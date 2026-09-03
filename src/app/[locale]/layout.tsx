@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { SiteHeader } from "@/components/SiteHeader";
 import { getAllFirms } from "@/lib/data";
 import { localeMeta, routing } from "@/i18n/routing";
@@ -60,6 +61,7 @@ export default async function LocaleLayout({
           <SiteHeader firms={firms} />
           <div className="flex flex-1 flex-col">{children}</div>
         </NextIntlClientProvider>
+        <Analytics />
       </body>
     </html>
   );
