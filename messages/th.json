@@ -1,0 +1,80 @@
+{
+  "Metadata": {
+    "titleDefault": "Prop Firms",
+    "description": "ข้อมูลบริษัท Prop Firm กฎการถอนเงิน และเครื่องคำนวณ"
+  },
+  "Nav": {
+    "brand": "Prop Firms",
+    "calculator": "เครื่องคำนวณการถอนเงิน",
+    "languageLabel": "ภาษา"
+  },
+  "HomePage": {
+    "title": "เปรียบเทียบ Prop Firm",
+    "subtitle": "เปรียบเทียบขนาดทุน กฎการถอนเงิน และสถานะความปลอดภัยแบบเรียลไทม์ของแต่ละบริษัท หรือใช้เครื่องคำนวณเพื่อประเมินยอดเงินที่จะได้รับ",
+    "openCalculator": "เปิดเครื่องคำนวณการถอนเงิน"
+  },
+  "CalculatorPage": {
+    "metaTitle": "เครื่องคำนวณการถอนเงิน",
+    "metaDescription": "ประเมินยอดเงินสุทธิที่จะได้รับจากกำไรของ Challenge ตามกฎของแต่ละบริษัท",
+    "title": "เครื่องคำนวณการถอนเงิน",
+    "subtitle": "เลือก Prop Firm กรอกจำนวนเงิน Challenge และกำไรที่คาดหวัง ระบบจะคำนวณทันทีตามสัดส่วนแบ่งกำไรแบบขั้นบันได ภาษีของแพลตฟอร์ม ค่าธรรมเนียมช่องทางชำระเงิน และยอดถอนขั้นต่ำของบริษัทนั้น"
+  },
+  "FirmPage": {
+    "metaTitle": "{name} รายละเอียดและกฎการถอนเงิน",
+    "metaDescription": "{name} ขนาดทุน กฎการถอนเงิน เครื่องคำนวณการถอนเงิน และคำถามที่พบบ่อย",
+    "notFoundMetaTitle": "ไม่พบบริษัทนี้",
+    "website": "เว็บไซต์",
+    "foundedOn": "ก่อตั้งเมื่อ {date}",
+    "minFunding": "ทุนขั้นต่ำ",
+    "maxFunding": "ทุนเริ่มต้นสูงสุด",
+    "defaultSplit": "สัดส่วนแบ่งกำไรเริ่มต้น",
+    "payoutCycleLabel": "รอบการถอนเงิน",
+    "platformTax": "ภาษีที่แพลตฟอร์มหักไว้",
+    "minPayout": "ยอดถอนขั้นต่ำ",
+    "channels": "ช่องทางการถอนเงิน",
+    "scalingCap": "เพดานของ Scaling Plan",
+    "none": "ไม่มี",
+    "cycleOnDemand": "ถอนได้ตามต้องการ ถอนครั้งแรกหลังจาก {days} วัน",
+    "cycleEveryNDays": "ทุก {days} วัน",
+    "cycleOnDemandAfterFirst": "ถอนตามต้องการหลังจากการถอนครั้งแรก ({days} วัน)",
+    "faqHeading": "คำถามที่พบบ่อย"
+  },
+  "FirmNotFound": {
+    "title": "ไม่พบบริษัทนี้",
+    "description": "โปรดตรวจสอบลิงก์ หรือกลับไปที่เครื่องคำนวณเพื่อเลือกบริษัทอื่น",
+    "cta": "เปิดเครื่องคำนวณการถอนเงิน"
+  },
+  "FirmCard": {
+    "foundedIn": "ก่อตั้งปี {year}",
+    "fundingRangeLabel": "ขนาดทุน",
+    "splitLabel": "สัดส่วนแบ่งกำไร",
+    "payoutSpeedLabel": "ความเร็วในการถอนเงิน",
+    "statusActive": "เปิดดำเนินการ",
+    "statusWarning": "แจ้งเตือนความล่าช้า",
+    "statusSuspended": "ระงับการถอนเงิน"
+  },
+  "PayoutCalculator": {
+    "heading": "เครื่องคำนวณการถอนเงิน",
+    "subtitle": "เลือกบริษัทและระดับสัดส่วนแบ่งกำไร กรอกจำนวนเงิน Challenge และกำไรที่คาดหวัง เพื่อดูยอดเงินสุทธิที่คาดว่าจะได้รับ",
+    "noFirms": "ยังไม่มีข้อมูลบริษัท",
+    "currentFirm": "บริษัทปัจจุบัน",
+    "firmLabel": "บริษัท",
+    "tierLabel": "ระดับสัดส่วนแบ่งกำไร",
+    "challengeAmountLabel": "จำนวนเงิน Challenge ({currency})",
+    "profitLabel": "กำไรที่คาดหวัง ({currency})",
+    "estimatedPayout": "ยอดเงินสุทธิที่คาดว่าจะได้รับ",
+    "profitPercentOfChallenge": "ประมาณ {percent}% ของจำนวนเงิน Challenge",
+    "belowMinimumWarning": "ต่ำกว่ายอดถอนขั้นต่ำ {amount} บริษัทอาจไม่ดำเนินการถอนเงินนี้",
+    "platformDeduction": "ค่าหักอื่น ๆ ของแพลตฟอร์ม",
+    "traderShare": "ส่วนแบ่งของเทรดเดอร์ ({percent}%)",
+    "firmShare": "ส่วนที่บริษัทเก็บไว้",
+    "taxWithheld": "ภาษีที่แพลตฟอร์มหักไว้",
+    "processorFee": "ค่าธรรมเนียมช่องทางชำระเงิน",
+    "withdrawalFee": "ค่าธรรมเนียมการถอนเงิน",
+    "errorInvalidNumber": "โปรดกรอกตัวเลขที่ถูกต้อง",
+    "errorTierNotFound": "ไม่พบระดับสัดส่วนแบ่งกำไรที่ตรงกัน",
+    "warningBelowMinChallenge": "จำนวนเงิน Challenge ต่ำกว่าระดับขั้นต่ำของบริษัทนี้ที่ {amount}",
+    "warningAboveMaxChallenge": "จำนวนเงิน Challenge สูงกว่าระดับทุนเริ่มต้นสูงสุดของบริษัทนี้ที่ {amount}",
+    "warningProfitOutsideTierRange": "กำไรที่คาดหวังอยู่นอกช่วงของระดับสัดส่วนแบ่งกำไรนี้ ผลลัพธ์เป็นเพียงการประมาณ"
+  }
+}

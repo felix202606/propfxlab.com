@@ -1,0 +1,80 @@
+{
+  "Metadata": {
+    "titleDefault": "Prop Firms",
+    "description": "Prop Firm 資料、出金規則與計算器。"
+  },
+  "Nav": {
+    "brand": "Prop Firms",
+    "calculator": "出金計算器",
+    "languageLabel": "語言"
+  },
+  "HomePage": {
+    "title": "Prop Firm 對照",
+    "subtitle": "查看各家資金規模、出金規則與即時安全狀態，或用計算器估算到手金額。",
+    "openCalculator": "打開出金計算器"
+  },
+  "CalculatorPage": {
+    "metaTitle": "出金計算器",
+    "metaDescription": "依公司規則估算挑戰帳戶利潤的最終到手金額。",
+    "title": "出金計算器",
+    "subtitle": "選擇 Prop Firm，輸入挑戰金額與預計利潤。結果會依該公司的階梯分成、平台扣稅、通道費與最低出金規則即時計算。"
+  },
+  "FirmPage": {
+    "metaTitle": "{name} 詳情與出金規則",
+    "metaDescription": "{name} 資金規模、提現規則、分成計算器與常見問題。",
+    "notFoundMetaTitle": "找不到公司",
+    "website": "官網",
+    "foundedOn": "成立於 {date}",
+    "minFunding": "最低資金",
+    "maxFunding": "最高初始資金",
+    "defaultSplit": "預設分成",
+    "payoutCycleLabel": "出金週期",
+    "platformTax": "平台扣稅",
+    "minPayout": "最低出金",
+    "channels": "提現渠道",
+    "scalingCap": "Scaling 上限",
+    "none": "無",
+    "cycleOnDemand": "按需，首次 {days} 天",
+    "cycleEveryNDays": "每 {days} 天",
+    "cycleOnDemandAfterFirst": "首次 {days} 天後按需",
+    "faqHeading": "常見問題"
+  },
+  "FirmNotFound": {
+    "title": "找不到這家公司",
+    "description": "請檢查連結，或回到計算器重新選擇。",
+    "cta": "打開出金計算器"
+  },
+  "FirmCard": {
+    "foundedIn": "成立於 {year}",
+    "fundingRangeLabel": "資金規模",
+    "splitLabel": "分成比例",
+    "payoutSpeedLabel": "出金速度",
+    "statusActive": "正常運營",
+    "statusWarning": "延遲預警",
+    "statusSuspended": "暫停出金"
+  },
+  "PayoutCalculator": {
+    "heading": "出金計算器",
+    "subtitle": "選擇公司與分成方案，輸入挑戰金額和預計利潤，查看預估到手金額。",
+    "noFirms": "暫無公司資料。",
+    "currentFirm": "目前公司",
+    "firmLabel": "公司",
+    "tierLabel": "分成方案",
+    "challengeAmountLabel": "挑戰金額（{currency}）",
+    "profitLabel": "預計利潤（{currency}）",
+    "estimatedPayout": "預估到手",
+    "profitPercentOfChallenge": "約為挑戰金額的 {percent}%",
+    "belowMinimumWarning": "低於最低出金 {amount}，平台可能不會處理這筆提現。",
+    "platformDeduction": "平台其他扣減",
+    "traderShare": "交易員分成（{percent}%）",
+    "firmShare": "公司留存",
+    "taxWithheld": "平台扣稅",
+    "processorFee": "支付通道費",
+    "withdrawalFee": "出金手續費",
+    "errorInvalidNumber": "請輸入有效數字",
+    "errorTierNotFound": "找不到對應的分成方案",
+    "warningBelowMinChallenge": "挑戰金額低於該平台最低檔 {amount}",
+    "warningAboveMaxChallenge": "挑戰金額高於該平台最高初始檔 {amount}",
+    "warningProfitOutsideTierRange": "目前預計利潤不在該分成階梯的利潤區間內，結果僅供參考"
+  }
+}

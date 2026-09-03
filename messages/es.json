@@ -1,0 +1,80 @@
+{
+  "Metadata": {
+    "titleDefault": "Prop Firms",
+    "description": "Perfiles de prop firms, reglas de pago y calculadoras."
+  },
+  "Nav": {
+    "brand": "Prop Firms",
+    "calculator": "Calculadora de pagos",
+    "languageLabel": "Idioma"
+  },
+  "HomePage": {
+    "title": "Comparativa de Prop Firms",
+    "subtitle": "Compara el capital, las reglas de retiro y el estado de seguridad en tiempo real de cada firma, o usa la calculadora para estimar tu pago neto.",
+    "openCalculator": "Abrir calculadora de pagos"
+  },
+  "CalculatorPage": {
+    "metaTitle": "Calculadora de pagos",
+    "metaDescription": "Estima tu pago neto a partir del beneficio del challenge según las reglas de cada firma.",
+    "title": "Calculadora de pagos",
+    "subtitle": "Elige una prop firm, introduce el importe del challenge y el beneficio esperado. El resultado se calcula al instante según el reparto por niveles, el impuesto de la plataforma, la comisión del procesador y el pago mínimo de esa firma."
+  },
+  "FirmPage": {
+    "metaTitle": "{name}: detalles y reglas de pago",
+    "metaDescription": "{name}: capital disponible, reglas de retiro, calculadora de pagos y preguntas frecuentes.",
+    "notFoundMetaTitle": "Firma no encontrada",
+    "website": "Sitio web",
+    "foundedOn": "Fundada el {date}",
+    "minFunding": "Capital mínimo",
+    "maxFunding": "Capital inicial máximo",
+    "defaultSplit": "Reparto por defecto",
+    "payoutCycleLabel": "Ciclo de pago",
+    "platformTax": "Retención fiscal de la plataforma",
+    "minPayout": "Pago mínimo",
+    "channels": "Canales de pago",
+    "scalingCap": "Límite del Scaling Plan",
+    "none": "Ninguno",
+    "cycleOnDemand": "A demanda, primer pago tras {days} días",
+    "cycleEveryNDays": "Cada {days} días",
+    "cycleOnDemandAfterFirst": "A demanda tras el primer pago ({days} días)",
+    "faqHeading": "Preguntas frecuentes"
+  },
+  "FirmNotFound": {
+    "title": "No encontramos esta firma",
+    "description": "Revisa el enlace o vuelve a la calculadora para elegir otra firma.",
+    "cta": "Abrir calculadora de pagos"
+  },
+  "FirmCard": {
+    "foundedIn": "Fundada en {year}",
+    "fundingRangeLabel": "Rango de capital",
+    "splitLabel": "Reparto",
+    "payoutSpeedLabel": "Velocidad de pago",
+    "statusActive": "Activa",
+    "statusWarning": "Alerta",
+    "statusSuspended": "Suspendida"
+  },
+  "PayoutCalculator": {
+    "heading": "Calculadora de pagos",
+    "subtitle": "Elige la firma y el nivel de reparto, introduce el importe del challenge y el beneficio esperado para previsualizar tu pago neto.",
+    "noFirms": "Todavía no hay firmas disponibles.",
+    "currentFirm": "Firma actual",
+    "firmLabel": "Firma",
+    "tierLabel": "Nivel de reparto",
+    "challengeAmountLabel": "Importe del challenge ({currency})",
+    "profitLabel": "Beneficio esperado ({currency})",
+    "estimatedPayout": "Pago neto estimado",
+    "profitPercentOfChallenge": "Aproximadamente el {percent}% del importe del challenge",
+    "belowMinimumWarning": "Por debajo del pago mínimo de {amount}. La firma podría no procesar este retiro.",
+    "platformDeduction": "Otra deducción de la plataforma",
+    "traderShare": "Parte del trader ({percent}%)",
+    "firmShare": "Retiene la firma",
+    "taxWithheld": "Retención fiscal de la plataforma",
+    "processorFee": "Comisión del procesador de pago",
+    "withdrawalFee": "Comisión de retiro",
+    "errorInvalidNumber": "Introduce números válidos",
+    "errorTierNotFound": "No se encontró un nivel de reparto coincidente",
+    "warningBelowMinChallenge": "El importe del challenge está por debajo del nivel mínimo de esta firma ({amount})",
+    "warningAboveMaxChallenge": "El importe del challenge supera el nivel inicial máximo de esta firma ({amount})",
+    "warningProfitOutsideTierRange": "El beneficio esperado está fuera del rango de este nivel de reparto; el resultado es solo orientativo"
+  }
+}

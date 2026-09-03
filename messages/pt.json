@@ -1,0 +1,80 @@
+{
+  "Metadata": {
+    "titleDefault": "Prop Firms",
+    "description": "Perfis de prop firms, regras de pagamento e calculadoras."
+  },
+  "Nav": {
+    "brand": "Prop Firms",
+    "calculator": "Calculadora de saque",
+    "languageLabel": "Idioma"
+  },
+  "HomePage": {
+    "title": "Comparativo de Prop Firms",
+    "subtitle": "Compare o capital disponível, as regras de saque e o status de segurança em tempo real de cada firma, ou use a calculadora para estimar o valor líquido a receber.",
+    "openCalculator": "Abrir calculadora de saque"
+  },
+  "CalculatorPage": {
+    "metaTitle": "Calculadora de saque",
+    "metaDescription": "Estime o valor líquido a receber a partir do lucro do challenge, conforme as regras de cada firma.",
+    "title": "Calculadora de saque",
+    "subtitle": "Escolha uma prop firm, informe o valor do challenge e o lucro esperado. O resultado é calculado instantaneamente com base na divisão por níveis, no imposto retido pela plataforma, na taxa da processadora de pagamentos e no saque mínimo dessa firma."
+  },
+  "FirmPage": {
+    "metaTitle": "{name}: detalhes e regras de pagamento",
+    "metaDescription": "{name}: capital disponível, regras de saque, calculadora de pagamento e perguntas frequentes.",
+    "notFoundMetaTitle": "Firma não encontrada",
+    "website": "Site",
+    "foundedOn": "Fundada em {date}",
+    "minFunding": "Capital mínimo",
+    "maxFunding": "Capital inicial máximo",
+    "defaultSplit": "Divisão padrão",
+    "payoutCycleLabel": "Ciclo de pagamento",
+    "platformTax": "Imposto retido pela plataforma",
+    "minPayout": "Saque mínimo",
+    "channels": "Canais de saque",
+    "scalingCap": "Limite do Scaling Plan",
+    "none": "Nenhum",
+    "cycleOnDemand": "Sob demanda, primeiro pagamento após {days} dias",
+    "cycleEveryNDays": "A cada {days} dias",
+    "cycleOnDemandAfterFirst": "Sob demanda após o primeiro pagamento ({days} dias)",
+    "faqHeading": "Perguntas frequentes"
+  },
+  "FirmNotFound": {
+    "title": "Não encontramos esta firma",
+    "description": "Verifique o link ou volte à calculadora para escolher outra firma.",
+    "cta": "Abrir calculadora de saque"
+  },
+  "FirmCard": {
+    "foundedIn": "Fundada em {year}",
+    "fundingRangeLabel": "Faixa de capital",
+    "splitLabel": "Percentual de divisão",
+    "payoutSpeedLabel": "Velocidade de saque",
+    "statusActive": "Ativa",
+    "statusWarning": "Alerta",
+    "statusSuspended": "Suspensa"
+  },
+  "PayoutCalculator": {
+    "heading": "Calculadora de saque",
+    "subtitle": "Escolha a firma e o nível de divisão, informe o valor do challenge e o lucro esperado para simular o valor líquido a receber.",
+    "noFirms": "Ainda não há firmas disponíveis.",
+    "currentFirm": "Firma atual",
+    "firmLabel": "Firma",
+    "tierLabel": "Nível de divisão",
+    "challengeAmountLabel": "Valor do challenge ({currency})",
+    "profitLabel": "Lucro esperado ({currency})",
+    "estimatedPayout": "Valor líquido estimado",
+    "profitPercentOfChallenge": "Cerca de {percent}% do valor do challenge",
+    "belowMinimumWarning": "Abaixo do saque mínimo de {amount}. A firma pode não processar este saque.",
+    "platformDeduction": "Outra dedução da plataforma",
+    "traderShare": "Parte do trader ({percent}%)",
+    "firmShare": "Retido pela firma",
+    "taxWithheld": "Imposto retido pela plataforma",
+    "processorFee": "Taxa da processadora de pagamento",
+    "withdrawalFee": "Taxa de saque",
+    "errorInvalidNumber": "Informe números válidos",
+    "errorTierNotFound": "Não foi possível encontrar um nível de divisão correspondente",
+    "warningBelowMinChallenge": "O valor do challenge está abaixo do nível mínimo desta firma ({amount})",
+    "warningAboveMaxChallenge": "O valor do challenge está acima do nível inicial máximo desta firma ({amount})",
+    "warningProfitOutsideTierRange": "O lucro esperado está fora da faixa deste nível de divisão; o resultado é apenas indicativo"
+  }
+}

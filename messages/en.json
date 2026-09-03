@@ -1,0 +1,80 @@
+{
+  "Metadata": {
+    "titleDefault": "Prop Firms",
+    "description": "Prop firm profiles, payout rules and calculators."
+  },
+  "Nav": {
+    "brand": "Prop Firms",
+    "calculator": "Payout Calculator",
+    "languageLabel": "Language"
+  },
+  "HomePage": {
+    "title": "Prop Firm Comparison",
+    "subtitle": "Compare funding scale, payout rules and real-time safety status across firms, or use the calculator to estimate your take-home amount.",
+    "openCalculator": "Open Payout Calculator"
+  },
+  "CalculatorPage": {
+    "metaTitle": "Payout Calculator",
+    "metaDescription": "Estimate your take-home amount from challenge profit based on each firm's rules.",
+    "title": "Payout Calculator",
+    "subtitle": "Choose a prop firm, enter your challenge amount and expected profit. The result is calculated instantly using that firm's tiered split, platform tax, processor fee and minimum payout rules."
+  },
+  "FirmPage": {
+    "metaTitle": "{name} Details & Payout Rules",
+    "metaDescription": "{name} funding scale, withdrawal rules, payout calculator and FAQ.",
+    "notFoundMetaTitle": "Firm not found",
+    "website": "Website",
+    "foundedOn": "Founded {date}",
+    "minFunding": "Min. Funding",
+    "maxFunding": "Max. Initial Funding",
+    "defaultSplit": "Default Split",
+    "payoutCycleLabel": "Payout Cycle",
+    "platformTax": "Platform Withholding Tax",
+    "minPayout": "Min. Payout",
+    "channels": "Payout Channels",
+    "scalingCap": "Scaling Cap",
+    "none": "None",
+    "cycleOnDemand": "On demand, first payout after {days} days",
+    "cycleEveryNDays": "Every {days} days",
+    "cycleOnDemandAfterFirst": "On demand after the first payout ({days} days)",
+    "faqHeading": "Frequently Asked Questions"
+  },
+  "FirmNotFound": {
+    "title": "We couldn't find this firm",
+    "description": "Please check the link, or go back to the calculator to pick another firm.",
+    "cta": "Open Payout Calculator"
+  },
+  "FirmCard": {
+    "foundedIn": "Founded {year}",
+    "fundingRangeLabel": "Funding range",
+    "splitLabel": "Split ratio",
+    "payoutSpeedLabel": "Payout speed",
+    "statusActive": "Active",
+    "statusWarning": "Warning",
+    "statusSuspended": "Suspended"
+  },
+  "PayoutCalculator": {
+    "heading": "Payout Calculator",
+    "subtitle": "Choose the firm and split tier, enter your challenge amount and expected profit to preview your take-home payout.",
+    "noFirms": "No firms available yet.",
+    "currentFirm": "Current firm",
+    "firmLabel": "Firm",
+    "tierLabel": "Split tier",
+    "challengeAmountLabel": "Challenge amount ({currency})",
+    "profitLabel": "Expected profit ({currency})",
+    "estimatedPayout": "Estimated take-home",
+    "profitPercentOfChallenge": "About {percent}% of the challenge amount",
+    "belowMinimumWarning": "Below the minimum payout of {amount}. The firm may not process this withdrawal.",
+    "platformDeduction": "Other platform deduction",
+    "traderShare": "Trader share ({percent}%)",
+    "firmShare": "Firm retains",
+    "taxWithheld": "Platform withholding tax",
+    "processorFee": "Payment processor fee",
+    "withdrawalFee": "Withdrawal fee",
+    "errorInvalidNumber": "Please enter valid numbers",
+    "errorTierNotFound": "Could not find a matching split tier",
+    "warningBelowMinChallenge": "Challenge amount is below this firm's minimum tier of {amount}",
+    "warningAboveMaxChallenge": "Challenge amount is above this firm's maximum initial tier of {amount}",
+    "warningProfitOutsideTierRange": "Expected profit is outside this split tier's profit range; result is indicative only"
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "Metadata": {
+    "titleDefault": "Prop Firms",
+    "description": "Hồ sơ các prop firm, quy định rút tiền và công cụ tính toán."
+  },
+  "Nav": {
+    "brand": "Prop Firms",
+    "calculator": "Máy tính rút tiền",
+    "languageLabel": "Ngôn ngữ"
+  },
+  "HomePage": {
+    "title": "So sánh Prop Firm",
+    "subtitle": "So sánh quy mô vốn, quy định rút tiền và trạng thái an toàn theo thời gian thực của từng công ty, hoặc dùng máy tính để ước tính số tiền thực nhận.",
+    "openCalculator": "Mở máy tính rút tiền"
+  },
+  "CalculatorPage": {
+    "metaTitle": "Máy tính rút tiền",
+    "metaDescription": "Ước tính số tiền thực nhận từ lợi nhuận Challenge theo quy định của từng công ty.",
+    "title": "Máy tính rút tiền",
+    "subtitle": "Chọn một prop firm, nhập số tiền Challenge và lợi nhuận dự kiến. Kết quả được tính ngay theo tỷ lệ chia lợi nhuận theo bậc, thuế của nền tảng, phí xử lý thanh toán và quy định rút tối thiểu của công ty đó."
+  },
+  "FirmPage": {
+    "metaTitle": "{name}: Chi tiết và quy định rút tiền",
+    "metaDescription": "{name}: quy mô vốn, quy định rút tiền, máy tính rút tiền và câu hỏi thường gặp.",
+    "notFoundMetaTitle": "Không tìm thấy công ty",
+    "website": "Trang web",
+    "foundedOn": "Thành lập ngày {date}",
+    "minFunding": "Vốn tối thiểu",
+    "maxFunding": "Vốn khởi điểm tối đa",
+    "defaultSplit": "Tỷ lệ chia mặc định",
+    "payoutCycleLabel": "Chu kỳ rút tiền",
+    "platformTax": "Thuế khấu trừ của nền tảng",
+    "minPayout": "Rút tối thiểu",
+    "channels": "Kênh rút tiền",
+    "scalingCap": "Giới hạn Scaling Plan",
+    "none": "Không có",
+    "cycleOnDemand": "Theo yêu cầu, lần rút đầu tiên sau {days} ngày",
+    "cycleEveryNDays": "Mỗi {days} ngày",
+    "cycleOnDemandAfterFirst": "Theo yêu cầu sau lần rút đầu tiên ({days} ngày)",
+    "faqHeading": "Câu hỏi thường gặp"
+  },
+  "FirmNotFound": {
+    "title": "Không tìm thấy công ty này",
+    "description": "Vui lòng kiểm tra lại liên kết, hoặc quay lại máy tính để chọn công ty khác.",
+    "cta": "Mở máy tính rút tiền"
+  },
+  "FirmCard": {
+    "foundedIn": "Thành lập năm {year}",
+    "fundingRangeLabel": "Quy mô vốn",
+    "splitLabel": "Tỷ lệ chia",
+    "payoutSpeedLabel": "Tốc độ rút tiền",
+    "statusActive": "Hoạt động",
+    "statusWarning": "Cảnh báo",
+    "statusSuspended": "Tạm ngừng rút tiền"
+  },
+  "PayoutCalculator": {
+    "heading": "Máy tính rút tiền",
+    "subtitle": "Chọn công ty và bậc chia lợi nhuận, nhập số tiền Challenge và lợi nhuận dự kiến để xem trước số tiền thực nhận.",
+    "noFirms": "Chưa có dữ liệu công ty.",
+    "currentFirm": "Công ty hiện tại",
+    "firmLabel": "Công ty",
+    "tierLabel": "Bậc chia lợi nhuận",
+    "challengeAmountLabel": "Số tiền Challenge ({currency})",
+    "profitLabel": "Lợi nhuận dự kiến ({currency})",
+    "estimatedPayout": "Số tiền thực nhận ước tính",
+    "profitPercentOfChallenge": "Khoảng {percent}% số tiền Challenge",
+    "belowMinimumWarning": "Thấp hơn mức rút tối thiểu {amount}. Công ty có thể không xử lý lần rút tiền này.",
+    "platformDeduction": "Khoản khấu trừ khác của nền tảng",
+    "traderShare": "Phần của trader ({percent}%)",
+    "firmShare": "Công ty giữ lại",
+    "taxWithheld": "Thuế khấu trừ của nền tảng",
+    "processorFee": "Phí xử lý thanh toán",
+    "withdrawalFee": "Phí rút tiền",
+    "errorInvalidNumber": "Vui lòng nhập số hợp lệ",
+    "errorTierNotFound": "Không tìm thấy bậc chia lợi nhuận phù hợp",
+    "warningBelowMinChallenge": "Số tiền Challenge thấp hơn mức tối thiểu của công ty này ({amount})",
+    "warningAboveMaxChallenge": "Số tiền Challenge cao hơn mức vốn khởi điểm tối đa của công ty này ({amount})",
+    "warningProfitOutsideTierRange": "Lợi nhuận dự kiến nằm ngoài khoảng của bậc chia này; kết quả chỉ mang tính tham khảo"
+  }
+}
