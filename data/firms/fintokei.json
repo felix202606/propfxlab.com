@@ -6,10 +6,10 @@
     "name": "Fintokei",
     "legalName": "Fintokei s.r.o.",
     "logo": {
-      "src": "https://fintokei.com/favicon.ico",
+      "src": "/logos/fintokei.png",
       "alt": "Fintokei Logo",
-      "width": 512,
-      "height": 512
+      "width": 128,
+      "height": 128
     },
     "foundedAt": "2021-09-01",
     "headquarters": {

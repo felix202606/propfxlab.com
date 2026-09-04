@@ -6,10 +6,10 @@
     "name": "Funding Traders",
     "legalName": "MCF Group FZCO",
     "logo": {
-      "src": "https://fundingtraders.com/favicon.ico",
+      "src": "/logos/funding-traders.png",
       "alt": "Funding Traders logo",
-      "width": 32,
-      "height": 32
+      "width": 128,
+      "height": 128
     },
     "foundedAt": "2023-01-01",
     "headquarters": {

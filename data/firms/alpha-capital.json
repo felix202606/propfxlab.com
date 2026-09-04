@@ -6,10 +6,10 @@
     "name": "Alpha Capital Group",
     "legalName": "Alpha Capital Group Limited",
     "logo": {
-      "src": "https://alphacapitalgroup.uk/favicon.ico",
+      "src": "/logos/alpha-capital.png",
       "alt": "Alpha Capital Group logo",
-      "width": 32,
-      "height": 32
+      "width": 128,
+      "height": 128
     },
     "foundedAt": "2021-11-02",
     "headquarters": {

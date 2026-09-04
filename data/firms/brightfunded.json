@@ -6,10 +6,10 @@
     "name": "BrightFunded",
     "legalName": "BrightFunded B.V.",
     "logo": {
-      "src": "https://www.brightfunded.com/favicon.ico",
+      "src": "/logos/brightfunded.png",
       "alt": "BrightFunded Logo",
-      "width": 512,
-      "height": 512
+      "width": 128,
+      "height": 128
     },
     "foundedAt": "2023-04-01",
     "headquarters": {

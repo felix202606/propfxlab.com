@@ -6,10 +6,10 @@
     "name": "Topstep",
     "legalName": "Topstep LLC",
     "logo": {
-      "src": "https://www.topstep.com/favicon.ico",
+      "src": "/logos/topstep.png",
       "alt": "Topstep Logo",
-      "width": 512,
-      "height": 512
+      "width": 128,
+      "height": 128
     },
     "foundedAt": "2012-01-01",
     "headquarters": {

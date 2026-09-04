@@ -6,10 +6,10 @@
     "name": "Top One Trader",
     "legalName": "Top One Trader LLC",
     "logo": {
-      "src": "https://www.toponetrader.com/favicon.ico",
+      "src": "/logos/top-one-trader.png",
       "alt": "Top One Trader Logo",
-      "width": 32,
-      "height": 32
+      "width": 128,
+      "height": 128
     },
     "foundedAt": "2021-01-01",
     "headquarters": {

@@ -6,10 +6,10 @@
     "name": "Tradeify",
     "legalName": "Tradeify LLC",
     "logo": {
-      "src": "https://tradeify.co/favicon.ico",
+      "src": "/logos/tradeify.png",
       "alt": "Tradeify Logo",
-      "width": 32,
-      "height": 32
+      "width": 128,
+      "height": 128
     },
     "foundedAt": "2023-01-01",
     "headquarters": {

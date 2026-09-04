@@ -6,10 +6,10 @@
     "name": "The5ers",
     "legalName": "Five Percent Online Ltd",
     "logo": {
-      "src": "https://the5ers.com/favicon.ico",
+      "src": "/logos/the5ers.png",
       "alt": "The5ers Logo",
-      "width": 512,
-      "height": 512
+      "width": 128,
+      "height": 128
     },
     "foundedAt": "2016-04-01",
     "headquarters": {

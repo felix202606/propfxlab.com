@@ -6,10 +6,10 @@
     "name": "Goat Funded Trader",
     "legalName": "Wishes Tower International Limited",
     "logo": {
-      "src": "https://www.goatfundedtrader.com/favicon.ico",
+      "src": "/logos/goatfunded.png",
       "alt": "Goat Funded Trader logo",
-      "width": 32,
-      "height": 32
+      "width": 128,
+      "height": 128
     },
     "foundedAt": "2022-01-01",
     "headquarters": {

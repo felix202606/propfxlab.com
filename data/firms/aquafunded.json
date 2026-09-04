@@ -6,10 +6,10 @@
     "name": "AquaFunded",
     "legalName": "AquaFunded FZE",
     "logo": {
-      "src": "https://www.aquafunded.com/favicon.ico",
+      "src": "/logos/aquafunded.png",
       "alt": "AquaFunded Logo",
-      "width": 32,
-      "height": 32
+      "width": 128,
+      "height": 128
     },
     "foundedAt": "2023-01-01",
     "headquarters": {

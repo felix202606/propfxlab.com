@@ -6,10 +6,10 @@
     "name": "FundedNext",
     "legalName": "GrowthNext F.Z.E",
     "logo": {
-      "src": "https://fundednext.com/favicon.ico",
+      "src": "/logos/fundednext.png",
       "alt": "FundedNext logo",
-      "width": 32,
-      "height": 32
+      "width": 128,
+      "height": 128
     },
     "foundedAt": "2022-03-01",
     "headquarters": {

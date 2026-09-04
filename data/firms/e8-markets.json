@@ -6,10 +6,10 @@
     "name": "E8 Markets",
     "legalName": "E8 Markets LLC",
     "logo": {
-      "src": "https://e8markets.com/favicon.ico",
+      "src": "/logos/e8-markets.png",
       "alt": "E8 Markets Logo",
-      "width": 512,
-      "height": 512
+      "width": 128,
+      "height": 128
     },
     "foundedAt": "2021-11-01",
     "headquarters": {

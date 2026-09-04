@@ -6,10 +6,10 @@
     "name": "FundingPips",
     "legalName": "Funding Pips Services Ltd.",
     "logo": {
-      "src": "https://fundingpips.com/favicon.ico",
+      "src": "/logos/fundingpips.png",
       "alt": "FundingPips logo",
-      "width": 32,
-      "height": 32
+      "width": 128,
+      "height": 128
     },
     "foundedAt": "2022-11-01",
     "headquarters": {
