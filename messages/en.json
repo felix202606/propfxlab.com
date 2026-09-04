@@ -1,17 +1,70 @@
 {
   "Metadata": {
-    "titleDefault": "Prop Firms",
-    "description": "Prop firm profiles, payout rules and calculators."
+    "titleDefault": "PropFXLab — Prop Firm Payout Intelligence",
+    "description": "Compare prop firm take-home payouts, safety status and withdrawal speed with a transparent calculator."
   },
   "Nav": {
-    "brand": "Prop Firms",
-    "calculator": "Payout Calculator",
+    "brand": "PropFXLab",
+    "calculator": "Calculator",
+    "rankings": "Rankings",
+    "compare": "Compare",
+    "faq": "FAQ",
     "languageLabel": "Language"
   },
   "HomePage": {
-    "title": "Prop Firm Comparison",
-    "subtitle": "Compare funding scale, payout rules and real-time safety status across firms, or use the calculator to estimate your take-home amount.",
-    "openCalculator": "Open Payout Calculator"
+    "eyebrow": "Independent payout lab",
+    "title": "See the cash that actually hits your account.",
+    "subtitle": "Model take-home payouts across prop firms after splits, platform fees and withdrawal costs — then rank who pays faster and safer.",
+    "openCalculator": "Open full calculator",
+    "accountSizeLabel": "Account size",
+    "profitLabel": "Expected profit (USD)",
+    "previewLabel": "Estimated take-home",
+    "previewFirm": "Top estimate · {firm}",
+    "previewSplit": "{percent}% trader share after fees",
+    "rankingsTitle": "Live firm ranking",
+    "rankingsSubtitle": "Ranked by estimated take-home on a {account} account with {profit} profit, using each firm's default split.",
+    "trustTitle": "Built for funded traders",
+    "trustSubtitle": "Every number is computed from public rules — not marketing copy.",
+    "trust": {
+      "calc": {
+        "title": "Transparent math",
+        "body": "Splits, platform deductions, processor fees and minimum payouts are applied in the same order a real withdrawal would be."
+      },
+      "risk": {
+        "title": "Risk alerts",
+        "body": "Delay warnings and suspended-payout badges surface before you buy a challenge, not after a missed withdrawal."
+      },
+      "speed": {
+        "title": "Payout speed audit",
+        "body": "We track advertised processing windows — Instant, 8 hours, 24 hours — so you can compare cash-out speed, not just split percentages."
+      }
+    },
+    "comparisonsTitle": "Popular head-to-heads",
+    "comparisonsSubtitle": "Jump into two-firm matchups and read the full payout rules on both sides.",
+    "vs": "VS",
+    "faqTitle": "Frequently asked questions",
+    "faqs": [
+      {
+        "question": "How is the take-home amount calculated?",
+        "answer": "We start from your expected profit, subtract any platform deduction, apply the firm's default trader split, then deduct withholding tax, processor fees and withdrawal fees. The remaining figure is the estimated amount that would hit your account."
+      },
+      {
+        "question": "Are these real funded trading accounts?",
+        "answer": "No. Prop firm accounts trade simulated capital. Past payout structures, advertised speeds and split percentages do not guarantee future results. Always confirm current terms on the firm's official site before you buy."
+      },
+      {
+        "question": "What do the safety badges mean?",
+        "answer": "Active means we have no open payout-delay signal. Warning flags delayed or disputed withdrawals. Suspended means payouts appear paused. Badges are observational, not a credit rating."
+      },
+      {
+        "question": "Do promo codes change the calculator result?",
+        "answer": "No. Promo codes may discount a challenge fee at checkout; they do not change profit split, fees or minimum payout used in the take-home estimate. Claim links may be affiliate links."
+      },
+      {
+        "question": "Why do two firms show different take-home on the same profit?",
+        "answer": "Default split, platform deductions and payout-channel fees differ. A higher advertised split can still net less after processor or crypto fees — that gap is exactly what the ranking is designed to show."
+      }
+    ]
   },
   "CalculatorPage": {
     "metaTitle": "Payout Calculator",
@@ -71,6 +124,12 @@
     "fundingRangeLabel": "Funding range",
     "splitLabel": "Split ratio",
     "payoutSpeedLabel": "Payout speed",
+    "netPayoutLabel": "Take-home",
+    "promoLabel": "Code",
+    "copy": "Copy",
+    "copied": "Copied",
+    "claimCta": "Claim offer",
+    "readReview": "Read review",
     "statusActive": "Active",
     "statusWarning": "Warning",
     "statusSuspended": "Suspended"
@@ -101,12 +160,15 @@
   },
   "SiteFooter": {
     "tagline": "Independent prop firm payout calculators and public rule comparisons.",
+    "sitemapExplore": "Explore",
+    "sitemapHome": "Home",
+    "sitemapFirms": "Firm reviews",
     "financialDisclaimerTitle": "Financial Disclaimer",
     "financialDisclaimerBody": "This site provides mathematical payout calculations and comparisons of publicly available data only. Nothing here constitutes financial, investment, tax or legal advice. All accounts referenced trade simulated capital, and past payout structures do not guarantee future results. Always verify current rules directly with the prop firm before making a purchase or withdrawal decision.",
     "affiliateDisclosureTitle": "Affiliate Disclosure",
     "affiliateDisclosureBody": "Some links on this site are affiliate/referral links. We may earn a commission if you sign up through them, at no extra cost to you. This potential compensation does not influence the objectivity of our calculators, comparisons or rankings — every figure is computed from the same public rules for each firm.",
     "trademarkNoticeTitle": "Trademark Notice",
     "trademarkNoticeBody": "All prop firm names, logos and trademarks shown on this site are the property of their respective owners. They are used here for identification and comparison purposes only and do not imply any endorsement, sponsorship or affiliation with this site unless explicitly stated.",
-    "copyright": "© {year} Prop Firms. Independent comparison site, not affiliated with any firm listed."
+    "copyright": "© {year} PropFXLab. Independent comparison site, not affiliated with any firm listed."
   }
 }

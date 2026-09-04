@@ -1,17 +1,70 @@
 {
   "Metadata": {
-    "titleDefault": "Prop Firms",
-    "description": "Perfiles de prop firms, reglas de pago y calculadoras."
+    "titleDefault": "PropFXLab — Inteligencia de pagos de prop firms",
+    "description": "Compara el pago neto, el estado de seguridad y la velocidad de retiro de cada prop firm con una calculadora transparente."
   },
   "Nav": {
-    "brand": "Prop Firms",
-    "calculator": "Calculadora de pagos",
+    "brand": "PropFXLab",
+    "calculator": "Calculadora",
+    "rankings": "Ranking",
+    "compare": "Comparar",
+    "faq": "FAQ",
     "languageLabel": "Idioma"
   },
   "HomePage": {
-    "title": "Comparativa de Prop Firms",
-    "subtitle": "Compara el capital, las reglas de retiro y el estado de seguridad en tiempo real de cada firma, o usa la calculadora para estimar tu pago neto.",
-    "openCalculator": "Abrir calculadora de pagos"
+    "eyebrow": "Laboratorio independiente de pagos",
+    "title": "Mira el dinero que realmente llega a tu cuenta.",
+    "subtitle": "Estima el pago neto de cada prop firm tras el split, las comisiones de la plataforma y los costes de retiro, y ordénalas por velocidad y seguridad.",
+    "openCalculator": "Abrir calculadora completa",
+    "accountSizeLabel": "Tamaño de cuenta",
+    "profitLabel": "Beneficio esperado (USD)",
+    "previewLabel": "Pago neto estimado",
+    "previewFirm": "Mejor estimación · {firm}",
+    "previewSplit": "{percent}% para el trader tras comisiones",
+    "rankingsTitle": "Ranking en vivo",
+    "rankingsSubtitle": "Ordenado por pago neto estimado en una cuenta de {account} con {profit} de beneficio, usando el split por defecto de cada firma.",
+    "trustTitle": "Hecho para traders fondeados",
+    "trustSubtitle": "Cada cifra se calcula a partir de reglas públicas, no de copy de marketing.",
+    "trust": {
+      "calc": {
+        "title": "Cálculo transparente",
+        "body": "Splits, deducciones, comisiones del procesador y pagos mínimos se aplican en el mismo orden que un retiro real."
+      },
+      "risk": {
+        "title": "Alertas de riesgo",
+        "body": "Los avisos de retraso y las insignias de pagos suspendidos aparecen antes de comprar un challenge, no después de un retiro fallido."
+      },
+      "speed": {
+        "title": "Auditoría de velocidad",
+        "body": "Seguimos las ventanas de procesamiento publicadas — Instant, 8 horas, 24 horas — para comparar la velocidad de cobro, no solo el porcentaje de split."
+      }
+    },
+    "comparisonsTitle": "Enfrentamientos populares",
+    "comparisonsSubtitle": "Entra en un mano a mano y lee las reglas de pago completas de ambas firmas.",
+    "vs": "VS",
+    "faqTitle": "Preguntas frecuentes",
+    "faqs": [
+      {
+        "question": "¿Cómo se calcula el pago neto?",
+        "answer": "Partimos del beneficio esperado, restamos cualquier deducción de la plataforma, aplicamos el split por defecto del trader y luego descontamos retención, comisión del procesador y comisión de retiro. Lo que queda es el importe estimado que llegaría a tu cuenta."
+      },
+      {
+        "question": "¿Son cuentas de trading con capital real?",
+        "answer": "No. Las cuentas de prop firms operan con capital simulado. Los splits, velocidades y reglas pasadas no garantizan resultados futuros. Confirma siempre los términos vigentes en el sitio oficial."
+      },
+      {
+        "question": "¿Qué significan las insignias de seguridad?",
+        "answer": "Activa indica que no hay señal de retraso. Alerta marca retiros retrasados o en disputa. Suspendida significa que los pagos parecen pausados. Son observaciones, no una calificación crediticia."
+      },
+      {
+        "question": "¿Los códigos promocionales cambian el resultado?",
+        "answer": "No. Un código puede descontar la tarifa del challenge en el checkout; no cambia el split, las comisiones ni el pago mínimo. Los botones de Claim pueden ser enlaces de afiliado."
+      },
+      {
+        "question": "¿Por qué dos firmas pagan distinto con el mismo beneficio?",
+        "answer": "El split por defecto, las deducciones y las comisiones de canal difieren. Un split más alto en el marketing puede quedar por debajo tras las comisiones de cripto o del procesador: esa brecha es lo que muestra el ranking."
+      }
+    ]
   },
   "CalculatorPage": {
     "metaTitle": "Calculadora de pagos",
@@ -71,6 +124,12 @@
     "fundingRangeLabel": "Rango de capital",
     "splitLabel": "Reparto",
     "payoutSpeedLabel": "Velocidad de pago",
+    "netPayoutLabel": "Pago neto",
+    "promoLabel": "Código",
+    "copy": "Copiar",
+    "copied": "Copiado",
+    "claimCta": "Canjear oferta",
+    "readReview": "Leer reseña",
     "statusActive": "Activa",
     "statusWarning": "Alerta",
     "statusSuspended": "Suspendida"
@@ -101,12 +160,15 @@
   },
   "SiteFooter": {
     "tagline": "Calculadoras de pago y comparativas de reglas públicas de prop firms, de forma independiente.",
+    "sitemapExplore": "Explorar",
+    "sitemapHome": "Inicio",
+    "sitemapFirms": "Reseñas",
     "financialDisclaimerTitle": "Aviso financiero",
     "financialDisclaimerBody": "Este sitio ofrece únicamente cálculos matemáticos de pago y comparativas de datos disponibles públicamente. Nada de lo aquí publicado constituye asesoramiento financiero, de inversión, fiscal o legal. Todas las cuentas mencionadas operan con capital simulado, y los repartos pasados no garantizan resultados futuros. Verifica siempre las reglas vigentes directamente con la prop firm antes de tomar una decisión de compra o retiro.",
     "affiliateDisclosureTitle": "Divulgación de afiliados",
     "affiliateDisclosureBody": "Algunos enlaces de este sitio son enlaces de afiliado/referido. Podemos recibir una comisión si te registras a través de ellos, sin coste adicional para ti. Esta posible compensación no influye en la objetividad de nuestras calculadoras, comparativas o clasificaciones: cada cifra se calcula con las mismas reglas públicas para cada firma.",
     "trademarkNoticeTitle": "Aviso de marcas registradas",
     "trademarkNoticeBody": "Todos los nombres, logotipos y marcas de las prop firms que aparecen en este sitio son propiedad de sus respectivos titulares. Se usan aquí únicamente con fines de identificación y comparación, y no implican patrocinio, aprobación ni afiliación con este sitio salvo que se indique expresamente.",
-    "copyright": "© {year} Prop Firms. Sitio comparativo independiente, sin afiliación con ninguna de las firmas listadas."
+    "copyright": "© {year} PropFXLab. Sitio comparativo independiente, sin afiliación con ninguna de las firmas listadas."
   }
 }

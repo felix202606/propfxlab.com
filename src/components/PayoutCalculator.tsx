@@ -83,7 +83,7 @@ export function PayoutCalculator({
   return (
     <section
       aria-labelledby="payout-calculator-heading"
-      className="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm dark:border-zinc-800 dark:bg-zinc-950"
+      className="rounded-2xl border border-white/10 bg-gradient-to-b from-zinc-900 to-black p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.04)]"
     >
       <h2
         id="payout-calculator-heading"
@@ -103,7 +103,7 @@ export function PayoutCalculator({
           <label className="flex flex-col gap-1.5 text-sm">
             <span className="font-medium">{t("firmLabel")}</span>
             <select
-              className="rounded-lg border border-zinc-200 bg-white px-3 py-2 dark:border-zinc-700 dark:bg-zinc-900"
+              className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-zinc-100 outline-none focus:border-emerald-400/40"
               value={slug}
               onChange={(event) => onFirmChange(event.target.value)}
             >
@@ -119,7 +119,7 @@ export function PayoutCalculator({
         <label className="flex flex-col gap-1.5 text-sm">
           <span className="font-medium">{t("tierLabel")}</span>
           <select
-            className="rounded-lg border border-zinc-200 bg-white px-3 py-2 dark:border-zinc-700 dark:bg-zinc-900"
+            className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-zinc-100 outline-none focus:border-emerald-400/40"
             value={tierId}
             onChange={(event) => setTierId(event.target.value)}
           >
@@ -140,7 +140,7 @@ export function PayoutCalculator({
             min={0}
             step={1000}
             inputMode="decimal"
-            className="rounded-lg border border-zinc-200 bg-white px-3 py-2 dark:border-zinc-700 dark:bg-zinc-900"
+            className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-zinc-100 outline-none focus:border-emerald-400/40"
             value={challengeAmount}
             onChange={(event) => setChallengeAmount(event.target.value)}
           />
@@ -153,14 +153,14 @@ export function PayoutCalculator({
             min={0}
             step={100}
             inputMode="decimal"
-            className="rounded-lg border border-zinc-200 bg-white px-3 py-2 dark:border-zinc-700 dark:bg-zinc-900"
+            className="rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-zinc-100 outline-none focus:border-emerald-400/40"
             value={profit}
             onChange={(event) => setProfit(event.target.value)}
           />
         </label>
       </form>
 
-      <div className="mt-6 rounded-xl bg-zinc-50 p-4 dark:bg-zinc-900">
+      <div className="mt-6 rounded-xl border border-white/10 bg-white/[0.03] p-4">
         {breakdown && "code" in breakdown ? (
           <p className="text-sm text-red-600 dark:text-red-400">
             {breakdown.code === "invalid-number"

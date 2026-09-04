@@ -5,9 +5,11 @@ from __future__ import annotations
 生成符合 src/lib/schema.ts 的 Prop Firm JSON，并写入 data/firms/<slug>.json。
 
 用法：
-  export GEMINI_API_KEY=AIzaSyCJMrl1yGlqhECysBJbFCHsKkvbJLzJWFY
+  export GEMINI_API_KEY=your_key
   python3 scripts/generate_firm.py --source scrape.txt --keywords "ftmo,payout,profit split"
   python3 scripts/generate_firm.py --source scrape.txt --keywords-file keywords.txt --force
+  python3 scripts/generate_firm.py --batch
+  python3 scripts/generate_firm.py --batch --only the5ers,e8-markets --force
 """
 
 import argparse
@@ -15,14 +17,39 @@ import json
 import os
 import subprocess
 import sys
+import time
+from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any, List, Optional
+from urllib.error import URLError
+from urllib.request import Request, urlopen
 
-ROOT = Path(__file__).resolve().parent.parent
+SCRIPT_DIR = Path(__file__).resolve().parent
+if str(SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(SCRIPT_DIR))
+
+from prop_firms import PROP_FIRMS, PropFirmSeed
+
+ROOT = SCRIPT_DIR.parent
 FIRMS_DIR = ROOT / "data" / "firms"
 EXPORT_SCHEMA = ROOT / "scripts" / "export-json-schema.ts"
 SAFE_INT_MAX = 9007199254740991
 _MISSING = object()
+
+
+def load_dotenv(path: Path = ROOT / ".env") -> None:
+    """把仓库根目录 .env 里的 KEY=VALUE 写进 os.environ（不覆盖已有环境变量）。"""
+    if not path.is_file():
+        return
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, _, value = line.partition("=")
+        key = key.strip()
+        value = value.strip().strip("'").strip('"')
+        if key and key not in os.environ:
+            os.environ[key] = value
 
 
 def load_zod_json_schema() -> dict[str, Any]:
@@ -86,6 +113,62 @@ def collect_keywords(raw: Optional[str], file_path: Optional[str]) -> List[str]:
     return [item for item in items if item]
 
 
+class _VisibleTextParser(HTMLParser):
+    _SKIP = {"script", "style", "noscript", "svg", "template"}
+
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=True)
+        self._skip_depth = 0
+        self.chunks: List[str] = []
+
+    def handle_starttag(self, tag: str, attrs: list[tuple[str, Optional[str]]]) -> None:
+        if tag in self._SKIP:
+            self._skip_depth += 1
+
+    def handle_endtag(self, tag: str) -> None:
+        if tag in self._SKIP and self._skip_depth:
+            self._skip_depth -= 1
+
+    def handle_data(self, data: str) -> None:
+        if self._skip_depth:
+            return
+        text = " ".join(data.split())
+        if text:
+            self.chunks.append(text)
+
+
+def fetch_site_text(url: str, max_chars: int = 16000) -> str:
+    """Best-effort homepage text for Gemini context. Empty string on failure."""
+    request = Request(
+        url,
+        headers={
+            "User-Agent": (
+                "Mozilla/5.0 (compatible; PropFXLab/1.0; +https://www.propfxlab.com)"
+            ),
+            "Accept": "text/html,application/xhtml+xml",
+        },
+        method="GET",
+    )
+    try:
+        with urlopen(request, timeout=20) as response:
+            raw = response.read(max_chars * 4)
+            charset = response.headers.get_content_charset() or "utf-8"
+            html = raw.decode(charset, errors="replace")
+    except (URLError, TimeoutError, OSError, ValueError) as error:
+        print(f"  抓取 {url} 失败（将仅用公开知识生成）: {error}")
+        return ""
+
+    parser = _VisibleTextParser()
+    try:
+        parser.feed(html)
+        parser.close()
+    except Exception:
+        return html[:max_chars]
+
+    text = " ".join(parser.chunks)
+    return text[:max_chars]
+
+
 def build_prompt(source_text: str, keywords: List[str], slug_hint: Optional[str]) -> str:
     keyword_block = ", ".join(keywords) if keywords else "(none provided)"
     slug_line = (
@@ -120,6 +203,95 @@ Source text:
 """
 
 
+def build_batch_prompt(firm: PropFirmSeed, source_text: str) -> str:
+    """Map card-level fields onto the full Zod schema used by the site."""
+    site_block = (
+        f"Official website excerpt (may be incomplete or marketing copy):\n---\n{source_text}\n---\n"
+        if source_text.strip()
+        else "No website excerpt was available. Use well-known public facts and stay conservative.\n"
+    )
+    return f"""You are extracting a complete Prop Firm profile for a comparison website.
+
+Return one JSON object that exactly matches the provided JSON Schema.
+Do not include markdown or commentary.
+
+Locked fields (copy exactly, do not rename):
+- slug: "{firm['slug']}"
+- status: "active"
+- basic.name: "{firm['name']}"
+- basic.website: "{firm['url']}"
+
+Card-level facts the homepage needs (encode them in the full schema, not as extra keys):
+- profitSplit: a human-readable range such as "80% - 90%". Encode this as
+  withdrawal.defaultTraderSharePercent (the typical starting trader share) plus
+  calculator.profitSplitTiers covering each published program / scaled tier.
+  defaultTraderSharePercent + defaultFirmSharePercent must equal 100.
+- payoutSpeed: short card copy such as "Within 24 Hours". Put it in payoutSpeed.
+- payoutMethods: methods such as Crypto/USDT, Rise, Bank Transfer. Encode each
+  as an object in withdrawal.channels (id kebab-case, method one of
+  bank_wire / card / ewallet / crypto / other).
+- faqs: at least 4 detailed Q&A items focused on payout rules and drawdown.
+  Each FAQ must include id, slug, locale "en", keywords, and seo
+  (schemaType "FAQPage", canonicalPath "/firms/{firm['slug']}/faq/<faq-slug>",
+  metaDescription max 320 characters, datePublished "2026-09-04").
+
+Other rules:
+- Use only facts supported by the website excerpt or widely published terms.
+  Do not invent precise fees, dates, or percentages you are unsure of.
+- If a nullable field is unknown, use null (for example maxAmount, subsequentIntervalDays, maxProfit).
+- If a required field is missing, use the most conservative value consistent with
+  public info and say so in payoutCycle.description or an FAQ answer.
+- slug, FAQ id/slug, and channel id must be kebab-case.
+- Logo src must be an http(s) URL or a path starting with /. Prefer {firm['url'].rstrip('/')}/favicon.ico if unknown.
+- Include prosAndCons with at least one pro and one con.
+- Include withdrawal.warnings with real risk items (drawdown breach, payout pause, prohibited strategies).
+
+{site_block}
+"""
+
+
+def apply_locked_fields(payload: dict[str, Any], firm: PropFirmSeed) -> dict[str, Any]:
+    payload["slug"] = firm["slug"]
+    payload["status"] = "active"
+    basic = payload.get("basic")
+    if not isinstance(basic, dict):
+        basic = {}
+        payload["basic"] = basic
+    basic["name"] = firm["name"]
+    basic["website"] = firm["url"]
+    return payload
+
+
+def write_firm_json(payload: dict[str, Any], slug: str, force: bool) -> Path:
+    FIRMS_DIR.mkdir(parents=True, exist_ok=True)
+    out_path = FIRMS_DIR / f"{slug}.json"
+    if out_path.exists() and not force:
+        raise SystemExit(f"已存在 {out_path}，如需覆盖请加 --force")
+    out_path.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    return out_path
+
+
+def generate_firm_json(
+    firm: PropFirmSeed,
+    schema: dict[str, Any],
+    model: str,
+    force: bool,
+    fetch_site: bool,
+) -> Path:
+    source_text = fetch_site_text(firm["url"]) if fetch_site else ""
+    prompt = build_batch_prompt(firm, source_text)
+    payload = apply_locked_fields(call_gemini(prompt, schema, model), firm)
+    payload["slug"] = kebab(str(payload.get("slug") or firm["slug"]))
+    if payload["slug"] != firm["slug"]:
+        payload["slug"] = firm["slug"]
+    out_path = write_firm_json(payload, firm["slug"], force)
+    print(f"Generated {out_path}")
+    return out_path
+
+
 def call_gemini(prompt: str, schema: dict[str, Any], model: str) -> dict[str, Any]:
     try:
         from google import genai
@@ -129,9 +301,14 @@ def call_gemini(prompt: str, schema: dict[str, Any], model: str) -> dict[str, An
             "缺少 google-genai。请先运行: pip3 install -r scripts/requirements.txt"
         )
 
+    load_dotenv()
     api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
     if not api_key:
-        raise SystemExit("请设置环境变量 GEMINI_API_KEY（或 GOOGLE_API_KEY）")
+        raise SystemExit(
+            "缺少 API Key。请在仓库根目录创建 .env，写入一行：\n"
+            "  GEMINI_API_KEY=你的密钥\n"
+            "或先 export GEMINI_API_KEY=你的密钥 再运行本脚本。"
+        )
 
     client = genai.Client(api_key=api_key)
     response = client.models.generate_content(
@@ -183,7 +360,7 @@ def validate_with_zod() -> None:
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="用 Gemini Structured Outputs 从抓取文本生成 Prop Firm JSON"
+        description="用 Gemini Structured Outputs 生成符合 src/lib/schema.ts 的 Prop Firm JSON"
     )
     parser.add_argument(
         "--source",
@@ -212,7 +389,79 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="只打印发给 Gemini 的 JSON Schema，不调用 API",
     )
+    parser.add_argument(
+        "--batch",
+        action="store_true",
+        help="循环 PROP_FIRMS（30 家），按官网公开信息生成 JSON",
+    )
+    parser.add_argument(
+        "--only",
+        help="批量模式下只跑这些 slug（逗号分隔）",
+    )
+    parser.add_argument(
+        "--sleep",
+        type=float,
+        default=1.5,
+        help="批量模式两次 Gemini 调用之间的间隔秒数（默认 1.5）",
+    )
+    parser.add_argument(
+        "--no-fetch",
+        action="store_true",
+        help="批量模式不抓取官网正文，仅用名称/网址提示模型",
+    )
     return parser.parse_args()
+
+
+def select_batch_firms(only: Optional[str]) -> list[PropFirmSeed]:
+    if not only:
+        return list(PROP_FIRMS)
+    wanted = {part.strip() for part in only.split(",") if part.strip()}
+    selected = [firm for firm in PROP_FIRMS if firm["slug"] in wanted]
+    missing = wanted - {firm["slug"] for firm in selected}
+    if missing:
+        raise SystemExit(f"PROP_FIRMS 中找不到 slug: {', '.join(sorted(missing))}")
+    return selected
+
+
+def run_batch(args: argparse.Namespace, schema: dict[str, Any]) -> None:
+    firms = select_batch_firms(args.only)
+    generated = 0
+    skipped = 0
+    failed: list[str] = []
+
+    for index, firm in enumerate(firms):
+        out_path = FIRMS_DIR / f"{firm['slug']}.json"
+        if out_path.exists() and not args.force:
+            print(f"跳过已存在 {out_path}（加 --force 可覆盖）")
+            skipped += 1
+            continue
+
+        print(f"[{index + 1}/{len(firms)}] {firm['name']} ({firm['slug']})")
+        try:
+            generate_firm_json(
+                firm,
+                schema,
+                args.model,
+                force=True,
+                fetch_site=not args.no_fetch,
+            )
+            generated += 1
+        except SystemExit as error:
+            print(f"  失败: {error}", file=sys.stderr)
+            failed.append(firm["slug"])
+        except Exception as error:
+            print(f"  失败: {error}", file=sys.stderr)
+            failed.append(firm["slug"])
+
+        if index < len(firms) - 1 and args.sleep > 0:
+            time.sleep(args.sleep)
+
+    print(
+        f"批量完成：生成 {generated}，跳过 {skipped}，失败 {len(failed)}"
+        + (f"（{', '.join(failed)}）" if failed else "")
+    )
+    if failed:
+        raise SystemExit(1)
 
 
 def main() -> None:
@@ -225,8 +474,14 @@ def main() -> None:
         sys.stdout.write("\n")
         return
 
+    if args.batch:
+        run_batch(args, gemini_schema)
+        if not args.skip_validate:
+            validate_with_zod()
+        return
+
     if not args.source:
-        raise SystemExit("请提供 --source（抓取文本文件，或 - 表示 stdin）")
+        raise SystemExit("请提供 --source，或使用 --batch 生成 PROP_FIRMS")
 
     source_text = read_text(args.source)
     if not source_text.strip():
@@ -241,16 +496,8 @@ def main() -> None:
         raise SystemExit("无法确定文件名：模型未返回 slug，请使用 --slug")
     firm["slug"] = slug
 
-    FIRMS_DIR.mkdir(parents=True, exist_ok=True)
-    out_path = FIRMS_DIR / f"{slug}.json"
-    if out_path.exists() and not args.force:
-        raise SystemExit(f"已存在 {out_path}，如需覆盖请加 --force")
-
-    out_path.write_text(
-        json.dumps(firm, ensure_ascii=False, indent=2) + "\n",
-        encoding="utf-8",
-    )
-    print(f"已写入 {out_path}")
+    out_path = write_firm_json(firm, slug, args.force)
+    print(f"Generated {out_path}")
 
     if not args.skip_validate:
         validate_with_zod()
