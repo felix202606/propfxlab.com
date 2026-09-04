@@ -1,0 +1,224 @@
+{
+  "slug": "take-profit-trader",
+  "status": "active",
+  "payoutSpeed": "Within 24 Hours",
+  "basic": {
+    "name": "Take Profit Trader",
+    "logo": {
+      "src": "https://www.takeprofittrader.com/favicon.ico",
+      "alt": "Take Profit Trader Logo",
+      "width": 100,
+      "height": 100
+    },
+    "foundedAt": "2021-01-01",
+    "headquarters": {
+      "city": "Orlando",
+      "country": "United States",
+      "countryCode": "US"
+    },
+    "website": "https://www.takeprofittrader.com",
+    "funding": {
+      "currency": "USD",
+      "minAccountSize": 25000,
+      "maxAccountSize": 150000,
+      "maxScaledSize": 300000
+    }
+  },
+  "withdrawal": {
+    "defaultTraderSharePercent": 80,
+    "defaultFirmSharePercent": 20,
+    "payoutCycle": {
+      "type": "on_demand",
+      "firstPayoutMinDays": 0,
+      "subsequentIntervalDays": null,
+      "description": "Payouts can be requested on demand as soon as the account buffer requirement is met."
+    },
+    "platformFee": {
+      "type": "none"
+    },
+    "channels": [
+      {
+        "id": "rise",
+        "name": "Rise",
+        "method": "ewallet",
+        "minAmount": 250,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ],
+        "notes": "Direct transfer via Rise."
+      },
+      {
+        "id": "bank-wire",
+        "name": "Bank Wire",
+        "method": "bank_wire",
+        "minAmount": 250,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 3
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "id": "crypto",
+        "name": "Crypto",
+        "method": "crypto",
+        "minAmount": 250,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ]
+      }
+    ],
+    "minPayoutAmount": 250,
+    "minPayoutCurrency": "USD",
+    "challengeFeeRefundedOnFirstPayout": false,
+    "warnings": [
+      "Violating the max drawdown limit results in immediate account failure.",
+      "Payouts require maintaining the minimum profit buffer in the account."
+    ]
+  },
+  "calculator": {
+    "currency": "USD",
+    "profitSplitTiers": [
+      {
+        "id": "standard-tier",
+        "label": "Standard 80% Split",
+        "program": "PRO Account",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 80
+      },
+      {
+        "id": "scaled-tier",
+        "label": "Scaled 90% Split",
+        "program": "PRO Account Scaled",
+        "minProfit": 5000,
+        "maxProfit": null,
+        "traderSharePercent": 90
+      }
+    ],
+    "platformWithholdingTaxPercent": 0,
+    "platformDeductionPercent": 0,
+    "paymentProcessorFeePercent": 0,
+    "minPayoutAmount": 250,
+    "scaling": {
+      "enabled": true,
+      "intervalMonths": 3,
+      "balanceIncreasePercent": 20,
+      "maxCapital": 300000,
+      "traderShareAfterScalePercent": 90,
+      "requirements": [
+        "Maintain profitability over active evaluation period"
+      ]
+    }
+  },
+  "faqs": [
+    {
+      "id": "payout-process",
+      "question": "How do payouts work at Take Profit Trader?",
+      "answer": "Take Profit Trader allows traders to request payouts immediately after reaching and securing the required profit buffer in a PRO account. Payouts are typically processed within 24 hours.",
+      "slug": "payout-process",
+      "locale": "en",
+      "keywords": [
+        "take profit trader",
+        "payouts",
+        "withdrawals"
+      ],
+      "seo": {
+        "title": "Take Profit Trader Payout Process",
+        "metaDescription": "Learn how payouts work at Take Profit Trader, including processing time and eligibility rules.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/take-profit-trader/faq/payout-process"
+      }
+    },
+    {
+      "id": "drawdown-rules",
+      "question": "What are the drawdown rules for Take Profit Trader accounts?",
+      "answer": "Take Profit Trader utilizes drawdown limits that track account equity. Breaching the daily or maximum allowable drawdown limit results in immediate account failure.",
+      "slug": "drawdown-rules",
+      "locale": "en",
+      "keywords": [
+        "take profit trader",
+        "drawdown",
+        "risk management"
+      ],
+      "seo": {
+        "title": "Take Profit Trader Drawdown Rules",
+        "metaDescription": "Understand the maximum drawdown rules and equity risk limits for Take Profit Trader accounts.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/take-profit-trader/faq/drawdown-rules"
+      }
+    },
+    {
+      "id": "payout-buffer-requirement",
+      "question": "What is the profit buffer requirement for payouts?",
+      "answer": "Traders must build and retain a minimum profit buffer before requesting a payout. Any profits earned above this buffer threshold are eligible for withdrawal.",
+      "slug": "payout-buffer-requirement",
+      "locale": "en",
+      "keywords": [
+        "profit buffer",
+        "payout threshold",
+        "take profit trader"
+      ],
+      "seo": {
+        "title": "Take Profit Trader Profit Buffer Requirement",
+        "metaDescription": "Details on the profit buffer required before initiating a payout with Take Profit Trader.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/take-profit-trader/faq/payout-buffer-requirement"
+      }
+    },
+    {
+      "id": "minimum-trading-days",
+      "question": "Is there a minimum trading day requirement before requesting a payout?",
+      "answer": "No, Take Profit Trader does not impose a minimum number of trading days on PRO accounts prior to payout requests, provided the required buffer is maintained.",
+      "slug": "minimum-trading-days",
+      "locale": "en",
+      "keywords": [
+        "trading days",
+        "payout eligibility",
+        "take profit trader"
+      ],
+      "seo": {
+        "title": "Take Profit Trader Minimum Trading Days",
+        "metaDescription": "Find out if Take Profit Trader requires minimum trading days before you can request a payout.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/take-profit-trader/faq/minimum-trading-days"
+      }
+    }
+  ],
+  "prosAndCons": {
+    "pros": [
+      "On-demand payouts available once profit buffer is reached",
+      "No minimum trading days requirement on PRO accounts"
+    ],
+    "cons": [
+      "Must maintain a profit buffer prior to withdrawing funds",
+      "Daily drawdown limits can trigger account termination"
+    ]
+  }
+}

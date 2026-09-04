@@ -1,0 +1,227 @@
+{
+  "slug": "aquafunded",
+  "status": "active",
+  "payoutSpeed": "Within 24 Hours",
+  "basic": {
+    "name": "AquaFunded",
+    "legalName": "AquaFunded FZE",
+    "logo": {
+      "src": "https://www.aquafunded.com/favicon.ico",
+      "alt": "AquaFunded Logo",
+      "width": 32,
+      "height": 32
+    },
+    "foundedAt": "2023-01-01",
+    "headquarters": {
+      "city": "Dubai",
+      "country": "United Arab Emirates",
+      "countryCode": "AE"
+    },
+    "website": "https://www.aquafunded.com",
+    "funding": {
+      "currency": "USD",
+      "minAccountSize": 5000,
+      "maxAccountSize": 200000,
+      "maxScaledSize": 2000000
+    }
+  },
+  "withdrawal": {
+    "defaultTraderSharePercent": 80,
+    "defaultFirmSharePercent": 20,
+    "payoutCycle": {
+      "type": "fixed_interval",
+      "firstPayoutMinDays": 14,
+      "subsequentIntervalDays": 14,
+      "description": "First payout is eligible 14 days after placing the first trade on the funded account. Subsequent payouts occur bi-weekly."
+    },
+    "platformFee": {
+      "type": "none"
+    },
+    "channels": [
+      {
+        "id": "crypto-usdt",
+        "name": "Crypto (USDT)",
+        "method": "crypto",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "id": "rise-payout",
+        "name": "Rise Pay",
+        "method": "ewallet",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "id": "bank-wire",
+        "name": "Bank Wire",
+        "method": "bank_wire",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 3
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ]
+      }
+    ],
+    "minPayoutAmount": 50,
+    "minPayoutCurrency": "USD",
+    "challengeFeeRefundedOnFirstPayout": true,
+    "warnings": [
+      "Violating daily drawdown or overall max drawdown limits will result in instant account breach.",
+      "Accounts inactive for more than 30 consecutive days may be terminated."
+    ]
+  },
+  "calculator": {
+    "currency": "USD",
+    "profitSplitTiers": [
+      {
+        "id": "standard-tier",
+        "label": "Standard Trader Share",
+        "program": "Standard Funded",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 80
+      },
+      {
+        "id": "scaling-tier",
+        "label": "Scaled Trader Share",
+        "program": "Scaling Plan",
+        "minProfit": 10000,
+        "maxProfit": null,
+        "traderSharePercent": 90
+      }
+    ],
+    "platformWithholdingTaxPercent": 0,
+    "platformDeductionPercent": 0,
+    "paymentProcessorFeePercent": 0,
+    "minPayoutAmount": 50,
+    "scaling": {
+      "enabled": true,
+      "intervalMonths": 3,
+      "balanceIncreasePercent": 25,
+      "maxCapital": 2000000,
+      "traderShareAfterScalePercent": 90,
+      "requirements": [
+        "Achieve at least 10% total profit over 3 consecutive months",
+        "Request at least 2 successful payouts during the period"
+      ]
+    }
+  },
+  "faqs": [
+    {
+      "id": "how-do-payouts-work",
+      "question": "How do payouts work at AquaFunded?",
+      "answer": "Payouts can be requested through your dashboard using supported methods such as Rise Pay, Crypto (USDT), or Bank Wire. Once requested, payouts are processed within 24 hours.",
+      "slug": "how-do-payouts-work",
+      "locale": "en",
+      "keywords": [
+        "payouts",
+        "payout process",
+        "withdrawal methods"
+      ],
+      "seo": {
+        "title": "How do payouts work at AquaFunded?",
+        "metaDescription": "Learn how to request and receive payouts at AquaFunded using Crypto, Rise Pay, or Bank Wire.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/aquafunded/faq/how-do-payouts-work"
+      }
+    },
+    {
+      "id": "what-are-the-drawdown-limits",
+      "question": "What are the drawdown limits at AquaFunded?",
+      "answer": "AquaFunded enforces maximum daily drawdown and total static/relative drawdown limits based on the selected account type. Exceeding these drawdown thresholds results in immediate breach of the account rules.",
+      "slug": "what-are-the-drawdown-limits",
+      "locale": "en",
+      "keywords": [
+        "drawdown",
+        "maximum drawdown",
+        "daily drawdown",
+        "drawdown rules"
+      ],
+      "seo": {
+        "title": "What are the drawdown limits at AquaFunded?",
+        "metaDescription": "Understand AquaFunded daily and overall drawdown limit rules to keep your funded account active.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/aquafunded/faq/what-are-the-drawdown-limits"
+      }
+    },
+    {
+      "id": "when-can-i-request-first-payout",
+      "question": "When can I request my first payout?",
+      "answer": "Traders are eligible to request their first payout 14 calendar days after placing their first trade on the live funded account.",
+      "slug": "when-can-i-request-first-payout",
+      "locale": "en",
+      "keywords": [
+        "first payout",
+        "payout schedule",
+        "withdrawal timeline"
+      ],
+      "seo": {
+        "title": "When can I request my first payout at AquaFunded?",
+        "metaDescription": "Find out when you are eligible to request your first withdrawal after passing your AquaFunded challenge.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/aquafunded/faq/when-can-i-request-first-payout"
+      }
+    },
+    {
+      "id": "is-the-challenge-fee-refundable",
+      "question": "Is the challenge fee refunded on the first payout?",
+      "answer": "Yes, AquaFunded refunds your initial evaluation challenge fee along with your first successful profit withdrawal.",
+      "slug": "is-the-challenge-fee-refundable",
+      "locale": "en",
+      "keywords": [
+        "challenge fee refund",
+        "refundable fee",
+        "first payout bonus"
+      ],
+      "seo": {
+        "title": "Is the challenge fee refunded on the first payout at AquaFunded?",
+        "metaDescription": "Learn about AquaFunded challenge fee refund policy on your first successful payout request.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/aquafunded/faq/is-the-challenge-fee-refundable"
+      }
+    }
+  ],
+  "prosAndCons": {
+    "pros": [
+      "Competitive profit split up to 90%",
+      "Fast payout processing within 24 hours",
+      "100% refundable evaluation fee on first payout"
+    ],
+    "cons": [
+      "Strict maximum daily and total drawdown rules",
+      "Inactivity policy requires trading activity within 30 days"
+    ]
+  }
+}

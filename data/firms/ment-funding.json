@@ -1,0 +1,235 @@
+{
+  "slug": "ment-funding",
+  "status": "active",
+  "payoutSpeed": "Within 24 Hours",
+  "basic": {
+    "name": "Ment Funding",
+    "legalName": "Ment Funding LLC",
+    "logo": {
+      "src": "https://mentfunding.com/favicon.ico",
+      "alt": "Ment Funding Logo",
+      "width": 128,
+      "height": 128
+    },
+    "foundedAt": "2021-01-01",
+    "headquarters": {
+      "city": "Wilmington",
+      "country": "United States",
+      "countryCode": "US"
+    },
+    "website": "https://mentfunding.com",
+    "funding": {
+      "currency": "USD",
+      "minAccountSize": 25000,
+      "maxAccountSize": 2000000,
+      "maxScaledSize": 2000000
+    }
+  },
+  "withdrawal": {
+    "defaultTraderSharePercent": 80,
+    "defaultFirmSharePercent": 20,
+    "payoutCycle": {
+      "type": "hybrid",
+      "firstPayoutMinDays": 14,
+      "subsequentIntervalDays": 14,
+      "description": "Payouts are processed bi-weekly. Traders can request their profit split after 14 days of active trading."
+    },
+    "platformFee": {
+      "type": "none"
+    },
+    "channels": [
+      {
+        "id": "crypto-usdt",
+        "name": "Crypto (USDT)",
+        "method": "crypto",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "id": "rise-pay",
+        "name": "Rise",
+        "method": "ewallet",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD",
+          "EUR",
+          "GBP"
+        ]
+      },
+      {
+        "id": "bank-transfer",
+        "name": "Bank Transfer",
+        "method": "bank_wire",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 3
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD",
+          "EUR",
+          "GBP"
+        ]
+      }
+    ],
+    "minPayoutAmount": 50,
+    "minPayoutCurrency": "USD",
+    "challengeFeeRefundedOnFirstPayout": true,
+    "warnings": [
+      "Violating the daily or maximum drawdown limit will result in immediate account termination.",
+      "Using prohibited trading strategies such as latency arbitrage or high-frequency trading is strictly banned.",
+      "Payouts may be delayed or paused if suspicious trading activity or copy trading from unapproved sources is detected."
+    ]
+  },
+  "calculator": {
+    "currency": "USD",
+    "profitSplitTiers": [
+      {
+        "id": "standard-tier",
+        "label": "Standard Profit Split",
+        "program": "Standard Evaluation",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 80
+      },
+      {
+        "id": "scaled-tier",
+        "label": "Scaled Profit Split",
+        "program": "Scaling Plan",
+        "minProfit": 10000,
+        "maxProfit": null,
+        "traderSharePercent": 90
+      }
+    ],
+    "platformWithholdingTaxPercent": 0,
+    "platformDeductionPercent": 0,
+    "paymentProcessorFeePercent": 0,
+    "minPayoutAmount": 50,
+    "scaling": {
+      "enabled": true,
+      "intervalMonths": 3,
+      "balanceIncreasePercent": 25,
+      "maxCapital": 2000000,
+      "traderShareAfterScalePercent": 90,
+      "requirements": [
+        "Achieve a total profit of 10% or more within a 3-month period",
+        "Maintain a positive balance at the time of scaling request",
+        "No active rule violations on the account"
+      ]
+    }
+  },
+  "faqs": [
+    {
+      "id": "drawdown-rules",
+      "question": "How does the drawdown limit work at Ment Funding?",
+      "answer": "Ment Funding features a daily drawdown limit and a maximum overall drawdown limit. The daily drawdown is calculated based on the starting balance of the day, while the maximum drawdown is static or trailing depending on the specific account type chosen. Exceeding these limits will result in an immediate breach of the account.",
+      "slug": "drawdown-rules",
+      "locale": "en",
+      "keywords": [
+        "drawdown",
+        "ment funding drawdown",
+        "daily loss limit",
+        "max drawdown"
+      ],
+      "seo": {
+        "title": "Ment Funding Drawdown Rules Explained",
+        "metaDescription": "Learn how the daily and maximum drawdown limits are calculated at Ment Funding to avoid account breaches.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/ment-funding/faq/drawdown-rules"
+      }
+    },
+    {
+      "id": "payout-schedule",
+      "question": "What is the payout schedule and how often can I withdraw?",
+      "answer": "Traders at Ment Funding can request their first payout 14 days after placing their first trade on the funded account. Subsequent payouts can also be requested on a bi-weekly basis (every 14 days), provided the account balance is above the initial starting balance.",
+      "slug": "payout-schedule",
+      "locale": "en",
+      "keywords": [
+        "payout schedule",
+        "ment funding withdrawal",
+        "bi-weekly payout"
+      ],
+      "seo": {
+        "title": "Ment Funding Payout Schedule & Frequency",
+        "metaDescription": "Find out when you can request your first and subsequent payouts as a funded trader with Ment Funding.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/ment-funding/faq/payout-schedule"
+      }
+    },
+    {
+      "id": "payout-methods",
+      "question": "What payout methods are supported by Ment Funding?",
+      "answer": "Ment Funding supports multiple convenient withdrawal methods, including Rise, Bank Transfer (Wire), and various Cryptocurrencies such as USDT. This ensures fast and secure processing of your profit share within 24 hours of approval.",
+      "slug": "payout-methods",
+      "locale": "en",
+      "keywords": [
+        "payout methods",
+        "withdraw crypto",
+        "rise pay",
+        "bank transfer"
+      ],
+      "seo": {
+        "title": "Supported Payout Methods at Ment Funding",
+        "metaDescription": "Discover the withdrawal options available at Ment Funding, including Rise, Bank Wire, and Crypto.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/ment-funding/faq/payout-methods"
+      }
+    },
+    {
+      "id": "refundable-fee",
+      "question": "Is the evaluation fee refundable upon receiving a payout?",
+      "answer": "Yes, the initial evaluation fee is fully refundable. It will be added to your very first successful payout once you reach the funded stage and complete the required trading period without any rule violations.",
+      "slug": "refundable-fee",
+      "locale": "en",
+      "keywords": [
+        "refundable fee",
+        "ment funding refund",
+        "evaluation fee refund"
+      ],
+      "seo": {
+        "title": "Is the Ment Funding Evaluation Fee Refundable?",
+        "metaDescription": "Learn how and when you can get your initial evaluation fee refunded by Ment Funding.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/ment-funding/faq/refundable-fee"
+      }
+    }
+  ],
+  "prosAndCons": {
+    "pros": [
+      "High profit split up to 90% with scaling",
+      "Fast payout processing within 24 hours",
+      "No minimum trading days requirement on evaluations",
+      "Refundable registration fee on the first payout"
+    ],
+    "cons": [
+      "Strict daily drawdown rules that can lead to account breach",
+      "Relatively high initial evaluation fees compared to some competitors"
+    ]
+  }
+}

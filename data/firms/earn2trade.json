@@ -1,0 +1,212 @@
+{
+  "slug": "earn2trade",
+  "status": "active",
+  "payoutSpeed": "Within 24-48 Hours",
+  "basic": {
+    "name": "Earn2Trade",
+    "legalName": "Earn2Trade LLC",
+    "logo": {
+      "src": "https://www.earn2trade.com/favicon.ico",
+      "alt": "Earn2Trade Logo"
+    },
+    "foundedAt": "2017-01-01",
+    "headquarters": {
+      "city": "Orlando",
+      "country": "United States",
+      "countryCode": "US"
+    },
+    "website": "https://www.earn2trade.com",
+    "funding": {
+      "currency": "USD",
+      "minAccountSize": 25000,
+      "maxAccountSize": 200000,
+      "maxScaledSize": 200000
+    }
+  },
+  "withdrawal": {
+    "defaultTraderSharePercent": 80,
+    "defaultFirmSharePercent": 20,
+    "payoutCycle": {
+      "type": "fixed_interval",
+      "firstPayoutMinDays": 0,
+      "subsequentIntervalDays": 7,
+      "description": "Payout requests are processed once per week upon meeting the minimal profit thresholds."
+    },
+    "platformFee": {
+      "type": "none"
+    },
+    "channels": [
+      {
+        "id": "rise-pay",
+        "name": "Rise",
+        "method": "ewallet",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 2
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "id": "crypto-usdt",
+        "name": "Crypto / USDT",
+        "method": "crypto",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 2
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ],
+        "notes": "Crypto payouts are typically settled as USDT, recorded as USD in schema."
+      },
+      {
+        "id": "bank-wire",
+        "name": "Bank Wire",
+        "method": "bank_wire",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 2,
+          "max": 5
+        },
+        "fee": {
+          "type": "flat",
+          "flatAmount": 35,
+          "currency": "USD"
+        },
+        "currencies": [
+          "USD"
+        ]
+      }
+    ],
+    "minPayoutAmount": 100,
+    "minPayoutCurrency": "USD",
+    "challengeFeeRefundedOnFirstPayout": false,
+    "warnings": [
+      "Violating the trailing drawdown threshold instantly terminates the account.",
+      "Payouts are subject to a minimum withdrawal threshold of $100.",
+      "Trading during major economic releases or holding positions overnight depends on specific account rules."
+    ]
+  },
+  "calculator": {
+    "currency": "USD",
+    "profitSplitTiers": [
+      {
+        "id": "gauntlet-mini-80",
+        "label": "Gauntlet Mini 80% Profit Split",
+        "program": "Gauntlet Mini",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 80
+      }
+    ],
+    "platformWithholdingTaxPercent": 0,
+    "platformDeductionPercent": 0,
+    "paymentProcessorFeePercent": 0,
+    "minPayoutAmount": 100,
+    "scaling": {
+      "enabled": false
+    }
+  },
+  "faqs": [
+    {
+      "id": "payout-process-and-frequency",
+      "question": "How often can I request a payout from Earn2Trade?",
+      "answer": "Earn2Trade processes trader payouts on a weekly basis. Traders can request withdrawals after reaching the minimum profit requirement of $100.",
+      "slug": "payout-process-and-frequency",
+      "locale": "en",
+      "keywords": [
+        "earn2trade payout",
+        "payout frequency",
+        "withdrawal schedule"
+      ],
+      "seo": {
+        "title": "Earn2Trade Payout Process & Frequency Guide",
+        "metaDescription": "Learn about Earn2Trade payout frequency, weekly withdrawal schedule, and minimum payout requirements.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/earn2trade/faq/payout-process-and-frequency"
+      }
+    },
+    {
+      "id": "minimum-payout-amount",
+      "question": "What is the minimum withdrawal amount for Earn2Trade accounts?",
+      "answer": "The minimum payout amount is $100. Withdrawals lower than $100 cannot be processed.",
+      "slug": "minimum-payout-amount",
+      "locale": "en",
+      "keywords": [
+        "earn2trade minimum payout",
+        "min withdrawal",
+        "payout limit"
+      ],
+      "seo": {
+        "title": "Earn2Trade Minimum Payout Amount",
+        "metaDescription": "Details on the minimum payout threshold of $100 for Earn2Trade funded accounts.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/earn2trade/faq/minimum-payout-amount"
+      }
+    },
+    {
+      "id": "drawdown-rules-explained",
+      "question": "How does drawdown work on Earn2Trade funded accounts?",
+      "answer": "Earn2Trade uses an End-of-Day or Live Trailing Drawdown depending on the chosen program. Breaching the trailing drawdown limit will immediately fail the account.",
+      "slug": "drawdown-rules-explained",
+      "locale": "en",
+      "keywords": [
+        "earn2trade drawdown",
+        "trailing drawdown",
+        "drawdown limit"
+      ],
+      "seo": {
+        "title": "Earn2Trade Trailing Drawdown Rules Explained",
+        "metaDescription": "Understand how trailing drawdown and end-of-day drawdown rules work at Earn2Trade.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/earn2trade/faq/drawdown-rules-explained"
+      }
+    },
+    {
+      "id": "available-payout-methods",
+      "question": "What payout methods does Earn2Trade support?",
+      "answer": "Earn2Trade supports payouts via Rise, Crypto (USDT), and Bank Wire transfers.",
+      "slug": "available-payout-methods",
+      "locale": "en",
+      "keywords": [
+        "earn2trade payment methods",
+        "earn2trade rise",
+        "crypto payout"
+      ],
+      "seo": {
+        "title": "Earn2Trade Payout Methods & Options",
+        "metaDescription": "Explore available withdrawal options at Earn2Trade including Rise, Crypto, and Wire Transfer.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/earn2trade/faq/available-payout-methods"
+      }
+    }
+  ],
+  "prosAndCons": {
+    "pros": [
+      "Path to real funded futures trading accounts",
+      "Flexible withdrawal options including Rise and Crypto",
+      "80% profit split for funded traders"
+    ],
+    "cons": [
+      "Subscription fee is not refunded upon first payout",
+      "Strict trailing drawdown rules"
+    ]
+  }
+}

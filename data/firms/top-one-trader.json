@@ -1,0 +1,229 @@
+{
+  "slug": "top-one-trader",
+  "status": "active",
+  "payoutSpeed": "Within 24 Hours",
+  "basic": {
+    "name": "Top One Trader",
+    "legalName": "Top One Trader LLC",
+    "logo": {
+      "src": "https://www.toponetrader.com/favicon.ico",
+      "alt": "Top One Trader Logo",
+      "width": 32,
+      "height": 32
+    },
+    "foundedAt": "2021-01-01",
+    "headquarters": {
+      "city": "Miami",
+      "country": "United States",
+      "countryCode": "US"
+    },
+    "website": "https://www.toponetrader.com",
+    "funding": {
+      "currency": "USD",
+      "minAccountSize": 10000,
+      "maxAccountSize": 200000,
+      "maxScaledSize": 500000
+    }
+  },
+  "withdrawal": {
+    "defaultTraderSharePercent": 80,
+    "defaultFirmSharePercent": 20,
+    "payoutCycle": {
+      "type": "on_demand",
+      "firstPayoutMinDays": 14,
+      "subsequentIntervalDays": 14,
+      "description": "First payout available after 14 days, subsequent payouts processed bi-weekly or on demand."
+    },
+    "platformFee": {
+      "type": "none"
+    },
+    "channels": [
+      {
+        "id": "crypto-usdt",
+        "name": "Crypto / USDT",
+        "method": "crypto",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ],
+        "notes": "Fast processing via USDT"
+      },
+      {
+        "id": "rise-pay",
+        "name": "Rise",
+        "method": "ewallet",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ],
+        "notes": "Direct transfer via Rise"
+      },
+      {
+        "id": "bank-wire",
+        "name": "Bank Transfer",
+        "method": "bank_wire",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 3
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ],
+        "notes": "Standard bank wire transfer"
+      }
+    ],
+    "minPayoutAmount": 100,
+    "minPayoutCurrency": "USD",
+    "challengeFeeRefundedOnFirstPayout": true,
+    "warnings": [
+      "Daily and maximum drawdown breaches result in account termination.",
+      "Inactivity for 30 consecutive days may cause account cancellation."
+    ]
+  },
+  "calculator": {
+    "currency": "USD",
+    "profitSplitTiers": [
+      {
+        "id": "standard-tier",
+        "label": "Standard Split",
+        "program": "Standard Evaluation",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 80
+      },
+      {
+        "id": "scaled-tier",
+        "label": "Scaled Split",
+        "program": "Scaled Account",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 90
+      }
+    ],
+    "platformWithholdingTaxPercent": 0,
+    "platformDeductionPercent": 0,
+    "paymentProcessorFeePercent": 0,
+    "minPayoutAmount": 100,
+    "scaling": {
+      "enabled": true,
+      "intervalMonths": 3,
+      "balanceIncreasePercent": 25,
+      "maxCapital": 500000,
+      "traderShareAfterScalePercent": 90,
+      "requirements": [
+        "Achieve 10% profit within 3 consecutive months",
+        "Request at least 2 successful payouts"
+      ]
+    }
+  },
+  "faqs": [
+    {
+      "id": "how-do-payouts-work",
+      "question": "How do payouts work at Top One Trader?",
+      "answer": "Payouts can be requested after meeting the minimum trading period, typically 14 days after receiving your funded account. Payments are processed within 24 hours via Crypto, Rise, or Bank Wire.",
+      "slug": "how-do-payouts-work",
+      "locale": "en",
+      "keywords": [
+        "payouts",
+        "withdrawal",
+        "top one trader"
+      ],
+      "seo": {
+        "title": "Top One Trader Payout Process",
+        "metaDescription": "Learn how payouts work at Top One Trader, including processing times and payment options.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/top-one-trader/faq/how-do-payouts-work"
+      }
+    },
+    {
+      "id": "what-are-the-drawdown-limits",
+      "question": "What are the drawdown limits for funded accounts?",
+      "answer": "Top One Trader enforces strict daily and total maximum drawdown limits. Breaching either threshold results in immediate account closure and forfeit of funds.",
+      "slug": "what-are-the-drawdown-limits",
+      "locale": "en",
+      "keywords": [
+        "drawdown",
+        "rules",
+        "risk management"
+      ],
+      "seo": {
+        "title": "Top One Trader Drawdown Rules",
+        "metaDescription": "Understand maximum drawdown limits and daily loss constraints at Top One Trader.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/top-one-trader/faq/what-are-the-drawdown-limits"
+      }
+    },
+    {
+      "id": "what-is-the-profit-split",
+      "question": "What is the default profit split ratio?",
+      "answer": "Top One Trader starts traders with an 80% profit split, which can scale up to 90% once scaling milestones are met.",
+      "slug": "what-is-the-profit-split",
+      "locale": "en",
+      "keywords": [
+        "profit split",
+        "trader share",
+        "scaling"
+      ],
+      "seo": {
+        "title": "Top One Trader Profit Split Ratio",
+        "metaDescription": "Find out how much profit you keep with Top One Trader split tiers from 80% to 90%.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/top-one-trader/faq/what-is-the-profit-split"
+      }
+    },
+    {
+      "id": "are-challenge-fees-refundable",
+      "question": "Are challenge fees refunded upon passing?",
+      "answer": "Yes, evaluation challenge fees are fully refunded to funded traders upon receiving their first profit payout.",
+      "slug": "are-challenge-fees-refundable",
+      "locale": "en",
+      "keywords": [
+        "refundable fee",
+        "challenge fee",
+        "payout"
+      ],
+      "seo": {
+        "title": "Top One Trader Refund Policy",
+        "metaDescription": "Details on evaluation fee refunds available with Top One Trader funded accounts.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/top-one-trader/faq/are-challenge-fees-refundable"
+      }
+    }
+  ],
+  "prosAndCons": {
+    "pros": [
+      "Fast payout processing within 24 hours",
+      "Generous profit split up to 90%",
+      "Refundable challenge fee on first payout"
+    ],
+    "cons": [
+      "Strict daily drawdown requirements",
+      "Inactivity period rule may void account"
+    ]
+  }
+}

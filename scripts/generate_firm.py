@@ -37,19 +37,26 @@ SAFE_INT_MAX = 9007199254740991
 _MISSING = object()
 
 
-def load_dotenv(path: Path = ROOT / ".env") -> None:
-    """把仓库根目录 .env 里的 KEY=VALUE 写进 os.environ（不覆盖已有环境变量）。"""
-    if not path.is_file():
-        return
-    for raw_line in path.read_text(encoding="utf-8").splitlines():
-        line = raw_line.strip()
-        if not line or line.startswith("#") or "=" not in line:
+ENV_FILES = (
+    ROOT / ".env",
+    ROOT / "gemini-key.txt",
+)
+
+
+def load_dotenv() -> None:
+    """读取仓库根目录的密钥文件（不覆盖已有环境变量）。"""
+    for path in ENV_FILES:
+        if not path.is_file():
             continue
-        key, _, value = line.partition("=")
-        key = key.strip()
-        value = value.strip().strip("'").strip('"')
-        if key and key not in os.environ:
-            os.environ[key] = value
+        for raw_line in path.read_text(encoding="utf-8").splitlines():
+            line = raw_line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, _, value = line.partition("=")
+            key = key.strip()
+            value = value.strip().strip("'").strip('"')
+            if key and key not in os.environ:
+                os.environ[key] = value
 
 
 def load_zod_json_schema() -> dict[str, Any]:
@@ -305,28 +312,42 @@ def call_gemini(prompt: str, schema: dict[str, Any], model: str) -> dict[str, An
     api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
     if not api_key:
         raise SystemExit(
-            "缺少 API Key。请在仓库根目录创建 .env，写入一行：\n"
-            "  GEMINI_API_KEY=你的密钥\n"
-            "或先 export GEMINI_API_KEY=你的密钥 再运行本脚本。"
+            "缺少 API Key。请打开 gemini-key.txt，把等号后面换成你的密钥。\n"
+            "文件位置：项目根目录的 gemini-key.txt"
         )
 
     client = genai.Client(api_key=api_key)
-    response = client.models.generate_content(
-        model=model,
-        contents=prompt,
-        config=types.GenerateContentConfig(
-            response_mime_type="application/json",
-            response_json_schema=schema,
-            temperature=0.2,
-        ),
-    )
-    text = getattr(response, "text", None)
-    if not text:
-        raise SystemExit(f"Gemini 没有返回 JSON 文本。finish 信息: {response}")
-    try:
-        return json.loads(text)
-    except json.JSONDecodeError as error:
-        raise SystemExit(f"Gemini 返回的内容不是合法 JSON: {error}\n{text[:2000]}")
+    last_error: Exception | None = None
+    for attempt in range(1, 4):
+        try:
+            response = client.models.generate_content(
+                model=model,
+                contents=prompt,
+                config=types.GenerateContentConfig(
+                    response_mime_type="application/json",
+                    response_json_schema=schema,
+                    temperature=0.2,
+                ),
+            )
+            text = getattr(response, "text", None)
+            if not text:
+                raise SystemExit(f"Gemini 没有返回 JSON 文本。finish 信息: {response}")
+            try:
+                return json.loads(text)
+            except json.JSONDecodeError as error:
+                raise SystemExit(f"Gemini 返回的内容不是合法 JSON: {error}\n{text[:2000]}")
+        except SystemExit:
+            raise
+        except Exception as error:
+            last_error = error
+            message = str(error)
+            transient = "503" in message or "UNAVAILABLE" in message or "429" in message
+            if not transient or attempt == 3:
+                raise SystemExit(error)
+            wait_s = 25 * attempt
+            print(f"  Gemini 忙碌/限流，{wait_s}s 后重试（{attempt}/3）")
+            time.sleep(wait_s)
+    raise SystemExit(last_error)
 
 
 def kebab(value: str) -> str:
@@ -371,8 +392,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--slug", help="输出文件名（kebab-case），默认用模型返回的 slug")
     parser.add_argument(
         "--model",
-        default="gemini-2.5-flash",
-        help="Gemini 模型 ID（默认 gemini-2.5-flash）",
+        default="gemini-3.5-flash",
+        help="Gemini 模型 ID（默认 gemini-3.5-flash）",
     )
     parser.add_argument(
         "--force",

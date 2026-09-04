@@ -1,0 +1,211 @@
+{
+  "slug": "fintokei",
+  "status": "active",
+  "payoutSpeed": "Within 24 Hours",
+  "basic": {
+    "name": "Fintokei",
+    "legalName": "Fintokei s.r.o.",
+    "logo": {
+      "src": "https://fintokei.com/favicon.ico",
+      "alt": "Fintokei Logo",
+      "width": 512,
+      "height": 512
+    },
+    "foundedAt": "2021-09-01",
+    "headquarters": {
+      "city": "Brno",
+      "country": "Czech Republic",
+      "countryCode": "CZ"
+    },
+    "website": "https://fintokei.com",
+    "funding": {
+      "currency": "EUR",
+      "minAccountSize": 10000,
+      "maxAccountSize": 400000,
+      "maxScaledSize": 4000000
+    }
+  },
+  "withdrawal": {
+    "defaultTraderSharePercent": 80,
+    "defaultFirmSharePercent": 20,
+    "payoutCycle": {
+      "type": "fixed_interval",
+      "firstPayoutMinDays": 14,
+      "subsequentIntervalDays": 14,
+      "description": "Payouts are available every 14 days following the completion of the first trading cycle."
+    },
+    "platformFee": {
+      "type": "none"
+    },
+    "channels": [
+      {
+        "id": "bank-wire",
+        "name": "Bank Transfer",
+        "method": "bank_wire",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 3
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "EUR",
+          "USD"
+        ]
+      },
+      {
+        "id": "crypto-usdt",
+        "name": "Crypto (USDT)",
+        "method": "crypto",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ]
+      }
+    ],
+    "minPayoutAmount": 50,
+    "minPayoutCurrency": "EUR",
+    "challengeFeeRefundedOnFirstPayout": true,
+    "warnings": [
+      "Breaching daily or maximum drawdown limits causes immediate account forfeiture.",
+      "News trading restrictions apply on specific account types.",
+      "Inactivity for over 30 days can result in account termination."
+    ]
+  },
+  "calculator": {
+    "currency": "EUR",
+    "profitSplitTiers": [
+      {
+        "id": "standard-tier",
+        "label": "Standard Split (80%)",
+        "program": "Pro Trader",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 80
+      },
+      {
+        "id": "scaled-tier",
+        "label": "Scaled Split (90%)",
+        "program": "Pro Trader Scaled",
+        "minProfit": 10000,
+        "maxProfit": null,
+        "traderSharePercent": 90
+      }
+    ],
+    "platformWithholdingTaxPercent": 0,
+    "platformDeductionPercent": 0,
+    "paymentProcessorFeePercent": 0,
+    "minPayoutAmount": 50,
+    "scaling": {
+      "enabled": true,
+      "intervalMonths": 2,
+      "balanceIncreasePercent": 10,
+      "maxCapital": 4000000,
+      "traderShareAfterScalePercent": 90,
+      "requirements": [
+        "Achieve 10% profit over 2 consecutive months",
+        "Maintain positive risk-reward behavior"
+      ]
+    }
+  },
+  "faqs": [
+    {
+      "id": "how-does-drawdown-work",
+      "question": "How does drawdown work at Fintokei?",
+      "answer": "Fintokei calculates maximum drawdown based on the initial balance and daily drawdown based on balance/equity at the start of the trading day depending on account type. Exceeding thresholds results in immediate failure.",
+      "slug": "how-does-drawdown-work",
+      "locale": "en",
+      "keywords": [
+        "fintokei drawdown",
+        "daily loss limit",
+        "maximum drawdown"
+      ],
+      "seo": {
+        "title": "How Does Drawdown Work at Fintokei?",
+        "metaDescription": "Learn how maximum drawdown and daily loss limits are calculated for Fintokei trading accounts.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/fintokei/faq/how-does-drawdown-work"
+      }
+    },
+    {
+      "id": "what-is-the-payout-cycle",
+      "question": "What is the payout cycle at Fintokei?",
+      "answer": "Fintokei processes payout requests after an initial 14-day trading period. Subsequent payouts are eligible on a bi-weekly cycle and processed within 24 hours.",
+      "slug": "what-is-the-payout-cycle",
+      "locale": "en",
+      "keywords": [
+        "fintokei payout cycle",
+        "payout schedule",
+        "withdrawal timeline"
+      ],
+      "seo": {
+        "title": "What Is the Payout Cycle at Fintokei?",
+        "metaDescription": "Understand Fintokei payout frequency, first payout waiting period, and withdrawal processing times.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/fintokei/faq/what-is-the-payout-cycle"
+      }
+    },
+    {
+      "id": "what-payout-methods-are-supported",
+      "question": "What payout methods are supported by Fintokei?",
+      "answer": "Fintokei supports payouts via direct Bank Wire transfers (SEPA/Wire) and Cryptocurrency options like USDT.",
+      "slug": "what-payout-methods-are-supported",
+      "locale": "en",
+      "keywords": [
+        "fintokei payout methods",
+        "crypto withdrawal",
+        "bank transfer"
+      ],
+      "seo": {
+        "title": "What Payout Methods Are Supported by Fintokei?",
+        "metaDescription": "Explore available withdrawal options at Fintokei including crypto USDT and direct bank wire transfers.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/fintokei/faq/what-payout-methods-are-supported"
+      }
+    },
+    {
+      "id": "is-the-challenge-fee-refundable",
+      "question": "Is the challenge fee refunded on the first payout?",
+      "answer": "Yes, Fintokei refunds the initial evaluation fee together with your first profit payout on eligible funded account programs.",
+      "slug": "is-the-challenge-fee-refundable",
+      "locale": "en",
+      "keywords": [
+        "fintokei fee refund",
+        "first payout refund",
+        "evaluation fee refund"
+      ],
+      "seo": {
+        "title": "Is the Challenge Fee Refunded on First Payout?",
+        "metaDescription": "Find out if Fintokei refunds your evaluation account fee upon achieving your first payout.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/fintokei/faq/is-the-challenge-fee-refundable"
+      }
+    }
+  ],
+  "prosAndCons": {
+    "pros": [
+      "Profit split goes up to 90% with scaling",
+      "Fast payout processing within 24 hours",
+      "Refundable evaluation fee on first payout"
+    ],
+    "cons": [
+      "Strict drawdown rules enforced",
+      "News trading restrictions on certain accounts"
+    ]
+  }
+}

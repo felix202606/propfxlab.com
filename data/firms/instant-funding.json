@@ -1,0 +1,237 @@
+{
+  "slug": "instant-funding",
+  "status": "active",
+  "payoutSpeed": "Within 24 Hours",
+  "basic": {
+    "name": "Instant Funding",
+    "legalName": "Instant Funding Ltd",
+    "logo": {
+      "src": "https://instantfunding.com/favicon.ico",
+      "alt": "Instant Funding Logo",
+      "width": 128,
+      "height": 128
+    },
+    "foundedAt": "2022-01-01",
+    "headquarters": {
+      "city": "London",
+      "country": "United Kingdom",
+      "countryCode": "GB"
+    },
+    "website": "https://instantfunding.com",
+    "funding": {
+      "currency": "USD",
+      "minAccountSize": 1250,
+      "maxAccountSize": 200000,
+      "maxScaledSize": 1250000
+    }
+  },
+  "withdrawal": {
+    "defaultTraderSharePercent": 80,
+    "defaultFirmSharePercent": 20,
+    "payoutCycle": {
+      "type": "hybrid",
+      "firstPayoutMinDays": 14,
+      "subsequentIntervalDays": 14,
+      "description": "Traders can request their first payout 14 days after placing their first trade on the funded account. Subsequent payouts can also be requested every 14 days."
+    },
+    "platformFee": {
+      "type": "none"
+    },
+    "channels": [
+      {
+        "id": "crypto-usdt",
+        "name": "Crypto (USDT)",
+        "method": "crypto",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD",
+          "EUR"
+        ]
+      },
+      {
+        "id": "rise-pay",
+        "name": "Rise",
+        "method": "ewallet",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD",
+          "EUR",
+          "GBP"
+        ]
+      },
+      {
+        "id": "bank-transfer",
+        "name": "Bank Wire Transfer",
+        "method": "bank_wire",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 3
+        },
+        "fee": {
+          "type": "flat",
+          "flatAmount": 15,
+          "currency": "USD"
+        },
+        "currencies": [
+          "USD",
+          "EUR",
+          "GBP"
+        ]
+      }
+    ],
+    "minPayoutAmount": 50,
+    "minPayoutCurrency": "USD",
+    "challengeFeeRefundedOnFirstPayout": true,
+    "warnings": [
+      "Violating the daily or maximum drawdown limits will result in immediate account termination.",
+      "Using prohibited trading strategies such as latency arbitrage, high-frequency trading (HFT) on live accounts, or grid trading software may lead to payout denial.",
+      "Inactivity for more than 30 days without trading can lead to account suspension."
+    ]
+  },
+  "calculator": {
+    "currency": "USD",
+    "profitSplitTiers": [
+      {
+        "id": "standard-tier",
+        "label": "Standard Profit Split",
+        "program": "Instant Funding / Evaluation",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 80
+      },
+      {
+        "id": "scaled-tier",
+        "label": "Scaled Profit Split",
+        "program": "Instant Funding / Evaluation Scaled",
+        "minProfit": 10000,
+        "maxProfit": null,
+        "traderSharePercent": 90
+      }
+    ],
+    "platformWithholdingTaxPercent": 0,
+    "platformDeductionPercent": 0,
+    "paymentProcessorFeePercent": 0,
+    "minPayoutAmount": 50,
+    "scaling": {
+      "enabled": true,
+      "intervalMonths": 3,
+      "balanceIncreasePercent": 25,
+      "maxCapital": 1250000,
+      "traderShareAfterScalePercent": 90,
+      "requirements": [
+        "Achieve a total profit of 10% or more within a 3-month period",
+        "Request at least 2 payouts during the scaling period",
+        "Maintain consistent risk management and avoid drawdown breaches"
+      ]
+    }
+  },
+  "faqs": [
+    {
+      "id": "drawdown-limit-rules",
+      "question": "How does the drawdown limit work on Instant Funding accounts?",
+      "answer": "Instant Funding uses a smart drawdown system. The maximum drawdown is typically set at 10% (or 8% depending on the account type) of the initial account balance. The daily drawdown is calculated based on the previous day's closing equity or balance, whichever is higher. Breaching these limits will result in immediate account closure.",
+      "slug": "drawdown-limit-rules",
+      "locale": "en",
+      "keywords": [
+        "drawdown",
+        "instant funding drawdown",
+        "daily drawdown limit",
+        "max drawdown"
+      ],
+      "seo": {
+        "title": "Instant Funding Drawdown Rules Explained",
+        "metaDescription": "Learn how the daily and maximum drawdown limits are calculated on Instant Funding accounts to avoid account breaches.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/instant-funding/faq/drawdown-limit-rules"
+      }
+    },
+    {
+      "id": "payout-schedule-processing",
+      "question": "What is the payout schedule and how long does it take to process?",
+      "answer": "Traders can request their first payout 14 days after placing their first trade on the funded account. Subsequent payouts can also be requested every 14 days. Once requested, payouts are processed within 24 hours, depending on the chosen withdrawal method (Crypto, Rise, or Bank Wire).",
+      "slug": "payout-schedule-processing",
+      "locale": "en",
+      "keywords": [
+        "payout schedule",
+        "instant funding payout",
+        "withdrawal processing time"
+      ],
+      "seo": {
+        "title": "Instant Funding Payout Schedule & Processing Time",
+        "metaDescription": "Find out when you can request your payouts and how long it takes for Instant Funding to process your withdrawals.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/instant-funding/faq/payout-schedule-processing"
+      }
+    },
+    {
+      "id": "prohibited-trading-strategies",
+      "question": "Are there any prohibited trading strategies on Instant Funding?",
+      "answer": "Yes, certain trading strategies are strictly prohibited to protect the firm's capital. These include latency arbitrage, high-frequency trading (HFT), grid trading, martingale strategies, and exploiting feed errors. Using these strategies will lead to the denial of payouts and account termination.",
+      "slug": "prohibited-trading-strategies",
+      "locale": "en",
+      "keywords": [
+        "prohibited strategies",
+        "instant funding rules",
+        "arbitrage",
+        "martingale"
+      ],
+      "seo": {
+        "title": "Prohibited Trading Strategies on Instant Funding",
+        "metaDescription": "Understand the restricted trading strategies on Instant Funding, including HFT, martingale, and arbitrage rules.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/instant-funding/faq/prohibited-trading-strategies"
+      }
+    },
+    {
+      "id": "challenge-fee-refund",
+      "question": "Is the initial challenge fee refundable?",
+      "answer": "Yes, the initial challenge fee is fully refundable. It is refunded to the trader along with their first successful profit split payout, provided they have met all the rules and successfully transitioned to a funded account.",
+      "slug": "challenge-fee-refund",
+      "locale": "en",
+      "keywords": [
+        "fee refund",
+        "refundable challenge fee",
+        "instant funding refund"
+      ],
+      "seo": {
+        "title": "Is the Instant Funding Challenge Fee Refundable?",
+        "metaDescription": "Learn about the refund policy for the initial challenge fee on Instant Funding and how to claim it with your first payout.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/instant-funding/faq/challenge-fee-refund"
+      }
+    }
+  ],
+  "prosAndCons": {
+    "pros": [
+      "Instant funding options available without lengthy evaluation phases",
+      "High profit split up to 90% through scaling",
+      "Fast payout processing within 24 hours"
+    ],
+    "cons": [
+      "Strict daily and maximum drawdown rules",
+      "Inactivity rules can lead to account suspension if not traded regularly"
+    ]
+  }
+}

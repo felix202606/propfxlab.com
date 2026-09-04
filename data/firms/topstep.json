@@ -1,0 +1,228 @@
+{
+  "slug": "topstep",
+  "status": "active",
+  "payoutSpeed": "Within 24 Hours",
+  "basic": {
+    "name": "Topstep",
+    "legalName": "Topstep LLC",
+    "logo": {
+      "src": "https://www.topstep.com/favicon.ico",
+      "alt": "Topstep Logo",
+      "width": 512,
+      "height": 512
+    },
+    "foundedAt": "2012-01-01",
+    "headquarters": {
+      "city": "Chicago",
+      "country": "United States",
+      "countryCode": "US"
+    },
+    "website": "https://www.topstep.com",
+    "funding": {
+      "currency": "USD",
+      "minAccountSize": 50000,
+      "maxAccountSize": 150000,
+      "maxScaledSize": 300000
+    }
+  },
+  "withdrawal": {
+    "defaultTraderSharePercent": 90,
+    "defaultFirmSharePercent": 10,
+    "payoutCycle": {
+      "type": "on_demand",
+      "firstPayoutMinDays": 5,
+      "subsequentIntervalDays": 5,
+      "description": "Traders can request a payout after accumulating 5 active trading days since their last payout or account creation."
+    },
+    "platformFee": {
+      "type": "none"
+    },
+    "channels": [
+      {
+        "id": "rise",
+        "name": "Rise",
+        "method": "ewallet",
+        "minAmount": 125,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 2
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "id": "bank-wire",
+        "name": "Bank Transfer",
+        "method": "bank_wire",
+        "minAmount": 500,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 3
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "id": "crypto",
+        "name": "Crypto / USDT",
+        "method": "crypto",
+        "minAmount": 125,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 2
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ],
+        "notes": "Crypto rails typically settle as USDT."
+      }
+    ],
+    "minPayoutAmount": 125,
+    "minPayoutCurrency": "USD",
+    "challengeFeeRefundedOnFirstPayout": false,
+    "warnings": [
+      "Violating the Maximum Drawdown limit will result in account suspension.",
+      "Payouts are paused if there is an active dispute or pending compliance review.",
+      "Holding positions over the weekend or trading during prohibited news events on certain programs can lead to a breach."
+    ]
+  },
+  "calculator": {
+    "currency": "USD",
+    "profitSplitTiers": [
+      {
+        "id": "first-10k",
+        "label": "First $10,000 Profit",
+        "program": "Express Funded Account",
+        "minProfit": 0,
+        "maxProfit": 10000,
+        "traderSharePercent": 100
+      },
+      {
+        "id": "standard-split",
+        "label": "Standard Profit Split",
+        "program": "Express Funded Account",
+        "minProfit": 10000.01,
+        "maxProfit": null,
+        "traderSharePercent": 90
+      }
+    ],
+    "platformWithholdingTaxPercent": 0,
+    "platformDeductionPercent": 0,
+    "paymentProcessorFeePercent": 0,
+    "minPayoutAmount": 125,
+    "scaling": {
+      "enabled": true,
+      "intervalMonths": 1,
+      "balanceIncreasePercent": 25,
+      "maxCapital": 300000,
+      "traderShareAfterScalePercent": 90,
+      "requirements": [
+        "Maintain consistency",
+        "Follow the scaling plan based on account balance"
+      ]
+    }
+  },
+  "faqs": [
+    {
+      "id": "topstep-payout-policy",
+      "question": "How does the Topstep payout policy work?",
+      "answer": "Topstep allows traders to request payouts once they have accumulated 5 active trading days of at least $100 in profit per day since their last payout. The first $10,000 of profits is 100% yours, and any profits beyond that are split 90/10 in your favor.",
+      "slug": "topstep-payout-policy",
+      "locale": "en",
+      "keywords": [
+        "topstep payout",
+        "payout policy",
+        "profit split"
+      ],
+      "seo": {
+        "title": "Topstep Payout Policy Explained",
+        "metaDescription": "Learn how Topstep payouts work, including the 5 active trading days rule, the 100% profit split on your first $10,000, and the standard 90/10 split.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/topstep/faq/topstep-payout-policy"
+      }
+    },
+    {
+      "id": "topstep-minimum-payout",
+      "question": "What is the minimum payout amount for Topstep?",
+      "answer": "The minimum payout amount for Topstep is $125 when using digital methods like Rise or Crypto. For bank wire transfers, the minimum payout is typically $500.",
+      "slug": "topstep-minimum-payout",
+      "locale": "en",
+      "keywords": [
+        "minimum payout",
+        "topstep withdrawal",
+        "limits"
+      ],
+      "seo": {
+        "title": "Topstep Minimum Payout Amount",
+        "metaDescription": "Find out the minimum payout limits for Topstep accounts across different payment methods like Rise, Crypto, and Bank Wire.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/topstep/faq/topstep-minimum-payout"
+      }
+    },
+    {
+      "id": "topstep-trailing-drawdown",
+      "question": "How does the Topstep trailing drawdown work?",
+      "answer": "Topstep utilizes a Maximum Drawdown that trails your highest account balance (calculated at the end of the trading day). If your account balance drops below this trailing minimum, your account will be breached.",
+      "slug": "topstep-trailing-drawdown",
+      "locale": "en",
+      "keywords": [
+        "trailing drawdown",
+        "drawdown rule",
+        "topstep rules"
+      ],
+      "seo": {
+        "title": "Understanding Topstep Trailing Drawdown",
+        "metaDescription": "A detailed guide on how Topstep's trailing drawdown is calculated at the end of the trading day and how to avoid breaching your account.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/topstep/faq/topstep-trailing-drawdown"
+      }
+    },
+    {
+      "id": "topstep-rule-breach-payout",
+      "question": "What happens if I breach a rule during a payout request?",
+      "answer": "If you breach a rule, such as the Daily Loss Limit or Maximum Drawdown, your account will be closed. Any pending payout requests may be forfeited depending on the compliance review of your trading history.",
+      "slug": "topstep-rule-breach-payout",
+      "locale": "en",
+      "keywords": [
+        "rule breach",
+        "payout forfeit",
+        "account closed"
+      ],
+      "seo": {
+        "title": "Topstep Rule Breach and Payouts",
+        "metaDescription": "Learn what happens to your pending payouts and account status if you breach a rule like the Daily Loss Limit on Topstep.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/topstep/faq/topstep-rule-breach-payout"
+      }
+    }
+  ],
+  "prosAndCons": {
+    "pros": [
+      "Keep 100% of your first $10,000 in profits",
+      "Industry-leading reputation and longevity",
+      "Fast payout processing within 24 hours"
+    ],
+    "cons": [
+      "Strict daily loss limits and trailing drawdown rules",
+      "Futures trading only (no Forex or CFDs)"
+    ]
+  }
+}

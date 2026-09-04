@@ -1,0 +1,225 @@
+{
+  "slug": "city-traders-imperium",
+  "status": "active",
+  "payoutSpeed": "Within 24 Hours",
+  "basic": {
+    "name": "City Traders Imperium",
+    "legalName": "City Traders Imperium Ltd",
+    "logo": {
+      "src": "https://citytradersimperium.com/favicon.ico",
+      "alt": "City Traders Imperium Logo",
+      "width": 100,
+      "height": 100
+    },
+    "foundedAt": "2018-01-01",
+    "headquarters": {
+      "city": "London",
+      "country": "United Kingdom",
+      "countryCode": "GB"
+    },
+    "website": "https://citytradersimperium.com",
+    "funding": {
+      "currency": "USD",
+      "minAccountSize": 10000,
+      "maxAccountSize": 100000,
+      "maxScaledSize": 4000000
+    }
+  },
+  "withdrawal": {
+    "defaultTraderSharePercent": 80,
+    "defaultFirmSharePercent": 20,
+    "payoutCycle": {
+      "type": "fixed_interval",
+      "firstPayoutMinDays": 14,
+      "subsequentIntervalDays": 14,
+      "description": "Payouts can be requested bi-weekly or monthly based on account rules."
+    },
+    "platformFee": {
+      "type": "none"
+    },
+    "channels": [
+      {
+        "id": "crypto-usdt",
+        "name": "Crypto (USDT)",
+        "method": "crypto",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "id": "rise-pay",
+        "name": "Rise",
+        "method": "ewallet",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "id": "bank-wire",
+        "name": "Bank Wire Transfer",
+        "method": "bank_wire",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 3
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ]
+      }
+    ],
+    "minPayoutAmount": 100,
+    "minPayoutCurrency": "USD",
+    "challengeFeeRefundedOnFirstPayout": true,
+    "warnings": [
+      "Breaching drawdown limits will result in account closure.",
+      "Prohibited trading strategies such as arbitrage may forfeit profits."
+    ]
+  },
+  "calculator": {
+    "currency": "USD",
+    "profitSplitTiers": [
+      {
+        "id": "tier-standard",
+        "label": "Standard Split",
+        "program": "Direct Funding & Challenge",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 80
+      },
+      {
+        "id": "tier-scaled",
+        "label": "Scaled Split",
+        "program": "Scaling Plan",
+        "minProfit": 10000,
+        "maxProfit": null,
+        "traderSharePercent": 90
+      }
+    ],
+    "platformWithholdingTaxPercent": 0,
+    "platformDeductionPercent": 0,
+    "paymentProcessorFeePercent": 0,
+    "minPayoutAmount": 100,
+    "scaling": {
+      "enabled": true,
+      "intervalMonths": 3,
+      "balanceIncreasePercent": 30,
+      "maxCapital": 4000000,
+      "traderShareAfterScalePercent": 90,
+      "requirements": [
+        "Achieve 10% profit target overall",
+        "Maintain active trading standing"
+      ]
+    }
+  },
+  "faqs": [
+    {
+      "id": "cti-payout-schedule",
+      "question": "When can I request my first payout with City Traders Imperium?",
+      "answer": "Traders can request their first payout after 14 days of active trading once eligible profit split requirements are met.",
+      "slug": "cti-payout-schedule",
+      "locale": "en",
+      "keywords": [
+        "cti payout",
+        "payout schedule",
+        "city traders imperium withdrawal"
+      ],
+      "seo": {
+        "title": "City Traders Imperium Payout Schedule",
+        "metaDescription": "Learn about the payout schedule and first withdrawal timeline at City Traders Imperium.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/city-traders-imperium/faq/cti-payout-schedule"
+      }
+    },
+    {
+      "id": "cti-drawdown-rules",
+      "question": "How do drawdown limits work at City Traders Imperium?",
+      "answer": "CTI implements fixed and maximum drawdown limits tailored to each evaluation and direct funding program level. Breaching drawdown thresholds forfeits account access.",
+      "slug": "cti-drawdown-rules",
+      "locale": "en",
+      "keywords": [
+        "cti drawdown",
+        "drawdown rules",
+        "max drawdown"
+      ],
+      "seo": {
+        "title": "City Traders Imperium Drawdown Rules",
+        "metaDescription": "Detailed guide on drawdown rules and risk limits at City Traders Imperium.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/city-traders-imperium/faq/cti-drawdown-rules"
+      }
+    },
+    {
+      "id": "cti-profit-split",
+      "question": "What profit split options does City Traders Imperium offer?",
+      "answer": "CTI starts standard profit splits at 80% for funded traders, which can scale up to 90% or higher as traders fulfill scaling targets.",
+      "slug": "cti-profit-split",
+      "locale": "en",
+      "keywords": [
+        "profit split",
+        "cti scale",
+        "trader share"
+      ],
+      "seo": {
+        "title": "City Traders Imperium Profit Split Rules",
+        "metaDescription": "Find out about profit splits and scaling rewards at City Traders Imperium.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/city-traders-imperium/faq/cti-profit-split"
+      }
+    },
+    {
+      "id": "cti-payment-methods",
+      "question": "What payout channels are available at City Traders Imperium?",
+      "answer": "Withdrawals can be processed via Crypto (USDT), Rise, and traditional Bank Wire transfers.",
+      "slug": "cti-payment-methods",
+      "locale": "en",
+      "keywords": [
+        "payout methods",
+        "crypto withdrawal",
+        "bank wire cti"
+      ],
+      "seo": {
+        "title": "City Traders Imperium Payout Methods",
+        "metaDescription": "Overview of payout channels and withdrawal options at City Traders Imperium.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/city-traders-imperium/faq/cti-payment-methods"
+      }
+    }
+  ],
+  "prosAndCons": {
+    "pros": [
+      "Competitive profit split up to 90%",
+      "Offers direct funding options as well as challenges",
+      "Fast payout processing within 24 hours"
+    ],
+    "cons": [
+      "Strict drawdown rules on select evaluation models"
+    ]
+  }
+}
