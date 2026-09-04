@@ -175,6 +175,9 @@
     "publishedLabel": "发布时间",
     "relatedFirms": "相关平台",
     "backToNews": "全部新闻",
+    "shareLabel": "分享",
+    "copyLink": "复制链接",
+    "linkCopied": "已复制",
     "disclaimer": "本文为公开报道的原创摘要，不构成任何投资或财务建议。细节请以原始来源和平台官网为准。",
     "notFoundMetaTitle": "未找到该新闻"
   },
