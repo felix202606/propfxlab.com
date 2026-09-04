@@ -1,0 +1,234 @@
+{
+  "slug": "the-trading-pit",
+  "status": "active",
+  "payoutSpeed": "Within 24 Hours",
+  "basic": {
+    "name": "The Trading Pit",
+    "legalName": "The Trading Pit Challenge GmbH",
+    "logo": {
+      "src": "https://www.thetradingpit.com/favicon.ico",
+      "alt": "The Trading Pit Logo",
+      "width": 32,
+      "height": 32
+    },
+    "foundedAt": "2022-01-01",
+    "headquarters": {
+      "city": "Vaduz",
+      "country": "Liechtenstein",
+      "countryCode": "LI"
+    },
+    "website": "https://www.thetradingpit.com",
+    "funding": {
+      "currency": "EUR",
+      "minAccountSize": 10000,
+      "maxAccountSize": 100000,
+      "maxScaledSize": 5000000
+    }
+  },
+  "withdrawal": {
+    "defaultTraderSharePercent": 80,
+    "defaultFirmSharePercent": 20,
+    "payoutCycle": {
+      "type": "fixed_interval",
+      "firstPayoutMinDays": 14,
+      "subsequentIntervalDays": 14,
+      "description": "Payouts can be requested bi-weekly once the minimum trading days and profit targets are met."
+    },
+    "platformFee": {
+      "type": "none"
+    },
+    "channels": [
+      {
+        "id": "bank-transfer",
+        "name": "Bank Transfer",
+        "method": "bank_wire",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 3
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "EUR",
+          "USD"
+        ]
+      },
+      {
+        "id": "rise",
+        "name": "Rise",
+        "method": "ewallet",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD",
+          "EUR"
+        ]
+      },
+      {
+        "id": "crypto-usdt",
+        "name": "Crypto (USDT)",
+        "method": "crypto",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ]
+      }
+    ],
+    "minPayoutAmount": 100,
+    "minPayoutCurrency": "EUR",
+    "challengeFeeRefundedOnFirstPayout": true,
+    "warnings": [
+      "Breaching daily or maximum drawdown limits will result in account termination.",
+      "Using prohibited trading strategies like latency arbitrage or high-frequency trading is strictly forbidden.",
+      "Payouts may be delayed if identity verification (KYC) is incomplete."
+    ]
+  },
+  "calculator": {
+    "currency": "EUR",
+    "profitSplitTiers": [
+      {
+        "id": "standard-tier",
+        "label": "Standard Tier",
+        "program": "CFD Challenge",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 80
+      },
+      {
+        "id": "scaled-tier",
+        "label": "Scaled Tier",
+        "program": "CFD Challenge",
+        "minProfit": 10000,
+        "maxProfit": null,
+        "traderSharePercent": 90
+      }
+    ],
+    "platformWithholdingTaxPercent": 0,
+    "platformDeductionPercent": 0,
+    "paymentProcessorFeePercent": 0,
+    "minPayoutAmount": 100,
+    "scaling": {
+      "enabled": true,
+      "intervalMonths": 3,
+      "balanceIncreasePercent": 25,
+      "maxCapital": 5000000,
+      "traderShareAfterScalePercent": 90,
+      "requirements": [
+        "Achieve profit target of 10%",
+        "Consistent trading over the period"
+      ]
+    }
+  },
+  "faqs": [
+    {
+      "id": "how-does-drawdown-work",
+      "question": "How does the drawdown limit work at The Trading Pit?",
+      "answer": "The Trading Pit uses a trailing drawdown model based on the highest recorded account balance. If your account equity drops below the specified drawdown limit, it constitutes a breach, and the account will be closed.",
+      "slug": "how-does-drawdown-work",
+      "locale": "en",
+      "keywords": [
+        "drawdown",
+        "trailing drawdown",
+        "rules",
+        "the trading pit"
+      ],
+      "seo": {
+        "title": "How Drawdown Works | The Trading Pit",
+        "metaDescription": "Learn about the trailing drawdown rules and limits at The Trading Pit to keep your account active.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/the-trading-pit/faq/how-does-drawdown-work"
+      }
+    },
+    {
+      "id": "when-can-i-request-payout",
+      "question": "When can I request my first payout?",
+      "answer": "You can request your first payout after completing the minimum trading days requirement and achieving the profit target on your funded account, typically within 14 days of your first trade.",
+      "slug": "when-can-i-request-payout",
+      "locale": "en",
+      "keywords": [
+        "payout",
+        "first payout",
+        "withdrawal",
+        "the trading pit"
+      ],
+      "seo": {
+        "title": "When Can I Request a Payout? | The Trading Pit",
+        "metaDescription": "Find out the timeline and requirements for requesting your first payout with The Trading Pit.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/the-trading-pit/faq/when-can-i-request-payout"
+      }
+    },
+    {
+      "id": "what-are-the-payout-methods",
+      "question": "What payout methods are supported by The Trading Pit?",
+      "answer": "The Trading Pit supports multiple payout methods including Bank Wire Transfer, Rise, and Crypto (USDT) to ensure fast and secure withdrawals for global traders.",
+      "slug": "what-are-the-payout-methods",
+      "locale": "en",
+      "keywords": [
+        "payout methods",
+        "withdrawal channels",
+        "rise",
+        "crypto",
+        "bank transfer"
+      ],
+      "seo": {
+        "title": "Supported Payout Methods | The Trading Pit",
+        "metaDescription": "Explore the withdrawal options available at The Trading Pit, including Rise, Crypto, and Bank Wire.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/the-trading-pit/faq/what-are-the-payout-methods"
+      }
+    },
+    {
+      "id": "is-the-challenge-fee-refundable",
+      "question": "Is the challenge fee refunded upon passing?",
+      "answer": "Yes, the registration fee for the challenge is fully refunded to the trader along with their first successful payout from the funded account.",
+      "slug": "is-the-challenge-fee-refundable",
+      "locale": "en",
+      "keywords": [
+        "refund",
+        "challenge fee",
+        "first payout",
+        "the trading pit"
+      ],
+      "seo": {
+        "title": "Is the Challenge Fee Refundable? | The Trading Pit",
+        "metaDescription": "Learn about the refund policy for challenge fees on your first payout at The Trading Pit.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/the-trading-pit/faq/is-the-challenge-fee-refundable"
+      }
+    }
+  ],
+  "prosAndCons": {
+    "pros": [
+      "Up to 90% profit split with scaling",
+      "Regulated environment and multi-asset offerings",
+      "Fast payouts within 24 hours"
+    ],
+    "cons": [
+      "Strict consistency and drawdown rules",
+      "Challenge fees are non-refundable if the challenge is failed"
+    ]
+  }
+}

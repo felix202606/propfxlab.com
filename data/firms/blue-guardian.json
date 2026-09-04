@@ -1,0 +1,209 @@
+{
+  "slug": "blue-guardian",
+  "status": "active",
+  "payoutSpeed": "Within 24-48 Hours",
+  "basic": {
+    "name": "Blue Guardian",
+    "legalName": "Blue Guardian Capital",
+    "logo": {
+      "src": "https://blueguardian.com/favicon.ico",
+      "alt": "Blue Guardian Logo",
+      "width": 100,
+      "height": 100
+    },
+    "foundedAt": "2021-06-01",
+    "headquarters": {
+      "city": "London",
+      "country": "United Kingdom",
+      "countryCode": "GB"
+    },
+    "website": "https://blueguardian.com",
+    "funding": {
+      "currency": "USD",
+      "minAccountSize": 10000,
+      "maxAccountSize": 200000,
+      "maxScaledSize": 2000000
+    }
+  },
+  "withdrawal": {
+    "defaultTraderSharePercent": 85,
+    "defaultFirmSharePercent": 15,
+    "payoutCycle": {
+      "type": "fixed_interval",
+      "firstPayoutMinDays": 14,
+      "subsequentIntervalDays": 14,
+      "description": "First payout is eligible 14 days after the first trade on the funded account, followed by bi-weekly payouts."
+    },
+    "platformFee": {
+      "type": "none"
+    },
+    "channels": [
+      {
+        "id": "crypto-usdt",
+        "name": "Crypto (USDT)",
+        "method": "crypto",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ],
+        "notes": "Paid out in USD; crypto rails typically settle as USDT."
+      },
+      {
+        "id": "rise-pay",
+        "name": "Rise",
+        "method": "ewallet",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 2
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ]
+      }
+    ],
+    "minPayoutAmount": 50,
+    "minPayoutCurrency": "USD",
+    "challengeFeeRefundedOnFirstPayout": true,
+    "warnings": [
+      "Breaching maximum daily or total drawdown limits results in immediate account failure.",
+      "Accounts remaining inactive for 30 consecutive days may be suspended."
+    ]
+  },
+  "calculator": {
+    "currency": "USD",
+    "profitSplitTiers": [
+      {
+        "id": "standard-tier",
+        "label": "Standard Tier",
+        "program": "Funded Trader",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 85
+      },
+      {
+        "id": "scaled-tier",
+        "label": "Scaled Tier",
+        "program": "Scaling Program",
+        "minProfit": 10000,
+        "maxProfit": null,
+        "traderSharePercent": 90
+      }
+    ],
+    "platformWithholdingTaxPercent": 0,
+    "platformDeductionPercent": 0,
+    "paymentProcessorFeePercent": 0,
+    "minPayoutAmount": 50,
+    "scaling": {
+      "enabled": true,
+      "intervalMonths": 3,
+      "balanceIncreasePercent": 30,
+      "maxCapital": 2000000,
+      "traderShareAfterScalePercent": 90,
+      "requirements": [
+        "Reach a cumulative profit target of 10% over 3 months."
+      ]
+    }
+  },
+  "faqs": [
+    {
+      "id": "payout-frequency-rules",
+      "question": "How often can I request a payout from Blue Guardian?",
+      "answer": "Payouts can be requested bi-weekly (every 14 days) following your first executed trade on a funded account. Requests are generally processed within 24 to 48 hours.",
+      "slug": "payout-frequency-rules",
+      "locale": "en",
+      "keywords": [
+        "blue guardian payout",
+        "payout frequency",
+        "biweekly payout"
+      ],
+      "seo": {
+        "title": "Blue Guardian Payout Frequency and Schedule",
+        "metaDescription": "Learn about Blue Guardian payout timelines, request intervals, and bi-weekly payout cycles.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/blue-guardian/faq/payout-frequency-rules"
+      }
+    },
+    {
+      "id": "drawdown-limits-explained",
+      "question": "What are the maximum and daily drawdown limits for Blue Guardian?",
+      "answer": "Blue Guardian applies standard relative equity-based drawdowns: a 4% daily drawdown ceiling and an 8% maximum total drawdown limit across account sizes.",
+      "slug": "drawdown-limits-explained",
+      "locale": "en",
+      "keywords": [
+        "blue guardian drawdown",
+        "daily drawdown",
+        "max total drawdown"
+      ],
+      "seo": {
+        "title": "Blue Guardian Drawdown Limits and Calculation",
+        "metaDescription": "Understand daily drawdown and maximum total drawdown limits on Blue Guardian accounts.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/blue-guardian/faq/drawdown-limits-explained"
+      }
+    },
+    {
+      "id": "profit-split-and-scaling",
+      "question": "What is the default profit split and how does scaling work?",
+      "answer": "Funded traders start with an 85% profit split. Consistently profitable traders meeting the 10% profit requirement over 3 months can scale their account balance up to $2,000,000 and receive a 90% profit split.",
+      "slug": "profit-split-and-scaling",
+      "locale": "en",
+      "keywords": [
+        "blue guardian profit split",
+        "account scaling",
+        "90 percent split"
+      ],
+      "seo": {
+        "title": "Blue Guardian Profit Split and Scaling Plan",
+        "metaDescription": "Detailed breakdown of Blue Guardian profit split tiers starting at 85% up to 90%.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/blue-guardian/faq/profit-split-and-scaling"
+      }
+    },
+    {
+      "id": "news-and-weekend-trading",
+      "question": "Are news trading and weekend position holding allowed?",
+      "answer": "Yes, news trading and holding open trades over the weekend are permitted on most Blue Guardian account models, subject to normal slippage risks.",
+      "slug": "news-and-weekend-trading",
+      "locale": "en",
+      "keywords": [
+        "blue guardian news trading",
+        "weekend holding",
+        "trading strategy rules"
+      ],
+      "seo": {
+        "title": "Blue Guardian News Trading and Weekend Holding Rules",
+        "metaDescription": "Overview of allowed strategies including news trading and weekend position holding at Blue Guardian.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/blue-guardian/faq/news-and-weekend-trading"
+      }
+    }
+  ],
+  "prosAndCons": {
+    "pros": [
+      "Competitive default profit split starting at 85%",
+      "Evaluation fee refunded upon first successful payout",
+      "Permits news trading and weekend position holding"
+    ],
+    "cons": [
+      "Minimum payout threshold of $50",
+      "Drawdown breaches result in immediate account termination"
+    ]
+  }
+}

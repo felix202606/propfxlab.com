@@ -1,0 +1,227 @@
+{
+  "slug": "for-traders",
+  "status": "active",
+  "payoutSpeed": "Within 24 Hours",
+  "basic": {
+    "name": "For Traders",
+    "legalName": "For Traders S.R.O.",
+    "logo": {
+      "src": "https://www.fortraders.com/favicon.ico",
+      "alt": "For Traders Logo",
+      "width": 128,
+      "height": 128
+    },
+    "foundedAt": "2023-01-01",
+    "headquarters": {
+      "city": "Prague",
+      "country": "Czech Republic",
+      "countryCode": "CZ"
+    },
+    "website": "https://www.fortraders.com",
+    "funding": {
+      "currency": "USD",
+      "minAccountSize": 10000,
+      "maxAccountSize": 200000,
+      "maxScaledSize": 1000000
+    }
+  },
+  "withdrawal": {
+    "defaultTraderSharePercent": 80,
+    "defaultFirmSharePercent": 20,
+    "payoutCycle": {
+      "type": "on_demand",
+      "firstPayoutMinDays": 14,
+      "subsequentIntervalDays": 14,
+      "description": "First payout can be requested 14 days after placing the first trade on a funded account."
+    },
+    "platformFee": {
+      "type": "none"
+    },
+    "channels": [
+      {
+        "id": "crypto-usdt",
+        "name": "Crypto (USDT)",
+        "method": "crypto",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "id": "rise",
+        "name": "Rise",
+        "method": "ewallet",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "id": "bank-wire",
+        "name": "Bank Wire Transfer",
+        "method": "bank_wire",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 3
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD",
+          "EUR"
+        ]
+      }
+    ],
+    "minPayoutAmount": 50,
+    "minPayoutCurrency": "USD",
+    "challengeFeeRefundedOnFirstPayout": true,
+    "warnings": [
+      "Breaching maximum daily or overall drawdown rules will result in account termination.",
+      "Trading style policies and news restrictions apply depending on the chosen account evaluation model."
+    ]
+  },
+  "calculator": {
+    "currency": "USD",
+    "profitSplitTiers": [
+      {
+        "id": "standard-tier",
+        "label": "Standard Split",
+        "program": "Evaluation",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 80
+      },
+      {
+        "id": "scaled-tier",
+        "label": "Scaled Split",
+        "program": "Scaling Plan",
+        "minProfit": 10000,
+        "maxProfit": null,
+        "traderSharePercent": 90
+      }
+    ],
+    "platformWithholdingTaxPercent": 0,
+    "platformDeductionPercent": 0,
+    "paymentProcessorFeePercent": 0,
+    "minPayoutAmount": 50,
+    "scaling": {
+      "enabled": true,
+      "intervalMonths": 3,
+      "balanceIncreasePercent": 25,
+      "maxCapital": 1000000,
+      "traderShareAfterScalePercent": 90,
+      "requirements": [
+        "Achieve 10% total profit within 3 months",
+        "Execute at least 2 successful payout requests"
+      ]
+    }
+  },
+  "faqs": [
+    {
+      "id": "payout-process-and-frequency",
+      "question": "How often can I request a payout with For Traders?",
+      "answer": "Traders can request their first payout after 14 days of trading on a funded account. Subsequent payouts can be processed bi-weekly or on-demand depending on performance and withdrawal channel.",
+      "slug": "payout-process-and-frequency",
+      "locale": "en",
+      "keywords": [
+        "payout frequency",
+        "for traders payout",
+        "withdrawal schedule"
+      ],
+      "seo": {
+        "title": "For Traders Payout Frequency & Rules",
+        "metaDescription": "Learn about the payout schedule, minimum waiting period, and processing frequency for For Traders funded accounts.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/for-traders/faq/payout-process-and-frequency"
+      }
+    },
+    {
+      "id": "drawdown-limits-and-calculation",
+      "question": "What are the drawdown limits for For Traders accounts?",
+      "answer": "For Traders enforces maximum daily drawdown and total maximum drawdown limits tailored to the evaluation model selected. Exceeding these drawdown thresholds results in account termination.",
+      "slug": "drawdown-limits-and-calculation",
+      "locale": "en",
+      "keywords": [
+        "drawdown limits",
+        "max daily drawdown",
+        "account loss rules"
+      ],
+      "seo": {
+        "title": "For Traders Drawdown Rules & Maximum Limits",
+        "metaDescription": "Understand how maximum daily drawdown and total loss limits are calculated on For Traders challenge accounts.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/for-traders/faq/drawdown-limits-and-calculation"
+      }
+    },
+    {
+      "id": "available-payout-methods",
+      "question": "Which payout methods are supported by For Traders?",
+      "answer": "For Traders supports several payout methods including Cryptocurrency (USDT), Rise payroll/wallet service, and traditional Bank Wire transfers.",
+      "slug": "available-payout-methods",
+      "locale": "en",
+      "keywords": [
+        "payout methods",
+        "crypto withdrawal",
+        "rise payout"
+      ],
+      "seo": {
+        "title": "Supported Payout Methods for For Traders",
+        "metaDescription": "Discover all available payout methods including Crypto USDT, Rise, and Bank Wire for requesting withdrawals at For Traders.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/for-traders/faq/available-payout-methods"
+      }
+    },
+    {
+      "id": "challenge-fee-refund-policy",
+      "question": "Is the evaluation fee refunded upon reaching funded status?",
+      "answer": "Yes, your initial evaluation challenge fee is fully refunded alongside your first successful profit withdrawal from a funded account.",
+      "slug": "challenge-fee-refund-policy",
+      "locale": "en",
+      "keywords": [
+        "fee refund",
+        "challenge fee refund",
+        "first payout bonus"
+      ],
+      "seo": {
+        "title": "For Traders Challenge Fee Refund Policy",
+        "metaDescription": "Find out when and how your initial challenge fee is refunded upon achieving your first payout with For Traders.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/for-traders/faq/challenge-fee-refund-policy"
+      }
+    }
+  ],
+  "prosAndCons": {
+    "pros": [
+      "Competitive profit split starting at 80% up to 90%",
+      "Fast payout processing within 24 hours",
+      "Multiple withdrawal channels including Crypto and Rise"
+    ],
+    "cons": [
+      "Strict drawdown enforcement leading to instant failure upon breach",
+      "Initial 14-day waiting period required before first payout request"
+    ]
+  }
+}

@@ -1,0 +1,236 @@
+{
+  "slug": "funderpro",
+  "status": "active",
+  "payoutSpeed": "Within 24 Hours",
+  "basic": {
+    "name": "FunderPro",
+    "legalName": "FunderPro Ltd",
+    "logo": {
+      "src": "https://funderpro.com/favicon.ico",
+      "alt": "FunderPro Logo",
+      "width": 128,
+      "height": 128
+    },
+    "foundedAt": "2023-02-01",
+    "headquarters": {
+      "city": "Valletta",
+      "country": "Malta",
+      "countryCode": "MT"
+    },
+    "website": "https://funderpro.com",
+    "funding": {
+      "currency": "USD",
+      "minAccountSize": 25000,
+      "maxAccountSize": 200000,
+      "maxScaledSize": 5000000
+    }
+  },
+  "withdrawal": {
+    "defaultTraderSharePercent": 80,
+    "defaultFirmSharePercent": 20,
+    "payoutCycle": {
+      "type": "on_demand",
+      "firstPayoutMinDays": 7,
+      "subsequentIntervalDays": 7,
+      "description": "Payouts can be requested on demand after the first trade, with a minimum processing time of 24 hours."
+    },
+    "platformFee": {
+      "type": "none"
+    },
+    "channels": [
+      {
+        "id": "rise",
+        "name": "Rise",
+        "method": "ewallet",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD",
+          "EUR",
+          "GBP"
+        ]
+      },
+      {
+        "id": "crypto-usdt",
+        "name": "Crypto (USDT)",
+        "method": "crypto",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD",
+          "EUR"
+        ]
+      },
+      {
+        "id": "bank-wire",
+        "name": "Bank Wire",
+        "method": "bank_wire",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 3
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD",
+          "EUR",
+          "GBP"
+        ]
+      }
+    ],
+    "minPayoutAmount": 50,
+    "minPayoutCurrency": "USD",
+    "challengeFeeRefundedOnFirstPayout": true,
+    "warnings": [
+      "Violating the daily drawdown limit of 5% or overall drawdown limit of 10% will result in immediate account termination.",
+      "Using prohibited strategies such as latency arbitrage, high-frequency trading (HFT), or copy trading from external sources is strictly forbidden.",
+      "Payouts may be delayed or paused if suspicious trading activity or consistency rule violations are detected during review."
+    ]
+  },
+  "calculator": {
+    "currency": "USD",
+    "profitSplitTiers": [
+      {
+        "id": "standard-tier",
+        "label": "Standard Profit Split",
+        "program": "Evaluation",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 80
+      },
+      {
+        "id": "scaled-tier",
+        "label": "Scaled Profit Split",
+        "program": "Scaling Plan",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 90
+      }
+    ],
+    "platformWithholdingTaxPercent": 0,
+    "platformDeductionPercent": 0,
+    "paymentProcessorFeePercent": 0,
+    "minPayoutAmount": 50,
+    "scaling": {
+      "enabled": true,
+      "intervalMonths": 3,
+      "balanceIncreasePercent": 25,
+      "maxCapital": 5000000,
+      "traderShareAfterScalePercent": 90,
+      "requirements": [
+        "Achieve a total profit of 10% or more within a 3-month period",
+        "Request at least 2 payouts during this period",
+        "Maintain consistent trading behavior without major drawdown breaches"
+      ]
+    }
+  },
+  "faqs": [
+    {
+      "id": "drawdown-limit-rules",
+      "question": "How does the drawdown limit work on FunderPro?",
+      "answer": "FunderPro enforces a 5% daily drawdown limit and a 10% overall drawdown limit. These limits are calculated based on the account equity or balance, whichever is higher at the start of the day, ensuring disciplined risk management. Breach of these rules results in account suspension.",
+      "slug": "drawdown-limit-rules",
+      "locale": "en",
+      "keywords": [
+        "drawdown",
+        "daily limit",
+        "overall limit",
+        "funderpro rules"
+      ],
+      "seo": {
+        "title": "How does the drawdown limit work on FunderPro?",
+        "metaDescription": "Learn about FunderPro's 5% daily drawdown and 10% overall drawdown limits, calculated based on equity and balance.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/funderpro/faq/drawdown-limit-rules"
+      }
+    },
+    {
+      "id": "payout-cycle-speed",
+      "question": "What is the payout cycle and how fast are payouts processed?",
+      "answer": "FunderPro offers on-demand payouts. Once you are on a funded account and have completed your first trade, you can request a payout. Payouts are typically processed within 24 hours, making it one of the fastest in the industry.",
+      "slug": "payout-cycle-speed",
+      "locale": "en",
+      "keywords": [
+        "payout cycle",
+        "payout speed",
+        "withdrawals"
+      ],
+      "seo": {
+        "title": "What is the payout cycle and how fast are payouts processed?",
+        "metaDescription": "Discover FunderPro's payout cycle. Learn how you can request payouts on demand and receive them within 24 hours.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/funderpro/faq/payout-cycle-speed"
+      }
+    },
+    {
+      "id": "challenge-fee-refund",
+      "question": "Are challenge fees refunded upon receiving the first payout?",
+      "answer": "Yes, FunderPro fully refunds your initial evaluation fee with your very first successful payout from your funded account. This ensures that successful traders can recover their starting costs completely.",
+      "slug": "challenge-fee-refund",
+      "locale": "en",
+      "keywords": [
+        "fee refund",
+        "first payout",
+        "challenge fee"
+      ],
+      "seo": {
+        "title": "Are challenge fees refunded upon receiving the first payout?",
+        "metaDescription": "Find out if FunderPro refunds your initial evaluation fee. Yes, the challenge fee is fully refunded with your first successful payout.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/funderpro/faq/challenge-fee-refund"
+      }
+    },
+    {
+      "id": "supported-payout-methods",
+      "question": "What payout methods are supported by FunderPro?",
+      "answer": "FunderPro supports multiple convenient payout methods including Rise, Bank Wire transfers, and direct Crypto (USDT) withdrawals. This variety allows traders globally to receive their profits securely and efficiently.",
+      "slug": "supported-payout-methods",
+      "locale": "en",
+      "keywords": [
+        "payout methods",
+        "crypto",
+        "rise",
+        "bank transfer"
+      ],
+      "seo": {
+        "title": "What payout methods are supported by FunderPro?",
+        "metaDescription": "Explore the payout methods available at FunderPro, including Rise, Bank Wire, and Crypto options like USDT.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/funderpro/faq/supported-payout-methods"
+      }
+    }
+  ],
+  "prosAndCons": {
+    "pros": [
+      "On-demand payouts processed within 24 hours",
+      "No time limits on evaluation phases",
+      "Up to 90% profit split through scaling",
+      "STP execution model with TradeLocker integration"
+    ],
+    "cons": [
+      "Relatively high minimum payout threshold for bank wires",
+      "Limited platform choices compared to legacy brokers"
+    ]
+  }
+}

@@ -1,0 +1,233 @@
+{
+  "slug": "funded-trading-plus",
+  "status": "active",
+  "payoutSpeed": "Within 24 Hours",
+  "basic": {
+    "name": "Funded Trading Plus",
+    "legalName": "Funded Trading Plus Ltd",
+    "logo": {
+      "src": "https://www.fundedtradingplus.com/favicon.ico",
+      "alt": "Funded Trading Plus Logo",
+      "width": 128,
+      "height": 128
+    },
+    "foundedAt": "2021-11-01",
+    "headquarters": {
+      "city": "London",
+      "country": "United Kingdom",
+      "countryCode": "GB"
+    },
+    "website": "https://www.fundedtradingplus.com",
+    "funding": {
+      "currency": "USD",
+      "minAccountSize": 5000,
+      "maxAccountSize": 250000,
+      "maxScaledSize": 2500000
+    }
+  },
+  "withdrawal": {
+    "defaultTraderSharePercent": 80,
+    "defaultFirmSharePercent": 20,
+    "payoutCycle": {
+      "type": "on_demand",
+      "firstPayoutMinDays": 0,
+      "subsequentIntervalDays": null,
+      "description": "Payouts can be requested on-demand once the trader has been in profit and met the minimum payout requirements, typically processed within 24 hours."
+    },
+    "platformFee": {
+      "type": "none"
+    },
+    "channels": [
+      {
+        "id": "rise",
+        "name": "Rise",
+        "method": "ewallet",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD",
+          "EUR",
+          "GBP"
+        ]
+      },
+      {
+        "id": "crypto",
+        "name": "Cryptocurrency (USDT/BTC)",
+        "method": "crypto",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "id": "bank-wire",
+        "name": "Bank Transfer",
+        "method": "bank_wire",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 3
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD",
+          "EUR",
+          "GBP"
+        ]
+      }
+    ],
+    "minPayoutAmount": 50,
+    "minPayoutCurrency": "USD",
+    "challengeFeeRefundedOnFirstPayout": true,
+    "warnings": [
+      "Violating daily or maximum drawdown limits will result in immediate account termination.",
+      "Using prohibited trading strategies such as latency arbitrage or high-frequency trading will lead to account suspension and forfeiture of profits.",
+      "Payouts may be delayed or paused if suspicious trading activity or copy trading from external sources is detected."
+    ]
+  },
+  "calculator": {
+    "currency": "USD",
+    "profitSplitTiers": [
+      {
+        "id": "standard-split",
+        "label": "Standard Profit Split",
+        "program": "All Programs",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 80
+      },
+      {
+        "id": "scaled-split",
+        "label": "Scaled Profit Split",
+        "program": "All Programs (Scaled)",
+        "minProfit": 20000,
+        "maxProfit": null,
+        "traderSharePercent": 90
+      }
+    ],
+    "platformWithholdingTaxPercent": 0,
+    "platformDeductionPercent": 0,
+    "paymentProcessorFeePercent": 0,
+    "minPayoutAmount": 50,
+    "scaling": {
+      "enabled": true,
+      "intervalMonths": 3,
+      "balanceIncreasePercent": 25,
+      "maxCapital": 2500000,
+      "traderShareAfterScalePercent": 90,
+      "requirements": [
+        "Achieve a profit target of 10% or more within a scaling cycle",
+        "Maintain account without breaching any drawdown rules",
+        "Request scaling through the trader dashboard"
+      ]
+    }
+  },
+  "faqs": [
+    {
+      "id": "how-do-payouts-work",
+      "question": "How do payouts work at Funded Trading Plus?",
+      "answer": "Traders can request payouts on-demand once they have generated profits on their funded account. Payouts are processed via Rise, Bank Wire, or Cryptocurrency, typically within 24 hours of the request.",
+      "slug": "how-do-payouts-work",
+      "locale": "en",
+      "keywords": [
+        "payouts",
+        "withdrawal",
+        "funded trading plus payouts"
+      ],
+      "seo": {
+        "title": "Funded Trading Plus Payout Process Explained",
+        "metaDescription": "Learn how to request payouts at Funded Trading Plus. Discover the processing times, minimum payout amounts, and available withdrawal methods.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/funded-trading-plus/faq/how-do-payouts-work"
+      }
+    },
+    {
+      "id": "what-is-the-profit-split",
+      "question": "What is the profit split at Funded Trading Plus?",
+      "answer": "Funded Trading Plus offers a starting profit split of 80% for the trader. This split can be scaled up to 90% as the trader demonstrates consistent profitability and scales their account.",
+      "slug": "what-is-the-profit-split",
+      "locale": "en",
+      "keywords": [
+        "profit split",
+        "scaling",
+        "trader share"
+      ],
+      "seo": {
+        "title": "Funded Trading Plus Profit Split and Scaling",
+        "metaDescription": "Find out about the profit split options at Funded Trading Plus, starting at 80% and scaling up to 90% for successful traders.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/funded-trading-plus/faq/what-is-the-profit-split"
+      }
+    },
+    {
+      "id": "how-does-drawdown-work",
+      "question": "How does the drawdown limit work?",
+      "answer": "Funded Trading Plus utilizes daily and maximum drawdown limits depending on the selected program. The drawdown is calculated based on the account balance or equity, and breaching these limits will result in account closure.",
+      "slug": "how-does-drawdown-work",
+      "locale": "en",
+      "keywords": [
+        "drawdown",
+        "risk management",
+        "rules"
+      ],
+      "seo": {
+        "title": "Understanding Drawdown Limits at Funded Trading Plus",
+        "metaDescription": "Get details on how daily and maximum drawdown limits are calculated at Funded Trading Plus to avoid account breaches.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/funded-trading-plus/faq/how-does-drawdown-work"
+      }
+    },
+    {
+      "id": "is-the-challenge-fee-refundable",
+      "question": "Is the challenge fee refundable?",
+      "answer": "Yes, the initial challenge fee is fully refunded to the trader along with their first successful profit withdrawal from the funded account.",
+      "slug": "is-the-challenge-fee-refundable",
+      "locale": "en",
+      "keywords": [
+        "refund",
+        "challenge fee",
+        "first payout"
+      ],
+      "seo": {
+        "title": "Funded Trading Plus Challenge Fee Refund Policy",
+        "metaDescription": "Learn about the refund policy for challenge fees at Funded Trading Plus, returned with your first payout.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/funded-trading-plus/faq/is-the-challenge-fee-refundable"
+      }
+    }
+  ],
+  "prosAndCons": {
+    "pros": [
+      "On-demand payouts processed within 24 hours",
+      "High profit split starting at 80% up to 90%",
+      "No time limits on evaluation phases",
+      "Refundable sign-up fee on first payout"
+    ],
+    "cons": [
+      "Relatively strict drawdown rules on certain programs",
+      "Inactivity rules apply if no trades are placed for a set period"
+    ]
+  }
+}

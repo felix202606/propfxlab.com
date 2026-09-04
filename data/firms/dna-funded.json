@@ -1,0 +1,238 @@
+{
+  "slug": "dna-funded",
+  "status": "active",
+  "payoutSpeed": "Within 24 Hours",
+  "basic": {
+    "name": "DNA Funded",
+    "legalName": "DNA Funded LLC",
+    "logo": {
+      "src": "https://www.dnafunded.com/favicon.ico",
+      "alt": "DNA Funded Logo",
+      "width": 128,
+      "height": 128
+    },
+    "foundedAt": "2023-10-15",
+    "headquarters": {
+      "city": "Wilmington",
+      "country": "United States",
+      "countryCode": "US"
+    },
+    "website": "https://www.dnafunded.com",
+    "funding": {
+      "currency": "USD",
+      "minAccountSize": 5000,
+      "maxAccountSize": 200000,
+      "maxScaledSize": 1000000
+    }
+  },
+  "withdrawal": {
+    "defaultTraderSharePercent": 80,
+    "defaultFirmSharePercent": 20,
+    "payoutCycle": {
+      "type": "fixed_interval",
+      "firstPayoutMinDays": 14,
+      "subsequentIntervalDays": 14,
+      "description": "Payouts are processed bi-weekly (every 14 days) after the first trade on the funded account."
+    },
+    "platformFee": {
+      "type": "none"
+    },
+    "channels": [
+      {
+        "id": "crypto-usdt",
+        "name": "Crypto (USDT)",
+        "method": "crypto",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ],
+        "notes": "Crypto rails typically settle as USDT."
+      },
+      {
+        "id": "rise-pay",
+        "name": "Rise",
+        "method": "ewallet",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD",
+          "EUR",
+          "GBP"
+        ]
+      },
+      {
+        "id": "bank-transfer",
+        "name": "Bank Wire Transfer",
+        "method": "bank_wire",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 3
+        },
+        "fee": {
+          "type": "flat",
+          "flatAmount": 15,
+          "currency": "USD"
+        },
+        "currencies": [
+          "USD",
+          "EUR",
+          "GBP"
+        ]
+      }
+    ],
+    "minPayoutAmount": 50,
+    "minPayoutCurrency": "USD",
+    "challengeFeeRefundedOnFirstPayout": true,
+    "warnings": [
+      "Violating daily or maximum drawdown limits will result in immediate account termination.",
+      "Using prohibited trading strategies such as high-frequency trading (HFT) or latency arbitrage is strictly forbidden.",
+      "Payouts may be delayed or paused if suspicious trading activity or copy trading from unapproved sources is detected."
+    ]
+  },
+  "calculator": {
+    "currency": "USD",
+    "profitSplitTiers": [
+      {
+        "id": "standard-tier",
+        "label": "Standard Profit Split",
+        "program": "Standard Evaluation",
+        "minProfit": 0,
+        "maxProfit": 10000,
+        "traderSharePercent": 80
+      },
+      {
+        "id": "scaled-tier",
+        "label": "Scaled Profit Split",
+        "program": "Scaling Plan",
+        "minProfit": 10000,
+        "maxProfit": null,
+        "traderSharePercent": 90
+      }
+    ],
+    "platformWithholdingTaxPercent": 0,
+    "platformDeductionPercent": 0,
+    "paymentProcessorFeePercent": 0,
+    "minPayoutAmount": 50,
+    "scaling": {
+      "enabled": true,
+      "intervalMonths": 3,
+      "balanceIncreasePercent": 25,
+      "maxCapital": 1000000,
+      "traderShareAfterScalePercent": 90,
+      "requirements": [
+        "Achieve a total profit of 10% or more within a 3-month period",
+        "Request a payout while maintaining a positive balance"
+      ]
+    }
+  },
+  "faqs": [
+    {
+      "id": "drawdown-rules",
+      "question": "How are the daily and maximum drawdown limits calculated at DNA Funded?",
+      "answer": "DNA Funded calculates the daily drawdown limit based on the previous day's ending balance or equity (whichever is higher) at 5:00 PM EST. The maximum drawdown is static or trailing depending on the specific challenge type, set at a fixed percentage of the initial account balance. Exceeding these limits at any point will lead to immediate account breach.",
+      "slug": "drawdown-rules-calculation",
+      "locale": "en",
+      "keywords": [
+        "drawdown",
+        "daily limit",
+        "maximum drawdown",
+        "dna funded rules"
+      ],
+      "seo": {
+        "title": "DNA Funded Drawdown Rules & Calculation Guide",
+        "metaDescription": "Learn how DNA Funded calculates daily and maximum drawdown limits to avoid account breaches.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/dna-funded/faq/drawdown-rules-calculation"
+      }
+    },
+    {
+      "id": "payout-cycle-frequency",
+      "question": "What is the payout cycle and frequency for DNA Funded traders?",
+      "answer": "Traders can request their first payout 14 days after placing their first trade on the funded account. Subsequent payouts can also be requested on a bi-weekly basis (every 14 days), provided the account balance is above the initial starting capital and all trading rules have been respected.",
+      "slug": "payout-cycle-frequency",
+      "locale": "en",
+      "keywords": [
+        "payout cycle",
+        "payout frequency",
+        "withdraw profit",
+        "dna funded payout"
+      ],
+      "seo": {
+        "title": "DNA Funded Payout Cycle and Frequency",
+        "metaDescription": "Find out when you can request your first and subsequent payouts with DNA Funded.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/dna-funded/faq/payout-cycle-frequency"
+      }
+    },
+    {
+      "id": "refundable-challenge-fee",
+      "question": "Is the registration fee refunded upon passing the DNA Funded challenge?",
+      "answer": "Yes, the initial challenge registration fee is fully refundable. It is processed and added to your very first successful profit split payout once you reach the funded stage and meet the minimum payout requirements.",
+      "slug": "refundable-challenge-fee",
+      "locale": "en",
+      "keywords": [
+        "refundable fee",
+        "challenge refund",
+        "first payout refund",
+        "dna funded fee"
+      ],
+      "seo": {
+        "title": "Is the DNA Funded Challenge Fee Refundable?",
+        "metaDescription": "Get details on how and when DNA Funded refunds your initial challenge registration fee.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/dna-funded/faq/refundable-challenge-fee"
+      }
+    },
+    {
+      "id": "prohibited-trading-strategies",
+      "question": "What trading strategies are prohibited at DNA Funded?",
+      "answer": "DNA Funded prohibits strategies that exploit system latencies or feed errors, such as high-frequency trading (HFT), latency arbitrage, reverse arbitrage, and emulator usage. Additionally, grid trading and martingale strategies may be restricted or subject to review. Always ensure your trading style reflects consistent, real-market risk management.",
+      "slug": "prohibited-trading-strategies",
+      "locale": "en",
+      "keywords": [
+        "prohibited strategies",
+        "hft trading",
+        "arbitrage",
+        "dna funded trading rules"
+      ],
+      "seo": {
+        "title": "Prohibited Trading Strategies at DNA Funded",
+        "metaDescription": "Understand which trading strategies and styles are banned on DNA Funded accounts to protect your funded status.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/dna-funded/faq/prohibited-trading-strategies"
+      }
+    }
+  ],
+  "prosAndCons": {
+    "pros": [
+      "High profit split up to 90% through scaling",
+      "Fast payout processing within 24 hours",
+      "Refundable challenge fee on the first payout"
+    ],
+    "cons": [
+      "Strict daily drawdown rules based on balance/equity high",
+      "Prohibition of certain automated trading strategies"
+    ]
+  }
+}

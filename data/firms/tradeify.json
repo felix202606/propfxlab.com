@@ -1,0 +1,225 @@
+{
+  "slug": "tradeify",
+  "status": "active",
+  "payoutSpeed": "Within 24 Hours",
+  "basic": {
+    "name": "Tradeify",
+    "legalName": "Tradeify LLC",
+    "logo": {
+      "src": "https://tradeify.co/favicon.ico",
+      "alt": "Tradeify Logo",
+      "width": 32,
+      "height": 32
+    },
+    "foundedAt": "2023-01-01",
+    "headquarters": {
+      "city": "Miami",
+      "country": "United States",
+      "countryCode": "US"
+    },
+    "website": "https://tradeify.co",
+    "funding": {
+      "currency": "USD",
+      "minAccountSize": 10000,
+      "maxAccountSize": 150000,
+      "maxScaledSize": 500000
+    }
+  },
+  "withdrawal": {
+    "defaultTraderSharePercent": 80,
+    "defaultFirmSharePercent": 20,
+    "payoutCycle": {
+      "type": "on_demand",
+      "firstPayoutMinDays": 0,
+      "subsequentIntervalDays": 1,
+      "description": "Payouts are available on demand once required criteria are met."
+    },
+    "platformFee": {
+      "type": "none"
+    },
+    "channels": [
+      {
+        "id": "crypto-usdt",
+        "name": "Crypto / USDT",
+        "method": "crypto",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "id": "rise-pay",
+        "name": "Rise",
+        "method": "ewallet",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "id": "bank-transfer",
+        "name": "Bank Transfer",
+        "method": "bank_wire",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 3
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ]
+      }
+    ],
+    "minPayoutAmount": 100,
+    "minPayoutCurrency": "USD",
+    "challengeFeeRefundedOnFirstPayout": false,
+    "warnings": [
+      "Drawdown limits strictly enforced; account termination upon breach.",
+      "Inactivity may lead to account suspension."
+    ]
+  },
+  "calculator": {
+    "currency": "USD",
+    "profitSplitTiers": [
+      {
+        "id": "standard-tier",
+        "label": "Standard Split",
+        "program": "Evaluation",
+        "minProfit": 0,
+        "maxProfit": 10000,
+        "traderSharePercent": 80
+      },
+      {
+        "id": "scaled-tier",
+        "label": "Scaled Split",
+        "program": "Scaled Account",
+        "minProfit": 10000,
+        "maxProfit": null,
+        "traderSharePercent": 90
+      }
+    ],
+    "platformWithholdingTaxPercent": 0,
+    "platformDeductionPercent": 0,
+    "paymentProcessorFeePercent": 0,
+    "minPayoutAmount": 100,
+    "scaling": {
+      "enabled": true,
+      "intervalMonths": 3,
+      "balanceIncreasePercent": 25,
+      "maxCapital": 500000,
+      "traderShareAfterScalePercent": 90,
+      "requirements": [
+        "Maintain consistency and pass scaling evaluations"
+      ]
+    }
+  },
+  "faqs": [
+    {
+      "id": "how-do-payouts-work-at-tradeify",
+      "question": "How do payouts work at Tradeify?",
+      "answer": "Traders can request payouts via Crypto, Rise, or Bank Transfer after meeting minimum requirements. Payouts are usually processed within 24 hours.",
+      "slug": "how-do-payouts-work-at-tradeify",
+      "locale": "en",
+      "keywords": [
+        "tradeify payouts",
+        "payout speed",
+        "crypto payouts"
+      ],
+      "seo": {
+        "title": "How Do Payouts Work at Tradeify?",
+        "metaDescription": "Learn about Tradeify payout methods, processing speed, and eligibility guidelines.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/tradeify/faq/how-do-payouts-work-at-tradeify"
+      }
+    },
+    {
+      "id": "what-is-the-profit-split-at-tradeify",
+      "question": "What is the profit split at Tradeify?",
+      "answer": "Tradeify offers a profit split starting at 80% and scaling up to 90% based on trader performance.",
+      "slug": "what-is-the-profit-split-at-tradeify",
+      "locale": "en",
+      "keywords": [
+        "tradeify profit split",
+        "trader share",
+        "scaling split"
+      ],
+      "seo": {
+        "title": "What is the Profit Split at Tradeify?",
+        "metaDescription": "Explore Tradeify profit split structure ranging from 80% up to 90%.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/tradeify/faq/what-is-the-profit-split-at-tradeify"
+      }
+    },
+    {
+      "id": "what-are-the-drawdown-rules-at-tradeify",
+      "question": "What are the drawdown rules at Tradeify?",
+      "answer": "Tradeify enforces maximum and daily drawdown rules depending on account type. Exceeding these limits leads to account breach.",
+      "slug": "what-are-the-drawdown-rules-at-tradeify",
+      "locale": "en",
+      "keywords": [
+        "tradeify drawdown",
+        "max drawdown",
+        "daily drawdown"
+      ],
+      "seo": {
+        "title": "What Are the Drawdown Rules at Tradeify?",
+        "metaDescription": "Understand maximum and daily drawdown constraints for Tradeify accounts.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/tradeify/faq/what-are-the-drawdown-rules-at-tradeify"
+      }
+    },
+    {
+      "id": "what-payout-methods-does-tradeify-support",
+      "question": "What payout methods does Tradeify support?",
+      "answer": "Tradeify supports withdrawal options including Crypto (USDT), Rise Pay, and Direct Bank Wire.",
+      "slug": "what-payout-methods-does-tradeify-support",
+      "locale": "en",
+      "keywords": [
+        "tradeify withdrawal methods",
+        "usdt",
+        "rise pay"
+      ],
+      "seo": {
+        "title": "What Payout Methods Does Tradeify Support?",
+        "metaDescription": "Check all payout options supported by Tradeify including Rise, USDT, and Bank Wire.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/tradeify/faq/what-payout-methods-does-tradeify-support"
+      }
+    }
+  ],
+  "prosAndCons": {
+    "pros": [
+      "Fast payout processing within 24 hours",
+      "Profit splits up to 90%",
+      "Flexible withdrawal channels (Crypto, Rise, Wire)"
+    ],
+    "cons": [
+      "Strict drawdown rules apply",
+      "Minimum withdrawal amount required"
+    ]
+  }
+}

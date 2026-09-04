@@ -1,0 +1,230 @@
+{
+  "slug": "the5ers",
+  "status": "active",
+  "payoutSpeed": "Within 24 Hours",
+  "basic": {
+    "name": "The5ers",
+    "legalName": "Five Percent Online Ltd",
+    "logo": {
+      "src": "https://the5ers.com/favicon.ico",
+      "alt": "The5ers Logo",
+      "width": 512,
+      "height": 512
+    },
+    "foundedAt": "2016-04-01",
+    "headquarters": {
+      "city": "Raanana",
+      "country": "Israel",
+      "countryCode": "IL"
+    },
+    "website": "https://the5ers.com",
+    "funding": {
+      "currency": "USD",
+      "minAccountSize": 5000,
+      "maxAccountSize": 250000,
+      "maxScaledSize": 4000000
+    }
+  },
+  "withdrawal": {
+    "defaultTraderSharePercent": 80,
+    "defaultFirmSharePercent": 20,
+    "payoutCycle": {
+      "type": "on_demand",
+      "firstPayoutMinDays": 14,
+      "subsequentIntervalDays": 14,
+      "description": "Payouts can be requested bi-weekly or on demand after completing the initial trading period."
+    },
+    "platformFee": {
+      "type": "none"
+    },
+    "channels": [
+      {
+        "id": "rise-pay",
+        "name": "Rise Pay",
+        "method": "ewallet",
+        "minAmount": 20,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "id": "crypto-usdt",
+        "name": "Crypto USDT",
+        "method": "crypto",
+        "minAmount": 20,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "id": "bank-wire",
+        "name": "Bank Wire",
+        "method": "bank_wire",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 3
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ]
+      }
+    ],
+    "minPayoutAmount": 20,
+    "minPayoutCurrency": "USD",
+    "challengeFeeRefundedOnFirstPayout": true,
+    "warnings": [
+      "Breaching maximum daily or total drawdown limits leads to immediate account termination.",
+      "Payout requests require full KYC verification prior to processing."
+    ]
+  },
+  "calculator": {
+    "currency": "USD",
+    "profitSplitTiers": [
+      {
+        "id": "tier-standard",
+        "label": "Standard Split",
+        "program": "High Stakes",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 80
+      },
+      {
+        "id": "tier-scaled",
+        "label": "Scaled Split",
+        "program": "High Stakes Scaled",
+        "minProfit": 10000,
+        "maxProfit": null,
+        "traderSharePercent": 90
+      }
+    ],
+    "platformWithholdingTaxPercent": 0,
+    "platformDeductionPercent": 0,
+    "paymentProcessorFeePercent": 0,
+    "minPayoutAmount": 20,
+    "scaling": {
+      "enabled": true,
+      "intervalMonths": 3,
+      "balanceIncreasePercent": 10,
+      "maxCapital": 4000000,
+      "traderShareAfterScalePercent": 90,
+      "requirements": [
+        "Reach profit target",
+        "Maintain active risk criteria"
+      ]
+    }
+  },
+  "faqs": [
+    {
+      "id": "faq-payout-speed",
+      "question": "How fast are payouts processed at The5ers?",
+      "answer": "The5ers processes standard payout requests within 24 business hours once approved by compliance.",
+      "slug": "payout-speed",
+      "locale": "en",
+      "keywords": [
+        "payout speed",
+        "withdrawal time",
+        "the5ers"
+      ],
+      "seo": {
+        "title": "How fast are payouts processed at The5ers?",
+        "metaDescription": "Find out the typical processing duration for payout requests at The5ers.",
+        "datePublished": "2026-09-04",
+        "dateModified": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/the5ers/faq/payout-speed"
+      }
+    },
+    {
+      "id": "faq-payout-methods",
+      "question": "What payout methods are supported by The5ers?",
+      "answer": "The5ers supports payouts via Rise, Crypto (USDT), and direct Bank Wire transfer.",
+      "slug": "payout-methods",
+      "locale": "en",
+      "keywords": [
+        "payout methods",
+        "withdrawal channels",
+        "rise pay",
+        "usdt"
+      ],
+      "seo": {
+        "title": "What payout methods are supported by The5ers?",
+        "metaDescription": "Overview of available payout channels including Rise and Crypto at The5ers.",
+        "datePublished": "2026-09-04",
+        "dateModified": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/the5ers/faq/payout-methods"
+      }
+    },
+    {
+      "id": "faq-drawdown-rules",
+      "question": "How are drawdown limits calculated at The5ers?",
+      "answer": "Drawdown limits depend on the selected evaluation program. Daily drawdown is calculated relative to account equity, while maximum absolute drawdown limits ensure strict risk management.",
+      "slug": "drawdown-rules",
+      "locale": "en",
+      "keywords": [
+        "drawdown rules",
+        "max drawdown",
+        "daily loss limit"
+      ],
+      "seo": {
+        "title": "How are drawdown limits calculated at The5ers?",
+        "metaDescription": "Detailed guide to drawdown calculation rules and limits at The5ers.",
+        "datePublished": "2026-09-04",
+        "dateModified": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/the5ers/faq/drawdown-rules"
+      }
+    },
+    {
+      "id": "faq-fee-refund",
+      "question": "Is the initial challenge fee refunded by The5ers?",
+      "answer": "Yes, the initial evaluation fee is refunded together with your first payout upon successfully passing the challenge and making eligible profit.",
+      "slug": "fee-refund",
+      "locale": "en",
+      "keywords": [
+        "challenge fee refund",
+        "evaluation fee refund",
+        "first payout"
+      ],
+      "seo": {
+        "title": "Is the initial challenge fee refunded by The5ers?",
+        "metaDescription": "Information about fee refund policies on your first profit payout at The5ers.",
+        "datePublished": "2026-09-04",
+        "dateModified": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/the5ers/faq/fee-refund"
+      }
+    }
+  ],
+  "prosAndCons": {
+    "pros": [
+      "Generous profit splits from 80% up to 90%",
+      "Fast payouts processed within 24 business hours",
+      "Refundable evaluation fee on first profit withdrawal"
+    ],
+    "cons": [
+      "Strict compliance with maximum drawdown constraints required"
+    ]
+  }
+}

@@ -1,0 +1,231 @@
+{
+  "slug": "e8-markets",
+  "status": "active",
+  "payoutSpeed": "Within 24 Hours",
+  "basic": {
+    "name": "E8 Markets",
+    "legalName": "E8 Markets LLC",
+    "logo": {
+      "src": "https://e8markets.com/favicon.ico",
+      "alt": "E8 Markets Logo",
+      "width": 512,
+      "height": 512
+    },
+    "foundedAt": "2021-11-01",
+    "headquarters": {
+      "city": "Dallas",
+      "country": "United States",
+      "countryCode": "US"
+    },
+    "website": "https://e8markets.com",
+    "funding": {
+      "currency": "USD",
+      "minAccountSize": 25000,
+      "maxAccountSize": 400000,
+      "maxScaledSize": 1000000
+    }
+  },
+  "withdrawal": {
+    "defaultTraderSharePercent": 80,
+    "defaultFirmSharePercent": 20,
+    "payoutCycle": {
+      "type": "on_demand",
+      "firstPayoutMinDays": 8,
+      "subsequentIntervalDays": 8,
+      "description": "Traders can request their first payout after 8 calendar days from placing the first trade, with subsequent payouts available on an 8-day cycle."
+    },
+    "platformFee": {
+      "type": "none"
+    },
+    "channels": [
+      {
+        "id": "crypto-usdt",
+        "name": "Crypto (USDT)",
+        "method": "crypto",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "id": "rise-pay",
+        "name": "Rise",
+        "method": "ewallet",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "id": "bank-transfer",
+        "name": "Bank Transfer",
+        "method": "bank_wire",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 3
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ]
+      }
+    ],
+    "minPayoutAmount": 50,
+    "minPayoutCurrency": "USD",
+    "challengeFeeRefundedOnFirstPayout": true,
+    "warnings": [
+      "Breaching maximum dynamic drawdown or daily loss limits leads to account termination.",
+      "Inactivity for extended periods or restricted trading strategies may affect payout eligibility."
+    ]
+  },
+  "calculator": {
+    "currency": "USD",
+    "profitSplitTiers": [
+      {
+        "id": "standard-tier",
+        "label": "Standard Split",
+        "program": "E8 Account",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 80
+      },
+      {
+        "id": "scaled-tier",
+        "label": "Scaled Split",
+        "program": "E8 Account Scaled",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 90
+      }
+    ],
+    "platformWithholdingTaxPercent": 0,
+    "platformDeductionPercent": 0,
+    "paymentProcessorFeePercent": 0,
+    "minPayoutAmount": 50,
+    "scaling": {
+      "enabled": true,
+      "intervalMonths": 3,
+      "balanceIncreasePercent": 25,
+      "maxCapital": 1000000,
+      "traderShareAfterScalePercent": 90,
+      "requirements": [
+        "Consistent profitability over 3 months",
+        "At least 2 successful payouts"
+      ]
+    }
+  },
+  "faqs": [
+    {
+      "id": "e8-markets-payout-cycle",
+      "question": "How often can I request a payout with E8 Markets?",
+      "answer": "E8 Markets allows traders to request their first payout after 8 calendar days from placing their first trade on the funded account. Subsequent payouts can also be requested on an 8-day cycle.",
+      "slug": "e8-markets-payout-cycle",
+      "locale": "en",
+      "keywords": [
+        "payout",
+        "e8 markets",
+        "withdrawal frequency"
+      ],
+      "seo": {
+        "title": "E8 Markets Payout Schedule & Frequency",
+        "metaDescription": "Learn about E8 Markets payout cycle, including the initial 8-day waiting period and subsequent withdrawal rules.",
+        "datePublished": "2026-09-04",
+        "dateModified": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/e8-markets/faq/e8-markets-payout-cycle"
+      }
+    },
+    {
+      "id": "e8-markets-drawdown-rules",
+      "question": "What are the drawdown limits for E8 Markets accounts?",
+      "answer": "E8 Markets features maximum drawdown limits based on account equity/balance rules along with daily loss limits. Exceeding these drawdown thresholds results in account breach.",
+      "slug": "e8-markets-drawdown-rules",
+      "locale": "en",
+      "keywords": [
+        "drawdown",
+        "e8 markets",
+        "risk limits"
+      ],
+      "seo": {
+        "title": "E8 Markets Drawdown Rules & Risk Management",
+        "metaDescription": "Understand E8 Markets maximum drawdown and daily loss limit rules to stay compliant during evaluation and trading.",
+        "datePublished": "2026-09-04",
+        "dateModified": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/e8-markets/faq/e8-markets-drawdown-rules"
+      }
+    },
+    {
+      "id": "e8-markets-profit-split",
+      "question": "What is the profit split ratio offered by E8 Markets?",
+      "answer": "E8 Markets provides a default profit split of 80% to the trader. Through their account scaling plan, successful traders can scale up their profit split to 90%.",
+      "slug": "e8-markets-profit-split",
+      "locale": "en",
+      "keywords": [
+        "profit split",
+        "e8 markets",
+        "scaling plan"
+      ],
+      "seo": {
+        "title": "E8 Markets Profit Split Percentage and Scaling",
+        "metaDescription": "Discover how E8 Markets profit splits work from the initial 80% split up to 90% via their scaling plan.",
+        "datePublished": "2026-09-04",
+        "dateModified": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/e8-markets/faq/e8-markets-profit-split"
+      }
+    },
+    {
+      "id": "e8-markets-payout-methods",
+      "question": "Which payout methods are supported by E8 Markets?",
+      "answer": "Traders can request payouts via Rise, Cryptocurrency (such as USDT), and direct Bank Wire transfers. Processing typically occurs within 24 hours of approval.",
+      "slug": "e8-markets-payout-methods",
+      "locale": "en",
+      "keywords": [
+        "payout methods",
+        "rise",
+        "crypto",
+        "e8 markets"
+      ],
+      "seo": {
+        "title": "E8 Markets Withdrawal & Payout Methods",
+        "metaDescription": "Explore supported payout options at E8 Markets including Rise, Crypto, and Bank Wire transfers.",
+        "datePublished": "2026-09-04",
+        "dateModified": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/e8-markets/faq/e8-markets-payout-methods"
+      }
+    }
+  ],
+  "prosAndCons": {
+    "pros": [
+      "Fast payout processing within 24 hours",
+      "Profit split starts at 80% and scales up to 90%",
+      "Multiple convenient withdrawal options including Crypto and Rise"
+    ],
+    "cons": [
+      "Dynamic drawdown limits require careful risk management",
+      "Minimum withdrawal amount threshold applies"
+    ]
+  }
+}

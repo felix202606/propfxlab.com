@@ -1,0 +1,236 @@
+{
+  "slug": "maven-trading",
+  "status": "active",
+  "payoutSpeed": "Within 24 Hours",
+  "basic": {
+    "name": "Maven Trading",
+    "legalName": "Maven Trading Ltd",
+    "logo": {
+      "src": "https://www.maventrading.com/favicon.ico",
+      "alt": "Maven Trading Logo",
+      "width": 128,
+      "height": 128
+    },
+    "foundedAt": "2022-08-01",
+    "headquarters": {
+      "city": "Toronto",
+      "country": "Canada",
+      "countryCode": "CA"
+    },
+    "website": "https://www.maventrading.com",
+    "funding": {
+      "currency": "USD",
+      "minAccountSize": 5000,
+      "maxAccountSize": 500000,
+      "maxScaledSize": 1000000
+    }
+  },
+  "withdrawal": {
+    "defaultTraderSharePercent": 80,
+    "defaultFirmSharePercent": 20,
+    "payoutCycle": {
+      "type": "fixed_interval",
+      "firstPayoutMinDays": 14,
+      "subsequentIntervalDays": 14,
+      "description": "Payouts are processed bi-weekly (every 14 days) after the first trade on the funded account, provided all drawdown and consistency rules are met."
+    },
+    "platformFee": {
+      "type": "none"
+    },
+    "channels": [
+      {
+        "id": "rise",
+        "name": "Rise",
+        "method": "ewallet",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 2
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD",
+          "EUR",
+          "GBP"
+        ]
+      },
+      {
+        "id": "crypto-usdt",
+        "name": "Crypto (USDT)",
+        "method": "crypto",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 2
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "id": "bank-transfer",
+        "name": "Bank Transfer",
+        "method": "bank_wire",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 2,
+          "max": 5
+        },
+        "fee": {
+          "type": "flat",
+          "flatAmount": 15,
+          "currency": "USD"
+        },
+        "currencies": [
+          "USD",
+          "EUR",
+          "GBP"
+        ]
+      }
+    ],
+    "minPayoutAmount": 50,
+    "minPayoutCurrency": "USD",
+    "challengeFeeRefundedOnFirstPayout": true,
+    "warnings": [
+      "Violating the daily or overall drawdown limit will result in immediate account termination.",
+      "Using prohibited trading strategies such as high-frequency trading (HFT) or latency arbitrage is strictly forbidden.",
+      "Failure to complete the KYC verification process will delay or pause payouts."
+    ]
+  },
+  "calculator": {
+    "currency": "USD",
+    "profitSplitTiers": [
+      {
+        "id": "standard-tier",
+        "label": "Standard Profit Split",
+        "program": "Standard Evaluation",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 80
+      },
+      {
+        "id": "scaled-tier",
+        "label": "Scaled Profit Split",
+        "program": "Scaling Plan",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 90
+      }
+    ],
+    "platformWithholdingTaxPercent": 0,
+    "platformDeductionPercent": 0,
+    "paymentProcessorFeePercent": 0,
+    "minPayoutAmount": 50,
+    "scaling": {
+      "enabled": true,
+      "intervalMonths": 3,
+      "balanceIncreasePercent": 25,
+      "maxCapital": 1000000,
+      "traderShareAfterScalePercent": 90,
+      "requirements": [
+        "Achieve a total profit of 10% or more within a 3-month period.",
+        "Request a payout at least twice during the scaling period.",
+        "Maintain account standing without any drawdown violations."
+      ]
+    }
+  },
+  "faqs": [
+    {
+      "id": "payout-frequency",
+      "question": "How often can I request a payout from Maven Trading?",
+      "answer": "Maven Trading allows traders to request payouts every 14 days (bi-weekly) once they are on a funded account. The first payout can be requested 14 days after placing the first trade on the live funded account, provided the account balance is above the initial starting balance and no drawdown rules have been breached.",
+      "slug": "payout-frequency",
+      "locale": "en",
+      "keywords": [
+        "payout frequency",
+        "maven trading payout",
+        "bi-weekly payout"
+      ],
+      "seo": {
+        "title": "Maven Trading Payout Frequency & Rules",
+        "metaDescription": "Learn about Maven Trading's bi-weekly payout schedule, including the 14-day waiting period for your first withdrawal on a funded account.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/maven-trading/faq/payout-frequency"
+      }
+    },
+    {
+      "id": "drawdown-rules",
+      "question": "What are the drawdown limits on Maven Trading accounts?",
+      "answer": "Maven Trading features both daily and overall drawdown limits. The daily drawdown is typically set at 5% (calculated based on the previous day's ending balance or equity, depending on the account type), and the maximum overall drawdown is 10%. Exceeding these limits will result in an automatic breach and account closure.",
+      "slug": "drawdown-rules",
+      "locale": "en",
+      "keywords": [
+        "drawdown limits",
+        "daily drawdown",
+        "max drawdown",
+        "maven trading rules"
+      ],
+      "seo": {
+        "title": "Maven Trading Drawdown Limits Explained",
+        "metaDescription": "Understand the daily and overall maximum drawdown limits on Maven Trading accounts to avoid account breaches.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/maven-trading/faq/drawdown-rules"
+      }
+    },
+    {
+      "id": "fee-refund",
+      "question": "Is the challenge registration fee refundable?",
+      "answer": "Yes, Maven Trading refunds the initial challenge registration fee to successful traders. The refund is processed alongside your very first profit split payout on the funded account.",
+      "slug": "fee-refund",
+      "locale": "en",
+      "keywords": [
+        "fee refund",
+        "challenge fee",
+        "first payout refund"
+      ],
+      "seo": {
+        "title": "Is the Maven Trading Challenge Fee Refundable?",
+        "metaDescription": "Find out how and when you can get your registration fee refunded after passing the Maven Trading challenge.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/maven-trading/faq/fee-refund"
+      }
+    },
+    {
+      "id": "prohibited-strategies",
+      "question": "What trading strategies are prohibited at Maven Trading?",
+      "answer": "Maven Trading prohibits strategies that exploit system inefficiencies rather than trading the market. This includes high-frequency trading (HFT), latency arbitrage, reverse arbitrage, news straddling, and using external copy traders without authorization. Normal manual trading, swing trading, and standard EAs are fully permitted.",
+      "slug": "prohibited-strategies",
+      "locale": "en",
+      "keywords": [
+        "prohibited strategies",
+        "forbidden trading",
+        "maven trading rules",
+        "ea trading"
+      ],
+      "seo": {
+        "title": "Prohibited Trading Strategies at Maven Trading",
+        "metaDescription": "Review the list of forbidden trading practices at Maven Trading, including HFT and latency arbitrage, to keep your account safe.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/maven-trading/faq/prohibited-strategies"
+      }
+    }
+  ],
+  "prosAndCons": {
+    "pros": [
+      "High profit split up to 90% through scaling",
+      "Refundable challenge fee on first payout",
+      "No minimum trading days requirement on standard challenges"
+    ],
+    "cons": [
+      "Strict consistency and drawdown rules",
+      "Bi-weekly payout schedule instead of on-demand"
+    ]
+  }
+}

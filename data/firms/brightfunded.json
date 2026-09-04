@@ -1,0 +1,242 @@
+{
+  "slug": "brightfunded",
+  "status": "active",
+  "payoutSpeed": "Within 24 Hours",
+  "basic": {
+    "name": "BrightFunded",
+    "legalName": "BrightFunded B.V.",
+    "logo": {
+      "src": "https://www.brightfunded.com/favicon.ico",
+      "alt": "BrightFunded Logo",
+      "width": 512,
+      "height": 512
+    },
+    "foundedAt": "2023-04-01",
+    "headquarters": {
+      "city": "Amsterdam",
+      "country": "Netherlands",
+      "countryCode": "NL"
+    },
+    "website": "https://www.brightfunded.com",
+    "funding": {
+      "currency": "EUR",
+      "minAccountSize": 10000,
+      "maxAccountSize": 200000,
+      "maxScaledSize": 400000
+    }
+  },
+  "withdrawal": {
+    "defaultTraderSharePercent": 80,
+    "defaultFirmSharePercent": 20,
+    "payoutCycle": {
+      "type": "fixed_interval",
+      "firstPayoutMinDays": 14,
+      "subsequentIntervalDays": 14,
+      "description": "Payouts are processed bi-weekly (every 14 days) after the first trade on the funded account."
+    },
+    "platformFee": {
+      "type": "none"
+    },
+    "channels": [
+      {
+        "id": "rise",
+        "name": "Rise",
+        "method": "ewallet",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD",
+          "EUR",
+          "GBP"
+        ],
+        "notes": "Fastest and most recommended payout method for global traders."
+      },
+      {
+        "id": "crypto-usdt",
+        "name": "Crypto (USDT)",
+        "method": "crypto",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD",
+          "EUR"
+        ],
+        "notes": "Payouts sent directly to your crypto wallet."
+      },
+      {
+        "id": "bank-transfer",
+        "name": "Bank Transfer",
+        "method": "bank_wire",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 3
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD",
+          "EUR",
+          "GBP"
+        ],
+        "notes": "Standard bank wire transfer. Processing times depend on your local bank."
+      }
+    ],
+    "minPayoutAmount": 50,
+    "minPayoutCurrency": "USD",
+    "challengeFeeRefundedOnFirstPayout": true,
+    "warnings": [
+      "Breaching daily or maximum drawdown limits will result in immediate account termination.",
+      "Using prohibited trading strategies such as latency arbitrage or high-frequency trading is strictly forbidden.",
+      "Payouts may be delayed if trade verification flags suspicious activity."
+    ]
+  },
+  "calculator": {
+    "currency": "USD",
+    "profitSplitTiers": [
+      {
+        "id": "standard-tier",
+        "label": "Standard Split",
+        "program": "Evaluation",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 80
+      },
+      {
+        "id": "scaled-tier",
+        "label": "Scaled Split",
+        "program": "Scaling Plan",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 90
+      }
+    ],
+    "platformWithholdingTaxPercent": 0,
+    "platformDeductionPercent": 0,
+    "paymentProcessorFeePercent": 0,
+    "minPayoutAmount": 50,
+    "scaling": {
+      "enabled": true,
+      "intervalMonths": 3,
+      "balanceIncreasePercent": 25,
+      "maxCapital": 400000,
+      "traderShareAfterScalePercent": 90,
+      "requirements": [
+        "Achieve a total profit of 10% or more within a 3-month period",
+        "At least 2 out of the 3 months must be profitable",
+        "Request scaling upon meeting the criteria"
+      ]
+    }
+  },
+  "faqs": [
+    {
+      "id": "how-do-payouts-work",
+      "question": "How do payouts work at BrightFunded?",
+      "answer": "BrightFunded processes payouts on a bi-weekly basis (every 14 days) after your first trade on the funded account. The default profit split is 80% in favor of the trader, which can scale up to 90% if you qualify for the scaling plan. Payout requests are typically processed within 24 hours.",
+      "slug": "how-do-payouts-work",
+      "locale": "en",
+      "keywords": [
+        "payout",
+        "withdraw",
+        "profit split",
+        "schedule"
+      ],
+      "seo": {
+        "title": "BrightFunded Payout Process & Schedule",
+        "metaDescription": "Learn how payouts work at BrightFunded, including the 14-day bi-weekly schedule, 80% to 90% profit split, and 24-hour processing time.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/brightfunded/faq/how-do-payouts-work"
+      }
+    },
+    {
+      "id": "what-are-the-drawdown-limits",
+      "question": "What are the drawdown limits at BrightFunded?",
+      "answer": "BrightFunded enforces a 5% daily drawdown limit and a 10% maximum drawdown limit. The daily drawdown is calculated based on the previous day's ending balance or equity (whichever is higher) at midnight CE(S)T. Exceeding these limits will result in immediate account breach and termination.",
+      "slug": "what-are-the-drawdown-limits",
+      "locale": "en",
+      "keywords": [
+        "drawdown",
+        "daily limit",
+        "max drawdown",
+        "breach"
+      ],
+      "seo": {
+        "title": "BrightFunded Drawdown Limits Explained",
+        "metaDescription": "Understand the daily 5% and maximum 10% drawdown rules at BrightFunded to avoid account breaches and keep your funded status.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/brightfunded/faq/what-are-the-drawdown-limits"
+      }
+    },
+    {
+      "id": "is-the-challenge-fee-refundable",
+      "question": "Is the challenge fee refundable?",
+      "answer": "Yes, the registration fee you pay for the BrightFunded challenge is fully refundable. It will be added to your very first successful payout once you reach the funded stage and complete your first profitable trading cycle.",
+      "slug": "is-the-challenge-fee-refundable",
+      "locale": "en",
+      "keywords": [
+        "refund",
+        "fee",
+        "challenge",
+        "registration"
+      ],
+      "seo": {
+        "title": "BrightFunded Challenge Fee Refund Policy",
+        "metaDescription": "Find out how and when you can get your BrightFunded challenge registration fee refunded. Refunded on your first successful payout.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/brightfunded/faq/is-the-challenge-fee-refundable"
+      }
+    },
+    {
+      "id": "what-payout-methods-are-supported",
+      "question": "What payout methods are supported by BrightFunded?",
+      "answer": "BrightFunded supports multiple payout methods to ensure convenient withdrawals. These include Rise (for global bank transfers and e-wallet payouts), direct Bank Transfers, and popular Cryptocurrencies such as USDT. Payouts are processed quickly, often within 24 hours.",
+      "slug": "what-payout-methods-are-supported",
+      "locale": "en",
+      "keywords": [
+        "payout methods",
+        "rise",
+        "crypto",
+        "bank transfer",
+        "withdraw"
+      ],
+      "seo": {
+        "title": "BrightFunded Supported Payout Methods",
+        "metaDescription": "Discover the withdrawal options available at BrightFunded, including Rise, Bank Wire, and Crypto (USDT) with fast processing.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/brightfunded/faq/what-payout-methods-are-supported"
+      }
+    }
+  ],
+  "prosAndCons": {
+    "pros": [
+      "Up to 90% profit split with scaling",
+      "No minimum trading days on evaluation phases",
+      "Refundable registration fee on first payout",
+      "Fast payout processing within 24 hours"
+    ],
+    "cons": [
+      "Relatively new firm (founded in 2023)",
+      "Strict consistency and drawdown rules apply"
+    ]
+  }
+}

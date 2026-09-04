@@ -1,0 +1,236 @@
+{
+  "slug": "fxify",
+  "status": "active",
+  "payoutSpeed": "Within 24 Hours",
+  "basic": {
+    "name": "FXIFY",
+    "legalName": "FXIFY Solutions Ltd",
+    "logo": {
+      "src": "https://fxify.com/favicon.ico",
+      "alt": "FXIFY Logo",
+      "width": 512,
+      "height": 512
+    },
+    "foundedAt": "2023-04-01",
+    "headquarters": {
+      "city": "London",
+      "country": "United Kingdom",
+      "countryCode": "GB"
+    },
+    "website": "https://fxify.com",
+    "funding": {
+      "currency": "USD",
+      "minAccountSize": 15000,
+      "maxAccountSize": 400000,
+      "maxScaledSize": 4000000
+    }
+  },
+  "withdrawal": {
+    "defaultTraderSharePercent": 80,
+    "defaultFirmSharePercent": 20,
+    "payoutCycle": {
+      "type": "on_demand",
+      "firstPayoutMinDays": 1,
+      "subsequentIntervalDays": 14,
+      "description": "FXIFY offers on-demand payouts starting from your very first profit split, with standard processing within 24 hours."
+    },
+    "platformFee": {
+      "type": "none"
+    },
+    "channels": [
+      {
+        "id": "rise",
+        "name": "Rise",
+        "method": "ewallet",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD",
+          "EUR",
+          "GBP"
+        ]
+      },
+      {
+        "id": "crypto-usdt",
+        "name": "Crypto (USDT/BTC)",
+        "method": "crypto",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ]
+      },
+      {
+        "id": "bank-wire",
+        "name": "Bank Wire Transfer",
+        "method": "bank_wire",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 3
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD",
+          "EUR",
+          "GBP"
+        ]
+      }
+    ],
+    "minPayoutAmount": 50,
+    "minPayoutCurrency": "USD",
+    "challengeFeeRefundedOnFirstPayout": true,
+    "warnings": [
+      "Violating daily or maximum drawdown limits will result in immediate account termination.",
+      "Using prohibited trading strategies such as latency arbitrage or high-frequency trading is strictly banned.",
+      "Payouts may be delayed or paused if trades are flagged for consistency rule violations or IP address mismatches."
+    ]
+  },
+  "calculator": {
+    "currency": "USD",
+    "profitSplitTiers": [
+      {
+        "id": "standard-tier",
+        "label": "Standard Profit Split",
+        "program": "Standard Evaluation",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 80
+      },
+      {
+        "id": "upgraded-tier",
+        "label": "Upgraded Profit Split",
+        "program": "On-Demand Upgrade / Scaling Plan",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 90
+      }
+    ],
+    "platformWithholdingTaxPercent": 0,
+    "platformDeductionPercent": 0,
+    "paymentProcessorFeePercent": 0,
+    "minPayoutAmount": 50,
+    "scaling": {
+      "enabled": true,
+      "intervalMonths": 3,
+      "balanceIncreasePercent": 25,
+      "maxCapital": 4000000,
+      "traderShareAfterScalePercent": 90,
+      "requirements": [
+        "Achieve a total profit of 10% or more within a 3-month period",
+        "Request scaling after meeting the profit target",
+        "Maintain active trading without violating drawdown rules"
+      ]
+    }
+  },
+  "faqs": [
+    {
+      "id": "fxify-payout-rules",
+      "question": "What are the payout rules and schedules at FXIFY?",
+      "answer": "FXIFY offers highly flexible payout options, including on-demand payouts. Traders can request their first payout as early as their first day of trading on a funded account, provided they have met the minimum payout threshold and have no active trades. Standard payouts are processed within 24 hours.",
+      "slug": "payout-rules-schedule",
+      "locale": "en",
+      "keywords": [
+        "FXIFY payout",
+        "payout schedule",
+        "on-demand payout",
+        "first payout"
+      ],
+      "seo": {
+        "title": "FXIFY Payout Rules & Schedule Explained",
+        "metaDescription": "Learn about FXIFY's flexible payout rules, including on-demand payouts from day one and standard 24-hour processing times.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/fxify/faq/payout-rules-schedule"
+      }
+    },
+    {
+      "id": "fxify-drawdown-limits",
+      "question": "How are the drawdown limits calculated at FXIFY?",
+      "answer": "FXIFY features a daily drawdown limit of 5% (calculated based on the previous day's closing equity or balance, whichever is higher) and a maximum static drawdown limit of 10%. Violating either of these limits will result in the immediate breach and closure of the account.",
+      "slug": "drawdown-limits-calculation",
+      "locale": "en",
+      "keywords": [
+        "FXIFY drawdown",
+        "daily drawdown",
+        "maximum drawdown",
+        "account breach"
+      ],
+      "seo": {
+        "title": "How FXIFY Calculates Daily and Maximum Drawdown",
+        "metaDescription": "Understand FXIFY's 5% daily drawdown and 10% maximum static drawdown rules to keep your funded account safe.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/fxify/faq/drawdown-limits-calculation"
+      }
+    },
+    {
+      "id": "fxify-refundable-fee",
+      "question": "Is the FXIFY challenge registration fee refundable?",
+      "answer": "Yes, the registration fee paid for the FXIFY challenge is fully refundable. It is returned to the trader along with their very first successful profit split payout on the live funded account.",
+      "slug": "refundable-challenge-fee",
+      "locale": "en",
+      "keywords": [
+        "FXIFY refund",
+        "challenge fee refund",
+        "first payout refund"
+      ],
+      "seo": {
+        "title": "Is the FXIFY Challenge Fee Refundable?",
+        "metaDescription": "Find out how and when you can get your FXIFY challenge registration fee refunded back to you.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/fxify/faq/refundable-challenge-fee"
+      }
+    },
+    {
+      "id": "fxify-prohibited-strategies",
+      "question": "What trading strategies are prohibited at FXIFY?",
+      "answer": "FXIFY prohibits strategies that exploit system latencies or feed errors, such as latency arbitrage, high-frequency trading (HFT), news straddling, and account sharing/coordinated trading. Standard manual trading, swing trading, and standard EAs are fully permitted.",
+      "slug": "prohibited-trading-strategies",
+      "locale": "en",
+      "keywords": [
+        "FXIFY prohibited strategies",
+        "HFT",
+        "arbitrage",
+        "EA rules"
+      ],
+      "seo": {
+        "title": "Prohibited Trading Strategies at FXIFY",
+        "metaDescription": "Review the list of banned trading practices at FXIFY, including latency arbitrage and high-frequency trading.",
+        "datePublished": "2026-09-04",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/fxify/faq/prohibited-trading-strategies"
+      }
+    }
+  ],
+  "prosAndCons": {
+    "pros": [
+      "On-demand payouts available from day one",
+      "High profit split up to 90%",
+      "No consistency rules or hidden trading restrictions",
+      "Static maximum drawdown (not trailing)"
+    ],
+    "cons": [
+      "Relatively strict 5% daily drawdown limit",
+      "Inactivity rule of 30 days applies to funded accounts"
+    ]
+  }
+}
