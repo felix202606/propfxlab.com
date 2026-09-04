@@ -25,6 +25,7 @@
     "rankingsSubtitle": "Xếp theo số tiền thực nhận ước tính trên tài khoản {account} với lợi nhuận {profit}, dùng tỷ lệ chia mặc định của từng công ty.",
     "emptyPreview": "Dữ liệu công ty chưa sẵn sàng. Máy tính vẫn dùng được.",
     "emptyRankings": "Hiện chưa có hồ sơ công ty. Phần còn lại của trang vẫn hoạt động.",
+    "dataAudited": "⚡ Dữ liệu kiểm tra lần cuối: Tháng 9 năm 2026",
     "trustTitle": "Dành cho trader được cấp vốn",
     "trustSubtitle": "Mọi con số đều được tính từ quy định công khai — không phải copy marketing.",
     "trust": {
@@ -130,8 +131,11 @@
     "promoLabel": "Mã",
     "copy": "Sao chép",
     "copied": "Đã sao chép",
-    "claimCta": "Nhận ưu đãi",
+    "claimCta": "Nhận giảm giá",
     "readReview": "Đọc đánh giá",
+    "firstPayoutLabel": "Ngày chờ rút tiền đầu",
+    "firstPayoutValue": "{days} ngày",
+    "firstPayoutImmediate": "Ngay lập tức",
     "statusActive": "Hoạt động",
     "statusWarning": "Cảnh báo",
     "statusSuspended": "Tạm ngừng rút tiền"

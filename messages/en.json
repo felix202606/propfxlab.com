@@ -25,6 +25,7 @@
     "rankingsSubtitle": "Ranked by estimated take-home on a {account} account with {profit} profit, using each firm's default split.",
     "emptyPreview": "Firm data is loading. The calculator stays available — rankings will appear when profiles are ready.",
     "emptyRankings": "No firm profiles are available right now. The rest of the page still works.",
+    "dataAudited": "⚡ Data last audited: September 2026",
     "trustTitle": "Built for funded traders",
     "trustSubtitle": "Every number is computed from public rules — not marketing copy.",
     "trust": {
@@ -130,8 +131,11 @@
     "promoLabel": "Code",
     "copy": "Copy",
     "copied": "Copied",
-    "claimCta": "Claim offer",
-    "readReview": "Read review",
+    "claimCta": "Claim Discount",
+    "readReview": "Read Review",
+    "firstPayoutLabel": "First Payout Days",
+    "firstPayoutValue": "{days, plural, one {# day} other {# days}}",
+    "firstPayoutImmediate": "Immediate",
     "statusActive": "Active",
     "statusWarning": "Warning",
     "statusSuspended": "Suspended"

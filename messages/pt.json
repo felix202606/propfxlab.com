@@ -25,6 +25,7 @@
     "rankingsSubtitle": "Ordenado pelo valor líquido estimado em uma conta de {account} com {profit} de lucro, usando o split padrão de cada firma.",
     "emptyPreview": "Os dados das firmas ainda estão carregando. A calculadora continua disponível.",
     "emptyRankings": "Não há perfis de firmas no momento. O restante da página continua funcionando.",
+    "dataAudited": "⚡ Dados auditados pela última vez: setembro de 2026",
     "trustTitle": "Feito para traders funded",
     "trustSubtitle": "Cada número é calculado a partir de regras públicas — não de copy de marketing.",
     "trust": {
@@ -130,8 +131,11 @@
     "promoLabel": "Cupom",
     "copy": "Copiar",
     "copied": "Copiado",
-    "claimCta": "Resgatar oferta",
+    "claimCta": "Resgatar desconto",
     "readReview": "Ler avaliação",
+    "firstPayoutLabel": "Dias até o primeiro saque",
+    "firstPayoutValue": "{days, plural, one {# dia} other {# dias}}",
+    "firstPayoutImmediate": "Imediato",
     "statusActive": "Ativa",
     "statusWarning": "Alerta",
     "statusSuspended": "Suspensa"
