@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { FirmLogo } from "@/components/FirmLogo";
 import { POPULAR_COMPARISONS } from "@/lib/offers";
 import type { PropFirm } from "@/lib/schema";
 
@@ -95,13 +96,11 @@ function FirmMini({
     <div
       className={`flex min-w-0 items-center gap-2 ${align === "right" ? "flex-row-reverse text-right" : ""}`}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <FirmLogo
+        name={firm.basic.name}
         src={firm.basic.logo.src}
         alt={firm.basic.logo.alt}
-        width={28}
-        height={28}
-        className="h-8 w-8 shrink-0 rounded-lg border border-white/10 bg-white object-contain p-0.5"
+        size="sm"
       />
       <span className="truncate text-xs font-medium text-zinc-300">
         {firm.basic.name}

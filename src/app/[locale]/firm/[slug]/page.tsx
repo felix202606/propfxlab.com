@@ -6,6 +6,7 @@ import { WithdrawalChannels } from "@/components/WithdrawalChannels";
 import { ProsConsBox } from "@/components/ProsConsBox";
 import { WarningBox } from "@/components/WarningBox";
 import { FaqAccordion } from "@/components/FaqAccordion";
+import { FirmLogo } from "@/components/FirmLogo";
 import { getAllFirms, getFirmBySlug, getFirmSlugs } from "@/lib/data";
 import { formatMoney } from "@/lib/payout";
 import { toFaqJsonLd } from "@/lib/schema";
@@ -68,13 +69,11 @@ export default async function FirmPage({
       />
 
       <header className="flex flex-wrap items-center gap-4">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <FirmLogo
+          name={firm.basic.name}
           src={firm.basic.logo.src}
           alt={firm.basic.logo.alt}
-          width={firm.basic.logo.width ?? 40}
-          height={firm.basic.logo.height ?? 40}
-          className="h-10 w-10 rounded-md bg-white object-contain"
+          size="md"
         />
         <div>
           <h1 className="text-3xl font-semibold tracking-tight">
