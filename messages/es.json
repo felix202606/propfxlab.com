@@ -23,6 +23,8 @@
     "previewSplit": "{percent}% para el trader tras comisiones",
     "rankingsTitle": "Ranking en vivo",
     "rankingsSubtitle": "Ordenado por pago neto estimado en una cuenta de {account} con {profit} de beneficio, usando el split por defecto de cada firma.",
+    "emptyPreview": "Los datos de las firmas se están cargando. La calculadora sigue disponible.",
+    "emptyRankings": "No hay perfiles de firmas ahora mismo. El resto de la página sigue funcionando.",
     "trustTitle": "Hecho para traders fondeados",
     "trustSubtitle": "Cada cifra se calcula a partir de reglas públicas, no de copy de marketing.",
     "trust": {

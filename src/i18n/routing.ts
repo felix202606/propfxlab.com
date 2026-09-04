@@ -17,4 +17,7 @@ export const localeMeta = {
 export const routing = defineRouting({
   locales: Object.keys(localeMeta) as (keyof typeof localeMeta)[],
   defaultLocale: "en",
+  // GSC 把 https://www.propfxlab.com/ 当作首页；always 前缀会 307 到 /en。
+  // as-needed 让裸路径直接 200 渲染默认语言，避免爬虫把中间层异常记成 5xx。
+  localePrefix: "as-needed",
 });

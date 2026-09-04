@@ -23,6 +23,8 @@
     "previewSplit": "{percent}% para o trader após taxas",
     "rankingsTitle": "Ranking ao vivo",
     "rankingsSubtitle": "Ordenado pelo valor líquido estimado em uma conta de {account} com {profit} de lucro, usando o split padrão de cada firma.",
+    "emptyPreview": "Os dados das firmas ainda estão carregando. A calculadora continua disponível.",
+    "emptyRankings": "Não há perfis de firmas no momento. O restante da página continua funcionando.",
     "trustTitle": "Feito para traders funded",
     "trustSubtitle": "Cada número é calculado a partir de regras públicas — não de copy de marketing.",
     "trust": {

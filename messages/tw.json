@@ -23,6 +23,8 @@
     "previewSplit": "扣除費用後交易員分成 {percent}%",
     "rankingsTitle": "即時平台排行",
     "rankingsSubtitle": "依 {account} 帳戶、{profit} 利潤、各家預設分成估算的到手金額排序。",
+    "emptyPreview": "平台資料尚未載入。計算器仍可使用，排行會在資料就緒後出現。",
+    "emptyRankings": "目前沒有可用的平台資料，頁面其餘部分仍可正常瀏覽。",
     "trustTitle": "為資金盤交易員而建",
     "trustSubtitle": "每一個數字都來自公開規則，而不是行銷文案。",
     "trust": {
