@@ -8,7 +8,7 @@ type SiteLogoProps = {
 export function SiteLogo({ size = 32, priority = false }: SiteLogoProps) {
   return (
     <Image
-      src="/icon-192.png"
+      src="/logo.png"
       alt="PropFXLab"
       width={size}
       height={size}
