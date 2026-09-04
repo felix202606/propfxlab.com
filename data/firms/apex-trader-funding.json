@@ -6,10 +6,10 @@
     "name": "Apex Trader Funding",
     "legalName": "Apex Trader Funding, Inc.",
     "logo": {
-      "src": "https://apextraderfunding.com/favicon.ico",
+      "src": "/logos/apex-trader-funding.png",
       "alt": "Apex Trader Funding logo",
-      "width": 32,
-      "height": 32
+      "width": 128,
+      "height": 128
     },
     "foundedAt": "2021-01-01",
     "headquarters": {

@@ -6,10 +6,10 @@
     "name": "City Traders Imperium",
     "legalName": "City Traders Imperium Ltd",
     "logo": {
-      "src": "https://citytradersimperium.com/favicon.ico",
+      "src": "/logos/city-traders-imperium.png",
       "alt": "City Traders Imperium Logo",
-      "width": 100,
-      "height": 100
+      "width": 128,
+      "height": 128
     },
     "foundedAt": "2018-01-01",
     "headquarters": {

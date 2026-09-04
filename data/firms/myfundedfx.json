@@ -6,10 +6,10 @@
     "name": "MyFundedFX",
     "legalName": "MyFunded Solutions, LLC",
     "logo": {
-      "src": "https://myfundedfx.com/favicon.ico",
+      "src": "/logos/myfundedfx.png",
       "alt": "MyFundedFX logo",
-      "width": 32,
-      "height": 32
+      "width": 128,
+      "height": 128
     },
     "foundedAt": "2022-06-01",
     "headquarters": {

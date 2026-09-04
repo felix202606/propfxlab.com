@@ -6,10 +6,10 @@
     "name": "The Trading Pit",
     "legalName": "The Trading Pit Challenge GmbH",
     "logo": {
-      "src": "https://www.thetradingpit.com/favicon.ico",
+      "src": "/logos/the-trading-pit.png",
       "alt": "The Trading Pit Logo",
-      "width": 32,
-      "height": 32
+      "width": 128,
+      "height": 128
     },
     "foundedAt": "2022-01-01",
     "headquarters": {

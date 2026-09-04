@@ -6,10 +6,10 @@
     "name": "FXIFY",
     "legalName": "FXIFY Solutions Ltd",
     "logo": {
-      "src": "https://fxify.com/favicon.ico",
+      "src": "/logos/fxify.png",
       "alt": "FXIFY Logo",
-      "width": 512,
-      "height": 512
+      "width": 128,
+      "height": 128
     },
     "foundedAt": "2023-04-01",
     "headquarters": {

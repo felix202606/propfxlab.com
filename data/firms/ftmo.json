@@ -6,10 +6,10 @@
     "name": "FTMO",
     "legalName": "FTMO s.r.o.",
     "logo": {
-      "src": "https://ftmo.com/favicon.ico",
+      "src": "/logos/ftmo.png",
       "alt": "FTMO logo",
-      "width": 32,
-      "height": 32
+      "width": 128,
+      "height": 128
     },
     "foundedAt": "2015-01-01",
     "headquarters": {

@@ -6,10 +6,10 @@
     "name": "Blue Guardian",
     "legalName": "Blue Guardian Capital",
     "logo": {
-      "src": "https://blueguardian.com/favicon.ico",
+      "src": "/logos/blue-guardian.png",
       "alt": "Blue Guardian Logo",
-      "width": 100,
-      "height": 100
+      "width": 128,
+      "height": 128
     },
     "foundedAt": "2021-06-01",
     "headquarters": {
