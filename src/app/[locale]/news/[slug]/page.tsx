@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import { NewsShareButtons } from "@/components/NewsShareButtons";
 import { getAllFirms, getNewsBySlug, getNewsSlugs } from "@/lib/data";
+import { formatNewsPublished, newsArticleAbsoluteUrl } from "@/lib/news-format";
 import { getNewsLocaleCopy } from "@/lib/schema";
 import { localeMeta } from "@/i18n/routing";
 
@@ -26,17 +28,6 @@ export async function generateMetadata({
   };
 }
 
-function formatPublished(iso: string, locale: string): string {
-  const date = new Date(iso);
-  if (Number.isNaN(date.getTime())) return iso;
-  const bcp47 = locale in localeMeta ? localeMeta[locale as keyof typeof localeMeta].bcp47 : locale;
-  return new Intl.DateTimeFormat(bcp47, {
-    dateStyle: "medium",
-    timeStyle: "short",
-    timeZone: "UTC",
-  }).format(date);
-}
-
 function paragraphs(body: string): string[] {
   return body
     .split(/\n{2,}/)
@@ -53,6 +44,7 @@ export default async function NewsArticlePage({
 
   const t = await getTranslations("NewsPage");
   const copy = getNewsLocaleCopy(article, locale);
+  const shareUrl = newsArticleAbsoluteUrl(locale, article.slug);
   const firms = getAllFirms();
   const related = article.relatedFirmSlugs
     .map((firmSlug) => firms.find((firm) => firm.slug === firmSlug))
@@ -66,7 +58,7 @@ export default async function NewsArticlePage({
     inLanguage: locale in localeMeta ? localeMeta[locale as keyof typeof localeMeta].bcp47 : locale,
     datePublished: article.publishedAt,
     dateModified: article.scrapedAt,
-    url: `https://www.propfxlab.com/news/${article.slug}`,
+    url: shareUrl,
     publisher: {
       "@type": "Organization",
       name: "PropFXLab",
@@ -99,7 +91,7 @@ export default async function NewsArticlePage({
           {article.sourceName}
         </a>
         <span className="mx-2 text-zinc-700">·</span>
-        {t("publishedLabel")}: {formatPublished(article.publishedAt, locale)}
+        {t("publishedLabel")}: {formatNewsPublished(article.publishedAt, locale)}
       </p>
 
       <div className="mt-8 space-y-4 text-sm leading-7 text-zinc-300">
@@ -107,6 +99,8 @@ export default async function NewsArticlePage({
           <p key={`${article.slug}-${index}`}>{paragraph}</p>
         ))}
       </div>
+
+      <NewsShareButtons url={shareUrl} title={copy.title} />
 
       {related.length > 0 ? (
         <section className="mt-10 border-t border-white/10 pt-6">

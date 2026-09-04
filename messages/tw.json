@@ -175,6 +175,9 @@
     "publishedLabel": "發布時間",
     "relatedFirms": "相關平台",
     "backToNews": "全部新聞",
+    "shareLabel": "分享",
+    "copyLink": "複製連結",
+    "linkCopied": "已複製",
     "disclaimer": "本文為公開報導的原創摘要，不構成任何投資或財務建議。細節請以原始來源和平台官網為準。",
     "notFoundMetaTitle": "找不到這則新聞"
   },

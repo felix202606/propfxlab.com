@@ -51,6 +51,7 @@ BROWSER_HEADERS = {
     "Cache-Control": "no-cache",
 }
 DEFAULT_MODEL = "gemini-3.6-flash"
+FALLBACK_MODELS = ("gemini-3.5-flash", "gemini-2.5-flash")
 MAX_AGE_HOURS = 96
 MAX_SUMMARY_CHARS = 800
 BATCH_SIZE = 4
@@ -136,6 +137,7 @@ Return JSON only.
 Keep an item only if it materially affects prop firms, funded-trader payouts, challenge/evaluation rules, firm shutdowns, regulation of proprietary trading, or named firms on our roster.
 Drop generic FX forecasts, retail broker promo, stock-market wrap-ups, and unrelated crypto news.
 Write original copy. Do not copy the source verbatim. Do not invent facts that are not in the provided title/summary.
+English content must be a substantial briefing: 5–8 short paragraphs that explain what happened, why it matters for funded traders, payout/rule/product implications, competitive context, and what readers should verify on the official site. Summary should be 3–4 sentences.
 For every kept article you MUST provide translations for all locale keys: en, es, cn, tw, th, vi, pt.
 Each locale needs title, summary, and content (body). English (en) is the canonical rewrite; other locales must be natural full translations of that English rewrite, not machine-literal calques.
 related_firm_slugs must be a subset of the provided roster slugs (or empty).
@@ -552,6 +554,9 @@ def build_prompt(batch: list[RssItem], roster: list[str]) -> str:
         "Each kept item needs: source_url (exact), tags (2–5), "
         "related_firm_slugs, relevance (high|medium), and translations. "
         "translations must include every locale key with title, summary, and content. "
+        "English summary: 3–4 sentences. English content: 5–8 short paragraphs covering "
+        "what happened, trader impact, payout/rules/product angle, competitive context, "
+        "and a verification note. Separate paragraphs with blank lines. "
         "Also set top-level title/summary/body to the English (en) rewrite for convenience."
     )
 
@@ -637,32 +642,37 @@ def call_gemini(
         raise SystemExit("缺少 GEMINI_API_KEY（GitHub Actions Secret 或本地 .env / gemini-key.txt）")
 
     client = genai.Client(api_key=api_key)
+    models = [model_name, *[m for m in FALLBACK_MODELS if m != model_name]]
     last_error: Exception | None = None
-    for attempt in range(1, 4):
-        try:
-            response = client.models.generate_content(
-                model=model_name,
-                contents=prompt,
-                config=types.GenerateContentConfig(
-                    system_instruction=system_instruction,
-                    response_mime_type="application/json",
-                    response_json_schema=schema,
-                    temperature=0.2,
-                ),
-            )
-            text = getattr(response, "text", None)
-            if not text:
-                raise RuntimeError(f"Gemini 没有返回 JSON：{response}")
-            return json.loads(text)
-        except Exception as error:
-            last_error = error
-            message = str(error)
-            transient = "503" in message or "UNAVAILABLE" in message or "429" in message
-            if not transient or attempt == 3:
-                raise SystemExit(error)
-            wait_s = 20 * attempt
-            print(f"  Gemini 限流/忙碌，{wait_s}s 后重试（{attempt}/3）")
-            time.sleep(wait_s)
+    for model_id in models:
+        for attempt in range(1, 4):
+            try:
+                response = client.models.generate_content(
+                    model=model_id,
+                    contents=prompt,
+                    config=types.GenerateContentConfig(
+                        system_instruction=system_instruction,
+                        response_mime_type="application/json",
+                        response_json_schema=schema,
+                        temperature=0.2,
+                    ),
+                )
+                text = getattr(response, "text", None)
+                if not text:
+                    raise RuntimeError(f"Gemini 没有返回 JSON：{response}")
+                if model_id != model_name:
+                    print(f"  改用模型 {model_id}")
+                return json.loads(text)
+            except Exception as error:
+                last_error = error
+                message = str(error)
+                transient = "503" in message or "UNAVAILABLE" in message or "429" in message
+                if not transient:
+                    break
+                wait_s = 25 * attempt
+                print(f"  Gemini {model_id} 限流/忙碌，{wait_s}s 后重试（{attempt}/3）")
+                time.sleep(wait_s)
+        print(f"  模型 {model_id} 不可用，尝试下一个…")
     raise SystemExit(last_error)
 
 
@@ -740,9 +750,13 @@ def write_article(item: RssItem, selected: SelectedArticle, allowed_slugs: set[s
     return out_path
 
 
-BACKFILL_SYSTEM = """You translate PropFXLab news briefings.
+BACKFILL_SYSTEM = """You rewrite and translate PropFXLab news briefings for funded traders.
 Return JSON only with a translations object containing every locale key: en, es, cn, tw, th, vi, pt.
-Keep facts identical. English may be lightly polished; other locales must be natural full translations.
+Keep facts identical to the source briefing — do not invent numbers, product names, or events.
+First expand English into a richer briefing: summary 3–4 sentences; content 5–8 short paragraphs
+covering what happened, why funded traders should care, payout/rule/product implications,
+competitive context, and what to verify on the official site. Separate paragraphs with blank lines.
+Then provide natural full translations for es, cn, tw, th, vi, pt of that expanded English.
 Each locale needs title, summary, and content.
 """
 
@@ -774,13 +788,14 @@ def backfill_translations(model_name: str, force: bool = False) -> None:
             skipped += 1
             continue
 
-        print(f"  翻译 {path.name}（缺 {', '.join(missing) or 'force'}）")
+        print(f"  扩写+翻译 {path.name}（缺 {', '.join(missing) or 'force'}）")
         prompt = (
-            "Translate this PropFXLab news briefing into all locales "
+            "Expand this PropFXLab news briefing into a richer English article, "
+            "then translate into all locales "
             f"{list(NEWS_LOCALES)}.\n"
             "Locale labels: "
             + ", ".join(f"{k}={v}" for k, v in LOCALE_LABELS.items())
-            + "\n\nEnglish source:\n"
+            + "\n\nSource briefing:\n"
             + json.dumps(
                 {
                     "title": payload.get("title"),

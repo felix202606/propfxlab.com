@@ -175,6 +175,9 @@
     "publishedLabel": "Publicado",
     "relatedFirms": "Firmas relacionadas",
     "backToNews": "Todas las noticias",
+    "shareLabel": "Compartir",
+    "copyLink": "Copiar enlace",
+    "linkCopied": "Copiado",
     "disclaimer": "Este briefing es un resumen original de información pública. No es asesoramiento financiero. Confirma los detalles en la fuente original y en el sitio oficial de la firma.",
     "notFoundMetaTitle": "Artículo no encontrado"
   },

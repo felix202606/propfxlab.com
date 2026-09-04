@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getAllNews } from "@/lib/data";
+import { formatNewsPublished } from "@/lib/news-format";
 import { getNewsLocaleCopy } from "@/lib/schema";
-import { localeMeta } from "@/i18n/routing";
 
 export async function generateMetadata({
   params,
@@ -14,17 +14,6 @@ export async function generateMetadata({
     title: t("metaTitle"),
     description: t("metaDescription"),
   };
-}
-
-function formatPublished(iso: string, locale: string): string {
-  const date = new Date(iso);
-  if (Number.isNaN(date.getTime())) return iso;
-  const bcp47 = locale in localeMeta ? localeMeta[locale as keyof typeof localeMeta].bcp47 : locale;
-  return new Intl.DateTimeFormat(bcp47, {
-    dateStyle: "medium",
-    timeStyle: "short",
-    timeZone: "UTC",
-  }).format(date);
 }
 
 export default async function NewsIndexPage({
@@ -53,7 +42,7 @@ export default async function NewsIndexPage({
                   <p className="text-xs tracking-wide text-zinc-500">
                     {article.sourceName}
                     <span className="mx-2 text-zinc-700">·</span>
-                    {formatPublished(article.publishedAt, locale)}
+                    {formatNewsPublished(article.publishedAt, locale)}
                   </p>
                   <h2 className="mt-2 text-lg font-medium tracking-tight">
                     <Link
