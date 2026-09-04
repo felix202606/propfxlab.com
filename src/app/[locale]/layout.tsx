@@ -21,7 +21,10 @@ const geistMono = Geist_Mono({
 });
 
 export const viewport: Viewport = {
-  themeColor: "#09090b",
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#09090b" },
+    { media: "(prefers-color-scheme: light)", color: "#fafafa" },
+  ],
 };
 
 export function generateStaticParams() {
@@ -49,8 +52,16 @@ export async function generateMetadata({
       },
       icons: {
         icon: [
-          { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
-          { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+          {
+            url: "/logo-on-dark.png",
+            type: "image/png",
+            media: "(prefers-color-scheme: dark)",
+          },
+          {
+            url: "/logo-on-light.png",
+            type: "image/png",
+            media: "(prefers-color-scheme: light)",
+          },
         ],
         apple: "/icon-192.png",
       },
