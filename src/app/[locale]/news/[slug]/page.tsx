@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { getAllFirms, getNewsBySlug, getNewsSlugs } from "@/lib/data";
+import { getNewsLocaleCopy } from "@/lib/schema";
 import { localeMeta } from "@/i18n/routing";
 
 export function generateStaticParams() {
@@ -18,9 +19,10 @@ export async function generateMetadata({
   if (!article) {
     return { title: t("notFoundMetaTitle") };
   }
+  const copy = getNewsLocaleCopy(article, locale);
   return {
-    title: article.title,
-    description: article.summary,
+    title: copy.title,
+    description: copy.summary,
   };
 }
 
@@ -50,6 +52,7 @@ export default async function NewsArticlePage({
   if (!article) notFound();
 
   const t = await getTranslations("NewsPage");
+  const copy = getNewsLocaleCopy(article, locale);
   const firms = getAllFirms();
   const related = article.relatedFirmSlugs
     .map((firmSlug) => firms.find((firm) => firm.slug === firmSlug))
@@ -58,8 +61,9 @@ export default async function NewsArticlePage({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "NewsArticle",
-    headline: article.title,
-    description: article.summary,
+    headline: copy.title,
+    description: copy.summary,
+    inLanguage: locale in localeMeta ? localeMeta[locale as keyof typeof localeMeta].bcp47 : locale,
     datePublished: article.publishedAt,
     dateModified: article.scrapedAt,
     url: `https://www.propfxlab.com/news/${article.slug}`,
@@ -83,7 +87,7 @@ export default async function NewsArticlePage({
         </Link>
       </p>
 
-      <h1 className="mt-4 text-3xl font-semibold tracking-tight">{article.title}</h1>
+      <h1 className="mt-4 text-3xl font-semibold tracking-tight">{copy.title}</h1>
       <p className="mt-3 text-sm text-zinc-500">
         {t("sourceLabel")}:{" "}
         <a
@@ -99,7 +103,7 @@ export default async function NewsArticlePage({
       </p>
 
       <div className="mt-8 space-y-4 text-sm leading-7 text-zinc-300">
-        {paragraphs(article.body).map((paragraph, index) => (
+        {paragraphs(copy.content).map((paragraph, index) => (
           <p key={`${article.slug}-${index}`}>{paragraph}</p>
         ))}
       </div>

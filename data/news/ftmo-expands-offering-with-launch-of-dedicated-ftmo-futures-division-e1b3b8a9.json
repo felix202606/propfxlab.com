@@ -16,5 +16,42 @@
   "relatedFirmSlugs": [
     "ftmo"
   ],
-  "relevance": "high"
+  "relevance": "high",
+  "translations": {
+    "en": {
+      "title": "FTMO Expands Offering with Launch of Dedicated FTMO Futures Division",
+      "summary": "Proprietary trading giant FTMO has announced the launch of FTMO Futures, expanding its funded account model into exchange-traded futures contracts. The new brand offers traders access to futures markets alongside the firm's existing forex and CFD evaluations.",
+      "content": "Leading proprietary trading firm FTMO has officially unveiled FTMO Futures, a dedicated brand expanding its trading services into exchange-traded futures contracts. The strategic launch allows traders to access central-exchange order books and trade popular futures benchmarks under FTMO's funded account framework. The expansion marks a major shift for FTMO, which built its reputation primarily as a forex and CFD proprietary trading provider. By introducing futures evaluation programs, FTMO aims to attract traders seeking exchange-traded execution, standardized contract specifications, and regulated market structures. The move reflects an industry-wide push among top-tier prop firms to diversify product suites and cater to varied trading styles across futures, forex, and indices."
+    },
+    "es": {
+      "title": "FTMO amplía su oferta con el lanzamiento de su división especializada FTMO Futures",
+      "summary": "El gigante del trading de prop trading FTMO ha anunciado el lanzamiento de FTMO Futures, expandiendo su modelo de cuentas financiadas a contratos de futuros cotizados en bolsa. La nueva marca ofrece a los operadores acceso a los mercados de futuros junto con las evaluaciones existentes de forex y CFD de la empresa.",
+      "content": "La firma líder de prop trading FTMO ha presentado oficialmente FTMO Futures, una marca dedicada que amplía sus servicios de trading a contratos de futuros cotizados en bolsa. Este lanzamiento estratégico permite a los operadores acceder a libros de órdenes de bolsas centrales y operar con los principales índices de referencia de futuros bajo el marco de cuentas financiadas de FTMO. La expansión marca un cambio importante para FTMO, que construyó su reputación principalmente como proveedor de trading de cuentas fondeadas de forex y CFD. Al introducir programas de evaluación de futuros, FTMO busca atraer a operadores que buscan ejecución cotizada en bolsa, especificaciones de contratos estandarizadas y estructuras de mercado reguladas. La medida refleja un impulso en toda la industria entre las principales firmas de prop trading para diversificar sus gamas de productos y atender a variados estilos de trading en futuros, forex e índices."
+    },
+    "cn": {
+      "title": "FTMO 推出 FTMO Futures 专属部门，进一步扩大服务范围",
+      "summary": "自营交易巨头 FTMO 宣布推出 FTMO Futures，将其资助账户模式扩展至交易所交易的期货合约。这一新品牌在保留现有外汇和差价合约（CFD）评估项目的同时，为交易者提供进入期货市场的机会。",
+      "content": "领先的自营交易公司 FTMO 已正式推出专属品牌 FTMO Futures，将其交易服务扩展至交易所交易的期货合约。这一战略性推出使交易者能够在 FTMO 的资助账户框架下，接入中央交易所订单簿并交易热门期货基准。对于主要凭借外汇和 CFD 自营交易赢得声誉的 FTMO 而言，此次扩张标志着重大转变。通过引入期货评估项目，FTMO 旨在吸引寻求交易所执行、标准化合约规格和受监管市场结构的交易者。此举反映了顶级自营交易公司在行业范围内推动产品多元化，以满足涵盖期货、外汇和指数的各种交易风格。"
+    },
+    "tw": {
+      "title": "FTMO 推出 FTMO Futures 專屬部門，進一步擴大服務範圍",
+      "summary": "自營交易巨頭 FTMO 宣布推出 FTMO Futures，將其資助帳戶模式擴展至交易所交易的期貨合約。這一新品牌在保留現有外匯和差價合約（CFD）評估項目的同時，為交易者提供進入期貨市場的機會。",
+      "content": "領先的自營交易公司 FTMO 已正式推出專屬品牌 FTMO Futures，將其交易服務擴展至交易所交易的期貨合約。這一戰略性推出使交易者能夠在 FTMO 的資助帳戶框架下，接入中央交易所訂單簿並交易熱門期貨基準。對於主要憑藉外匯和 CFD 自營交易贏得聲譽的 FTMO 而言，此次擴張標誌著重大轉變。透過引入期貨評估項目，FTMO 旨在吸引尋求交易所執行、標準化合約規格和受監管市場結構的交易者。此舉反映了頂級自營交易公司在行業範圍內推動產品多元化，以滿足涵蓋期貨、外匯和指數的各種交易風格。"
+    },
+    "th": {
+      "title": "FTMO ขยายขอบเขตการให้บริการด้วยการเปิดตัวแผนก FTMO Futures โดยเฉพาะ",
+      "summary": "FTMO ยักษ์ใหญ่ด้าน Proprietary Trading ประกาศเปิดตัว FTMO Futures ขยายโมเดลบัญชีทุนไปยังสัญญาซื้อขายล่วงหน้า (Futures) ที่ทำการซื้อขายในตลาดหลักทรัพย์ แบรนด์ใหม่นี้ช่วยให้เทรดเดอร์สามารถเข้าถึงตลาดฟิวเจอร์สควบคู่ไปกับการประเมิน Forex และ CFD ที่มีอยู่ของบริษัท",
+      "content": "FTMO บริษัท Proprietary Trading ชั้นนำได้เปิดตัว FTMO Futures อย่างเป็นทางการ ซึ่งเป็นแบรนด์เฉพาะที่ขยายบริการการเทรดไปสู่สัญญาซื้อขายล่วงหน้าในตลาดหลักทรัพย์ การเปิดตัวเชิงกลยุทธ์นี้ช่วยให้เทรดเดอร์สามารถเข้าถึงสมุดคำสั่งซื้อขายของตลาดกลางและเทรดดัชนีอ้างอิงฟิวเจอร์สยอดนิยมภายใต้กรอบบัญชีทุนของ FTMO การขยายตัวในครั้งนี้นับเป็นการเปลี่ยนแปลงครั้งสำคัญสำหรับ FTMO ซึ่งสร้างชื่อเสียงในฐานะผู้ให้บริการการเทรด Forex และ CFD เป็นหลัก โดยการนำเสนอโปรแกรมการประเมินฟิวเจอร์ส FTMO มุ่งหวังที่จะดึงดูดเทรดเดอร์ที่แสวงหาการส่งคำสั่งในตลาดหลักทรัพย์ ข้อกำหนดสัญญาที่เป็นมาตรฐาน และโครงสร้างตลาดที่มีการกำกับดูแล ความเคลื่อนไหวนี้สะท้อนให้เห็นถึงแนวโน้มทั่วทั้งอุตสาหกรรมในหมู่บริษัท Prop Firm ชั้นนำในการกระจายพอร์ตสินค้าและตอบสนองสไตล์การเทรดที่หลากหลายทั้งในฟิวเจอร์ส ฟอเร็กซ์ และดัชนี"
+    },
+    "vi": {
+      "title": "FTMO Mở Rộng Sản Phẩm Với Việc Ra Mắt Bộ Phận Chuyên Biệt FTMO Futures",
+      "summary": "Gã khổng lồ giao dịch tự doanh FTMO đã thông báo ra mắt FTMO Futures, mở rộng mô hình tài khoản cấp vốn sang các hợp đồng tương lai được giao dịch trên sở giao dịch. Thương hiệu mới cung cấp cho các nhà giao dịch khả năng tiếp cận thị trường tương lai bên cạnh các chương trình đánh giá Forex và CFD hiện có của công ty.",
+      "content": "Công ty giao dịch tự doanh hàng đầu FTMO đã chính thức ra mắt FTMO Futures, một thương hiệu chuyên biệt mở rộng dịch vụ giao dịch sang các hợp đồng tương lai được giao dịch trên sở giao dịch. Việc ra mắt chiến lược này cho phép các nhà giao dịch truy cập sổ lệnh của sở giao dịch trung tâm và giao dịch các hợp đồng tương lai chuẩn phổ biến theo khuôn khổ tài khoản cấp vốn của FTMO. Sự mở rộng này đánh dấu một bước chuyển dịch lớn đối với FTMO, đơn vị vốn xây dựng uy tín chủ yếu nhờ cung cấp dịch vụ giao dịch tự doanh Forex và CFD. Bằng cách giới thiệu các chương trình đánh giá hợp đồng tương lai, FTMO nhằm mục đích thu hút các nhà giao dịch tìm kiếm khớp lệnh trên sở giao dịch, quy chuẩn hợp đồng chuẩn hóa và cấu trúc thị trường được quản lý. Động thái này phản ánh xu hướng toàn ngành của các công ty prop firm hàng đầu trong việc đa dạng hóa danh mục sản phẩm và đáp ứng các phong cách giao dịch đa dạng trên thị trường tương lai, ngoại hối và chỉ số."
+    },
+    "pt": {
+      "title": "FTMO Expande Oferta com o Lançamento da Divisão Dedicada FTMO Futures",
+      "summary": "A gigante do prop trading FTMO anunciou o lançamento da FTMO Futures, expandindo seu modelo de contas financiadas para contratos futuros negociados em bolsa. A nova marca oferece aos traders acesso aos mercados futuros juntamente com as avaliações existentes de forex e CFDs da empresa.",
+      "content": "A principal empresa de prop trading, FTMO, revelou oficialmente a FTMO Futures, uma marca dedicada que expande seus serviços de trading para contratos futuros negociados em bolsa. O lançamento estratégico permite que os traders acessem livros de ofertas de bolsas centrais e negociem os principais benchmarks de futuros sob a estrutura de contas financiadas da FTMO. A expansão marca uma mudança importante para a FTMO, que construiu sua reputação principalmente como provedora de prop trading de forex e CFDs. Ao introduzir programas de avaliação de futuros, a FTMO visa atrair traders que buscam execução em bolsa, especificações de contratos padronizadas e estruturas de mercado regulamentadas. A medida reflete um impulso em toda a indústria entre as principais empresas de prop trading para diversificar suas gamas de produtos e atender a variados estilos de trading em futuros, forex e índices."
+    }
+  }
 }

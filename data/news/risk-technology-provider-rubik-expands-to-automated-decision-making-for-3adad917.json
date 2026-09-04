@@ -14,5 +14,42 @@
     "risk-infrastructure"
   ],
   "relatedFirmSlugs": [],
-  "relevance": "medium"
+  "relevance": "medium",
+  "translations": {
+    "en": {
+      "title": "Risk Technology Provider RUBIK Expands to Automated Decision-Making for Prop Firms",
+      "summary": "Prop firm risk management technology vendor RUBIK announced that its platform now executes automated risk decisions for proprietary trading clients rather than solely offering advisory analytics. The capability allows prop firms to automatically manage account breaches, leverage restrictions, and toxic trading activity.",
+      "content": "Risk technology vendor RUBIK has expanded its suite of services for proprietary trading firms, moving from risk monitoring and advisory alerts to automated decision-making execution. The technology provider stated that its system now takes direct risk actions on behalf of prop firm operators based on pre-set compliance parameters. Under the expanded framework, RUBIK's infrastructure can automatically flag rule violations, freeze accounts exceeding drawdown thresholds, and identify latency arbitrage or toxic trading behaviors without requiring manual operator intervention. The transition toward autonomous risk decision-making highlights how prop firms are increasingly relying on third-party technology providers to enforce challenge rules, safeguard firm capital, and manage real-time risk exposure across thousands of active accounts."
+    },
+    "es": {
+      "title": "El proveedor de tecnología de riesgo RUBIK se expande hacia la toma de decisiones automatizada para firmas de fondeo",
+      "summary": "RUBIK, proveedor de tecnología de gestión de riesgos para firmas de fondeo, anunció que su plataforma ahora ejecuta decisiones de riesgo automatizadas para clientes de trading propietario, en lugar de ofrecer únicamente análisis consultivos. Esta función permite a las firmas gestionar automáticamente el incumplimiento de reglas, restricciones de apalancamiento y actividades de trading tóxicas.",
+      "content": "El proveedor de tecnología de riesgo RUBIK ha ampliado su suite de servicios para empresas de trading propietario, pasando del monitoreo de riesgos y alertas consultivas a la ejecución automatizada de decisiones. La empresa declaró que su sistema ahora toma acciones de riesgo directas en nombre de los operadores de firmas de fondeo basándose en parámetros de cumplimiento preestablecidos. Bajo este marco ampliado, la infraestructura de RUBIK puede identificar automáticamente violaciones de reglas, congelar cuentas que superen los límites de drawdown e identificar arbitraje de latencia o comportamientos de trading tóxicos sin requerir intervención manual. La transición hacia la toma de decisiones de riesgo autónoma resalta cómo las firmas de fondeo dependen cada vez más de proveedores de tecnología externos para hacer cumplir las reglas de evaluación, proteger el capital de la firma y gestionar la exposición al riesgo en tiempo real en miles de cuentas activas."
+    },
+    "cn": {
+      "title": "风险技术提供商 RUBIK 扩展至自营交易公司自动化决策领域",
+      "summary": "自营交易公司风险管理技术供应商 RUBIK 宣布，其平台现可为自营交易客户执行自动化风险决策，而不再仅提供咨询分析。该功能使自营交易公司能够自动管理账户违规、杠杆限制以及恶意交易活动。",
+      "content": "风险技术供应商 RUBIK 扩展了针对自营交易公司的服务套件，从风险监控和咨询警报转向自动化决策执行。该技术提供商表示，其系统现在可以根据预设的合规参数，代表自营交易公司运营商采取直接的风险行动。在扩展的框架下，RUBIK 的基础设施可以自动标记违规行为、冻结超过最大回撤门槛的账户，并识别延迟套利或恶意交易行为，无需人工干预。向自主风险决策的转变表明，自营交易公司越来越依赖第三方技术提供商来执行考核规则、保护公司资金，并对数千个活跃账户进行实时风险敞口管理。"
+    },
+    "tw": {
+      "title": "風險技術提供商 RUBIK 擴展至自營交易公司自動化決策領域",
+      "summary": "自營交易公司風險管理技術供應商 RUBIK 宣布，其平台現可為自營交易客戶執行自動化風險決策，而不再僅提供諮詢分析。該功能使自營交易公司能夠自動管理帳戶違規、槓桿限制以及惡意交易活動。",
+      "content": "風險技術供應商 RUBIK 擴展了針對自營交易公司的服務套件，從風險監控和諮詢警報轉向自動化決策執行。該技術提供商表示，其系統現在可以根據預設的合規參數，代表自營交易公司營運商採取直接的風險行動。在擴展的框架下，RUBIK 的基礎設施可以自動標記違規行為、凍結超過最大回撤門檻的帳戶，並識別延遲套利或惡意交易行為，無需人工干預。向自主風險決策的轉變表明，自營交易公司越來越依賴第三方技術提供商來執行考核規則、保護公司資金，並對數千個活躍帳戶進行即時風險敞口管理。"
+    },
+    "th": {
+      "title": "RUBIK ผู้ให้บริการเทคโนโลยีความเสี่ยง ขยายบริการสู่การตัดสินใจอัตโนมัติสำหรับ Prop Firm",
+      "summary": "RUBIK ผู้ให้บริการเทคโนโลยีการจัดการความเสี่ยงสำหรับ Prop Firm ประกาศว่าแพลตฟอร์มของตนสามารถดำเนินการตัดสินใจด้านความเสี่ยงแบบอัตโนมัติสำหรับลูกค้าการเทรดแบบ Proprietary ได้แล้ว แทนที่จะให้บริการเพียงการวิเคราะห์เพื่อการแนะนำเท่านั้น ความสามารถนี้ช่วยให้ Prop Firm สามารถจัดการการละเมิดบัญชี ข้อจำกัดเลเวอเรจ และพฤติกรรมการเทรดที่เป็นอันตรายได้อย่างเป็นอัตโนมัติ",
+      "content": "RUBIK ผู้ให้บริการเทคโนโลยีความเสี่ยง ได้ขยายชุดบริการสำหรับบริษัท Proprietary Trading โดยเปลี่ยนจากการเฝ้าระวังความเสี่ยงและการแจ้งเตือนเชิงแนะนำ ไปสู่การดำเนินการตัดสินใจแบบอัตโนมัติ ผู้ให้บริการเทคโนโลยีระบุว่าระบบของตนสามารถดำเนินการจัดการความเสี่ยงโดยตรงแทนผู้ให้บริการ Prop Firm ตามพารามิเตอร์การปฏิบัติตามกฎระเบียบที่ตั้งค่าไว้ล่วงหน้า ภายใต้กรอบการทำงานที่ขยายขึ้นนี้ โครงสร้างพื้นฐานของ RUBIK สามารถแจ้งเตือนการละเมิดกฎ ระงับบัญชีที่เกินเกณฑ์ Drawdown และระบุการทำ Latency Arbitrage หรือพฤติกรรมการเทรดที่เป็นอันตรายได้โดยไม่ต้องอาศัยการจัดการด้วยตนเอง การเปลี่ยนผ่านสู่การตัดสินใจด้านความเสี่ยงแบบอัตโนมัตินี้แสดงให้เห็นว่า Prop Firm พึ่งพาผู้ให้บริการเทคโนโลยีภายนอกมากขึ้นเรื่อยๆ ในการบังคับใช้กฎการท้าทาย ปกป้องเงินทุนของบริษัท และบริหารจัดการความเสี่ยงแบบเรียลไทม์จากบัญชีที่ใช้งานอยู่นับพันบัญชี"
+    },
+    "vi": {
+      "title": "Nhà cung cấp công nghệ rủi ro RUBIK mở rộng sang ra quyết định tự động cho các Prop Firm",
+      "summary": "Nhà cung cấp công nghệ quản lý rủi ro cho prop firm RUBIK thông báo rằng nền tảng của họ hiện có thể thực thi các quyết định rủi ro tự động cho khách hàng giao dịch tự doanh thay vì chỉ cung cấp phân tích tư vấn. Tính năng này cho phép các prop firm tự động quản lý việc vi phạm tài khoản, hạn chế đòn bẩy và các hoạt động giao dịch độc hại.",
+      "content": "Nhà cung cấp công nghệ rủi ro RUBIK đã mở rộng bộ dịch vụ dành cho các công ty giao dịch tự doanh, chuyển từ giám sát rủi ro và cảnh báo tư vấn sang thực thi ra quyết định tự động. Nhà cung cấp công nghệ này cho biết hệ thống của họ hiện có thể thực hiện các hành động rủi ro trực tiếp thay mặt cho các nhà vận hành prop firm dựa trên các tham số tuân thủ được thiết lập trước. Theo khuôn khổ mở rộng, hạ tầng của RUBIK có thể tự động gắn cờ các vi phạm quy tắc, đóng băng các tài khoản vượt quá ngưỡng sụt giảm tài sản (drawdown) và nhận diện giao dịch chênh lệch giá độ trễ (latency arbitrage) hoặc các hành vi giao dịch độc hại mà không cần sự can thiệp thủ công. Sự chuyển dịch sang ra quyết định rủi ro tự động cho thấy các prop firm đang ngày càng phụ thuộc vào các nhà cung cấp công nghệ bên thứ ba để thực thi quy tắc thử thách, bảo vệ vốn của công ty và quản lý mức độ rủi ro thời gian thực trên hàng nghìn tài khoản đang hoạt động."
+    },
+    "pt": {
+      "title": "Provedora de tecnologia de risco RUBIK expande para tomada de decisão automatizada para Prop Firms",
+      "summary": "A provedora de tecnologia de gestão de risco para prop firms RUBIK anunciou que sua plataforma agora executa decisões de risco automatizadas para clientes de trading proprietário, em vez de oferecer apenas análises consultivas. O recurso permite que as prop firms gerenciem automaticamente violações de contas, restrições de alavancagem e atividades de trading tóxicas.",
+      "content": "A provedora de tecnologia de risco RUBIK expandiu sua suíte de serviços para empresas de trading proprietário, migrando do monitoramento de risco e alertas consultivos para a execução automatizada de tomadas de decisão. A provedora de tecnologia afirmou que seu sistema agora toma ações diretas de risco em nome dos operadores de prop firms com base em parâmetros de conformidade pré-configurados. Sob essa estrutura expandida, a infraestrutura da RUBIK pode sinalizar automaticamente violações de regras, congelar contas que excedam os limites de drawdown e identificar arbitragem de latência ou comportamentos de trading tóxicos sem a necessidade de intervenção manual do operador. A transição para a tomada de decisão de risco autônoma destaca como as prop firms estão dependendo cada vez mais de provedores de tecnologia terceirizados para aplicar regras de desafios, proteger o capital da empresa e gerenciar a exposição ao risco em tempo real em milhares de contas ativas."
+    }
+  }
 }
