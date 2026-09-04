@@ -9,6 +9,7 @@
     "rankings": "Rankings",
     "compare": "Compare",
     "faq": "FAQ",
+    "news": "News",
     "languageLabel": "Language"
   },
   "HomePage": {
@@ -163,6 +164,19 @@
     "warningBelowMinChallenge": "Challenge amount is below this firm's minimum tier of {amount}",
     "warningAboveMaxChallenge": "Challenge amount is above this firm's maximum initial tier of {amount}",
     "warningProfitOutsideTierRange": "Expected profit is outside this split tier's profit range; result is indicative only"
+  },
+  "NewsPage": {
+    "metaTitle": "Prop Firm News",
+    "metaDescription": "Industry headlines on payouts, rule changes and regulation, summarized for funded traders.",
+    "title": "Prop firm news",
+    "subtitle": "Headlines that affect funded traders — payouts, rule changes, shutdowns and regulation. Briefings are original summaries of public RSS feeds, not copies of the source articles.",
+    "empty": "No news items yet. The next scheduled scrape will fill this page.",
+    "sourceLabel": "Source",
+    "publishedLabel": "Published",
+    "relatedFirms": "Related firms",
+    "backToNews": "All news",
+    "disclaimer": "This briefing is an original summary of publicly available reporting. It is not financial advice. Confirm details on the original source and the firm's official site.",
+    "notFoundMetaTitle": "Article not found"
   },
   "SiteFooter": {
     "tagline": "Independent prop firm payout calculators and public rule comparisons.",

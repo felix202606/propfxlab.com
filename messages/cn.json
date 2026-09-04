@@ -9,6 +9,7 @@
     "rankings": "排行榜",
     "compare": "对比",
     "faq": "FAQ",
+    "news": "新闻",
     "languageLabel": "语言"
   },
   "HomePage": {
@@ -163,6 +164,19 @@
     "warningBelowMinChallenge": "挑战金额低于该平台最低档 {amount}",
     "warningAboveMaxChallenge": "挑战金额高于该平台最高初始档 {amount}",
     "warningProfitOutsideTierRange": "当前预计利润不在该分成阶梯的利润区间内，结果仅供参考"
+  },
+  "NewsPage": {
+    "metaTitle": "Prop Firm 行业新闻",
+    "metaDescription": "面向 funded 交易员的出金、规则变更与监管摘要。",
+    "title": "Prop Firm 新闻",
+    "subtitle": "影响 funded 交易员的行业动态：出金、规则变更、停运与监管。正文是根据公开 RSS 改写的摘要，不是原文转载。",
+    "empty": "暂时还没有新闻。下一次定时抓取会写入这里。",
+    "sourceLabel": "来源",
+    "publishedLabel": "发布时间",
+    "relatedFirms": "相关平台",
+    "backToNews": "全部新闻",
+    "disclaimer": "本文为公开报道的原创摘要，不构成任何投资或财务建议。细节请以原始来源和平台官网为准。",
+    "notFoundMetaTitle": "未找到该新闻"
   },
   "SiteFooter": {
     "tagline": "独立的 Prop Firm 出金计算器与公开规则对比。",

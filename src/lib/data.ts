@@ -2,9 +2,10 @@ import "server-only";
 import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { cache } from "react";
-import { parsePropFirm, type PropFirm } from "@/lib/schema";
+import { parseNewsArticle, parsePropFirm, type NewsArticle, type PropFirm } from "@/lib/schema";
 
 const FIRMS_DIR = path.join(process.cwd(), "data", "firms");
+const NEWS_DIR = path.join(process.cwd(), "data", "news");
 
 function readFirmFile(fileName: string): PropFirm {
   const filePath = path.join(FIRMS_DIR, fileName);
@@ -52,4 +53,44 @@ export function getFirmBySlug(slug: string): PropFirm | undefined {
 
 export function getFirmSlugs(): string[] {
   return getAllFirms().map((firm) => firm.slug);
+}
+
+function readNewsFile(fileName: string): NewsArticle {
+  const filePath = path.join(NEWS_DIR, fileName);
+  const raw = readFileSync(filePath, "utf8");
+  return parseNewsArticle(JSON.parse(raw));
+}
+
+export const getAllNews = cache((): NewsArticle[] => {
+  try {
+    let fileNames: string[];
+    try {
+      fileNames = readdirSync(NEWS_DIR).filter((name) => name.endsWith(".json"));
+    } catch (err) {
+      console.error("[data] Cannot read news directory:", NEWS_DIR, err);
+      return [];
+    }
+
+    const results: NewsArticle[] = [];
+    for (const fileName of fileNames) {
+      try {
+        results.push(readNewsFile(fileName));
+      } catch (err) {
+        console.error("[data] Skipping invalid news file:", fileName, err);
+      }
+    }
+
+    return results.sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
+  } catch (err) {
+    console.error("[data] Unexpected getAllNews failure:", err);
+    return [];
+  }
+});
+
+export function getNewsBySlug(slug: string): NewsArticle | undefined {
+  return getAllNews().find((article) => article.slug === slug);
+}
+
+export function getNewsSlugs(): string[] {
+  return getAllNews().map((article) => article.slug);
 }

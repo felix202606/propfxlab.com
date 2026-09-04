@@ -269,6 +269,31 @@ export function parsePropFirm(data: unknown): PropFirm {
   return propFirmSchema.parse(data);
 }
 
+const isoDateTime = z
+  .string()
+  .min(20)
+  .refine((value) => !Number.isNaN(Date.parse(value)), "必须是可解析的 ISO-8601 时间");
+
+export const newsArticleSchema = z.object({
+  slug: kebabSlug,
+  title: z.string().min(1),
+  summary: z.string().min(1),
+  body: z.string().min(1),
+  sourceName: z.string().min(1),
+  sourceUrl: z.url(),
+  publishedAt: isoDateTime,
+  scrapedAt: isoDateTime,
+  tags: z.array(z.string().min(1)).default([]),
+  relatedFirmSlugs: z.array(kebabSlug).default([]),
+  relevance: z.enum(["high", "medium"]).default("medium"),
+});
+
+export type NewsArticle = z.infer<typeof newsArticleSchema>;
+
+export function parseNewsArticle(data: unknown): NewsArticle {
+  return newsArticleSchema.parse(data);
+}
+
 /** 生成 schema.org FAQPage，可直接放入 <script type="application/ld+json"> */
 export function toFaqJsonLd(firm: PropFirm) {
   return {

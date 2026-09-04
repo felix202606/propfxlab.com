@@ -5,9 +5,10 @@ import { localeMeta, routing } from "@/i18n/routing";
 
 const BASE_URL = "https://www.propfxlab.com";
 const FIRMS_DIR = path.join(process.cwd(), "data", "firms");
+const NEWS_DIR = path.join(process.cwd(), "data", "news");
 
 /** 与语言无关的固定路径，会在每种语言前缀下各生成一条 URL。 */
-const STATIC_PATHS = ["", "/calculator"] as const;
+const STATIC_PATHS = ["", "/calculator", "/news"] as const;
 
 type FirmEntry = { slug: string; lastModified: Date };
 
@@ -35,6 +36,38 @@ function readFirmEntries(): FirmEntry[] {
           ? (parsed as { slug?: unknown }).slug
           : undefined;
       // slug 缺失时退回文件名：文件名和路由 slug 在本仓库里始终一致
+      const slug =
+        typeof raw === "string" && raw.trim()
+          ? raw.trim()
+          : path.basename(fileName, ".json");
+
+      entries.push({ slug, lastModified: statSync(filePath).mtime });
+    } catch (error) {
+      console.error(`[sitemap] 跳过无法解析的 ${filePath}：`, error);
+    }
+  }
+
+  return entries.sort((a, b) => a.slug.localeCompare(b.slug, "en"));
+}
+
+function readNewsEntries(): FirmEntry[] {
+  let fileNames: string[];
+  try {
+    fileNames = readdirSync(NEWS_DIR).filter((name) => name.endsWith(".json"));
+  } catch (error) {
+    console.error(`[sitemap] 读取 ${NEWS_DIR} 失败，本次跳过新闻页：`, error);
+    return [];
+  }
+
+  const entries: FirmEntry[] = [];
+  for (const fileName of fileNames) {
+    const filePath = path.join(NEWS_DIR, fileName);
+    try {
+      const parsed: unknown = JSON.parse(readFileSync(filePath, "utf8"));
+      const raw =
+        typeof parsed === "object" && parsed !== null
+          ? (parsed as { slug?: unknown }).slug
+          : undefined;
       const slug =
         typeof raw === "string" && raw.trim()
           ? raw.trim()
@@ -84,14 +117,22 @@ function localizedEntries(
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const firms = readFirmEntries();
+  const news = readNewsEntries();
   const now = new Date();
 
   return [
     ...STATIC_PATHS.flatMap((pathname) =>
-      localizedEntries(pathname, now, pathname === "" ? 1 : 0.8),
+      localizedEntries(
+        pathname,
+        now,
+        pathname === "" ? 1 : pathname === "/news" ? 0.7 : 0.8,
+      ),
     ),
     ...firms.flatMap((firm) =>
       localizedEntries(`/firm/${firm.slug}`, firm.lastModified, 0.7),
+    ),
+    ...news.flatMap((article) =>
+      localizedEntries(`/news/${article.slug}`, article.lastModified, 0.6),
     ),
   ];
 }
