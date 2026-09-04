@@ -274,8 +274,41 @@ const isoDateTime = z
   .min(20)
   .refine((value) => !Number.isNaN(Date.parse(value)), "必须是可解析的 ISO-8601 时间");
 
+/** 与 i18n/routing.ts 的 locale key 对齐 */
+export const newsLocaleKeys = [
+  "en",
+  "es",
+  "cn",
+  "tw",
+  "th",
+  "vi",
+  "pt",
+] as const;
+
+export type NewsLocale = (typeof newsLocaleKeys)[number];
+
+export const newsLocaleCopySchema = z.object({
+  title: z.string().min(1),
+  summary: z.string().min(1),
+  /** 正文；对应顶层英文字段 body */
+  content: z.string().min(1),
+});
+
+export const newsTranslationsSchema = z
+  .object({
+    en: newsLocaleCopySchema,
+    es: newsLocaleCopySchema.optional(),
+    cn: newsLocaleCopySchema.optional(),
+    tw: newsLocaleCopySchema.optional(),
+    th: newsLocaleCopySchema.optional(),
+    vi: newsLocaleCopySchema.optional(),
+    pt: newsLocaleCopySchema.optional(),
+  })
+  .passthrough();
+
 export const newsArticleSchema = z.object({
   slug: kebabSlug,
+  /** 英文规范字段（兼容旧数据与 sitemap/排序） */
   title: z.string().min(1),
   summary: z.string().min(1),
   body: z.string().min(1),
@@ -286,12 +319,39 @@ export const newsArticleSchema = z.object({
   tags: z.array(z.string().min(1)).default([]),
   relatedFirmSlugs: z.array(kebabSlug).default([]),
   relevance: z.enum(["high", "medium"]).default("medium"),
+  /** 各语言 title / summary / content；缺 locale 时前端回退到 en */
+  translations: newsTranslationsSchema.optional(),
 });
 
+export type NewsLocaleCopy = z.infer<typeof newsLocaleCopySchema>;
+export type NewsTranslations = z.infer<typeof newsTranslationsSchema>;
 export type NewsArticle = z.infer<typeof newsArticleSchema>;
 
 export function parseNewsArticle(data: unknown): NewsArticle {
   return newsArticleSchema.parse(data);
+}
+
+/** 按 locale 取文案；缺失则降级到 translations.en，再降级到顶层英文字段 */
+export function getNewsLocaleCopy(
+  article: NewsArticle,
+  locale: string,
+): NewsLocaleCopy {
+  const translations = article.translations;
+  const localized =
+    translations && locale in translations
+      ? (translations as Record<string, NewsLocaleCopy | undefined>)[locale]
+      : undefined;
+  if (localized?.title && localized.summary && localized.content) {
+    return localized;
+  }
+  if (translations?.en) {
+    return translations.en;
+  }
+  return {
+    title: article.title,
+    summary: article.summary,
+    content: article.body,
+  };
 }
 
 /** 生成 schema.org FAQPage，可直接放入 <script type="application/ld+json"> */

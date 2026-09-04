@@ -53,10 +53,22 @@ BROWSER_HEADERS = {
 DEFAULT_MODEL = "gemini-3.6-flash"
 MAX_AGE_HOURS = 96
 MAX_SUMMARY_CHARS = 800
-BATCH_SIZE = 8
+BATCH_SIZE = 4
 REQUEST_TIMEOUT_S = 20
 TITLE_SIMILARITY_THRESHOLD = 0.72
 TITLE_JACCARD_THRESHOLD = 0.55
+
+# 与 src/i18n/routing.ts / messages/*.json 的 locale key 对齐
+NEWS_LOCALES = ("en", "es", "cn", "tw", "th", "vi", "pt")
+LOCALE_LABELS = {
+    "en": "English",
+    "es": "Spanish",
+    "cn": "Simplified Chinese",
+    "tw": "Traditional Chinese",
+    "th": "Thai",
+    "vi": "Vietnamese",
+    "pt": "Portuguese",
+}
 
 # 用户提供的源里，部分是 RSS 目录页或旧路径；这里用实际可解析的 XML。
 RSS_FEEDS = [
@@ -123,7 +135,9 @@ GEMINI_SYSTEM_INSTRUCTION = """You select and rewrite prop-firm industry news fo
 Return JSON only.
 Keep an item only if it materially affects prop firms, funded-trader payouts, challenge/evaluation rules, firm shutdowns, regulation of proprietary trading, or named firms on our roster.
 Drop generic FX forecasts, retail broker promo, stock-market wrap-ups, and unrelated crypto news.
-Write original English. Do not copy the source verbatim. Do not invent facts that are not in the provided title/summary.
+Write original copy. Do not copy the source verbatim. Do not invent facts that are not in the provided title/summary.
+For every kept article you MUST provide translations for all locale keys: en, es, cn, tw, th, vi, pt.
+Each locale needs title, summary, and content (body). English (en) is the canonical rewrite; other locales must be natural full translations of that English rewrite, not machine-literal calques.
 related_firm_slugs must be a subset of the provided roster slugs (or empty).
 """
 
@@ -136,11 +150,23 @@ class RssItem(BaseModel):
     published_at: datetime
 
 
-class SelectedArticle(BaseModel):
-    source_url: str
+class LocaleCopy(BaseModel):
     title: str
     summary: str
-    body: str
+    content: str
+
+    @field_validator("title", "summary", "content", mode="before")
+    @classmethod
+    def strip_text(cls, value: object) -> object:
+        return value.strip() if isinstance(value, str) else value
+
+
+class SelectedArticle(BaseModel):
+    source_url: str
+    title: str = ""
+    summary: str = ""
+    body: str = ""
+    translations: dict[str, LocaleCopy] = Field(default_factory=dict)
     tags: list[str] = Field(default_factory=list)
     related_firm_slugs: list[str] = Field(default_factory=list)
     relevance: Literal["high", "medium"] = "medium"
@@ -167,6 +193,7 @@ class NewsArticleFile(BaseModel):
     tags: list[str]
     relatedFirmSlugs: list[str]
     relevance: Literal["high", "medium"]
+    translations: dict[str, LocaleCopy]
 
 
 def load_dotenv() -> None:
@@ -511,17 +538,33 @@ def build_prompt(batch: list[RssItem], roster: list[str]) -> str:
         }
         for item in batch
     ]
+    locale_help = ", ".join(
+        f"{code} ({LOCALE_LABELS[code]})" for code in NEWS_LOCALES
+    )
     return (
         "Roster slugs (only use these in related_firm_slugs):\n"
         + ", ".join(roster)
+        + "\n\nLocales that MUST appear under translations (exact keys): "
+        + locale_help
         + "\n\nRSS items:\n"
         + json.dumps(payload, ensure_ascii=False, indent=2)
         + "\n\nReturn articles you would keep for a funded-trader news desk. "
-        "Each kept item needs: source_url (exact), title (clear, not clickbait), "
-        "summary (2 sentences), body (3–6 short paragraphs), tags (2–5), "
-        "related_firm_slugs, relevance (high|medium)."
+        "Each kept item needs: source_url (exact), tags (2–5), "
+        "related_firm_slugs, relevance (high|medium), and translations. "
+        "translations must include every locale key with title, summary, and content. "
+        "Also set top-level title/summary/body to the English (en) rewrite for convenience."
     )
 
+
+LOCALE_COPY_SCHEMA: dict[str, Any] = {
+    "type": "object",
+    "properties": {
+        "title": {"type": "string"},
+        "summary": {"type": "string"},
+        "content": {"type": "string"},
+    },
+    "required": ["title", "summary", "content"],
+}
 
 SELECTION_JSON_SCHEMA: dict[str, Any] = {
     "type": "object",
@@ -535,15 +578,20 @@ SELECTION_JSON_SCHEMA: dict[str, Any] = {
                     "title": {"type": "string"},
                     "summary": {"type": "string"},
                     "body": {"type": "string"},
+                    "translations": {
+                        "type": "object",
+                        "properties": {
+                            locale: LOCALE_COPY_SCHEMA for locale in NEWS_LOCALES
+                        },
+                        "required": list(NEWS_LOCALES),
+                    },
                     "tags": {"type": "array", "items": {"type": "string"}},
                     "related_firm_slugs": {"type": "array", "items": {"type": "string"}},
                     "relevance": {"type": "string", "enum": ["high", "medium"]},
                 },
                 "required": [
                     "source_url",
-                    "title",
-                    "summary",
-                    "body",
+                    "translations",
                     "tags",
                     "related_firm_slugs",
                     "relevance",
@@ -555,7 +603,26 @@ SELECTION_JSON_SCHEMA: dict[str, Any] = {
 }
 
 
-def call_gemini(prompt: str, model_name: str) -> SelectionResult:
+BACKFILL_JSON_SCHEMA: dict[str, Any] = {
+    "type": "object",
+    "properties": {
+        "translations": {
+            "type": "object",
+            "properties": {locale: LOCALE_COPY_SCHEMA for locale in NEWS_LOCALES},
+            "required": list(NEWS_LOCALES),
+        }
+    },
+    "required": ["translations"],
+}
+
+
+def call_gemini(
+    prompt: str,
+    model_name: str,
+    *,
+    schema: dict[str, Any] = SELECTION_JSON_SCHEMA,
+    system_instruction: str = GEMINI_SYSTEM_INSTRUCTION,
+) -> dict[str, Any]:
     try:
         from google import genai
         from google.genai import types
@@ -577,16 +644,16 @@ def call_gemini(prompt: str, model_name: str) -> SelectionResult:
                 model=model_name,
                 contents=prompt,
                 config=types.GenerateContentConfig(
-                    system_instruction=GEMINI_SYSTEM_INSTRUCTION,
+                    system_instruction=system_instruction,
                     response_mime_type="application/json",
-                    response_json_schema=SELECTION_JSON_SCHEMA,
+                    response_json_schema=schema,
                     temperature=0.2,
                 ),
             )
             text = getattr(response, "text", None)
             if not text:
                 raise RuntimeError(f"Gemini 没有返回 JSON：{response}")
-            return SelectionResult.model_validate_json(text)
+            return json.loads(text)
         except Exception as error:
             last_error = error
             message = str(error)
@@ -599,9 +666,50 @@ def call_gemini(prompt: str, model_name: str) -> SelectionResult:
     raise SystemExit(last_error)
 
 
+def normalize_translations(
+    raw: Optional[dict[str, Any]],
+    *,
+    fallback_title: str,
+    fallback_summary: str,
+    fallback_body: str,
+) -> dict[str, LocaleCopy]:
+    source = raw if isinstance(raw, dict) else {}
+    en_raw = source.get("en") if isinstance(source.get("en"), dict) else {}
+    en_title = str(en_raw.get("title") or fallback_title).strip() or fallback_title
+    en_summary = str(en_raw.get("summary") or fallback_summary).strip() or fallback_summary
+    en_content = (
+        str(en_raw.get("content") or fallback_body).strip() or fallback_body
+    )
+    out: dict[str, LocaleCopy] = {
+        "en": LocaleCopy(title=en_title, summary=en_summary, content=en_content)
+    }
+    for locale in NEWS_LOCALES:
+        if locale == "en":
+            continue
+        block = source.get(locale)
+        if not isinstance(block, dict):
+            continue
+        title = str(block.get("title") or "").strip()
+        summary = str(block.get("summary") or "").strip()
+        content = str(block.get("content") or "").strip()
+        if title and summary and content:
+            out[locale] = LocaleCopy(title=title, summary=summary, content=content)
+    return out
+
+
 def write_article(item: RssItem, selected: SelectedArticle, allowed_slugs: set[str]) -> Path:
     NEWS_DIR.mkdir(parents=True, exist_ok=True)
-    slug = make_slug(selected.title or item.title, item.source_url)
+    translations = normalize_translations(
+        {k: v.model_dump() if isinstance(v, LocaleCopy) else v for k, v in selected.translations.items()},
+        fallback_title=selected.title or item.title,
+        fallback_summary=selected.summary,
+        fallback_body=selected.body,
+    )
+    en = translations["en"]
+    title = selected.title.strip() or en.title
+    summary = selected.summary.strip() or en.summary
+    body = selected.body.strip() or en.content
+    slug = make_slug(title, item.source_url)
     related = [
         slug_value
         for slug_value in selected.related_firm_slugs
@@ -610,9 +718,9 @@ def write_article(item: RssItem, selected: SelectedArticle, allowed_slugs: set[s
     tags = [kebab(tag) for tag in selected.tags if kebab(tag)]
     payload = NewsArticleFile(
         slug=slug,
-        title=selected.title or item.title,
-        summary=selected.summary,
-        body=selected.body,
+        title=title,
+        summary=summary,
+        body=body,
         sourceName=item.source_name,
         sourceUrl=item.source_url,  # type: ignore[arg-type]
         publishedAt=isoformat_utc(item.published_at),
@@ -620,6 +728,7 @@ def write_article(item: RssItem, selected: SelectedArticle, allowed_slugs: set[s
         tags=tags[:8],
         relatedFirmSlugs=related,
         relevance=selected.relevance,
+        translations=translations,
     )
     out_path = NEWS_DIR / f"{slug}.json"
     if out_path.exists():
@@ -629,6 +738,83 @@ def write_article(item: RssItem, selected: SelectedArticle, allowed_slugs: set[s
         encoding="utf-8",
     )
     return out_path
+
+
+BACKFILL_SYSTEM = """You translate PropFXLab news briefings.
+Return JSON only with a translations object containing every locale key: en, es, cn, tw, th, vi, pt.
+Keep facts identical. English may be lightly polished; other locales must be natural full translations.
+Each locale needs title, summary, and content.
+"""
+
+
+def backfill_translations(model_name: str, force: bool = False) -> None:
+    files = sorted(NEWS_DIR.glob("*.json"))
+    if not files:
+        print("data/news/ 下没有 JSON")
+        return
+
+    updated = 0
+    skipped = 0
+    for path in files:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        existing = payload.get("translations") if isinstance(payload, dict) else None
+        missing = [
+            locale
+            for locale in NEWS_LOCALES
+            if not (
+                isinstance(existing, dict)
+                and isinstance(existing.get(locale), dict)
+                and str(existing[locale].get("title") or "").strip()
+                and str(existing[locale].get("summary") or "").strip()
+                and str(existing[locale].get("content") or "").strip()
+            )
+        ]
+        if not missing and not force:
+            print(f"  跳过已完整 {path.name}")
+            skipped += 1
+            continue
+
+        print(f"  翻译 {path.name}（缺 {', '.join(missing) or 'force'}）")
+        prompt = (
+            "Translate this PropFXLab news briefing into all locales "
+            f"{list(NEWS_LOCALES)}.\n"
+            "Locale labels: "
+            + ", ".join(f"{k}={v}" for k, v in LOCALE_LABELS.items())
+            + "\n\nEnglish source:\n"
+            + json.dumps(
+                {
+                    "title": payload.get("title"),
+                    "summary": payload.get("summary"),
+                    "content": payload.get("body"),
+                },
+                ensure_ascii=False,
+                indent=2,
+            )
+        )
+        result = call_gemini(
+            prompt,
+            model_name,
+            schema=BACKFILL_JSON_SCHEMA,
+            system_instruction=BACKFILL_SYSTEM,
+        )
+        translations = normalize_translations(
+            result.get("translations") if isinstance(result, dict) else None,
+            fallback_title=str(payload.get("title") or ""),
+            fallback_summary=str(payload.get("summary") or ""),
+            fallback_body=str(payload.get("body") or ""),
+        )
+        payload["translations"] = {
+            locale: copy.model_dump() for locale, copy in translations.items()
+        }
+        # keep top-level English in sync
+        payload["title"] = translations["en"].title
+        payload["summary"] = translations["en"].summary
+        payload["body"] = translations["en"].content
+        path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        updated += 1
+        time.sleep(1.2)
+
+    print(f"回填完成：更新 {updated}，跳过 {skipped}")
 
 
 def parse_args() -> argparse.Namespace:
@@ -655,6 +841,16 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="只抓 RSS、打印候选，不调用 Gemini、不写文件",
     )
+    parser.add_argument(
+        "--backfill-translations",
+        action="store_true",
+        help="为已有 data/news/*.json 补齐 7 语种 translations",
+    )
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="与 --backfill-translations 联用：即使已有翻译也重写",
+    )
     return parser.parse_args()
 
 
@@ -664,6 +860,11 @@ def main() -> None:
     load_dotenv()
 
     NEWS_DIR.mkdir(parents=True, exist_ok=True)
+
+    if args.backfill_translations:
+        backfill_translations(args.model, force=args.force)
+        return
+
     existing, seen_urls, existing_titles = load_existing()
     print(f"已有新闻 {len(existing)} 条")
 
@@ -693,7 +894,8 @@ def main() -> None:
 
     for batch_index, batch in enumerate(chunked(candidates, BATCH_SIZE), start=1):
         print(f"Gemini 批次 {batch_index}（{len(batch)} 条）")
-        result = call_gemini(build_prompt(batch, roster), args.model)
+        raw = call_gemini(build_prompt(batch, roster), args.model)
+        result = SelectionResult.model_validate(raw)
         by_url = {normalize_url(item.source_url): item for item in batch}
         for selected in result.articles:
             source_key = normalize_url(selected.source_url)
@@ -701,9 +903,22 @@ def main() -> None:
             if item is None:
                 skipped += 1
                 continue
-            if not selected.summary or not selected.body:
+            translations = normalize_translations(
+                {
+                    k: (v.model_dump() if isinstance(v, LocaleCopy) else v)
+                    for k, v in selected.translations.items()
+                },
+                fallback_title=selected.title or item.title,
+                fallback_summary=selected.summary,
+                fallback_body=selected.body,
+            )
+            if not translations["en"].summary or not translations["en"].content:
                 skipped += 1
                 continue
+            selected.translations = translations
+            selected.title = selected.title or translations["en"].title
+            selected.summary = selected.summary or translations["en"].summary
+            selected.body = selected.body or translations["en"].content
             try:
                 out_path = write_article(item, selected, allowed)
             except FileExistsError:
