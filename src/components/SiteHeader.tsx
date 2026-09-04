@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { LocaleSwitcher } from "@/components/LocaleSwitcher";
+import { SiteLogo } from "@/components/SiteLogo";
 
 const navLinkClass =
   "whitespace-nowrap rounded-lg px-3 py-1.5 text-zinc-400 transition-colors hover:bg-white/5 hover:text-zinc-50";
@@ -13,9 +14,7 @@ export function SiteHeader() {
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-2 px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center justify-between gap-4">
           <Link href="/" className="flex items-center gap-2.5">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-400 to-cyan-500 text-[11px] font-bold text-zinc-950 shadow-[0_0_20px_-4px_rgba(52,211,153,0.8)]">
-              FX
-            </span>
+            <SiteLogo size={32} priority />
             <span className="bg-gradient-to-r from-zinc-50 via-white to-emerald-300 bg-clip-text text-base font-semibold tracking-tight text-transparent">
               {t("brand")}
             </span>

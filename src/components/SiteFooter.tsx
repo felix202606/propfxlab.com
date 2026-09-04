@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { SiteLogo } from "@/components/SiteLogo";
 
 type FirmLink = { slug: string; name: string };
 
@@ -14,9 +15,7 @@ export function SiteFooter({ firms }: { firms: FirmLink[] }) {
         <div className="flex flex-wrap items-start justify-between gap-8">
           <div className="max-w-sm">
             <Link href="/" className="flex items-center gap-2.5">
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-400 to-cyan-500 text-[11px] font-bold text-zinc-950">
-                FX
-              </span>
+              <SiteLogo size={32} />
               <span className="bg-gradient-to-r from-zinc-50 to-emerald-300 bg-clip-text text-base font-semibold tracking-tight text-transparent">
                 {nav("brand")}
               </span>
