@@ -27,17 +27,22 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: LayoutProps<"/[locale]">): Promise<Metadata> {
-  const { locale } = await params;
-  if (!hasLocale(routing.locales, locale)) return {};
+  try {
+    const { locale } = await params;
+    if (!hasLocale(routing.locales, locale)) return {};
 
-  const t = await getTranslations({ locale, namespace: "Metadata" });
-  return {
-    title: {
-      default: t("titleDefault"),
-      template: "%s · PropFXLab",
-    },
-    description: t("description"),
-  };
+    const t = await getTranslations({ locale, namespace: "Metadata" });
+    return {
+      title: {
+        default: t("titleDefault"),
+        template: "%s · PropFXLab",
+      },
+      description: t("description"),
+    };
+  } catch (err) {
+    console.error("[layout] generateMetadata failed:", err);
+    return {};
+  }
 }
 
 export default async function LocaleLayout({
@@ -47,10 +52,15 @@ export default async function LocaleLayout({
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
 
-  const firms = getAllFirms().map((firm) => ({
-    slug: firm.slug,
-    name: firm.basic.name,
-  }));
+  let firms: { slug: string; name: string }[] = [];
+  try {
+    firms = getAllFirms().map((firm) => ({
+      slug: firm.slug,
+      name: firm.basic.name,
+    }));
+  } catch (err) {
+    console.error("[layout] getAllFirms failed, rendering footer without firm links:", err);
+  }
 
   return (
     <html

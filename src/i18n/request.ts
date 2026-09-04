@@ -1,22 +1,18 @@
-import * as rootParams from "next/root-params";
 import { getRequestConfig } from "next-intl/server";
 import { hasLocale } from "next-intl";
 import { routing } from "./routing";
 
 export default getRequestConfig(async ({ locale }) => {
-  try {
-    if (!locale) {
-      try {
-        const paramValue = await rootParams.locale();
-        if (hasLocale(routing.locales, paramValue)) {
-          locale = paramValue;
-        }
-      } catch (err) {
-        console.error("[i18n] rootParams.locale() failed, falling back:", err);
+  if (!locale) {
+    try {
+      const rootParams = await import("next/root-params");
+      const paramValue = await rootParams.locale();
+      if (hasLocale(routing.locales, paramValue)) {
+        locale = paramValue;
       }
+    } catch (err) {
+      console.error("[i18n] locale resolution failed, falling back:", err);
     }
-  } catch (err) {
-    console.error("[i18n] locale resolution failed, falling back:", err);
   }
 
   if (!hasLocale(routing.locales, locale)) {
