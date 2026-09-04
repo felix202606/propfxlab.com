@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { FirmLogo } from "@/components/FirmLogo";
 import { PromoCodeCopy } from "@/components/PromoCodeCopy";
+import { getCardChannelTags } from "@/lib/channel-tags";
 import { getFirmOffer } from "@/lib/offers";
 import { formatMoney } from "@/lib/payout";
 import type { PlatformStatus, PropFirm } from "@/lib/schema";
@@ -69,6 +70,8 @@ export function FirmCard({ firm, rank, netPayout, currency }: FirmCardProps) {
   const t = useTranslations("FirmCard");
   const offer = getFirmOffer(firm.slug, firm.basic.website);
   const payoutCurrency = currency ?? firm.calculator.currency;
+  const channelTags = getCardChannelTags(firm.withdrawal.channels);
+  const firstPayoutDays = firm.withdrawal.payoutCycle.firstPayoutMinDays;
 
   return (
     <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-zinc-900 to-black p-5 shadow-[0_0_0_1px_rgba(255,255,255,0.04)] transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-400/30 hover:shadow-[0_0_28px_-8px_rgba(16,185,129,0.4)]">
@@ -116,25 +119,49 @@ export function FirmCard({ firm, rank, netPayout, currency }: FirmCardProps) {
         </div>
       </dl>
 
-      <div className="relative mt-4">
-        <PromoCodeCopy code={offer.code} />
+      <div className="relative mt-3 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5">
+        <p className="text-[11px] uppercase tracking-wide text-zinc-500">
+          {t("firstPayoutLabel")}
+        </p>
+        <p className="mt-0.5 font-mono text-sm font-medium text-cyan-300">
+          {firstPayoutDays === 0
+            ? t("firstPayoutImmediate")
+            : t("firstPayoutValue", { days: firstPayoutDays })}
+        </p>
       </div>
 
-      <div className="relative mt-4 grid grid-cols-2 gap-2">
-        <a
-          href={offer.href}
-          target="_blank"
-          rel="sponsored noopener noreferrer"
-          className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-emerald-400 to-cyan-400 px-3 py-2.5 text-sm font-semibold text-zinc-950 transition-opacity hover:opacity-90"
-        >
-          {t("claimCta")}
-        </a>
-        <Link
-          href={`/firm/${firm.slug}`}
-          className="inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-sm font-medium text-zinc-200 transition-colors hover:border-emerald-400/30 hover:text-white"
-        >
-          {t("readReview")}
-        </Link>
+      {channelTags.length > 0 ? (
+        <ul className="relative mt-3 flex flex-wrap gap-1.5">
+          {channelTags.map((tag) => (
+            <li
+              key={tag.id}
+              className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-2.5 py-1 font-mono text-[10px] font-medium tracking-wide text-cyan-200"
+            >
+              {tag.label}
+            </li>
+          ))}
+        </ul>
+      ) : null}
+
+      <div className="relative mt-auto pt-4">
+        <PromoCodeCopy code={offer.code} href={offer.href} />
+
+        <div className="mt-3 grid grid-cols-[1.15fr_0.85fr] gap-2">
+          <a
+            href={offer.href}
+            target="_blank"
+            rel="sponsored noopener noreferrer"
+            className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-emerald-400 via-emerald-300 to-cyan-400 px-3 py-2.5 text-sm font-semibold text-zinc-950 shadow-[0_0_22px_-4px_rgba(52,211,153,0.95)] ring-1 ring-emerald-200/50 transition-all hover:brightness-110 hover:shadow-[0_0_32px_-2px_rgba(34,211,238,0.85)]"
+          >
+            {t("claimCta")}
+          </a>
+          <Link
+            href={`/firm/${firm.slug}`}
+            className="inline-flex items-center justify-center rounded-xl border border-white/[0.08] bg-zinc-950/70 px-3 py-2.5 text-sm font-medium text-zinc-400 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04)] transition-colors hover:border-white/15 hover:bg-zinc-900 hover:text-zinc-200"
+          >
+            {t("readReview")}
+          </Link>
+        </div>
       </div>
     </article>
   );

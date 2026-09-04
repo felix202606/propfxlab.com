@@ -72,7 +72,8 @@ export function HomeMarketplace({ firms }: { firms: PropFirm[] }) {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(16,185,129,0.16),transparent_55%),radial-gradient(ellipse_at_bottom_right,rgba(34,211,238,0.08),transparent_40%)]" />
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[length:72px_72px] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
 
-        <div className="relative mx-auto grid w-full max-w-6xl gap-10 px-4 py-16 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:py-24">
+        <div className="relative mx-auto w-full max-w-6xl px-4 pt-16 pb-10 lg:pt-24 lg:pb-12">
+          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div>
             <p className="inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-emerald-300">
               {t("eyebrow")}
@@ -192,6 +193,11 @@ export function HomeMarketplace({ firms }: { firms: PropFirm[] }) {
               </p>
             )}
           </div>
+        </div>
+
+        <p className="mt-8 text-center text-[11px] tracking-wide text-zinc-500">
+          {t("dataAudited")}
+        </p>
         </div>
       </section>
 

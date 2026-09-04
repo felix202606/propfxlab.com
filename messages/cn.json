@@ -25,6 +25,7 @@
     "rankingsSubtitle": "按 {account} 账户、{profit} 利润、各家默认分成估算的到手金额排序。",
     "emptyPreview": "平台数据暂未加载。计算器仍可使用，排行会在资料就绪后出现。",
     "emptyRankings": "当前没有可用的平台资料，页面其余部分仍可正常浏览。",
+    "dataAudited": "⚡ 数据最近核验：2026 年 9 月",
     "trustTitle": "为资金盘交易员而建",
     "trustSubtitle": "每一个数字都来自公开规则，而不是营销文案。",
     "trust": {
@@ -132,6 +133,9 @@
     "copied": "已复制",
     "claimCta": "领取优惠",
     "readReview": "查看详情",
+    "firstPayoutLabel": "首次出金等待期",
+    "firstPayoutValue": "{days} 天",
+    "firstPayoutImmediate": "即时",
     "statusActive": "正常运营",
     "statusWarning": "延迟预警",
     "statusSuspended": "暂停出金"
