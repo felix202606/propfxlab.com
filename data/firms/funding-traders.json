@@ -1,0 +1,209 @@
+{
+  "slug": "funding-traders",
+  "status": "active",
+  "payoutSpeed": "Within 48 Hours",
+  "basic": {
+    "name": "Funding Traders",
+    "legalName": "MCF Group FZCO",
+    "logo": {
+      "src": "https://fundingtraders.com/favicon.ico",
+      "alt": "Funding Traders logo",
+      "width": 32,
+      "height": 32
+    },
+    "foundedAt": "2023-01-01",
+    "headquarters": {
+      "city": "Dubai",
+      "country": "United Arab Emirates",
+      "countryCode": "AE"
+    },
+    "website": "https://fundingtraders.com",
+    "funding": {
+      "currency": "USD",
+      "minAccountSize": 5000,
+      "maxAccountSize": 200000,
+      "maxScaledSize": 2000000
+    }
+  },
+  "withdrawal": {
+    "defaultTraderSharePercent": 80,
+    "defaultFirmSharePercent": 20,
+    "payoutCycle": {
+      "type": "hybrid",
+      "firstPayoutMinDays": 14,
+      "subsequentIntervalDays": 21,
+      "description": "1-Step PRO, 2-Step PRO6 and 2-Step PRO10 accounts default to a 21-day payout schedule (a 14-day cycle is available as a paid add-on). Instant Funded accounts pay every 14 days by default. Funding Traders guarantees payout processing within 48 hours of a valid request, or pays $1,000 in compensation ($500 cash + $500 credit) if it misses the window."
+    },
+    "platformFee": {
+      "type": "none"
+    },
+    "channels": [
+      {
+        "id": "crypto",
+        "name": "Cryptocurrency (via Coinbase Commerce)",
+        "method": "crypto",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": { "min": 0, "max": 2 },
+        "fee": { "type": "none" },
+        "currencies": ["USD"],
+        "notes": "Fastest route; network fees are outside Funding Traders' control."
+      },
+      {
+        "id": "bank-transfer-rise",
+        "name": "Bank transfer (via Rise)",
+        "method": "bank_wire",
+        "minAmount": 200,
+        "maxAmount": null,
+        "processingBusinessDays": { "min": 2, "max": 5 },
+        "fee": { "type": "none" },
+        "currencies": ["USD"]
+      }
+    ],
+    "minPayoutAmount": 50,
+    "minPayoutCurrency": "USD",
+    "challengeFeeRefundedOnFirstPayout": true,
+    "warnings": [
+      "Instant Funded accounts do not allow news trading, unlike evaluation-based accounts which permit it with restrictions",
+      "Total profit must exceed 1% of the starting balance before any withdrawal can be requested",
+      "Breaching any account rule voids payout eligibility for that request, even if funds were otherwise available",
+      "Instant accounts require a 3% non-withdrawable safety cushion, reducing the amount you can actually withdraw"
+    ]
+  },
+  "calculator": {
+    "currency": "USD",
+    "profitSplitTiers": [
+      {
+        "id": "next-gen-80",
+        "label": "2-Step PRO / 1-Step PRO default",
+        "program": "2-step",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 80
+      },
+      {
+        "id": "instant-90",
+        "label": "Instant Funded Program default",
+        "program": "instant",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 90
+      },
+      {
+        "id": "addon-100",
+        "label": "100% split add-on (any program)",
+        "program": "any-addon",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 100
+      }
+    ],
+    "platformWithholdingTaxPercent": 0,
+    "platformDeductionPercent": 0,
+    "paymentProcessorFeePercent": 0,
+    "minPayoutAmount": 50,
+    "scaling": {
+      "enabled": true,
+      "intervalMonths": 2,
+      "balanceIncreasePercent": 25,
+      "maxCapital": 2000000,
+      "traderShareAfterScalePercent": 80,
+      "requirements": [
+        "Automatic scaling review every 2 months on funded accounts",
+        "Requires at least 8% net profit over the 2-month cycle",
+        "The 25% scale-up applies directly to the existing account without buying a new evaluation",
+        "Profit split stays at its current tier after scaling unless raised separately via a promo code or paid add-on"
+      ]
+    }
+  },
+  "faqs": [
+    {
+      "id": "what-is-funding-traders",
+      "question": "What is Funding Traders?",
+      "answer": "Funding Traders is a proprietary trading firm founded in 2023, operated by MCF Group FZCO in Dubai, UAE, with a US entity (FT US Inc) based in Miami Beach, Florida. It offers Instant Funded, 2-Step PRO6, 2-Step PRO10 and 1-Step account types on forex, indices, commodities and crypto, and has funded over 53,000 trading accounts.",
+      "slug": "what-is-funding-traders",
+      "locale": "en",
+      "keywords": ["Funding Traders", "prop firm", "Dubai", "Instant Funded", "evaluation"],
+      "seo": {
+        "title": "What is Funding Traders? | Prop Firm FAQ",
+        "metaDescription": "Funding Traders is a Dubai-based prop firm founded in 2023, offering Instant Funded, 1-Step and 2-Step evaluation accounts.",
+        "datePublished": "2026-08-15",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/funding-traders/faq/what-is-funding-traders"
+      }
+    },
+    {
+      "id": "profit-split",
+      "question": "What is the Funding Traders profit split?",
+      "answer": "2-Step PRO and 1-Step PRO accounts default to an 80% trader / 20% firm split, while Instant Funded accounts default higher at 90% / 10%. Any account type can reach a full 100% split by using a paid add-on or promo code at checkout.",
+      "slug": "profit-split",
+      "locale": "en",
+      "keywords": ["Funding Traders profit split", "80%", "90% Instant", "100% add-on"],
+      "seo": {
+        "title": "Funding Traders Profit Split: 80% to 100% | FAQ",
+        "metaDescription": "Funding Traders pays 80% by default on evaluation accounts, 90% on Instant Funded, with a 100% add-on available.",
+        "datePublished": "2026-08-15",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/funding-traders/faq/profit-split"
+      }
+    },
+    {
+      "id": "payout-cycle",
+      "question": "How often can I withdraw from Funding Traders?",
+      "answer": "2-Step PRO6, 2-Step PRO10 and 1-Step PRO accounts default to a 21-day payout schedule, with a 14-day cycle available as a paid upgrade. Instant Funded accounts pay every 14 days by default. Funding Traders publicly guarantees processing within 48 hours of a valid request, backed by a $1,000 compensation policy if that deadline is missed.",
+      "slug": "payout-cycle",
+      "locale": "en",
+      "keywords": ["Funding Traders payout cycle", "21 days", "14 days", "48 hour guarantee"],
+      "seo": {
+        "title": "Funding Traders Payout Cycle and 48-Hour Guarantee | FAQ",
+        "metaDescription": "Funding Traders pays every 21 days by default (14-day upgrade available) with a 48-hour processing guarantee.",
+        "datePublished": "2026-08-15",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/funding-traders/faq/payout-cycle"
+      }
+    },
+    {
+      "id": "withdrawal-methods-and-fees",
+      "question": "Which withdrawal methods does Funding Traders support, and are there fees?",
+      "answer": "Withdrawals are available via cryptocurrency through Coinbase Commerce (minimum $50, fastest option) or bank transfer via Rise (minimum $200, 2–5 business days). Funding Traders does not add its own processing fee on top of these minimums, though your total profit must exceed 1% of the starting balance before a payout can be requested.",
+      "slug": "withdrawal-methods-and-fees",
+      "locale": "en",
+      "keywords": ["Funding Traders withdrawal methods", "crypto", "Rise", "1% profit target"],
+      "seo": {
+        "title": "Funding Traders Withdrawal Methods and Fees | FAQ",
+        "metaDescription": "Funding Traders offers crypto (min $50) and Rise bank transfer (min $200) payouts with no added internal fee.",
+        "datePublished": "2026-08-15",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/funding-traders/faq/withdrawal-methods-and-fees"
+      }
+    },
+    {
+      "id": "scaling-plan",
+      "question": "How does the Funding Traders scaling plan work?",
+      "answer": "Funded accounts are reviewed automatically every 2 months. Traders who achieve at least 8% net profit over that cycle receive a 25% account size increase applied directly to their existing account (no new evaluation purchase required), scaling up toward a $2,000,000 total allocation cap. The profit split itself stays at its current tier through scaling unless separately upgraded.",
+      "slug": "scaling-plan",
+      "locale": "en",
+      "keywords": ["Funding Traders scaling plan", "25% increase", "8% profit", "$2 million"],
+      "seo": {
+        "title": "Funding Traders Scaling Plan Explained | FAQ",
+        "metaDescription": "Funding Traders reviews accounts every 2 months and grants a 25% size increase after 8% net profit, up to $2M total.",
+        "datePublished": "2026-08-15",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/funding-traders/faq/scaling-plan"
+      }
+    }
+  ],
+  "prosAndCons": {
+    "pros": [
+      "Instant Funded accounts start at a 90% split by default, higher than most competitors' base tier",
+      "Public 48-hour payout guarantee backed by $1,000 in compensation if missed",
+      "Scaling reviews happen automatically every 2 months with no manual application needed",
+      "Funded over 53,000 accounts with a public, verifiable payout tracker"
+    ],
+    "cons": [
+      "2-Step PRO and 1-Step PRO accounts default to a slower 21-day payout cycle unless you pay for the 14-day add-on",
+      "Instant Funded accounts carry a stricter 15% consistency score versus lighter rules on evaluation accounts",
+      "A 3% non-withdrawable safety cushion is required on Instant accounts"
+    ]
+  }
+}

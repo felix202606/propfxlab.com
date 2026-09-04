@@ -37,7 +37,29 @@
     "cycleOnDemand": "按需，首次 {days} 天",
     "cycleEveryNDays": "每 {days} 天",
     "cycleOnDemandAfterFirst": "首次 {days} 天後按需",
-    "faqHeading": "常見問題"
+    "faqHeading": "常見問題",
+    "channelsHeading": "出金通道",
+    "channelsSubtitle": "該公司支援的出金方式、限額與處理時長。",
+    "channelMinLabel": "最低",
+    "channelMaxLabel": "最高",
+    "channelNoMax": "無上限",
+    "channelProcessingLabel": "處理時長",
+    "channelProcessingRange": "{min}–{max} 個工作日",
+    "channelFeeLabel": "手續費",
+    "feeNone": "免手續費",
+    "feeFlat": "固定 {amount}",
+    "feePercent": "{percent}%",
+    "feeMixed": "{amount} + {percent}%",
+    "methodBankWire": "銀行轉帳",
+    "methodCard": "銀行卡",
+    "methodEwallet": "電子錢包",
+    "methodCrypto": "加密貨幣",
+    "methodOther": "其他",
+    "prosConsHeading": "優缺點對比",
+    "prosHeading": "優點",
+    "consHeading": "缺點",
+    "warningHeading": "禁忌規則與風險提醒",
+    "warningIntro": "所有帳戶均為模擬資金交易，規則可能隨時調整。購買或申請出金前，請務必以公司官網當前條款為準。"
   },
   "FirmNotFound": {
     "title": "找不到這家公司",
@@ -76,5 +98,15 @@
     "warningBelowMinChallenge": "挑戰金額低於該平台最低檔 {amount}",
     "warningAboveMaxChallenge": "挑戰金額高於該平台最高初始檔 {amount}",
     "warningProfitOutsideTierRange": "目前預計利潤不在該分成階梯的利潤區間內，結果僅供參考"
+  },
+  "SiteFooter": {
+    "tagline": "獨立的 Prop Firm 出金計算器與公開規則對比。",
+    "financialDisclaimerTitle": "財務免責聲明",
+    "financialDisclaimerBody": "本站僅提供基於公開資料的數學計算與對比，不構成任何投資、財務、稅務或法律建議。所有帳戶均為模擬資金交易，過去的分成規則不代表未來結果。做出購買或出金決定前，請務必以該 Prop Firm 官方最新條款為準。",
+    "affiliateDisclosureTitle": "推廣連結聲明",
+    "affiliateDisclosureBody": "本站部分連結為推廣/返佣連結。若您透過這些連結註冊，本站可能獲得一定佣金，您無需為此支付額外費用。這種潛在收益不會影響計算器、對比或排名的客觀性——所有數據皆按各公司相同的公開規則計算得出。",
+    "trademarkNoticeTitle": "商標聲明",
+    "trademarkNoticeBody": "本站展示的所有 Prop Firm 名稱、Logo 及商標均歸各自公司所有。此處使用僅用於識別與對比目的，除非明確說明，不代表任何背書、贊助或關聯關係。",
+    "copyright": "© {year} Prop Firms。獨立對比網站，與所列任何公司均無關聯。"
   }
 }

@@ -1,6 +1,6 @@
 {
   "slug": "ftmo",
-  "status": "on-fire",
+  "status": "active",
   "payoutSpeed": "Within 8 Hours",
   "basic": {
     "name": "FTMO",
@@ -83,7 +83,13 @@
     ],
     "minPayoutAmount": 20,
     "minPayoutCurrency": "USD",
-    "challengeFeeRefundedOnFirstPayout": true
+    "challengeFeeRefundedOnFirstPayout": true,
+    "warnings": [
+      "Breaching the 5% max daily loss or 10% max overall loss immediately fails the account and forfeits any unpaid profit",
+      "Copy-trading or mirroring positions across multiple FTMO accounts is prohibited and can void payouts",
+      "Reward requests are paused while any rule-violation investigation is open",
+      "Using a third party to trade the account on your behalf breaches the terms of use"
+    ]
   },
   "calculator": {
     "currency": "USD",
@@ -241,5 +247,18 @@
         "canonicalPath": "/firms/ftmo/faq/scaling-plan"
       }
     }
-  ]
+  ],
+  "prosAndCons": {
+    "pros": [
+      "Long operating history since 2015 with strong industry reputation and brand recognition",
+      "Reward share can reach 90% via the Scaling Plan, or immediately on the 1-Step Challenge",
+      "No platform withdrawal commission and no personal income tax withholding on rewards",
+      "Challenge fee is refunded with the first successful payout"
+    ],
+    "cons": [
+      "Standard 2-Step split starts at 80% until Scaling Plan qualification is reached",
+      "First payout requires a 14-calendar-day waiting period after the first trade",
+      "Crypto withdrawals require a higher $50 minimum than bank wire, card or Skrill"
+    ]
+  }
 }

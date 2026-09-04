@@ -1,0 +1,228 @@
+{
+  "slug": "goatfunded",
+  "status": "active",
+  "payoutSpeed": "Within 2 Business Days",
+  "basic": {
+    "name": "Goat Funded Trader",
+    "legalName": "Wishes Tower International Limited",
+    "logo": {
+      "src": "https://www.goatfundedtrader.com/favicon.ico",
+      "alt": "Goat Funded Trader logo",
+      "width": 32,
+      "height": 32
+    },
+    "foundedAt": "2022-01-01",
+    "headquarters": {
+      "city": "Hong Kong",
+      "country": "Hong Kong",
+      "countryCode": "HK"
+    },
+    "website": "https://www.goatfundedtrader.com",
+    "funding": {
+      "currency": "USD",
+      "minAccountSize": 5000,
+      "maxAccountSize": 400000,
+      "maxScaledSize": 2000000
+    }
+  },
+  "withdrawal": {
+    "defaultTraderSharePercent": 80,
+    "defaultFirmSharePercent": 20,
+    "payoutCycle": {
+      "type": "hybrid",
+      "firstPayoutMinDays": 14,
+      "subsequentIntervalDays": 14,
+      "description": "Standard funded accounts pay out bi-weekly (every 2 weeks). Goat Funded Trader advertises a 2-business-day processing window and pays a $500 bonus to the trader if a payout takes longer. Weekly payouts unlock once a trader reaches Scaling Level 2."
+    },
+    "platformFee": {
+      "type": "none"
+    },
+    "channels": [
+      {
+        "id": "crypto",
+        "name": "Cryptocurrency",
+        "method": "crypto",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": { "min": 0, "max": 2 },
+        "fee": { "type": "none" },
+        "currencies": ["USD"],
+        "notes": "Fastest payout route; blockchain network fees are outside Goat Funded Trader's control."
+      },
+      {
+        "id": "bank-wire",
+        "name": "Bank wire transfer",
+        "method": "bank_wire",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": { "min": 2, "max": 5 },
+        "fee": { "type": "none" },
+        "currencies": ["USD", "EUR"]
+      },
+      {
+        "id": "skrill",
+        "name": "Skrill",
+        "method": "ewallet",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": { "min": 1, "max": 2 },
+        "fee": { "type": "none" },
+        "currencies": ["USD", "EUR"]
+      }
+    ],
+    "minPayoutAmount": 50,
+    "minPayoutCurrency": "USD",
+    "challengeFeeRefundedOnFirstPayout": true,
+    "warnings": [
+      "Funded accounts enforce a 15-20% single-day consistency rule depending on the plan",
+      "News trading profit is capped at 1% within 5 minutes of high-impact news releases",
+      "All scaling percentages are calculated on the original account size, even after accounts are merged",
+      "No regulated broker or financial authority oversees the firm; entities are registered in Hong Kong and Saint Lucia"
+    ]
+  },
+  "calculator": {
+    "currency": "USD",
+    "profitSplitTiers": [
+      {
+        "id": "standard-80",
+        "label": "Standard funded split (default)",
+        "program": "2-step",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 80
+      },
+      {
+        "id": "addon-100",
+        "label": "100% profit split add-on (paid upgrade)",
+        "program": "2-step-addon",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 100
+      },
+      {
+        "id": "scaling-level-1-90",
+        "label": "Scaling Level 1 (2 months + 4 payouts)",
+        "program": "scaling-l1",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 90
+      },
+      {
+        "id": "scaling-level-4-95",
+        "label": "GOAT Level 4 (6 months + 15 payouts)",
+        "program": "scaling-l4",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 95
+      }
+    ],
+    "platformWithholdingTaxPercent": 0,
+    "platformDeductionPercent": 0,
+    "paymentProcessorFeePercent": 0,
+    "minPayoutAmount": 50,
+    "scaling": {
+      "enabled": true,
+      "intervalMonths": 2,
+      "balanceIncreasePercent": 15,
+      "maxCapital": 2000000,
+      "traderShareAfterScalePercent": 90,
+      "requirements": [
+        "Level 1: 2 months funded + 4 payouts unlocks a 15% capital increase, a 90% split, and +1% on both drawdown limits",
+        "Level 2: 4 months funded + 6 payouts unlocks a 30% capital increase, a 90% split, +2% drawdown, and weekly payouts",
+        "Level 3: 5 months funded + 10 payouts unlocks a 40% capital increase, a 92% split, +3% drawdown, and a $300–$500 monthly salary",
+        "Level 4 (GOAT): 6 months funded + 15 payouts unlocks a 50% capital increase, a 95% split, and +4% drawdown",
+        "All scaling percentages are calculated on the original, unmerged account size"
+      ]
+    }
+  },
+  "faqs": [
+    {
+      "id": "what-is-goat-funded-trader",
+      "question": "What is Goat Funded Trader?",
+      "answer": "Goat Funded Trader (GFT) is a proprietary trading firm founded in 2022 and registered through Wishes Tower International Limited in Hong Kong (with an additional Goat Funded LTD entity in Saint Lucia). It offers 1-Step, 2-Step, 3-Step and Instant Funding evaluations on accounts from $5,000 to $400,000, with a fully refundable challenge fee on the first funded payout.",
+      "slug": "what-is-goat-funded-trader",
+      "locale": "en",
+      "keywords": ["Goat Funded Trader", "GFT", "prop firm", "Hong Kong", "evaluation"],
+      "seo": {
+        "title": "What is Goat Funded Trader? | Prop Firm FAQ",
+        "metaDescription": "Goat Funded Trader is a Hong Kong-registered prop firm founded in 2022, offering 1-Step to 3-Step and Instant Funding accounts.",
+        "datePublished": "2026-08-15",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/goatfunded/faq/what-is-goat-funded-trader"
+      }
+    },
+    {
+      "id": "profit-split",
+      "question": "What is the Goat Funded Trader profit split?",
+      "answer": "The default funded split is 80% to the trader and 20% to the firm. Traders can pay for a 100% split add-on at checkout, or climb the 4-level scaling plan to reach up to a 95% split organically at the top GOAT tier, one of the highest ceilings in the industry.",
+      "slug": "profit-split",
+      "locale": "en",
+      "keywords": ["Goat Funded Trader profit split", "80%", "100% add-on", "95% GOAT tier"],
+      "seo": {
+        "title": "Goat Funded Trader Profit Split: 80% to 100% | FAQ",
+        "metaDescription": "Goat Funded Trader starts at an 80% split, with a paid 100% add-on or scaling progression up to a 95% organic split.",
+        "datePublished": "2026-08-15",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/goatfunded/faq/profit-split"
+      }
+    },
+    {
+      "id": "payout-cycle",
+      "question": "How often can I withdraw from Goat Funded Trader?",
+      "answer": "Standard funded accounts pay out bi-weekly (every 2 weeks). Goat Funded Trader publicly commits to a 2-business-day processing window and pays traders a $500 bonus if a payout is late. Reaching Scaling Level 2 (4 months funded, 6 payouts) unlocks weekly payouts instead.",
+      "slug": "payout-cycle",
+      "locale": "en",
+      "keywords": ["Goat Funded Trader payout", "bi-weekly", "2 business days", "weekly payout"],
+      "seo": {
+        "title": "Goat Funded Trader Payout Cycle | FAQ",
+        "metaDescription": "Goat Funded Trader pays bi-weekly by default, processes payouts within 2 business days, and unlocks weekly cycles at Level 2.",
+        "datePublished": "2026-08-15",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/goatfunded/faq/payout-cycle"
+      }
+    },
+    {
+      "id": "fees-and-challenge-refund",
+      "question": "Does Goat Funded Trader charge withdrawal fees or refund the challenge fee?",
+      "answer": "Goat Funded Trader does not add its own commission on bank, Skrill or crypto payouts; only third-party network or bank charges may apply. The evaluation fee is fully refundable and is credited back automatically with your first successful funded payout, effectively making a passed challenge free.",
+      "slug": "fees-and-challenge-refund",
+      "locale": "en",
+      "keywords": ["Goat Funded Trader fees", "challenge refund", "no commission"],
+      "seo": {
+        "title": "Goat Funded Trader Fees and Challenge Refund | FAQ",
+        "metaDescription": "Goat Funded Trader charges no internal payout commission and fully refunds the challenge fee on the first funded payout.",
+        "datePublished": "2026-08-15",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/goatfunded/faq/fees-and-challenge-refund"
+      }
+    },
+    {
+      "id": "scaling-plan",
+      "question": "How does the Goat Funded Trader scaling plan work?",
+      "answer": "The scaling plan has four levels based on time funded and successful payouts: Level 1 (2 months, 4 payouts) adds 15% capital and a 90% split; Level 2 (4 months, 6 payouts) adds 30% and unlocks weekly payouts; Level 3 (5 months, 10 payouts) adds 40%, raises the split to 92%, and adds a monthly salary; Level 4, the GOAT tier (6 months, 15 payouts), adds 50% capital and a 95% split. All increases are calculated on the original account size, even after merges.",
+      "slug": "scaling-plan",
+      "locale": "en",
+      "keywords": ["Goat Funded Trader scaling", "GOAT level", "capital boost", "monthly salary"],
+      "seo": {
+        "title": "Goat Funded Trader Scaling Plan Levels | FAQ",
+        "metaDescription": "Goat Funded Trader's 4-level scaling plan raises capital 15% to 50% and the split up to 95% as you hit funded milestones.",
+        "datePublished": "2026-08-15",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/goatfunded/faq/scaling-plan"
+      }
+    }
+  ],
+  "prosAndCons": {
+    "pros": [
+      "Profit split can reach a full 100% via a one-time paid add-on, one of the highest ceilings in the industry",
+      "Challenge fee is fully refundable on the first funded payout, making a passed evaluation effectively free",
+      "Four-level scaling plan adds a monthly salary ($300-$500) at the top two levels",
+      "No internal commission on bank, Skrill or crypto payouts"
+    ],
+    "cons": [
+      "No regulated broker backing; accounts are registered in Hong Kong / Saint Lucia with no financial regulator oversight",
+      "Default split is only 80% before add-ons or scaling milestones are reached",
+      "Higher scaling levels require several months of funded trading history (up to 6 months for the top tier)"
+    ]
+  }
+}

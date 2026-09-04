@@ -1,0 +1,200 @@
+{
+  "slug": "alpha-capital",
+  "status": "active",
+  "payoutSpeed": "Bi-Weekly or On-Demand",
+  "basic": {
+    "name": "Alpha Capital Group",
+    "legalName": "Alpha Capital Group Limited",
+    "logo": {
+      "src": "https://alphacapitalgroup.uk/favicon.ico",
+      "alt": "Alpha Capital Group logo",
+      "width": 32,
+      "height": 32
+    },
+    "foundedAt": "2021-11-02",
+    "headquarters": {
+      "city": "London",
+      "country": "United Kingdom",
+      "countryCode": "GB"
+    },
+    "website": "https://alphacapitalgroup.uk",
+    "funding": {
+      "currency": "USD",
+      "minAccountSize": 5000,
+      "maxAccountSize": 200000,
+      "maxScaledSize": 2000000
+    }
+  },
+  "withdrawal": {
+    "defaultTraderSharePercent": 80,
+    "defaultFirmSharePercent": 20,
+    "payoutCycle": {
+      "type": "hybrid",
+      "firstPayoutMinDays": 14,
+      "subsequentIntervalDays": 14,
+      "description": "Standard Alpha Pro / Alpha Swing / Alpha Three plans pay performance fees bi-weekly once a trader becomes a Qualified Analyst. Alpha Direct and select upgraded plans instead allow on-demand requests once minimum profit and consistency rules (such as the 40% best-day cap) are met."
+    },
+    "platformFee": {
+      "type": "none"
+    },
+    "channels": [
+      {
+        "id": "bank-wire",
+        "name": "Bank wire transfer",
+        "method": "bank_wire",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": { "min": 1, "max": 3 },
+        "fee": { "type": "none" },
+        "currencies": ["USD", "GBP", "EUR"]
+      },
+      {
+        "id": "crypto",
+        "name": "Cryptocurrency",
+        "method": "crypto",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": { "min": 0, "max": 1 },
+        "fee": { "type": "none" },
+        "currencies": ["USD"]
+      }
+    ],
+    "minPayoutAmount": 100,
+    "minPayoutCurrency": "USD",
+    "challengeFeeRefundedOnFirstPayout": true,
+    "warnings": [
+      "The 10% gain required to scale must be present in the account at the moment of the request — prior withdrawals do not count toward it",
+      "On-demand withdrawal plans enforce a 40% best-day consistency rule",
+      "A newly scaled account requires a minimum of 5 trading days before the next performance fee request is accepted",
+      "The account must be reset to its initial balance (after a full withdrawal) before a scale-up can be requested"
+    ]
+  },
+  "calculator": {
+    "currency": "USD",
+    "profitSplitTiers": [
+      {
+        "id": "standard-80",
+        "label": "Standard performance fee (default)",
+        "program": "alpha-pro",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 80
+      },
+      {
+        "id": "alpha-direct-90",
+        "label": "Alpha Direct / 90% split upgrade",
+        "program": "alpha-direct",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 90
+      }
+    ],
+    "platformWithholdingTaxPercent": 0,
+    "platformDeductionPercent": 0,
+    "paymentProcessorFeePercent": 0,
+    "minPayoutAmount": 100,
+    "scaling": {
+      "enabled": true,
+      "balanceIncreasePercent": 10,
+      "maxCapital": 2000000,
+      "traderShareAfterScalePercent": 80,
+      "requirements": [
+        "Available on Alpha Pro, Alpha Swing and Alpha Three plans",
+        "Requires a 10% gain on the account balance, present in the account at the time of the scale-up request (prior withdrawals don't count toward this)",
+        "Request scaling together with a performance fee withdrawal via the dashboard notes field, confirmed by email to the payments team",
+        "No fixed waiting period between scale-ups, but a newly scaled account needs at least 5 trading days before the next performance fee request",
+        "From the second scale-up onward, maximum lot size also increases by 10%"
+      ]
+    }
+  },
+  "faqs": [
+    {
+      "id": "what-is-alpha-capital-group",
+      "question": "What is Alpha Capital Group?",
+      "answer": "Alpha Capital Group is a UK proprietary trading firm incorporated in November 2021 and headquartered in London. Traders pass an Alpha One, Alpha Pro, Alpha Swing or Alpha Three evaluation to become a Qualified Analyst on a simulated account, with sizes from $5,000 to $200,000 and combined allocation up to $400,000 before scaling.",
+      "slug": "what-is-alpha-capital-group",
+      "locale": "en",
+      "keywords": ["Alpha Capital Group", "prop firm", "UK", "Qualified Analyst", "evaluation"],
+      "seo": {
+        "title": "What is Alpha Capital Group? | Prop Firm FAQ",
+        "metaDescription": "Alpha Capital Group is a UK prop firm founded in 2021, running Alpha One, Pro, Swing and Three evaluation programmes.",
+        "datePublished": "2026-08-15",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/alpha-capital/faq/what-is-alpha-capital-group"
+      }
+    },
+    {
+      "id": "profit-split",
+      "question": "What is the Alpha Capital Group performance fee split?",
+      "answer": "Alpha Capital Group calls its profit split a \"performance fee.\" The standard split pays 80% to the trader and 20% to the firm on eligible simulated profits. Alpha Direct and other upgraded plans can pay a 90% performance fee instead, and the split can rise further as accounts move through the scaling plan.",
+      "slug": "profit-split",
+      "locale": "en",
+      "keywords": ["Alpha Capital profit split", "performance fee", "80%", "90% Alpha Direct"],
+      "seo": {
+        "title": "Alpha Capital Group Performance Fee: 80% to 90% | FAQ",
+        "metaDescription": "Alpha Capital Group pays an 80% standard performance fee, rising to 90% on Alpha Direct and upgraded plans.",
+        "datePublished": "2026-08-15",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/alpha-capital/faq/profit-split"
+      }
+    },
+    {
+      "id": "payout-cycle",
+      "question": "How often can I withdraw from Alpha Capital Group?",
+      "answer": "Standard Alpha Pro, Alpha Swing and Alpha Three plans pay performance fees on a bi-weekly schedule once you become a Qualified Analyst. Alpha Direct and certain upgraded plans instead support on-demand requests, subject to minimum profit and a 40% best-day consistency rule. Support and payment processing run Monday to Friday, 8am–8pm GMT.",
+      "slug": "payout-cycle",
+      "locale": "en",
+      "keywords": ["Alpha Capital payout cycle", "bi-weekly", "on-demand", "Qualified Analyst"],
+      "seo": {
+        "title": "Alpha Capital Group Payout Cycle | FAQ",
+        "metaDescription": "Alpha Capital Group pays bi-weekly by default, with on-demand requests available on Alpha Direct and upgraded plans.",
+        "datePublished": "2026-08-15",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/alpha-capital/faq/payout-cycle"
+      }
+    },
+    {
+      "id": "withdrawal-methods-and-fees",
+      "question": "What withdrawal methods and fees does Alpha Capital Group use?",
+      "answer": "Alpha Capital Group processes performance fees via bank wire (minimum $100, 1–3 business days) or cryptocurrency (minimum $100, usually same-day). The firm does not add its own withdrawal commission; the evaluation fee is also refunded once a trader's first performance fee is successfully paid out.",
+      "slug": "withdrawal-methods-and-fees",
+      "locale": "en",
+      "keywords": ["Alpha Capital withdrawal fee", "bank wire", "crypto payout", "fee refund"],
+      "seo": {
+        "title": "Alpha Capital Group Withdrawal Methods and Fees | FAQ",
+        "metaDescription": "Alpha Capital Group charges no internal payout fee across bank wire and crypto, and refunds the evaluation fee on first payout.",
+        "datePublished": "2026-08-15",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/alpha-capital/faq/withdrawal-methods-and-fees"
+      }
+    },
+    {
+      "id": "scaling-plan",
+      "question": "How does the Alpha Capital Group scaling plan work?",
+      "answer": "On Alpha Pro, Alpha Swing and Alpha Three accounts, every time your balance grows 10% you can request a scale-up together with your performance fee withdrawal: the account increases by 10% of the initial balance, and from your second scale-up onward the maximum lot size also rises 10%. There's no fixed waiting period between scale-ups, only a 5-trading-day minimum after each one, and combined virtual capital growth is capped at $2,000,000.",
+      "slug": "scaling-plan",
+      "locale": "en",
+      "keywords": ["Alpha Capital scaling plan", "10% gain", "max lot size", "$2 million"],
+      "seo": {
+        "title": "Alpha Capital Group Scaling Plan Explained | FAQ",
+        "metaDescription": "Alpha Capital Group scales accounts by 10% of the initial balance every time you hit a 10% gain, up to a $2M ceiling.",
+        "datePublished": "2026-08-15",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/alpha-capital/faq/scaling-plan"
+      }
+    }
+  ],
+  "prosAndCons": {
+    "pros": [
+      "Scaling can be requested any time a 10% gain is present, with no fixed monthly waiting window",
+      "Over 4 years of public operating history (incorporated November 2021) with a large Trustpilot track record",
+      "Evaluation fee is refunded once the first performance fee is successfully paid out",
+      "No internal fee on bank wire or crypto payouts"
+    ],
+    "cons": [
+      "Standard performance fee split is 80%; reaching 90% requires Alpha Direct or a paid plan upgrade",
+      "To scale, the account must first be reset to its initial balance after a full withdrawal, tying up capital during the request",
+      "Combined virtual capital growth across scaled accounts is capped at $2,000,000"
+    ]
+  }
+}

@@ -37,7 +37,29 @@
     "cycleOnDemand": "On demand, first payout after {days} days",
     "cycleEveryNDays": "Every {days} days",
     "cycleOnDemandAfterFirst": "On demand after the first payout ({days} days)",
-    "faqHeading": "Frequently Asked Questions"
+    "faqHeading": "Frequently Asked Questions",
+    "channelsHeading": "Withdrawal Channels",
+    "channelsSubtitle": "Supported payout methods, limits and processing times for this firm.",
+    "channelMinLabel": "Min.",
+    "channelMaxLabel": "Max.",
+    "channelNoMax": "No max",
+    "channelProcessingLabel": "Processing",
+    "channelProcessingRange": "{min}–{max} business days",
+    "channelFeeLabel": "Fee",
+    "feeNone": "No fee",
+    "feeFlat": "{amount} flat",
+    "feePercent": "{percent}%",
+    "feeMixed": "{amount} + {percent}%",
+    "methodBankWire": "Bank Wire",
+    "methodCard": "Card",
+    "methodEwallet": "E-Wallet",
+    "methodCrypto": "Crypto",
+    "methodOther": "Other",
+    "prosConsHeading": "Pros & Cons",
+    "prosHeading": "Pros",
+    "consHeading": "Cons",
+    "warningHeading": "Rules & Restrictions to Watch",
+    "warningIntro": "All accounts trade simulated capital, and rules can change without notice. Always confirm the current terms directly on the firm's official website before purchasing or requesting a withdrawal."
   },
   "FirmNotFound": {
     "title": "We couldn't find this firm",
@@ -76,5 +98,15 @@
     "warningBelowMinChallenge": "Challenge amount is below this firm's minimum tier of {amount}",
     "warningAboveMaxChallenge": "Challenge amount is above this firm's maximum initial tier of {amount}",
     "warningProfitOutsideTierRange": "Expected profit is outside this split tier's profit range; result is indicative only"
+  },
+  "SiteFooter": {
+    "tagline": "Independent prop firm payout calculators and public rule comparisons.",
+    "financialDisclaimerTitle": "Financial Disclaimer",
+    "financialDisclaimerBody": "This site provides mathematical payout calculations and comparisons of publicly available data only. Nothing here constitutes financial, investment, tax or legal advice. All accounts referenced trade simulated capital, and past payout structures do not guarantee future results. Always verify current rules directly with the prop firm before making a purchase or withdrawal decision.",
+    "affiliateDisclosureTitle": "Affiliate Disclosure",
+    "affiliateDisclosureBody": "Some links on this site are affiliate/referral links. We may earn a commission if you sign up through them, at no extra cost to you. This potential compensation does not influence the objectivity of our calculators, comparisons or rankings — every figure is computed from the same public rules for each firm.",
+    "trademarkNoticeTitle": "Trademark Notice",
+    "trademarkNoticeBody": "All prop firm names, logos and trademarks shown on this site are the property of their respective owners. They are used here for identification and comparison purposes only and do not imply any endorsement, sponsorship or affiliation with this site unless explicitly stated.",
+    "copyright": "© {year} Prop Firms. Independent comparison site, not affiliated with any firm listed."
   }
 }

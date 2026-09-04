@@ -37,7 +37,29 @@
     "cycleOnDemand": "按需，首次 {days} 天",
     "cycleEveryNDays": "每 {days} 天",
     "cycleOnDemandAfterFirst": "首次 {days} 天后按需",
-    "faqHeading": "常见问题"
+    "faqHeading": "常见问题",
+    "channelsHeading": "出金通道",
+    "channelsSubtitle": "该公司支持的出金方式、限额与处理时长。",
+    "channelMinLabel": "最低",
+    "channelMaxLabel": "最高",
+    "channelNoMax": "无上限",
+    "channelProcessingLabel": "处理时长",
+    "channelProcessingRange": "{min}–{max} 个工作日",
+    "channelFeeLabel": "手续费",
+    "feeNone": "免手续费",
+    "feeFlat": "固定 {amount}",
+    "feePercent": "{percent}%",
+    "feeMixed": "{amount} + {percent}%",
+    "methodBankWire": "银行转账",
+    "methodCard": "银行卡",
+    "methodEwallet": "电子钱包",
+    "methodCrypto": "加密货币",
+    "methodOther": "其他",
+    "prosConsHeading": "优缺点对比",
+    "prosHeading": "优点",
+    "consHeading": "缺点",
+    "warningHeading": "禁忌规则与风险提醒",
+    "warningIntro": "所有账户均为模拟资金交易，规则可能随时调整。购买或申请出金前，请务必以公司官网当前条款为准。"
   },
   "FirmNotFound": {
     "title": "找不到这家公司",
@@ -76,5 +98,15 @@
     "warningBelowMinChallenge": "挑战金额低于该平台最低档 {amount}",
     "warningAboveMaxChallenge": "挑战金额高于该平台最高初始档 {amount}",
     "warningProfitOutsideTierRange": "当前预计利润不在该分成阶梯的利润区间内，结果仅供参考"
+  },
+  "SiteFooter": {
+    "tagline": "独立的 Prop Firm 出金计算器与公开规则对比。",
+    "financialDisclaimerTitle": "财务免责声明",
+    "financialDisclaimerBody": "本站仅提供基于公开数据的数学计算与对比，不构成任何投资、财务、税务或法律建议。所有账户均为模拟资金交易，历史分成规则不代表未来结果。做出购买或出金决定前，请务必直接以该 Prop Firm 官方最新条款为准。",
+    "affiliateDisclosureTitle": "推广链接声明",
+    "affiliateDisclosureBody": "本站部分链接为推广/返佣链接。若您通过这些链接注册，本站可能获得一定佣金，您无需为此支付额外费用。这种潜在收益不会影响计算器、对比或排名的客观性——所有数据均按各公司相同的公开规则计算得出。",
+    "trademarkNoticeTitle": "商标声明",
+    "trademarkNoticeBody": "本站展示的所有 Prop Firm 名称、Logo 及商标均归各自公司所有。此处使用仅用于识别与对比目的，除非明确说明，不代表任何背书、赞助或关联关系。",
+    "copyright": "© {year} Prop Firms。独立对比网站，与所列任何公司均无关联。"
   }
 }

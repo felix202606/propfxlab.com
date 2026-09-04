@@ -1,0 +1,211 @@
+{
+  "slug": "myfundedfx",
+  "status": "active",
+  "payoutSpeed": "Every 14 Days",
+  "basic": {
+    "name": "MyFundedFX",
+    "legalName": "MyFunded Solutions, LLC",
+    "logo": {
+      "src": "https://myfundedfx.com/favicon.ico",
+      "alt": "MyFundedFX logo",
+      "width": 32,
+      "height": 32
+    },
+    "foundedAt": "2022-06-01",
+    "headquarters": {
+      "city": "Dallas",
+      "country": "United States",
+      "countryCode": "US"
+    },
+    "website": "https://myfundedfx.com",
+    "funding": {
+      "currency": "USD",
+      "minAccountSize": 5000,
+      "maxAccountSize": 300000,
+      "maxScaledSize": 1500000
+    }
+  },
+  "withdrawal": {
+    "defaultTraderSharePercent": 80,
+    "defaultFirmSharePercent": 20,
+    "payoutCycle": {
+      "type": "hybrid",
+      "firstPayoutMinDays": 14,
+      "subsequentIntervalDays": 14,
+      "description": "Two-Step, Two-Step Max and One-Step accounts unlock a first payout 14 calendar days after the first trade on the funded account, then continue on a 2-week cycle. Three-Step accounts move faster, with a payout cycle every 5 days."
+    },
+    "platformFee": {
+      "type": "none"
+    },
+    "channels": [
+      {
+        "id": "bank-wire",
+        "name": "Bank wire transfer",
+        "method": "bank_wire",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": { "min": 2, "max": 5 },
+        "fee": { "type": "none" },
+        "currencies": ["USD"]
+      },
+      {
+        "id": "crypto",
+        "name": "Cryptocurrency (ETH/USDT/USDC, ERC-20)",
+        "method": "crypto",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": { "min": 0, "max": 1 },
+        "fee": { "type": "none" },
+        "currencies": ["USD"],
+        "notes": "Wallets must be on the ERC-20 network; network gas fees are separate from any firm-side charge."
+      },
+      {
+        "id": "paypal",
+        "name": "PayPal",
+        "method": "ewallet",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": { "min": 1, "max": 2 },
+        "fee": { "type": "none" },
+        "currencies": ["USD"]
+      }
+    ],
+    "minPayoutAmount": 50,
+    "minPayoutCurrency": "USD",
+    "challengeFeeRefundedOnFirstPayout": true,
+    "warnings": [
+      "Scaling eligibility requires the account to stay at or above its starting balance for the full 90-day window with zero rule violations",
+      "Since the 2025-2026 SeacrestFunded rebrand, MyFundedFX has restricted or wound down some services — confirm current account status directly with support before relying on these rules",
+      "Crypto withdrawals require ERC-20 network wallets specifically; sending to the wrong network can result in lost funds",
+      "Scaling is not automatic — a manual request is required even after qualifying"
+    ]
+  },
+  "calculator": {
+    "currency": "USD",
+    "profitSplitTiers": [
+      {
+        "id": "standard-80",
+        "label": "Standard funded split (default)",
+        "program": "2-step",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 80
+      },
+      {
+        "id": "max-92-75",
+        "label": "Maximum achievable split (performance-based)",
+        "program": "2-step-max",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 92.75
+      }
+    ],
+    "platformWithholdingTaxPercent": 0,
+    "platformDeductionPercent": 0,
+    "paymentProcessorFeePercent": 0,
+    "minPayoutAmount": 50,
+    "scaling": {
+      "enabled": true,
+      "intervalMonths": 3,
+      "balanceIncreasePercent": 25,
+      "maxCapital": 1500000,
+      "traderShareAfterScalePercent": 80,
+      "requirements": [
+        "Review occurs every 90 calendar days on funded (live simulated) accounts only",
+        "Requires at least 12% net profit within that 90-day window",
+        "Account balance must stay at or above the starting balance throughout the period, with no rule violations",
+        "Scaling is not automatic — traders must submit a manual request once they qualify",
+        "Scaling stops once the account reaches 5x its original size or the $1,500,000 cap, whichever comes first"
+      ]
+    }
+  },
+  "faqs": [
+    {
+      "id": "what-is-myfundedfx",
+      "question": "What is MyFundedFX?",
+      "answer": "MyFundedFX (legally MyFunded Solutions, LLC) is a proprietary trading firm founded in June 2022 and headquartered in Dallas, Texas. It offered Two-Step, Two-Step Max, One-Step, One-Step Max and Three-Step evaluation programs on simulated accounts up to $300,000, partnering with brokers such as Eightcap, ThinkMarkets and Purple Trading.",
+      "slug": "what-is-myfundedfx",
+      "locale": "en",
+      "keywords": ["MyFundedFX", "prop firm", "Dallas Texas", "evaluation", "Two-Step"],
+      "seo": {
+        "title": "What is MyFundedFX? | Prop Firm FAQ",
+        "metaDescription": "MyFundedFX is a Dallas, Texas prop firm founded in 2022, running Two-Step, One-Step and Three-Step evaluation accounts.",
+        "datePublished": "2026-08-15",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/myfundedfx/faq/what-is-myfundedfx"
+      }
+    },
+    {
+      "id": "profit-split",
+      "question": "What is the MyFundedFX profit split?",
+      "answer": "The standard funded split at MyFundedFX is 80% to the trader and 20% to the firm across One-Step and Two-Step Challenges. Depending on the specific challenge type and account performance, published splits have gone as high as 92.75% for top-tier traders.",
+      "slug": "profit-split",
+      "locale": "en",
+      "keywords": ["MyFundedFX profit split", "80%", "92.75%", "Two-Step Challenge"],
+      "seo": {
+        "title": "MyFundedFX Profit Split: 80% up to 92.75% | FAQ",
+        "metaDescription": "MyFundedFX pays an 80% standard split on One-Step and Two-Step accounts, with top tiers reaching up to 92.75%.",
+        "datePublished": "2026-08-15",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/myfundedfx/faq/profit-split"
+      }
+    },
+    {
+      "id": "payout-cycle",
+      "question": "How often can I withdraw from MyFundedFX?",
+      "answer": "Two-Step, Two-Step Max and One-Step accounts unlock a first payout 14 calendar days after the first trade on the funded account, then continue on a bi-weekly cycle. Three-Step accounts move faster, with payouts available every 5 days. The minimum payout amount on any account is $50.",
+      "slug": "payout-cycle",
+      "locale": "en",
+      "keywords": ["MyFundedFX payout cycle", "14 days", "bi-weekly", "Three-Step"],
+      "seo": {
+        "title": "MyFundedFX Payout Cycle | FAQ",
+        "metaDescription": "MyFundedFX pays every 14 days on Two-Step and One-Step accounts, or every 5 days on Three-Step accounts.",
+        "datePublished": "2026-08-15",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/myfundedfx/faq/payout-cycle"
+      }
+    },
+    {
+      "id": "withdrawal-methods-and-fees",
+      "question": "What withdrawal methods and fees does MyFundedFX use?",
+      "answer": "Payouts are available via bank wire, cryptocurrency (ETH, USDT and USDC on the ERC-20 network) or PayPal, each with a $50 minimum. MyFundedFX does not add its own withdrawal commission; card and crypto network charges from third parties may still apply.",
+      "slug": "withdrawal-methods-and-fees",
+      "locale": "en",
+      "keywords": ["MyFundedFX withdrawal fee", "ERC-20", "PayPal payout", "bank wire"],
+      "seo": {
+        "title": "MyFundedFX Withdrawal Methods and Fees | FAQ",
+        "metaDescription": "MyFundedFX charges no internal payout fee across bank wire, ERC-20 crypto and PayPal, each with a $50 minimum.",
+        "datePublished": "2026-08-15",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/myfundedfx/faq/withdrawal-methods-and-fees"
+      }
+    },
+    {
+      "id": "seacrestfunded-rebrand",
+      "question": "Is MyFundedFX still operating, or has it become SeacrestFunded?",
+      "answer": "MyFundedFX rebranded to SeacrestFunded in 2025 and paired the change with a new, separately licensed CFD brokerage arm. As of February 2026 the group announced it was winding down forex/CFD prop-style challenge accounts to focus on that brokerage business, directing traders to request final payouts and refunds. Before opening a new challenge, verify current account status and payout availability directly on the official channels, since terms have changed since the original MyFundedFX rules described in these FAQs.",
+      "slug": "seacrestfunded-rebrand",
+      "locale": "en",
+      "keywords": ["MyFundedFX rebrand", "SeacrestFunded", "shutdown", "final payout"],
+      "seo": {
+        "title": "MyFundedFX to SeacrestFunded: What Changed | FAQ",
+        "metaDescription": "MyFundedFX rebranded as SeacrestFunded and wound down prop-style challenge accounts in early 2026; verify status before signing up.",
+        "datePublished": "2026-08-15",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/myfundedfx/faq/seacrestfunded-rebrand"
+      }
+    }
+  ],
+  "prosAndCons": {
+    "pros": [
+      "Published profit splits have reached as high as 92.75% for top-performing traders",
+      "Multiple payout methods including bank wire, ERC-20 crypto and PayPal, each with just a $50 minimum",
+      "Three-Step accounts offer a much faster 5-day payout cycle versus 14 days on Two-Step/One-Step"
+    ],
+    "cons": [
+      "Scaling requires a manual request — qualifying automatically does not trigger the balance increase",
+      "Standard split is 80% by default; reaching the higher published tiers depends on challenge type and performance",
+      "Ongoing brand transition to SeacrestFunded creates uncertainty for new sign-ups; verify current terms before purchasing"
+    ]
+  }
+}

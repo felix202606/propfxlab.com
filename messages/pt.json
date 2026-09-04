@@ -37,7 +37,29 @@
     "cycleOnDemand": "Sob demanda, primeiro pagamento após {days} dias",
     "cycleEveryNDays": "A cada {days} dias",
     "cycleOnDemandAfterFirst": "Sob demanda após o primeiro pagamento ({days} dias)",
-    "faqHeading": "Perguntas frequentes"
+    "faqHeading": "Perguntas frequentes",
+    "channelsHeading": "Canais de saque",
+    "channelsSubtitle": "Métodos de saque suportados, limites e prazos de processamento desta firma.",
+    "channelMinLabel": "Mín.",
+    "channelMaxLabel": "Máx.",
+    "channelNoMax": "Sem máximo",
+    "channelProcessingLabel": "Processamento",
+    "channelProcessingRange": "{min}–{max} dias úteis",
+    "channelFeeLabel": "Taxa",
+    "feeNone": "Sem taxa",
+    "feeFlat": "{amount} fixa",
+    "feePercent": "{percent}%",
+    "feeMixed": "{amount} + {percent}%",
+    "methodBankWire": "Transferência bancária",
+    "methodCard": "Cartão",
+    "methodEwallet": "Carteira digital",
+    "methodCrypto": "Cripto",
+    "methodOther": "Outro",
+    "prosConsHeading": "Vantagens e desvantagens",
+    "prosHeading": "Vantagens",
+    "consHeading": "Desvantagens",
+    "warningHeading": "Regras e restrições a observar",
+    "warningIntro": "Todas as contas operam com capital simulado e as regras podem mudar sem aviso prévio. Sempre confirme os termos vigentes diretamente no site oficial da firma antes de comprar ou solicitar um saque."
   },
   "FirmNotFound": {
     "title": "Não encontramos esta firma",
@@ -76,5 +98,15 @@
     "warningBelowMinChallenge": "O valor do challenge está abaixo do nível mínimo desta firma ({amount})",
     "warningAboveMaxChallenge": "O valor do challenge está acima do nível inicial máximo desta firma ({amount})",
     "warningProfitOutsideTierRange": "O lucro esperado está fora da faixa deste nível de divisão; o resultado é apenas indicativo"
+  },
+  "SiteFooter": {
+    "tagline": "Calculadoras de saque e comparativos de regras públicas de prop firms, de forma independente.",
+    "financialDisclaimerTitle": "Aviso financeiro",
+    "financialDisclaimerBody": "Este site oferece apenas cálculos matemáticos de pagamento e comparações de dados publicamente disponíveis. Nada aqui constitui aconselhamento financeiro, de investimento, fiscal ou jurídico. Todas as contas mencionadas operam com capital simulado, e divisões passadas não garantem resultados futuros. Sempre verifique as regras vigentes diretamente com a prop firm antes de tomar uma decisão de compra ou saque.",
+    "affiliateDisclosureTitle": "Divulgação de afiliados",
+    "affiliateDisclosureBody": "Alguns links deste site são links de afiliado/indicação. Podemos receber uma comissão se você se cadastrar através deles, sem custo adicional para você. Essa possível compensação não influencia a objetividade de nossas calculadoras, comparações ou classificações — cada número é calculado com as mesmas regras públicas para cada firma.",
+    "trademarkNoticeTitle": "Aviso de marcas registradas",
+    "trademarkNoticeBody": "Todos os nomes, logotipos e marcas das prop firms exibidos neste site são propriedade de seus respectivos donos. Eles são usados aqui apenas para fins de identificação e comparação, e não implicam patrocínio, aprovação ou afiliação com este site, exceto quando expressamente indicado.",
+    "copyright": "© {year} Prop Firms. Site comparativo independente, sem afiliação com qualquer firma listada."
   }
 }

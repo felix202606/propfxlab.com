@@ -127,6 +127,8 @@ export const withdrawalRulesSchema = z.object({
   minPayoutAmount: z.number().nonnegative(),
   minPayoutCurrency: currencyCode,
   challengeFeeRefundedOnFirstPayout: z.boolean(),
+  /** 出金/规则相关的禁忌与风险提醒，用于详情页 Warning Box */
+  warnings: z.array(z.string().min(1)).min(1).optional(),
 });
 
 /** 计算器：按利润区间或产品线切换的阶梯分成 */
@@ -204,6 +206,12 @@ export const faqItemSchema = z.object({
   seo: faqSeoSchema,
 });
 
+/** 优缺点对比框：详情页 Pros & Cons 区块 */
+export const prosAndConsSchema = z.object({
+  pros: z.array(z.string().min(1)).min(1),
+  cons: z.array(z.string().min(1)).min(1),
+});
+
 /** 平台安全状态：用于首页卡片角标，与详情页的详细规则解耦 */
 export const platformStatusSchema = z
   .enum(["active", "warning", "suspended"])
@@ -220,6 +228,8 @@ export const propFirmSchema = z
     withdrawal: withdrawalRulesSchema,
     calculator: calculatorParamsSchema,
     faqs: z.array(faqItemSchema).min(1),
+    /** 优缺点对比框内容；缺省时页面不渲染该区块 */
+    prosAndCons: prosAndConsSchema.optional(),
   })
   .superRefine((firm, ctx) => {
     const splitSum =
@@ -247,10 +257,12 @@ export type PlatformStatus = z.infer<typeof platformStatusSchema>;
 export type Logo = z.infer<typeof logoSchema>;
 export type BasicInfo = z.infer<typeof basicInfoSchema>;
 export type WithdrawalFee = z.infer<typeof withdrawalFeeSchema>;
+export type WithdrawalChannel = z.infer<typeof withdrawalChannelSchema>;
 export type WithdrawalRules = z.infer<typeof withdrawalRulesSchema>;
 export type ProfitSplitTier = z.infer<typeof profitSplitTierSchema>;
 export type CalculatorParams = z.infer<typeof calculatorParamsSchema>;
 export type FaqItem = z.infer<typeof faqItemSchema>;
+export type ProsAndCons = z.infer<typeof prosAndConsSchema>;
 export type PropFirm = z.infer<typeof propFirmSchema>;
 
 export function parsePropFirm(data: unknown): PropFirm {

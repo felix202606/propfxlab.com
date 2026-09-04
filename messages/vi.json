@@ -37,7 +37,29 @@
     "cycleOnDemand": "Theo yêu cầu, lần rút đầu tiên sau {days} ngày",
     "cycleEveryNDays": "Mỗi {days} ngày",
     "cycleOnDemandAfterFirst": "Theo yêu cầu sau lần rút đầu tiên ({days} ngày)",
-    "faqHeading": "Câu hỏi thường gặp"
+    "faqHeading": "Câu hỏi thường gặp",
+    "channelsHeading": "Kênh rút tiền",
+    "channelsSubtitle": "Các phương thức rút tiền, hạn mức và thời gian xử lý được công ty này hỗ trợ.",
+    "channelMinLabel": "Tối thiểu",
+    "channelMaxLabel": "Tối đa",
+    "channelNoMax": "Không giới hạn",
+    "channelProcessingLabel": "Thời gian xử lý",
+    "channelProcessingRange": "{min}–{max} ngày làm việc",
+    "channelFeeLabel": "Phí",
+    "feeNone": "Miễn phí",
+    "feeFlat": "Cố định {amount}",
+    "feePercent": "{percent}%",
+    "feeMixed": "{amount} + {percent}%",
+    "methodBankWire": "Chuyển khoản ngân hàng",
+    "methodCard": "Thẻ",
+    "methodEwallet": "Ví điện tử",
+    "methodCrypto": "Tiền mã hóa",
+    "methodOther": "Khác",
+    "prosConsHeading": "Ưu và nhược điểm",
+    "prosHeading": "Ưu điểm",
+    "consHeading": "Nhược điểm",
+    "warningHeading": "Quy định và hạn chế cần lưu ý",
+    "warningIntro": "Tất cả tài khoản đều giao dịch bằng vốn mô phỏng và quy định có thể thay đổi mà không cần báo trước. Luôn xác nhận điều khoản hiện tại trực tiếp trên trang web chính thức của công ty trước khi mua hoặc yêu cầu rút tiền."
   },
   "FirmNotFound": {
     "title": "Không tìm thấy công ty này",
@@ -76,5 +98,15 @@
     "warningBelowMinChallenge": "Số tiền Challenge thấp hơn mức tối thiểu của công ty này ({amount})",
     "warningAboveMaxChallenge": "Số tiền Challenge cao hơn mức vốn khởi điểm tối đa của công ty này ({amount})",
     "warningProfitOutsideTierRange": "Lợi nhuận dự kiến nằm ngoài khoảng của bậc chia này; kết quả chỉ mang tính tham khảo"
+  },
+  "SiteFooter": {
+    "tagline": "Công cụ tính rút tiền và so sánh quy định công khai của các prop firm, độc lập và khách quan.",
+    "financialDisclaimerTitle": "Miễn trừ trách nhiệm tài chính",
+    "financialDisclaimerBody": "Trang web này chỉ cung cấp các phép tính toán học và so sánh dữ liệu công khai. Không có nội dung nào ở đây cấu thành lời khuyên tài chính, đầu tư, thuế hoặc pháp lý. Tất cả các tài khoản được đề cập đều giao dịch bằng vốn mô phỏng, và cơ cấu chia lợi nhuận trong quá khứ không đảm bảo kết quả trong tương lai. Luôn xác minh quy định hiện hành trực tiếp với prop firm trước khi đưa ra quyết định mua hoặc rút tiền.",
+    "affiliateDisclosureTitle": "Công bố liên kết tiếp thị",
+    "affiliateDisclosureBody": "Một số liên kết trên trang web này là liên kết tiếp thị liên kết/giới thiệu. Chúng tôi có thể nhận hoa hồng nếu bạn đăng ký qua các liên kết đó, mà bạn không phải trả thêm chi phí nào. Khoản thù lao tiềm năng này không ảnh hưởng đến tính khách quan của công cụ tính toán, so sánh hoặc xếp hạng của chúng tôi — mọi số liệu đều được tính từ cùng một bộ quy định công khai cho mỗi công ty.",
+    "trademarkNoticeTitle": "Thông báo về nhãn hiệu",
+    "trademarkNoticeBody": "Tất cả tên, logo và nhãn hiệu của các prop firm hiển thị trên trang web này là tài sản của chủ sở hữu tương ứng. Chúng được sử dụng ở đây chỉ nhằm mục đích nhận diện và so sánh, không hàm ý bất kỳ sự chứng thực, tài trợ hay liên kết nào với trang web này trừ khi được nêu rõ.",
+    "copyright": "© {year} Prop Firms. Trang so sánh độc lập, không liên kết với bất kỳ công ty nào được liệt kê."
   }
 }

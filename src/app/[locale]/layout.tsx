@@ -4,6 +4,7 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { Geist, Geist_Mono } from "next/font/google";
 import { SiteHeader } from "@/components/SiteHeader";
+import { SiteFooter } from "@/components/SiteFooter";
 import { getAllFirms } from "@/lib/data";
 import { localeMeta, routing } from "@/i18n/routing";
 import "../globals.css";
@@ -59,6 +60,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider>
           <SiteHeader firms={firms} />
           <div className="flex flex-1 flex-col">{children}</div>
+          <SiteFooter />
         </NextIntlClientProvider>
       </body>
     </html>

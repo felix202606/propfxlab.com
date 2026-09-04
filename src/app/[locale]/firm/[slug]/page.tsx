@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { PayoutCalculator } from "@/components/PayoutCalculator";
+import { WithdrawalChannels } from "@/components/WithdrawalChannels";
+import { ProsConsBox } from "@/components/ProsConsBox";
+import { WarningBox } from "@/components/WarningBox";
+import { FaqAccordion } from "@/components/FaqAccordion";
 import { getAllFirms, getFirmBySlug, getFirmSlugs } from "@/lib/data";
 import { formatMoney } from "@/lib/payout";
 import { toFaqJsonLd } from "@/lib/schema";
@@ -118,10 +122,6 @@ export default async function FirmPage({
           )}
         />
         <Stat
-          label={t("channels")}
-          value={firm.withdrawal.channels.map((channel) => channel.name).join("、")}
-        />
-        <Stat
           label={t("scalingCap")}
           value={
             funding.maxScaledSize
@@ -135,25 +135,34 @@ export default async function FirmPage({
         {cycle.description}
       </p>
 
-      <div className="mt-8">
+      {/* 出金通道图标区 */}
+      <div className="mt-10">
+        <WithdrawalChannels
+          channels={firm.withdrawal.channels}
+          currency={firm.calculator.currency}
+        />
+      </div>
+
+      {/* 优缺点 Pros & Cons 对比框 */}
+      {firm.prosAndCons ? (
+        <div className="mt-8">
+          <ProsConsBox prosAndCons={firm.prosAndCons} />
+        </div>
+      ) : null}
+
+      <div className="mt-10">
         <PayoutCalculator firms={firms} defaultSlug={firm.slug} lockFirm />
       </div>
 
-      <section className="mt-14" aria-labelledby="faq-heading">
-        <h2 id="faq-heading" className="text-2xl font-semibold tracking-tight">
-          {t("faqHeading")}
-        </h2>
-        <div className="mt-6 space-y-6">
-          {firm.faqs.map((item) => (
-            <div key={item.id} id={item.slug}>
-              <h3 className="text-base font-semibold">{item.question}</h3>
-              <p className="mt-2 text-sm leading-7 text-zinc-600 dark:text-zinc-400">
-                {item.answer}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* 禁忌规则提醒 Warning Box */}
+      <div className="mt-10">
+        <WarningBox warnings={firm.withdrawal.warnings} />
+      </div>
+
+      {/* FAQ 展开手风琴 */}
+      <div className="mt-14">
+        <FaqAccordion faqs={firm.faqs} />
+      </div>
     </article>
   );
 }
