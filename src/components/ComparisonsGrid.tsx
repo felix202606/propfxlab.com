@@ -14,7 +14,28 @@ export function ComparisonsGrid({ firms }: { firms: PropFirm[] }) {
     return [{ left, right }];
   });
 
-  if (pairs.length === 0) return null;
+  if (pairs.length === 0) {
+    return (
+      <section id="compare" className="mx-auto w-full max-w-6xl scroll-mt-24 px-4 py-16">
+        <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+          <span className="bg-gradient-to-r from-white to-cyan-300 bg-clip-text text-transparent">
+            {t("comparisonsTitle")}
+          </span>
+        </h2>
+        <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-400">
+          {t("comparisonsSubtitle")}
+        </p>
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {[0, 1, 2].map((slot) => (
+            <div
+              key={slot}
+              className="h-36 animate-pulse rounded-2xl border border-white/10 bg-white/[0.03]"
+            />
+          ))}
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="compare" className="mx-auto w-full max-w-6xl scroll-mt-24 px-4 py-16">

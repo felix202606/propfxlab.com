@@ -7,10 +7,21 @@ import { getAllFirms } from "@/lib/data";
 
 type HomeFaq = { question: string; answer: string };
 
+function toHomeFaqs(raw: unknown): HomeFaq[] {
+  if (!Array.isArray(raw)) return [];
+  return raw.filter(
+    (item): item is HomeFaq =>
+      !!item &&
+      typeof item === "object" &&
+      typeof (item as HomeFaq).question === "string" &&
+      typeof (item as HomeFaq).answer === "string",
+  );
+}
+
 export default async function Home() {
   const t = await getTranslations("HomePage");
   const firms = getAllFirms();
-  const faqs = (t.raw("faqs") as HomeFaq[]).map((item, index) => ({
+  const faqs = toHomeFaqs(t.raw("faqs")).map((item, index) => ({
     id: `home-faq-${index + 1}`,
     question: item.question,
     answer: item.answer,

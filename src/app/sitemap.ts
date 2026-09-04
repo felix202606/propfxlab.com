@@ -4,7 +4,7 @@ import type { MetadataRoute } from "next";
 import { localeMeta, routing } from "@/i18n/routing";
 
 const BASE_URL = "https://www.propfxlab.com";
-const FIRMS_DIR = path.join(process.cwd(), "data/firms");
+const FIRMS_DIR = path.join(process.cwd(), "data", "firms");
 
 /** 与语言无关的固定路径，会在每种语言前缀下各生成一条 URL。 */
 const STATIC_PATHS = ["", "/calculator"] as const;
@@ -53,20 +53,28 @@ function readFirmEntries(): FirmEntry[] {
  * 所有真实页面都在 /[locale] 之下，裸路径（如 /firm/ftmo）会被 proxy.ts 307 跳转，
  * 因此这里输出带语言前缀的 URL，并让同一页面的各语言版本互相声明 hreflang。
  */
+function localeUrl(locale: string, pathname: string): string {
+  const suffix = pathname === "" ? "" : pathname;
+  if (locale === routing.defaultLocale) {
+    return `${BASE_URL}${suffix || "/"}`;
+  }
+  return `${BASE_URL}/${locale}${suffix}`;
+}
+
 function localizedEntries(
   pathname: string,
   lastModified: Date,
   priority: number,
 ): MetadataRoute.Sitemap {
   const languages: Record<string, string> = {
-    "x-default": `${BASE_URL}/${routing.defaultLocale}${pathname}`,
+    "x-default": localeUrl(routing.defaultLocale, pathname),
   };
   for (const locale of routing.locales) {
-    languages[localeMeta[locale].bcp47] = `${BASE_URL}/${locale}${pathname}`;
+    languages[localeMeta[locale].bcp47] = localeUrl(locale, pathname);
   }
 
   return routing.locales.map((locale) => ({
-    url: `${BASE_URL}/${locale}${pathname}`,
+    url: localeUrl(locale, pathname),
     lastModified,
     changeFrequency: "weekly",
     priority,

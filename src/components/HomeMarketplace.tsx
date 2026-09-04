@@ -141,7 +141,12 @@ export function HomeMarketplace({ firms }: { firms: PropFirm[] }) {
             <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-500">
               {t("previewLabel")}
             </p>
-            {preview && leader ? (
+            {firms.length === 0 ? (
+              <div className="mt-6 space-y-4">
+                <div className="h-12 w-48 animate-pulse rounded-lg bg-white/10" />
+                <p className="text-sm text-zinc-500">{t("emptyPreview")}</p>
+              </div>
+            ) : preview && leader ? (
               <>
                 <p className="mt-1 text-sm text-zinc-400">
                   {t("previewFirm", { firm: leader.firm.basic.name })}
@@ -209,18 +214,32 @@ export function HomeMarketplace({ firms }: { firms: PropFirm[] }) {
           </div>
         </div>
 
-        <ol className="mt-8 grid gap-4 md:grid-cols-2">
-          {ranked.map(({ firm, breakdown }, index) => (
-            <li key={firm.slug}>
-              <FirmCard
-                firm={firm}
-                rank={index + 1}
-                netPayout={breakdown?.netPayout ?? null}
-                currency={firm.calculator.currency}
+        {firms.length === 0 ? (
+          <div className="mt-8 grid gap-4 md:grid-cols-2">
+            {[0, 1, 2, 3].map((slot) => (
+              <div
+                key={slot}
+                className="h-64 animate-pulse rounded-2xl border border-white/10 bg-white/[0.03]"
               />
-            </li>
-          ))}
-        </ol>
+            ))}
+            <p className="md:col-span-2 text-sm text-zinc-500">
+              {t("emptyRankings")}
+            </p>
+          </div>
+        ) : (
+          <ol className="mt-8 grid gap-4 md:grid-cols-2">
+            {ranked.map(({ firm, breakdown }, index) => (
+              <li key={firm.slug}>
+                <FirmCard
+                  firm={firm}
+                  rank={index + 1}
+                  netPayout={breakdown?.netPayout ?? null}
+                  currency={firm.calculator.currency}
+                />
+              </li>
+            ))}
+          </ol>
+        )}
       </section>
     </>
   );
