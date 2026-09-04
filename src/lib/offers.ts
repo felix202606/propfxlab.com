@@ -15,7 +15,7 @@ export const FIRM_OFFERS: Record<string, FirmOffer> = {
     href: "https://apextraderfunding.com",
   },
   "funding-traders": { code: "PROPFXLAB", href: "https://fundingtraders.com" },
-  myfundedfx: { code: "PROPFXLAB", href: "https://myfundedfx.com" },
+  myfundedfx: { code: "PROPFXLAB", href: "https://seacrestmarkets.io/closed" },
 };
 
 export function getFirmOffer(slug: string, fallbackHref: string): FirmOffer {

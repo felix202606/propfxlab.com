@@ -1,7 +1,7 @@
 {
   "slug": "myfundedfx",
-  "status": "active",
-  "payoutSpeed": "Every 14 Days",
+  "status": "suspended",
+  "payoutSpeed": "Closed",
   "basic": {
     "name": "MyFundedFX",
     "legalName": "MyFunded Solutions, LLC",
@@ -17,7 +17,7 @@
       "country": "United States",
       "countryCode": "US"
     },
-    "website": "https://myfundedfx.com",
+    "website": "https://seacrestmarkets.io/closed",
     "funding": {
       "currency": "USD",
       "minAccountSize": 5000,
@@ -74,8 +74,8 @@
     "minPayoutCurrency": "USD",
     "challengeFeeRefundedOnFirstPayout": true,
     "warnings": [
+      "Seacrest Markets (the MyFundedFX / SeacrestFunded successor) published a closure notice at seacrestmarkets.io/closed and is no longer operating. Do not buy a new challenge.",
       "Scaling eligibility requires the account to stay at or above its starting balance for the full 90-day window with zero rule violations",
-      "Since the 2025-2026 SeacrestFunded rebrand, MyFundedFX has restricted or wound down some services — confirm current account status directly with support before relying on these rules",
       "Crypto withdrawals require ERC-20 network wallets specifically; sending to the wrong network can result in lost funds",
       "Scaling is not automatic — a manual request is required even after qualifying"
     ]
@@ -183,14 +183,15 @@
     {
       "id": "seacrestfunded-rebrand",
       "question": "Is MyFundedFX still operating, or has it become SeacrestFunded?",
-      "answer": "MyFundedFX rebranded to SeacrestFunded in 2025 and paired the change with a new, separately licensed CFD brokerage arm. As of February 2026 the group announced it was winding down forex/CFD prop-style challenge accounts to focus on that brokerage business, directing traders to request final payouts and refunds. Before opening a new challenge, verify current account status and payout availability directly on the official channels, since terms have changed since the original MyFundedFX rules described in these FAQs.",
+      "answer": "MyFundedFX rebranded to SeacrestFunded in 2025 and later operated a licensed CFD brokerage as Seacrest Markets. Seacrest Markets published a closure notice at https://seacrestmarkets.io/closed stating it is no longer operating. Do not open a new challenge; historical payout rules below describe the old MyFundedFX program only.",
       "slug": "seacrestfunded-rebrand",
       "locale": "en",
       "keywords": ["MyFundedFX rebrand", "SeacrestFunded", "shutdown", "final payout"],
       "seo": {
-        "title": "MyFundedFX to SeacrestFunded: What Changed | FAQ",
-        "metaDescription": "MyFundedFX rebranded as SeacrestFunded and wound down prop-style challenge accounts in early 2026; verify status before signing up.",
+        "title": "MyFundedFX / Seacrest Markets closure | FAQ",
+        "metaDescription": "Seacrest Markets, the successor to MyFundedFX / SeacrestFunded, is no longer operating. See seacrestmarkets.io/closed.",
         "datePublished": "2026-08-15",
+        "dateModified": "2026-09-04",
         "schemaType": "FAQPage",
         "canonicalPath": "/firms/myfundedfx/faq/seacrestfunded-rebrand"
       }
@@ -205,7 +206,7 @@
     "cons": [
       "Scaling requires a manual request — qualifying automatically does not trigger the balance increase",
       "Standard split is 80% by default; reaching the higher published tiers depends on challenge type and performance",
-      "Ongoing brand transition to SeacrestFunded creates uncertainty for new sign-ups; verify current terms before purchasing"
+      "Ongoing brand transition to SeacrestFunded creates uncertainty for new sign-ups; the successor brokerage Seacrest Markets has since closed"
     ]
   }
 }

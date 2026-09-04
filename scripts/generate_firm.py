@@ -15,13 +15,16 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import subprocess
 import sys
 import time
+from dataclasses import dataclass
 from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any, List, Optional
 from urllib.error import URLError
+from urllib.parse import urlparse
 from urllib.request import Request, urlopen
 
 SCRIPT_DIR = Path(__file__).resolve().parent
@@ -35,6 +38,58 @@ FIRMS_DIR = ROOT / "data" / "firms"
 EXPORT_SCHEMA = ROOT / "scripts" / "export-json-schema.ts"
 SAFE_INT_MAX = 9007199254740991
 _MISSING = object()
+
+CLOSED_FIRM_WARNING = "⚠️ Warning: Firm appeared to be closed."
+
+GEMINI_SYSTEM_INSTRUCTION = """You are extracting a complete Prop Firm profile for a comparison website.
+Return one JSON object that exactly matches the provided JSON Schema.
+Do not include markdown or commentary.
+If the website content indicates that the prop firm has closed, ceased operations, or suspended services, you MUST output "status": "suspended" in the JSON.
+"""
+
+# Path tokens that usually mean a shutdown landing page (not FAQ copy like "account closed").
+CLOSURE_URL_MARKERS = (
+    "shut-down",
+    "shutdown",
+    "out-of-business",
+    "stop-operations",
+    "winding-down",
+    "ceased-operations",
+)
+
+# Firm-level shutdown copy. Bare "closed" / "shut down" is too noisy (account-breach FAQs).
+CLOSURE_TEXT_PHRASES = (
+    "no longer operating",
+    "no longer in operation",
+    "no longer in business",
+    "ceased operations",
+    "cease operations",
+    "stop operations",
+    "stopped operations",
+    "out of business",
+    "winding down operations",
+    "has shut down",
+    "have shut down",
+    "is shutting down",
+    "shutting down operations",
+    "suspended services",
+    "suspended operations",
+    "is no longer operating",
+)
+
+_CLOSURE_CONTEXT_RE = re.compile(
+    r"\b(?:firm|company|business|operations?|services?)\b.{0,48}\b(?:closed|shut\s*down|ceased)\b"
+    r"|"
+    r"\b(?:closed|shut\s*down|ceased)\b.{0,48}\b(?:firm|company|business|operations?|services?)\b",
+    re.IGNORECASE | re.DOTALL,
+)
+
+
+@dataclass(frozen=True)
+class FetchedPage:
+    url: str
+    text: str
+    appeared_closed: bool
 
 
 ENV_FILES = (
@@ -144,8 +199,32 @@ class _VisibleTextParser(HTMLParser):
             self.chunks.append(text)
 
 
-def fetch_site_text(url: str, max_chars: int = 16000) -> str:
-    """Best-effort homepage text for Gemini context. Empty string on failure."""
+def detect_firm_closure(url: str, text: str = "") -> bool:
+    """True when the URL or page copy looks like a firm-level shutdown notice."""
+    parsed = urlparse(url)
+    path = parsed.path.lower()
+    normalized = path.rstrip("/")
+    if normalized.endswith("/closed") or "/closed/" in path:
+        return True
+    url_haystack = f"{path} {parsed.query} {parsed.fragment}".lower()
+    if any(marker in url_haystack for marker in CLOSURE_URL_MARKERS):
+        return True
+
+    lowered = " ".join(text.lower().split())
+    if any(phrase in lowered for phrase in CLOSURE_TEXT_PHRASES):
+        return True
+    return bool(lowered and _CLOSURE_CONTEXT_RE.search(lowered))
+
+
+def warn_if_closed(url: str, text: str = "") -> bool:
+    appeared_closed = detect_firm_closure(url, text)
+    if appeared_closed:
+        print(CLOSED_FIRM_WARNING)
+    return appeared_closed
+
+
+def fetch_site_text(url: str, max_chars: int = 16000) -> FetchedPage:
+    """Best-effort homepage text for Gemini context. Empty text on failure."""
     request = Request(
         url,
         headers={
@@ -158,22 +237,32 @@ def fetch_site_text(url: str, max_chars: int = 16000) -> str:
     )
     try:
         with urlopen(request, timeout=20) as response:
+            final_url = response.geturl() or url
             raw = response.read(max_chars * 4)
             charset = response.headers.get_content_charset() or "utf-8"
             html = raw.decode(charset, errors="replace")
     except (URLError, TimeoutError, OSError, ValueError) as error:
         print(f"  抓取 {url} 失败（将仅用公开知识生成）: {error}")
-        return ""
+        return FetchedPage(
+            url=url,
+            text="",
+            appeared_closed=warn_if_closed(url, ""),
+        )
 
     parser = _VisibleTextParser()
     try:
         parser.feed(html)
         parser.close()
+        text = " ".join(parser.chunks)[:max_chars]
     except Exception:
-        return html[:max_chars]
+        text = html[:max_chars]
 
-    text = " ".join(parser.chunks)
-    return text[:max_chars]
+    appeared_closed = detect_firm_closure(final_url, text) or detect_firm_closure(
+        url, text
+    )
+    if appeared_closed:
+        print(CLOSED_FIRM_WARNING)
+    return FetchedPage(url=final_url, text=text, appeared_closed=appeared_closed)
 
 
 def build_prompt(source_text: str, keywords: List[str], slug_hint: Optional[str]) -> str:
@@ -187,6 +276,7 @@ def build_prompt(source_text: str, keywords: List[str], slug_hint: Optional[str]
 
 Return one JSON object that exactly matches the provided JSON Schema.
 Do not include markdown or commentary.
+If the website content indicates that the prop firm has closed, ceased operations, or suspended services, you MUST output "status": "suspended" in the JSON.
 
 Rules:
 - Use only facts supported by the source text. Do not invent payout numbers, fees, or dates.
@@ -221,12 +311,16 @@ def build_batch_prompt(firm: PropFirmSeed, source_text: str) -> str:
 
 Return one JSON object that exactly matches the provided JSON Schema.
 Do not include markdown or commentary.
+If the website content indicates that the prop firm has closed, ceased operations, or suspended services, you MUST output "status": "suspended" in the JSON.
 
 Locked fields (copy exactly, do not rename):
 - slug: "{firm['slug']}"
-- status: "active"
 - basic.name: "{firm['name']}"
 - basic.website: "{firm['url']}"
+
+Status field:
+- Use "active" only if the firm still operates and pays out.
+- If the website content indicates that the prop firm has closed, ceased operations, or suspended services, you MUST output "status": "suspended" in the JSON.
 
 Card-level facts the homepage needs (encode them in the full schema, not as extra keys):
 - profitSplit: a human-readable range such as "80% - 90%". Encode this as
@@ -257,9 +351,17 @@ Other rules:
 """
 
 
-def apply_locked_fields(payload: dict[str, Any], firm: PropFirmSeed) -> dict[str, Any]:
+def apply_locked_fields(
+    payload: dict[str, Any],
+    firm: PropFirmSeed,
+    *,
+    status: Optional[str] = None,
+) -> dict[str, Any]:
     payload["slug"] = firm["slug"]
-    payload["status"] = "active"
+    if status:
+        payload["status"] = status
+    elif payload.get("status") not in {"active", "warning", "suspended"}:
+        payload["status"] = "active"
     basic = payload.get("basic")
     if not isinstance(basic, dict):
         basic = {}
@@ -288,9 +390,19 @@ def generate_firm_json(
     force: bool,
     fetch_site: bool,
 ) -> Path:
-    source_text = fetch_site_text(firm["url"]) if fetch_site else ""
+    if fetch_site:
+        page = fetch_site_text(firm["url"])
+        source_text = page.text
+        appeared_closed = page.appeared_closed
+    else:
+        source_text = ""
+        appeared_closed = warn_if_closed(firm["url"], "")
     prompt = build_batch_prompt(firm, source_text)
-    payload = apply_locked_fields(call_gemini(prompt, schema, model), firm)
+    payload = apply_locked_fields(
+        call_gemini(prompt, schema, model),
+        firm,
+        status="suspended" if appeared_closed else None,
+    )
     payload["slug"] = kebab(str(payload.get("slug") or firm["slug"]))
     if payload["slug"] != firm["slug"]:
         payload["slug"] = firm["slug"]
@@ -324,6 +436,7 @@ def call_gemini(prompt: str, schema: dict[str, Any], model: str) -> dict[str, An
                 model=model,
                 contents=prompt,
                 config=types.GenerateContentConfig(
+                    system_instruction=GEMINI_SYSTEM_INSTRUCTION,
                     response_mime_type="application/json",
                     response_json_schema=schema,
                     temperature=0.2,
@@ -508,6 +621,7 @@ def main() -> None:
     if not source_text.strip():
         raise SystemExit("原始文本为空")
 
+    appeared_closed = warn_if_closed(args.slug or "", source_text)
     keywords = collect_keywords(args.keywords, args.keywords_file)
     prompt = build_prompt(source_text, keywords, args.slug)
     firm = call_gemini(prompt, gemini_schema, args.model)
@@ -516,6 +630,8 @@ def main() -> None:
     if not slug:
         raise SystemExit("无法确定文件名：模型未返回 slug，请使用 --slug")
     firm["slug"] = slug
+    if appeared_closed:
+        firm["status"] = "suspended"
 
     out_path = write_firm_json(firm, slug, args.force)
     print(f"Generated {out_path}")
