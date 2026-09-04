@@ -19,23 +19,38 @@ function toHomeFaqs(raw: unknown): HomeFaq[] {
 }
 
 export default async function Home() {
-  const t = await getTranslations("HomePage");
-  const firms = getAllFirms();
-  const faqs = toHomeFaqs(t.raw("faqs")).map((item, index) => ({
-    id: `home-faq-${index + 1}`,
-    question: item.question,
-    answer: item.answer,
-    slug: `home-faq-${index + 1}`,
-  }));
+  let firms: ReturnType<typeof getAllFirms> = [];
+  try {
+    firms = getAllFirms();
+  } catch (err) {
+    console.error("[home] getAllFirms failed, rendering empty marketplace:", err);
+  }
+
+  let faqs: Array<HomeFaq & { id: string; slug: string }> = [];
+  let faqTitle: string | undefined;
+  try {
+    const t = await getTranslations("HomePage");
+    faqTitle = t("faqTitle");
+    faqs = toHomeFaqs(t.raw("faqs")).map((item, index) => ({
+      id: `home-faq-${index + 1}`,
+      question: item.question,
+      answer: item.answer,
+      slug: `home-faq-${index + 1}`,
+    }));
+  } catch (err) {
+    console.error("[home] translations failed, rendering page without FAQ copy:", err);
+  }
 
   return (
     <main className="relative flex-1">
       <HomeMarketplace firms={firms} />
       <TrustGrid />
       <ComparisonsGrid firms={firms} />
-      <div className="mx-auto w-full max-w-6xl px-4 pb-20">
-        <FaqAccordion faqs={faqs} heading={t("faqTitle")} />
-      </div>
+      {faqs.length > 0 ? (
+        <div className="mx-auto w-full max-w-6xl px-4 pb-20">
+          <FaqAccordion faqs={faqs} heading={faqTitle} />
+        </div>
+      ) : null}
     </main>
   );
 }
