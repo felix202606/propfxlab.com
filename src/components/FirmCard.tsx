@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { FirmLogo } from "@/components/FirmLogo";
 import { PromoCodeCopy } from "@/components/PromoCodeCopy";
 import { getFirmOffer } from "@/lib/offers";
 import { formatMoney } from "@/lib/payout";
@@ -74,13 +75,11 @@ export function FirmCard({ firm, rank, netPayout, currency }: FirmCardProps) {
       <div className="pointer-events-none absolute inset-x-0 -top-24 h-40 bg-[radial-gradient(closest-side,rgba(16,185,129,0.16),transparent)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
       <div className="relative flex items-start gap-3">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <FirmLogo
+          name={firm.basic.name}
           src={firm.basic.logo.src}
           alt={firm.basic.logo.alt}
-          width={firm.basic.logo.width ?? 40}
-          height={firm.basic.logo.height ?? 40}
-          className="h-11 w-11 shrink-0 rounded-xl border border-white/10 bg-white object-contain p-1"
+          size="lg"
         />
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
