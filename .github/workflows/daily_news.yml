@@ -1,0 +1,48 @@
+name: Daily news scrape
+
+on:
+  schedule:
+    - cron: "0 2,14 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: daily-news
+  cancel-in-progress: false
+
+jobs:
+  scrape-news:
+    name: Scrape and publish news
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Run news scraper
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python -u scripts/news_scraper.py
+
+      - name: Commit and push news JSON
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p data/news
+          git add data/news/
+          if git diff --staged --quiet; then
+            echo "No new news JSON to commit"
+          else
+            git commit -m "chore(news): update scraped news JSON"
+            git push origin HEAD:main
+          fi

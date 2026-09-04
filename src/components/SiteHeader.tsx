@@ -34,6 +34,9 @@ export function SiteHeader() {
           <Link href={{ pathname: "/", hash: "faq" }} className={navLinkClass}>
             {t("faq")}
           </Link>
+          <Link href="/news" className={navLinkClass}>
+            {t("news")}
+          </Link>
           <Link href="/calculator" className={navLinkClass}>
             {t("calculator")}
           </Link>

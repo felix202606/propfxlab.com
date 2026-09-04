@@ -9,6 +9,7 @@
     "rankings": "Ranking",
     "compare": "Comparar",
     "faq": "FAQ",
+    "news": "Noticias",
     "languageLabel": "Idioma"
   },
   "HomePage": {
@@ -163,6 +164,19 @@
     "warningBelowMinChallenge": "El importe del challenge está por debajo del nivel mínimo de esta firma ({amount})",
     "warningAboveMaxChallenge": "El importe del challenge supera el nivel inicial máximo de esta firma ({amount})",
     "warningProfitOutsideTierRange": "El beneficio esperado está fuera del rango de este nivel de reparto; el resultado es solo orientativo"
+  },
+  "NewsPage": {
+    "metaTitle": "Noticias de prop firms",
+    "metaDescription": "Titulares del sector sobre pagos, cambios de reglas y regulación, resumidos para traders fondeados.",
+    "title": "Noticias de prop firms",
+    "subtitle": "Titulares que afectan a traders fondeados: pagos, cambios de reglas, cierres y regulación. Los briefings son resúmenes originales de feeds RSS públicos, no copias del artículo fuente.",
+    "empty": "Aún no hay noticias. La próxima captura programada llenará esta página.",
+    "sourceLabel": "Fuente",
+    "publishedLabel": "Publicado",
+    "relatedFirms": "Firmas relacionadas",
+    "backToNews": "Todas las noticias",
+    "disclaimer": "Este briefing es un resumen original de información pública. No es asesoramiento financiero. Confirma los detalles en la fuente original y en el sitio oficial de la firma.",
+    "notFoundMetaTitle": "Artículo no encontrado"
   },
   "SiteFooter": {
     "tagline": "Calculadoras de pago y comparativas de reglas públicas de prop firms, de forma independiente.",

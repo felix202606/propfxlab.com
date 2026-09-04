@@ -39,6 +39,14 @@ export function SiteFooter({ firms }: { firms: FirmLink[] }) {
                 </li>
                 <li>
                   <Link
+                    href="/news"
+                    className="text-zinc-400 transition-colors hover:text-emerald-300"
+                  >
+                    {nav("news")}
+                  </Link>
+                </li>
+                <li>
+                  <Link
                     href="/calculator"
                     className="text-zinc-400 transition-colors hover:text-emerald-300"
                   >

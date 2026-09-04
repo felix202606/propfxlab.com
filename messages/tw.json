@@ -9,6 +9,7 @@
     "rankings": "排行榜",
     "compare": "對比",
     "faq": "FAQ",
+    "news": "新聞",
     "languageLabel": "語言"
   },
   "HomePage": {
@@ -163,6 +164,19 @@
     "warningBelowMinChallenge": "挑戰金額低於該平台最低檔 {amount}",
     "warningAboveMaxChallenge": "挑戰金額高於該平台最高初始檔 {amount}",
     "warningProfitOutsideTierRange": "目前預計利潤不在該分成階梯的利潤區間內，結果僅供參考"
+  },
+  "NewsPage": {
+    "metaTitle": "Prop Firm 產業新聞",
+    "metaDescription": "面向 funded 交易員的出金、規則變更與監管摘要。",
+    "title": "Prop Firm 新聞",
+    "subtitle": "影響 funded 交易員的產業動態：出金、規則變更、停運與監管。正文是根據公開 RSS 改寫的摘要，不是原文轉載。",
+    "empty": "暫時還沒有新聞。下一次定時抓取會寫入這裡。",
+    "sourceLabel": "來源",
+    "publishedLabel": "發布時間",
+    "relatedFirms": "相關平台",
+    "backToNews": "全部新聞",
+    "disclaimer": "本文為公開報導的原創摘要，不構成任何投資或財務建議。細節請以原始來源和平台官網為準。",
+    "notFoundMetaTitle": "找不到這則新聞"
   },
   "SiteFooter": {
     "tagline": "獨立的 Prop Firm 出金計算器與公開規則對比。",

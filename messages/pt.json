@@ -9,6 +9,7 @@
     "rankings": "Ranking",
     "compare": "Comparar",
     "faq": "FAQ",
+    "news": "Notícias",
     "languageLabel": "Idioma"
   },
   "HomePage": {
@@ -163,6 +164,19 @@
     "warningBelowMinChallenge": "O valor do challenge está abaixo do nível mínimo desta firma ({amount})",
     "warningAboveMaxChallenge": "O valor do challenge está acima do nível inicial máximo desta firma ({amount})",
     "warningProfitOutsideTierRange": "O lucro esperado está fora da faixa deste nível de divisão; o resultado é apenas indicativo"
+  },
+  "NewsPage": {
+    "metaTitle": "Notícias de prop firms",
+    "metaDescription": "Manchetes do setor sobre saques, mudanças de regras e regulação, resumidas para traders fondeados.",
+    "title": "Notícias de prop firms",
+    "subtitle": "Manchetes que afetam traders fondeados — saques, mudanças de regras, encerramentos e regulação. Os briefings são resumos originais de feeds RSS públicos, não cópias do artigo original.",
+    "empty": "Ainda não há notícias. A próxima coleta programada preencherá esta página.",
+    "sourceLabel": "Fonte",
+    "publishedLabel": "Publicado",
+    "relatedFirms": "Firmas relacionadas",
+    "backToNews": "Todas as notícias",
+    "disclaimer": "Este briefing é um resumo original de reportagens públicas. Não é aconselhamento financeiro. Confirme os detalhes na fonte original e no site oficial da firma.",
+    "notFoundMetaTitle": "Artigo não encontrado"
   },
   "SiteFooter": {
     "tagline": "Calculadoras de saque e comparativos de regras públicas de prop firms, de forma independente.",

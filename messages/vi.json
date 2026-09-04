@@ -9,6 +9,7 @@
     "rankings": "Xếp hạng",
     "compare": "So sánh",
     "faq": "FAQ",
+    "news": "Tin tức",
     "languageLabel": "Ngôn ngữ"
   },
   "HomePage": {
@@ -163,6 +164,19 @@
     "warningBelowMinChallenge": "Số tiền Challenge thấp hơn mức tối thiểu của công ty này ({amount})",
     "warningAboveMaxChallenge": "Số tiền Challenge cao hơn mức vốn khởi điểm tối đa của công ty này ({amount})",
     "warningProfitOutsideTierRange": "Lợi nhuận dự kiến nằm ngoài khoảng của bậc chia này; kết quả chỉ mang tính tham khảo"
+  },
+  "NewsPage": {
+    "metaTitle": "Tin tức Prop Firm",
+    "metaDescription": "Tiêu đề ngành về rút tiền, thay đổi quy định và giám sát, tóm tắt cho trader được cấp vốn.",
+    "title": "Tin tức Prop Firm",
+    "subtitle": "Các tin ảnh hưởng đến trader được cấp vốn — rút tiền, đổi quy định, đóng cửa và giám sát. Bản tóm tắt được viết lại từ RSS công khai, không sao chép bài gốc.",
+    "empty": "Chưa có tin tức. Lần thu thập theo lịch tiếp theo sẽ điền trang này.",
+    "sourceLabel": "Nguồn",
+    "publishedLabel": "Ngày đăng",
+    "relatedFirms": "Công ty liên quan",
+    "backToNews": "Tất cả tin tức",
+    "disclaimer": "Bản tóm tắt này được viết lại từ tin công khai, không phải lời khuyên tài chính. Hãy xác nhận chi tiết trên nguồn gốc và trang chính thức của công ty.",
+    "notFoundMetaTitle": "Không tìm thấy bài viết"
   },
   "SiteFooter": {
     "tagline": "Công cụ tính rút tiền và so sánh quy định công khai của các prop firm, độc lập và khách quan.",
