@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
@@ -20,6 +20,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const viewport: Viewport = {
+  themeColor: "#09090b",
+};
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
@@ -38,6 +42,14 @@ export async function generateMetadata({
         template: "%s · PropFXLab",
       },
       description: t("description"),
+      appleWebApp: {
+        capable: true,
+        statusBarStyle: "black-translucent",
+        title: "Prop Calc",
+      },
+      icons: {
+        apple: "/icon-192.png",
+      },
     };
   } catch (err) {
     console.error("[layout] generateMetadata failed:", err);
