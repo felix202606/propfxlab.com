@@ -1,17 +1,70 @@
 {
   "Metadata": {
-    "titleDefault": "Prop Firms",
-    "description": "Hồ sơ các prop firm, quy định rút tiền và công cụ tính toán."
+    "titleDefault": "PropFXLab — Tình báo rút tiền Prop Firm",
+    "description": "So sánh số tiền thực nhận, trạng thái an toàn và tốc độ rút tiền của từng prop firm bằng máy tính minh bạch."
   },
   "Nav": {
-    "brand": "Prop Firms",
-    "calculator": "Máy tính rút tiền",
+    "brand": "PropFXLab",
+    "calculator": "Máy tính",
+    "rankings": "Xếp hạng",
+    "compare": "So sánh",
+    "faq": "FAQ",
     "languageLabel": "Ngôn ngữ"
   },
   "HomePage": {
-    "title": "So sánh Prop Firm",
-    "subtitle": "So sánh quy mô vốn, quy định rút tiền và trạng thái an toàn theo thời gian thực của từng công ty, hoặc dùng máy tính để ước tính số tiền thực nhận.",
-    "openCalculator": "Mở máy tính rút tiền"
+    "eyebrow": "Phòng thí nghiệm rút tiền độc lập",
+    "title": "Xem số tiền thực sự về tài khoản của bạn.",
+    "subtitle": "Ước tính số tiền thực nhận của từng prop firm sau chia lợi nhuận, phí nền tảng và chi phí rút tiền — rồi xếp hạng theo tốc độ và độ an toàn.",
+    "openCalculator": "Mở máy tính đầy đủ",
+    "accountSizeLabel": "Quy mô tài khoản",
+    "profitLabel": "Lợi nhuận dự kiến (USD)",
+    "previewLabel": "Số tiền thực nhận ước tính",
+    "previewFirm": "Ước tính cao nhất · {firm}",
+    "previewSplit": "Trader nhận {percent}% sau phí",
+    "rankingsTitle": "Xếp hạng trực tiếp",
+    "rankingsSubtitle": "Xếp theo số tiền thực nhận ước tính trên tài khoản {account} với lợi nhuận {profit}, dùng tỷ lệ chia mặc định của từng công ty.",
+    "trustTitle": "Dành cho trader được cấp vốn",
+    "trustSubtitle": "Mọi con số đều được tính từ quy định công khai — không phải copy marketing.",
+    "trust": {
+      "calc": {
+        "title": "Tính toán minh bạch",
+        "body": "Tỷ lệ chia, khoản khấu trừ nền tảng, phí xử lý và mức rút tối thiểu được áp dụng theo đúng thứ tự của một lần rút tiền thật."
+      },
+      "risk": {
+        "title": "Cảnh báo rủi ro",
+        "body": "Huy hiệu cảnh báo chậm và tạm ngừng rút tiền xuất hiện trước khi bạn mua challenge, không phải sau khi lỡ một lần rút."
+      },
+      "speed": {
+        "title": "Kiểm toán tốc độ rút tiền",
+        "body": "Chúng tôi theo dõi khung xử lý được công bố — Instant, 8 giờ, 24 giờ — để so sánh tốc độ nhận tiền, không chỉ phần trăm chia."
+      }
+    },
+    "comparisonsTitle": "Cặp so sánh phổ biến",
+    "comparisonsSubtitle": "Vào trận đối đầu hai công ty và đọc toàn bộ quy định rút tiền của cả hai bên.",
+    "vs": "VS",
+    "faqTitle": "Câu hỏi thường gặp",
+    "faqs": [
+      {
+        "question": "Số tiền thực nhận được tính như thế nào?",
+        "answer": "Bắt đầu từ lợi nhuận dự kiến, trừ khoản khấu trừ của nền tảng, áp dụng tỷ lệ chia mặc định của trader, rồi trừ thuế khấu trừ, phí xử lý và phí rút tiền. Phần còn lại là số tiền ước tính sẽ về tài khoản của bạn."
+      },
+      {
+        "question": "Đây có phải tài khoản giao dịch vốn thật không?",
+        "answer": "Không. Tài khoản prop firm giao dịch bằng vốn mô phỏng. Tỷ lệ chia, tốc độ và quy định trong quá khứ không đảm bảo kết quả tương lai. Luôn xác nhận điều khoản hiện hành trên trang chính thức."
+      },
+      {
+        "question": "Huy hiệu trạng thái an toàn nghĩa là gì?",
+        "answer": "Hoạt động nghĩa là chưa có tín hiệu chậm rút. Cảnh báo đánh dấu rút tiền bị trễ hoặc tranh chấp. Tạm ngừng rút tiền nghĩa là thanh toán có vẻ bị tạm dừng. Đây là quan sát, không phải xếp hạng tín dụng."
+      },
+      {
+        "question": "Mã ưu đãi có làm thay đổi kết quả máy tính không?",
+        "answer": "Không. Mã ưu đãi có thể giảm phí challenge khi thanh toán; không thay đổi tỷ lệ chia, phí hay mức rút tối thiểu. Nút Claim có thể là liên kết tiếp thị."
+      },
+      {
+        "question": "Vì sao cùng lợi nhuận mà hai công ty thực nhận khác nhau?",
+        "answer": "Tỷ lệ chia mặc định, khoản khấu trừ và phí kênh khác nhau. Tỷ lệ chia quảng cáo cao hơn vẫn có thể thực nhận thấp hơn sau phí crypto hoặc phí xử lý — đó chính là khoảng cách mà bảng xếp hạng muốn cho thấy."
+      }
+    ]
   },
   "CalculatorPage": {
     "metaTitle": "Máy tính rút tiền",
@@ -71,6 +124,12 @@
     "fundingRangeLabel": "Quy mô vốn",
     "splitLabel": "Tỷ lệ chia",
     "payoutSpeedLabel": "Tốc độ rút tiền",
+    "netPayoutLabel": "Thực nhận",
+    "promoLabel": "Mã",
+    "copy": "Sao chép",
+    "copied": "Đã sao chép",
+    "claimCta": "Nhận ưu đãi",
+    "readReview": "Đọc đánh giá",
     "statusActive": "Hoạt động",
     "statusWarning": "Cảnh báo",
     "statusSuspended": "Tạm ngừng rút tiền"
@@ -101,12 +160,15 @@
   },
   "SiteFooter": {
     "tagline": "Công cụ tính rút tiền và so sánh quy định công khai của các prop firm, độc lập và khách quan.",
+    "sitemapExplore": "Khám phá",
+    "sitemapHome": "Trang chủ",
+    "sitemapFirms": "Đánh giá công ty",
     "financialDisclaimerTitle": "Miễn trừ trách nhiệm tài chính",
     "financialDisclaimerBody": "Trang web này chỉ cung cấp các phép tính toán học và so sánh dữ liệu công khai. Không có nội dung nào ở đây cấu thành lời khuyên tài chính, đầu tư, thuế hoặc pháp lý. Tất cả các tài khoản được đề cập đều giao dịch bằng vốn mô phỏng, và cơ cấu chia lợi nhuận trong quá khứ không đảm bảo kết quả trong tương lai. Luôn xác minh quy định hiện hành trực tiếp với prop firm trước khi đưa ra quyết định mua hoặc rút tiền.",
     "affiliateDisclosureTitle": "Công bố liên kết tiếp thị",
     "affiliateDisclosureBody": "Một số liên kết trên trang web này là liên kết tiếp thị liên kết/giới thiệu. Chúng tôi có thể nhận hoa hồng nếu bạn đăng ký qua các liên kết đó, mà bạn không phải trả thêm chi phí nào. Khoản thù lao tiềm năng này không ảnh hưởng đến tính khách quan của công cụ tính toán, so sánh hoặc xếp hạng của chúng tôi — mọi số liệu đều được tính từ cùng một bộ quy định công khai cho mỗi công ty.",
     "trademarkNoticeTitle": "Thông báo về nhãn hiệu",
     "trademarkNoticeBody": "Tất cả tên, logo và nhãn hiệu của các prop firm hiển thị trên trang web này là tài sản của chủ sở hữu tương ứng. Chúng được sử dụng ở đây chỉ nhằm mục đích nhận diện và so sánh, không hàm ý bất kỳ sự chứng thực, tài trợ hay liên kết nào với trang web này trừ khi được nêu rõ.",
-    "copyright": "© {year} Prop Firms. Trang so sánh độc lập, không liên kết với bất kỳ công ty nào được liệt kê."
+    "copyright": "© {year} PropFXLab. Trang so sánh độc lập, không liên kết với bất kỳ công ty nào được liệt kê."
   }
 }

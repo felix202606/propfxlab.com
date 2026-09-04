@@ -34,7 +34,7 @@ export async function generateMetadata({
   return {
     title: {
       default: t("titleDefault"),
-      template: "%s · Prop Firms",
+      template: "%s · PropFXLab",
     },
     description: t("description"),
   };
@@ -55,13 +55,13 @@ export default async function LocaleLayout({
   return (
     <html
       lang={localeMeta[locale].bcp47}
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`dark ${geistSans.variable} ${geistMono.variable} h-full scroll-smooth antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-zinc-50 font-sans text-zinc-950 dark:bg-black dark:text-zinc-50">
+      <body className="flex min-h-full flex-col bg-[#09090b] font-sans text-zinc-50">
         <NextIntlClientProvider>
-          <SiteHeader firms={firms} />
+          <SiteHeader />
           <div className="flex flex-1 flex-col">{children}</div>
-          <SiteFooter />
+          <SiteFooter firms={firms} />
         </NextIntlClientProvider>
         <Analytics />
       </body>

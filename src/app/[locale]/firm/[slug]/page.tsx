@@ -31,7 +31,7 @@ export async function generateMetadata({
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-xl border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950">
+    <div className="rounded-xl border border-white/10 bg-white/[0.03] p-4">
       <p className="text-xs font-medium uppercase tracking-wide text-zinc-500">
         {label}
       </p>

@@ -11,7 +11,7 @@ export function LocaleSwitcher() {
   const pathname = usePathname();
 
   return (
-    <label className="flex items-center gap-1.5 text-sm text-zinc-600 dark:text-zinc-400">
+    <label className="flex items-center gap-1.5 text-sm text-zinc-400">
       <span className="sr-only">{t("languageLabel")}</span>
       <select
         aria-label={t("languageLabel")}
@@ -20,10 +20,10 @@ export function LocaleSwitcher() {
           const nextLocale = event.target.value as (typeof routing.locales)[number];
           router.replace(pathname, { locale: nextLocale });
         }}
-        className="rounded-lg border border-zinc-200 bg-white px-2 py-1 text-sm dark:border-zinc-700 dark:bg-zinc-900"
+        className="cursor-pointer rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-zinc-200 outline-none transition-colors hover:border-emerald-400/30 hover:bg-white/10 focus:border-emerald-400/40"
       >
         {routing.locales.map((code) => (
-          <option key={code} value={code}>
+          <option key={code} value={code} className="bg-zinc-950 text-zinc-100">
             {localeMeta[code].label}
           </option>
         ))}

@@ -1,17 +1,70 @@
 {
   "Metadata": {
-    "titleDefault": "Prop Firms",
-    "description": "Prop Firm 資料、出金規則與計算器。"
+    "titleDefault": "PropFXLab — Prop Firm 出金情報",
+    "description": "用透明計算器對比各家 Prop Firm 的到手金額、安全狀態與出金速度。"
   },
   "Nav": {
-    "brand": "Prop Firms",
+    "brand": "PropFXLab",
     "calculator": "出金計算器",
+    "rankings": "排行榜",
+    "compare": "對比",
+    "faq": "FAQ",
     "languageLabel": "語言"
   },
   "HomePage": {
-    "title": "Prop Firm 對照",
-    "subtitle": "查看各家資金規模、出金規則與即時安全狀態，或用計算器估算到手金額。",
-    "openCalculator": "打開出金計算器"
+    "eyebrow": "獨立出金實驗室",
+    "title": "先算清，真正能打到帳上的錢。",
+    "subtitle": "依分成、平台扣費與出金成本估算各家到手金額，再對照安全狀態與到帳速度。",
+    "openCalculator": "打開完整計算器",
+    "accountSizeLabel": "帳戶規模",
+    "profitLabel": "預計利潤（USD）",
+    "previewLabel": "預估到手",
+    "previewFirm": "目前最高估算 · {firm}",
+    "previewSplit": "扣除費用後交易員分成 {percent}%",
+    "rankingsTitle": "即時平台排行",
+    "rankingsSubtitle": "依 {account} 帳戶、{profit} 利潤、各家預設分成估算的到手金額排序。",
+    "trustTitle": "為資金盤交易員而建",
+    "trustSubtitle": "每一個數字都來自公開規則，而不是行銷文案。",
+    "trust": {
+      "calc": {
+        "title": "透明計算",
+        "body": "分成、平台扣減、通道費和最低出金依真實出金順序疊加，結果可覆核。"
+      },
+      "risk": {
+        "title": "風險預警",
+        "body": "延遲預警和暫停出金徽章會在你購買挑戰前亮起，而不是在錯過出金之後。"
+      },
+      "speed": {
+        "title": "出金速度審計",
+        "body": "我們追蹤公開的處理時效——即時、8 小時、24 小時——對比的是到帳速度，而不只是分成比例。"
+      }
+    },
+    "comparisonsTitle": "熱門兩兩對比",
+    "comparisonsSubtitle": "直接進入兩家平台的對決，閱讀雙方完整出金規則。",
+    "vs": "VS",
+    "faqTitle": "常見問題",
+    "faqs": [
+      {
+        "question": "到手金額是怎麼算出來的？",
+        "answer": "從預計利潤出發，減去平台扣減，再依預設交易員分成，隨後扣除代扣稅、通道費和出金手續費。剩下的就是估算會打到你帳戶的金額。"
+      },
+      {
+        "question": "這些是真實資金帳戶嗎？",
+        "answer": "不是。Prop Firm 帳戶交易的是模擬資金。歷史分成、宣傳速度和規則不代表未來結果。購買前請以官方最新條款為準。"
+      },
+      {
+        "question": "安全狀態徽章代表什麼？",
+        "answer": "正常運營表示暫無出金延遲訊號；預警表示存在延遲或爭議；暫停出金表示出金疑似中斷。徽章是觀察結果，不是信用評級。"
+      },
+      {
+        "question": "優惠碼會改變計算器結果嗎？",
+        "answer": "不會。優惠碼通常只影響挑戰費，不改變分成、手續費或最低出金。Claim 按鈕可能是推廣連結。"
+      },
+      {
+        "question": "為什麼同樣利潤，兩家到手不一樣？",
+        "answer": "預設分成、平台扣減和通道費不同。更高的宣傳分成在扣完通道費後仍可能更少——這正是排行榜要揭示的差距。"
+      }
+    ]
   },
   "CalculatorPage": {
     "metaTitle": "出金計算器",
@@ -71,6 +124,12 @@
     "fundingRangeLabel": "資金規模",
     "splitLabel": "分成比例",
     "payoutSpeedLabel": "出金速度",
+    "netPayoutLabel": "到手利潤",
+    "promoLabel": "優惠碼",
+    "copy": "複製",
+    "copied": "已複製",
+    "claimCta": "領取優惠",
+    "readReview": "查看詳情",
     "statusActive": "正常運營",
     "statusWarning": "延遲預警",
     "statusSuspended": "暫停出金"
@@ -101,12 +160,15 @@
   },
   "SiteFooter": {
     "tagline": "獨立的 Prop Firm 出金計算器與公開規則對比。",
+    "sitemapExplore": "瀏覽",
+    "sitemapHome": "首頁",
+    "sitemapFirms": "平台評測",
     "financialDisclaimerTitle": "財務免責聲明",
     "financialDisclaimerBody": "本站僅提供基於公開資料的數學計算與對比，不構成任何投資、財務、稅務或法律建議。所有帳戶均為模擬資金交易，過去的分成規則不代表未來結果。做出購買或出金決定前，請務必以該 Prop Firm 官方最新條款為準。",
     "affiliateDisclosureTitle": "推廣連結聲明",
     "affiliateDisclosureBody": "本站部分連結為推廣/返佣連結。若您透過這些連結註冊，本站可能獲得一定佣金，您無需為此支付額外費用。這種潛在收益不會影響計算器、對比或排名的客觀性——所有數據皆按各公司相同的公開規則計算得出。",
     "trademarkNoticeTitle": "商標聲明",
     "trademarkNoticeBody": "本站展示的所有 Prop Firm 名稱、Logo 及商標均歸各自公司所有。此處使用僅用於識別與對比目的，除非明確說明，不代表任何背書、贊助或關聯關係。",
-    "copyright": "© {year} Prop Firms。獨立對比網站，與所列任何公司均無關聯。"
+    "copyright": "© {year} PropFXLab。獨立對比網站，與所列任何公司均無關聯。"
   }
 }

@@ -1,17 +1,70 @@
 {
   "Metadata": {
-    "titleDefault": "Prop Firms",
-    "description": "Perfis de prop firms, regras de pagamento e calculadoras."
+    "titleDefault": "PropFXLab — Inteligência de saques de prop firms",
+    "description": "Compare o valor líquido, o status de segurança e a velocidade de saque de cada prop firm com uma calculadora transparente."
   },
   "Nav": {
-    "brand": "Prop Firms",
-    "calculator": "Calculadora de saque",
+    "brand": "PropFXLab",
+    "calculator": "Calculadora",
+    "rankings": "Ranking",
+    "compare": "Comparar",
+    "faq": "FAQ",
     "languageLabel": "Idioma"
   },
   "HomePage": {
-    "title": "Comparativo de Prop Firms",
-    "subtitle": "Compare o capital disponível, as regras de saque e o status de segurança em tempo real de cada firma, ou use a calculadora para estimar o valor líquido a receber.",
-    "openCalculator": "Abrir calculadora de saque"
+    "eyebrow": "Laboratório independente de saques",
+    "title": "Veja o dinheiro que realmente cai na sua conta.",
+    "subtitle": "Estime o valor líquido de cada prop firm após o split, as taxas da plataforma e os custos de saque — e ranqueie quem paga mais rápido e com mais segurança.",
+    "openCalculator": "Abrir calculadora completa",
+    "accountSizeLabel": "Tamanho da conta",
+    "profitLabel": "Lucro esperado (USD)",
+    "previewLabel": "Valor líquido estimado",
+    "previewFirm": "Melhor estimativa · {firm}",
+    "previewSplit": "{percent}% para o trader após taxas",
+    "rankingsTitle": "Ranking ao vivo",
+    "rankingsSubtitle": "Ordenado pelo valor líquido estimado em uma conta de {account} com {profit} de lucro, usando o split padrão de cada firma.",
+    "trustTitle": "Feito para traders funded",
+    "trustSubtitle": "Cada número é calculado a partir de regras públicas — não de copy de marketing.",
+    "trust": {
+      "calc": {
+        "title": "Cálculo transparente",
+        "body": "Splits, deduções da plataforma, taxas da processadora e saques mínimos são aplicados na mesma ordem de um saque real."
+      },
+      "risk": {
+        "title": "Alertas de risco",
+        "body": "Avisos de atraso e selos de saque suspenso aparecem antes de você comprar um challenge, não depois de um saque perdido."
+      },
+      "speed": {
+        "title": "Auditoria de velocidade",
+        "body": "Acompanhamos as janelas de processamento anunciadas — Instant, 8 horas, 24 horas — para comparar a velocidade do saque, não só o percentual de split."
+      }
+    },
+    "comparisonsTitle": "Confrontos populares",
+    "comparisonsSubtitle": "Entre num mano a mano e leia as regras de saque completas das duas firmas.",
+    "vs": "VS",
+    "faqTitle": "Perguntas frequentes",
+    "faqs": [
+      {
+        "question": "Como o valor líquido é calculado?",
+        "answer": "Partimos do lucro esperado, subtraímos qualquer dedução da plataforma, aplicamos o split padrão do trader e então descontamos imposto retido, taxa da processadora e taxa de saque. O que resta é o valor estimado que cairia na sua conta."
+      },
+      {
+        "question": "Essas são contas com capital real?",
+        "answer": "Não. Contas de prop firms operam com capital simulado. Splits, velocidades e regras passadas não garantem resultados futuros. Confirme sempre os termos vigentes no site oficial."
+      },
+      {
+        "question": "O que significam os selos de segurança?",
+        "answer": "Ativa indica que não há sinal de atraso. Alerta marca saques atrasados ou em disputa. Suspensa significa que os pagamentos parecem pausados. São observações, não uma classificação de crédito."
+      },
+      {
+        "question": "Os cupons mudam o resultado da calculadora?",
+        "answer": "Não. Um cupom pode descontar a taxa do challenge no checkout; não altera split, taxas ou saque mínimo. Os botões de Claim podem ser links de afiliado."
+      },
+      {
+        "question": "Por que duas firmas pagam diferente com o mesmo lucro?",
+        "answer": "O split padrão, as deduções e as taxas de canal diferem. Um split mais alto no marketing ainda pode render menos após taxas de cripto ou da processadora — essa diferença é o que o ranking mostra."
+      }
+    ]
   },
   "CalculatorPage": {
     "metaTitle": "Calculadora de saque",
@@ -71,6 +124,12 @@
     "fundingRangeLabel": "Faixa de capital",
     "splitLabel": "Percentual de divisão",
     "payoutSpeedLabel": "Velocidade de saque",
+    "netPayoutLabel": "Valor líquido",
+    "promoLabel": "Cupom",
+    "copy": "Copiar",
+    "copied": "Copiado",
+    "claimCta": "Resgatar oferta",
+    "readReview": "Ler avaliação",
     "statusActive": "Ativa",
     "statusWarning": "Alerta",
     "statusSuspended": "Suspensa"
@@ -101,12 +160,15 @@
   },
   "SiteFooter": {
     "tagline": "Calculadoras de saque e comparativos de regras públicas de prop firms, de forma independente.",
+    "sitemapExplore": "Explorar",
+    "sitemapHome": "Início",
+    "sitemapFirms": "Avaliações",
     "financialDisclaimerTitle": "Aviso financeiro",
     "financialDisclaimerBody": "Este site oferece apenas cálculos matemáticos de pagamento e comparações de dados publicamente disponíveis. Nada aqui constitui aconselhamento financeiro, de investimento, fiscal ou jurídico. Todas as contas mencionadas operam com capital simulado, e divisões passadas não garantem resultados futuros. Sempre verifique as regras vigentes diretamente com a prop firm antes de tomar uma decisão de compra ou saque.",
     "affiliateDisclosureTitle": "Divulgação de afiliados",
     "affiliateDisclosureBody": "Alguns links deste site são links de afiliado/indicação. Podemos receber uma comissão se você se cadastrar através deles, sem custo adicional para você. Essa possível compensação não influencia a objetividade de nossas calculadoras, comparações ou classificações — cada número é calculado com as mesmas regras públicas para cada firma.",
     "trademarkNoticeTitle": "Aviso de marcas registradas",
     "trademarkNoticeBody": "Todos os nomes, logotipos e marcas das prop firms exibidos neste site são propriedade de seus respectivos donos. Eles são usados aqui apenas para fins de identificação e comparação, e não implicam patrocínio, aprovação ou afiliação com este site, exceto quando expressamente indicado.",
-    "copyright": "© {year} Prop Firms. Site comparativo independente, sem afiliação com qualquer firma listada."
+    "copyright": "© {year} PropFXLab. Site comparativo independente, sem afiliação com qualquer firma listada."
   }
 }
