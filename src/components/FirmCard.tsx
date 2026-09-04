@@ -144,24 +144,35 @@ export function FirmCard({ firm, rank, netPayout, currency }: FirmCardProps) {
       ) : null}
 
       <div className="relative mt-auto pt-4">
-        <PromoCodeCopy code={offer.code} href={offer.href} />
-
-        <div className="mt-3 grid grid-cols-[1.15fr_0.85fr] gap-2">
-          <a
-            href={offer.href}
-            target="_blank"
-            rel="sponsored noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-emerald-400 via-emerald-300 to-cyan-400 px-3 py-2.5 text-sm font-semibold text-zinc-950 shadow-[0_0_22px_-4px_rgba(52,211,153,0.95)] ring-1 ring-emerald-200/50 transition-all hover:brightness-110 hover:shadow-[0_0_32px_-2px_rgba(34,211,238,0.85)]"
-          >
-            {t("claimCta")}
-          </a>
+        {firm.status === "suspended" ? (
           <Link
             href={`/firm/${firm.slug}`}
-            className="inline-flex items-center justify-center rounded-xl border border-white/[0.08] bg-zinc-950/70 px-3 py-2.5 text-sm font-medium text-zinc-400 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04)] transition-colors hover:border-white/15 hover:bg-zinc-900 hover:text-zinc-200"
+            className="inline-flex w-full items-center justify-center rounded-xl border border-red-400/20 bg-red-400/10 px-3 py-2.5 text-sm font-medium text-red-200 transition-colors hover:border-red-400/40 hover:bg-red-400/15"
           >
             {t("readReview")}
           </Link>
-        </div>
+        ) : (
+          <>
+            <PromoCodeCopy code={offer.code} href={offer.href} />
+
+            <div className="mt-3 grid grid-cols-[1.15fr_0.85fr] gap-2">
+              <a
+                href={offer.href}
+                target="_blank"
+                rel="sponsored noopener noreferrer"
+                className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-emerald-400 via-emerald-300 to-cyan-400 px-3 py-2.5 text-sm font-semibold text-zinc-950 shadow-[0_0_22px_-4px_rgba(52,211,153,0.95)] ring-1 ring-emerald-200/50 transition-all hover:brightness-110 hover:shadow-[0_0_32px_-2px_rgba(34,211,238,0.85)]"
+              >
+                {t("claimCta")}
+              </a>
+              <Link
+                href={`/firm/${firm.slug}`}
+                className="inline-flex items-center justify-center rounded-xl border border-white/[0.08] bg-zinc-950/70 px-3 py-2.5 text-sm font-medium text-zinc-400 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04)] transition-colors hover:border-white/15 hover:bg-zinc-900 hover:text-zinc-200"
+              >
+                {t("readReview")}
+              </Link>
+            </div>
+          </>
+        )}
       </div>
     </article>
   );

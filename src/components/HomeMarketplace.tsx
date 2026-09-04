@@ -54,13 +54,17 @@ export function HomeMarketplace({ firms }: { firms: PropFirm[] }) {
         breakdown: payoutForFirm(firm, accountSize, profitValue),
       }))
       .sort((a, b) => {
+        const aClosed = a.firm.status === "suspended" ? 1 : 0;
+        const bClosed = b.firm.status === "suspended" ? 1 : 0;
+        if (aClosed !== bClosed) return aClosed - bClosed;
         const aPay = a.breakdown?.netPayout ?? -1;
         const bPay = b.breakdown?.netPayout ?? -1;
         return bPay - aPay;
       });
   }, [firms, accountSize, profitValue, hasValidProfit]);
 
-  const leader = ranked[0];
+  const leader =
+    ranked.find((entry) => entry.firm.status !== "suspended") ?? ranked[0];
   const preview = leader?.breakdown ?? null;
 
   return (

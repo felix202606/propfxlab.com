@@ -35,7 +35,7 @@ PROP_FIRMS: list[PropFirmSeed] = [
         "slug": "funding-traders",
         "url": "https://fundingtraders.com",
     },
-    {"name": "MyFundedFX", "slug": "myfundedfx", "url": "https://myfundedfx.com"},
+    {"name": "MyFundedFX", "slug": "myfundedfx", "url": "https://seacrestmarkets.io/closed"},
     {"name": "The5ers", "slug": "the5ers", "url": "https://the5ers.com"},
     {"name": "E8 Markets", "slug": "e8-markets", "url": "https://e8markets.com"},
     {"name": "Topstep", "slug": "topstep", "url": "https://www.topstep.com"},
