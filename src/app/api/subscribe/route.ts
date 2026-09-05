@@ -3,20 +3,79 @@ import { Resend } from "resend";
 
 const FROM = "PropFXLab Alerts <alerts@propfxlab.com>";
 const REPLY_TO = "qq81174761@gmail.com";
-const SUBJECT = "⚡ Welcome to PropFXLab - Your Exclusive Prop Firm Discounts";
 
-function buildWelcomeHtml(email: string): string {
+type LocaleKey = "en" | "es" | "cn" | "tw" | "th" | "vi" | "pt";
+
+const copy: Record<LocaleKey, { subject: string; hero: string; subhero: string; ctaLabel: string; footerUnsub: string }> = {
+  en: {
+    subject: "⚡ Welcome to PropFXLab - Your Exclusive Prop Firm Discounts",
+    hero: "Your Prop Firm Edge Starts Here",
+    subhero: "You're now on the list. We'll alert you to the best discount codes, challenge sales, and profit-boost strategies — before anyone else.",
+    ctaLabel: "Open Profit Calculator →",
+    footerUnsub: "You're receiving this because you subscribed at",
+  },
+  es: {
+    subject: "⚡ Bienvenido a PropFXLab - Tus Descuentos Exclusivos de Prop Firms",
+    hero: "Tu Ventaja en Prop Firms Empieza Aquí",
+    subhero: "Ya estás en la lista. Te avisaremos sobre los mejores códigos de descuento, ventas de desafíos y estrategias de maximización de ganancias — antes que nadie.",
+    ctaLabel: "Abrir Calculadora de Ganancias →",
+    footerUnsub: "Recibes esto porque te suscribiste en",
+  },
+  cn: {
+    subject: "⚡ 欢迎加入 PropFXLab - 你的专属道具公司折扣",
+    hero: "你的道具公司优势从这里开始",
+    subhero: "你已成功加入订阅列表。我们将第一时间向你推送最佳折扣码、挑战特卖与利润提升策略。",
+    ctaLabel: "打开利润计算器 →",
+    footerUnsub: "你收到此邮件是因为你在以下网站订阅：",
+  },
+  tw: {
+    subject: "⚡ 歡迎加入 PropFXLab - 你的專屬道具公司折扣",
+    hero: "你的道具公司優勢從這裡開始",
+    subhero: "你已成功加入訂閱清單。我們將第一時間向你推送最佳折扣碼、挑戰特賣與利潤提升策略。",
+    ctaLabel: "開啟利潤計算機 →",
+    footerUnsub: "你收到此郵件是因為你在以下網站訂閱：",
+  },
+  th: {
+    subject: "⚡ ยินดีต้อนรับสู่ PropFXLab - ส่วนลดพิเศษ Prop Firm ของคุณ",
+    hero: "ความได้เปรียบ Prop Firm ของคุณเริ่มต้นที่นี่",
+    subhero: "คุณอยู่ในรายชื่อแล้ว เราจะแจ้งเตือนคุณเกี่ยวกับโค้ดส่วนลด การขาย Challenge และกลยุทธ์เพิ่มกำไรที่ดีที่สุด — ก่อนใคร",
+    ctaLabel: "เปิดเครื่องคำนวณกำไร →",
+    footerUnsub: "คุณได้รับอีเมลนี้เพราะสมัครสมาชิกที่",
+  },
+  vi: {
+    subject: "⚡ Chào mừng đến PropFXLab - Ưu đãi Prop Firm độc quyền của bạn",
+    hero: "Lợi thế Prop Firm của bạn bắt đầu từ đây",
+    subhero: "Bạn đã có mặt trong danh sách. Chúng tôi sẽ thông báo cho bạn về các mã giảm giá tốt nhất, đợt sale challenge và chiến lược tăng lợi nhuận — trước bất kỳ ai khác.",
+    ctaLabel: "Mở Máy Tính Lợi Nhuận →",
+    footerUnsub: "Bạn nhận được email này vì đã đăng ký tại",
+  },
+  pt: {
+    subject: "⚡ Bem-vindo ao PropFXLab - Seus Descontos Exclusivos de Prop Firms",
+    hero: "Sua Vantagem em Prop Firms Começa Aqui",
+    subhero: "Você já está na lista. Vamos te avisar sobre os melhores códigos de desconto, vendas de desafios e estratégias para maximizar ganhos — antes de qualquer um.",
+    ctaLabel: "Abrir Calculadora de Lucros →",
+    footerUnsub: "Você está recebendo isto porque se inscreveu em",
+  },
+};
+
+function getLocaleKey(locale: string): LocaleKey {
+  return (locale in copy ? locale : "en") as LocaleKey;
+}
+
+function buildWelcomeHtml(email: string, locale: string): string {
+  const l = getLocaleKey(locale);
+  const c = copy[l];
+
   return `<!DOCTYPE html>
-<html lang="en">
+<html lang="${l === "cn" || l === "tw" ? "zh" : l}">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>${SUBJECT}</title>
+  <title>${c.subject}</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { background: #0a0a0f; color: #e2e8f0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
     a { color: #34d399; text-decoration: none; }
-    a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
@@ -31,140 +90,70 @@ function buildWelcomeHtml(email: string): string {
               <div style="display:inline-block; background: #052e16; border: 1px solid #34d399; border-radius: 8px; padding: 6px 14px; margin-bottom: 20px;">
                 <span style="color:#34d399; font-size:12px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase;">⚡ PropFXLab Alerts</span>
               </div>
-              <h1 style="color:#f1f5f9; font-size:26px; font-weight:800; line-height:1.3; margin-bottom:10px;">
-                Your Prop Firm Edge<br/>Starts Here
-              </h1>
-              <p style="color:#94a3b8; font-size:15px; line-height:1.6;">
-                You're now on the list. We'll alert you to the best discount codes,<br/>
-                challenge sales, and profit-boost strategies — before anyone else.
-              </p>
+              <h1 style="color:#f1f5f9; font-size:26px; font-weight:800; line-height:1.3; margin-bottom:10px;">${c.hero}</h1>
+              <p style="color:#94a3b8; font-size:15px; line-height:1.6;">${c.subhero}</p>
             </td>
           </tr>
 
-          <!-- Divider bar -->
+          <!-- Divider -->
           <tr>
             <td style="height:3px; background: linear-gradient(90deg, #059669, #34d399, #059669);"></td>
           </tr>
 
-          <!-- Promo codes section -->
+          <!-- Promo codes -->
           <tr>
-            <td style="background:#0f1923; border-left: 1px solid #1e3a2f; border-right: 1px solid #1e3a2f; padding: 32px 40px;">
+            <td style="background:#0f1923; border-left:1px solid #1e3a2f; border-right:1px solid #1e3a2f; padding:32px 40px;">
               <p style="color:#64748b; font-size:11px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; margin-bottom:20px;">🔥 Current Live Discounts</p>
 
               <!-- FTMO -->
-              <table width="100%" cellpadding="0" cellspacing="0" style="background:#0a1510; border:1px solid #1e3a2f; border-radius:10px; padding:0; margin-bottom:12px;">
-                <tr>
-                  <td style="padding:16px 20px;">
-                    <table width="100%" cellpadding="0" cellspacing="0">
-                      <tr>
-                        <td>
-                          <span style="color:#e2e8f0; font-size:15px; font-weight:700;">FTMO</span>
-                          <span style="display:inline-block; background:#052e16; color:#34d399; font-size:11px; font-weight:600; padding:2px 8px; border-radius:4px; margin-left:8px;">10% OFF</span>
-                        </td>
-                        <td align="right">
-                          <span style="background:#1e3a2f; color:#6ee7b7; font-family:monospace; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:0.08em;">PROPFXLAB10</span>
-                        </td>
-                      </tr>
-                      <tr><td colspan="2" style="padding-top:6px;"><span style="color:#64748b; font-size:12px;">Applies to all challenge sizes · No expiry</span></td></tr>
-                    </table>
-                  </td>
-                </tr>
+              <table width="100%" cellpadding="0" cellspacing="0" style="background:#0a1510; border:1px solid #1e3a2f; border-radius:10px; margin-bottom:12px;">
+                <tr><td style="padding:16px 20px;">
+                  <table width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td><span style="color:#e2e8f0; font-size:15px; font-weight:700;">FTMO</span> <span style="background:#052e16; color:#34d399; font-size:11px; font-weight:600; padding:2px 8px; border-radius:4px;">10% OFF</span></td>
+                      <td align="right"><span style="background:#1e3a2f; color:#6ee7b7; font-family:monospace; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px;">PROPFXLAB10</span></td>
+                    </tr>
+                    <tr><td colspan="2" style="padding-top:6px;"><span style="color:#64748b; font-size:12px;">All challenge sizes · No expiry</span></td></tr>
+                  </table>
+                </td></tr>
               </table>
 
               <!-- FundedNext -->
-              <table width="100%" cellpadding="0" cellspacing="0" style="background:#0a1510; border:1px solid #1e3a2f; border-radius:10px; padding:0; margin-bottom:12px;">
-                <tr>
-                  <td style="padding:16px 20px;">
-                    <table width="100%" cellpadding="0" cellspacing="0">
-                      <tr>
-                        <td>
-                          <span style="color:#e2e8f0; font-size:15px; font-weight:700;">FundedNext</span>
-                          <span style="display:inline-block; background:#052e16; color:#34d399; font-size:11px; font-weight:600; padding:2px 8px; border-radius:4px; margin-left:8px;">15% OFF</span>
-                        </td>
-                        <td align="right">
-                          <span style="background:#1e3a2f; color:#6ee7b7; font-family:monospace; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:0.08em;">FXLAB15</span>
-                        </td>
-                      </tr>
-                      <tr><td colspan="2" style="padding-top:6px;"><span style="color:#64748b; font-size:12px;">Stellar &amp; Evaluation accounts · Limited time</span></td></tr>
-                    </table>
-                  </td>
-                </tr>
+              <table width="100%" cellpadding="0" cellspacing="0" style="background:#0a1510; border:1px solid #1e3a2f; border-radius:10px; margin-bottom:12px;">
+                <tr><td style="padding:16px 20px;">
+                  <table width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td><span style="color:#e2e8f0; font-size:15px; font-weight:700;">FundedNext</span> <span style="background:#052e16; color:#34d399; font-size:11px; font-weight:600; padding:2px 8px; border-radius:4px;">15% OFF</span></td>
+                      <td align="right"><span style="background:#1e3a2f; color:#6ee7b7; font-family:monospace; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px;">FXLAB15</span></td>
+                    </tr>
+                    <tr><td colspan="2" style="padding-top:6px;"><span style="color:#64748b; font-size:12px;">Stellar &amp; Evaluation · Limited time</span></td></tr>
+                  </table>
+                </td></tr>
               </table>
 
               <!-- The Funded Trader -->
-              <table width="100%" cellpadding="0" cellspacing="0" style="background:#0a1510; border:1px solid #1e3a2f; border-radius:10px; padding:0; margin-bottom:12px;">
-                <tr>
-                  <td style="padding:16px 20px;">
-                    <table width="100%" cellpadding="0" cellspacing="0">
-                      <tr>
-                        <td>
-                          <span style="color:#e2e8f0; font-size:15px; font-weight:700;">The Funded Trader</span>
-                          <span style="display:inline-block; background:#052e16; color:#34d399; font-size:11px; font-weight:600; padding:2px 8px; border-radius:4px; margin-left:8px;">20% OFF</span>
-                        </td>
-                        <td align="right">
-                          <span style="background:#1e3a2f; color:#6ee7b7; font-family:monospace; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px; letter-spacing:0.08em;">TFT20PROP</span>
-                        </td>
-                      </tr>
-                      <tr><td colspan="2" style="padding-top:6px;"><span style="color:#64748b; font-size:12px;">Royal &amp; Standard challenges · Ends soon</span></td></tr>
-                    </table>
-                  </td>
-                </tr>
+              <table width="100%" cellpadding="0" cellspacing="0" style="background:#0a1510; border:1px solid #1e3a2f; border-radius:10px;">
+                <tr><td style="padding:16px 20px;">
+                  <table width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td><span style="color:#e2e8f0; font-size:15px; font-weight:700;">The Funded Trader</span> <span style="background:#052e16; color:#34d399; font-size:11px; font-weight:600; padding:2px 8px; border-radius:4px;">20% OFF</span></td>
+                      <td align="right"><span style="background:#1e3a2f; color:#6ee7b7; font-family:monospace; font-size:13px; font-weight:700; padding:4px 12px; border-radius:6px;">TFT20PROP</span></td>
+                    </tr>
+                    <tr><td colspan="2" style="padding-top:6px;"><span style="color:#64748b; font-size:12px;">Royal &amp; Standard · Ends soon</span></td></tr>
+                  </table>
+                </td></tr>
               </table>
             </td>
           </tr>
 
           <!-- CTA -->
           <tr>
-            <td style="background:#0f1923; border-left:1px solid #1e3a2f; border-right:1px solid #1e3a2f; padding: 0 40px 32px 40px; text-align:center;">
-              <p style="color:#64748b; font-size:11px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; margin-bottom:16px;">🧮 Profit Calculator</p>
-              <p style="color:#94a3b8; font-size:14px; line-height:1.6; margin-bottom:20px;">
-                See exactly how much you'll take home after splits, resets,<br/>and withdrawal fees — before you buy a challenge.
-              </p>
+            <td style="background:#0f1923; border-left:1px solid #1e3a2f; border-right:1px solid #1e3a2f; padding:0 40px 32px; text-align:center;">
+              <p style="color:#94a3b8; font-size:14px; line-height:1.6; margin-bottom:20px; margin-top:8px;">🧮 ${c.ctaLabel.replace(" →", "")}</p>
               <a href="https://propfxlab.com/calculator"
-                 style="display:inline-block; background: linear-gradient(135deg, #059669, #34d399); color:#fff; font-size:14px; font-weight:700; padding:12px 32px; border-radius:8px; text-decoration:none;">
-                Open Profit Calculator →
+                 style="display:inline-block; background:linear-gradient(135deg,#059669,#34d399); color:#fff; font-size:14px; font-weight:700; padding:12px 32px; border-radius:8px;">
+                ${c.ctaLabel}
               </a>
-            </td>
-          </tr>
-
-          <!-- What to expect -->
-          <tr>
-            <td style="background:#080d12; border-left:1px solid #1e3a2f; border-right:1px solid #1e3a2f; border-top:1px solid #1e3a2f; padding:28px 40px;">
-              <p style="color:#64748b; font-size:11px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; margin-bottom:16px;">📬 What You'll Receive</p>
-              <table width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td width="50%" style="padding-right:12px; padding-bottom:12px; vertical-align:top;">
-                    <div style="background:#0a1510; border:1px solid #1e3a2f; border-radius:8px; padding:14px;">
-                      <div style="font-size:18px; margin-bottom:6px;">🚨</div>
-                      <div style="color:#e2e8f0; font-size:13px; font-weight:600; margin-bottom:4px;">Flash Sales</div>
-                      <div style="color:#64748b; font-size:12px;">Time-limited 50–80% off events, straight to your inbox</div>
-                    </div>
-                  </td>
-                  <td width="50%" style="padding-left:12px; padding-bottom:12px; vertical-align:top;">
-                    <div style="background:#0a1510; border:1px solid #1e3a2f; border-radius:8px; padding:14px;">
-                      <div style="font-size:18px; margin-bottom:6px;">📊</div>
-                      <div style="color:#e2e8f0; font-size:13px; font-weight:600; margin-bottom:4px;">Firm Comparisons</div>
-                      <div style="color:#64748b; font-size:12px;">Side-by-side breakdowns of payout rules &amp; fees</div>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td width="50%" style="padding-right:12px; vertical-align:top;">
-                    <div style="background:#0a1510; border:1px solid #1e3a2f; border-radius:8px; padding:14px;">
-                      <div style="font-size:18px; margin-bottom:6px;">🎯</div>
-                      <div style="color:#e2e8f0; font-size:13px; font-weight:600; margin-bottom:4px;">Strategy Alerts</div>
-                      <div style="color:#64748b; font-size:12px;">Rule changes &amp; risk tips that protect your funded account</div>
-                    </div>
-                  </td>
-                  <td width="50%" style="padding-left:12px; vertical-align:top;">
-                    <div style="background:#0a1510; border:1px solid #1e3a2f; border-radius:8px; padding:14px;">
-                      <div style="font-size:18px; margin-bottom:6px;">💸</div>
-                      <div style="color:#e2e8f0; font-size:13px; font-weight:600; margin-bottom:4px;">Payout Insights</div>
-                      <div style="color:#64748b; font-size:12px;">Real withdrawal timelines &amp; community payout reports</div>
-                    </div>
-                  </td>
-                </tr>
-              </table>
             </td>
           </tr>
 
@@ -172,10 +161,10 @@ function buildWelcomeHtml(email: string): string {
           <tr>
             <td style="background:#060a0e; border:1px solid #1e3a2f; border-top:none; border-radius:0 0 16px 16px; padding:24px 40px; text-align:center;">
               <p style="color:#334155; font-size:11px; line-height:1.7;">
-                You're receiving this because <strong style="color:#475569;">${email}</strong> subscribed at <a href="https://propfxlab.com" style="color:#475569;">propfxlab.com</a>.<br/>
-                <a href="https://propfxlab.com" style="color:#64748b;">Visit site</a>
+                ${c.footerUnsub} <strong style="color:#475569;">${email}</strong> ·
+                <a href="https://propfxlab.com" style="color:#475569;">propfxlab.com</a>
                 &nbsp;·&nbsp;
-                <a href="mailto:${REPLY_TO}" style="color:#64748b;">Contact us</a>
+                <a href="mailto:${REPLY_TO}" style="color:#64748b;">Contact</a>
                 &nbsp;·&nbsp;
                 <span style="color:#334155;">© 2026 PropFXLab</span>
               </p>
@@ -212,17 +201,17 @@ export async function POST(request: NextRequest) {
   try {
     await resend.contacts.create({ email, unsubscribed: false });
   } catch (err) {
-    // Log but continue; the welcome email should still go out
     console.error("[subscribe] contacts.create failed:", err);
   }
 
-  // Step B — send welcome email
+  // Step B — send localized welcome email
+  const l = getLocaleKey(locale);
   const { error } = await resend.emails.send({
     from: FROM,
     to: [email],
     replyTo: REPLY_TO,
-    subject: SUBJECT,
-    html: buildWelcomeHtml(email),
+    subject: copy[l].subject,
+    html: buildWelcomeHtml(email, locale),
   });
 
   if (error) {

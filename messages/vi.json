@@ -193,5 +193,17 @@
     "trademarkNoticeTitle": "Thông báo về nhãn hiệu",
     "trademarkNoticeBody": "Tất cả tên, logo và nhãn hiệu của các prop firm hiển thị trên trang web này là tài sản của chủ sở hữu tương ứng. Chúng được sử dụng ở đây chỉ nhằm mục đích nhận diện và so sánh, không hàm ý bất kỳ sự chứng thực, tài trợ hay liên kết nào với trang web này trừ khi được nêu rõ.",
     "copyright": "© {year} PropFXLab. Trang so sánh độc lập, không liên kết với bất kỳ công ty nào được liệt kê."
+  },
+  "Subscribe": {
+    "badge": "⚡ Cảnh Báo Độc Quyền",
+    "heading": "Nhận ưu đãi Prop Firm trước tiên",
+    "subheading": "Flash sale, mã giảm giá & thông tin thanh toán — thẳng vào hộp thư của bạn.",
+    "placeholder": "email@cuaban.com",
+    "button": "Nhận Cảnh Báo",
+    "sending": "Đang gửi…",
+    "successMsg": "Đã đăng ký! Kiểm tra hộp thư để nhận ưu đãi độc quyền.",
+    "noSpam": "0 Spam. Hủy đăng ký bất cứ lúc nào.",
+    "networkError": "Lỗi mạng. Vui lòng kiểm tra kết nối.",
+    "genericError": "Đã có lỗi xảy ra. Vui lòng thử lại."
   }
 }

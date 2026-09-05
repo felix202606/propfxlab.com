@@ -193,5 +193,17 @@
     "trademarkNoticeTitle": "Trademark Notice",
     "trademarkNoticeBody": "All prop firm names, logos and trademarks shown on this site are the property of their respective owners. They are used here for identification and comparison purposes only and do not imply any endorsement, sponsorship or affiliation with this site unless explicitly stated.",
     "copyright": "© {year} PropFXLab. Independent comparison site, not affiliated with any firm listed."
+  },
+  "Subscribe": {
+    "badge": "⚡ Exclusive Alerts",
+    "heading": "Get prop firm discounts first",
+    "subheading": "Flash sales, promo codes & payout insights — straight to your inbox.",
+    "placeholder": "your@email.com",
+    "button": "Get Alerts",
+    "sending": "Sending…",
+    "successMsg": "Subscribed! Check your inbox for exclusive discounts.",
+    "noSpam": "0 Spam. Unsubscribe at any time.",
+    "networkError": "Network error. Please check your connection.",
+    "genericError": "Something went wrong. Please try again."
   }
 }

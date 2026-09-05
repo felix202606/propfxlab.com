@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { NewsShareButtons } from "@/components/NewsShareButtons";
-import { SubscribeForm } from "@/components/SubscribeForm";
 import { getAllFirms, getNewsBySlug, getNewsSlugs } from "@/lib/data";
 import { formatNewsPublished, newsArticleAbsoluteUrl } from "@/lib/news-format";
 import { getNewsLocaleCopy } from "@/lib/schema";
@@ -124,20 +123,6 @@ export default async function NewsArticlePage({
       ) : null}
 
       <p className="mt-10 text-xs leading-5 text-zinc-600">{t("disclaimer")}</p>
-
-      {/* Subscribe strip */}
-      <div className="mt-10 rounded-2xl border border-white/10 bg-gradient-to-br from-zinc-900 to-zinc-950 p-6">
-        <div className="mb-1 inline-block rounded-full border border-emerald-500/30 bg-emerald-950/50 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-emerald-400">
-          ⚡ Stay Ahead
-        </div>
-        <h2 className="mt-2 text-base font-bold text-white">
-          Get exclusive prop firm discounts &amp; alerts
-        </h2>
-        <p className="mt-1 mb-4 text-xs text-zinc-400">
-          Flash sales, promo codes &amp; payout insights — straight to your inbox.
-        </p>
-        <SubscribeForm locale={locale} />
-      </div>
     </article>
   );
 }
