@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 const FROM = "PropFXLab Alerts <alerts@propfxlab.com>";
 const REPLY_TO = "qq81174761@gmail.com";
 const SUBJECT = "⚡ Welcome to PropFXLab - Your Exclusive Prop Firm Discounts";
@@ -193,6 +191,8 @@ function buildWelcomeHtml(email: string): string {
 }
 
 export async function POST(request: NextRequest) {
+  const resend = new Resend(process.env.RESEND_API_KEY);
+
   let email: string;
   let locale: string;
 
