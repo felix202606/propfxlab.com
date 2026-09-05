@@ -15,11 +15,13 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pull-requests: write
     steps:
       - name: Check out repository
         uses: actions/checkout@v7
         with:
           ref: main
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v6
@@ -32,17 +34,36 @@ jobs:
       - name: Run news scraper
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-        run: python -u scripts/news_scraper.py
+          GEMINI_MODEL: gemini-3.5-flash
+          NEWS_MAX_ITEMS: "12"
+        run: python -u scripts/news_scraper.py --max-items 12
 
-      - name: Commit and push news JSON
+      - name: Create pull request for new news JSON
+        id: cpr
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore(news): update scraped news JSON"
+          branch: chore/daily-news
+          delete-branch: true
+          title: "chore(news): update scraped news JSON"
+          body: |
+            Automated news scrape from `Daily news scrape`.
+
+            ## Summary
+            - New/updated JSON under `data/news/`
+            - Opens a PR because `main` is protected
+
+            ## Test plan
+            - [ ] Preview `/news` and one article page
+            - [ ] Confirm Zod firm check still passes
+          add-paths: |
+            data/news/
+
+      - name: Enable auto-merge when checks pass
+        if: steps.cpr.outputs.pull-request-number != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          mkdir -p data/news
-          git add data/news/
-          if git diff --staged --quiet; then
-            echo "No new news JSON to commit"
-          else
-            git commit -m "chore(news): update scraped news JSON"
-            git push origin HEAD:main
-          fi
+          gh pr merge "${{ steps.cpr.outputs.pull-request-number }}" --merge --auto || \
+            echo "Auto-merge unavailable; PR left open for review: ${{ steps.cpr.outputs.pull-request-url }}"
