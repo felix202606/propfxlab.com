@@ -9,7 +9,11 @@ from __future__ import annotations
   export GEMINI_API_KEY=your_key
   python3 scripts/news_scraper.py
   python3 scripts/news_scraper.py --dry-run
-  python3 scripts/news_scraper.py --max-items 12 --model gemini-3.6-flash
+  python3 scripts/news_scraper.py --max-items 5 --model gemini-3.5-flash-lite
+
+说明：
+  每条候选新闻只调用 Gemini 一次，单次响应包含英文总结 + 6 语种翻译（共 7 个 locale）。
+  默认模型 gemini-3.5-flash-lite（免费档约 500 RPD）；每天最多处理 5 条 → 约 5 次请求。
 """
 
 import argparse
@@ -23,7 +27,7 @@ import time
 from datetime import datetime, timedelta, timezone
 from difflib import SequenceMatcher
 from pathlib import Path
-from typing import Any, Iterable, Literal, Optional
+from typing import Any, Literal, Optional
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlparse
 from urllib.request import Request, urlopen
@@ -50,13 +54,13 @@ BROWSER_HEADERS = {
     "Accept-Language": "en-US,en;q=0.9",
     "Cache-Control": "no-cache",
 }
-DEFAULT_MODEL = "gemini-3.5-flash"
-FALLBACK_MODELS = ("gemini-3.6-flash",)
+DEFAULT_MODEL = "gemini-3.5-flash-lite"
+FALLBACK_MODELS = ("gemini-flash-lite-latest", "gemini-3.1-flash-lite")
 MAX_AGE_HOURS = 96
 MAX_SUMMARY_CHARS = 800
-BATCH_SIZE = 2
-BATCH_PAUSE_S = 8.0
-MAX_ITEMS_DEFAULT = 6
+# 条目之间的短暂停顿（限流友好；每条仍只 1 次请求）
+BATCH_PAUSE_S = 2.0
+MAX_ITEMS_DEFAULT = 5
 REQUEST_TIMEOUT_S = 20
 TITLE_SIMILARITY_THRESHOLD = 0.72
 TITLE_JACCARD_THRESHOLD = 0.55
@@ -82,6 +86,8 @@ RSS_FEEDS = [
     "https://www.dailyforex.com/rss/forexnews.xml",
     "https://ftmo.com/en/blog/feed/",
     "https://fundednext.com/blog/feed/",
+    "https://joinprop.com/feed/",
+    "https://www.luxtradingfirm.com/blog/feed/",
 ]
 
 STOPWORDS = {
@@ -94,18 +100,14 @@ EVENT_KEYWORDS = (
     "ftmo",
     "fundednext",
     "fundingpips",
-    "metaquotes",
-    "metatrader",
-    "cftc",
-    "nfa",
-    "esma",
-    "cysec",
     "prop firm",
     "prop firms",
     "payout",
     "shutdown",
     "suspended",
     "rubik",
+    "instant funding",
+    "funded account",
 )
 
 KEYWORD_HINTS = (
@@ -126,22 +128,21 @@ KEYWORD_HINTS = (
     "myfunded",
     "topstep",
     "apex trader",
-    "cftc",
-    "nfa",
-    "esma",
-    "cysec",
-    "metaquotes",
-    "metatrader",
+    "lux trading",
+    "e8 markets",
+    "news trading",
 )
 
-GEMINI_SYSTEM_INSTRUCTION = """You select and rewrite prop-firm industry news for PropFXLab, a comparison site for funded traders.
-Return JSON only.
-Keep an item only if it materially affects prop firms, funded-trader payouts, challenge/evaluation rules, firm shutdowns, regulation of proprietary trading, or named firms on our roster.
-Drop generic FX forecasts, retail broker promo, stock-market wrap-ups, and unrelated crypto news.
-Write original English. Do not copy the source verbatim. Do not invent facts that are not in the provided title/summary.
-English content must be a substantial briefing: 5–8 short paragraphs. Summary should be 3–4 sentences.
-related_firm_slugs must be a subset of the provided roster slugs (or empty).
-Translations are NOT required in this step.
+GEMINI_SYSTEM_INSTRUCTION = """You rewrite one prop-firm industry news item for PropFXLab, a comparison site for funded traders.
+Return JSON only for THIS single RSS item.
+If the item is NOT about prop firms / funded traders / payouts / challenge rules / firm launches-shutdowns / regulation of prop trading / named roster firms, set keep=false and leave other fields empty.
+If keep=true:
+- Write an original English briefing (do not copy the source verbatim; do not invent facts).
+- English summary: 3–4 sentences. English body/content: 5–8 short paragraphs separated by blank lines.
+- Provide translations for ALL locale keys exactly: en, es, cn, tw, th, vi, pt.
+- Each locale needs title, summary, and content. en is the canonical rewrite; other locales are natural full translations of that English rewrite.
+- related_firm_slugs must be a subset of the provided roster slugs (or empty).
+- Also set top-level title/summary/body to the English rewrite.
 """
 
 
@@ -165,7 +166,8 @@ class LocaleCopy(BaseModel):
 
 
 class SelectedArticle(BaseModel):
-    source_url: str
+    keep: bool = True
+    source_url: str = ""
     title: str = ""
     summary: str = ""
     body: str = ""
@@ -178,10 +180,6 @@ class SelectedArticle(BaseModel):
     @classmethod
     def strip_text(cls, value: object) -> object:
         return value.strip() if isinstance(value, str) else value
-
-
-class SelectionResult(BaseModel):
-    articles: list[SelectedArticle] = Field(default_factory=list)
 
 
 class NewsArticleFile(BaseModel):
@@ -279,11 +277,55 @@ def normalize_url(url: str) -> str:
 
 
 def looks_relevant(title: str, summary: str) -> bool:
+    title_l = title.lower()
+    # 促销码落地页不是新闻
+    if "discount code" in title_l:
+        return False
     blob = f"{title}\n{summary}".lower()
-    if any(hint in blob for hint in KEYWORD_HINTS):
+    if any(hint in title_l for hint in KEYWORD_HINTS):
+        return True
+    # 摘要里的弱命中（如周报顺带提到 prop firm）不算优先候选
+    strong = (
+        "prop firm",
+        "prop firms",
+        "proprietary trading",
+        "funded trader",
+        "funded account",
+        "instant funding",
+        "profit split",
+        "challenge fee",
+    )
+    if any(hint in blob for hint in strong):
+        # 标题像宏观/外汇行情则丢掉
+        fxish = (
+            "price forecast",
+            "weekly outlook",
+            "weekly review",
+            "nfp",
+            "cpi",
+            "cftc report",
+            "net positions",
+            "usd/",
+            "eur/",
+            "gbp/",
+            "aud/",
+            "gold ",
+            "oil ",
+        )
+        if any(token in title_l for token in fxish):
+            return False
         return True
     for firm in PROP_FIRMS:
-        if firm["name"].lower() in blob or firm["slug"].replace("-", " ") in blob:
+        name = firm["name"].lower()
+        slug = firm["slug"].replace("-", " ")
+        # 短名/泛名（如 "For Traders"）必须整词匹配，避免 for traders 误伤
+        if len(name) < 12 or name in {"for traders"}:
+            if re.search(rf"\b{re.escape(name)}\b", blob) or re.search(
+                rf"\b{re.escape(slug)}\b", blob
+            ):
+                return True
+            continue
+        if name in blob or slug in blob:
             return True
     return False
 
@@ -324,8 +366,13 @@ def titles_are_duplicate(left: str, right: str) -> bool:
     if not tokens_left or not tokens_right:
         return False
     jaccard = len(tokens_left & tokens_right) / len(tokens_left | tokens_right)
-    shared_events = event_keywords_in(left) & event_keywords_in(right)
-    if shared_events and len(tokens_left & tokens_right) >= 2:
+    # “prop firm(s)” 太泛，不能单独当去重信号，否则所有 prop 稿会互相误杀
+    shared_events = {
+        keyword
+        for keyword in (event_keywords_in(left) & event_keywords_in(right))
+        if keyword not in {"prop firm", "prop firms"}
+    }
+    if shared_events and len(tokens_left & tokens_right) >= 3:
         return True
     if jaccard >= TITLE_JACCARD_THRESHOLD and shared_events:
         return True
@@ -521,38 +568,31 @@ def collect_candidates(
     unique = dedupe_items(ranked, existing_titles)
     preferred = [item for item in unique if looks_relevant(item.title, item.summary)]
     filler = [item for item in unique if item not in preferred]
+    # 先尽量塞满 prop 相关，不够再用其他；池子要大于最终送审数
+    pool_limit = max(max_items * 8, 40)
     ordered = preferred + filler
-    return ordered[:max_items]
+    return ordered[:pool_limit]
 
 
-def chunked(items: list[RssItem], size: int) -> Iterable[list[RssItem]]:
-    for index in range(0, len(items), size):
-        yield items[index : index + size]
-
-
-def build_prompt(batch: list[RssItem], roster: list[str]) -> str:
-    payload = [
-        {
-            "title": item.title,
-            "source_name": item.source_name,
-            "source_url": item.source_url,
-            "published_at": isoformat_utc(item.published_at),
-            "summary": item.summary,
-        }
-        for item in batch
-    ]
+def build_prompt(item: RssItem, roster: list[str]) -> str:
+    locale_help = ", ".join(f"{code} ({LOCALE_LABELS[code]})" for code in NEWS_LOCALES)
+    payload = {
+        "title": item.title,
+        "source_name": item.source_name,
+        "source_url": item.source_url,
+        "published_at": isoformat_utc(item.published_at),
+        "summary": item.summary,
+    }
     return (
         "Roster slugs (only use these in related_firm_slugs):\n"
         + ", ".join(roster)
-        + "\n\nRSS items:\n"
+        + "\n\nLocales that MUST appear under translations when keep=true (exact keys): "
+        + locale_help
+        + "\n\nProcess this ONE RSS item in a single response. "
+        "If relevant, set keep=true and return the English rewrite PLUS full translations "
+        "for en/es/cn/tw/th/vi/pt in the same JSON (1 request = 1 article + all locales). "
+        "If not relevant, set keep=false.\n\nRSS item:\n"
         + json.dumps(payload, ensure_ascii=False, indent=2)
-        + "\n\nReturn articles you would keep for a funded-trader news desk. "
-        "Keep only items that clearly relate to prop firms, funded accounts, payouts, "
-        "challenge rules, firm launches/shutdowns, or named roster firms. "
-        "Each kept item needs: source_url (exact), title, summary (3–4 sentences), "
-        "body (5–8 short paragraphs separated by blank lines), tags (2–5), "
-        "related_firm_slugs, relevance (high|medium). "
-        "Write original English only in this step — translations are added later."
     )
 
 
@@ -566,36 +606,25 @@ LOCALE_COPY_SCHEMA: dict[str, Any] = {
     "required": ["title", "summary", "content"],
 }
 
-# 先只生成英文，减小 payload，降低 Actions 上的 Gemini 503
+# 单条新闻单次请求：英文总结 + 6 语种翻译全部在同一响应里
 SELECTION_JSON_SCHEMA: dict[str, Any] = {
     "type": "object",
     "properties": {
-        "articles": {
-            "type": "array",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "source_url": {"type": "string"},
-                    "title": {"type": "string"},
-                    "summary": {"type": "string"},
-                    "body": {"type": "string"},
-                    "tags": {"type": "array", "items": {"type": "string"}},
-                    "related_firm_slugs": {"type": "array", "items": {"type": "string"}},
-                    "relevance": {"type": "string", "enum": ["high", "medium"]},
-                },
-                "required": [
-                    "source_url",
-                    "title",
-                    "summary",
-                    "body",
-                    "tags",
-                    "related_firm_slugs",
-                    "relevance",
-                ],
-            },
-        }
+        "keep": {"type": "boolean"},
+        "source_url": {"type": "string"},
+        "title": {"type": "string"},
+        "summary": {"type": "string"},
+        "body": {"type": "string"},
+        "translations": {
+            "type": "object",
+            "properties": {locale: LOCALE_COPY_SCHEMA for locale in NEWS_LOCALES},
+            "required": list(NEWS_LOCALES),
+        },
+        "tags": {"type": "array", "items": {"type": "string"}},
+        "related_firm_slugs": {"type": "array", "items": {"type": "string"}},
+        "relevance": {"type": "string", "enum": ["high", "medium"]},
     },
-    "required": ["articles"],
+    "required": ["keep"],
 }
 
 
@@ -666,12 +695,18 @@ def call_gemini(
                 if hard_miss:
                     print(f"  模型 {model_id} 不可用（404），跳过")
                     break
-                transient = "503" in message or "UNAVAILABLE" in message or "429" in message
+                # 免费额度耗尽：立刻停止，避免重试把 RPD 打光
+                if "429" in message or "RESOURCE_EXHAUSTED" in message:
+                    raise RuntimeError(error)
+                transient = "503" in message or "UNAVAILABLE" in message
                 if not transient:
                     print(f"  模型 {model_id} 失败：{error}")
                     break
-                wait_s = 20 * attempt
-                print(f"  Gemini {model_id} 限流/忙碌，{wait_s}s 后重试（{attempt}/3）")
+                # 503 只重试 1 次，节省配额
+                if attempt >= 2:
+                    break
+                wait_s = 15
+                print(f"  Gemini {model_id} 忙碌，{wait_s}s 后重试一次")
                 time.sleep(wait_s)
         print(f"  模型 {model_id} 本轮放弃，尝试下一个…")
     raise RuntimeError(last_error or "Gemini 调用失败")
@@ -860,7 +895,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--backfill-translations",
         action="store_true",
-        help="为已有 data/news/*.json 补齐 7 语种 translations",
+        help="仅用于修补旧稿：为已有 data/news/*.json 补齐 translations（正常抓取不走此路径）",
     )
     parser.add_argument(
         "--force",
@@ -907,79 +942,91 @@ def main() -> None:
     roster = sorted(allowed)
     written = 0
     skipped = 0
-    failed_batches = 0
+    failed = 0
     active_model: Optional[str] = None
-    written_paths: list[Path] = []
 
-    # Actions 优先处理关键词命中，减少无效大模型调用
+    # 关键词预筛：只把真正像 prop 的条目送 Gemini，避免烧 RPD
     preferred = [item for item in candidates if looks_relevant(item.title, item.summary)]
     if preferred:
-        print(f"关键词命中 {len(preferred)} 条，优先送审")
-        candidates = preferred
+        print(f"关键词命中 {len(preferred)} 条，优先送审（每条 1 次 API）")
+        candidates = preferred[: max(1, args.max_items)]
+    else:
+        print("无关键词命中，本轮不调用 Gemini（避免用外汇行情浪费配额）")
+        return
 
-    batches = list(chunked(candidates, BATCH_SIZE))
-    for batch_index, batch in enumerate(batches, start=1):
-        print(f"Gemini 批次 {batch_index}/{len(batches)}（{len(batch)} 条）")
+    for index, item in enumerate(candidates, start=1):
+        print(f"Gemini [{index}/{len(candidates)}] {item.title[:80]}")
         try:
             raw, active_model = call_gemini(
-                build_prompt(batch, roster),
+                build_prompt(item, roster),
                 args.model,
                 preferred_model=active_model,
             )
-            result = SelectionResult.model_validate(raw)
+            selected = SelectedArticle.model_validate(raw)
         except Exception as error:
-            failed_batches += 1
-            print(f"  批次失败，跳过：{error}")
-            if batch_index < len(batches):
+            failed += 1
+            message = str(error)
+            print(f"  失败，跳过：{error}")
+            if "429" in message or "RESOURCE_EXHAUSTED" in message:
+                print("  免费额度已用尽，停止本轮剩余请求以节省配额")
+                break
+            if index < len(candidates):
                 time.sleep(BATCH_PAUSE_S)
             continue
 
-        by_url = {normalize_url(item.source_url): item for item in batch}
-        for selected in result.articles:
-            source_key = normalize_url(selected.source_url)
-            item = by_url.get(source_key)
-            if item is None:
-                skipped += 1
-                continue
-            translations = normalize_translations(
-                {
-                    k: (v.model_dump() if isinstance(v, LocaleCopy) else v)
-                    for k, v in selected.translations.items()
-                },
-                fallback_title=selected.title or item.title,
-                fallback_summary=selected.summary,
-                fallback_body=selected.body,
-            )
-            if not translations["en"].summary or not translations["en"].content:
-                skipped += 1
-                continue
-            selected.translations = translations
-            selected.title = selected.title or translations["en"].title
-            selected.summary = selected.summary or translations["en"].summary
-            selected.body = selected.body or translations["en"].content
-            try:
-                out_path = write_article(item, selected, allowed)
-            except FileExistsError:
-                skipped += 1
-                continue
-            written += 1
-            written_paths.append(out_path)
-            print(f"  写入 {out_path.relative_to(ROOT)}")
+        if not selected.keep:
+            skipped += 1
+            print("  跳过：模型判定与 prop firm 无关")
+            if index < len(candidates):
+                time.sleep(BATCH_PAUSE_S)
+            continue
 
-        if batch_index < len(batches):
+        # 强制绑定本条 source_url，避免模型改写链接
+        selected.source_url = item.source_url
+        translations = normalize_translations(
+            {
+                k: (v.model_dump() if isinstance(v, LocaleCopy) else v)
+                for k, v in selected.translations.items()
+            },
+            fallback_title=selected.title or item.title,
+            fallback_summary=selected.summary,
+            fallback_body=selected.body,
+        )
+        missing_locales = [locale for locale in NEWS_LOCALES if locale not in translations]
+        if missing_locales:
+            skipped += 1
+            print(f"  跳过：缺少语种 {', '.join(missing_locales)}（要求单次返回全部翻译）")
+            if index < len(candidates):
+                time.sleep(BATCH_PAUSE_S)
+            continue
+        if not translations["en"].summary or not translations["en"].content:
+            skipped += 1
+            print("  跳过：英文 summary/content 为空")
+            if index < len(candidates):
+                time.sleep(BATCH_PAUSE_S)
+            continue
+
+        selected.translations = translations
+        selected.title = selected.title or translations["en"].title
+        selected.summary = selected.summary or translations["en"].summary
+        selected.body = selected.body or translations["en"].content
+        try:
+            out_path = write_article(item, selected, allowed)
+        except FileExistsError:
+            skipped += 1
+            print("  跳过：文件已存在")
+            if index < len(candidates):
+                time.sleep(BATCH_PAUSE_S)
+            continue
+        written += 1
+        print(f"  写入 {out_path.relative_to(ROOT)}（含 {len(translations)} 语种）")
+
+        if index < len(candidates):
             time.sleep(BATCH_PAUSE_S)
 
-    if written_paths:
-        print(f"为 {len(written_paths)} 篇新稿补齐多语言…")
-        try:
-            backfill_translations(args.model, force=False)
-        except Exception as error:
-            print(f"  翻译补齐未完成（英文稿已保存）：{error}")
-
-    print(f"完成：写入 {written}，跳过 {skipped}，失败批次 {failed_batches}")
+    print(f"完成：写入 {written}，跳过 {skipped}，失败 {failed}（约 {written + skipped + failed} 次 API）")
     if written == 0:
         print("本轮没有可发布的新新闻（限流或候选被筛掉都算正常结束）")
-    # Actions：没有新稿不视为失败，避免限流时整次 workflow 红灯
     return
 
 
