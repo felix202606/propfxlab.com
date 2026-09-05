@@ -50,11 +50,13 @@ BROWSER_HEADERS = {
     "Accept-Language": "en-US,en;q=0.9",
     "Cache-Control": "no-cache",
 }
-DEFAULT_MODEL = "gemini-3.6-flash"
-FALLBACK_MODELS = ("gemini-3.5-flash", "gemini-2.5-flash")
+DEFAULT_MODEL = "gemini-3.5-flash"
+FALLBACK_MODELS = ("gemini-3.6-flash",)
 MAX_AGE_HOURS = 96
 MAX_SUMMARY_CHARS = 800
-BATCH_SIZE = 4
+BATCH_SIZE = 3
+BATCH_PAUSE_S = 4.0
+MAX_ITEMS_DEFAULT = 12
 REQUEST_TIMEOUT_S = 20
 TITLE_SIMILARITY_THRESHOLD = 0.72
 TITLE_JACCARD_THRESHOLD = 0.55
@@ -627,7 +629,8 @@ def call_gemini(
     *,
     schema: dict[str, Any] = SELECTION_JSON_SCHEMA,
     system_instruction: str = GEMINI_SYSTEM_INSTRUCTION,
-) -> dict[str, Any]:
+    preferred_model: Optional[str] = None,
+) -> tuple[dict[str, Any], str]:
     try:
         from google import genai
         from google.genai import types
@@ -642,9 +645,13 @@ def call_gemini(
         raise SystemExit("缺少 GEMINI_API_KEY（GitHub Actions Secret 或本地 .env / gemini-key.txt）")
 
     client = genai.Client(api_key=api_key)
-    models = [model_name, *[m for m in FALLBACK_MODELS if m != model_name]]
+    ordered: list[str] = []
+    for candidate in (preferred_model, model_name, *FALLBACK_MODELS):
+        if candidate and candidate not in ordered:
+            ordered.append(candidate)
+
     last_error: Exception | None = None
-    for model_id in models:
+    for model_id in ordered:
         for attempt in range(1, 4):
             try:
                 response = client.models.generate_content(
@@ -662,18 +669,23 @@ def call_gemini(
                     raise RuntimeError(f"Gemini 没有返回 JSON：{response}")
                 if model_id != model_name:
                     print(f"  改用模型 {model_id}")
-                return json.loads(text)
+                return json.loads(text), model_id
             except Exception as error:
                 last_error = error
                 message = str(error)
+                hard_miss = "404" in message or "NOT_FOUND" in message
+                if hard_miss:
+                    print(f"  模型 {model_id} 不可用（404），跳过")
+                    break
                 transient = "503" in message or "UNAVAILABLE" in message or "429" in message
                 if not transient:
+                    print(f"  模型 {model_id} 失败：{error}")
                     break
-                wait_s = 25 * attempt
+                wait_s = 20 * attempt
                 print(f"  Gemini {model_id} 限流/忙碌，{wait_s}s 后重试（{attempt}/3）")
                 time.sleep(wait_s)
-        print(f"  模型 {model_id} 不可用，尝试下一个…")
-    raise SystemExit(last_error)
+        print(f"  模型 {model_id} 本轮放弃，尝试下一个…")
+    raise RuntimeError(last_error or "Gemini 调用失败")
 
 
 def normalize_translations(
@@ -806,7 +818,7 @@ def backfill_translations(model_name: str, force: bool = False) -> None:
                 indent=2,
             )
         )
-        result = call_gemini(
+        result, _model_used = call_gemini(
             prompt,
             model_name,
             schema=BACKFILL_JSON_SCHEMA,
@@ -842,8 +854,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--max-items",
         type=int,
-        default=24,
-        help="本轮最多送给 Gemini 的候选条数（默认 24）",
+        default=int(os.environ.get("NEWS_MAX_ITEMS", MAX_ITEMS_DEFAULT)),
+        help=f"本轮最多送给 Gemini 的候选条数（默认 {MAX_ITEMS_DEFAULT}）",
     )
     parser.add_argument(
         "--max-age-hours",
@@ -906,11 +918,26 @@ def main() -> None:
     roster = sorted(allowed)
     written = 0
     skipped = 0
+    failed_batches = 0
+    active_model: Optional[str] = None
 
-    for batch_index, batch in enumerate(chunked(candidates, BATCH_SIZE), start=1):
-        print(f"Gemini 批次 {batch_index}（{len(batch)} 条）")
-        raw = call_gemini(build_prompt(batch, roster), args.model)
-        result = SelectionResult.model_validate(raw)
+    batches = list(chunked(candidates, BATCH_SIZE))
+    for batch_index, batch in enumerate(batches, start=1):
+        print(f"Gemini 批次 {batch_index}/{len(batches)}（{len(batch)} 条）")
+        try:
+            raw, active_model = call_gemini(
+                build_prompt(batch, roster),
+                args.model,
+                preferred_model=active_model,
+            )
+            result = SelectionResult.model_validate(raw)
+        except Exception as error:
+            failed_batches += 1
+            print(f"  批次失败，跳过：{error}")
+            if batch_index < len(batches):
+                time.sleep(BATCH_PAUSE_S)
+            continue
+
         by_url = {normalize_url(item.source_url): item for item in batch}
         for selected in result.articles:
             source_key = normalize_url(selected.source_url)
@@ -942,7 +969,13 @@ def main() -> None:
             written += 1
             print(f"  写入 {out_path.relative_to(ROOT)}")
 
-    print(f"完成：写入 {written}，跳过 {skipped}")
+        if batch_index < len(batches):
+            time.sleep(BATCH_PAUSE_S)
+
+    print(f"完成：写入 {written}，跳过 {skipped}，失败批次 {failed_batches}")
+    # Actions 只要写出了文件就成功，方便后续 commit；全失败才退出非 0
+    if written == 0 and failed_batches > 0 and candidates:
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":
