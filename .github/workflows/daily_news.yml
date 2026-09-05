@@ -35,8 +35,8 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: gemini-3.5-flash
-          NEWS_MAX_ITEMS: "12"
-        run: python -u scripts/news_scraper.py --max-items 12
+          NEWS_MAX_ITEMS: "6"
+        run: python -u scripts/news_scraper.py --max-items 6
 
       - name: Create pull request for new news JSON
         id: cpr

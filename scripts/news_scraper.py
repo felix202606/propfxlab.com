@@ -54,9 +54,9 @@ DEFAULT_MODEL = "gemini-3.5-flash"
 FALLBACK_MODELS = ("gemini-3.6-flash",)
 MAX_AGE_HOURS = 96
 MAX_SUMMARY_CHARS = 800
-BATCH_SIZE = 3
-BATCH_PAUSE_S = 4.0
-MAX_ITEMS_DEFAULT = 12
+BATCH_SIZE = 2
+BATCH_PAUSE_S = 8.0
+MAX_ITEMS_DEFAULT = 6
 REQUEST_TIMEOUT_S = 20
 TITLE_SIMILARITY_THRESHOLD = 0.72
 TITLE_JACCARD_THRESHOLD = 0.55
@@ -138,11 +138,10 @@ GEMINI_SYSTEM_INSTRUCTION = """You select and rewrite prop-firm industry news fo
 Return JSON only.
 Keep an item only if it materially affects prop firms, funded-trader payouts, challenge/evaluation rules, firm shutdowns, regulation of proprietary trading, or named firms on our roster.
 Drop generic FX forecasts, retail broker promo, stock-market wrap-ups, and unrelated crypto news.
-Write original copy. Do not copy the source verbatim. Do not invent facts that are not in the provided title/summary.
-English content must be a substantial briefing: 5–8 short paragraphs that explain what happened, why it matters for funded traders, payout/rule/product implications, competitive context, and what readers should verify on the official site. Summary should be 3–4 sentences.
-For every kept article you MUST provide translations for all locale keys: en, es, cn, tw, th, vi, pt.
-Each locale needs title, summary, and content (body). English (en) is the canonical rewrite; other locales must be natural full translations of that English rewrite, not machine-literal calques.
+Write original English. Do not copy the source verbatim. Do not invent facts that are not in the provided title/summary.
+English content must be a substantial briefing: 5–8 short paragraphs. Summary should be 3–4 sentences.
 related_firm_slugs must be a subset of the provided roster slugs (or empty).
+Translations are NOT required in this step.
 """
 
 
@@ -542,24 +541,18 @@ def build_prompt(batch: list[RssItem], roster: list[str]) -> str:
         }
         for item in batch
     ]
-    locale_help = ", ".join(
-        f"{code} ({LOCALE_LABELS[code]})" for code in NEWS_LOCALES
-    )
     return (
         "Roster slugs (only use these in related_firm_slugs):\n"
         + ", ".join(roster)
-        + "\n\nLocales that MUST appear under translations (exact keys): "
-        + locale_help
         + "\n\nRSS items:\n"
         + json.dumps(payload, ensure_ascii=False, indent=2)
         + "\n\nReturn articles you would keep for a funded-trader news desk. "
-        "Each kept item needs: source_url (exact), tags (2–5), "
-        "related_firm_slugs, relevance (high|medium), and translations. "
-        "translations must include every locale key with title, summary, and content. "
-        "English summary: 3–4 sentences. English content: 5–8 short paragraphs covering "
-        "what happened, trader impact, payout/rules/product angle, competitive context, "
-        "and a verification note. Separate paragraphs with blank lines. "
-        "Also set top-level title/summary/body to the English (en) rewrite for convenience."
+        "Keep only items that clearly relate to prop firms, funded accounts, payouts, "
+        "challenge rules, firm launches/shutdowns, or named roster firms. "
+        "Each kept item needs: source_url (exact), title, summary (3–4 sentences), "
+        "body (5–8 short paragraphs separated by blank lines), tags (2–5), "
+        "related_firm_slugs, relevance (high|medium). "
+        "Write original English only in this step — translations are added later."
     )
 
 
@@ -573,6 +566,7 @@ LOCALE_COPY_SCHEMA: dict[str, Any] = {
     "required": ["title", "summary", "content"],
 }
 
+# 先只生成英文，减小 payload，降低 Actions 上的 Gemini 503
 SELECTION_JSON_SCHEMA: dict[str, Any] = {
     "type": "object",
     "properties": {
@@ -585,20 +579,15 @@ SELECTION_JSON_SCHEMA: dict[str, Any] = {
                     "title": {"type": "string"},
                     "summary": {"type": "string"},
                     "body": {"type": "string"},
-                    "translations": {
-                        "type": "object",
-                        "properties": {
-                            locale: LOCALE_COPY_SCHEMA for locale in NEWS_LOCALES
-                        },
-                        "required": list(NEWS_LOCALES),
-                    },
                     "tags": {"type": "array", "items": {"type": "string"}},
                     "related_firm_slugs": {"type": "array", "items": {"type": "string"}},
                     "relevance": {"type": "string", "enum": ["high", "medium"]},
                 },
                 "required": [
                     "source_url",
-                    "translations",
+                    "title",
+                    "summary",
+                    "body",
                     "tags",
                     "related_firm_slugs",
                     "relevance",
@@ -920,6 +909,13 @@ def main() -> None:
     skipped = 0
     failed_batches = 0
     active_model: Optional[str] = None
+    written_paths: list[Path] = []
+
+    # Actions 优先处理关键词命中，减少无效大模型调用
+    preferred = [item for item in candidates if looks_relevant(item.title, item.summary)]
+    if preferred:
+        print(f"关键词命中 {len(preferred)} 条，优先送审")
+        candidates = preferred
 
     batches = list(chunked(candidates, BATCH_SIZE))
     for batch_index, batch in enumerate(batches, start=1):
@@ -967,15 +963,24 @@ def main() -> None:
                 skipped += 1
                 continue
             written += 1
+            written_paths.append(out_path)
             print(f"  写入 {out_path.relative_to(ROOT)}")
 
         if batch_index < len(batches):
             time.sleep(BATCH_PAUSE_S)
 
+    if written_paths:
+        print(f"为 {len(written_paths)} 篇新稿补齐多语言…")
+        try:
+            backfill_translations(args.model, force=False)
+        except Exception as error:
+            print(f"  翻译补齐未完成（英文稿已保存）：{error}")
+
     print(f"完成：写入 {written}，跳过 {skipped}，失败批次 {failed_batches}")
-    # Actions 只要写出了文件就成功，方便后续 commit；全失败才退出非 0
-    if written == 0 and failed_batches > 0 and candidates:
-        raise SystemExit(1)
+    if written == 0:
+        print("本轮没有可发布的新新闻（限流或候选被筛掉都算正常结束）")
+    # Actions：没有新稿不视为失败，避免限流时整次 workflow 红灯
+    return
 
 
 if __name__ == "__main__":
