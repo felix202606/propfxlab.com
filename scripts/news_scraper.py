@@ -32,6 +32,13 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import urlparse
 from urllib.request import Request, urlopen
 
+try:
+    import requests
+    import tweepy
+except ImportError:
+    requests = None  # type: ignore[assignment]
+    tweepy = None  # type: ignore[assignment]
+
 from pydantic import BaseModel, Field, HttpUrl, field_validator
 
 SCRIPT_DIR = Path(__file__).resolve().parent
@@ -84,6 +91,22 @@ INDEXNOW_KEY = "abc8dfc79fc54c40b0fecce27d963c8c"
 INDEXNOW_KEY_LOCATION = f"https://{INDEXNOW_HOST}/{INDEXNOW_KEY}.txt"
 # 与用户约定的推送顺序一致
 INDEXNOW_LOCALES = ("en", "es", "pt", "tw", "cn", "th", "vi")
+
+# 语种国旗 Emoji（用于 Telegram/X 发帖）
+LOCALE_FLAGS = {
+    "en": "🇬🇧",
+    "es": "🇪🇸",
+    "cn": "🇨🇳",
+    "tw": "🇹🇼",
+    "th": "🇹🇭",
+    "vi": "🇻🇳",
+    "pt": "🇵🇹",
+}
+
+# 社媒发布配置
+SOCIAL_POST_INTERVAL_HOURS = 3  # 每篇新闻间隔3小时发布
+LAST_POST_TIME_FILE = ROOT / ".last_social_post_time"
+PROPFXLAB_SITE_URL = "https://www.propfxlab.com"
 
 # 用户提供的源里，部分是 RSS 目录页或旧路径；这里用实际可解析的 XML。
 RSS_FEEDS = [
@@ -782,7 +805,125 @@ def notify_indexnow(slug: str) -> None:
         print(f"  IndexNow 推送 {slug} 失败：{error}")
 
 
-def write_article(item: RssItem, selected: SelectedArticle, allowed_slugs: set[str]) -> Path:
+def check_social_post_interval() -> bool:
+    """检查是否已过发帖间隔时间。返回 True 表示可以发帖。"""
+    if not LAST_POST_TIME_FILE.is_file():
+        return True
+    
+    try:
+        last_post_time_str = LAST_POST_TIME_FILE.read_text(encoding="utf-8").strip()
+        last_post_time = datetime.fromisoformat(last_post_time_str)
+        elapsed = datetime.now(timezone.utc) - last_post_time
+        if elapsed.total_seconds() < SOCIAL_POST_INTERVAL_HOURS * 3600:
+            remaining_hours = (SOCIAL_POST_INTERVAL_HOURS * 3600 - elapsed.total_seconds()) / 3600
+            print(f"  ⏰ 距离上次社媒发帖未满 {SOCIAL_POST_INTERVAL_HOURS} 小时（还需等待 {remaining_hours:.1f} 小时），本次跳过发帖")
+            return False
+    except (OSError, ValueError) as error:
+        print(f"  Warning: 读取上次发帖时间失败：{error}")
+    
+    return True
+
+
+def update_last_post_time() -> None:
+    """更新上次发帖时间戳。"""
+    try:
+        LAST_POST_TIME_FILE.write_text(
+            datetime.now(timezone.utc).isoformat(),
+            encoding="utf-8",
+        )
+    except OSError as error:
+        print(f"  Warning: 保存发帖时间戳失败：{error}")
+
+
+def post_to_telegram(title: str, summary: str, slug: str, translations: dict[str, LocaleCopy]) -> None:
+    """发送新闻到 Telegram 频道。"""
+    bot_token = os.environ.get("TELEGRAM_BOT_TOKEN")
+    chat_id = os.environ.get("TELEGRAM_CHAT_ID")
+    
+    if not bot_token or not chat_id:
+        print("  Warning: 缺少 TELEGRAM_BOT_TOKEN 或 TELEGRAM_CHAT_ID，跳过 Telegram 发帖")
+        return
+    
+    if requests is None:
+        print("  Warning: 缺少 requests 库，跳过 Telegram 发帖")
+        return
+    
+    try:
+        # 构建消息：标题 + 精简看点 + 7语种国旗 + 新闻网址
+        flags = " ".join(LOCALE_FLAGS.get(locale, "") for locale in NEWS_LOCALES)
+        news_url = f"{PROPFXLAB_SITE_URL}/en/news/{slug}"
+        
+        message = f"📰 {title}\n\n{summary}\n\n{flags}\n\n🔗 {news_url}"
+        
+        # 调用 Telegram Bot API
+        api_url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
+        payload = {
+            "chat_id": chat_id,
+            "text": message,
+            "parse_mode": "HTML",
+            "disable_web_page_preview": False,
+        }
+        
+        response = requests.post(api_url, json=payload, timeout=REQUEST_TIMEOUT_S)
+        response.raise_for_status()
+        
+        print(f"  ✅ Telegram 发帖成功 (@propfxlab)")
+        
+    except Exception as error:
+        print(f"  Warning: Telegram 发帖失败：{error}")
+
+
+def post_to_x(title: str, summary: str, slug: str, translations: dict[str, LocaleCopy]) -> None:
+    """发送新闻到 X (Twitter)。"""
+    api_key = os.environ.get("X_API_KEY")
+    api_secret = os.environ.get("X_API_SECRET")
+    access_token = os.environ.get("X_ACCESS_TOKEN")
+    access_secret = os.environ.get("X_ACCESS_SECRET")
+    
+    if not all([api_key, api_secret, access_token, access_secret]):
+        print("  Warning: 缺少 X API 凭证，跳过 X 发帖")
+        return
+    
+    if tweepy is None:
+        print("  Warning: 缺少 tweepy 库，跳过 X 发帖")
+        return
+    
+    try:
+        # 使用 tweepy v2 API
+        client = tweepy.Client(
+            consumer_key=api_key,
+            consumer_secret=api_secret,
+            access_token=access_token,
+            access_token_secret=access_secret,
+        )
+        
+        # 构建推文：标题 + 精简看点 + 网址（Twitter 会限制在 280 字符）
+        flags = " ".join(LOCALE_FLAGS.get(locale, "") for locale in NEWS_LOCALES)
+        news_url = f"{PROPFXLAB_SITE_URL}/en/news/{slug}"
+        
+        # Twitter 字符限制处理
+        tweet_base = f"📰 {title}\n\n{flags}\n\n🔗 {news_url}"
+        if len(tweet_base) <= 280:
+            tweet_text = tweet_base
+        else:
+            # 如果太长，省略部分摘要
+            max_summary_len = 280 - len(f"📰 {title}\n\n...\n\n{flags}\n\n🔗 {news_url}")
+            truncated_summary = summary[:max_summary_len] + "..." if len(summary) > max_summary_len else summary
+            tweet_text = f"📰 {title}\n\n{truncated_summary}\n\n{flags}\n\n🔗 {news_url}"
+            if len(tweet_text) > 280:
+                # 如果还是太长，进一步精简
+                tweet_text = f"📰 {title}\n\n{flags}\n\n🔗 {news_url}"
+        
+        # 发送推文
+        response = client.create_tweet(text=tweet_text)
+        print(f"  ✅ X 发帖成功 (@PropFXLab)")
+        
+    except Exception as error:
+        print(f"  Warning: X 发帖失败：{error}")
+
+
+
+def write_article(item: RssItem, selected: SelectedArticle, allowed_slugs: set[str]) -> tuple[Path, dict[str, LocaleCopy]]:
     NEWS_DIR.mkdir(parents=True, exist_ok=True)
     translations = normalize_translations(
         {k: v.model_dump() if isinstance(v, LocaleCopy) else v for k, v in selected.translations.items()},
@@ -823,7 +964,7 @@ def write_article(item: RssItem, selected: SelectedArticle, allowed_slugs: set[s
         encoding="utf-8",
     )
     notify_indexnow(slug)
-    return out_path
+    return out_path, translations
 
 
 BACKFILL_SYSTEM = """You rewrite and translate PropFXLab news briefings for funded traders.
@@ -1053,7 +1194,7 @@ def main() -> None:
         selected.summary = selected.summary or translations["en"].summary
         selected.body = selected.body or translations["en"].content
         try:
-            out_path = write_article(item, selected, allowed)
+            out_path, article_translations = write_article(item, selected, allowed)
         except FileExistsError:
             skipped += 1
             print("  跳过：文件已存在")
@@ -1061,7 +1202,29 @@ def main() -> None:
                 time.sleep(BATCH_PAUSE_S)
             continue
         written += 1
-        print(f"  写入 {out_path.relative_to(ROOT)}（含 {len(translations)} 语种）")
+        slug = out_path.stem
+        print(f"  写入 {out_path.relative_to(ROOT)}（含 {len(article_translations)} 语种）")
+        
+        # 社媒发布：检查间隔时间
+        if check_social_post_interval():
+            # 发送到 Telegram
+            post_to_telegram(
+                title=selected.title,
+                summary=selected.summary,
+                slug=slug,
+                translations=article_translations,
+            )
+            
+            # 发送到 X
+            post_to_x(
+                title=selected.title,
+                summary=selected.summary,
+                slug=slug,
+                translations=article_translations,
+            )
+            
+            # 更新发帖时间戳
+            update_last_post_time()
 
         if index < len(candidates):
             time.sleep(BATCH_PAUSE_S)
