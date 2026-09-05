@@ -77,6 +77,14 @@ LOCALE_LABELS = {
     "pt": "Portuguese",
 }
 
+# IndexNow：新稿写入后秒级通知搜索引擎
+INDEXNOW_ENDPOINT = "https://api.indexnow.org/indexnow"
+INDEXNOW_HOST = "www.propfxlab.com"
+INDEXNOW_KEY = "abc8dfc79fc54c40b0fecce27d963c8c"
+INDEXNOW_KEY_LOCATION = f"https://{INDEXNOW_HOST}/{INDEXNOW_KEY}.txt"
+# 与用户约定的推送顺序一致
+INDEXNOW_LOCALES = ("en", "es", "pt", "tw", "cn", "th", "vi")
+
 # 用户提供的源里，部分是 RSS 目录页或旧路径；这里用实际可解析的 XML。
 RSS_FEEDS = [
     "https://www.financemagnates.com/forex/feed",
@@ -743,6 +751,37 @@ def normalize_translations(
     return out
 
 
+def notify_indexnow(slug: str) -> None:
+    """向 IndexNow 推送该 slug 在全部 locale 下的新闻 URL。"""
+    payload = {
+        "host": INDEXNOW_HOST,
+        "key": INDEXNOW_KEY,
+        "keyLocation": INDEXNOW_KEY_LOCATION,
+        "urlList": [
+            f"https://{INDEXNOW_HOST}/{locale}/news/{slug}"
+            for locale in INDEXNOW_LOCALES
+        ],
+    }
+    body = json.dumps(payload).encode("utf-8")
+    request = Request(
+        INDEXNOW_ENDPOINT,
+        data=body,
+        headers={
+            "Content-Type": "application/json; charset=utf-8",
+            "User-Agent": BROWSER_HEADERS["User-Agent"],
+        },
+        method="POST",
+    )
+    try:
+        with urlopen(request, timeout=REQUEST_TIMEOUT_S) as response:
+            status = getattr(response, "status", None) or response.getcode()
+            print(f"  IndexNow 推送 {slug}: HTTP {status}" + ("（成功）" if status in (200, 202) else ""))
+    except HTTPError as error:
+        print(f"  IndexNow 推送 {slug}: HTTP {error.code}")
+    except (URLError, TimeoutError, OSError) as error:
+        print(f"  IndexNow 推送 {slug} 失败：{error}")
+
+
 def write_article(item: RssItem, selected: SelectedArticle, allowed_slugs: set[str]) -> Path:
     NEWS_DIR.mkdir(parents=True, exist_ok=True)
     translations = normalize_translations(
@@ -783,6 +822,7 @@ def write_article(item: RssItem, selected: SelectedArticle, allowed_slugs: set[s
         payload.model_dump_json(indent=2) + "\n",
         encoding="utf-8",
     )
+    notify_indexnow(slug)
     return out_path
 
 
@@ -863,6 +903,8 @@ def backfill_translations(model_name: str, force: bool = False) -> None:
         payload["body"] = translations["en"].content
         path.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         updated += 1
+        slug = str(payload.get("slug") or path.stem)
+        notify_indexnow(slug)
         time.sleep(1.2)
 
     print(f"回填完成：更新 {updated}，跳过 {skipped}")
