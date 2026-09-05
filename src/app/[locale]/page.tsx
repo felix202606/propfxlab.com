@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { ComparisonsGrid } from "@/components/ComparisonsGrid";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { HomeMarketplace } from "@/components/HomeMarketplace";
+import { SubscribeForm } from "@/components/SubscribeForm";
 import { TrustGrid } from "@/components/TrustGrid";
 import { getAllFirms } from "@/lib/data";
 
@@ -18,7 +19,9 @@ function toHomeFaqs(raw: unknown): HomeFaq[] {
   );
 }
 
-export default async function Home() {
+export default async function Home({ params }: PageProps<"/[locale]">) {
+  const { locale } = await params;
+
   let firms: ReturnType<typeof getAllFirms> = [];
   try {
     firms = getAllFirms();
@@ -51,6 +54,22 @@ export default async function Home() {
           <FaqAccordion faqs={faqs} heading={faqTitle} />
         </div>
       ) : null}
+
+      {/* Subscribe banner */}
+      <section className="mx-auto w-full max-w-2xl px-4 pb-20">
+        <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-zinc-900 to-zinc-950 p-8">
+          <div className="mb-1 inline-block rounded-full border border-emerald-500/30 bg-emerald-950/50 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-emerald-400">
+            ⚡ Exclusive Alerts
+          </div>
+          <h2 className="mt-3 text-xl font-bold tracking-tight text-white">
+            Get the best prop firm discounts first
+          </h2>
+          <p className="mt-2 mb-5 text-sm leading-relaxed text-zinc-400">
+            Flash sales, promo codes &amp; payout insights — straight to your inbox.
+          </p>
+          <SubscribeForm locale={locale} />
+        </div>
+      </section>
     </main>
   );
 }
