@@ -193,5 +193,17 @@
     "trademarkNoticeTitle": "商標聲明",
     "trademarkNoticeBody": "本站展示的所有 Prop Firm 名稱、Logo 及商標均歸各自公司所有。此處使用僅用於識別與對比目的，除非明確說明，不代表任何背書、贊助或關聯關係。",
     "copyright": "© {year} PropFXLab。獨立對比網站，與所列任何公司均無關聯。"
+  },
+  "Subscribe": {
+    "badge": "⚡ 專屬優惠提醒",
+    "heading": "搶先獲取道具公司折扣",
+    "subheading": "限時特賣、優惠碼與出金資訊，直達你的信箱。",
+    "placeholder": "your@email.com",
+    "button": "訂閱提醒",
+    "sending": "傳送中…",
+    "successMsg": "訂閱成功！請查收信箱獲取專屬折扣。",
+    "noSpam": "0 垃圾信件，隨時可退訂。",
+    "networkError": "網路錯誤，請檢查連線。",
+    "genericError": "出錯了，請重試。"
   }
 }

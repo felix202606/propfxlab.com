@@ -2,11 +2,22 @@
 
 import { useState } from "react";
 
-interface SubscribeFormProps {
-  locale?: string;
+export interface SubscribeTranslations {
+  placeholder: string;
+  button: string;
+  sending: string;
+  successMsg: string;
+  noSpam: string;
+  networkError: string;
+  genericError: string;
 }
 
-export function SubscribeForm({ locale = "en" }: SubscribeFormProps) {
+interface SubscribeFormProps {
+  locale?: string;
+  t: SubscribeTranslations;
+}
+
+export function SubscribeForm({ locale = "en", t }: SubscribeFormProps) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
@@ -28,26 +39,24 @@ export function SubscribeForm({ locale = "en" }: SubscribeFormProps) {
       const data = (await res.json()) as { success?: boolean; error?: string };
 
       if (!res.ok || !data.success) {
-        setErrorMsg(data.error ?? "Something went wrong. Please try again.");
+        setErrorMsg(data.error ?? t.genericError);
         setStatus("error");
       } else {
         setStatus("success");
       }
     } catch {
-      setErrorMsg("Network error. Please check your connection and try again.");
+      setErrorMsg(t.networkError);
       setStatus("error");
     }
   }
 
   if (status === "success") {
     return (
-      <div className="flex items-start gap-3 rounded-xl border border-emerald-500/30 bg-emerald-950/40 px-5 py-4">
+      <div className="flex items-start gap-3 rounded-xl border border-emerald-500/30 bg-emerald-950/40 px-4 py-3">
         <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500 text-xs font-bold text-black">
           ✓
         </span>
-        <p className="text-sm font-medium text-emerald-300">
-          Subscribed successfully! Check your inbox for exclusive discounts.
-        </p>
+        <p className="text-sm font-medium text-emerald-300">{t.successMsg}</p>
       </div>
     );
   }
@@ -55,7 +64,7 @@ export function SubscribeForm({ locale = "en" }: SubscribeFormProps) {
   return (
     <div className="w-full">
       <form onSubmit={handleSubmit} noValidate>
-        <div className="flex flex-col gap-2 sm:flex-row sm:gap-0">
+        <div className="flex flex-col gap-2">
           <input
             type="email"
             required
@@ -64,14 +73,14 @@ export function SubscribeForm({ locale = "en" }: SubscribeFormProps) {
               setEmail(e.target.value);
               if (status === "error") setStatus("idle");
             }}
-            placeholder="your@email.com"
+            placeholder={t.placeholder}
             disabled={status === "loading"}
-            className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:border-emerald-500/60 focus:outline-none focus:ring-1 focus:ring-emerald-500/40 disabled:opacity-50 sm:rounded-r-none sm:border-r-0"
+            className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:border-emerald-500/60 focus:outline-none focus:ring-1 focus:ring-emerald-500/40 disabled:opacity-50"
           />
           <button
             type="submit"
             disabled={status === "loading" || !email.trim()}
-            className="flex shrink-0 items-center justify-center gap-2 rounded-lg bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-black transition-colors hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-60 sm:rounded-l-none"
+            className="flex w-full items-center justify-center gap-2 rounded-lg bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-black transition-colors hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-60"
           >
             {status === "loading" ? (
               <>
@@ -95,10 +104,10 @@ export function SubscribeForm({ locale = "en" }: SubscribeFormProps) {
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
                   />
                 </svg>
-                Sending…
+                {t.sending}
               </>
             ) : (
-              "Get Alerts"
+              t.button
             )}
           </button>
         </div>
@@ -108,7 +117,7 @@ export function SubscribeForm({ locale = "en" }: SubscribeFormProps) {
         )}
       </form>
 
-      <p className="mt-2 text-xs text-zinc-500">0 Spam. Unsubscribe at any time.</p>
+      <p className="mt-2 text-xs text-zinc-500">{t.noSpam}</p>
     </div>
   );
 }

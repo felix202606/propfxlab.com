@@ -127,9 +127,18 @@ export function SiteFooter({ firms }: { firms: FirmLink[] }) {
           </div>
         </div>
 
-        <p className="mt-8 border-t border-white/10 pt-6 text-xs text-zinc-600">
-          {t("copyright", { year })}
-        </p>
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-6">
+          <p className="text-xs text-zinc-600">{t("copyright", { year })}</p>
+          <p className="text-xs text-zinc-500">
+            Media &amp; advertising:{" "}
+            <a
+              href="mailto:contact@propfxlab.com"
+              className="text-zinc-400 underline-offset-2 transition-colors hover:text-emerald-400 hover:underline"
+            >
+              contact@propfxlab.com
+            </a>
+          </p>
+        </div>
       </div>
     </footer>
   );

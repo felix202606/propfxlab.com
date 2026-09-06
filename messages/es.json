@@ -193,5 +193,17 @@
     "trademarkNoticeTitle": "Aviso de marcas registradas",
     "trademarkNoticeBody": "Todos los nombres, logotipos y marcas de las prop firms que aparecen en este sitio son propiedad de sus respectivos titulares. Se usan aquí únicamente con fines de identificación y comparación, y no implican patrocinio, aprobación ni afiliación con este sitio salvo que se indique expresamente.",
     "copyright": "© {year} PropFXLab. Sitio comparativo independiente, sin afiliación con ninguna de las firmas listadas."
+  },
+  "Subscribe": {
+    "badge": "⚡ Alertas Exclusivas",
+    "heading": "Obtén descuentos de prop firms primero",
+    "subheading": "Ventas flash, códigos promo e info de pagos — directo a tu bandeja.",
+    "placeholder": "tu@email.com",
+    "button": "Recibir Alertas",
+    "sending": "Enviando…",
+    "successMsg": "¡Suscrito! Revisa tu bandeja para descuentos exclusivos.",
+    "noSpam": "0 Spam. Cancela cuando quieras.",
+    "networkError": "Error de red. Verifica tu conexión.",
+    "genericError": "Algo salió mal. Inténtalo de nuevo."
   }
 }

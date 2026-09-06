@@ -6,6 +6,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { SubscribeWidget } from "@/components/SubscribeWidget";
 import { getAllFirms } from "@/lib/data";
 import { localeMeta, routing } from "@/i18n/routing";
 import "../globals.css";
@@ -89,6 +90,36 @@ export default async function LocaleLayout({
     console.error("[layout] getAllFirms failed, rendering footer without firm links:", err);
   }
 
+  let subT = {
+    badge: "⚡ Exclusive Alerts",
+    heading: "Get prop firm discounts first",
+    subheading: "Flash sales, promo codes & payout insights — straight to your inbox.",
+    placeholder: "your@email.com",
+    button: "Get Alerts",
+    sending: "Sending…",
+    successMsg: "Subscribed! Check your inbox for exclusive discounts.",
+    noSpam: "0 Spam. Unsubscribe at any time.",
+    networkError: "Network error. Please check your connection.",
+    genericError: "Something went wrong. Please try again.",
+  };
+  try {
+    const tSub = await getTranslations({ locale, namespace: "Subscribe" });
+    subT = {
+      badge: tSub("badge"),
+      heading: tSub("heading"),
+      subheading: tSub("subheading"),
+      placeholder: tSub("placeholder"),
+      button: tSub("button"),
+      sending: tSub("sending"),
+      successMsg: tSub("successMsg"),
+      noSpam: tSub("noSpam"),
+      networkError: tSub("networkError"),
+      genericError: tSub("genericError"),
+    };
+  } catch (err) {
+    console.error("[layout] Subscribe translations failed, using English fallback:", err);
+  }
+
   return (
     <html
       lang={localeMeta[locale].bcp47}
@@ -99,6 +130,7 @@ export default async function LocaleLayout({
           <SiteHeader />
           <div className="flex flex-1 flex-col">{children}</div>
           <SiteFooter firms={firms} />
+          <SubscribeWidget locale={locale} t={subT} />
         </NextIntlClientProvider>
         <Analytics />
       </body>
