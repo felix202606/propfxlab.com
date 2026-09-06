@@ -58,6 +58,11 @@
     "comparisonsTitle": "热门两两对比",
     "comparisonsSubtitle": "直接进入两家平台的对决，阅读双方完整出金规则。",
     "vs": "VS",
+    "selectFirmA": "选择平台 A",
+    "selectFirmB": "选择平台 B",
+    "compareNow": "立即对比",
+    "viewComparison": "查看对比",
+    "sameFirmError": "请选择两家不同的平台再对比。",
     "faqTitle": "常见问题",
     "faqs": [
       {
@@ -129,6 +134,38 @@
     "consHeading": "缺点",
     "warningHeading": "禁忌规则与风险提醒",
     "warningIntro": "所有账户均为模拟资金交易，规则可能随时调整。购买或申请出金前，请务必以公司官网当前条款为准。"
+  },
+  "ComparePage": {
+    "metaTitle": "{left} vs {right} — Prop Firm 对比",
+    "metaDescription": "对比 {left} 与 {right} 在 10 万美元账户上的到手利润、分成、首次出金等待期、出金通道与回撤规则。",
+    "notFoundMetaTitle": "未找到该对比",
+    "eyebrow": "Prop Firm 两两对比",
+    "vs": "VS",
+    "subtitle": "以 {account} 账户、{profit} 利润为例，并排对照双方出金规则。",
+    "exampleProfitLabel": "$100k 到手利润",
+    "profitSplit": "Profit Split",
+    "firstPayout": "首次出金等待期",
+    "channels": "出金通道",
+    "drawdown": "Drawdown 规则",
+    "promo": "优惠码与官网",
+    "splitDefault": "{percent}%",
+    "splitWithMax": "默认 {percent}% · 最高 {max}%",
+    "drawdownFallback": "请以该平台官网的日亏与总亏损上限为准。",
+    "visitWebsite": "前往 {name} 官网",
+    "insightTitle": "AI 对比总结",
+    "insightTemplate": "更看重 {reasonA} 选 {nameA}；想要 {reasonB} 则选 {nameB}。",
+    "reasonReputation": "稳健口碑",
+    "reasonHigherSplit": "更高分成",
+    "reasonFasterPayout": "更短的首次出金等待",
+    "reasonMoreChannels": "更多出金通道",
+    "reasonHigherTakeHome": "更高预估到手",
+    "readProfile": "查看 {name} 评测",
+    "backToCompare": "全部对比"
+  },
+  "CompareNotFound": {
+    "title": "找不到这次对比",
+    "description": "请检查链接，或回到首页对比区重新选择两家平台。",
+    "cta": "返回对比"
   },
   "FirmNotFound": {
     "title": "找不到这家公司",

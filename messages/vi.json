@@ -58,6 +58,11 @@
     "comparisonsTitle": "Cặp so sánh phổ biến",
     "comparisonsSubtitle": "Vào trận đối đầu hai công ty và đọc toàn bộ quy định rút tiền của cả hai bên.",
     "vs": "VS",
+    "selectFirmA": "Chọn công ty A",
+    "selectFirmB": "Chọn công ty B",
+    "compareNow": "So sánh ngay",
+    "viewComparison": "Xem so sánh",
+    "sameFirmError": "Hãy chọn hai công ty khác nhau để so sánh.",
     "faqTitle": "Câu hỏi thường gặp",
     "faqs": [
       {
@@ -129,6 +134,38 @@
     "consHeading": "Nhược điểm",
     "warningHeading": "Quy định và hạn chế cần lưu ý",
     "warningIntro": "Tất cả tài khoản đều giao dịch bằng vốn mô phỏng và quy định có thể thay đổi mà không cần báo trước. Luôn xác nhận điều khoản hiện tại trực tiếp trên trang web chính thức của công ty trước khi mua hoặc yêu cầu rút tiền."
+  },
+  "ComparePage": {
+    "metaTitle": "{left} vs {right} — So sánh Prop Firm",
+    "metaDescription": "So sánh số tiền thực nhận của {left} và {right} trên tài khoản 100.000 USD, tỷ lệ chia, thời gian chờ lần rút đầu, kênh rút tiền và quy tắc drawdown.",
+    "notFoundMetaTitle": "Không tìm thấy bản so sánh",
+    "eyebrow": "So sánh Prop Firm",
+    "vs": "VS",
+    "subtitle": "Đối chiếu quy tắc rút tiền với tài khoản {account} và lợi nhuận ví dụ {profit}.",
+    "exampleProfitLabel": "Thực nhận trên $100k",
+    "profitSplit": "Profit Split",
+    "firstPayout": "Chờ lần rút đầu",
+    "channels": "Kênh rút tiền",
+    "drawdown": "Quy tắc Drawdown",
+    "promo": "Mã ưu đãi & trang chính thức",
+    "splitDefault": "{percent}%",
+    "splitWithMax": "Mặc định {percent}% · tối đa {max}%",
+    "drawdownFallback": "Hãy xác nhận hạn mức lỗ ngày và tổng lỗ trên trang chính thức của công ty.",
+    "visitWebsite": "Truy cập {name}",
+    "insightTitle": "Tóm tắt so sánh bằng AI",
+    "insightTemplate": "Chọn {nameA} nếu bạn ưu tiên {reasonA}; chọn {nameB} nếu bạn muốn {reasonB}.",
+    "reasonReputation": "uy tín vững chắc",
+    "reasonHigherSplit": "tỷ lệ chia lợi nhuận cao hơn",
+    "reasonFasterPayout": "thời gian chờ lần rút đầu ngắn hơn",
+    "reasonMoreChannels": "nhiều kênh rút tiền hơn",
+    "reasonHigherTakeHome": "số tiền thực nhận ước tính cao hơn",
+    "readProfile": "Đọc đánh giá {name}",
+    "backToCompare": "Tất cả so sánh"
+  },
+  "CompareNotFound": {
+    "title": "Không tìm thấy bản so sánh này",
+    "description": "Hãy kiểm tra liên kết hoặc chọn hai công ty từ mục so sánh trên trang chủ.",
+    "cta": "Quay lại so sánh"
   },
   "FirmNotFound": {
     "title": "Không tìm thấy công ty này",

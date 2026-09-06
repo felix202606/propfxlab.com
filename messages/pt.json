@@ -58,6 +58,11 @@
     "comparisonsTitle": "Confrontos populares",
     "comparisonsSubtitle": "Entre num mano a mano e leia as regras de saque completas das duas firmas.",
     "vs": "VS",
+    "selectFirmA": "Selecionar firma A",
+    "selectFirmB": "Selecionar firma B",
+    "compareNow": "Comparar agora",
+    "viewComparison": "Ver comparação",
+    "sameFirmError": "Escolha duas firmas diferentes para comparar.",
     "faqTitle": "Perguntas frequentes",
     "faqs": [
       {
@@ -129,6 +134,38 @@
     "consHeading": "Desvantagens",
     "warningHeading": "Regras e restrições a observar",
     "warningIntro": "Todas as contas operam com capital simulado e as regras podem mudar sem aviso prévio. Sempre confirme os termos vigentes diretamente no site oficial da firma antes de comprar ou solicitar um saque."
+  },
+  "ComparePage": {
+    "metaTitle": "{left} vs {right} — Comparação de prop firms",
+    "metaDescription": "Compare o valor líquido de {left} e {right} numa conta de 100 mil dólares, o split, a espera do primeiro saque, os canais de pagamento e as regras de drawdown.",
+    "notFoundMetaTitle": "Comparação não encontrada",
+    "eyebrow": "Comparação de prop firms",
+    "vs": "VS",
+    "subtitle": "Regras de saque lado a lado com uma conta de {account} e um lucro de exemplo de {profit}.",
+    "exampleProfitLabel": "Líquido em $100k",
+    "profitSplit": "Profit Split",
+    "firstPayout": "Espera do primeiro saque",
+    "channels": "Canais de saque",
+    "drawdown": "Regras de drawdown",
+    "promo": "Promo e site oficial",
+    "splitDefault": "{percent}%",
+    "splitWithMax": "{percent}% padrão · até {max}%",
+    "drawdownFallback": "Confirme os limites de perda diária e total no site oficial da firma.",
+    "visitWebsite": "Visitar {name}",
+    "insightTitle": "Conclusão da comparação",
+    "insightTemplate": "Escolha {nameA} se prioriza {reasonA}; escolha {nameB} se quiser {reasonB}.",
+    "reasonReputation": "reputação sólida",
+    "reasonHigherSplit": "um split de lucro mais alto",
+    "reasonFasterPayout": "uma espera menor para o primeiro saque",
+    "reasonMoreChannels": "mais canais de saque",
+    "reasonHigherTakeHome": "um líquido estimado mais alto",
+    "readProfile": "Ler a análise de {name}",
+    "backToCompare": "Todas as comparações"
+  },
+  "CompareNotFound": {
+    "title": "Não encontramos esta comparação",
+    "description": "Verifique o link ou escolha duas firmas na secção de comparações da página inicial.",
+    "cta": "Voltar às comparações"
   },
   "FirmNotFound": {
     "title": "Não encontramos esta firma",
