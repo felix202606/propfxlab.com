@@ -1,5 +1,50 @@
+import { promises as dns } from "dns";
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
+
+// Common disposable / throwaway email domains
+const DISPOSABLE_DOMAINS = new Set([
+  "mailinator.com","guerrillamail.com","guerrillamail.net","guerrillamail.org",
+  "guerrillamail.biz","guerrillamail.de","guerrillamail.info","grr.la",
+  "sharklasers.com","spam4.me","yopmail.com","yopmail.fr","cool.fr.nf",
+  "jetable.fr.nf","nospam.ze.tc","nomail.xl.cx","mega.zik.dj","speed.1s.fr",
+  "courriel.fr.nf","moncourrier.fr.nf","monemail.fr.nf","monmail.fr.nf",
+  "tempmail.com","temp-mail.org","throwam.com","throwaway.email",
+  "10minutemail.com","10minutemail.net","10minemail.com","dispostable.com",
+  "maildrop.cc","mailnull.com","spamgourmet.com","trashmail.com",
+  "trashmail.me","trashmail.net","trashmail.at","trashmail.io",
+  "fakeinbox.com","mailnesia.com","spamex.com","spamfree24.org",
+  "getairmail.com","filzmail.com","uggsrock.com","emailondeck.com",
+  "tempr.email","discard.email","spamhereplease.com","binkmail.com",
+  "bobmail.info","chammy.info","devnullmail.com","letthemeatspam.com",
+  "notmailinator.com","reallymymail.com","reconmail.com","safetymail.info",
+  "shortmail.net","spamthisplease.com","stuffmail.de","supergreatmail.com",
+  "supermailer.jp","suremail.info","tempalias.com","tempinbox.com",
+  "tempinbox.co.uk","trashdevil.com","trashdevil.de","wegwerfmail.de",
+  "wegwerfmail.net","wegwerfmail.org","zehnminuten.de","zehnminutenmail.de",
+]);
+
+async function isEmailValid(email: string): Promise<{ ok: boolean; reason?: string }> {
+  const domain = email.split("@")[1]?.toLowerCase();
+  if (!domain) return { ok: false, reason: "Invalid email format." };
+
+  // Block disposable domains
+  if (DISPOSABLE_DOMAINS.has(domain)) {
+    return { ok: false, reason: "Disposable email addresses are not allowed." };
+  }
+
+  // MX record check — verify the domain can actually receive email
+  try {
+    const records = await dns.resolveMx(domain);
+    if (!records || records.length === 0) {
+      return { ok: false, reason: "Email domain has no mail server. Please use a real email address." };
+    }
+  } catch {
+    return { ok: false, reason: "Email domain could not be verified. Please use a real email address." };
+  }
+
+  return { ok: true };
+}
 
 const FROM = "PropFXLab Alerts <alerts@propfxlab.com>";
 const REPLY_TO = "contact@propfxlab.com";
@@ -195,6 +240,11 @@ export async function POST(request: NextRequest) {
 
   if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return NextResponse.json({ error: "Please provide a valid email address." }, { status: 422 });
+  }
+
+  const validation = await isEmailValid(email);
+  if (!validation.ok) {
+    return NextResponse.json({ error: validation.reason }, { status: 422 });
   }
 
   // Step A — add to Resend Contacts (v6: no audienceId needed)
