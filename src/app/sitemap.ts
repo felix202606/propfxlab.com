@@ -8,7 +8,7 @@ const FIRMS_DIR = path.join(process.cwd(), "data", "firms");
 const NEWS_DIR = path.join(process.cwd(), "data", "news");
 
 /** 与语言无关的固定路径，会在每种语言前缀下各生成一条 URL。 */
-const STATIC_PATHS = ["", "/calculator", "/news"] as const;
+const STATIC_PATHS = ["", "/calculator", "/news", "/defunct"] as const;
 
 type FirmEntry = { slug: string; lastModified: Date };
 
@@ -125,7 +125,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       localizedEntries(
         pathname,
         now,
-        pathname === "" ? 1 : pathname === "/news" ? 0.7 : 0.8,
+        pathname === ""
+          ? 1
+          : pathname === "/news"
+            ? 0.7
+            : pathname === "/defunct"
+              ? 0.6
+              : 0.8,
       ),
     ),
     ...firms.flatMap((firm) =>

@@ -10,6 +10,7 @@
     "compare": "Comparar",
     "faq": "FAQ",
     "news": "Notícias",
+    "defunct": "Cemitério",
     "languageLabel": "Idioma"
   },
   "HomePage": {
@@ -27,6 +28,17 @@
     "emptyPreview": "Os dados das firmas ainda estão carregando. A calculadora continua disponível.",
     "emptyRankings": "Não há perfis de firmas no momento. O restante da página continua funcionando.",
     "dataAudited": "⚡ Dados auditados pela última vez: setembro de 2026",
+    "searchPlaceholder": "Buscar firmas...",
+    "viewModeLabel": "Visualização",
+    "viewModeCard": "Cartões",
+    "viewModeTable": "Tabela",
+    "tabTop10": "Top 10 escolhas",
+    "tabAllFirms": "Todas as firmas",
+    "tabClosedWarning": "Fechadas / Alerta",
+    "tableFirmColumn": "Firma",
+    "loadMoreCta": "Carregar mais",
+    "showingCount": "Mostrando {shown} de {total} firmas",
+    "noResults": "Nenhuma firma corresponde à sua busca.",
     "trustTitle": "Feito para traders funded",
     "trustSubtitle": "Cada número é calculado a partir de regras públicas — não de copy de marketing.",
     "trust": {
@@ -180,6 +192,25 @@
     "linkCopied": "Copiado",
     "disclaimer": "Este briefing é um resumo original de reportagens públicas. Não é aconselhamento financeiro. Confirme os detalhes na fonte original e no site oficial da firma.",
     "notFoundMetaTitle": "Artigo não encontrado"
+  },
+  "DefunctPage": {
+    "metaTitle": "⚠️ Cemitério das Prop Firms: firmas de trading com fundeio fechadas e suspensas (2023-2026)",
+    "metaDescription": "Uma lista atualizada de prop firms que fecharam, ficaram em silêncio ou pararam de pagar entre 2023 e 2026, com o motivo público de cada fechamento e alternativas mais seguras e verificadas.",
+    "title": "Cemitério das Prop Firms: firmas fechadas e suspensas (2023-2026)",
+    "subtitle": "Antes de comprar um challenge, confira esta lista. Essas firmas pararam de operar, pararam de pagar ou foram fechadas por reguladores — verifique se a sua não está aqui antes de financiar uma conta.",
+    "countLabel": "{count, plural, one {# firma fechada ou suspensa registrada} other {# firmas fechadas ou suspensas registradas}}",
+    "empty": "Ainda não há registros de firmas fechadas. Volte em breve.",
+    "disclaimer": "Esta página resume fechamentos relatados publicamente e reclamações de traders. Não é aconselhamento jurídico ou financeiro, nem uma determinação de fraude. Os detalhes podem mudar rapidamente — sempre verifique o status atual de uma firma diretamente antes de comprar um challenge ou solicitar um saque.",
+    "akaLabel": "Também conhecida como",
+    "closedOnLabel": "Fechada em",
+    "viewFullProfile": "Ver perfil completo",
+    "sourceLabel": "Fonte",
+    "statusRegulatoryAction": "Ação regulatória",
+    "statusUnpaidPayouts": "Saques não pagos",
+    "statusCeasedOperations": "Operações encerradas",
+    "alternativesBadge": "Alternativas verificadas",
+    "alternativesHeadline": "Procurando prop firms mais seguras e verificadas? Veja nossa lista auditada de firmas ativas com saques garantidos.",
+    "alternativesInlineText": "Opere com uma firma verificada e ativa:"
   },
   "SiteFooter": {
     "tagline": "Calculadoras de saque e comparativos de regras públicas de prop firms, de forma independente.",

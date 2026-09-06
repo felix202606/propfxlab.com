@@ -2,10 +2,18 @@ import "server-only";
 import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { cache } from "react";
-import { parseNewsArticle, parsePropFirm, type NewsArticle, type PropFirm } from "@/lib/schema";
+import {
+  parseDefunctFirm,
+  parseNewsArticle,
+  parsePropFirm,
+  type DefunctFirm,
+  type NewsArticle,
+  type PropFirm,
+} from "@/lib/schema";
 
 const FIRMS_DIR = path.join(process.cwd(), "data", "firms");
 const NEWS_DIR = path.join(process.cwd(), "data", "news");
+const CLOSED_FIRMS_FILE = path.join(process.cwd(), "data", "closed_firms.json");
 
 function readFirmFile(fileName: string): PropFirm {
   const filePath = path.join(FIRMS_DIR, fileName);
@@ -94,3 +102,32 @@ export function getNewsBySlug(slug: string): NewsArticle | undefined {
 export function getNewsSlugs(): string[] {
   return getAllNews().map((article) => article.slug);
 }
+
+/**
+ * 读取 data/closed_firms.json（Boneyard 黑名单，单文件、非逐平台目录）。
+ * 同样逐条容错：坏条目跳过，不让整页 500。
+ */
+export const getAllDefunctFirms = cache((): DefunctFirm[] => {
+  try {
+    const raw = readFileSync(CLOSED_FIRMS_FILE, "utf8");
+    const parsed: unknown = JSON.parse(raw);
+    if (!Array.isArray(parsed)) {
+      console.error("[data] closed_firms.json is not an array");
+      return [];
+    }
+
+    const results: DefunctFirm[] = [];
+    for (const entry of parsed) {
+      try {
+        results.push(parseDefunctFirm(entry));
+      } catch (err) {
+        console.error("[data] Skipping invalid closed-firm entry:", err);
+      }
+    }
+
+    return results.sort((a, b) => b.closedDate.localeCompare(a.closedDate));
+  } catch (err) {
+    console.error("[data] Cannot read closed firms file:", CLOSED_FIRMS_FILE, err);
+    return [];
+  }
+});

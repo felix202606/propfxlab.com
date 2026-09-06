@@ -331,6 +331,42 @@ export function parseNewsArticle(data: unknown): NewsArticle {
   return newsArticleSchema.parse(data);
 }
 
+/**
+ * 「Boneyard」已关闭 / 暂停出金平台黑名单条目。
+ * 与 propFirmSchema 解耦：这些平台通常已无法核实完整规则，只需名称、关闭时间与原因。
+ */
+export const defunctStatusSchema = z.enum([
+  /** 监管机构立案 / 法律行动导致停运 */
+  "regulatory_action",
+  /** 长期拖欠出金后停运 */
+  "unpaid_payouts",
+  /** 未见明确公告，网站与客服静默停止运营 */
+  "ceased_operations",
+]);
+
+export const defunctFirmSchema = z.object({
+  slug: kebabSlug,
+  name: z.string().min(1),
+  /** 常见简称/别名，例如 MFF、SFT */
+  aliases: z.array(z.string().min(1)).default([]),
+  /** 关闭 / 停止出金的月份，日期统一取当月 1 日 */
+  closedDate: isoDate,
+  status: defunctStatusSchema,
+  /** 用于卡片配色强调：high 用红色，medium 用琥珀色 */
+  severity: z.enum(["high", "medium"]).default("medium"),
+  reason: z.string().min(1),
+  /** 若站内仍保留完整评测（如 MyFundedFX），关联到 /firm/[slug] */
+  relatedFirmSlug: kebabSlug.optional(),
+  sourceUrl: z.url().optional(),
+});
+
+export type DefunctStatus = z.infer<typeof defunctStatusSchema>;
+export type DefunctFirm = z.infer<typeof defunctFirmSchema>;
+
+export function parseDefunctFirm(data: unknown): DefunctFirm {
+  return defunctFirmSchema.parse(data);
+}
+
 /** 按 locale 取文案；缺失则降级到 translations.en，再降级到顶层英文字段 */
 export function getNewsLocaleCopy(
   article: NewsArticle,

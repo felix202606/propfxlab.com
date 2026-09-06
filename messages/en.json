@@ -10,6 +10,7 @@
     "compare": "Compare",
     "faq": "FAQ",
     "news": "News",
+    "defunct": "Boneyard",
     "languageLabel": "Language"
   },
   "HomePage": {
@@ -27,6 +28,17 @@
     "emptyPreview": "Firm data is loading. The calculator stays available — rankings will appear when profiles are ready.",
     "emptyRankings": "No firm profiles are available right now. The rest of the page still works.",
     "dataAudited": "⚡ Data last audited: September 2026",
+    "searchPlaceholder": "Search firms...",
+    "viewModeLabel": "View",
+    "viewModeCard": "Card",
+    "viewModeTable": "Table",
+    "tabTop10": "Top 10 Picks",
+    "tabAllFirms": "All Firms",
+    "tabClosedWarning": "Closed / Warning",
+    "tableFirmColumn": "Firm",
+    "loadMoreCta": "Load more",
+    "showingCount": "Showing {shown} of {total} firms",
+    "noResults": "No firms match your search.",
     "trustTitle": "Built for funded traders",
     "trustSubtitle": "Every number is computed from public rules — not marketing copy.",
     "trust": {
@@ -180,6 +192,25 @@
     "linkCopied": "Copied",
     "disclaimer": "This briefing is an original summary of publicly available reporting. It is not financial advice. Confirm details on the original source and the firm's official site.",
     "notFoundMetaTitle": "Article not found"
+  },
+  "DefunctPage": {
+    "metaTitle": "⚠️ Prop Firm Boneyard: List of Closed & Suspended Prop Trading Firms (2023-2026)",
+    "metaDescription": "A running list of prop trading firms that have closed, gone silent or stopped paying out between 2023 and 2026, with the public reason for each shutdown and safer, verified alternatives.",
+    "title": "Prop Firm Boneyard: Closed & Suspended Prop Trading Firms (2023-2026)",
+    "subtitle": "Before you buy a challenge, check this list. These firms stopped operating, stopped paying, or were shut down by regulators — verify a firm isn't here before you fund an account.",
+    "countLabel": "{count, plural, one {# closed or suspended firm tracked} other {# closed or suspended firms tracked}}",
+    "empty": "No closed-firm records yet. Check back soon.",
+    "disclaimer": "This page summarizes publicly reported closures and trader complaints. It is not legal or financial advice and is not a determination of fraud. Details can change quickly — always verify a firm's current status directly before buying a challenge or requesting a withdrawal.",
+    "akaLabel": "Also known as",
+    "closedOnLabel": "Closed",
+    "viewFullProfile": "View full profile",
+    "sourceLabel": "Source",
+    "statusRegulatoryAction": "Regulatory Action",
+    "statusUnpaidPayouts": "Unpaid Payouts",
+    "statusCeasedOperations": "Ceased Operations",
+    "alternativesBadge": "Verified Alternatives",
+    "alternativesHeadline": "Looking for safer, verified prop firms? Check our audited list of active firms with guaranteed payouts.",
+    "alternativesInlineText": "Trade with a verified, active firm instead:"
   },
   "SiteFooter": {
     "tagline": "Independent prop firm payout calculators and public rule comparisons.",

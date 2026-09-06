@@ -55,6 +55,14 @@ export function SiteFooter({ firms }: { firms: FirmLink[] }) {
                 </li>
                 <li>
                   <Link
+                    href="/defunct"
+                    className="text-amber-400/80 transition-colors hover:text-amber-300"
+                  >
+                    {nav("defunct")}
+                  </Link>
+                </li>
+                <li>
+                  <Link
                     href={{ pathname: "/", hash: "rankings" }}
                     className="text-zinc-400 transition-colors hover:text-emerald-300"
                   >

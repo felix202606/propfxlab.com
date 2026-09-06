@@ -20,3 +20,15 @@ export function newsArticleAbsoluteUrl(locale: string, slug: string): string {
   const path = locale === "en" ? `/news/${slug}` : `/${locale}/news/${slug}`;
   return `https://www.propfxlab.com${path}`;
 }
+
+/** 只显示「月 年」，用于收录日期只精确到月份的记录（如已关闭平台名单） */
+export function formatMonthYear(iso: string, locale: string): string {
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) return iso;
+  const bcp47 =
+    locale in localeMeta ? localeMeta[locale as keyof typeof localeMeta].bcp47 : locale;
+  return new Intl.DateTimeFormat(bcp47, {
+    year: "numeric",
+    month: "long",
+  }).format(date);
+}

@@ -1,0 +1,77 @@
+[
+  {
+    "slug": "my-forex-funds",
+    "name": "My Forex Funds (MFF)",
+    "aliases": ["MFF"],
+    "closedDate": "2023-09-01",
+    "status": "regulatory_action",
+    "severity": "high",
+    "reason": "US regulators (the CFTC and SEC) filed emergency enforcement actions against parent company Traders Global Group Ltd., alleging the firm misrepresented profit-split payouts and manipulated trading conditions against funded traders. A US court froze company assets and appointed a receiver, forcing an abrupt halt to new challenge sales, trading access and outstanding withdrawals within days.",
+    "sourceUrl": "https://www.cftc.gov/PressRoom/PressReleases/8775-23"
+  },
+  {
+    "slug": "true-forex-funds",
+    "name": "True Forex Funds (TFT)",
+    "aliases": ["TFT", "True Forex Trading"],
+    "closedDate": "2024-03-01",
+    "status": "unpaid_payouts",
+    "severity": "high",
+    "reason": "Traders reported months of delayed and unfulfilled payout requests through late 2023 and early 2024. Support tickets went unanswered and the firm never issued a clear public statement confirming continued operations, leading to a widespread consensus in the funded-trading community that it had gone defunct."
+  },
+  {
+    "slug": "surgetrader",
+    "name": "SurgeTrader",
+    "aliases": [],
+    "closedDate": "2024-06-01",
+    "status": "ceased_operations",
+    "severity": "high",
+    "reason": "Parent company Match-Trade/Surge wound down the funded-account program, citing banking and payment-processor difficulties. Traders with pending profit splits reported being redirected to a lengthy claims process instead of receiving payouts under the originally advertised cycle."
+  },
+  {
+    "slug": "funded-engineer",
+    "name": "Funded Engineer",
+    "aliases": [],
+    "closedDate": "2024-01-01",
+    "status": "ceased_operations",
+    "severity": "medium",
+    "reason": "The firm stopped issuing new challenges and became largely unresponsive to support and payout requests. Its official site and social channels went inactive shortly after, and it is now broadly listed as defunct by the funded-trading community."
+  },
+  {
+    "slug": "skilled-funded-traders",
+    "name": "Skilled Funded Traders (SFT)",
+    "aliases": ["SFT"],
+    "closedDate": "2023-11-01",
+    "status": "unpaid_payouts",
+    "severity": "medium",
+    "reason": "Multiple traders reported delayed payouts and intermittent account access starting in late 2023. Public communication from the firm slowed sharply afterward, and it is widely reported as no longer honoring new withdrawal requests."
+  },
+  {
+    "slug": "smart-prop-trader",
+    "name": "Smart Prop Trader",
+    "aliases": [],
+    "closedDate": "2024-02-01",
+    "status": "ceased_operations",
+    "severity": "medium",
+    "reason": "Site access and client support became intermittent before going fully offline. No formal closure notice was issued to funded traders, leaving outstanding profit-split claims unresolved."
+  },
+  {
+    "slug": "glow-node",
+    "name": "Glow Node",
+    "aliases": [],
+    "closedDate": "2024-05-01",
+    "status": "ceased_operations",
+    "severity": "medium",
+    "reason": "Operations wound down with minimal advance notice; the trading platform and dashboard access were discontinued while trader profit-split claims remained outstanding and unaddressed."
+  },
+  {
+    "slug": "myfundedfx",
+    "name": "MyFundedFX",
+    "aliases": ["MFFX"],
+    "closedDate": "2026-09-01",
+    "status": "ceased_operations",
+    "severity": "high",
+    "reason": "MyFundedFX rebranded to SeacrestFunded and later operated a licensed brokerage as Seacrest Markets, which has since published a closure notice confirming it is no longer operating. Do not purchase a new challenge under any of these brand names.",
+    "relatedFirmSlug": "myfundedfx",
+    "sourceUrl": "https://seacrestmarkets.io/closed"
+  }
+]

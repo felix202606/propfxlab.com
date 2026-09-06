@@ -1,9 +1,12 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { FirmCard } from "@/components/FirmCard";
+import { FirmFilterBar, type ViewMode } from "@/components/FirmFilterBar";
+import { FirmTable } from "@/components/FirmTable";
+import { FirmTabs, type FirmTab } from "@/components/FirmTabs";
 import { HERO_ACCOUNT_SIZES } from "@/lib/offers";
 import {
   calculatePayout,
@@ -14,6 +17,13 @@ import type { PropFirm } from "@/lib/schema";
 
 const DEFAULT_ACCOUNT = 100_000;
 const DEFAULT_PROFIT = 8000;
+const PAGE_SIZE = 10;
+
+const STATUS_WEIGHT: Record<PropFirm["status"], number> = {
+  active: 0,
+  warning: 1,
+  suspended: 2,
+};
 
 function formatAccountChip(amount: number): string {
   if (amount >= 1000) return `$${amount / 1000}k`;
@@ -42,6 +52,10 @@ export function HomeMarketplace({ firms }: { firms: PropFirm[] }) {
   const calc = useTranslations("PayoutCalculator");
   const [accountSize, setAccountSize] = useState(DEFAULT_ACCOUNT);
   const [profit, setProfit] = useState(String(DEFAULT_PROFIT));
+  const [searchQuery, setSearchQuery] = useState("");
+  const [viewMode, setViewMode] = useState<ViewMode>("card");
+  const [activeTab, setActiveTab] = useState<FirmTab>("top10");
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
   const profitValue = Number(profit);
   const hasValidProfit = Number.isFinite(profitValue) && profitValue >= 0;
@@ -54,9 +68,9 @@ export function HomeMarketplace({ firms }: { firms: PropFirm[] }) {
         breakdown: payoutForFirm(firm, accountSize, profitValue),
       }))
       .sort((a, b) => {
-        const aClosed = a.firm.status === "suspended" ? 1 : 0;
-        const bClosed = b.firm.status === "suspended" ? 1 : 0;
-        if (aClosed !== bClosed) return aClosed - bClosed;
+        const aWeight = STATUS_WEIGHT[a.firm.status];
+        const bWeight = STATUS_WEIGHT[b.firm.status];
+        if (aWeight !== bWeight) return aWeight - bWeight;
         const aPay = a.breakdown?.netPayout ?? -1;
         const bPay = b.breakdown?.netPayout ?? -1;
         return bPay - aPay;
@@ -66,6 +80,39 @@ export function HomeMarketplace({ firms }: { firms: PropFirm[] }) {
   const leader =
     ranked.find((entry) => entry.firm.status !== "suspended") ?? ranked[0];
   const preview = leader?.breakdown ?? null;
+
+  const filteredRanked = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
+    if (!query) return ranked;
+    return ranked.filter(({ firm }) =>
+      firm.basic.name.toLowerCase().includes(query),
+    );
+  }, [ranked, searchQuery]);
+
+  const closedCount = useMemo(
+    () => ranked.filter(({ firm }) => firm.status !== "active").length,
+    [ranked],
+  );
+
+  useEffect(() => {
+    setVisibleCount(PAGE_SIZE);
+  }, [searchQuery, activeTab]);
+
+  const top10List = filteredRanked.slice(0, 10);
+  const allList = filteredRanked.slice(0, visibleCount);
+  const closedList = useMemo(
+    () => filteredRanked.filter(({ firm }) => firm.status !== "active"),
+    [filteredRanked],
+  );
+
+  const canLoadMore = activeTab === "all" && visibleCount < filteredRanked.length;
+
+  const visibleList =
+    activeTab === "top10"
+      ? top10List
+      : activeTab === "closed"
+        ? closedList
+        : allList;
 
   return (
     <>
@@ -205,6 +252,15 @@ export function HomeMarketplace({ firms }: { firms: PropFirm[] }) {
         </div>
       </section>
 
+      <FirmFilterBar
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
+        accountSize={accountSize}
+        onAccountSizeChange={setAccountSize}
+        viewMode={viewMode}
+        onViewModeChange={setViewMode}
+      />
+
       <section id="rankings" className="mx-auto w-full max-w-6xl scroll-mt-24 px-4 py-16">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
@@ -224,6 +280,15 @@ export function HomeMarketplace({ firms }: { firms: PropFirm[] }) {
           </div>
         </div>
 
+        <div className="mt-6">
+          <FirmTabs
+            active={activeTab}
+            onChange={setActiveTab}
+            allCount={filteredRanked.length}
+            closedCount={closedCount}
+          />
+        </div>
+
         {firms.length === 0 ? (
           <div className="mt-8 grid gap-4 md:grid-cols-2">
             {[0, 1, 2, 3].map((slot) => (
@@ -236,19 +301,50 @@ export function HomeMarketplace({ firms }: { firms: PropFirm[] }) {
               {t("emptyRankings")}
             </p>
           </div>
+        ) : visibleList.length === 0 ? (
+          <p className="mt-8 text-sm text-zinc-500">{t("noResults")}</p>
         ) : (
-          <ol className="mt-8 grid gap-4 md:grid-cols-2">
-            {ranked.map(({ firm, breakdown }, index) => (
-              <li key={firm.slug}>
-                <FirmCard
-                  firm={firm}
-                  rank={index + 1}
-                  netPayout={breakdown?.netPayout ?? null}
-                  currency={firm.calculator.currency}
-                />
-              </li>
-            ))}
-          </ol>
+          <>
+            {activeTab === "all" ? (
+              <p className="mt-6 text-xs tracking-wide text-zinc-500">
+                {t("showingCount", {
+                  shown: visibleList.length,
+                  total: filteredRanked.length,
+                })}
+              </p>
+            ) : null}
+
+            {viewMode === "table" ? (
+              <div className="mt-4">
+                <FirmTable rows={visibleList} />
+              </div>
+            ) : (
+              <ol className="mt-4 grid gap-4 md:grid-cols-2">
+                {visibleList.map(({ firm, breakdown }, index) => (
+                  <li key={firm.slug}>
+                    <FirmCard
+                      firm={firm}
+                      rank={activeTab === "closed" ? undefined : index + 1}
+                      netPayout={breakdown?.netPayout ?? null}
+                      currency={firm.calculator.currency}
+                    />
+                  </li>
+                ))}
+              </ol>
+            )}
+
+            {canLoadMore ? (
+              <div className="mt-6 flex justify-center">
+                <button
+                  type="button"
+                  onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}
+                  className="inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/5 px-5 py-2.5 text-sm font-medium text-zinc-200 transition-colors hover:border-emerald-400/30 hover:bg-emerald-400/10 hover:text-emerald-200"
+                >
+                  {t("loadMoreCta")}
+                </button>
+              </div>
+            ) : null}
+          </>
         )}
       </section>
     </>

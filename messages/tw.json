@@ -10,6 +10,7 @@
     "compare": "對比",
     "faq": "FAQ",
     "news": "新聞",
+    "defunct": "已關閉平台",
     "languageLabel": "語言"
   },
   "HomePage": {
@@ -27,6 +28,17 @@
     "emptyPreview": "平台資料尚未載入。計算器仍可使用，排行會在資料就緒後出現。",
     "emptyRankings": "目前沒有可用的平台資料，頁面其餘部分仍可正常瀏覽。",
     "dataAudited": "⚡ 資料最近核驗：2026 年 9 月",
+    "searchPlaceholder": "搜尋平台...",
+    "viewModeLabel": "檢視",
+    "viewModeCard": "卡片",
+    "viewModeTable": "表格",
+    "tabTop10": "Top 10 精選",
+    "tabAllFirms": "全部平台",
+    "tabClosedWarning": "已關閉 / 預警",
+    "tableFirmColumn": "平台",
+    "loadMoreCta": "載入更多",
+    "showingCount": "顯示 {shown} / {total} 家平台",
+    "noResults": "沒有符合的平台。",
     "trustTitle": "為資金盤交易員而建",
     "trustSubtitle": "每一個數字都來自公開規則，而不是行銷文案。",
     "trust": {
@@ -180,6 +192,25 @@
     "linkCopied": "已複製",
     "disclaimer": "本文為公開報導的原創摘要，不構成任何投資或財務建議。細節請以原始來源和平台官網為準。",
     "notFoundMetaTitle": "找不到這則新聞"
+  },
+  "DefunctPage": {
+    "metaTitle": "⚠️ 出資交易骷髏場：已關閉 / 暫停出金的資金盤平台清單（2023-2026）",
+    "metaDescription": "彙整 2023 至 2026 年間已關閉、失聯或停止出金的資金盤平台，附公開的關閉原因，以及經過審核的更安全替代平台。",
+    "title": "出資交易骷髏場：已關閉 / 暫停出金的平台（2023-2026）",
+    "subtitle": "在購買挑戰前先查一查這份清單。這些平台已停止運營、停止出金，或被監管機構關停——出金前請先確認你選的平台不在這裡。",
+    "countLabel": "已收錄 {count} 家已關閉或暫停出金的平台",
+    "empty": "暫無已關閉平台記錄，敬請期待。",
+    "disclaimer": "本頁彙整的是公開報導的關閉事件與交易員投訴，不構成法律或財務建議，也不代表對欺詐行為的認定。資訊可能會快速變化——購買挑戰或申請出金前，請務必直接核實平台的最新狀態。",
+    "akaLabel": "曾用名 / 別名",
+    "closedOnLabel": "關閉時間",
+    "viewFullProfile": "查看完整評測",
+    "sourceLabel": "資訊來源",
+    "statusRegulatoryAction": "監管立案",
+    "statusUnpaidPayouts": "拖欠出金",
+    "statusCeasedOperations": "靜默停運",
+    "alternativesBadge": "已驗證替代平台",
+    "alternativesHeadline": "想找更安全、經過驗證的資金盤平台？看看我們審核過的正常運營平台清單，出金有保障。",
+    "alternativesInlineText": "改用已驗證、正常運營的平台："
   },
   "SiteFooter": {
     "tagline": "獨立的 Prop Firm 出金計算器與公開規則對比。",

@@ -10,6 +10,7 @@
     "compare": "So sánh",
     "faq": "FAQ",
     "news": "Tin tức",
+    "defunct": "Công ty đã đóng",
     "languageLabel": "Ngôn ngữ"
   },
   "HomePage": {
@@ -27,6 +28,17 @@
     "emptyPreview": "Dữ liệu công ty chưa sẵn sàng. Máy tính vẫn dùng được.",
     "emptyRankings": "Hiện chưa có hồ sơ công ty. Phần còn lại của trang vẫn hoạt động.",
     "dataAudited": "⚡ Dữ liệu kiểm tra lần cuối: Tháng 9 năm 2026",
+    "searchPlaceholder": "Tìm công ty...",
+    "viewModeLabel": "Chế độ xem",
+    "viewModeCard": "Thẻ",
+    "viewModeTable": "Bảng",
+    "tabTop10": "Top 10 đề xuất",
+    "tabAllFirms": "Tất cả công ty",
+    "tabClosedWarning": "Đóng / Cảnh báo",
+    "tableFirmColumn": "Công ty",
+    "loadMoreCta": "Xem thêm",
+    "showingCount": "Hiển thị {shown}/{total} công ty",
+    "noResults": "Không có công ty phù hợp với tìm kiếm.",
     "trustTitle": "Dành cho trader được cấp vốn",
     "trustSubtitle": "Mọi con số đều được tính từ quy định công khai — không phải copy marketing.",
     "trust": {
@@ -180,6 +192,25 @@
     "linkCopied": "Đã sao chép",
     "disclaimer": "Bản tóm tắt này được viết lại từ tin công khai, không phải lời khuyên tài chính. Hãy xác nhận chi tiết trên nguồn gốc và trang chính thức của công ty.",
     "notFoundMetaTitle": "Không tìm thấy bài viết"
+  },
+  "DefunctPage": {
+    "metaTitle": "⚠️ Nghĩa địa Prop Firm: Danh sách công ty Prop Trading đã đóng và bị tạm ngừng (2023-2026)",
+    "metaDescription": "Danh sách các công ty prop trading đã đóng cửa, im lặng biến mất hoặc ngừng trả tiền trong giai đoạn 2023-2026, kèm lý do công khai cho từng trường hợp và các lựa chọn thay thế an toàn hơn đã được kiểm chứng.",
+    "title": "Nghĩa địa Prop Firm: công ty đã đóng và bị tạm ngừng (2023-2026)",
+    "subtitle": "Trước khi mua Challenge, hãy kiểm tra danh sách này. Các công ty này đã ngừng hoạt động, ngừng trả tiền, hoặc bị cơ quan quản lý đóng cửa — hãy xác nhận công ty bạn chọn không có trong danh sách trước khi nạp tiền.",
+    "countLabel": "Đã ghi nhận {count} công ty đóng cửa hoặc bị tạm ngừng",
+    "empty": "Chưa có dữ liệu công ty đóng cửa. Hãy quay lại sau.",
+    "disclaimer": "Trang này tổng hợp các vụ đóng cửa và khiếu nại của trader được báo cáo công khai. Đây không phải là tư vấn pháp lý hay tài chính và không phải là kết luận về gian lận. Thông tin có thể thay đổi nhanh — luôn xác minh trực tiếp trạng thái hiện tại của công ty trước khi mua Challenge hoặc yêu cầu rút tiền.",
+    "akaLabel": "Còn được gọi là",
+    "closedOnLabel": "Đóng cửa",
+    "viewFullProfile": "Xem hồ sơ đầy đủ",
+    "sourceLabel": "Nguồn",
+    "statusRegulatoryAction": "Bị xử lý pháp lý",
+    "statusUnpaidPayouts": "Nợ tiền rút",
+    "statusCeasedOperations": "Ngừng hoạt động lặng lẽ",
+    "alternativesBadge": "Lựa chọn đã kiểm chứng",
+    "alternativesHeadline": "Đang tìm prop firm an toàn hơn, đã được kiểm chứng? Xem danh sách công ty đang hoạt động, đã kiểm toán với cam kết trả tiền của chúng tôi.",
+    "alternativesInlineText": "Hãy giao dịch với một công ty đã kiểm chứng, đang hoạt động:"
   },
   "SiteFooter": {
     "tagline": "Công cụ tính rút tiền và so sánh quy định công khai của các prop firm, độc lập và khách quan.",

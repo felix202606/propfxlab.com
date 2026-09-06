@@ -40,6 +40,12 @@ export function SiteHeader() {
           <Link href="/calculator" className={navLinkClass}>
             {t("calculator")}
           </Link>
+          <Link
+            href="/defunct"
+            className={`${navLinkClass} text-amber-400/80 hover:text-amber-300`}
+          >
+            {t("defunct")}
+          </Link>
         </nav>
 
         <div className="hidden sm:block">

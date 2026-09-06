@@ -1,9 +1,10 @@
 import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { z } from "zod";
-import { propFirmSchema } from "../src/lib/schema";
+import { defunctFirmSchema, propFirmSchema } from "../src/lib/schema";
 
 const FIRMS_DIR = path.join(process.cwd(), "data", "firms");
+const CLOSED_FIRMS_FILE = path.join(process.cwd(), "data", "closed_firms.json");
 
 function loadJson(filePath: string): { ok: true; data: unknown } | { ok: false; error: string } {
   try {
@@ -12,6 +13,49 @@ function loadJson(filePath: string): { ok: true; data: unknown } | { ok: false; 
     const message = error instanceof Error ? error.message : String(error);
     return { ok: false, error: message };
   }
+}
+
+function validateClosedFirms(): number {
+  const relativePath = path.relative(process.cwd(), CLOSED_FIRMS_FILE);
+  const parsed = loadJson(CLOSED_FIRMS_FILE);
+
+  if (!parsed.ok) {
+    console.error(`\n✖ ${relativePath}`);
+    console.error(`  JSON 无法解析: ${parsed.error}`);
+    return 1;
+  }
+
+  if (!Array.isArray(parsed.data)) {
+    console.error(`\n✖ ${relativePath}`);
+    console.error(`  顶层必须是数组`);
+    return 1;
+  }
+
+  let failed = 0;
+  const seenSlugs = new Set<string>();
+
+  parsed.data.forEach((entry, index) => {
+    const result = defunctFirmSchema.safeParse(entry);
+    if (!result.success) {
+      failed += 1;
+      console.error(`\n✖ ${relativePath} [${index}]`);
+      console.error(z.prettifyError(result.error));
+      return;
+    }
+    if (seenSlugs.has(result.data.slug)) {
+      failed += 1;
+      console.error(`\n✖ ${relativePath} [${index}]`);
+      console.error(`  slug "${result.data.slug}" 重复`);
+      return;
+    }
+    seenSlugs.add(result.data.slug);
+  });
+
+  if (failed === 0) {
+    console.log(`✓ ${relativePath} (${parsed.data.length} 条记录)`);
+  }
+
+  return failed;
 }
 
 function main(): void {
@@ -64,12 +108,14 @@ function main(): void {
     console.log(`✓ ${relativePath}`);
   }
 
+  failed += validateClosedFirms();
+
   if (failed > 0) {
-    console.error(`\n校验失败：${failed}/${files.length} 个文件不符合 src/lib/schema.ts`);
+    console.error(`\n校验失败：共 ${failed} 处不符合 src/lib/schema.ts`);
     process.exit(1);
   }
 
-  console.log(`\n全部通过：${files.length} 个 Prop Firm JSON 符合 Schema`);
+  console.log(`\n全部通过：${files.length} 个 Prop Firm JSON + closed_firms.json 符合 Schema`);
 }
 
 main();

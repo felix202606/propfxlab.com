@@ -10,6 +10,7 @@
     "compare": "对比",
     "faq": "FAQ",
     "news": "新闻",
+    "defunct": "已关闭平台",
     "languageLabel": "语言"
   },
   "HomePage": {
@@ -27,6 +28,17 @@
     "emptyPreview": "平台数据暂未加载。计算器仍可使用，排行会在资料就绪后出现。",
     "emptyRankings": "当前没有可用的平台资料，页面其余部分仍可正常浏览。",
     "dataAudited": "⚡ 数据最近核验：2026 年 9 月",
+    "searchPlaceholder": "搜索平台...",
+    "viewModeLabel": "视图",
+    "viewModeCard": "卡片",
+    "viewModeTable": "表格",
+    "tabTop10": "Top 10 精选",
+    "tabAllFirms": "全部平台",
+    "tabClosedWarning": "已关闭 / 预警",
+    "tableFirmColumn": "平台",
+    "loadMoreCta": "加载更多",
+    "showingCount": "显示 {shown} / {total} 家平台",
+    "noResults": "没有匹配的平台。",
     "trustTitle": "为资金盘交易员而建",
     "trustSubtitle": "每一个数字都来自公开规则，而不是营销文案。",
     "trust": {
@@ -180,6 +192,25 @@
     "linkCopied": "已复制",
     "disclaimer": "本文为公开报道的原创摘要，不构成任何投资或财务建议。细节请以原始来源和平台官网为准。",
     "notFoundMetaTitle": "未找到该新闻"
+  },
+  "DefunctPage": {
+    "metaTitle": "⚠️ 出资交易骷髅场：已关闭 / 暂停出金的资金盘平台清单（2023-2026）",
+    "metaDescription": "汇总 2023 至 2026 年间已关闭、失联或停止出金的资金盘平台，附公开的关闭原因，以及经过审核的更安全替代平台。",
+    "title": "出资交易骷髅场：已关闭 / 暂停出金的平台（2023-2026）",
+    "subtitle": "在购买挑战前先查一查这份清单。这些平台已停止运营、停止出金，或被监管机构关停——出金前请先确认你选的平台不在这里。",
+    "countLabel": "已收录 {count} 家已关闭或暂停出金的平台",
+    "empty": "暂无已关闭平台记录，敬请期待。",
+    "disclaimer": "本页汇总的是公开报道的关闭事件与交易员投诉，不构成法律或财务建议，也不代表对欺诈行为的认定。信息可能会快速变化——购买挑战或申请出金前，请务必直接核实平台的最新状态。",
+    "akaLabel": "曾用名 / 别名",
+    "closedOnLabel": "关闭时间",
+    "viewFullProfile": "查看完整评测",
+    "sourceLabel": "信息来源",
+    "statusRegulatoryAction": "监管立案",
+    "statusUnpaidPayouts": "拖欠出金",
+    "statusCeasedOperations": "静默停运",
+    "alternativesBadge": "已验证替代平台",
+    "alternativesHeadline": "想找更安全、经过验证的资金盘平台？看看我们审核过的正常运营平台清单，出金有保障。",
+    "alternativesInlineText": "改用已验证、正常运营的平台："
   },
   "SiteFooter": {
     "tagline": "独立的 Prop Firm 出金计算器与公开规则对比。",
