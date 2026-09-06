@@ -3,7 +3,7 @@ import { ComparisonsGrid } from "@/components/ComparisonsGrid";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { HomeMarketplace } from "@/components/HomeMarketplace";
 import { TrustGrid } from "@/components/TrustGrid";
-import { getAllFirms } from "@/lib/data";
+import { getAllDefunctFirms, getAllFirms } from "@/lib/data";
 
 type HomeFaq = { question: string; answer: string };
 
@@ -20,8 +20,10 @@ function toHomeFaqs(raw: unknown): HomeFaq[] {
 
 export default async function Home() {
   let firms: ReturnType<typeof getAllFirms> = [];
+  let defunctCount = 0;
   try {
-    firms = getAllFirms();
+    firms = getAllFirms().filter((firm) => firm.status === "active");
+    defunctCount = getAllDefunctFirms().length;
   } catch (err) {
     console.error("[home] getAllFirms failed, rendering empty marketplace:", err);
   }
@@ -43,7 +45,7 @@ export default async function Home() {
 
   return (
     <main className="relative flex-1">
-      <HomeMarketplace firms={firms} />
+      <HomeMarketplace firms={firms} defunctCount={defunctCount} />
       <TrustGrid />
       <ComparisonsGrid firms={firms} />
       {faqs.length > 0 ? (

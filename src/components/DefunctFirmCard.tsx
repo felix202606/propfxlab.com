@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { SaferAlternatives } from "@/components/SaferAlternatives";
 import { formatMonthYear } from "@/lib/news-format";
-import type { DefunctFirm, DefunctStatus } from "@/lib/schema";
+import { getDefunctLocaleCopy, type DefunctFirm, type DefunctStatus } from "@/lib/schema";
 
 const STATUS_LABEL_KEY: Record<DefunctStatus, string> = {
   regulatory_action: "statusRegulatoryAction",
@@ -23,6 +23,7 @@ export function DefunctFirmCard({
   locale: string;
 }) {
   const t = useTranslations("DefunctPage");
+  const { reason } = getDefunctLocaleCopy(firm, locale);
 
   return (
     <article className="flex h-full flex-col rounded-2xl border border-red-400/20 bg-gradient-to-b from-red-950/25 via-zinc-950 to-black p-5 shadow-[0_0_0_1px_rgba(248,113,113,0.08)]">
@@ -56,7 +57,7 @@ export function DefunctFirmCard({
         </span>
       </p>
 
-      <p className="mt-3 flex-1 text-sm leading-6 text-zinc-300">{firm.reason}</p>
+      <p className="mt-3 flex-1 text-sm leading-6 text-zinc-300">{reason}</p>
 
       <div className="mt-4 flex flex-wrap gap-2">
         {firm.relatedFirmSlug ? (
