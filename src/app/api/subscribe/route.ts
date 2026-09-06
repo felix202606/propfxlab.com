@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
 const FROM = "PropFXLab Alerts <alerts@propfxlab.com>";
-const REPLY_TO = "qq81174761@gmail.com";
+const REPLY_TO = "contact@propfxlab.com";
 
 type LocaleKey = "en" | "es" | "cn" | "tw" | "th" | "vi" | "pt";
 
@@ -215,9 +215,8 @@ export async function POST(request: NextRequest) {
   });
 
   if (error) {
-    const msg = (error as { message?: string }).message ?? JSON.stringify(error);
-    console.error("[subscribe] emails.send failed:", msg);
-    return NextResponse.json({ error: `Resend error: ${msg}` }, { status: 500 });
+    console.error("[subscribe] emails.send failed:", (error as { message?: string }).message ?? error);
+    return NextResponse.json({ error: "Failed to send welcome email. Please try again." }, { status: 500 });
   }
 
   return NextResponse.json({ success: true });
