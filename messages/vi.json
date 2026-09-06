@@ -191,7 +191,18 @@
     "copyLink": "Sao chép liên kết",
     "linkCopied": "Đã sao chép",
     "disclaimer": "Bản tóm tắt này được viết lại từ tin công khai, không phải lời khuyên tài chính. Hãy xác nhận chi tiết trên nguồn gốc và trang chính thức của công ty.",
-    "notFoundMetaTitle": "Không tìm thấy bài viết"
+    "notFoundMetaTitle": "Không tìm thấy bài viết",
+    "searchPlaceholder": "Tìm tiêu đề và tóm tắt...",
+    "categoryLabel": "Chuyên mục tin",
+    "categoryAll": "Tất cả",
+    "categoryRuleChanges": "Đổi quy định",
+    "categoryPayoutAlerts": "Cảnh báo rút tiền",
+    "categoryFirmNews": "Tin công ty",
+    "previous": "Trước",
+    "next": "Sau",
+    "paginationNav": "Phân trang tin tức",
+    "showingCount": "Hiển thị {shown}/{total} · trang {page}/{totalPages}",
+    "noResults": "Không có bài viết phù hợp với tìm kiếm."
   },
   "DefunctPage": {
     "metaTitle": "⚠️ Nghĩa địa Prop Firm: Danh sách công ty Prop Trading đã đóng và bị tạm ngừng (2023-2026)",

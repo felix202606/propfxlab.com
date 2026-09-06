@@ -191,7 +191,18 @@
     "copyLink": "Copy link",
     "linkCopied": "Copied",
     "disclaimer": "This briefing is an original summary of publicly available reporting. It is not financial advice. Confirm details on the original source and the firm's official site.",
-    "notFoundMetaTitle": "Article not found"
+    "notFoundMetaTitle": "Article not found",
+    "searchPlaceholder": "Search headlines and summaries...",
+    "categoryLabel": "News categories",
+    "categoryAll": "All",
+    "categoryRuleChanges": "Rule Changes",
+    "categoryPayoutAlerts": "Payout Alerts",
+    "categoryFirmNews": "Firm News",
+    "previous": "Previous",
+    "next": "Next",
+    "paginationNav": "News pagination",
+    "showingCount": "Showing {shown} of {total} · page {page}/{totalPages}",
+    "noResults": "No articles match your search."
   },
   "DefunctPage": {
     "metaTitle": "⚠️ Prop Firm Boneyard: List of Closed & Suspended Prop Trading Firms (2023-2026)",
