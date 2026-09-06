@@ -344,6 +344,22 @@ export const defunctStatusSchema = z.enum([
   "ceased_operations",
 ]);
 
+export const defunctLocaleCopySchema = z.object({
+  reason: z.string().min(1),
+});
+
+export const defunctTranslationsSchema = z
+  .object({
+    en: defunctLocaleCopySchema,
+    es: defunctLocaleCopySchema.optional(),
+    cn: defunctLocaleCopySchema.optional(),
+    tw: defunctLocaleCopySchema.optional(),
+    th: defunctLocaleCopySchema.optional(),
+    vi: defunctLocaleCopySchema.optional(),
+    pt: defunctLocaleCopySchema.optional(),
+  })
+  .passthrough();
+
 export const defunctFirmSchema = z.object({
   slug: kebabSlug,
   name: z.string().min(1),
@@ -354,17 +370,38 @@ export const defunctFirmSchema = z.object({
   status: defunctStatusSchema,
   /** 用于卡片配色强调：high 用红色，medium 用琥珀色 */
   severity: z.enum(["high", "medium"]).default("medium"),
+  /** 英文规范原因；各语言版本放 translations */
   reason: z.string().min(1),
   /** 若站内仍保留完整评测（如 MyFundedFX），关联到 /firm/[slug] */
   relatedFirmSlug: kebabSlug.optional(),
   sourceUrl: z.url().optional(),
+  translations: defunctTranslationsSchema.optional(),
 });
 
 export type DefunctStatus = z.infer<typeof defunctStatusSchema>;
+export type DefunctLocaleCopy = z.infer<typeof defunctLocaleCopySchema>;
 export type DefunctFirm = z.infer<typeof defunctFirmSchema>;
 
 export function parseDefunctFirm(data: unknown): DefunctFirm {
   return defunctFirmSchema.parse(data);
+}
+
+export function getDefunctLocaleCopy(
+  firm: DefunctFirm,
+  locale: string,
+): DefunctLocaleCopy {
+  const translations = firm.translations;
+  const localized =
+    translations && locale in translations
+      ? (translations as Record<string, DefunctLocaleCopy | undefined>)[locale]
+      : undefined;
+  if (localized?.reason) {
+    return localized;
+  }
+  if (translations?.en?.reason) {
+    return translations.en;
+  }
+  return { reason: firm.reason };
 }
 
 /** 按 locale 取文案；缺失则降级到 translations.en，再降级到顶层英文字段 */

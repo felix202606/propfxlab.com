@@ -47,7 +47,13 @@ function payoutForFirm(
   return result;
 }
 
-export function HomeMarketplace({ firms }: { firms: PropFirm[] }) {
+export function HomeMarketplace({
+  firms,
+  defunctCount,
+}: {
+  firms: PropFirm[];
+  defunctCount: number;
+}) {
   const t = useTranslations("HomePage");
   const calc = useTranslations("PayoutCalculator");
   const [accountSize, setAccountSize] = useState(DEFAULT_ACCOUNT);
@@ -89,30 +95,16 @@ export function HomeMarketplace({ firms }: { firms: PropFirm[] }) {
     );
   }, [ranked, searchQuery]);
 
-  const closedCount = useMemo(
-    () => ranked.filter(({ firm }) => firm.status !== "active").length,
-    [ranked],
-  );
-
   useEffect(() => {
     setVisibleCount(PAGE_SIZE);
   }, [searchQuery, activeTab]);
 
   const top10List = filteredRanked.slice(0, 10);
   const allList = filteredRanked.slice(0, visibleCount);
-  const closedList = useMemo(
-    () => filteredRanked.filter(({ firm }) => firm.status !== "active"),
-    [filteredRanked],
-  );
 
   const canLoadMore = activeTab === "all" && visibleCount < filteredRanked.length;
 
-  const visibleList =
-    activeTab === "top10"
-      ? top10List
-      : activeTab === "closed"
-        ? closedList
-        : allList;
+  const visibleList = activeTab === "top10" ? top10List : allList;
 
   return (
     <>
@@ -285,7 +277,7 @@ export function HomeMarketplace({ firms }: { firms: PropFirm[] }) {
             active={activeTab}
             onChange={setActiveTab}
             allCount={filteredRanked.length}
-            closedCount={closedCount}
+            defunctCount={defunctCount}
           />
         </div>
 
@@ -324,7 +316,7 @@ export function HomeMarketplace({ firms }: { firms: PropFirm[] }) {
                   <li key={firm.slug}>
                     <FirmCard
                       firm={firm}
-                      rank={activeTab === "closed" ? undefined : index + 1}
+                      rank={index + 1}
                       netPayout={breakdown?.netPayout ?? null}
                       currency={firm.calculator.currency}
                     />

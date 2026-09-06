@@ -7,7 +7,30 @@
     "status": "regulatory_action",
     "severity": "high",
     "reason": "US regulators (the CFTC and SEC) filed emergency enforcement actions against parent company Traders Global Group Ltd., alleging the firm misrepresented profit-split payouts and manipulated trading conditions against funded traders. A US court froze company assets and appointed a receiver, forcing an abrupt halt to new challenge sales, trading access and outstanding withdrawals within days.",
-    "sourceUrl": "https://www.cftc.gov/PressRoom/PressReleases/8775-23"
+    "sourceUrl": "https://www.cftc.gov/PressRoom/PressReleases/8775-23",
+    "translations": {
+      "en": {
+        "reason": "US regulators (the CFTC and SEC) filed emergency enforcement actions against parent company Traders Global Group Ltd., alleging the firm misrepresented profit-split payouts and manipulated trading conditions against funded traders. A US court froze company assets and appointed a receiver, forcing an abrupt halt to new challenge sales, trading access and outstanding withdrawals within days."
+      },
+      "es": {
+        "reason": "Los reguladores de EE. UU. (CFTC y SEC) presentaron acciones de emergencia contra la matriz Traders Global Group Ltd., alegando que la firma distorsionó los pagos por split y manipuló las condiciones de trading. Un tribunal estadounidense congeló los activos y nombró un administrador, deteniendo en pocos días las ventas de challenges, el acceso a las cuentas y los retiros pendientes."
+      },
+      "cn": {
+        "reason": "美国监管机构（CFTC 与 SEC）对母公司 Traders Global Group Ltd. 提起紧急执法，指控其虚报分成出金、操纵交易条件。美国法院冻结公司资产并指定接管人，数日内即停止新挑战销售、账户交易和未完成出金。"
+      },
+      "tw": {
+        "reason": "美國監管機構（CFTC 與 SEC）對母公司 Traders Global Group Ltd. 提起緊急執法，指控其虛報分成出金、操縱交易條件。美國法院凍結公司資產並指定接管人，數日內即停止新挑戰銷售、帳戶交易與未完成出金。"
+      },
+      "th": {
+        "reason": "หน่วยงานกำกับดูแลของสหรัฐฯ (CFTC และ SEC) ยื่นฟ้องฉุกเฉินต่อบริษัทแม่ Traders Global Group Ltd. โดยกล่าวหาว่าบิดเบือนการจ่ายส่วนแบ่งกำไรและบิดเบือนเงื่อนไขการเทรด ศาลสหรัฐฯ อายัดทรัพย์สินและแต่งตั้งผู้รับช่วง ทำให้การขาย Challenge การเข้าถึงบัญชี และการถอนเงินค้างจ่ายหยุดลงภายในไม่กี่วัน"
+      },
+      "vi": {
+        "reason": "Cơ quan quản lý Mỹ (CFTC và SEC) đã khởi kiện khẩn cấp công ty mẹ Traders Global Group Ltd., cáo buộc công ty xuyên tạc việc chia lợi nhuận và thao túng điều kiện giao dịch. Tòa án Mỹ đóng băng tài sản và chỉ định người quản lý, buộc dừng bán challenge, truy cập tài khoản và các khoản rút tiền chưa thanh toán trong vài ngày."
+      },
+      "pt": {
+        "reason": "Os reguladores dos EUA (CFTC e SEC) moveram ações emergenciais contra a controladora Traders Global Group Ltd., alegando que a firma distorceu os pagamentos de split e manipulou condições de trading. Um tribunal americano congelou os ativos e nomeou um administrador, interrompendo em poucos dias as vendas de challenges, o acesso às contas e os saques pendentes."
+      }
+    }
   },
   {
     "slug": "true-forex-funds",
@@ -16,7 +39,30 @@
     "closedDate": "2024-03-01",
     "status": "unpaid_payouts",
     "severity": "high",
-    "reason": "Traders reported months of delayed and unfulfilled payout requests through late 2023 and early 2024. Support tickets went unanswered and the firm never issued a clear public statement confirming continued operations, leading to a widespread consensus in the funded-trading community that it had gone defunct."
+    "reason": "Traders reported months of delayed and unfulfilled payout requests through late 2023 and early 2024. Support tickets went unanswered and the firm never issued a clear public statement confirming continued operations, leading to a widespread consensus in the funded-trading community that it had gone defunct.",
+    "translations": {
+      "en": {
+        "reason": "Traders reported months of delayed and unfulfilled payout requests through late 2023 and early 2024. Support tickets went unanswered and the firm never issued a clear public statement confirming continued operations, leading to a widespread consensus in the funded-trading community that it had gone defunct."
+      },
+      "es": {
+        "reason": "Los traders denunciaron meses de retiros retrasados e impagos entre finales de 2023 y principios de 2024. El soporte no respondía y la firma nunca publicó un comunicado claro de que siguiera operando, por lo que la comunidad de cuentas fondeadas la considera cerrada."
+      },
+      "cn": {
+        "reason": "2023 年底至 2024 年初，多名交易员反映出金长期拖延且未兑现。客服工单无人回复，平台也从未发布明确的持续运营声明，资金盘社区普遍认定其已停运。"
+      },
+      "tw": {
+        "reason": "2023 年底至 2024 年初，多名交易員反映出金長期拖延且未兌現。客服工單無人回覆，平台也從未發布明確的持續營運聲明，資金盤社群普遍認定其已停運。"
+      },
+      "th": {
+        "reason": "เทรดเดอร์รายงานว่าคำขอถอนเงินล่าช้าและไม่ได้รับเงินเป็นเวลาหลายเดือนตั้งแต่ปลายปี 2023 ถึงต้นปี 2024 ตั๋วซัพพอร์ตไม่ได้รับการตอบกลับ และบริษัทไม่เคยออกแถลงการณ์ยืนยันว่ายังเปิดดำเนินการ ชุมชนเทรดทุนจึงถือว่าบริษัทปิดตัวแล้ว"
+      },
+      "vi": {
+        "reason": "Nhiều trader báo cáo yêu cầu rút tiền bị trì hoãn và không được thanh toán suốt cuối 2023 đến đầu 2024. Ticket hỗ trợ không được trả lời và công ty không ra tuyên bố rõ ràng về việc tiếp tục hoạt động, nên cộng đồng tài khoản funded coi công ty đã đóng cửa."
+      },
+      "pt": {
+        "reason": "Traders relataram meses de saques atrasados e não pagos entre o fim de 2023 e o início de 2024. Os tickets de suporte ficaram sem resposta e a firma nunca emitiu um comunicado claro de que continuava operando, levando a comunidade funded a considerá-la encerrada."
+      }
+    }
   },
   {
     "slug": "surgetrader",
@@ -25,7 +71,30 @@
     "closedDate": "2024-06-01",
     "status": "ceased_operations",
     "severity": "high",
-    "reason": "Parent company Match-Trade/Surge wound down the funded-account program, citing banking and payment-processor difficulties. Traders with pending profit splits reported being redirected to a lengthy claims process instead of receiving payouts under the originally advertised cycle."
+    "reason": "Parent company Match-Trade/Surge wound down the funded-account program, citing banking and payment-processor difficulties. Traders with pending profit splits reported being redirected to a lengthy claims process instead of receiving payouts under the originally advertised cycle.",
+    "translations": {
+      "en": {
+        "reason": "Parent company Match-Trade/Surge wound down the funded-account program, citing banking and payment-processor difficulties. Traders with pending profit splits reported being redirected to a lengthy claims process instead of receiving payouts under the originally advertised cycle."
+      },
+      "es": {
+        "reason": "La matriz Match-Trade/Surge cerró el programa de cuentas fondeadas, alegando problemas bancarios y con procesadores de pago. Los traders con splits pendientes afirmaron que los derivaron a un largo proceso de reclamaciones en lugar de pagarles según el ciclo anunciado."
+      },
+      "cn": {
+        "reason": "母公司 Match-Trade/Surge 以银行与支付通道困难为由，关停了资金盘账户项目。已申请分成出金的交易员称被转入冗长的索赔流程，而不是按原先宣传的周期到账。"
+      },
+      "tw": {
+        "reason": "母公司 Match-Trade/Surge 以銀行與支付通道困難為由，關停了資金盤帳戶專案。已申請分成出金的交易員稱被轉入冗長的索賠流程，而不是依原先宣傳的週期到帳。"
+      },
+      "th": {
+        "reason": "บริษัทแม่ Match-Trade/Surge ยุติโปรแกรมบัญชีทุน โดยอ้างปัญหาธนาคารและผู้ประมวลผลการชำระเงิน เทรดเดอร์ที่มีส่วนแบ่งกำไรค้างจ่ายระบุว่าถูกส่งไปยังกระบวนการเคลมที่ยืดเยื้อ แทนที่จะได้รับเงินตามรอบที่โฆษณาไว้"
+      },
+      "vi": {
+        "reason": "Công ty mẹ Match-Trade/Surge đã đóng chương trình tài khoản funded, viện dẫn khó khăn về ngân hàng và cổng thanh toán. Trader có khoản chia lợi nhuận chưa nhận cho biết bị chuyển sang quy trình khiếu nại kéo dài thay vì được trả theo chu kỳ đã quảng cáo."
+      },
+      "pt": {
+        "reason": "A controladora Match-Trade/Surge encerrou o programa de contas funded, citando dificuldades bancárias e com processadores de pagamento. Traders com splits pendentes relataram ter sido redirecionados a um longo processo de reivindicação em vez de receber no ciclo anunciado."
+      }
+    }
   },
   {
     "slug": "funded-engineer",
@@ -34,7 +103,30 @@
     "closedDate": "2024-01-01",
     "status": "ceased_operations",
     "severity": "medium",
-    "reason": "The firm stopped issuing new challenges and became largely unresponsive to support and payout requests. Its official site and social channels went inactive shortly after, and it is now broadly listed as defunct by the funded-trading community."
+    "reason": "The firm stopped issuing new challenges and became largely unresponsive to support and payout requests. Its official site and social channels went inactive shortly after, and it is now broadly listed as defunct by the funded-trading community.",
+    "translations": {
+      "en": {
+        "reason": "The firm stopped issuing new challenges and became largely unresponsive to support and payout requests. Its official site and social channels went inactive shortly after, and it is now broadly listed as defunct by the funded-trading community."
+      },
+      "es": {
+        "reason": "La firma dejó de vender challenges y casi no respondía a soporte ni a solicitudes de retiro. El sitio oficial y las redes se inactivaron poco después, y la comunidad de cuentas fondeadas la considera cerrada."
+      },
+      "cn": {
+        "reason": "该平台停止发售新挑战，对客服与出金请求基本不再回复。官网与社媒随后停更，资金盘社区现普遍将其列为已关停平台。"
+      },
+      "tw": {
+        "reason": "該平台停止發售新挑戰，對客服與出金請求幾乎不再回覆。官網與社群隨後停更，資金盤社群現普遍將其列為已關停平台。"
+      },
+      "th": {
+        "reason": "บริษัทหยุดออก Challenge ใหม่และแทบไม่ตอบคำขอซัพพอร์ตหรือถอนเงิน เว็บไซต์และโซเชียลทางการเงียบในเวลาต่อมา และชุมชนเทรดทุนจัดว่าบริษัทปิดตัวแล้ว"
+      },
+      "vi": {
+        "reason": "Công ty ngừng bán challenge mới và gần như không phản hồi hỗ trợ cũng như yêu cầu rút tiền. Website và mạng xã hội chính thức sớm ngừng hoạt động; cộng đồng funded hiện xếp công ty vào danh sách đã đóng cửa."
+      },
+      "pt": {
+        "reason": "A firma parou de vender challenges e passou a não responder suporte nem pedidos de saque. O site e as redes oficiais ficaram inativos em seguida, e a comunidade funded a lista como encerrada."
+      }
+    }
   },
   {
     "slug": "skilled-funded-traders",
@@ -43,7 +135,30 @@
     "closedDate": "2023-11-01",
     "status": "unpaid_payouts",
     "severity": "medium",
-    "reason": "Multiple traders reported delayed payouts and intermittent account access starting in late 2023. Public communication from the firm slowed sharply afterward, and it is widely reported as no longer honoring new withdrawal requests."
+    "reason": "Multiple traders reported delayed payouts and intermittent account access starting in late 2023. Public communication from the firm slowed sharply afterward, and it is widely reported as no longer honoring new withdrawal requests.",
+    "translations": {
+      "en": {
+        "reason": "Multiple traders reported delayed payouts and intermittent account access starting in late 2023. Public communication from the firm slowed sharply afterward, and it is widely reported as no longer honoring new withdrawal requests."
+      },
+      "es": {
+        "reason": "Varios traders denunciaron retiros retrasados y acceso intermitente a las cuentas desde finales de 2023. La comunicación pública de la firma se redujo bruscamente y se informa de forma generalizada que ya no atiende nuevas solicitudes de retiro."
+      },
+      "cn": {
+        "reason": "自 2023 年底起，多名交易员反映出金拖延、账户时断时续。此后平台对外沟通明显减少，普遍报道称其已不再处理新的出金申请。"
+      },
+      "tw": {
+        "reason": "自 2023 年底起，多名交易員反映出金拖延、帳戶時斷時續。此後平台對外溝通明顯減少，普遍報導稱其已不再處理新的出金申請。"
+      },
+      "th": {
+        "reason": "เทรดเดอร์หลายรายรายงานว่าการถอนเงินล่าช้าและเข้าบัญชีได้ไม่ต่อเนื่องตั้งแต่ปลายปี 2023 หลังจากนั้นการสื่อสารสาธารณะของบริษัทลดลงอย่างชัดเจน และมีรายงานอย่างกว้างขวางว่าไม่รับคำขอถอนเงินใหม่แล้ว"
+      },
+      "vi": {
+        "reason": "Nhiều trader báo cáo rút tiền chậm và truy cập tài khoản không ổn định từ cuối 2023. Sau đó công ty gần như ngừng truyền thông công khai, và được báo cáo rộng rãi là không còn xử lý yêu cầu rút tiền mới."
+      },
+      "pt": {
+        "reason": "Vários traders relataram saques atrasados e acesso intermitente às contas a partir do fim de 2023. A comunicação pública da firma caiu bruscamente e há relatos generalizados de que ela não honra mais novos pedidos de saque."
+      }
+    }
   },
   {
     "slug": "smart-prop-trader",
@@ -52,7 +167,30 @@
     "closedDate": "2024-02-01",
     "status": "ceased_operations",
     "severity": "medium",
-    "reason": "Site access and client support became intermittent before going fully offline. No formal closure notice was issued to funded traders, leaving outstanding profit-split claims unresolved."
+    "reason": "Site access and client support became intermittent before going fully offline. No formal closure notice was issued to funded traders, leaving outstanding profit-split claims unresolved.",
+    "translations": {
+      "en": {
+        "reason": "Site access and client support became intermittent before going fully offline. No formal closure notice was issued to funded traders, leaving outstanding profit-split claims unresolved."
+      },
+      "es": {
+        "reason": "El acceso al sitio y el soporte al cliente se volvieron intermitentes antes de quedar fuera de línea. No se emitió un aviso formal de cierre a los traders fondeados, y las reclamaciones de split pendientes quedaron sin resolver."
+      },
+      "cn": {
+        "reason": "网站与客服先是时断时续，随后完全下线。平台未向资金盘交易员发布正式关停公告，未完成的分成出金请求也未处理。"
+      },
+      "tw": {
+        "reason": "網站與客服先是時斷時續，隨後完全下線。平台未向資金盤交易員發布正式關停公告，未完成的分成出金請求也未處理。"
+      },
+      "th": {
+        "reason": "การเข้าเว็บไซต์และฝ่ายซัพพอร์ตขาดช่วงก่อนจะออฟไลน์ทั้งหมด ไม่มีประกาศปิดตัวอย่างเป็นทางการถึงเทรดเดอร์ที่ได้รับทุน ทำให้คำขอแบ่งกำไรที่ค้างอยู่ไม่ได้รับการแก้ไข"
+      },
+      "vi": {
+        "reason": "Website và hỗ trợ khách hàng lúc được lúc mất rồi ngừng hoàn toàn. Không có thông báo đóng cửa chính thức gửi trader funded, các khoản chia lợi nhuận còn lại chưa được giải quyết."
+      },
+      "pt": {
+        "reason": "O acesso ao site e o suporte ficaram intermitentes antes de sair do ar. Não houve aviso formal de encerramento aos traders funded, e os pedidos de split pendentes ficaram sem resolução."
+      }
+    }
   },
   {
     "slug": "glow-node",
@@ -61,7 +199,30 @@
     "closedDate": "2024-05-01",
     "status": "ceased_operations",
     "severity": "medium",
-    "reason": "Operations wound down with minimal advance notice; the trading platform and dashboard access were discontinued while trader profit-split claims remained outstanding and unaddressed."
+    "reason": "Operations wound down with minimal advance notice; the trading platform and dashboard access were discontinued while trader profit-split claims remained outstanding and unaddressed.",
+    "translations": {
+      "en": {
+        "reason": "Operations wound down with minimal advance notice; the trading platform and dashboard access were discontinued while trader profit-split claims remained outstanding and unaddressed."
+      },
+      "es": {
+        "reason": "Las operaciones se cerraron con muy poco aviso previo; se cortó el acceso a la plataforma y al panel, mientras las reclamaciones de split de los traders quedaron pendientes y sin respuesta."
+      },
+      "cn": {
+        "reason": "平台几乎未提前通知即收缩运营；交易端与后台登录被切断，交易员的分成出金请求仍未处理。"
+      },
+      "tw": {
+        "reason": "平台幾乎未提前通知即收縮營運；交易端與後台登入被切斷，交易員的分成出金請求仍未處理。"
+      },
+      "th": {
+        "reason": "บริษัทยุติการดำเนินงานโดยแจ้งล่วงหน้าน้อยมาก แพลตฟอร์มเทรดและแดชบอร์ดถูกปิด ในขณะที่คำขอแบ่งกำไรของเทรดเดอร์ยังค้างและไม่ได้รับการจัดการ"
+      },
+      "vi": {
+        "reason": "Hoạt động dừng lại với rất ít thông báo trước; nền tảng giao dịch và dashboard bị cắt, trong khi các khoản chia lợi nhuận của trader vẫn chưa được xử lý."
+      },
+      "pt": {
+        "reason": "As operações foram encerradas com pouco aviso prévio; o acesso à plataforma e ao painel foi cortado, enquanto os pedidos de split dos traders permaneceram em aberto e sem resposta."
+      }
+    }
   },
   {
     "slug": "myfundedfx",
@@ -72,6 +233,29 @@
     "severity": "high",
     "reason": "MyFundedFX rebranded to SeacrestFunded and later operated a licensed brokerage as Seacrest Markets, which has since published a closure notice confirming it is no longer operating. Do not purchase a new challenge under any of these brand names.",
     "relatedFirmSlug": "myfundedfx",
-    "sourceUrl": "https://seacrestmarkets.io/closed"
+    "sourceUrl": "https://seacrestmarkets.io/closed",
+    "translations": {
+      "en": {
+        "reason": "MyFundedFX rebranded to SeacrestFunded and later operated a licensed brokerage as Seacrest Markets, which has since published a closure notice confirming it is no longer operating. Do not purchase a new challenge under any of these brand names."
+      },
+      "es": {
+        "reason": "MyFundedFX se relanzó como SeacrestFunded y después operó como bróker con licencia Seacrest Markets, que ya publicó un aviso de cierre confirmando que no sigue operando. No compres un challenge nuevo bajo ninguno de estos nombres."
+      },
+      "cn": {
+        "reason": "MyFundedFX 先后更名为 SeacrestFunded，再以持牌经纪商 Seacrest Markets 运营；后者已发布关停公告，确认不再营业。请勿以任何上述品牌购买新挑战。"
+      },
+      "tw": {
+        "reason": "MyFundedFX 先後更名為 SeacrestFunded，再以持牌經紀商 Seacrest Markets 營運；後者已發布關停公告，確認不再營業。請勿以任何上述品牌購買新挑戰。"
+      },
+      "th": {
+        "reason": "MyFundedFX เปลี่ยนชื่อเป็น SeacrestFunded แล้วต่อมาเปิดโบรกเกอร์ที่ได้รับใบอนุญาตในชื่อ Seacrest Markets ซึ่งได้ประกาศปิดกิจการแล้ว อย่าซื้อ Challenge ใหม่ภายใต้ชื่อใด ๆ เหล่านี้"
+      },
+      "vi": {
+        "reason": "MyFundedFX đổi thương hiệu thành SeacrestFunded rồi vận hành môi giới có giấy phép Seacrest Markets; công ty này đã đăng thông báo đóng cửa xác nhận không còn hoạt động. Không mua challenge mới dưới bất kỳ tên nào trong các thương hiệu trên."
+      },
+      "pt": {
+        "reason": "A MyFundedFX rebatizou-se como SeacrestFunded e depois operou a corretora licenciada Seacrest Markets, que já publicou um aviso de encerramento confirmando que não opera mais. Não compre um challenge novo sob nenhum desses nomes."
+      }
+    }
   }
 ]
