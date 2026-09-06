@@ -191,7 +191,18 @@
     "copyLink": "複製連結",
     "linkCopied": "已複製",
     "disclaimer": "本文為公開報導的原創摘要，不構成任何投資或財務建議。細節請以原始來源和平台官網為準。",
-    "notFoundMetaTitle": "找不到這則新聞"
+    "notFoundMetaTitle": "找不到這則新聞",
+    "searchPlaceholder": "搜尋標題和摘要...",
+    "categoryLabel": "新聞分類",
+    "categoryAll": "全部",
+    "categoryRuleChanges": "規則變更",
+    "categoryPayoutAlerts": "出金提醒",
+    "categoryFirmNews": "平台動態",
+    "previous": "上一頁",
+    "next": "下一頁",
+    "paginationNav": "新聞分頁",
+    "showingCount": "顯示 {shown} / {total} · 第 {page}/{totalPages} 頁",
+    "noResults": "沒有符合的新聞。"
   },
   "DefunctPage": {
     "metaTitle": "⚠️ 出資交易骷髏場：已關閉 / 暫停出金的資金盤平台清單（2023-2026）",

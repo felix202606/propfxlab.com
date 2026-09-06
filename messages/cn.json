@@ -191,7 +191,18 @@
     "copyLink": "复制链接",
     "linkCopied": "已复制",
     "disclaimer": "本文为公开报道的原创摘要，不构成任何投资或财务建议。细节请以原始来源和平台官网为准。",
-    "notFoundMetaTitle": "未找到该新闻"
+    "notFoundMetaTitle": "未找到该新闻",
+    "searchPlaceholder": "搜索标题和摘要...",
+    "categoryLabel": "新闻分类",
+    "categoryAll": "全部",
+    "categoryRuleChanges": "规则变更",
+    "categoryPayoutAlerts": "出金提醒",
+    "categoryFirmNews": "平台动态",
+    "previous": "上一页",
+    "next": "下一页",
+    "paginationNav": "新闻分页",
+    "showingCount": "显示 {shown} / {total} · 第 {page}/{totalPages} 页",
+    "noResults": "没有匹配的新闻。"
   },
   "DefunctPage": {
     "metaTitle": "⚠️ 出资交易骷髅场：已关闭 / 暂停出金的资金盘平台清单（2023-2026）",

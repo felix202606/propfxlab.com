@@ -191,7 +191,18 @@
     "copyLink": "คัดลอกลิงก์",
     "linkCopied": "คัดลอกแล้ว",
     "disclaimer": "บทสรุปนี้เขียนขึ้นใหม่จากข่าวสาธารณะ ไม่ใช่คำแนะนำทางการเงิน โปรดยืนยันรายละเอียดจากแหล่งต้นทางและเว็บไซต์ทางการของบริษัท",
-    "notFoundMetaTitle": "ไม่พบบทความ"
+    "notFoundMetaTitle": "ไม่พบบทความ",
+    "searchPlaceholder": "ค้นหาหัวข้อและบทสรุป...",
+    "categoryLabel": "หมวดข่าว",
+    "categoryAll": "ทั้งหมด",
+    "categoryRuleChanges": "เปลี่ยนกฎ",
+    "categoryPayoutAlerts": "แจ้งเตือนการถอน",
+    "categoryFirmNews": "ข่าวบริษัท",
+    "previous": "ก่อนหน้า",
+    "next": "ถัดไป",
+    "paginationNav": "การแบ่งหน้าข่าว",
+    "showingCount": "แสดง {shown} จาก {total} · หน้า {page}/{totalPages}",
+    "noResults": "ไม่พบข่าวที่ตรงกับการค้นหา"
   },
   "DefunctPage": {
     "metaTitle": "⚠️ สุสาน Prop Firm: รายชื่อบริษัท Prop Trading ที่ปิดและถูกระงับ (2023-2026)",

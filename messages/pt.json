@@ -191,7 +191,18 @@
     "copyLink": "Copiar link",
     "linkCopied": "Copiado",
     "disclaimer": "Este briefing é um resumo original de reportagens públicas. Não é aconselhamento financeiro. Confirme os detalhes na fonte original e no site oficial da firma.",
-    "notFoundMetaTitle": "Artigo não encontrado"
+    "notFoundMetaTitle": "Artigo não encontrado",
+    "searchPlaceholder": "Buscar títulos e resumos...",
+    "categoryLabel": "Categorias de notícias",
+    "categoryAll": "Todas",
+    "categoryRuleChanges": "Mudanças de regras",
+    "categoryPayoutAlerts": "Alertas de saque",
+    "categoryFirmNews": "Notícias das firmas",
+    "previous": "Anterior",
+    "next": "Próxima",
+    "paginationNav": "Paginação de notícias",
+    "showingCount": "Mostrando {shown} de {total} · página {page}/{totalPages}",
+    "noResults": "Nenhum artigo corresponde à sua busca."
   },
   "DefunctPage": {
     "metaTitle": "⚠️ Cemitério das Prop Firms: firmas de trading com fundeio fechadas e suspensas (2023-2026)",
