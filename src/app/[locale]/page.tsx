@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { ComparisonsGrid } from "@/components/ComparisonsGrid";
-import { FaqAccordion } from "@/components/FaqAccordion";
 import { HomeMarketplace } from "@/components/HomeMarketplace";
+import { SiteFaqExplorer, type SiteFaqListItem } from "@/components/SiteFaqExplorer";
 import { TrustGrid } from "@/components/TrustGrid";
 import { getAllDefunctFirms, getAllFirms, getAllSiteFaqs } from "@/lib/data";
 import { getSiteFaqLocaleCopy } from "@/lib/schema";
@@ -19,8 +19,7 @@ export default async function Home({
     console.error("[home] getAllFirms failed, rendering empty marketplace:", err);
   }
 
-  let faqs: Array<{ id: string; question: string; answer: string; slug: string }> =
-    [];
+  let faqs: SiteFaqListItem[] = [];
   let faqTitle: string | undefined;
   try {
     const t = await getTranslations("HomePage");
@@ -29,6 +28,7 @@ export default async function Home({
       const copy = getSiteFaqLocaleCopy(faq, locale);
       return {
         id: faq.id,
+        category: faq.category,
         question: copy.question,
         answer: copy.answer,
         slug: `faq-${faq.id}`,
@@ -45,7 +45,7 @@ export default async function Home({
       <ComparisonsGrid firms={firms} />
       {faqs.length > 0 ? (
         <div className="mx-auto w-full max-w-6xl px-4 pb-20">
-          <FaqAccordion faqs={faqs} heading={faqTitle} openFirst />
+          <SiteFaqExplorer faqs={faqs} heading={faqTitle} />
         </div>
       ) : null}
     </main>
