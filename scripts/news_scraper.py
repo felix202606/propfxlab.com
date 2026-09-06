@@ -869,11 +869,16 @@ def post_to_telegram(title: str, summary: str, slug: str, translations: dict[str
         return
     
     try:
-        # 构建消息：标题 + 精简看点 + 7语种国旗 + 新闻网址
-        flags = " ".join(LOCALE_FLAGS.get(locale, "") for locale in NEWS_LOCALES)
-        news_url = f"{PROPFXLAB_SITE_URL}/en/news/{slug}"
+        # 构建消息：标题 + 精简看点 + 每个国旗对应语言的链接
+        # 每个国旗后面跟对应语言的新闻链接
+        locale_links = []
+        for locale in NEWS_LOCALES:
+            flag = LOCALE_FLAGS.get(locale, "")
+            url = f"{PROPFXLAB_SITE_URL}/{locale}/news/{slug}"
+            locale_links.append(f"{flag} {url}")
         
-        message = f"📰 {title}\n\n{summary}\n\n{flags}\n\n🔗 {news_url}"
+        links_text = "\n".join(locale_links)
+        message = f"📰 {title}\n\n{summary}\n\n{links_text}"
         
         # 调用 Telegram Bot API
         api_url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
@@ -917,22 +922,25 @@ def post_to_x(title: str, summary: str, slug: str, translations: dict[str, Local
             access_token_secret=access_secret,
         )
         
-        # 构建推文：标题 + 精简看点 + 网址（Twitter 会限制在 280 字符）
+        # 构建推文：标题 + 国旗 + 英文链接（Twitter字符限制）
+        # 为了节省字符，只显示国旗，链接到英文版
         flags = " ".join(LOCALE_FLAGS.get(locale, "") for locale in NEWS_LOCALES)
         news_url = f"{PROPFXLAB_SITE_URL}/en/news/{slug}"
         
         # Twitter 字符限制处理
         tweet_base = f"📰 {title}\n\n{flags}\n\n🔗 {news_url}"
+        
         if len(tweet_base) <= 280:
             tweet_text = tweet_base
         else:
-            # 如果太长，省略部分摘要
-            max_summary_len = 280 - len(f"📰 {title}\n\n...\n\n{flags}\n\n🔗 {news_url}")
-            truncated_summary = summary[:max_summary_len] + "..." if len(summary) > max_summary_len else summary
-            tweet_text = f"📰 {title}\n\n{truncated_summary}\n\n{flags}\n\n🔗 {news_url}"
-            if len(tweet_text) > 280:
-                # 如果还是太长，进一步精简
-                tweet_text = f"📰 {title}\n\n{flags}\n\n🔗 {news_url}"
+            # 如果太长，缩短标题
+            max_title_len = 280 - len(f"\n\n{flags}\n\n🔗 {news_url}") - 5  # 5 = "📰 " + "..."
+            if max_title_len > 20:
+                truncated_title = title[:max_title_len] + "..."
+                tweet_text = f"📰 {truncated_title}\n\n{flags}\n\n🔗 {news_url}"
+            else:
+                # 极端情况：只发链接
+                tweet_text = f"{flags}\n\n🔗 {news_url}"
         
         # 发送推文
         response = client.create_tweet(text=tweet_text)
