@@ -6,14 +6,17 @@ import {
   parseDefunctFirm,
   parseNewsArticle,
   parsePropFirm,
+  parseSiteFaq,
   type DefunctFirm,
   type NewsArticle,
   type PropFirm,
+  type SiteFaq,
 } from "@/lib/schema";
 
 const FIRMS_DIR = path.join(process.cwd(), "data", "firms");
 const NEWS_DIR = path.join(process.cwd(), "data", "news");
 const CLOSED_FIRMS_FILE = path.join(process.cwd(), "data", "closed_firms.json");
+const SITE_FAQS_FILE = path.join(process.cwd(), "data", "faqs.json");
 
 function readFirmFile(fileName: string): PropFirm {
   const filePath = path.join(FIRMS_DIR, fileName);
@@ -128,6 +131,31 @@ export const getAllDefunctFirms = cache((): DefunctFirm[] => {
     return results.sort((a, b) => b.closedDate.localeCompare(a.closedDate));
   } catch (err) {
     console.error("[data] Cannot read closed firms file:", CLOSED_FIRMS_FILE, err);
+    return [];
+  }
+});
+
+export const getAllSiteFaqs = cache((): SiteFaq[] => {
+  try {
+    const raw = readFileSync(SITE_FAQS_FILE, "utf8");
+    const parsed: unknown = JSON.parse(raw);
+    if (!Array.isArray(parsed)) {
+      console.error("[data] faqs.json is not an array");
+      return [];
+    }
+
+    const results: SiteFaq[] = [];
+    for (const entry of parsed) {
+      try {
+        results.push(parseSiteFaq(entry));
+      } catch (err) {
+        console.error("[data] Skipping invalid site FAQ entry:", err);
+      }
+    }
+
+    return results;
+  } catch (err) {
+    console.error("[data] Cannot read site FAQs file:", SITE_FAQS_FILE, err);
     return [];
   }
 });

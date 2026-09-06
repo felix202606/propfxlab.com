@@ -204,6 +204,19 @@
     "showingCount": "Mostrando {shown} de {total} · página {page}/{totalPages}",
     "noResults": "Nenhum artigo corresponde à sua busca."
   },
+  "FaqPage": {
+    "metaTitle": "FAQ de Prop Firms — Saques, segurança e regras",
+    "metaDescription": "Respostas sobre valor líquido, taxas ocultas, primeiro saque, selos de segurança, consistency rule e cupons para traders funded.",
+    "title": "Perguntas frequentes",
+    "subtitle": "Cálculo de saque, segurança das firmas e regras de trading para quem compara challenges.",
+    "listHeading": "Respostas",
+    "categoryLabel": "Categorias de FAQ",
+    "categoryAll": "Todas",
+    "categoryPayout": "💰 Cálculo de saque",
+    "categorySafety": "🛡️ Segurança",
+    "categoryRules": "📜 Regras de trading",
+    "empty": "Ainda não há perguntas nesta categoria."
+  },
   "DefunctPage": {
     "metaTitle": "⚠️ Cemitério das Prop Firms: firmas de trading com fundeio fechadas e suspensas (2023-2026)",
     "metaDescription": "Uma lista atualizada de prop firms que fecharam, ficaram em silêncio ou pararam de pagar entre 2023 e 2026, com o motivo público de cada fechamento e alternativas mais seguras e verificadas.",

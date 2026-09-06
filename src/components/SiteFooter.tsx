@@ -79,7 +79,7 @@ export function SiteFooter({ firms }: { firms: FirmLink[] }) {
                 </li>
                 <li>
                   <Link
-                    href={{ pathname: "/", hash: "faq" }}
+                    href="/faq"
                     className="text-zinc-400 transition-colors hover:text-emerald-300"
                   >
                     {nav("faq")}

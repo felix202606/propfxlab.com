@@ -204,6 +204,19 @@
     "showingCount": "Hiển thị {shown}/{total} · trang {page}/{totalPages}",
     "noResults": "Không có bài viết phù hợp với tìm kiếm."
   },
+  "FaqPage": {
+    "metaTitle": "FAQ Prop Firm — Rút tiền, an toàn và luật giao dịch",
+    "metaDescription": "Giải đáp tiền thực nhận, phí ẩn, chờ rút lần đầu, huy hiệu an toàn, consistency rule và mã giảm giá cho trader funded.",
+    "title": "Câu hỏi thường gặp",
+    "subtitle": "Tính payout, an toàn nền tảng và luật giao dịch — dành cho trader đang so sánh challenge.",
+    "listHeading": "Câu trả lời",
+    "categoryLabel": "Chuyên mục FAQ",
+    "categoryAll": "Tất cả",
+    "categoryPayout": "💰 Tính rút tiền",
+    "categorySafety": "🛡️ An toàn",
+    "categoryRules": "📜 Luật giao dịch",
+    "empty": "Chuyên mục này chưa có câu hỏi."
+  },
   "DefunctPage": {
     "metaTitle": "⚠️ Nghĩa địa Prop Firm: Danh sách công ty Prop Trading đã đóng và bị tạm ngừng (2023-2026)",
     "metaDescription": "Danh sách các công ty prop trading đã đóng cửa, im lặng biến mất hoặc ngừng trả tiền trong giai đoạn 2023-2026, kèm lý do công khai cho từng trường hợp và các lựa chọn thay thế an toàn hơn đã được kiểm chứng.",

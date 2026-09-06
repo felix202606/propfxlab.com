@@ -3,22 +3,13 @@ import { ComparisonsGrid } from "@/components/ComparisonsGrid";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { HomeMarketplace } from "@/components/HomeMarketplace";
 import { TrustGrid } from "@/components/TrustGrid";
-import { getAllDefunctFirms, getAllFirms } from "@/lib/data";
+import { getAllDefunctFirms, getAllFirms, getAllSiteFaqs } from "@/lib/data";
+import { getSiteFaqLocaleCopy } from "@/lib/schema";
 
-type HomeFaq = { question: string; answer: string };
-
-function toHomeFaqs(raw: unknown): HomeFaq[] {
-  if (!Array.isArray(raw)) return [];
-  return raw.filter(
-    (item): item is HomeFaq =>
-      !!item &&
-      typeof item === "object" &&
-      typeof (item as HomeFaq).question === "string" &&
-      typeof (item as HomeFaq).answer === "string",
-  );
-}
-
-export default async function Home() {
+export default async function Home({
+  params,
+}: PageProps<"/[locale]">) {
+  const { locale } = await params;
   let firms: ReturnType<typeof getAllFirms> = [];
   let defunctCount = 0;
   try {
@@ -28,17 +19,21 @@ export default async function Home() {
     console.error("[home] getAllFirms failed, rendering empty marketplace:", err);
   }
 
-  let faqs: Array<HomeFaq & { id: string; slug: string }> = [];
+  let faqs: Array<{ id: string; question: string; answer: string; slug: string }> =
+    [];
   let faqTitle: string | undefined;
   try {
     const t = await getTranslations("HomePage");
     faqTitle = t("faqTitle");
-    faqs = toHomeFaqs(t.raw("faqs")).map((item, index) => ({
-      id: `home-faq-${index + 1}`,
-      question: item.question,
-      answer: item.answer,
-      slug: `home-faq-${index + 1}`,
-    }));
+    faqs = getAllSiteFaqs().map((faq) => {
+      const copy = getSiteFaqLocaleCopy(faq, locale);
+      return {
+        id: faq.id,
+        question: copy.question,
+        answer: copy.answer,
+        slug: `faq-${faq.id}`,
+      };
+    });
   } catch (err) {
     console.error("[home] translations failed, rendering page without FAQ copy:", err);
   }
@@ -50,7 +45,7 @@ export default async function Home() {
       <ComparisonsGrid firms={firms} />
       {faqs.length > 0 ? (
         <div className="mx-auto w-full max-w-6xl px-4 pb-20">
-          <FaqAccordion faqs={faqs} heading={faqTitle} />
+          <FaqAccordion faqs={faqs} heading={faqTitle} openFirst />
         </div>
       ) : null}
     </main>

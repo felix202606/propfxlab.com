@@ -427,6 +427,79 @@ export function getNewsLocaleCopy(
   };
 }
 
+export const siteFaqCategorySchema = z.enum([
+  "payout",
+  "safety",
+  "rules",
+  "general",
+]);
+
+export const siteFaqLocaleCopySchema = z.object({
+  question: z.string().min(1),
+  answer: z.string().min(1),
+});
+
+export const siteFaqTranslationsSchema = z
+  .object({
+    en: siteFaqLocaleCopySchema,
+    es: siteFaqLocaleCopySchema.optional(),
+    cn: siteFaqLocaleCopySchema.optional(),
+    tw: siteFaqLocaleCopySchema.optional(),
+    th: siteFaqLocaleCopySchema.optional(),
+    vi: siteFaqLocaleCopySchema.optional(),
+    pt: siteFaqLocaleCopySchema.optional(),
+  })
+  .passthrough();
+
+export const siteFaqSchema = z.object({
+  id: z.string().min(1),
+  category: siteFaqCategorySchema,
+  question: z.string().min(1),
+  answer: z.string().min(1),
+  translations: siteFaqTranslationsSchema.optional(),
+});
+
+export type SiteFaqCategory = z.infer<typeof siteFaqCategorySchema>;
+export type SiteFaqLocaleCopy = z.infer<typeof siteFaqLocaleCopySchema>;
+export type SiteFaq = z.infer<typeof siteFaqSchema>;
+
+export function parseSiteFaq(data: unknown): SiteFaq {
+  return siteFaqSchema.parse(data);
+}
+
+export function getSiteFaqLocaleCopy(
+  faq: SiteFaq,
+  locale: string,
+): SiteFaqLocaleCopy {
+  const translations = faq.translations;
+  const localized =
+    translations && locale in translations
+      ? (translations as Record<string, SiteFaqLocaleCopy | undefined>)[locale]
+      : undefined;
+  if (localized?.question && localized.answer) {
+    return localized;
+  }
+  if (translations?.en?.question && translations.en.answer) {
+    return translations.en;
+  }
+  return { question: faq.question, answer: faq.answer };
+}
+
+export function toSiteFaqJsonLd(faqs: Array<SiteFaqLocaleCopy & { id: string }>) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+}
+
 /** 生成 schema.org FAQPage，可直接放入 <script type="application/ld+json"> */
 export function toFaqJsonLd(firm: PropFirm) {
   return {

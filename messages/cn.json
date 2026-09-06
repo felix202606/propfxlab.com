@@ -204,6 +204,19 @@
     "showingCount": "显示 {shown} / {total} · 第 {page}/{totalPages} 页",
     "noResults": "没有匹配的新闻。"
   },
+  "FaqPage": {
+    "metaTitle": "Prop Firm FAQ — 出金、安全与交易规则",
+    "metaDescription": "解答到手金额、隐藏出金费、首次出金等待期、安全徽章、一致性规则和优惠码等 funded 交易员常见问题。",
+    "title": "常见问题",
+    "subtitle": "出金计算、平台安全与交易规则，写给正在对比 Challenge 的 funded 交易员。",
+    "listHeading": "问答",
+    "categoryLabel": "FAQ 分类",
+    "categoryAll": "全部",
+    "categoryPayout": "💰 出金计算",
+    "categorySafety": "🛡️ 平台安全",
+    "categoryRules": "📜 交易规则",
+    "empty": "这个分类下暂时没有问题。"
+  },
   "DefunctPage": {
     "metaTitle": "⚠️ 出资交易骷髅场：已关闭 / 暂停出金的资金盘平台清单（2023-2026）",
     "metaDescription": "汇总 2023 至 2026 年间已关闭、失联或停止出金的资金盘平台，附公开的关闭原因，以及经过审核的更安全替代平台。",
