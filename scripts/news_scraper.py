@@ -76,12 +76,12 @@ TITLE_JACCARD_THRESHOLD = 0.55
 NEWS_LOCALES = ("en", "es", "cn", "tw", "th", "vi", "pt")
 LOCALE_LABELS = {
     "en": "English",
-    "es": "Spanish",
-    "cn": "Simplified Chinese",
-    "tw": "Traditional Chinese",
-    "th": "Thai",
-    "vi": "Vietnamese",
-    "pt": "Portuguese",
+    "es": "Español",
+    "cn": "简体中文",
+    "tw": "繁體中文",
+    "th": "ไทย",
+    "vi": "Tiếng Việt",
+    "pt": "Português",
 }
 
 # IndexNow：新稿写入后秒级通知搜索引擎
@@ -870,15 +870,17 @@ def post_to_telegram(title: str, summary: str, slug: str, translations: dict[str
     
     try:
         # 构建消息：标题 + 精简看点 + 每个国旗对应语言的链接
-        # 每个国旗后面跟对应语言的新闻链接
+        # 使用 HTML 格式隐藏长链接，只显示语言名称
         locale_links = []
         for locale in NEWS_LOCALES:
             flag = LOCALE_FLAGS.get(locale, "")
+            label = LOCALE_LABELS.get(locale, locale.upper())
             url = f"{PROPFXLAB_SITE_URL}/{locale}/news/{slug}"
-            locale_links.append(f"{flag} {url}")
+            # HTML 格式：<a href="url">文本</a>
+            locale_links.append(f'{flag} <a href="{url}">{label}</a>')
         
         links_text = "\n".join(locale_links)
-        message = f"📰 {title}\n\n{summary}\n\n{links_text}"
+        message = f"📰 <b>{title}</b>\n\n{summary}\n\n{links_text}"
         
         # 调用 Telegram Bot API
         api_url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
@@ -886,7 +888,7 @@ def post_to_telegram(title: str, summary: str, slug: str, translations: dict[str
             "chat_id": chat_id,
             "text": message,
             "parse_mode": "HTML",
-            "disable_web_page_preview": False,
+            "disable_web_page_preview": True,  # 禁用预览避免卡顿
         }
         
         response = requests.post(api_url, json=payload, timeout=REQUEST_TIMEOUT_S)
