@@ -162,11 +162,49 @@ KEYWORD_HINTS = (
     "lux trading",
     "e8 markets",
     "news trading",
+    # 扩展：外汇经纪商和交易平台
+    "forex broker",
+    "fx broker",
+    "metatrader",
+    "mt4",
+    "mt5",
+    "ctrader",
+    "trading platform",
+    "broker regulation",
+    "cysec",
+    "fca",
+    "asic",
+    "nfa",
+    # 扩展：交易工具和策略
+    "trading strategy",
+    "trading indicator",
+    "algorithmic trading",
+    "automated trading",
+    "trading bot",
+    "trading signal",
+    # 扩展：重要市场事件
+    "nfp",
+    "fomc",
+    "ecb rate",
+    "central bank",
+    "interest rate",
+    "volatility",
 )
 
-GEMINI_SYSTEM_INSTRUCTION = """You rewrite one prop-firm industry news item for PropFXLab, a comparison site for funded traders.
+GEMINI_SYSTEM_INSTRUCTION = """You rewrite one trading/forex industry news item for PropFXLab, a comparison site for funded traders.
 Return JSON only for THIS single RSS item.
-If the item is NOT about prop firms / funded traders / payouts / challenge rules / firm launches-shutdowns / regulation of prop trading / named roster firms, set keep=false and leave other fields empty.
+
+KEEP=TRUE if the item is about ANY of these topics:
+- Prop firms / funded traders / payouts / challenge rules / firm launches-shutdowns
+- Forex brokers / trading platforms (MT4/MT5, cTrader, TradingView)
+- Retail FX regulation / broker licensing / industry compliance
+- Trading technology / tools / indicators / strategies
+- Major FX market events / economic data releases that traders care about
+- Broker promotions / trading competitions
+- Industry fraud / scams / warnings (relevant to traders)
+
+KEEP=FALSE only if clearly irrelevant (e.g., general stock market, crypto mining, real estate).
+
 If keep=true:
 - Write an original English briefing (do not copy the source verbatim; do not invent facts).
 - English summary: 3–4 sentences. English body/content: 5–8 short paragraphs separated by blank lines.
@@ -315,35 +353,17 @@ def looks_relevant(title: str, summary: str) -> bool:
     blob = f"{title}\n{summary}".lower()
     if any(hint in title_l for hint in KEYWORD_HINTS):
         return True
-    # 摘要里的弱命中（如周报顺带提到 prop firm）不算优先候选
-    strong = (
-        "prop firm",
-        "prop firms",
-        "proprietary trading",
-        "funded trader",
-        "funded account",
-        "instant funding",
-        "profit split",
-        "challenge fee",
-    )
-    if any(hint in blob for hint in strong):
-        # 标题像宏观/外汇行情则丢掉
-        fxish = (
-            "price forecast",
-            "weekly outlook",
-            "weekly review",
-            "nfp",
-            "cpi",
-            "cftc report",
-            "net positions",
-            "usd/",
-            "eur/",
-            "gbp/",
-            "aud/",
-            "gold ",
-            "oil ",
+    # 摘要里的弱命中也算（放宽标准）
+    if any(hint in blob for hint in KEYWORD_HINTS):
+        # 标题像宏观/外汇行情也接受（改为仅排除明显不相关的）
+        irrelevant = (
+            "real estate",
+            "cryptocurrency mining",
+            "bitcoin mining",
+            "stock market crash",
+            "equity trading",
         )
-        if any(token in title_l for token in fxish):
+        if any(token in title_l for token in irrelevant):
             return False
         return True
     for firm in PROP_FIRMS:
