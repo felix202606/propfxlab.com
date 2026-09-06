@@ -1,6 +1,7 @@
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import type { MetadataRoute } from "next";
+import { getPopularCompareSlugs } from "@/lib/compare";
 import { localeMeta, routing } from "@/i18n/routing";
 
 const BASE_URL = "https://www.propfxlab.com";
@@ -136,6 +137,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ),
     ...firms.flatMap((firm) =>
       localizedEntries(`/firm/${firm.slug}`, firm.lastModified, 0.7),
+    ),
+    ...getPopularCompareSlugs().flatMap((slug) =>
+      localizedEntries(`/compare/${slug}`, now, 0.65),
     ),
     ...news.flatMap((article) =>
       localizedEntries(`/news/${article.slug}`, article.lastModified, 0.6),

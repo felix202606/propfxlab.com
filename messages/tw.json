@@ -58,6 +58,11 @@
     "comparisonsTitle": "熱門兩兩對比",
     "comparisonsSubtitle": "直接進入兩家平台的對決，閱讀雙方完整出金規則。",
     "vs": "VS",
+    "selectFirmA": "選擇平台 A",
+    "selectFirmB": "選擇平台 B",
+    "compareNow": "立即對比",
+    "viewComparison": "查看對比",
+    "sameFirmError": "請選擇兩家不同的平台再對比。",
     "faqTitle": "常見問題",
     "faqs": [
       {
@@ -129,6 +134,38 @@
     "consHeading": "缺點",
     "warningHeading": "禁忌規則與風險提醒",
     "warningIntro": "所有帳戶均為模擬資金交易，規則可能隨時調整。購買或申請出金前，請務必以公司官網當前條款為準。"
+  },
+  "ComparePage": {
+    "metaTitle": "{left} vs {right} — Prop Firm 對比",
+    "metaDescription": "對比 {left} 與 {right} 在 10 萬美元帳戶上的到手利潤、分成、首次出金等待期、出金通道與回撤規則。",
+    "notFoundMetaTitle": "找不到此次對比",
+    "eyebrow": "Prop Firm 兩兩對比",
+    "vs": "VS",
+    "subtitle": "以 {account} 帳戶、{profit} 利潤為例，並排對照雙方出金規則。",
+    "exampleProfitLabel": "$100k 到手利潤",
+    "profitSplit": "Profit Split",
+    "firstPayout": "首次出金等待期",
+    "channels": "出金通道",
+    "drawdown": "Drawdown 規則",
+    "promo": "優惠碼與官網",
+    "splitDefault": "{percent}%",
+    "splitWithMax": "預設 {percent}% · 最高 {max}%",
+    "drawdownFallback": "請以該平台官網的日虧與總虧損上限為準。",
+    "visitWebsite": "前往 {name} 官網",
+    "insightTitle": "AI 對比總結",
+    "insightTemplate": "更看重 {reasonA} 選 {nameA}；想要 {reasonB} 則選 {nameB}。",
+    "reasonReputation": "穩健口碑",
+    "reasonHigherSplit": "更高分成",
+    "reasonFasterPayout": "更短的首次出金等待",
+    "reasonMoreChannels": "更多出金通道",
+    "reasonHigherTakeHome": "更高預估到手",
+    "readProfile": "查看 {name} 評測",
+    "backToCompare": "全部對比"
+  },
+  "CompareNotFound": {
+    "title": "找不到這次對比",
+    "description": "請檢查連結，或回到首頁對比區重新選擇兩家平台。",
+    "cta": "返回對比"
   },
   "FirmNotFound": {
     "title": "找不到這家公司",

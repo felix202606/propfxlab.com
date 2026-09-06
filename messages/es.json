@@ -58,6 +58,11 @@
     "comparisonsTitle": "Enfrentamientos populares",
     "comparisonsSubtitle": "Entra en un mano a mano y lee las reglas de pago completas de ambas firmas.",
     "vs": "VS",
+    "selectFirmA": "Elegir firma A",
+    "selectFirmB": "Elegir firma B",
+    "compareNow": "Comparar ahora",
+    "viewComparison": "Ver comparativa",
+    "sameFirmError": "Elige dos firmas distintas para comparar.",
     "faqTitle": "Preguntas frecuentes",
     "faqs": [
       {
@@ -129,6 +134,38 @@
     "consHeading": "Desventajas",
     "warningHeading": "Reglas y restricciones a tener en cuenta",
     "warningIntro": "Todas las cuentas operan con capital simulado y las reglas pueden cambiar sin previo aviso. Verifica siempre los términos vigentes directamente en el sitio oficial de la firma antes de comprar o solicitar un retiro."
+  },
+  "ComparePage": {
+    "metaTitle": "{left} vs {right} — Comparativa de prop firms",
+    "metaDescription": "Compara el pago neto de {left} y {right} en una cuenta de 100.000 $, el split, la espera del primer payout, los canales de retiro y las reglas de drawdown.",
+    "notFoundMetaTitle": "Comparativa no encontrada",
+    "eyebrow": "Comparativa de prop firms",
+    "vs": "VS",
+    "subtitle": "Reglas de pago lado a lado con una cuenta de {account} y un beneficio de ejemplo de {profit}.",
+    "exampleProfitLabel": "Neto en 100k $",
+    "profitSplit": "Profit Split",
+    "firstPayout": "Espera del primer payout",
+    "channels": "Canales de retiro",
+    "drawdown": "Reglas de drawdown",
+    "promo": "Promo y sitio oficial",
+    "splitDefault": "{percent}%",
+    "splitWithMax": "{percent}% por defecto · hasta {max}%",
+    "drawdownFallback": "Confirma los límites de pérdida diaria y total en el sitio oficial de la firma.",
+    "visitWebsite": "Visitar {name}",
+    "insightTitle": "Conclusión de la comparativa",
+    "insightTemplate": "Elige {nameA} si priorizas {reasonA}; elige {nameB} si quieres {reasonB}.",
+    "reasonReputation": "una reputación sólida",
+    "reasonHigherSplit": "un split de beneficios más alto",
+    "reasonFasterPayout": "una espera más corta para el primer payout",
+    "reasonMoreChannels": "más canales de retiro",
+    "reasonHigherTakeHome": "un neto estimado más alto",
+    "readProfile": "Leer la reseña de {name}",
+    "backToCompare": "Todas las comparativas"
+  },
+  "CompareNotFound": {
+    "title": "No encontramos esta comparativa",
+    "description": "Revisa el enlace o elige dos firmas en la sección de comparativas de la portada.",
+    "cta": "Volver a comparativas"
   },
   "FirmNotFound": {
     "title": "No encontramos esta firma",

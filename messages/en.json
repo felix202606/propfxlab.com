@@ -58,6 +58,11 @@
     "comparisonsTitle": "Popular head-to-heads",
     "comparisonsSubtitle": "Jump into two-firm matchups and read the full payout rules on both sides.",
     "vs": "VS",
+    "selectFirmA": "Select Firm A",
+    "selectFirmB": "Select Firm B",
+    "compareNow": "Compare Now",
+    "viewComparison": "View comparison",
+    "sameFirmError": "Pick two different firms to compare.",
     "faqTitle": "Frequently asked questions",
     "faqs": [
       {
@@ -129,6 +134,38 @@
     "consHeading": "Cons",
     "warningHeading": "Rules & Restrictions to Watch",
     "warningIntro": "All accounts trade simulated capital, and rules can change without notice. Always confirm the current terms directly on the firm's official website before purchasing or requesting a withdrawal."
+  },
+  "ComparePage": {
+    "metaTitle": "{left} vs {right} — Prop Firm Comparison",
+    "metaDescription": "Compare {left} and {right} take-home payouts on a $100k account, profit split, first payout wait, withdrawal channels and drawdown rules.",
+    "notFoundMetaTitle": "Comparison not found",
+    "eyebrow": "Prop Firm Comparison",
+    "vs": "VS",
+    "subtitle": "Side-by-side payout rules using a {account} account and {profit} profit example.",
+    "exampleProfitLabel": "Take-home on $100k",
+    "profitSplit": "Profit Split",
+    "firstPayout": "First Payout Wait",
+    "channels": "Payout Channels",
+    "drawdown": "Drawdown Rules",
+    "promo": "Promo & Official Site",
+    "splitDefault": "{percent}%",
+    "splitWithMax": "{percent}% default · up to {max}%",
+    "drawdownFallback": "Confirm daily and overall loss limits on the firm's official site.",
+    "visitWebsite": "Visit {name}",
+    "insightTitle": "AI comparison takeaway",
+    "insightTemplate": "Choose {nameA} if you prioritize {reasonA}; choose {nameB} if you want {reasonB}.",
+    "reasonReputation": "rock-solid reputation",
+    "reasonHigherSplit": "a higher profit split",
+    "reasonFasterPayout": "a shorter first-payout wait",
+    "reasonMoreChannels": "more withdrawal channels",
+    "reasonHigherTakeHome": "higher estimated take-home",
+    "readProfile": "Read {name} review",
+    "backToCompare": "All comparisons"
+  },
+  "CompareNotFound": {
+    "title": "We couldn't find this comparison",
+    "description": "Check the link, or pick two firms from the homepage comparison section.",
+    "cta": "Back to comparisons"
   },
   "FirmNotFound": {
     "title": "We couldn't find this firm",

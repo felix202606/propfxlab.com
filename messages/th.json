@@ -58,6 +58,11 @@
     "comparisonsTitle": "คู่เปรียบเทียบยอดนิยม",
     "comparisonsSubtitle": "เข้าสู่การเทียบสองบริษัท และอ่านกฎการถอนเงินฉบับเต็มของทั้งสองฝ่าย",
     "vs": "VS",
+    "selectFirmA": "เลือกบริษัท A",
+    "selectFirmB": "เลือกบริษัท B",
+    "compareNow": "เปรียบเทียบเลย",
+    "viewComparison": "ดูการเปรียบเทียบ",
+    "sameFirmError": "เลือกสองบริษัทที่ต่างกันเพื่อเปรียบเทียบ",
     "faqTitle": "คำถามที่พบบ่อย",
     "faqs": [
       {
@@ -129,6 +134,38 @@
     "consHeading": "ข้อเสีย",
     "warningHeading": "กฎและข้อจำกัดที่ควรระวัง",
     "warningIntro": "ทุกบัญชีเทรดด้วยทุนจำลอง และกฎอาจเปลี่ยนแปลงได้โดยไม่แจ้งล่วงหน้า โปรดตรวจสอบเงื่อนไขล่าสุดจากเว็บไซต์ทางการของบริษัทก่อนซื้อหรือขอถอนเงินเสมอ"
+  },
+  "ComparePage": {
+    "metaTitle": "{left} vs {right} — เปรียบเทียบ Prop Firm",
+    "metaDescription": "เปรียบเทียบยอดรับสุทธิของ {left} และ {right} ในบัญชี 100,000 ดอลลาร์ สัดส่วนแบ่งกำไร เวลารอถอนครั้งแรก ช่องทางถอน และกฎ drawdown",
+    "notFoundMetaTitle": "ไม่พบการเปรียบเทียบนี้",
+    "eyebrow": "เปรียบเทียบ Prop Firm",
+    "vs": "VS",
+    "subtitle": "เทียบกฎการถอนแบบคู่ขนาน โดยใช้บัญชี {account} และกำไรตัวอย่าง {profit}",
+    "exampleProfitLabel": "ยอดสุทธิบนบัญชี $100k",
+    "profitSplit": "Profit Split",
+    "firstPayout": "เวลารอถอนครั้งแรก",
+    "channels": "ช่องทางถอนเงิน",
+    "drawdown": "กฎ Drawdown",
+    "promo": "โค้ดส่วนลดและเว็บไซต์ทางการ",
+    "splitDefault": "{percent}%",
+    "splitWithMax": "ค่าเริ่มต้น {percent}% · สูงสุด {max}%",
+    "drawdownFallback": "โปรดยืนยันเพดานขาดทุนรายวันและรวมจากเว็บไซต์ทางการของบริษัท",
+    "visitWebsite": "ไปที่ {name}",
+    "insightTitle": "สรุปเปรียบเทียบโดย AI",
+    "insightTemplate": "เลือก {nameA} หากคุณให้ความสำคัญกับ {reasonA} เลือก {nameB} หากคุณต้องการ {reasonB}",
+    "reasonReputation": "ชื่อเสียงที่มั่นคง",
+    "reasonHigherSplit": "สัดส่วนแบ่งกำไรที่สูงกว่า",
+    "reasonFasterPayout": "เวลารอถอนครั้งแรกที่สั้นกว่า",
+    "reasonMoreChannels": "ช่องทางถอนที่มากกว่า",
+    "reasonHigherTakeHome": "ยอดรับสุทธิโดยประมาณที่สูงกว่า",
+    "readProfile": "อ่านรีวิว {name}",
+    "backToCompare": "การเปรียบเทียบทั้งหมด"
+  },
+  "CompareNotFound": {
+    "title": "ไม่พบการเปรียบเทียบนี้",
+    "description": "ตรวจสอบลิงก์ หรือเลือกสองบริษัทจากส่วนเปรียบเทียบในหน้าแรก",
+    "cta": "กลับไปการเปรียบเทียบ"
   },
   "FirmNotFound": {
     "title": "ไม่พบบริษัทนี้",
