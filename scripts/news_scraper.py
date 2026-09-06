@@ -104,7 +104,7 @@ LOCALE_FLAGS = {
 }
 
 # 社媒发布配置
-SOCIAL_POST_INTERVAL_HOURS = 3  # 每篇新闻间隔3小时发布
+SOCIAL_POST_INTERVAL_HOURS = 3  # 每篇新闻间隔3小时发布（同一次 flush 内不限）
 LAST_POST_TIME_FILE = ROOT / ".last_social_post_time"
 PROPFXLAB_SITE_URL = "https://www.propfxlab.com"
 
@@ -796,6 +796,9 @@ def normalize_translations(
 
 def notify_indexnow(slug: str) -> None:
     """向 IndexNow 推送该 slug 在全部 locale 下的新闻 URL。"""
+    if os.environ.get("SKIP_INDEXNOW", "").strip().lower() in {"1", "true", "yes"}:
+        print(f"  IndexNow 推迟（SKIP_INDEXNOW）：{slug}")
+        return
     payload = {
         "host": INDEXNOW_HOST,
         "key": INDEXNOW_KEY,
@@ -898,6 +901,32 @@ def post_to_telegram(title: str, summary: str, slug: str, translations: dict[str
         
     except Exception as error:
         print(f"  Warning: Telegram 发帖失败：{error}")
+
+
+def post_telegram_for_slug(slug: str) -> None:
+    """从 data/news/<slug>.json 读取并发送 Telegram。"""
+    path = NEWS_DIR / f"{slug}.json"
+    if not path.is_file():
+        print(f"  Warning: 找不到新闻文件，跳过 Telegram：{path.name}")
+        return
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        print(f"  Warning: 读取 {path.name} 失败：{error}")
+        return
+    title = str(payload.get("title") or "").strip()
+    summary = str(payload.get("summary") or "").strip()
+    if not title or not summary:
+        print(f"  Warning: {path.name} 缺少 title/summary，跳过 Telegram")
+        return
+    raw_translations = payload.get("translations") if isinstance(payload, dict) else None
+    translations = normalize_translations(
+        raw_translations if isinstance(raw_translations, dict) else None,
+        fallback_title=title,
+        fallback_summary=summary,
+        fallback_body=str(payload.get("body") or ""),
+    )
+    post_to_telegram(title, summary, slug, translations)
 
 
 def post_to_x(title: str, summary: str, slug: str, translations: dict[str, LocaleCopy]) -> None:
@@ -1115,6 +1144,18 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="与 --backfill-translations 联用：即使已有翻译也重写",
     )
+    parser.add_argument(
+        "--notify-indexnow",
+        nargs="+",
+        metavar="SLUG",
+        help="仅向 IndexNow 推送给定 slug（用于 CI：main 推送后再通知搜索引擎）",
+    )
+    parser.add_argument(
+        "--post-telegram",
+        nargs="+",
+        metavar="SLUG",
+        help="从已写入的 JSON 向 Telegram 发帖（用于 CI：main 推送后再发）",
+    )
     return parser.parse_args()
 
 
@@ -1124,6 +1165,21 @@ def main() -> None:
     load_dotenv()
 
     NEWS_DIR.mkdir(parents=True, exist_ok=True)
+
+    if args.notify_indexnow:
+        # Force-send even if SKIP_INDEXNOW is set in the job env
+        os.environ.pop("SKIP_INDEXNOW", None)
+        for slug in args.notify_indexnow:
+            notify_indexnow(slug.strip())
+        return
+
+    if args.post_telegram:
+        for index, slug in enumerate(args.post_telegram):
+            post_telegram_for_slug(slug.strip())
+            update_last_post_time()
+            if index < len(args.post_telegram) - 1:
+                time.sleep(BATCH_PAUSE_S)
+        return
 
     if args.backfill_translations:
         backfill_translations(args.model, force=args.force)
@@ -1234,26 +1290,17 @@ def main() -> None:
         written += 1
         slug = out_path.stem
         print(f"  写入 {out_path.relative_to(ROOT)}（含 {len(article_translations)} 语种）")
-        
-        # 社媒发布：检查间隔时间
-        if check_social_post_interval():
-            # 发送到 Telegram
+
+        # CI 里先写盘、后推 main，再发社媒，避免链接 404
+        if os.environ.get("SKIP_SOCIAL", "").strip().lower() in {"1", "true", "yes"}:
+            print("  社媒发帖推迟（SKIP_SOCIAL）")
+        elif check_social_post_interval():
             post_to_telegram(
                 title=selected.title,
                 summary=selected.summary,
                 slug=slug,
                 translations=article_translations,
             )
-            
-            # X 发布已关闭（需要付费 API）
-            # post_to_x(
-            #     title=selected.title,
-            #     summary=selected.summary,
-            #     slug=slug,
-            #     translations=article_translations,
-            # )
-            
-            # 更新发帖时间戳
             update_last_post_time()
 
         if index < len(candidates):
