@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const FROM = "PropFXLab Alerts <alerts@propfxlab.com>";
+const FROM = process.env.RESEND_FROM ?? "PropFXLab Alerts <onboarding@resend.dev>";
 const REPLY_TO = "qq81174761@gmail.com";
 
 type LocaleKey = "en" | "es" | "cn" | "tw" | "th" | "vi" | "pt";
