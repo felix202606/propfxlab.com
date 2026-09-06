@@ -204,6 +204,19 @@
     "showingCount": "Showing {shown} of {total} · page {page}/{totalPages}",
     "noResults": "No articles match your search."
   },
+  "FaqPage": {
+    "metaTitle": "Prop Firm FAQ — Payouts, Safety and Trading Rules",
+    "metaDescription": "Answers on net profit, hidden withdrawal fees, first payout waits, safety badges, consistency rules and promo codes for funded traders.",
+    "title": "Frequently asked questions",
+    "subtitle": "Payout math, platform safety and trading rules — written for funded traders comparing challenges.",
+    "listHeading": "Answers",
+    "categoryLabel": "FAQ categories",
+    "categoryAll": "All",
+    "categoryPayout": "💰 Payouts",
+    "categorySafety": "🛡️ Safety",
+    "categoryRules": "📜 Trading Rules",
+    "empty": "No questions in this category yet."
+  },
   "DefunctPage": {
     "metaTitle": "⚠️ Prop Firm Boneyard: List of Closed & Suspended Prop Trading Firms (2023-2026)",
     "metaDescription": "A running list of prop trading firms that have closed, gone silent or stopped paying out between 2023 and 2026, with the public reason for each shutdown and safer, verified alternatives.",

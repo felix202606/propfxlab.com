@@ -10,37 +10,48 @@ export type AccordionFaq = {
 type FaqAccordionProps = {
   faqs: AccordionFaq[];
   heading?: string;
+  hideHeading?: boolean;
+  /** 默认展开第一项；分类切换时用 key 重挂载列表 */
+  openFirst?: boolean;
 };
 
 /**
  * 手风琴 FAQ：用原生 <details>/<summary> 实现零 JS 展开收起，
  * 同时保留 itemProp 微数据，与 toFaqJsonLd() 生成的 JSON-LD 互为补充。
  */
-export function FaqAccordion({ faqs, heading }: FaqAccordionProps) {
+export function FaqAccordion({
+  faqs,
+  heading,
+  hideHeading = false,
+  openFirst = false,
+}: FaqAccordionProps) {
   const t = useTranslations("FirmPage");
   const title = heading ?? t("faqHeading");
 
   return (
     <section
       id="faq"
-      aria-labelledby="faq-heading"
+      aria-labelledby={hideHeading ? undefined : "faq-heading"}
       className="scroll-mt-24"
       itemScope
       itemType="https://schema.org/FAQPage"
     >
-      <h2
-        id="faq-heading"
-        className="text-2xl font-semibold tracking-tight sm:text-3xl"
-      >
-        <span className="bg-gradient-to-r from-white to-emerald-300 bg-clip-text text-transparent">
-          {title}
-        </span>
-      </h2>
-      <div className="mt-6 divide-y divide-white/10 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-zinc-900 to-black shadow-[0_0_0_1px_rgba(255,255,255,0.04)]">
-        {faqs.map((item) => (
+      {hideHeading ? null : (
+        <h2
+          id="faq-heading"
+          className="text-2xl font-semibold tracking-tight sm:text-3xl"
+        >
+          <span className="bg-gradient-to-r from-white to-emerald-300 bg-clip-text text-transparent">
+            {title}
+          </span>
+        </h2>
+      )}
+      <div className={`${hideHeading ? "" : "mt-6 "}divide-y divide-white/10 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-zinc-900 to-black shadow-[0_0_0_1px_rgba(255,255,255,0.04)]`}>
+        {faqs.map((item, index) => (
           <details
             key={item.id}
             id={item.slug ?? item.id}
+            open={openFirst && index === 0}
             className="group px-5 py-4 [&_summary::-webkit-details-marker]:hidden"
             itemScope
             itemProp="mainEntity"

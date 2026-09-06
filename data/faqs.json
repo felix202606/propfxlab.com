@@ -1,0 +1,434 @@
+[
+  {
+    "id": "1",
+    "category": "payout",
+    "question": "How is take-home (net profit) calculated?",
+    "answer": "We take the expected profit you enter (for example $8,000), apply each firm's profit split (such as 80% or 90%), then factor in withdrawal-channel fees (for example Rise or crypto payout deductions) to estimate what actually lands in your account.",
+    "translations": {
+      "en": {
+        "question": "How is take-home (net profit) calculated?",
+        "answer": "We take the expected profit you enter (for example $8,000), apply each firm's profit split (such as 80% or 90%), then factor in withdrawal-channel fees (for example Rise or crypto payout deductions) to estimate what actually lands in your account."
+      },
+      "cn": {
+        "question": "到手金额（Net Profit）是如何计算出来的？",
+        "answer": "我们根据你输入的预期盈利（如 $8,000），扣除各平台设定的 Profit Split（利润分成，如 80% 或 90%），并综合考量其隐藏的出金通道手续费（如 Rise/Crypto 提现扣点）后，算出的实际到账预估值。"
+      },
+      "tw": {
+        "question": "到手金額（Net Profit）是如何計算出來的？",
+        "answer": "我們根據你輸入的預期盈利（如 $8,000），扣除各平台設定的 Profit Split（利潤分成，如 80% 或 90%），並綜合考量其隱藏的出金通道手續費（如 Rise/Crypto 提現扣點）後，算出的實際到帳預估值。"
+      },
+      "es": {
+        "question": "¿Cómo se calcula el pago neto (net profit)?",
+        "answer": "Tomamos el beneficio esperado que introduces (por ejemplo 8.000 $), aplicamos el split de cada firma (80% o 90%) y descontamos comisiones de canal (Rise o cripto) para estimar lo que realmente llega a tu cuenta."
+      },
+      "th": {
+        "question": "ยอดเงินสุทธิ (Net Profit) คำนวณอย่างไร?",
+        "answer": "เราใช้กำไรที่คุณกรอก (เช่น $8,000) แล้วหักสัดส่วนแบ่งกำไรของแต่ละบริษัท (เช่น 80% หรือ 90%) รวมถึงค่าธรรมเนียมช่องทางถอนที่ซ่อนอยู่ (เช่น Rise/คริปโต) เพื่อประมาณยอดที่เข้าบัญชีจริง"
+      },
+      "vi": {
+        "question": "Số tiền thực nhận (Net Profit) được tính như thế nào?",
+        "answer": "Chúng tôi lấy lợi nhuận bạn nhập (ví dụ $8,000), trừ tỷ lệ chia của từng công ty (80% hoặc 90%), rồi tính thêm phí kênh rút tiền ẩn (Rise/crypto) để ước lượng số tiền thực sự về tài khoản."
+      },
+      "pt": {
+        "question": "Como o valor líquido (net profit) é calculado?",
+        "answer": "Usamos o lucro esperado que você informa (por exemplo US$ 8.000), aplicamos o split de cada firma (80% ou 90%) e consideramos taxas de canal (Rise ou cripto) para estimar o que realmente cai na conta."
+      }
+    }
+  },
+  {
+    "id": "2",
+    "category": "payout",
+    "question": "Are there extra hidden fees on withdrawal, such as crypto or bank-wire charges?",
+    "answer": "Most firms support free withdrawals via crypto (USDT) or Rise, but some bank wires are charged $25–$50 by intermediary banks. Our ranking cards list the payout channels each firm supports.",
+    "translations": {
+      "en": {
+        "question": "Are there extra hidden fees on withdrawal, such as crypto or bank-wire charges?",
+        "answer": "Most firms support free withdrawals via crypto (USDT) or Rise, but some bank wires are charged $25–$50 by intermediary banks. Our ranking cards list the payout channels each firm supports."
+      },
+      "cn": {
+        "question": "提现时会产生额外的隐藏费用（如 Crypto/Bank Wire 手续费）吗？",
+        "answer": "大部分平台支持通过 Crypto (USDT) 或 Rise 免费提现，但某些平台电汇（Bank Wire）会由中间行收取 $25–$50 不等的处理费。我们在计算卡片中均已标注各自支持的出金渠道。"
+      },
+      "tw": {
+        "question": "提現時會產生額外的隱藏費用（如 Crypto/Bank Wire 手續費）嗎？",
+        "answer": "大部分平台支援透過 Crypto (USDT) 或 Rise 免費提現，但某些平台電匯（Bank Wire）會由中間行收取 $25–$50 不等的處理費。我們在計算卡片中均已標註各自支援的出金管道。"
+      },
+      "es": {
+        "question": "¿Hay comisiones ocultas al retirar, como cripto o transferencia bancaria?",
+        "answer": "La mayoría permite retiros gratis por cripto (USDT) o Rise, pero algunas transferencias bancarias cobran 25–50 $ por bancos intermediarios. En las tarjetas indicamos los canales de cada firma."
+      },
+      "th": {
+        "question": "การถอนเงินมีค่าธรรมเนียมแอบแฝง เช่น Crypto หรือ Bank Wire หรือไม่?",
+        "answer": "บริษัทส่วนใหญ่ถอนฟรีผ่านคริปโต (USDT) หรือ Rise แต่บางแห่งคิดค่าธรรมเนียมโอนเงินผ่านธนาคารตัวกลาง $25–$50 เราระบุช่องทางถอนของแต่ละบริษัทไว้บนการ์ดแล้ว"
+      },
+      "vi": {
+        "question": "Rút tiền có phát sinh phí ẩn như Crypto/Bank Wire không?",
+        "answer": "Hầu hết công ty hỗ trợ rút miễn phí qua crypto (USDT) hoặc Rise, nhưng một số lệnh bank wire bị ngân hàng trung gian thu $25–$50. Thẻ xếp hạng đã ghi kênh rút của từng công ty."
+      },
+      "pt": {
+        "question": "Há taxas ocultas no saque, como cripto ou TED/wire?",
+        "answer": "A maioria permite saque grátis via cripto (USDT) ou Rise, mas alguns wires cobram US$ 25–50 de bancos intermediários. Os cartões listam os canais de cada firma."
+      }
+    }
+  },
+  {
+    "id": "3",
+    "category": "payout",
+    "question": "How is the first payout period different from later payouts?",
+    "answer": "Most prop firms require a 14–30 day wait before the first withdrawal after you get funded, then switch to bi-weekly (14 days) or weekly payouts. Some top firms sell a 5-day first-payout add-on.",
+    "translations": {
+      "en": {
+        "question": "How is the first payout period different from later payouts?",
+        "answer": "Most prop firms require a 14–30 day wait before the first withdrawal after you get funded, then switch to bi-weekly (14 days) or weekly payouts. Some top firms sell a 5-day first-payout add-on."
+      },
+      "cn": {
+        "question": "首次出金等待期（First Payout Period）与后续出金有什么区别？",
+        "answer": "绝大多数 Prop Firm 要求通过评估后的首次提现需等待 14–30 天，而后续提现则缩短至双周（14天）或每周。部分顶尖平台提供加购 5 天极速出金选项。"
+      },
+      "tw": {
+        "question": "首次出金等待期（First Payout Period）與後續出金有什麼區別？",
+        "answer": "絕大多數 Prop Firm 要求通過評估後的首次提現需等待 14–30 天，而後續提現則縮短至雙週（14 天）或每週。部分頂尖平台提供加購 5 天極速出金選項。"
+      },
+      "es": {
+        "question": "¿En qué se diferencia el primer periodo de pago de los siguientes?",
+        "answer": "Casi todas las prop firms exigen 14–30 días antes del primer retiro tras el fondeo; luego pasan a quincenal (14 días) o semanal. Algunas venden un extra de primer pago en 5 días."
+      },
+      "th": {
+        "question": "ระยะรอถอนครั้งแรกต่างจากรอบถอนถัดไปอย่างไร?",
+        "answer": "Prop Firm ส่วนใหญ่ให้รอ 14–30 วันก่อนถอนครั้งแรกหลังผ่านประเมิน จากนั้นเหลือทุกสองสัปดาห์หรือรายสัปดาห์ บางเจ้ามีตัวเลือกเร่งรอบแรกเหลือ 5 วัน"
+      },
+      "vi": {
+        "question": "Thời gian chờ rút lần đầu khác các lần sau thế nào?",
+        "answer": "Hầu hết prop firm yêu cầu chờ 14–30 ngày trước lần rút đầu sau khi được cấp vốn, rồi chuyển sang hai tuần hoặc hàng tuần. Một số hãng bán gói rút lần đầu trong 5 ngày."
+      },
+      "pt": {
+        "question": "Qual a diferença entre o primeiro saque e os seguintes?",
+        "answer": "A maioria exige 14–30 dias até o primeiro saque após o funded e depois passa a quinzenal ou semanal. Algumas vendem um add-on de primeiro saque em 5 dias."
+      }
+    }
+  },
+  {
+    "id": "4",
+    "category": "payout",
+    "question": "Why does the same $10k profit pay out so differently across firms?",
+    "answer": "It depends on the starting split (often 70%–90%), whether there is a payout cap, and whether the firm refunds the challenge fee on the first payout.",
+    "translations": {
+      "en": {
+        "question": "Why does the same $10k profit pay out so differently across firms?",
+        "answer": "It depends on the starting split (often 70%–90%), whether there is a payout cap, and whether the firm refunds the challenge fee on the first payout."
+      },
+      "cn": {
+        "question": "为什么同样是 $10k 盈利，不同平台的实际到手金额差距这么大？",
+        "answer": "这取决于平台的初始分成比例（70%–90% 不等）、是否有出金阶梯上限（Payout Cap），以及是否在首次出金时退还你的评估买号费用（Challenge Fee Refund）。"
+      },
+      "tw": {
+        "question": "為什麼同樣是 $10k 盈利，不同平台的實際到手金額差距這麼大？",
+        "answer": "這取決於平台的初始分成比例（70%–90% 不等）、是否有出金階梯上限（Payout Cap），以及是否在首次出金時退還你的評估買號費用（Challenge Fee Refund）。"
+      },
+      "es": {
+        "question": "¿Por qué 10.000 $ de beneficio pagan tan distinto según la firma?",
+        "answer": "Depende del split inicial (70%–90%), de si hay un tope de payout y de si reembolsan la fee del challenge en el primer retiro."
+      },
+      "th": {
+        "question": "กำไร $10k เท่ากัน ทำไมได้เงินจริงต่างกันมาก?",
+        "answer": "ขึ้นกับสัดส่วนแบ่งกำไรเริ่มต้น (70%–90%) มีเพดานถอนหรือไม่ และบริษัทคืนค่า Challenge ในรอบถอนแรกหรือไม่"
+      },
+      "vi": {
+        "question": "Cùng $10k lợi nhuận, sao tiền thực nhận lệch nhau nhiều?",
+        "answer": "Do tỷ lệ chia ban đầu (70%–90%), có trần payout hay không, và công ty có hoàn phí challenge ở lần rút đầu hay không."
+      },
+      "pt": {
+        "question": "Por que o mesmo lucro de US$ 10 mil rende valores tão diferentes?",
+        "answer": "Depende do split inicial (70%–90%), de haver teto de saque e de a firma devolver a taxa do challenge no primeiro payout."
+      }
+    }
+  },
+  {
+    "id": "5",
+    "category": "safety",
+    "question": "What does the safety status on this site mean?",
+    "answer": "We review operating history, regulatory posture, public payout records, and community reports of delays (Reddit/Trustpilot), then mark firms Active, Warning, or Defunct.",
+    "translations": {
+      "en": {
+        "question": "What does the safety status on this site mean?",
+        "answer": "We review operating history, regulatory posture, public payout records, and community reports of delays (Reddit/Trustpilot), then mark firms Active, Warning, or Defunct."
+      },
+      "cn": {
+        "question": "你们网站上的“安全验证状态”代表什么？",
+        "answer": "我们根据平台的运营年限、监管合规性、社媒出金记录以及社区（Reddit/Trustpilot）的提现延迟反馈，将其标记为 Active（正常）、Warning（预警）或 Defunct（已关停）。"
+      },
+      "tw": {
+        "question": "你們網站上的「安全驗證狀態」代表什麼？",
+        "answer": "我們根據平台的營運年限、監管合規性、社群出金紀錄以及社區（Reddit/Trustpilot）的提現延遲回饋，將其標記為 Active（正常）、Warning（預警）或 Defunct（已關停）。"
+      },
+      "es": {
+        "question": "¿Qué significa el estado de seguridad en este sitio?",
+        "answer": "Revisamos años de operación, cumplimiento, historial público de pagos y quejas de retrasos (Reddit/Trustpilot) y marcamos Active, Warning o Defunct."
+      },
+      "th": {
+        "question": "สถานะความปลอดภัยบนเว็บนี้หมายถึงอะไร?",
+        "answer": "เราดูอายุการดำเนินงาน การปฏิบัติตามกฎ บันทึกการจ่ายเงิน และรายงานความล่าช้าในชุมชน (Reddit/Trustpilot) แล้วติด Active, Warning หรือ Defunct"
+      },
+      "vi": {
+        "question": "Trạng thái xác minh an toàn trên site nghĩa là gì?",
+        "answer": "Chúng tôi xét số năm vận hành, tuân thủ, lịch sử payout công khai và phản ánh chậm trả trên cộng đồng (Reddit/Trustpilot), rồi gắn Active, Warning hoặc Defunct."
+      },
+      "pt": {
+        "question": "O que o status de segurança neste site significa?",
+        "answer": "Avaliamos tempo de operação, conformidade, histórico público de saques e relatos de atraso (Reddit/Trustpilot) e marcamos Active, Warning ou Defunct."
+      }
+    }
+  },
+  {
+    "id": "6",
+    "category": "safety",
+    "question": "If a prop firm delays payouts or shuts down, is PropFXLab liable?",
+    "answer": "PropFXLab is an independent comparison and calculator site. We do not hold trader funds. We recommend established firms such as FTMO and FundedNext with a longer operating record.",
+    "translations": {
+      "en": {
+        "question": "If a prop firm delays payouts or shuts down, is PropFXLab liable?",
+        "answer": "PropFXLab is an independent comparison and calculator site. We do not hold trader funds. We recommend established firms such as FTMO and FundedNext with a longer operating record."
+      },
+      "cn": {
+        "question": "如果我选择的 Prop Firm 出现延迟出金或跑路，PropFXLab 会负责吗？",
+        "answer": "PropFXLab 为独立的第三方数据对比与计算平台，不直接处理交易员资金。我们建议优先选择 FTMO、FundedNext 等运营多年且资金链稳健的头部平台。"
+      },
+      "tw": {
+        "question": "如果我選擇的 Prop Firm 出現延遲出金或跑路，PropFXLab 會負責嗎？",
+        "answer": "PropFXLab 為獨立的第三方資料對比與計算平台，不直接處理交易員資金。我們建議優先選擇 FTMO、FundedNext 等營運多年且資金鏈穩健的頭部平台。"
+      },
+      "es": {
+        "question": "Si la prop firm retrasa pagos o cierra, ¿PropFXLab responde?",
+        "answer": "PropFXLab es un comparador y calculadora independiente; no custodiamos fondos. Prioriza firmas con historial largo como FTMO o FundedNext."
+      },
+      "th": {
+        "question": "ถ้า Prop Firm ล่าช้าหรือปิดกิจการ PropFXLab รับผิดชอบไหม?",
+        "answer": "PropFXLab เป็นแพลตฟอร์มเปรียบเทียบและคำนวณอิสระ ไม่ถือเงินเทรดเดอร์ แนะนำให้เลือกเจ้าที่เปิดมานาน เช่น FTMO และ FundedNext"
+      },
+      "vi": {
+        "question": "Nếu prop firm chậm trả hoặc sập, PropFXLab có chịu trách nhiệm?",
+        "answer": "PropFXLab là nền tảng so sánh và tính toán độc lập, không giữ tiền trader. Nên ưu tiên FTMO, FundedNext và các hãng vận hành lâu, dòng tiền ổn."
+      },
+      "pt": {
+        "question": "Se a prop firm atrasar saques ou fechar, a PropFXLab responde?",
+        "answer": "A PropFXLab é um comparador e calculadora independente e não custodia fundos. Prefira firmas estabelecidas como FTMO e FundedNext."
+      }
+    }
+  },
+  {
+    "id": "7",
+    "category": "safety",
+    "question": "Can I still buy a challenge from a Boneyard / closed firm?",
+    "answer": "No. Firms marked Defunct or Suspended have a serious risk of unpaid payouts or shutdown. Check the Boneyard list before you buy an evaluation.",
+    "translations": {
+      "en": {
+        "question": "Can I still buy a challenge from a Boneyard / closed firm?",
+        "answer": "No. Firms marked Defunct or Suspended have a serious risk of unpaid payouts or shutdown. Check the Boneyard list before you buy an evaluation."
+      },
+      "cn": {
+        "question": "被列入“黑名单/已关闭（Boneyard）”的平台还能买吗？",
+        "answer": "绝不建议购买。被标记为 Defunct 或 Suspended 的平台存在严重的资金链断裂或暂停运营风险，请在购买评估前务必查阅我们的黑名单列表。"
+      },
+      "tw": {
+        "question": "被列入「黑名單／已關閉（Boneyard）」的平台還能買嗎？",
+        "answer": "絕不建議購買。被標記為 Defunct 或 Suspended 的平台存在嚴重的資金鏈斷裂或暫停營運風險，請在購買評估前務必查閱我們的黑名單列表。"
+      },
+      "es": {
+        "question": "¿Puedo comprar un challenge de una firma del Boneyard / cerrada?",
+        "answer": "No. Las marcadas Defunct o Suspended tienen alto riesgo de impago o cierre. Revisa la lista Boneyard antes de comprar."
+      },
+      "th": {
+        "question": "แพลตฟอร์มในบัญชีดำ/ปิดกิจการ (Boneyard) ยังซื้อได้ไหม?",
+        "answer": "ไม่ควรซื้อ บริษัทที่ติด Defunct หรือ Suspended มีความเสี่ยงขาดสภาพคล่องหรือปิดกิจการ สูง ตรวจรายชื่อ Boneyard ก่อนซื้อ Challenge"
+      },
+      "vi": {
+        "question": "Nền tảng trong Boneyard / đã đóng còn nên mua không?",
+        "answer": "Không. Firm gắn Defunct hoặc Suspended có rủi ro đứt dòng tiền hoặc ngừng vận hành. Hãy xem danh sách Boneyard trước khi mua challenge."
+      },
+      "pt": {
+        "question": "Ainda posso comprar challenge de uma firma do Boneyard / fechada?",
+        "answer": "Não. Firmas Defunct ou Suspended têm risco alto de calote ou encerramento. Consulte o Boneyard antes de comprar."
+      }
+    }
+  },
+  {
+    "id": "8",
+    "category": "rules",
+    "question": "What is a consistency rule, and why can it block a payout?",
+    "answer": "Some firms cap any single day's profit at 30%–50% of total profit to stop lottery-style betting. Breaking that rule can mean a denied withdrawal or an account reset.",
+    "translations": {
+      "en": {
+        "question": "What is a consistency rule, and why can it block a payout?",
+        "answer": "Some firms cap any single day's profit at 30%–50% of total profit to stop lottery-style betting. Breaking that rule can mean a denied withdrawal or an account reset."
+      },
+      "cn": {
+        "question": "什么是“一致性规则（Consistency Rule）”？为什么它会影响出金？",
+        "answer": "部分平台要求单日最大盈利不得超过总盈利的 30%–50%（防止重仓赌行情）。如果违反一致性规则，平台可能会拒绝提现或要求重置账户。"
+      },
+      "tw": {
+        "question": "什麼是「一致性規則（Consistency Rule）」？為什麼它會影響出金？",
+        "answer": "部分平台要求單日最大盈利不得超過總盈利的 30%–50%（防止重倉賭行情）。如果違反一致性規則，平台可能會拒絕提現或要求重置帳戶。"
+      },
+      "es": {
+        "question": "¿Qué es la regla de consistencia y por qué puede bloquear un retiro?",
+        "answer": "Algunas firmas limitan el beneficio de un solo día al 30%–50% del total para evitar apuestas all-in. Incumplirla puede denegar el retiro o resetear la cuenta."
+      },
+      "th": {
+        "question": "กฎ Consistency คืออะไร ทำไมถึงกระทบการถอน?",
+        "answer": "บางบริษัทจำกัดกำไรวันเดียวไม่เกิน 30%–50% ของกำไรรวม เพื่อกันการงัดพอร์ต หากฝ่าฝืนอาจถูกปฏิเสธถอนหรือรีเซ็ตบัญชี"
+      },
+      "vi": {
+        "question": "Consistency Rule là gì và vì sao ảnh hưởng rút tiền?",
+        "answer": "Một số hãng giới hạn lãi một ngày không quá 30%–50% tổng lãi để tránh all-in. Vi phạm có thể bị từ chối rút hoặc reset tài khoản."
+      },
+      "pt": {
+        "question": "O que é a consistency rule e por que ela trava o saque?",
+        "answer": "Algumas firmas limitam o lucro de um único dia a 30%–50% do total para evitar all-in. Violar isso pode negar o saque ou resetar a conta."
+      }
+    }
+  },
+  {
+    "id": "9",
+    "category": "rules",
+    "question": "Do all prop firms allow news trading and overnight holds?",
+    "answer": "No. Some firms ban opening or closing around high-impact news (NFP, CPI) for 2–5 minutes, or ban weekend holding. Check the tags on each firm page.",
+    "translations": {
+      "en": {
+        "question": "Do all prop firms allow news trading and overnight holds?",
+        "answer": "No. Some firms ban opening or closing around high-impact news (NFP, CPI) for 2–5 minutes, or ban weekend holding. Check the tags on each firm page."
+      },
+      "cn": {
+        "question": "所有 Prop Firm 都允许新闻交易（News Trading）和隔夜持仓吗？",
+        "answer": "并非如此。部分平台在重磅新闻（如 NFP、CPI）前后 2–5 分钟内禁止开平仓，或禁止周末持仓（Weekend Holding）。具体规则请在各平台详情页查看标签。"
+      },
+      "tw": {
+        "question": "所有 Prop Firm 都允許新聞交易（News Trading）和隔夜持倉嗎？",
+        "answer": "並非如此。部分平台在重磅新聞（如 NFP、CPI）前後 2–5 分鐘內禁止開平倉，或禁止週末持倉（Weekend Holding）。具體規則請在各平台詳情頁查看標籤。"
+      },
+      "es": {
+        "question": "¿Todas las prop firms permiten news trading y posiciones overnight?",
+        "answer": "No. Algunas prohíben abrir o cerrar 2–5 minutos alrededor de noticias fuertes (NFP, CPI) o vetan el weekend holding. Revisa las etiquetas en cada ficha."
+      },
+      "th": {
+        "question": "ทุก Prop Firm อนุญาตเทรดข่าวและถือข้ามคืนไหม?",
+        "answer": "ไม่เสมอไป บางเจ้าห้ามเปิด-ปิดออเดอร์ช่วง 2–5 นาทีรอบข่าวใหญ่ (NFP, CPI) หรือห้ามถือข้ามสุดสัปดาห์ ดูแท็กในหน้ารายละเอียดแต่ละบริษัท"
+      },
+      "vi": {
+        "question": "Mọi prop firm đều cho news trading và giữ lệnh qua đêm?",
+        "answer": "Không. Một số cấm mở/đóng lệnh 2–5 phút quanh tin mạnh (NFP, CPI) hoặc cấm giữ qua weekend. Xem tag ở trang từng công ty."
+      },
+      "pt": {
+        "question": "Todas as prop firms permitem news trading e overnight?",
+        "answer": "Não. Algumas proíbem abrir/fechar 2–5 minutos em torno de notícias fortes (NFP, CPI) ou vetam weekend holding. Veja as tags na página de cada firma."
+      }
+    }
+  },
+  {
+    "id": "10",
+    "category": "rules",
+    "question": "Are Phase 1/2 evaluation rules the same as the funded account?",
+    "answer": "Evaluations usually have drawdown limits and no payouts. Funded accounts add the profit split, and some firms switch to a stricter trailing drawdown.",
+    "translations": {
+      "en": {
+        "question": "Are Phase 1/2 evaluation rules the same as the funded account?",
+        "answer": "Evaluations usually have drawdown limits and no payouts. Funded accounts add the profit split, and some firms switch to a stricter trailing drawdown."
+      },
+      "cn": {
+        "question": "评估阶段（Phase 1/2）和实盘阶段（Funded Account）规则一样吗？",
+        "answer": "评估阶段通常有回撤上限（Drawdown）限制但无出金；实盘阶段才有利润分成，且部分平台在实盘阶段会实施更严格的回撤计算方式（如 Trailing Drawdown 追踪回撤）。"
+      },
+      "tw": {
+        "question": "評估階段（Phase 1/2）和實盤階段（Funded Account）規則一樣嗎？",
+        "answer": "評估階段通常有回撤上限（Drawdown）限制但無出金；實盤階段才有利潤分成，且部分平台在實盤階段會實施更嚴格的回撤計算方式（如 Trailing Drawdown 追蹤回撤）。"
+      },
+      "es": {
+        "question": "¿Las reglas de Phase 1/2 son iguales a la cuenta funded?",
+        "answer": "La evaluación suele tener drawdown y no hay retiros. En funded entra el split y algunas firmas pasan a un trailing drawdown más estricto."
+      },
+      "th": {
+        "question": "กฎ Phase 1/2 เหมือนบัญชี Funded หรือไม่?",
+        "answer": "ช่วงประเมินมักมีเพดาน Drawdown แต่ยังถอนไม่ได้ บัญชี Funded จึงมีแบ่งกำไร และบางเจ้าใช้ Trailing Drawdown ที่เข้มกว่า"
+      },
+      "vi": {
+        "question": "Luật Phase 1/2 có giống tài khoản Funded không?",
+        "answer": "Giai đoạn đánh giá thường có trần drawdown và chưa rút được. Tài khoản funded mới có chia lợi nhuận, và một số hãng chuyển sang trailing drawdown chặt hơn."
+      },
+      "pt": {
+        "question": "As regras da Phase 1/2 são iguais às da conta funded?",
+        "answer": "A avaliação costuma ter drawdown e sem saque. No funded entra o split, e algumas firmas passam a um trailing drawdown mais rígido."
+      }
+    }
+  },
+  {
+    "id": "11",
+    "category": "general",
+    "question": "Does a PropFXLab promo code change my profit split?",
+    "answer": "No. Codes only discount the challenge fee (typically 5%–15%) or add a free retry. They do not change the split.",
+    "translations": {
+      "en": {
+        "question": "Does a PropFXLab promo code change my profit split?",
+        "answer": "No. Codes only discount the challenge fee (typically 5%–15%) or add a free retry. They do not change the split."
+      },
+      "cn": {
+        "question": "使用 PropFXLab 提供的优惠码会影响我的出金比例吗？",
+        "answer": "绝对不会。优惠码仅用于在购买评估账户时享受 5%–15% 的价格折扣或免费重考（Free Retry）权益，不影响后续的分成比例。"
+      },
+      "tw": {
+        "question": "使用 PropFXLab 提供的優惠碼會影響我的出金比例嗎？",
+        "answer": "絕對不會。優惠碼僅用於在購買評估帳戶時享受 5%–15% 的價格折扣或免費重考（Free Retry）權益，不影響後續的分成比例。"
+      },
+      "es": {
+        "question": "¿El código de PropFXLab cambia mi porcentaje de split?",
+        "answer": "No. Solo descuenta 5%–15% al comprar el challenge o da un free retry. No altera el split."
+      },
+      "th": {
+        "question": "ใช้โค้ด PropFXLab แล้วสัดส่วนแบ่งกำไรเปลี่ยนไหม?",
+        "answer": "ไม่เปลี่ยน โค้ดใช้ลดราคา Challenge 5%–15% หรือได้ Free Retry เท่านั้น ไม่แตะสัดส่วนแบ่งกำไร"
+      },
+      "vi": {
+        "question": "Mã giảm giá PropFXLab có làm đổi tỷ lệ chia không?",
+        "answer": "Không. Mã chỉ giảm 5%–15% phí challenge hoặc tặng Free Retry, không đổi tỷ lệ chia sau này."
+      },
+      "pt": {
+        "question": "O cupom da PropFXLab muda o meu split?",
+        "answer": "Não. Ele só dá 5%–15% de desconto no challenge ou um free retry. O split permanece igual."
+      }
+    }
+  },
+  {
+    "id": "12",
+    "category": "general",
+    "question": "How often is your data updated?",
+    "answer": "Our scrape plus a human review audits firm rules, promo codes, and payout channels twice a week.",
+    "translations": {
+      "en": {
+        "question": "How often is your data updated?",
+        "answer": "Our scrape plus a human review audits firm rules, promo codes, and payout channels twice a week."
+      },
+      "cn": {
+        "question": "你们的数据多久更新一次？",
+        "answer": "我们的自动化抓取系统和人工审核团队每周对各平台的最新规则、折扣码和出金通道进行两次审计，确保数据实时准确。"
+      },
+      "tw": {
+        "question": "你們的資料多久更新一次？",
+        "answer": "我們的自動化抓取系統和人工審核團隊每週對各平台的最新規則、折扣碼和出金管道進行兩次審計，確保資料即時準確。"
+      },
+      "es": {
+        "question": "¿Con qué frecuencia actualizan los datos?",
+        "answer": "El scraper más una revisión humana auditan reglas, cupones y canales de pago dos veces por semana."
+      },
+      "th": {
+        "question": "ข้อมูลอัปเดตบ่อยแค่ไหน?",
+        "answer": "ระบบดึงข้อมูลอัตโนมัติบวกทีมตรวจทาน จะตรวจกฎ โค้ดส่วนลด และช่องทางถอนสัปดาห์ละสองครั้ง"
+      },
+      "vi": {
+        "question": "Dữ liệu được cập nhật bao lâu một lần?",
+        "answer": "Hệ thống thu thập tự động kết hợp kiểm tra thủ công rà soát quy tắc, mã giảm và kênh rút mỗi tuần hai lần."
+      },
+      "pt": {
+        "question": "Com que frequência os dados são atualizados?",
+        "answer": "O scraper mais uma revisão humana auditam regras, cupons e canais de saque duas vezes por semana."
+      }
+    }
+  }
+]

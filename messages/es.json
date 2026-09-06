@@ -204,6 +204,19 @@
     "showingCount": "Mostrando {shown} de {total} · página {page}/{totalPages}",
     "noResults": "Ningún artículo coincide con tu búsqueda."
   },
+  "FaqPage": {
+    "metaTitle": "FAQ de Prop Firms — Pagos, seguridad y reglas",
+    "metaDescription": "Respuestas sobre pago neto, comisiones ocultas, primer payout, badges de seguridad, consistency rules y códigos promo para traders fondeados.",
+    "title": "Preguntas frecuentes",
+    "subtitle": "Cálculo de pagos, seguridad de las firmas y reglas de trading para quien compara challenges.",
+    "listHeading": "Respuestas",
+    "categoryLabel": "Categorías de FAQ",
+    "categoryAll": "Todas",
+    "categoryPayout": "💰 Cálculo de pagos",
+    "categorySafety": "🛡️ Seguridad",
+    "categoryRules": "📜 Reglas de trading",
+    "empty": "Aún no hay preguntas en esta categoría."
+  },
   "DefunctPage": {
     "metaTitle": "⚠️ Cementerio de Prop Firms: firmas de trading con fondeo cerradas y suspendidas (2023-2026)",
     "metaDescription": "Un listado actualizado de prop firms que han cerrado, dejado de responder o dejado de pagar entre 2023 y 2026, con el motivo público de cada cierre y alternativas más seguras y verificadas.",
