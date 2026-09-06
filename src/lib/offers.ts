@@ -15,7 +15,6 @@ export const FIRM_OFFERS: Record<string, FirmOffer> = {
     href: "https://apextraderfunding.com",
   },
   "funding-traders": { code: "PROPFXLAB", href: "https://fundingtraders.com" },
-  myfundedfx: { code: "PROPFXLAB", href: "https://seacrestmarkets.io/closed" },
 };
 
 export function getFirmOffer(slug: string, fallbackHref: string): FirmOffer {
@@ -29,6 +28,6 @@ export const POPULAR_COMPARISONS = [
   ["ftmo", "fundingpips"],
   ["fundednext", "goatfunded"],
   ["alpha-capital", "ftmo"],
-  ["apex-trader-funding", "myfundedfx"],
+  ["apex-trader-funding", "topstep"],
   ["funding-traders", "fundingpips"],
 ] as const;
