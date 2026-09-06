@@ -1243,13 +1243,13 @@ def main() -> None:
                 translations=article_translations,
             )
             
-            # 发送到 X
-            post_to_x(
-                title=selected.title,
-                summary=selected.summary,
-                slug=slug,
-                translations=article_translations,
-            )
+            # X 发布已关闭（需要付费 API）
+            # post_to_x(
+            #     title=selected.title,
+            #     summary=selected.summary,
+            #     slug=slug,
+            #     translations=article_translations,
+            # )
             
             # 更新发帖时间戳
             update_last_post_time()
