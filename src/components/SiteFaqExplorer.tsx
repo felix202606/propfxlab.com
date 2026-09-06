@@ -5,10 +5,9 @@ import { useTranslations } from "next-intl";
 import { FaqAccordion, type AccordionFaq } from "@/components/FaqAccordion";
 import type { SiteFaqCategory } from "@/lib/schema";
 
-const TABS: Array<{ id: "all" | SiteFaqCategory; labelKey: string }> = [
-  { id: "all", labelKey: "categoryAll" },
-  { id: "payout", labelKey: "categoryPayout" },
+const TABS: Array<{ id: Exclude<SiteFaqCategory, "general">; labelKey: string }> = [
   { id: "safety", labelKey: "categorySafety" },
+  { id: "payout", labelKey: "categoryPayout" },
   { id: "rules", labelKey: "categoryRules" },
 ];
 
@@ -16,24 +15,39 @@ export type SiteFaqListItem = AccordionFaq & {
   category: SiteFaqCategory;
 };
 
-export function SiteFaqExplorer({ faqs }: { faqs: SiteFaqListItem[] }) {
+export function SiteFaqExplorer({
+  faqs,
+  heading,
+}: {
+  faqs: SiteFaqListItem[];
+  heading?: string;
+}) {
   const t = useTranslations("FaqPage");
-  const [category, setCategory] = useState<(typeof TABS)[number]["id"]>("all");
+  const [category, setCategory] = useState<(typeof TABS)[number]["id"]>("safety");
 
   const visible = useMemo(
     () =>
-      category === "all"
-        ? faqs
-        : faqs.filter((item) => item.category === category),
+      faqs.filter((item) =>
+        category === "safety"
+          ? item.category === "safety" || item.category === "general"
+          : item.category === category,
+      ),
     [category, faqs],
   );
 
   return (
-    <div className="mt-8">
+    <div className={heading ? "scroll-mt-24" : "mt-8"} id={heading ? "faq" : undefined}>
+      {heading ? (
+        <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+          <span className="bg-gradient-to-r from-white to-emerald-300 bg-clip-text text-transparent">
+            {heading}
+          </span>
+        </h2>
+      ) : null}
       <div
         role="tablist"
         aria-label={t("categoryLabel")}
-        className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1"
+        className={`${heading ? "mt-6 " : ""}-mx-1 flex gap-2 overflow-x-auto px-1 pb-1`}
       >
         {TABS.map((tab) => {
           const selected = tab.id === category;
