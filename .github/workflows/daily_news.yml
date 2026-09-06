@@ -2,6 +2,7 @@ name: Daily news scrape
 
 on:
   schedule:
+    # 02:00 & 14:00 UTC ≈ 14:00 & 02:00 NZST
     - cron: "0 2,14 * * *"
   workflow_dispatch:
 
@@ -11,7 +12,7 @@ concurrency:
 
 jobs:
   scrape-news:
-    name: Scrape and publish news
+    name: Scrape and open news PR
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -36,12 +37,9 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: gemini-3.5-flash-lite
           NEWS_MAX_ITEMS: "5"
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-          X_API_KEY: ${{ secrets.X_API_KEY }}
-          X_API_SECRET: ${{ secrets.X_API_SECRET }}
-          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
-          X_ACCESS_SECRET: ${{ secrets.X_ACCESS_SECRET }}
+          # IndexNow / Telegram run from news_publish.yml after merge to main
+          SKIP_INDEXNOW: "1"
+          SKIP_SOCIAL: "1"
         run: python -u scripts/news_scraper.py --max-items 5
 
       - name: Create pull request for new news JSON
@@ -56,13 +54,7 @@ jobs:
           body: |
             Automated news scrape from `Daily news scrape`.
 
-            ## Summary
-            - New/updated JSON under `data/news/`
-            - Opens a PR because `main` is protected
-
-            ## Test plan
-            - [ ] Preview `/news` and one article page
-            - [ ] Confirm Zod firm check still passes
+            IndexNow + Telegram run after this merges to `main` (`Publish news after merge`).
           add-paths: |
             data/news/
 
@@ -72,4 +64,4 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh pr merge "${{ steps.cpr.outputs.pull-request-number }}" --merge --auto || \
-            echo "Auto-merge unavailable; PR left open for review: ${{ steps.cpr.outputs.pull-request-url }}"
+            echo "Auto-merge unavailable; PR left open: ${{ steps.cpr.outputs.pull-request-url }}"

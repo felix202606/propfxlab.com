@@ -1,0 +1,50 @@
+name: Publish news after merge
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "data/news/**"
+
+concurrency:
+  group: news-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: IndexNow + Telegram
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 2
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Notify IndexNow and Telegram for new articles
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          mapfile -t slugs < <(
+            git diff --name-only --diff-filter=A HEAD~1 HEAD -- data/news/ \
+              | sed -n 's|^data/news/\(.*\)\.json$|\1|p'
+          )
+          if [ "${#slugs[@]}" -eq 0 ]; then
+            echo "No newly added news JSON in this push"
+            exit 0
+          fi
+          echo "Publishing ${#slugs[@]} article(s): ${slugs[*]}"
+          # Brief window for Vercel to pick up main
+          sleep 45
+          python -u scripts/news_scraper.py --notify-indexnow "${slugs[@]}"
+          python -u scripts/news_scraper.py --post-telegram "${slugs[@]}"
