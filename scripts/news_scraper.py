@@ -103,9 +103,10 @@ LOCALE_FLAGS = {
     "pt": "🇵🇹",
 }
 
-# 社媒发布配置
-SOCIAL_POST_INTERVAL_HOURS = 3  # 每篇新闻间隔3小时发布（同一次 flush 内不限）
+# 社媒发布配置：Telegram 每 6 小时最多 1 条；多余进持久队列
+SOCIAL_POST_INTERVAL_HOURS = 6
 LAST_POST_TIME_FILE = ROOT / ".last_social_post_time"
+TELEGRAM_QUEUE_FILE = ROOT / "data" / "telegram_queue.json"
 PROPFXLAB_SITE_URL = "https://www.propfxlab.com"
 
 # 用户提供的源里，部分是 RSS 目录页或旧路径；这里用实际可解析的 XML。
@@ -828,48 +829,101 @@ def notify_indexnow(slug: str) -> None:
         print(f"  IndexNow 推送 {slug} 失败：{error}")
 
 
-def check_social_post_interval() -> bool:
+def check_social_post_interval(last_posted_at: Optional[datetime] = None) -> bool:
     """检查是否已过发帖间隔时间。返回 True 表示可以发帖。"""
-    if not LAST_POST_TIME_FILE.is_file():
-        return True
-    
-    try:
-        last_post_time_str = LAST_POST_TIME_FILE.read_text(encoding="utf-8").strip()
-        last_post_time = datetime.fromisoformat(last_post_time_str)
-        elapsed = datetime.now(timezone.utc) - last_post_time
-        if elapsed.total_seconds() < SOCIAL_POST_INTERVAL_HOURS * 3600:
-            remaining_hours = (SOCIAL_POST_INTERVAL_HOURS * 3600 - elapsed.total_seconds()) / 3600
-            print(f"  ⏰ 距离上次社媒发帖未满 {SOCIAL_POST_INTERVAL_HOURS} 小时（还需等待 {remaining_hours:.1f} 小时），本次跳过发帖")
-            return False
-    except (OSError, ValueError) as error:
-        print(f"  Warning: 读取上次发帖时间失败：{error}")
-    
+    if last_posted_at is None:
+        if LAST_POST_TIME_FILE.is_file():
+            try:
+                last_posted_at = datetime.fromisoformat(
+                    LAST_POST_TIME_FILE.read_text(encoding="utf-8").strip()
+                )
+            except (OSError, ValueError) as error:
+                print(f"  Warning: 读取上次发帖时间失败：{error}")
+                return True
+        else:
+            return True
+
+    if last_posted_at.tzinfo is None:
+        last_posted_at = last_posted_at.replace(tzinfo=timezone.utc)
+
+    elapsed = datetime.now(timezone.utc) - last_posted_at
+    if elapsed.total_seconds() < SOCIAL_POST_INTERVAL_HOURS * 3600:
+        remaining_hours = (SOCIAL_POST_INTERVAL_HOURS * 3600 - elapsed.total_seconds()) / 3600
+        print(
+            f"  ⏰ 距离上次社媒发帖未满 {SOCIAL_POST_INTERVAL_HOURS} 小时"
+            f"（还需等待 {remaining_hours:.1f} 小时），本次跳过发帖"
+        )
+        return False
     return True
 
 
-def update_last_post_time() -> None:
-    """更新上次发帖时间戳。"""
+def update_last_post_time(when: Optional[datetime] = None) -> None:
+    """更新本地上次发帖时间戳（非 CI 路径）。"""
+    stamp = when or datetime.now(timezone.utc)
     try:
-        LAST_POST_TIME_FILE.write_text(
-            datetime.now(timezone.utc).isoformat(),
-            encoding="utf-8",
-        )
+        LAST_POST_TIME_FILE.write_text(stamp.isoformat(), encoding="utf-8")
     except OSError as error:
         print(f"  Warning: 保存发帖时间戳失败：{error}")
 
 
-def post_to_telegram(title: str, summary: str, slug: str, translations: dict[str, LocaleCopy]) -> None:
-    """发送新闻到 Telegram 频道。"""
+def load_telegram_queue() -> dict[str, Any]:
+    """读取持久化 Telegram 队列。"""
+    if not TELEGRAM_QUEUE_FILE.is_file():
+        return {"slugs": [], "lastPostedAt": None}
+    try:
+        payload = json.loads(TELEGRAM_QUEUE_FILE.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        print(f"  Warning: 读取 Telegram 队列失败：{error}")
+        return {"slugs": [], "lastPostedAt": None}
+    if not isinstance(payload, dict):
+        return {"slugs": [], "lastPostedAt": None}
+    slugs = payload.get("slugs")
+    if not isinstance(slugs, list):
+        slugs = []
+    cleaned = [str(slug).strip() for slug in slugs if str(slug).strip()]
+    return {
+        "slugs": cleaned,
+        "lastPostedAt": payload.get("lastPostedAt"),
+    }
+
+
+def save_telegram_queue(slugs: list[str], last_posted_at: Optional[str]) -> None:
+    """写入持久化 Telegram 队列。"""
+    TELEGRAM_QUEUE_FILE.parent.mkdir(parents=True, exist_ok=True)
+    payload = {
+        "slugs": slugs,
+        "lastPostedAt": last_posted_at,
+    }
+    TELEGRAM_QUEUE_FILE.write_text(
+        json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+
+def parse_queue_timestamp(raw: Any) -> Optional[datetime]:
+    if not raw:
+        return None
+    try:
+        parsed = datetime.fromisoformat(str(raw).strip())
+    except ValueError:
+        return None
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=timezone.utc)
+    return parsed
+
+
+def post_to_telegram(title: str, summary: str, slug: str, translations: dict[str, LocaleCopy]) -> bool:
+    """发送新闻到 Telegram 频道。成功返回 True。"""
     bot_token = os.environ.get("TELEGRAM_BOT_TOKEN")
     chat_id = os.environ.get("TELEGRAM_CHAT_ID")
     
     if not bot_token or not chat_id:
         print("  Warning: 缺少 TELEGRAM_BOT_TOKEN 或 TELEGRAM_CHAT_ID，跳过 Telegram 发帖")
-        return
+        return False
     
     if requests is None:
         print("  Warning: 缺少 requests 库，跳过 Telegram 发帖")
-        return
+        return False
     
     try:
         # 构建消息：标题 + 精简看点 + 每个国旗对应语言的链接
@@ -897,28 +951,30 @@ def post_to_telegram(title: str, summary: str, slug: str, translations: dict[str
         response = requests.post(api_url, json=payload, timeout=REQUEST_TIMEOUT_S)
         response.raise_for_status()
         
-        print(f"  ✅ Telegram 发帖成功 (@propfxlab)")
+        print(f"  ✅ Telegram 发帖成功 (@propfxlab)：{slug}")
+        return True
         
     except Exception as error:
         print(f"  Warning: Telegram 发帖失败：{error}")
+        return False
 
 
-def post_telegram_for_slug(slug: str) -> None:
-    """从 data/news/<slug>.json 读取并发送 Telegram。"""
+def post_telegram_for_slug(slug: str) -> bool:
+    """从 data/news/<slug>.json 读取并发送 Telegram。成功返回 True。"""
     path = NEWS_DIR / f"{slug}.json"
     if not path.is_file():
         print(f"  Warning: 找不到新闻文件，跳过 Telegram：{path.name}")
-        return
+        return False
     try:
         payload = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as error:
         print(f"  Warning: 读取 {path.name} 失败：{error}")
-        return
+        return False
     title = str(payload.get("title") or "").strip()
     summary = str(payload.get("summary") or "").strip()
     if not title or not summary:
         print(f"  Warning: {path.name} 缺少 title/summary，跳过 Telegram")
-        return
+        return False
     raw_translations = payload.get("translations") if isinstance(payload, dict) else None
     translations = normalize_translations(
         raw_translations if isinstance(raw_translations, dict) else None,
@@ -926,7 +982,68 @@ def post_telegram_for_slug(slug: str) -> None:
         fallback_summary=summary,
         fallback_body=str(payload.get("body") or ""),
     )
-    post_to_telegram(title, summary, slug, translations)
+    return post_to_telegram(title, summary, slug, translations)
+
+
+def enqueue_telegram_slugs(slugs: list[str]) -> list[str]:
+    """把 slug 追加进队列（去重，保持顺序），返回当前队列。"""
+    queue = load_telegram_queue()
+    existing = list(queue["slugs"])
+    seen = set(existing)
+    for slug in slugs:
+        cleaned = slug.strip()
+        if cleaned and cleaned not in seen:
+            existing.append(cleaned)
+            seen.add(cleaned)
+    save_telegram_queue(existing, queue.get("lastPostedAt") if isinstance(queue.get("lastPostedAt"), str) else None)
+    print(f"  Telegram 队列现有 {len(existing)} 条待发")
+    return existing
+
+
+def flush_telegram_queue(force: bool = False) -> bool:
+    """
+    从队列发至多 1 条。默认遵守 6 小时间隔。
+    返回 True 表示队列文件有变更（发帖或清理失效 slug）。
+    """
+    queue = load_telegram_queue()
+    slugs = list(queue["slugs"])
+    last_raw = queue.get("lastPostedAt") if isinstance(queue.get("lastPostedAt"), str) else None
+    last_posted_at = parse_queue_timestamp(last_raw)
+
+    if not slugs:
+        print("  Telegram 队列为空，无需发帖")
+        return False
+
+    if not force and not check_social_post_interval(last_posted_at):
+        return False
+
+    changed = False
+    while slugs:
+        slug = slugs[0]
+        news_path = NEWS_DIR / f"{slug}.json"
+        if not news_path.is_file():
+            print(f"  Warning: 队列中的 {slug} 已不存在，移除")
+            slugs.pop(0)
+            changed = True
+            continue
+
+        ok = post_telegram_for_slug(slug)
+        if not ok:
+            # 保留队首，下次再试；仍写出清理后的队列
+            save_telegram_queue(slugs, last_raw)
+            return changed
+
+        slugs.pop(0)
+        now = datetime.now(timezone.utc)
+        last_raw = now.isoformat()
+        save_telegram_queue(slugs, last_raw)
+        update_last_post_time(now)
+        print(f"  Telegram 队列剩余 {len(slugs)} 条")
+        return True
+
+    if changed:
+        save_telegram_queue(slugs, last_raw)
+    return changed
 
 
 def post_to_x(title: str, summary: str, slug: str, translations: dict[str, LocaleCopy]) -> None:
@@ -1151,10 +1268,26 @@ def parse_args() -> argparse.Namespace:
         help="仅向 IndexNow 推送给定 slug（用于 CI：main 推送后再通知搜索引擎）",
     )
     parser.add_argument(
+        "--enqueue-telegram",
+        nargs="+",
+        metavar="SLUG",
+        help="把 slug 加入 Telegram 队列（不立刻连发）",
+    )
+    parser.add_argument(
+        "--flush-telegram",
+        action="store_true",
+        help="从队列发至多 1 条（默认遵守 6 小时间隔）",
+    )
+    parser.add_argument(
+        "--force-flush-telegram",
+        action="store_true",
+        help="忽略发帖间隔，从队列强制发 1 条",
+    )
+    parser.add_argument(
         "--post-telegram",
         nargs="+",
         metavar="SLUG",
-        help="从已写入的 JSON 向 Telegram 发帖（用于 CI：main 推送后再发）",
+        help="入队后立刻尝试 flush 1 条（不会一次发多条）",
     )
     return parser.parse_args()
 
@@ -1173,12 +1306,17 @@ def main() -> None:
             notify_indexnow(slug.strip())
         return
 
+    if args.enqueue_telegram:
+        enqueue_telegram_slugs([slug.strip() for slug in args.enqueue_telegram])
+        return
+
+    if args.flush_telegram or args.force_flush_telegram:
+        flush_telegram_queue(force=bool(args.force_flush_telegram))
+        return
+
     if args.post_telegram:
-        for index, slug in enumerate(args.post_telegram):
-            post_telegram_for_slug(slug.strip())
-            update_last_post_time()
-            if index < len(args.post_telegram) - 1:
-                time.sleep(BATCH_PAUSE_S)
+        enqueue_telegram_slugs([slug.strip() for slug in args.post_telegram])
+        flush_telegram_queue(force=False)
         return
 
     if args.backfill_translations:
@@ -1295,13 +1433,16 @@ def main() -> None:
         if os.environ.get("SKIP_SOCIAL", "").strip().lower() in {"1", "true", "yes"}:
             print("  社媒发帖推迟（SKIP_SOCIAL）")
         elif check_social_post_interval():
-            post_to_telegram(
+            if post_to_telegram(
                 title=selected.title,
                 summary=selected.summary,
                 slug=slug,
                 translations=article_translations,
-            )
-            update_last_post_time()
+            ):
+                update_last_post_time()
+            # 本地路径也只发 1 条：写入成功后立刻结束本轮社媒
+            # （其余新闻仍写入 JSON，Telegram 留给队列/下次）
+            # 注意：CI 走 SKIP_SOCIAL + 合并后队列，不走这里。
 
         if index < len(candidates):
             time.sleep(BATCH_PAUSE_S)

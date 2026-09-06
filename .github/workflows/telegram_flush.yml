@@ -1,18 +1,18 @@
-name: Publish news after merge
+name: Flush Telegram queue
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "data/news/**"
+  schedule:
+    # Every 6 hours — at most one Telegram post per run
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
 
 concurrency:
-  group: news-publish
+  group: telegram-flush
   cancel-in-progress: false
 
 jobs:
-  publish:
-    name: IndexNow + Telegram queue
+  flush:
+    name: Flush one Telegram post
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -21,7 +21,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v7
         with:
-          fetch-depth: 2
+          ref: main
 
       - name: Set up Python
         uses: actions/setup-python@v6
@@ -31,27 +31,13 @@ jobs:
       - name: Install Python dependencies
         run: pip install -r scripts/requirements.txt
 
-      - name: IndexNow + enqueue Telegram (max 1 flush / 6h)
-        id: social
+      - name: Flush at most one queued post
+        id: flush
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
         run: |
-          mapfile -t slugs < <(
-            git diff --name-only --diff-filter=A HEAD~1 HEAD -- data/news/ \
-              | sed -n 's|^data/news/\(.*\)\.json$|\1|p'
-          )
-          if [ "${#slugs[@]}" -eq 0 ]; then
-            echo "No newly added news JSON in this push"
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
-          echo "New articles: ${slugs[*]}"
-          # Brief window for Vercel to pick up main
-          sleep 45
-          python -u scripts/news_scraper.py --notify-indexnow "${slugs[@]}"
-          # 入队后最多发 1 条；其余等 6 小时定时 flush
-          python -u scripts/news_scraper.py --post-telegram "${slugs[@]}"
+          python -u scripts/news_scraper.py --flush-telegram
           if git diff --quiet -- data/telegram_queue.json; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else
@@ -59,18 +45,17 @@ jobs:
           fi
 
       - name: Persist Telegram queue
-        if: steps.social.outputs.changed == 'true'
+        if: steps.flush.outputs.changed == 'true'
         id: cpr
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "chore(news): update telegram queue"
+          commit-message: "chore(news): flush telegram queue"
           branch: chore/telegram-queue
           delete-branch: true
-          title: "chore(news): update telegram queue"
+          title: "chore(news): flush telegram queue"
           body: |
-            Persist Telegram post queue / lastPostedAt after news merge.
-            Interval: 1 post per 6 hours.
+            Automated Telegram flush (max 1 post / 6 hours).
           add-paths: |
             data/telegram_queue.json
 
