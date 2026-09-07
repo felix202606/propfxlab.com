@@ -16,12 +16,13 @@ alwaysApply: true
 - 禁止让 sitemap 里的 URL 互跳（`/calculator` 与 `/cn/calculator` 必须各自 200）。
 - 禁止新路由不进 `sitemap.ts`、不写七语 `generateMetadata`、没有内链。
 - 禁止中间件输出 `hreflang="cn|tw"`。只用 sitemap 的 `zh-CN` / `zh-TW`，英文裸路径为 `x-default`。
+- 禁止把爬虫、收录、HTML、Google/Bing 抓取说明写进用户可见文案。那些只写在本规则和代码注释里。
 
 ## 必须保持
 
 - `localePrefix: "as-needed"`、`localeDetection: false`、`localeCookie: false`、`alternateLinks: false`
 - 对比：C(n,2) 全量无序对（约 29 家 → 406 页）× 7 语；规范 slug 字母序，反序 308
-- `/compare` 必须把全部对比 URL 写成可抓取的 `<a href>`（按平台 `<details>` 折叠可以）。禁止只留下拉、选完才跳转、页面上没有这 406 条内链。
+- `/compare` 必须把全部对比 URL 写成可抓取的 `<a href>`。可用嵌套 `<details>`（整表默认收起 → 字母 → 平台）避免上百家平台把页面拉很长。禁止只留下拉、选完才跳转、页面上没有这批内链。
 - FAQ `/faq` × 7；新闻每篇 `/news/[slug]` × 7（daily）；导航/页脚链到 `/compare` `/faq` `/news`
 
 ## 交付前自检

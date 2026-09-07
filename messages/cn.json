@@ -170,11 +170,9 @@
     "metaTitle": "全部 Prop Firm 对比",
     "metaDescription": "覆盖每一组 Prop Firm 对决：10 万美元账户到手利润、分成、首次出金等待、出金通道与回撤规则。共 {count} 组。",
     "title": "全部 Prop Firm 对比",
-    "subtitle": "可下拉速选或点热门卡；下面按平台折叠列出全部 {count} 组真实链接，供 Google / Bing 抓取，不是选完才生成。",
+    "subtitle": "先选两家平台，或点下面的热门对决。",
     "popularHeading": "热门对决",
-    "directoryHeading": "全部 {count} 组对比目录",
-    "directorySummary": "展开全部 {count} 组对比（供检索）",
-    "directoryHint": "每家平台折叠其对比链接。链接写在页面 HTML 里，爬虫不用点开也能收录。",
+    "directorySummary": "查看全部 {count} 组对比",
     "vsName": "对 {name}"
   },
   "CompareNotFound": {

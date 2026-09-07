@@ -170,11 +170,9 @@
     "metaTitle": "Todas las comparativas de prop firms",
     "metaDescription": "Comparativas de pago de cada pareja de prop firms: neto en 100.000 $, split, espera del primer payout, canales y drawdown. {count} enfrentamientos.",
     "title": "Todas las comparativas de prop firms",
-    "subtitle": "Elige dos firmas o un mano a mano popular. Debajo, cada firma pliega sus {count} enlaces reales para que Google y Bing los rastreen — no se generan al elegir.",
+    "subtitle": "Elige dos firmas, o abre un mano a mano popular.",
     "popularHeading": "Enfrentamientos populares",
-    "directoryHeading": "Las {count} comparativas",
     "directorySummary": "Ver las {count} comparativas",
-    "directoryHint": "Cada firma pliega sus enlaces. Siguen en el HTML para que los buscadores indexen cada pareja.",
     "vsName": "vs {name}"
   },
   "CompareNotFound": {

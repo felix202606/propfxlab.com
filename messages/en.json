@@ -170,11 +170,9 @@
     "metaTitle": "All Prop Firm Comparisons",
     "metaDescription": "Head-to-head payout comparisons for every prop firm pair: take-home on $100k, profit split, first payout wait, channels and drawdown. {count} matchups.",
     "title": "All prop firm comparisons",
-    "subtitle": "Pick two firms, open a popular card, or use the folder below — every one of the {count} pairs is a real link on this page.",
+    "subtitle": "Pick two firms, or open a popular matchup.",
     "popularHeading": "Popular matchups",
-    "directoryHeading": "All {count} comparisons",
     "directorySummary": "Browse all {count} comparisons",
-    "directoryHint": "Each firm folds its matchups. The links stay in the HTML so Google and Bing can crawl every pair.",
     "vsName": "vs {name}"
   },
   "CompareNotFound": {
