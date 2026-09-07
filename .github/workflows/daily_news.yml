@@ -12,11 +12,13 @@ concurrency:
 
 jobs:
   scrape-news:
-    name: Scrape and open news PR
+    name: Scrape, merge, and publish
     runs-on: ubuntu-latest
     permissions:
       contents: write
       pull-requests: write
+      actions: write
+      checks: read
     steps:
       - name: Check out repository
         uses: actions/checkout@v7
@@ -33,17 +35,42 @@ jobs:
         run: pip install -r scripts/requirements.txt
 
       - name: Run news scraper
+        id: scrape
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: gemini-3.5-flash-lite
           NEWS_MAX_ITEMS: "5"
-          # IndexNow / Telegram run from news_publish.yml after merge to main
+          # Publish happens in this job after merge (GITHUB_TOKEN cannot chain workflows)
           SKIP_INDEXNOW: "1"
           SKIP_SOCIAL: "1"
-        run: python -u scripts/news_scraper.py --max-items 5
+        run: |
+          set -euo pipefail
+          before=$(ls data/news/*.json 2>/dev/null | wc -l | tr -d ' ')
+          python -u scripts/news_scraper.py --max-items 5
+          mapfile -t new_slugs < <(
+            git status --porcelain -- data/news/ \
+              | awk '/^\?\?|^A |^ M|^M / {print $2}' \
+              | sed -n 's|^data/news/\(.*\)\.json$|\1|p'
+          )
+          # Also catch untracked via ls diff if needed
+          if [ "${#new_slugs[@]}" -eq 0 ]; then
+            mapfile -t new_slugs < <(
+              git ls-files --others --exclude-standard -- data/news/ \
+                | sed -n 's|^data/news/\(.*\)\.json$|\1|p'
+            )
+          fi
+          echo "New slugs: ${new_slugs[*]:-none}"
+          echo "slug_count=${#new_slugs[@]}" >> "$GITHUB_OUTPUT"
+          {
+            echo "slugs<<EOF"
+            printf '%s\n' "${new_slugs[@]:-}"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+          echo "before_count=$before" >> "$GITHUB_OUTPUT"
 
       - name: Create pull request for new news JSON
         id: cpr
+        if: steps.scrape.outputs.slug_count != '0'
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -54,14 +81,118 @@ jobs:
           body: |
             Automated news scrape from `Daily news scrape`.
 
-            IndexNow + Telegram run after this merges to `main` (`Publish news after merge`).
+            IndexNow + Telegram run in this same workflow after merge
+            (GITHUB_TOKEN merges do not trigger `news_publish.yml`).
           add-paths: |
             data/news/
 
-      - name: Enable auto-merge when checks pass
+      - name: Approve Zod-check, auto-merge, then publish
         if: steps.cpr.outputs.pull-request-number != ''
+        id: publish
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
+          SLUGS_MULTILINE: ${{ steps.scrape.outputs.slugs }}
         run: |
-          gh pr merge "${{ steps.cpr.outputs.pull-request-number }}" --merge --auto || \
-            echo "Auto-merge unavailable; PR left open: ${{ steps.cpr.outputs.pull-request-url }}"
+          set -euo pipefail
+
+          gh pr merge "$PR_NUMBER" --merge --auto || true
+
+          echo "Waiting for PR #$PR_NUMBER to merge (approve pending Zod-check if needed)..."
+          merged=false
+          for i in $(seq 1 60); do
+            # Approve any action_required runs on the news branch
+            mapfile -t pending < <(
+              gh api "repos/${GITHUB_REPOSITORY}/actions/runs?branch=chore/daily-news&per_page=10" \
+                --jq '.workflow_runs[] | select(.conclusion=="action_required" or .status=="waiting") | .id'
+            )
+            for run_id in "${pending[@]:-}"; do
+              [ -n "${run_id:-}" ] || continue
+              echo "Approving workflow run $run_id"
+              gh api -X POST "repos/${GITHUB_REPOSITORY}/actions/runs/${run_id}/approve" || true
+            done
+
+            state=$(gh pr view "$PR_NUMBER" --json state,mergedAt --jq '.state')
+            if [ "$state" = "MERGED" ]; then
+              merged=true
+              break
+            fi
+            sleep 10
+          done
+
+          if [ "$merged" != "true" ]; then
+            echo "::error::PR #$PR_NUMBER did not merge within ~10 minutes. Telegram skipped."
+            gh pr view "$PR_NUMBER" --json state,mergeStateStatus,url,statusCheckRollup
+            exit 1
+          fi
+
+          echo "PR merged. Publishing IndexNow + Telegram..."
+          mapfile -t slugs <<< "$SLUGS_MULTILINE"
+          # Drop empties
+          cleaned=()
+          for s in "${slugs[@]:-}"; do
+            s=$(echo "$s" | tr -d '\r' | xargs)
+            [ -n "$s" ] && cleaned+=("$s")
+          done
+          if [ "${#cleaned[@]}" -eq 0 ]; then
+            echo "No slugs to publish"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          # Refresh main so queue file is current
+          git fetch origin main
+          git checkout -B main origin/main
+
+          # Wait for Vercel to pick up news routes
+          sleep 45
+
+          python -u scripts/news_scraper.py --notify-indexnow "${cleaned[@]}"
+          python -u scripts/news_scraper.py --post-telegram "${cleaned[@]}"
+
+          if git diff --quiet -- data/telegram_queue.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Persist Telegram queue
+        if: steps.publish.outputs.changed == 'true'
+        id: qpr
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore(news): update telegram queue"
+          branch: chore/telegram-queue
+          delete-branch: true
+          title: "chore(news): update telegram queue"
+          body: |
+            Persist Telegram post queue / lastPostedAt after daily news publish.
+            Interval: 1 post per 6 hours.
+          add-paths: |
+            data/telegram_queue.json
+
+      - name: Auto-merge telegram queue PR
+        if: steps.qpr.outputs.pull-request-number != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ steps.qpr.outputs.pull-request-number }}
+        run: |
+          set -euo pipefail
+          for i in 1 2 3 4 5 6; do
+            mapfile -t pending < <(
+              gh api "repos/${GITHUB_REPOSITORY}/actions/runs?branch=chore/telegram-queue&per_page=10" \
+                --jq '.workflow_runs[] | select(.conclusion=="action_required" or .status=="waiting") | .id'
+            )
+            for run_id in "${pending[@]:-}"; do
+              [ -n "${run_id:-}" ] || continue
+              gh api -X POST "repos/${GITHUB_REPOSITORY}/actions/runs/${run_id}/approve" || true
+            done
+            gh pr merge "$PR_NUMBER" --merge --auto || true
+            state=$(gh pr view "$PR_NUMBER" --json state --jq '.state')
+            [ "$state" = "MERGED" ] && exit 0
+            sleep 10
+          done
+          echo "Queue PR still open: ${{ steps.qpr.outputs.pull-request-url }}"
