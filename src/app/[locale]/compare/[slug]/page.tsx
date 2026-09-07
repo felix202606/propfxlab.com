@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
+import { getPathname, Link } from "@/i18n/navigation";
 import { FirmLogo } from "@/components/FirmLogo";
 import { PromoCodeCopy } from "@/components/PromoCodeCopy";
 import { getCardChannelTags } from "@/lib/channel-tags";
@@ -11,18 +11,22 @@ import {
   COMPARE_EXAMPLE_PROFIT,
   examplePayoutForFirm,
   extractDrawdownRule,
-  getPopularCompareSlugs,
+  canonicalCompareSlug,
+  COMPARE_EXCLUDED_SLUGS,
+  listCanonicalCompareSlugs,
   maxTraderSharePercent,
   parseCompareSlug,
   pickCompareInsight,
 } from "@/lib/compare";
-import { getFirmBySlug, getFirmSlugs } from "@/lib/data";
+import { getAllFirms, getFirmBySlug, getFirmSlugs } from "@/lib/data";
 import { getFirmOffer } from "@/lib/offers";
 import { formatMoney } from "@/lib/payout";
 import type { PropFirm } from "@/lib/schema";
 
+export const dynamicParams = true;
+
 export function generateStaticParams() {
-  return getPopularCompareSlugs().map((slug) => ({ slug }));
+  return listCanonicalCompareSlugs(getFirmSlugs()).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
@@ -47,9 +51,14 @@ export async function generateMetadata({
 export default async function ComparePage({
   params,
 }: PageProps<"/[locale]/compare/[slug]">) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const pair = resolveComparePair(slug);
   if (!pair) notFound();
+
+  const canonical = canonicalCompareSlug(pair.left.slug, pair.right.slug);
+  if (slug !== canonical) {
+    permanentRedirect(getPathname({ href: `/compare/${canonical}`, locale }));
+  }
 
   const t = await getTranslations("ComparePage");
   const tCard = await getTranslations("FirmCard");
@@ -81,7 +90,7 @@ export default async function ComparePage({
 
       <p className="text-sm">
         <Link
-          href={{ pathname: "/", hash: "compare" }}
+          href="/compare"
           className="text-zinc-500 transition-colors hover:text-cyan-300"
         >
           {t("backToCompare")}
@@ -191,6 +200,13 @@ export default async function ComparePage({
           label={t("readProfile", { name: right.basic.name })}
         />
       </div>
+
+      <RelatedCompares
+        firm={left}
+        excludeSlug={right.slug}
+        heading={t("relatedHeading", { name: left.basic.name })}
+        vs={t("vs")}
+      />
     </article>
   );
 }
@@ -353,5 +369,43 @@ function ProfileLink({ firm, label }: { firm: PropFirm; label: string }) {
     >
       {label}
     </Link>
+  );
+}
+
+function RelatedCompares({
+  firm,
+  excludeSlug,
+  heading,
+  vs,
+}: {
+  firm: PropFirm;
+  excludeSlug: string;
+  heading: string;
+  vs: string;
+}) {
+  const others = getAllFirms().filter(
+    (item) =>
+      item.slug !== firm.slug &&
+      item.slug !== excludeSlug &&
+      !COMPARE_EXCLUDED_SLUGS.has(item.slug),
+  );
+  if (others.length === 0) return null;
+
+  return (
+    <section className="mt-12">
+      <h2 className="text-lg font-semibold text-zinc-100">{heading}</h2>
+      <ul className="mt-3 flex flex-wrap gap-2">
+        {others.map((other) => (
+          <li key={other.slug}>
+            <Link
+              href={`/compare/${canonicalCompareSlug(firm.slug, other.slug)}`}
+              className="inline-flex rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs text-zinc-300 transition-colors hover:border-cyan-400/40 hover:text-white"
+            >
+              {firm.basic.name} {vs} {other.basic.name}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }

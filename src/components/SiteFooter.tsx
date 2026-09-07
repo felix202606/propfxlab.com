@@ -71,7 +71,7 @@ export function SiteFooter({ firms }: { firms: FirmLink[] }) {
                 </li>
                 <li>
                   <Link
-                    href={{ pathname: "/", hash: "compare" }}
+                    href="/compare"
                     className="text-zinc-400 transition-colors hover:text-emerald-300"
                   >
                     {nav("compare")}

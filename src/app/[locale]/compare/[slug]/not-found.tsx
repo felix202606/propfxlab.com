@@ -9,7 +9,7 @@ export default function CompareNotFound() {
       <h1 className="text-2xl font-semibold">{t("title")}</h1>
       <p className="mt-2 text-sm text-zinc-500">{t("description")}</p>
       <Link
-        href={{ pathname: "/", hash: "compare" }}
+        href="/compare"
         className="mt-6 inline-block text-sm font-medium underline underline-offset-4"
       >
         {t("cta")}

@@ -62,6 +62,7 @@
     "selectFirmB": "Selecionar firma B",
     "compareNow": "Comparar agora",
     "viewComparison": "Ver comparação",
+    "viewAllComparisons": "Ver as {count} comparações",
     "sameFirmError": "Escolha duas firmas diferentes para comparar.",
     "faqTitle": "Perguntas frequentes",
     "faqs": [
@@ -133,7 +134,9 @@
     "prosHeading": "Vantagens",
     "consHeading": "Desvantagens",
     "warningHeading": "Regras e restrições a observar",
-    "warningIntro": "Todas as contas operam com capital simulado e as regras podem mudar sem aviso prévio. Sempre confirme os termos vigentes diretamente no site oficial da firma antes de comprar ou solicitar um saque."
+    "warningIntro": "Todas as contas operam com capital simulado e as regras podem mudar sem aviso prévio. Sempre confirme os termos vigentes diretamente no site oficial da firma antes de comprar ou solicitar um saque.",
+    "compareHeading": "Comparar {name}",
+    "compareWith": "vs {name}"
   },
   "ComparePage": {
     "metaTitle": "{left} vs {right} — Comparação de prop firms",
@@ -160,7 +163,15 @@
     "reasonMoreChannels": "mais canais de saque",
     "reasonHigherTakeHome": "um líquido estimado mais alto",
     "readProfile": "Ler a análise de {name}",
+    "relatedHeading": "Mais comparações de {name}",
     "backToCompare": "Todas as comparações"
+  },
+  "CompareIndex": {
+    "metaTitle": "Todas as comparações de prop firms",
+    "metaDescription": "Comparações de saque de cada par de prop firms: líquido em 100 mil dólares, split, espera do primeiro saque, canais e drawdown. {count} confrontos.",
+    "title": "Todas as comparações de prop firms",
+    "subtitle": "{count} mano a mano entre {firms} firmas — líquido, split, primeiro saque e drawdown lado a lado.",
+    "vsName": "vs {name}"
   },
   "CompareNotFound": {
     "title": "Não encontramos esta comparação",

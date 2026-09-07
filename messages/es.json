@@ -62,6 +62,7 @@
     "selectFirmB": "Elegir firma B",
     "compareNow": "Comparar ahora",
     "viewComparison": "Ver comparativa",
+    "viewAllComparisons": "Ver las {count} comparativas",
     "sameFirmError": "Elige dos firmas distintas para comparar.",
     "faqTitle": "Preguntas frecuentes",
     "faqs": [
@@ -133,7 +134,9 @@
     "prosHeading": "Ventajas",
     "consHeading": "Desventajas",
     "warningHeading": "Reglas y restricciones a tener en cuenta",
-    "warningIntro": "Todas las cuentas operan con capital simulado y las reglas pueden cambiar sin previo aviso. Verifica siempre los términos vigentes directamente en el sitio oficial de la firma antes de comprar o solicitar un retiro."
+    "warningIntro": "Todas las cuentas operan con capital simulado y las reglas pueden cambiar sin previo aviso. Verifica siempre los términos vigentes directamente en el sitio oficial de la firma antes de comprar o solicitar un retiro.",
+    "compareHeading": "Comparar {name}",
+    "compareWith": "vs {name}"
   },
   "ComparePage": {
     "metaTitle": "{left} vs {right} — Comparativa de prop firms",
@@ -160,7 +163,15 @@
     "reasonMoreChannels": "más canales de retiro",
     "reasonHigherTakeHome": "un neto estimado más alto",
     "readProfile": "Leer la reseña de {name}",
+    "relatedHeading": "Más comparativas de {name}",
     "backToCompare": "Todas las comparativas"
+  },
+  "CompareIndex": {
+    "metaTitle": "Todas las comparativas de prop firms",
+    "metaDescription": "Comparativas de pago de cada pareja de prop firms: neto en 100.000 $, split, espera del primer payout, canales y drawdown. {count} enfrentamientos.",
+    "title": "Todas las comparativas de prop firms",
+    "subtitle": "{count} mano a mano entre {firms} firmas: neto, split, primer payout y drawdown, lado a lado.",
+    "vsName": "vs {name}"
   },
   "CompareNotFound": {
     "title": "No encontramos esta comparativa",

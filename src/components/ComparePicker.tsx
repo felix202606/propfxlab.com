@@ -3,7 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
-import { buildCompareSlug } from "@/lib/compare";
+import { canonicalCompareSlug } from "@/lib/compare";
 
 export type CompareFirmOption = {
   slug: string;
@@ -21,7 +21,7 @@ export function ComparePicker({ firms }: { firms: CompareFirmOption[] }) {
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!canCompare) return;
-    router.push(`/compare/${buildCompareSlug(leftSlug, rightSlug)}`);
+    router.push(`/compare/${canonicalCompareSlug(leftSlug, rightSlug)}`);
   }
 
   return (

@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { ComparePicker } from "@/components/ComparePicker";
 import { FirmLogo } from "@/components/FirmLogo";
-import { buildCompareSlug } from "@/lib/compare";
+import { canonicalCompareSlug, listCanonicalCompareSlugs } from "@/lib/compare";
 import { getFirmOffer, POPULAR_COMPARISONS } from "@/lib/offers";
 import type { PropFirm } from "@/lib/schema";
 
@@ -32,6 +32,19 @@ export function ComparisonsGrid({ firms }: { firms: PropFirm[] }) {
       <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-400">
         {t("comparisonsSubtitle")}
       </p>
+      {pickerFirms.length >= 2 ? (
+        <p className="mt-3">
+          <Link
+            href="/compare"
+            className="text-sm font-medium text-cyan-300 transition-colors hover:text-white"
+          >
+            {t("viewAllComparisons", {
+              count: listCanonicalCompareSlugs(pickerFirms.map((firm) => firm.slug))
+                .length,
+            })}
+          </Link>
+        </p>
+      ) : null}
 
       {pickerFirms.length >= 2 ? <ComparePicker firms={pickerFirms} /> : null}
 
@@ -47,7 +60,7 @@ export function ComparisonsGrid({ firms }: { firms: PropFirm[] }) {
       ) : (
         <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {pairs.map(({ left, right }) => {
-            const compareHref = `/compare/${buildCompareSlug(left.slug, right.slug)}`;
+            const compareHref = `/compare/${canonicalCompareSlug(left.slug, right.slug)}`;
             const leftOffer = getFirmOffer(left.slug, left.basic.website);
             const rightOffer = getFirmOffer(right.slug, right.basic.website);
 
