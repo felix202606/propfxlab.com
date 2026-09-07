@@ -6,7 +6,19 @@ import { canonicalCompareSlug, listCanonicalCompareSlugs } from "@/lib/compare";
 import { getFirmOffer, POPULAR_COMPARISONS } from "@/lib/offers";
 import type { PropFirm } from "@/lib/schema";
 
-export function ComparisonsGrid({ firms }: { firms: PropFirm[] }) {
+export function ComparisonsGrid({
+  firms,
+  showHeader = true,
+  showViewAll = true,
+  embedded = false,
+  popularHeading,
+}: {
+  firms: PropFirm[];
+  showHeader?: boolean;
+  showViewAll?: boolean;
+  embedded?: boolean;
+  popularHeading?: string;
+}) {
   const t = useTranslations("HomePage");
   const bySlug = new Map(firms.map((firm) => [firm.slug, firm]));
 
@@ -23,16 +35,27 @@ export function ComparisonsGrid({ firms }: { firms: PropFirm[] }) {
   }));
 
   return (
-    <section id="compare" className="mx-auto w-full max-w-6xl scroll-mt-24 px-4 py-16">
-      <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-        <span className="bg-gradient-to-r from-white to-cyan-300 bg-clip-text text-transparent">
-          {t("comparisonsTitle")}
-        </span>
-      </h2>
-      <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-400">
-        {t("comparisonsSubtitle")}
-      </p>
-      {pickerFirms.length >= 2 ? (
+    <section
+      id={embedded ? "popular-comparisons" : "compare"}
+      className={
+        embedded
+          ? "scroll-mt-24"
+          : "mx-auto w-full max-w-6xl scroll-mt-24 px-4 py-16"
+      }
+    >
+      {showHeader ? (
+        <>
+          <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+            <span className="bg-gradient-to-r from-white to-cyan-300 bg-clip-text text-transparent">
+              {t("comparisonsTitle")}
+            </span>
+          </h2>
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-400">
+            {t("comparisonsSubtitle")}
+          </p>
+        </>
+      ) : null}
+      {showViewAll && pickerFirms.length >= 2 ? (
         <p className="mt-3">
           <Link
             href="/compare"
@@ -47,6 +70,12 @@ export function ComparisonsGrid({ firms }: { firms: PropFirm[] }) {
       ) : null}
 
       {pickerFirms.length >= 2 ? <ComparePicker firms={pickerFirms} /> : null}
+
+      {popularHeading ? (
+        <h2 className="mt-10 text-lg font-semibold text-zinc-100">
+          {popularHeading}
+        </h2>
+      ) : null}
 
       {pairs.length === 0 ? (
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

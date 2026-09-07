@@ -170,7 +170,11 @@
     "metaTitle": "Todas as comparações de prop firms",
     "metaDescription": "Comparações de saque de cada par de prop firms: líquido em 100 mil dólares, split, espera do primeiro saque, canais e drawdown. {count} confrontos.",
     "title": "Todas as comparações de prop firms",
-    "subtitle": "{count} mano a mano entre {firms} firmas — líquido, split, primeiro saque e drawdown lado a lado.",
+    "subtitle": "Escolha duas firmas ou um confronto popular. Abaixo, cada firma dobra os {count} links reais para o Google e o Bing rastrearem — não são gerados depois de escolher.",
+    "popularHeading": "Confrontos populares",
+    "directoryHeading": "As {count} comparações",
+    "directorySummary": "Ver as {count} comparações",
+    "directoryHint": "Cada firma dobra os seus links. Continuam no HTML para os motores de busca indexarem cada par.",
     "vsName": "vs {name}"
   },
   "CompareNotFound": {

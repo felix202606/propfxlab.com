@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import { ComparisonsGrid } from "@/components/ComparisonsGrid";
 import { canonicalCompareSlug, COMPARE_EXCLUDED_SLUGS } from "@/lib/compare";
 import { getAllFirms } from "@/lib/data";
 
@@ -64,34 +65,49 @@ export default async function CompareIndexPage({
         </p>
       </header>
 
-      <div className="mt-10 space-y-10">
-        {firms.map((firm) => (
-          <section key={firm.slug} id={firm.slug}>
-            <h2 className="text-lg font-semibold text-zinc-100">
-              <Link
-                href={`/firm/${firm.slug}`}
-                className="transition-colors hover:text-cyan-300"
-              >
+      <ComparisonsGrid
+        firms={firms}
+        showHeader={false}
+        showViewAll={false}
+        embedded
+        popularHeading={t("popularHeading")}
+      />
+
+      <section id="directory" className="mt-14">
+        <h2 className="text-xl font-semibold tracking-tight text-zinc-100">
+          {t("directoryHeading", { count: comparisons })}
+        </h2>
+        <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-500">
+          {t("directoryHint")}
+        </p>
+        <div className="mt-6 space-y-2">
+          {firms.map((firm) => (
+            <details
+              key={firm.slug}
+              id={firm.slug}
+              className="rounded-2xl border border-white/10 bg-white/[0.03] px-4 py-3"
+            >
+              <summary className="cursor-pointer text-sm font-semibold text-zinc-100">
                 {firm.basic.name}
-              </Link>
-            </h2>
-            <ul className="mt-3 flex flex-wrap gap-2">
-              {firms
-                .filter((other) => other.slug !== firm.slug)
-                .map((other) => (
-                  <li key={other.slug}>
-                    <Link
-                      href={`/compare/${canonicalCompareSlug(firm.slug, other.slug)}`}
-                      className="inline-flex rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs text-zinc-300 transition-colors hover:border-cyan-400/40 hover:text-white"
-                    >
-                      {t("vsName", { name: other.basic.name })}
-                    </Link>
-                  </li>
-                ))}
-            </ul>
-          </section>
-        ))}
-      </div>
+              </summary>
+              <ul className="mt-3 flex flex-wrap gap-2 pb-1">
+                {firms
+                  .filter((other) => other.slug !== firm.slug)
+                  .map((other) => (
+                    <li key={other.slug}>
+                      <Link
+                        href={`/compare/${canonicalCompareSlug(firm.slug, other.slug)}`}
+                        className="inline-flex rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs text-zinc-300 transition-colors hover:border-cyan-400/40 hover:text-white"
+                      >
+                        {t("vsName", { name: other.basic.name })}
+                      </Link>
+                    </li>
+                  ))}
+              </ul>
+            </details>
+          ))}
+        </div>
+      </section>
     </article>
   );
 }
