@@ -20,4 +20,11 @@ export const routing = defineRouting({
   // GSC 把 https://www.propfxlab.com/ 当作首页；always 前缀会 307 到 /en。
   // as-needed 让裸路径直接 200 渲染默认语言，避免爬虫把中间层异常记成 5xx。
   localePrefix: "as-needed",
+  // 爬虫同一会话会先抓 /cn/... 再抓裸路径。NEXT_LOCALE cookie / Accept-Language
+  // 会把 /calculator 307 到 /cn/calculator，GSC 记成「网页会自动重定向」不收录。
+  // 语言只认 URL，切换器走显式 locale，不再靠 cookie。
+  localeDetection: false,
+  localeCookie: false,
+  // 中间件 Link 头会把 hreflang 写成 cn/tw；sitemap 已用 zh-CN/zh-TW。
+  alternateLinks: false,
 });
