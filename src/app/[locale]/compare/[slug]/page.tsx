@@ -13,7 +13,7 @@ import {
   extractDrawdownRule,
   canonicalCompareSlug,
   COMPARE_EXCLUDED_SLUGS,
-  listCanonicalCompareSlugs,
+  getPrerenderCompareSlugs,
   maxTraderSharePercent,
   parseCompareSlug,
   pickCompareInsight,
@@ -23,10 +23,12 @@ import { getFirmOffer } from "@/lib/offers";
 import { formatMoney } from "@/lib/payout";
 import type { PropFirm } from "@/lib/schema";
 
+/** Cache on-demand compare URLs as static HTML after the first hit. */
+export const dynamic = "force-static";
 export const dynamicParams = true;
 
 export function generateStaticParams() {
-  return listCanonicalCompareSlugs(getFirmSlugs()).map((slug) => ({ slug }));
+  return getPrerenderCompareSlugs().map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
