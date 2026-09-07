@@ -62,6 +62,15 @@ export function getPopularCompareSlugs(): string[] {
 }
 
 /**
+ * Build-time prerender set. The full C(n,2) matrix stays in the sitemap and is
+ * generated on demand (`dynamicParams`) so each Vercel deploy does not store
+ * ~2,800 HTML snapshots. Popular pairs stay prerendered for the homepage.
+ */
+export function getPrerenderCompareSlugs(): string[] {
+  return getPopularCompareSlugs();
+}
+
+/**
  * Parse `ftmo-vs-fundednext` (or `apex-trader-funding-vs-topstep`) into two
  * known firm slugs. Tries an exact `-vs-` split first, then longest-prefix match
  * so multi-hyphen slugs still resolve.
