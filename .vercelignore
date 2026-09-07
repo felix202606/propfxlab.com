@@ -1,0 +1,7 @@
+# Not needed to build or serve the site. Keeping them off the upload
+# avoids packing scraper tooling and backup JSON into function traces.
+scripts
+data/_firms_backup
+data/telegram_queue.json
+AGENTS.md
+CLAUDE.md
