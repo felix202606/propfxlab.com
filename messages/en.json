@@ -39,20 +39,20 @@
     "loadMoreCta": "Load more",
     "showingCount": "Showing {shown} of {total} firms",
     "noResults": "No firms match your search.",
-    "trustTitle": "Built for funded traders",
-    "trustSubtitle": "Every number is computed from public rules — not marketing copy.",
+    "trustTitle": "How PropFXLab Works: A Transparent Win-Win Model",
+    "trustSubtitle": "We don't charge traders a single penny. Here is how we save you money while keeping our site 100% free.",
     "trust": {
-      "calc": {
-        "title": "Transparent math",
-        "body": "Splits, platform deductions, processor fees and minimum payouts are applied in the same order a real withdrawal would be."
+      "discount": {
+        "title": "We Negotiate Discounts For You",
+        "body": "We partner with top prop firms to secure exclusive promo codes. You save money upfront on every challenge fee."
       },
-      "risk": {
-        "title": "Risk alerts",
-        "body": "Delay warnings and suspended-payout badges surface before you buy a challenge, not after a missed withdrawal."
+      "free": {
+        "title": "How We Stay 100% Free",
+        "body": "Zero hidden subscription fees. When you use our discount codes to sign up, the prop firm pays us a small referral commission—a true win-win."
       },
-      "speed": {
-        "title": "Payout speed audit",
-        "body": "We track advertised processing windows — Instant, 8 hours, 24 hours — so you can compare cash-out speed, not just split percentages."
+      "audit": {
+        "title": "Unbiased & Uncompromising",
+        "body": "Affiliate commissions never buy our favor. If a platform delays payouts or breaks rules, we instantly list them in our Boneyard blacklist."
       }
     },
     "comparisonsTitle": "Popular head-to-heads",

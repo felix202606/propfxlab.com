@@ -39,20 +39,20 @@
     "loadMoreCta": "Carregar mais",
     "showingCount": "Mostrando {shown} de {total} firmas",
     "noResults": "Nenhuma firma corresponde à sua busca.",
-    "trustTitle": "Feito para traders funded",
-    "trustSubtitle": "Cada número é calculado a partir de regras públicas — não de copy de marketing.",
+    "trustTitle": "Como o PropFXLab funciona: um modelo transparente de ganha-ganha",
+    "trustSubtitle": "Não cobramos um centavo dos traders. Veja como economizamos o seu dinheiro e mantemos o site 100% gratuito.",
     "trust": {
-      "calc": {
-        "title": "Cálculo transparente",
-        "body": "Splits, deduções da plataforma, taxas da processadora e saques mínimos são aplicados na mesma ordem de um saque real."
+      "discount": {
+        "title": "Negociamos descontos para você",
+        "body": "Fazemos parceria com as principais prop firms para garantir códigos promo exclusivos. Você economiza na hora em cada taxa de challenge."
       },
-      "risk": {
-        "title": "Alertas de risco",
-        "body": "Avisos de atraso e selos de saque suspenso aparecem antes de você comprar um challenge, não depois de um saque perdido."
+      "free": {
+        "title": "Como continuamos 100% gratuitos",
+        "body": "Zero taxas de assinatura ocultas. Quando você usa nossos códigos de desconto para se inscrever, a prop firm nos paga uma pequena comissão de indicação — um verdadeiro ganha-ganha."
       },
-      "speed": {
-        "title": "Auditoria de velocidade",
-        "body": "Acompanhamos as janelas de processamento anunciadas — Instant, 8 horas, 24 horas — para comparar a velocidade do saque, não só o percentual de split."
+      "audit": {
+        "title": "Imparciais e intransigentes",
+        "body": "Comissões de afiliado nunca compram nosso favor. Se uma plataforma atrasa pagamentos ou quebra regras, a listamos imediatamente na blacklist Boneyard."
       }
     },
     "comparisonsTitle": "Confrontos populares",

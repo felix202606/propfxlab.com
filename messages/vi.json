@@ -39,20 +39,20 @@
     "loadMoreCta": "Xem thêm",
     "showingCount": "Hiển thị {shown}/{total} công ty",
     "noResults": "Không có công ty phù hợp với tìm kiếm.",
-    "trustTitle": "Dành cho trader được cấp vốn",
-    "trustSubtitle": "Mọi con số đều được tính từ quy định công khai — không phải copy marketing.",
+    "trustTitle": "PropFXLab hoạt động thế nào: mô hình Win-Win minh bạch",
+    "trustSubtitle": "Chúng tôi không thu một xu nào từ trader. Đây là cách chúng tôi giúp bạn tiết kiệm tiền và giữ trang web miễn phí 100%.",
     "trust": {
-      "calc": {
-        "title": "Tính toán minh bạch",
-        "body": "Tỷ lệ chia, khoản khấu trừ nền tảng, phí xử lý và mức rút tối thiểu được áp dụng theo đúng thứ tự của một lần rút tiền thật."
+      "discount": {
+        "title": "Chúng tôi đàm phán giảm giá cho bạn",
+        "body": "Chúng tôi hợp tác với các prop firm hàng đầu để có mã promo độc quyền. Bạn tiết kiệm ngay từ phí challenge mỗi lần đăng ký."
       },
-      "risk": {
-        "title": "Cảnh báo rủi ro",
-        "body": "Huy hiệu cảnh báo chậm và tạm ngừng rút tiền xuất hiện trước khi bạn mua challenge, không phải sau khi lỡ một lần rút."
+      "free": {
+        "title": "Chúng tôi giữ 100% miễn phí thế nào",
+        "body": "Không phí đăng ký ẩn. Khi bạn dùng mã giảm giá của chúng tôi để đăng ký, prop firm trả cho chúng tôi hoa hồng giới thiệu nhỏ — win-win thực sự."
       },
-      "speed": {
-        "title": "Kiểm toán tốc độ rút tiền",
-        "body": "Chúng tôi theo dõi khung xử lý được công bố — Instant, 8 giờ, 24 giờ — để so sánh tốc độ nhận tiền, không chỉ phần trăm chia."
+      "audit": {
+        "title": "Khách quan và không thỏa hiệp",
+        "body": "Hoa hồng affiliate không mua được sự thiên vị. Nếu nền tảng chậm payout hoặc phá luật, chúng tôi đưa họ vào blacklist Boneyard ngay lập tức."
       }
     },
     "comparisonsTitle": "Cặp so sánh phổ biến",
