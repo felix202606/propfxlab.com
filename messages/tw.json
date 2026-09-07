@@ -170,11 +170,9 @@
     "metaTitle": "全部 Prop Firm 對比",
     "metaDescription": "覆蓋每一組 Prop Firm 對決：10 萬美元帳戶到手利潤、分成、首次出金等待、出金通道與回撤規則。共 {count} 組。",
     "title": "全部 Prop Firm 對比",
-    "subtitle": "先選兩家平台，或點熱門對決。下面按平台摺疊列出全部 {count} 組真實連結，給 Google / Bing 抓取，不是選完才生成。",
+    "subtitle": "先選兩家平台，或點下面的熱門對決。",
     "popularHeading": "熱門對決",
-    "directoryHeading": "全部 {count} 組對比目錄",
-    "directorySummary": "展開全部 {count} 組對比（供檢索）",
-    "directoryHint": "每家平台摺疊其對比連結。連結寫在頁面 HTML 裡，爬蟲不用點開也能收錄。",
+    "directorySummary": "查看全部 {count} 組對比",
     "vsName": "對 {name}"
   },
   "CompareNotFound": {

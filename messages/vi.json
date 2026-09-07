@@ -170,11 +170,9 @@
     "metaTitle": "Tất cả so sánh Prop Firm",
     "metaDescription": "So sánh từng cặp prop firm: thực nhận trên 100.000 USD, tỷ lệ chia, lần rút đầu, kênh rút và drawdown. {count} cặp.",
     "title": "Tất cả so sánh Prop Firm",
-    "subtitle": "Chọn hai công ty hoặc một cặp phổ biến. Bên dưới, từng hãng gập {count} liên kết thật để Google / Bing thu thập — không phải chọn xong mới sinh ra.",
+    "subtitle": "Chọn hai công ty, hoặc mở một cặp phổ biến.",
     "popularHeading": "Cặp so sánh phổ biến",
-    "directoryHeading": "Mục lục {count} cặp so sánh",
     "directorySummary": "Xem tất cả {count} cặp so sánh",
-    "directoryHint": "Mỗi công ty gập các liên kết so sánh. Liên kết nằm trong HTML, crawler không cần mở cũng lập chỉ mục được.",
     "vsName": "vs {name}"
   },
   "CompareNotFound": {
