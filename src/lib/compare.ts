@@ -18,15 +18,45 @@ export type CompareInsight = {
   rightReason: CompareReasonKey;
 };
 
+/** Closed / redirected profiles must not mint compare URLs. */
+export const COMPARE_EXCLUDED_SLUGS = new Set(["myfundedfx"]);
+
 export function buildCompareSlug(leftSlug: string, rightSlug: string): string {
   return `${leftSlug}${COMPARE_DELIMITER}${rightSlug}`;
+}
+
+/** One indexable slug per unordered pair: `alpha-capital-vs-ftmo`, never both orders. */
+export function canonicalCompareSlug(leftSlug: string, rightSlug: string): string {
+  const [left, right] = [leftSlug, rightSlug].sort((a, b) =>
+    a.localeCompare(b, "en"),
+  );
+  return buildCompareSlug(left, right);
+}
+
+export function compareableSlugs(slugs: readonly string[]): string[] {
+  return [...new Set(slugs.filter((slug) => !COMPARE_EXCLUDED_SLUGS.has(slug)))].sort(
+    (a, b) => a.localeCompare(b, "en"),
+  );
+}
+
+export function listCanonicalCompareSlugs(slugs: readonly string[]): string[] {
+  const sorted = compareableSlugs(slugs);
+  const pairs: string[] = [];
+  for (let i = 0; i < sorted.length; i += 1) {
+    for (let j = i + 1; j < sorted.length; j += 1) {
+      pairs.push(buildCompareSlug(sorted[i], sorted[j]));
+    }
+  }
+  return pairs;
 }
 
 export function getPopularCompareSlugs(): string[] {
   const slugs = new Set<string>();
   for (const [left, right] of POPULAR_COMPARISONS) {
-    slugs.add(buildCompareSlug(left, right));
-    slugs.add(buildCompareSlug(right, left));
+    if (COMPARE_EXCLUDED_SLUGS.has(left) || COMPARE_EXCLUDED_SLUGS.has(right)) {
+      continue;
+    }
+    slugs.add(canonicalCompareSlug(left, right));
   }
   return [...slugs];
 }

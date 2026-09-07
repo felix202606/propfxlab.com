@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { PayoutCalculator } from "@/components/PayoutCalculator";
 import { WithdrawalChannels } from "@/components/WithdrawalChannels";
 import { ProsConsBox } from "@/components/ProsConsBox";
 import { WarningBox } from "@/components/WarningBox";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { FirmLogo } from "@/components/FirmLogo";
+import { canonicalCompareSlug, COMPARE_EXCLUDED_SLUGS } from "@/lib/compare";
 import { getAllFirms, getFirmBySlug, getFirmSlugs } from "@/lib/data";
 import { formatMoney } from "@/lib/payout";
 import { toFaqJsonLd } from "@/lib/schema";
@@ -162,6 +164,30 @@ export default async function FirmPage({
       <div className="mt-14">
         <FaqAccordion faqs={firm.faqs} />
       </div>
+
+      <section className="mt-14">
+        <h2 className="text-lg font-semibold text-zinc-100">
+          {t("compareHeading", { name: firm.basic.name })}
+        </h2>
+        <ul className="mt-3 flex flex-wrap gap-2">
+          {firms
+            .filter(
+              (other) =>
+                other.slug !== firm.slug &&
+                !COMPARE_EXCLUDED_SLUGS.has(other.slug),
+            )
+            .map((other) => (
+              <li key={other.slug}>
+                <Link
+                  href={`/compare/${canonicalCompareSlug(firm.slug, other.slug)}`}
+                  className="inline-flex rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs text-zinc-300 transition-colors hover:border-cyan-400/40 hover:text-white"
+                >
+                  {t("compareWith", { name: other.basic.name })}
+                </Link>
+              </li>
+            ))}
+        </ul>
+      </section>
     </article>
   );
 }

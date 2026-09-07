@@ -62,6 +62,7 @@
     "selectFirmB": "Select Firm B",
     "compareNow": "Compare Now",
     "viewComparison": "View comparison",
+    "viewAllComparisons": "See all {count} comparisons",
     "sameFirmError": "Pick two different firms to compare.",
     "faqTitle": "Frequently asked questions",
     "faqs": [
@@ -133,7 +134,9 @@
     "prosHeading": "Pros",
     "consHeading": "Cons",
     "warningHeading": "Rules & Restrictions to Watch",
-    "warningIntro": "All accounts trade simulated capital, and rules can change without notice. Always confirm the current terms directly on the firm's official website before purchasing or requesting a withdrawal."
+    "warningIntro": "All accounts trade simulated capital, and rules can change without notice. Always confirm the current terms directly on the firm's official website before purchasing or requesting a withdrawal.",
+    "compareHeading": "Compare {name}",
+    "compareWith": "vs {name}"
   },
   "ComparePage": {
     "metaTitle": "{left} vs {right} — Prop Firm Comparison",
@@ -160,7 +163,15 @@
     "reasonMoreChannels": "more withdrawal channels",
     "reasonHigherTakeHome": "higher estimated take-home",
     "readProfile": "Read {name} review",
+    "relatedHeading": "More {name} comparisons",
     "backToCompare": "All comparisons"
+  },
+  "CompareIndex": {
+    "metaTitle": "All Prop Firm Comparisons",
+    "metaDescription": "Head-to-head payout comparisons for every prop firm pair: take-home on $100k, profit split, first payout wait, channels and drawdown. {count} matchups.",
+    "title": "All prop firm comparisons",
+    "subtitle": "{count} head-to-heads across {firms} firms — take-home, split, first payout and drawdown, side by side.",
+    "vsName": "vs {name}"
   },
   "CompareNotFound": {
     "title": "We couldn't find this comparison",

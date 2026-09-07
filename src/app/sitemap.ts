@@ -1,7 +1,11 @@
 import { readdirSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import type { MetadataRoute } from "next";
-import { getPopularCompareSlugs } from "@/lib/compare";
+import {
+  COMPARE_EXCLUDED_SLUGS,
+  compareableSlugs,
+  listCanonicalCompareSlugs,
+} from "@/lib/compare";
 import { localeMeta, routing } from "@/i18n/routing";
 
 const BASE_URL = "https://www.propfxlab.com";
@@ -9,7 +13,14 @@ const FIRMS_DIR = path.join(process.cwd(), "data", "firms");
 const NEWS_DIR = path.join(process.cwd(), "data", "news");
 
 /** 与语言无关的固定路径，会在每种语言前缀下各生成一条 URL。 */
-const STATIC_PATHS = ["", "/calculator", "/news", "/defunct", "/faq"] as const;
+const STATIC_PATHS = [
+  "",
+  "/calculator",
+  "/compare",
+  "/news",
+  "/defunct",
+  "/faq",
+] as const;
 
 type FirmEntry = { slug: string; lastModified: Date };
 
@@ -99,6 +110,7 @@ function localizedEntries(
   pathname: string,
   lastModified: Date,
   priority: number,
+  changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] = "weekly",
 ): MetadataRoute.Sitemap {
   const languages: Record<string, string> = {
     "x-default": localeUrl(routing.defaultLocale, pathname),
@@ -110,16 +122,21 @@ function localizedEntries(
   return routing.locales.map((locale) => ({
     url: localeUrl(locale, pathname),
     lastModified,
-    changeFrequency: "weekly",
+    changeFrequency,
     priority,
     alternates: { languages },
   }));
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const firms = readFirmEntries();
+  const firms = readFirmEntries().filter(
+    (firm) => !COMPARE_EXCLUDED_SLUGS.has(firm.slug),
+  );
   const news = readNewsEntries();
   const now = new Date();
+  const compareSlugs = listCanonicalCompareSlugs(
+    compareableSlugs(firms.map((firm) => firm.slug)),
+  );
 
   return [
     ...STATIC_PATHS.flatMap((pathname) =>
@@ -128,21 +145,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         now,
         pathname === ""
           ? 1
-          : pathname === "/news" || pathname === "/faq"
+          : pathname === "/compare" ||
+              pathname === "/news" ||
+              pathname === "/faq"
             ? 0.7
             : pathname === "/defunct"
               ? 0.6
               : 0.8,
+        pathname === "/news" ? "daily" : "weekly",
       ),
     ),
     ...firms.flatMap((firm) =>
       localizedEntries(`/firm/${firm.slug}`, firm.lastModified, 0.7),
     ),
-    ...getPopularCompareSlugs().flatMap((slug) =>
+    ...compareSlugs.flatMap((slug) =>
       localizedEntries(`/compare/${slug}`, now, 0.65),
     ),
     ...news.flatMap((article) =>
-      localizedEntries(`/news/${article.slug}`, article.lastModified, 0.6),
+      localizedEntries(`/news/${article.slug}`, article.lastModified, 0.6, "daily"),
     ),
   ];
 }

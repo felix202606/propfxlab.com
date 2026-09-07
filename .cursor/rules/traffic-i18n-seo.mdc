@@ -1,0 +1,39 @@
+---
+description: 硬锁：任何改动必须七语对齐且可被 Google/Bing 收录。流量优先，违反则不能交付。
+alwaysApply: true
+---
+
+# HARD LOCK: 七语 + 收录（不可关掉）
+
+流量是核心。功能再好，Google / Bing 不收录等于零。本规则**写死**，不能为了图快而跳过。
+
+改任何页面、文案、路由、中间件、sitemap、新闻、FAQ、对比之前：先保证爬虫 200、七语齐、能进索引。做不到就不要交付。
+
+## 禁止事项
+
+- 禁止只改 `en.json` / `cn.json`。必须同步 `en es cn tw th vi pt`，key 集合一致。
+- 禁止改回 `localeDetection: true` 或重新打开 `NEXT_LOCALE` cookie。
+- 禁止让 sitemap 里的 URL 互跳（`/calculator` 与 `/cn/calculator` 必须各自 200）。
+- 禁止新路由不进 `sitemap.ts`、不写七语 `generateMetadata`、没有内链。
+- 禁止中间件输出 `hreflang="cn|tw"`。只用 sitemap 的 `zh-CN` / `zh-TW`，英文裸路径为 `x-default`。
+
+## 必须保持
+
+- `localePrefix: "as-needed"`、`localeDetection: false`、`localeCookie: false`、`alternateLinks: false`
+- 对比：C(n,2) 全量无序对（约 29 家 → 406 页）× 7 语；规范 slug 字母序，反序 308
+- FAQ `/faq` × 7；新闻每篇 `/news/[slug]` × 7（daily）；导航/页脚链到 `/compare` `/faq` `/news`
+
+## 交付前自检
+
+1. 七份 `messages/*.json` 新 key 齐全  
+2. 新 URL 在 sitemap 有七语 + hreflang  
+3. 用无 cookie 请求打该 URL，期望 200 不是 307  
+4. 至少一条站内链接指向它  
+
+```ts
+// ❌ 只写英文或不进 sitemap
+t("compareNow")
+
+// ✅ 七语同 key，sitemap 用 localeUrl()
+localizedEntries(`/compare/${slug}`, now, 0.65)
+```

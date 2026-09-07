@@ -62,6 +62,7 @@
     "selectFirmB": "選擇平台 B",
     "compareNow": "立即對比",
     "viewComparison": "查看對比",
+    "viewAllComparisons": "查看全部 {count} 組對比",
     "sameFirmError": "請選擇兩家不同的平台再對比。",
     "faqTitle": "常見問題",
     "faqs": [
@@ -133,7 +134,9 @@
     "prosHeading": "優點",
     "consHeading": "缺點",
     "warningHeading": "禁忌規則與風險提醒",
-    "warningIntro": "所有帳戶均為模擬資金交易，規則可能隨時調整。購買或申請出金前，請務必以公司官網當前條款為準。"
+    "warningIntro": "所有帳戶均為模擬資金交易，規則可能隨時調整。購買或申請出金前，請務必以公司官網當前條款為準。",
+    "compareHeading": "對比 {name}",
+    "compareWith": "對 {name}"
   },
   "ComparePage": {
     "metaTitle": "{left} vs {right} — Prop Firm 對比",
@@ -160,7 +163,15 @@
     "reasonMoreChannels": "更多出金通道",
     "reasonHigherTakeHome": "更高預估到手",
     "readProfile": "查看 {name} 評測",
+    "relatedHeading": "更多 {name} 對比",
     "backToCompare": "全部對比"
+  },
+  "CompareIndex": {
+    "metaTitle": "全部 Prop Firm 對比",
+    "metaDescription": "覆蓋每一組 Prop Firm 對決：10 萬美元帳戶到手利潤、分成、首次出金等待、出金通道與回撤規則。共 {count} 組。",
+    "title": "全部 Prop Firm 對比",
+    "subtitle": "{firms} 家平台、{count} 組對決，並排對照到手利潤、分成、首次出金與回撤規則。",
+    "vsName": "對 {name}"
   },
   "CompareNotFound": {
     "title": "找不到這次對比",
