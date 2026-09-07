@@ -21,6 +21,7 @@ alwaysApply: true
 
 - `localePrefix: "as-needed"`、`localeDetection: false`、`localeCookie: false`、`alternateLinks: false`
 - 对比：C(n,2) 全量无序对（约 29 家 → 406 页）× 7 语；规范 slug 字母序，反序 308
+- `/compare` 必须把全部对比 URL 写成可抓取的 `<a href>`（按平台 `<details>` 折叠可以）。禁止只留下拉、选完才跳转、页面上没有这 406 条内链。
 - FAQ `/faq` × 7；新闻每篇 `/news/[slug]` × 7（daily）；导航/页脚链到 `/compare` `/faq` `/news`
 
 ## 交付前自检
