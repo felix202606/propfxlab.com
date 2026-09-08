@@ -6,9 +6,11 @@ import { useTranslations } from "next-intl";
 export function PromoCodeCopy({
   code,
   href,
+  compact = false,
 }: {
   code: string;
   href: string;
+  compact?: boolean;
 }) {
   const t = useTranslations("FirmCard");
   const [copied, setCopied] = useState(false);
@@ -26,18 +28,30 @@ export function PromoCodeCopy({
   }
 
   return (
-    <div className="flex items-center gap-2 rounded-xl border border-dashed border-emerald-400/25 bg-emerald-400/[0.06] px-3 py-2 shadow-[inset_0_0_0_1px_rgba(16,185,129,0.08)]">
-      <span className="text-[10px] font-medium uppercase tracking-[0.16em] text-zinc-500">
-        {t("promoLabel")}
-      </span>
-      <code className="flex-1 font-mono text-sm font-semibold tracking-wide text-emerald-300">
+    <div
+      className={`flex min-w-0 items-center gap-1.5 border border-dashed border-emerald-400/25 bg-emerald-400/[0.06] shadow-[inset_0_0_0_1px_rgba(16,185,129,0.08)] ${
+        compact ? "rounded-md px-1.5 py-0.5" : "rounded-xl px-3 py-2"
+      }`}
+    >
+      {compact ? null : (
+        <span className="text-[10px] font-medium uppercase tracking-[0.16em] text-zinc-500">
+          {t("promoLabel")}
+        </span>
+      )}
+      <code
+        className={`min-w-0 truncate font-mono font-semibold tracking-wide text-emerald-300 ${
+          compact ? "text-[11px]" : "flex-1 text-sm"
+        }`}
+      >
         {code}
       </code>
       <button
         type="button"
         onClick={copyCode}
         aria-live="polite"
-        className={`rounded-lg px-2.5 py-1 text-[11px] font-semibold tracking-wide transition-all ${
+        className={`shrink-0 rounded-md text-[10px] font-semibold tracking-wide transition-all ${
+          compact ? "px-1.5 py-px" : "px-2 py-0.5"
+        } ${
           copied
             ? "border border-emerald-400/40 bg-emerald-400/20 text-emerald-200"
             : "border border-white/10 bg-zinc-950/80 text-zinc-200 hover:border-emerald-400/40 hover:text-emerald-200"
