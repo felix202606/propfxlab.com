@@ -17,6 +17,7 @@ from __future__ import annotations
 """
 
 import argparse
+import base64
 import hashlib
 import json
 import os
@@ -103,11 +104,15 @@ LOCALE_FLAGS = {
     "pt": "🇵🇹",
 }
 
-# 社媒发布配置：Telegram 每 6 小时最多 1 条；多余进持久队列
+# 社媒发布配置：UTC 00/06/12/18 各最多 1 条（对应 NZ 12/18/00/06）
+# GitHub cron 常延迟数小时，所以用「档位」而不是「距上次满 6 小时」。
 SOCIAL_POST_INTERVAL_HOURS = 6
 LAST_POST_TIME_FILE = ROOT / ".last_social_post_time"
 TELEGRAM_QUEUE_FILE = ROOT / "data" / "telegram_queue.json"
+TELEGRAM_STATE_BRANCH = "chore/telegram-state"
+TELEGRAM_QUEUE_REL = "data/telegram_queue.json"
 PROPFXLAB_SITE_URL = "https://www.propfxlab.com"
+_TELEGRAM_QUEUE_SHA: Optional[str] = None
 
 # 用户提供的源里，部分是 RSS 目录页或旧路径；这里用实际可解析的 XML。
 RSS_FEEDS = [
@@ -829,8 +834,175 @@ def notify_indexnow(slug: str) -> None:
         print(f"  IndexNow 推送 {slug} 失败：{error}")
 
 
+def telegram_slot_start(when: datetime) -> datetime:
+    """UTC 上 6 小时一档：00:00 / 06:00 / 12:00 / 18:00。"""
+    utc = when.astimezone(timezone.utc)
+    hour = (utc.hour // SOCIAL_POST_INTERVAL_HOURS) * SOCIAL_POST_INTERVAL_HOURS
+    return utc.replace(hour=hour, minute=0, second=0, microsecond=0)
+
+
+def _github_repo_token() -> Optional[tuple[str, str]]:
+    repo = os.environ.get("GITHUB_REPOSITORY", "").strip()
+    token = (os.environ.get("GH_TOKEN") or os.environ.get("GITHUB_TOKEN") or "").strip()
+    if not repo or not token or requests is None:
+        return None
+    return repo, token
+
+
+def _github_headers(token: str) -> dict[str, str]:
+    return {
+        "Authorization": f"Bearer {token}",
+        "Accept": "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+    }
+
+
+def _ensure_telegram_state_branch(repo: str, token: str) -> None:
+    headers = _github_headers(token)
+    ref_url = f"https://api.github.com/repos/{repo}/git/ref/heads/{TELEGRAM_STATE_BRANCH}"
+    response = requests.get(ref_url, headers=headers, timeout=REQUEST_TIMEOUT_S)
+    if response.status_code == 200:
+        return
+    if response.status_code != 404:
+        print(f"  Warning: 读取 {TELEGRAM_STATE_BRANCH} 失败：HTTP {response.status_code}")
+        return
+    main_ref = requests.get(
+        f"https://api.github.com/repos/{repo}/git/ref/heads/main",
+        headers=headers,
+        timeout=REQUEST_TIMEOUT_S,
+    )
+    if main_ref.status_code != 200:
+        print(f"  Warning: 无法从 main 创建 {TELEGRAM_STATE_BRANCH}：HTTP {main_ref.status_code}")
+        return
+    sha = str(main_ref.json().get("object", {}).get("sha") or "")
+    if not sha:
+        return
+    created = requests.post(
+        f"https://api.github.com/repos/{repo}/git/refs",
+        headers=headers,
+        json={"ref": f"refs/heads/{TELEGRAM_STATE_BRANCH}", "sha": sha},
+        timeout=REQUEST_TIMEOUT_S,
+    )
+    if created.status_code not in {200, 201}:
+        print(f"  Warning: 创建 {TELEGRAM_STATE_BRANCH} 失败：HTTP {created.status_code} {created.text[:200]}")
+        return
+    print(f"  已创建分支 {TELEGRAM_STATE_BRANCH} 用于持久化 Telegram 队列")
+
+
+def pull_telegram_queue_from_github() -> None:
+    """CI 中从不受保护的 state 分支拉取队列，避免等 main 上的队列 PR。"""
+    global _TELEGRAM_QUEUE_SHA
+    auth = _github_repo_token()
+    if not auth:
+        return
+    repo, token = auth
+    try:
+        _ensure_telegram_state_branch(repo, token)
+        response = requests.get(
+            f"https://api.github.com/repos/{repo}/contents/{TELEGRAM_QUEUE_REL}",
+            headers=_github_headers(token),
+            params={"ref": TELEGRAM_STATE_BRANCH},
+            timeout=REQUEST_TIMEOUT_S,
+        )
+        if response.status_code == 404:
+            _TELEGRAM_QUEUE_SHA = None
+            return
+        response.raise_for_status()
+        payload = response.json()
+        _TELEGRAM_QUEUE_SHA = str(payload.get("sha") or "") or None
+        raw = str(payload.get("content") or "").replace("\n", "")
+        if not raw:
+            return
+        TELEGRAM_QUEUE_FILE.parent.mkdir(parents=True, exist_ok=True)
+        TELEGRAM_QUEUE_FILE.write_text(base64.b64decode(raw).decode("utf-8"), encoding="utf-8")
+    except Exception as error:
+        print(f"  Warning: 拉取 Telegram 队列失败：{error}")
+
+
+def _merge_telegram_queues(local: dict[str, Any], remote: dict[str, Any]) -> dict[str, Any]:
+    slugs: list[str] = []
+    seen: set[str] = set()
+    for source in (remote, local):
+        raw_slugs = source.get("slugs") if isinstance(source, dict) else None
+        if not isinstance(raw_slugs, list):
+            continue
+        for slug in raw_slugs:
+            cleaned = str(slug).strip()
+            if cleaned and cleaned not in seen:
+                slugs.append(cleaned)
+                seen.add(cleaned)
+    local_ts = parse_queue_timestamp(local.get("lastPostedAt") if isinstance(local, dict) else None)
+    remote_ts = parse_queue_timestamp(remote.get("lastPostedAt") if isinstance(remote, dict) else None)
+    latest = max((stamp for stamp in (local_ts, remote_ts) if stamp is not None), default=None)
+    return {
+        "slugs": slugs,
+        "lastPostedAt": latest.isoformat() if latest else None,
+    }
+
+
+def push_telegram_queue_to_github() -> None:
+    """把队列写到 chore/telegram-state，不走受保护的 main。"""
+    global _TELEGRAM_QUEUE_SHA
+    auth = _github_repo_token()
+    if not auth or not TELEGRAM_QUEUE_FILE.is_file():
+        return
+    repo, token = auth
+    headers = _github_headers(token)
+    try:
+        _ensure_telegram_state_branch(repo, token)
+        body = TELEGRAM_QUEUE_FILE.read_bytes()
+        encoded = base64.b64encode(body).decode("ascii")
+        payload: dict[str, Any] = {
+            "message": "chore(news): update telegram queue",
+            "content": encoded,
+            "branch": TELEGRAM_STATE_BRANCH,
+        }
+        if _TELEGRAM_QUEUE_SHA:
+            payload["sha"] = _TELEGRAM_QUEUE_SHA
+        response = requests.put(
+            f"https://api.github.com/repos/{repo}/contents/{TELEGRAM_QUEUE_REL}",
+            headers=headers,
+            json=payload,
+            timeout=REQUEST_TIMEOUT_S,
+        )
+        if response.status_code == 409:
+            current = requests.get(
+                f"https://api.github.com/repos/{repo}/contents/{TELEGRAM_QUEUE_REL}",
+                headers=headers,
+                params={"ref": TELEGRAM_STATE_BRANCH},
+                timeout=REQUEST_TIMEOUT_S,
+            )
+            current.raise_for_status()
+            remote_payload = current.json()
+            _TELEGRAM_QUEUE_SHA = str(remote_payload.get("sha") or "") or None
+            remote_raw = str(remote_payload.get("content") or "").replace("\n", "")
+            remote_queue = json.loads(base64.b64decode(remote_raw).decode("utf-8")) if remote_raw else {}
+            local_queue = json.loads(body.decode("utf-8"))
+            merged = _merge_telegram_queues(local_queue, remote_queue)
+            TELEGRAM_QUEUE_FILE.write_text(
+                json.dumps(merged, ensure_ascii=False, indent=2) + "\n",
+                encoding="utf-8",
+            )
+            payload["content"] = base64.b64encode(TELEGRAM_QUEUE_FILE.read_bytes()).decode("ascii")
+            if _TELEGRAM_QUEUE_SHA:
+                payload["sha"] = _TELEGRAM_QUEUE_SHA
+            response = requests.put(
+                f"https://api.github.com/repos/{repo}/contents/{TELEGRAM_QUEUE_REL}",
+                headers=headers,
+                json=payload,
+                timeout=REQUEST_TIMEOUT_S,
+            )
+        if response.status_code not in {200, 201}:
+            print(f"  Warning: 保存 Telegram 队列失败：HTTP {response.status_code} {response.text[:200]}")
+            return
+        _TELEGRAM_QUEUE_SHA = str(response.json().get("content", {}).get("sha") or "") or _TELEGRAM_QUEUE_SHA
+        print(f"  Telegram 队列已写入 {TELEGRAM_STATE_BRANCH}")
+    except Exception as error:
+        print(f"  Warning: 保存 Telegram 队列失败：{error}")
+
+
 def check_social_post_interval(last_posted_at: Optional[datetime] = None) -> bool:
-    """检查是否已过发帖间隔时间。返回 True 表示可以发帖。"""
+    """当前 UTC 6 小时档尚未发过则可以发帖。"""
     if last_posted_at is None:
         if LAST_POST_TIME_FILE.is_file():
             try:
@@ -846,12 +1018,12 @@ def check_social_post_interval(last_posted_at: Optional[datetime] = None) -> boo
     if last_posted_at.tzinfo is None:
         last_posted_at = last_posted_at.replace(tzinfo=timezone.utc)
 
-    elapsed = datetime.now(timezone.utc) - last_posted_at
-    if elapsed.total_seconds() < SOCIAL_POST_INTERVAL_HOURS * 3600:
-        remaining_hours = (SOCIAL_POST_INTERVAL_HOURS * 3600 - elapsed.total_seconds()) / 3600
+    last_slot = telegram_slot_start(last_posted_at)
+    now_slot = telegram_slot_start(datetime.now(timezone.utc))
+    if last_slot >= now_slot:
         print(
-            f"  ⏰ 距离上次社媒发帖未满 {SOCIAL_POST_INTERVAL_HOURS} 小时"
-            f"（还需等待 {remaining_hours:.1f} 小时），本次跳过发帖"
+            f"  ⏰ {now_slot.strftime('%Y-%m-%d %H:%M')} UTC 档已发过"
+            f"（上次 {last_posted_at.isoformat()}），跳过"
         )
         return False
     return True
@@ -868,6 +1040,7 @@ def update_last_post_time(when: Optional[datetime] = None) -> None:
 
 def load_telegram_queue() -> dict[str, Any]:
     """读取持久化 Telegram 队列。"""
+    pull_telegram_queue_from_github()
     if not TELEGRAM_QUEUE_FILE.is_file():
         return {"slugs": [], "lastPostedAt": None}
     try:
@@ -898,6 +1071,7 @@ def save_telegram_queue(slugs: list[str], last_posted_at: Optional[str]) -> None
         json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
         encoding="utf-8",
     )
+    push_telegram_queue_to_github()
 
 
 def parse_queue_timestamp(raw: Any) -> Optional[datetime]:
@@ -1002,7 +1176,7 @@ def enqueue_telegram_slugs(slugs: list[str]) -> list[str]:
 
 def flush_telegram_queue(force: bool = False) -> bool:
     """
-    从队列发至多 1 条。默认遵守 6 小时间隔。
+    从队列发至多 1 条。默认每个 UTC 6 小时档最多 1 条。
     返回 True 表示队列文件有变更（发帖或清理失效 slug）。
     """
     queue = load_telegram_queue()
@@ -1276,7 +1450,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--flush-telegram",
         action="store_true",
-        help="从队列发至多 1 条（默认遵守 6 小时间隔）",
+        help="从队列发至多 1 条（默认每个 UTC 6 小时档最多 1 条）",
     )
     parser.add_argument(
         "--force-flush-telegram",

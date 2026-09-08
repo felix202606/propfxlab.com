@@ -5,7 +5,6 @@ on:
     branches: [main]
     paths:
       - "data/news/**"
-  # Manual / recovery (GITHUB_TOKEN merges do not chain into this workflow)
   workflow_dispatch:
     inputs:
       slugs:
@@ -23,8 +22,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      pull-requests: write
-      actions: write
     steps:
       - name: Check out repository
         uses: actions/checkout@v7
@@ -39,11 +36,11 @@ jobs:
       - name: Install Python dependencies
         run: pip install -r scripts/requirements.txt
 
-      - name: IndexNow + enqueue Telegram (max 1 flush / 6h)
-        id: social
+      - name: IndexNow + enqueue Telegram
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           INPUT_SLUGS: ${{ inputs.slugs }}
         run: |
           set -euo pipefail
@@ -60,12 +57,10 @@ jobs:
 
           if [ "${#slugs[@]}" -eq 0 ]; then
             echo "No news slugs to publish"
-            echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
           echo "Articles: ${slugs[*]}"
-          # Brief window for Vercel to pick up main (skip long wait on manual dispatch)
           if [ "${{ github.event_name }}" = "push" ]; then
             sleep 45
           else
@@ -73,49 +68,4 @@ jobs:
           fi
 
           python -u scripts/news_scraper.py --notify-indexnow "${slugs[@]}"
-          # 入队后最多发 1 条；其余等 6 小时定时 flush
-          python -u scripts/news_scraper.py --post-telegram "${slugs[@]}"
-
-          if git diff --quiet -- data/telegram_queue.json; then
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Persist Telegram queue
-        if: steps.social.outputs.changed == 'true'
-        id: cpr
-        uses: peter-evans/create-pull-request@v7
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "chore(news): update telegram queue"
-          branch: chore/telegram-queue
-          delete-branch: true
-          title: "chore(news): update telegram queue"
-          body: |
-            Persist Telegram post queue / lastPostedAt after news merge.
-            Interval: 1 post per 6 hours.
-          add-paths: |
-            data/telegram_queue.json
-
-      - name: Approve pending Zod-check + enable auto-merge
-        if: steps.cpr.outputs.pull-request-number != ''
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
-        run: |
-          set -euo pipefail
-          # GITHUB_TOKEN-created PRs often leave required checks in action_required
-          for i in 1 2 3 4 5; do
-            mapfile -t pending < <(
-              gh api "repos/${GITHUB_REPOSITORY}/actions/runs?event=pull_request&status=completed&per_page=20" \
-                --jq '.workflow_runs[] | select(.conclusion=="action_required") | select(.head_branch=="chore/telegram-queue") | .id'
-            )
-            for run_id in "${pending[@]:-}"; do
-              [ -n "$run_id" ] || continue
-              gh api -X POST "repos/${GITHUB_REPOSITORY}/actions/runs/${run_id}/approve" || true
-            done
-            sleep 5
-          done
-          gh pr merge "$PR_NUMBER" --merge --auto || \
-            echo "Auto-merge unavailable; PR left open: ${{ steps.cpr.outputs.pull-request-url }}"
+          python -u scripts/news_scraper.py --enqueue-telegram "${slugs[@]}"

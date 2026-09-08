@@ -2,12 +2,13 @@ name: Flush Telegram queue
 
 on:
   schedule:
-    # Every 6 hours — at most one Telegram post per run
-    - cron: "0 */6 * * *"
+    # GitHub cron is often hours late. Run often; the script posts at most
+    # once per UTC 6-hour slot (00/06/12/18 = NZ 12/18/00/06).
+    - cron: "*/15 * * * *"
   workflow_dispatch:
 
 concurrency:
-  group: telegram-flush
+  group: telegram-queue
   cancel-in-progress: false
 
 jobs:
@@ -16,8 +17,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
-      pull-requests: write
-      actions: write
     steps:
       - name: Check out repository
         uses: actions/checkout@v7
@@ -33,52 +32,8 @@ jobs:
         run: pip install -r scripts/requirements.txt
 
       - name: Flush at most one queued post
-        id: flush
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: |
-          python -u scripts/news_scraper.py --flush-telegram
-          if git diff --quiet -- data/telegram_queue.json; then
-            echo "changed=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "changed=true" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Persist Telegram queue
-        if: steps.flush.outputs.changed == 'true'
-        id: cpr
-        uses: peter-evans/create-pull-request@v7
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "chore(news): flush telegram queue"
-          branch: chore/telegram-queue
-          delete-branch: true
-          title: "chore(news): flush telegram queue"
-          body: |
-            Automated Telegram flush (max 1 post / 6 hours).
-          add-paths: |
-            data/telegram_queue.json
-
-      - name: Approve Zod-check + auto-merge queue PR
-        if: steps.cpr.outputs.pull-request-number != ''
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
-        run: |
-          set -euo pipefail
-          for i in 1 2 3 4 5 6; do
-            mapfile -t pending < <(
-              gh api "repos/${GITHUB_REPOSITORY}/actions/runs?branch=chore/telegram-queue&per_page=10" \
-                --jq '.workflow_runs[] | select(.conclusion=="action_required" or .status=="waiting") | .id'
-            )
-            for run_id in "${pending[@]:-}"; do
-              [ -n "${run_id:-}" ] || continue
-              gh api -X POST "repos/${GITHUB_REPOSITORY}/actions/runs/${run_id}/approve" || true
-            done
-            gh pr merge "$PR_NUMBER" --merge --auto || true
-            state=$(gh pr view "$PR_NUMBER" --json state --jq '.state')
-            [ "$state" = "MERGED" ] && exit 0
-            sleep 10
-          done
-          echo "Auto-merge unavailable; PR left open: ${{ steps.cpr.outputs.pull-request-url }}"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python -u scripts/news_scraper.py --flush-telegram
