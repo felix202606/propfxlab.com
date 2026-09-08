@@ -40,19 +40,12 @@ function StatusBadge({ status }: { status: PlatformStatus }) {
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-medium tracking-wide backdrop-blur-sm ${style.badgeClasses}`}
+      className={`inline-flex shrink-0 items-center gap-1 rounded-full border px-1.5 py-px text-[10px] font-medium tracking-wide ${style.badgeClasses}`}
     >
       {style.icon ? (
         <span aria-hidden>{style.icon}</span>
       ) : (
-        <span className="relative flex h-2 w-2">
-          <span
-            className={`absolute inline-flex h-full w-full animate-ping rounded-full opacity-75 ${style.dotClasses}`}
-          />
-          <span
-            className={`relative inline-flex h-2 w-2 rounded-full ${style.dotClasses}`}
-          />
-        </span>
+        <span className={`h-1.5 w-1.5 rounded-full ${style.dotClasses}`} />
       )}
       {t(STATUS_LABEL_KEY[status])}
     </span>
@@ -70,72 +63,66 @@ export function FirmCard({ firm, rank, netPayout, currency }: FirmCardProps) {
   const t = useTranslations("FirmCard");
   const offer = getFirmOffer(firm.slug, firm.basic.website);
   const payoutCurrency = currency ?? firm.calculator.currency;
-  const channelTags = getCardChannelTags(firm.withdrawal.channels);
+  const channelTags = getCardChannelTags(firm.withdrawal.channels).slice(0, 2);
   const firstPayoutDays = firm.withdrawal.payoutCycle.firstPayoutMinDays;
 
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-zinc-900 to-black p-5 shadow-[0_0_0_1px_rgba(255,255,255,0.04)] transition-all duration-300 hover:-translate-y-0.5 hover:border-emerald-400/30 hover:shadow-[0_0_28px_-8px_rgba(16,185,129,0.4)]">
-      <div className="pointer-events-none absolute inset-x-0 -top-24 h-40 bg-[radial-gradient(closest-side,rgba(16,185,129,0.16),transparent)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-
-      <div className="relative flex items-start gap-3">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-white/10 bg-gradient-to-b from-zinc-900 to-black p-2.5 shadow-[0_0_0_1px_rgba(255,255,255,0.04)] transition-colors hover:border-emerald-400/30">
+      <div className="relative flex items-center gap-2">
         <FirmLogo
           name={firm.basic.name}
           src={firm.basic.logo.src}
           alt={firm.basic.logo.alt}
-          size="lg"
+          size="sm"
         />
-        <div className="min-w-0 flex-1">
-          <div className="flex flex-wrap items-center gap-2">
-            {rank != null ? (
-              <span className="font-mono text-[11px] text-zinc-500">#{rank}</span>
-            ) : null}
-            <h3 className="truncate font-semibold tracking-tight text-zinc-50">
-              {firm.basic.name}
-            </h3>
-          </div>
-          <div className="mt-1.5">
-            <StatusBadge status={firm.status} />
-          </div>
+        <div className="flex min-w-0 flex-1 items-center gap-1.5">
+          {rank != null ? (
+            <span className="shrink-0 font-mono text-[10px] text-zinc-500">
+              #{rank}
+            </span>
+          ) : null}
+          <h3 className="truncate text-xs font-semibold tracking-tight text-zinc-50">
+            {firm.basic.name}
+          </h3>
         </div>
+        <StatusBadge status={firm.status} />
       </div>
 
-      <dl className="relative mt-5 grid grid-cols-2 gap-3">
-        <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3">
-          <dt className="text-[11px] uppercase tracking-wide text-zinc-500">
+      <dl className="relative mt-2 grid grid-cols-3 gap-1.5">
+        <div>
+          <dt className="truncate text-[9px] leading-3 text-zinc-500">
             {t("netPayoutLabel")}
           </dt>
-          <dd className="mt-1 font-mono text-lg font-semibold text-emerald-300">
+          <dd className="mt-px font-mono text-xs font-semibold text-emerald-300">
             {netPayout != null ? formatMoney(netPayout, payoutCurrency) : "—"}
           </dd>
         </div>
-        <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3">
-          <dt className="text-[11px] uppercase tracking-wide text-zinc-500">
+        <div>
+          <dt className="truncate text-[9px] leading-3 text-zinc-500">
             {t("payoutSpeedLabel")}
           </dt>
-          <dd className="mt-1 inline-flex items-center gap-1 text-sm font-medium text-amber-300">
-            <span aria-hidden>⚡</span>
+          <dd className="mt-px line-clamp-1 text-[11px] font-medium leading-4 text-amber-300">
             {firm.payoutSpeed}
+          </dd>
+        </div>
+        <div>
+          <dt className="truncate text-[9px] leading-3 text-zinc-500">
+            {t("firstPayoutLabel")}
+          </dt>
+          <dd className="mt-px font-mono text-[11px] font-medium text-cyan-300">
+            {firstPayoutDays === 0
+              ? t("firstPayoutImmediate")
+              : t("firstPayoutValue", { days: firstPayoutDays })}
           </dd>
         </div>
       </dl>
 
-      <div className="relative mt-3 rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5">
-        <p className="text-[11px] uppercase tracking-wide text-zinc-500">
-          {t("firstPayoutLabel")}
-        </p>
-        <p className="mt-0.5 font-mono text-sm font-medium text-cyan-300">
-          {firstPayoutDays === 0
-            ? t("firstPayoutImmediate")
-            : t("firstPayoutValue", { days: firstPayoutDays })}
-        </p>
-      </div>
-
       {channelTags.length > 0 ? (
-        <ul className="relative mt-3 flex flex-wrap gap-1.5">
+        <ul className="relative mt-1.5 flex gap-1 overflow-hidden">
           {channelTags.map((tag) => (
             <li
               key={tag.id}
-              className="rounded-full border border-cyan-400/20 bg-cyan-400/10 px-2.5 py-1 font-mono text-[10px] font-medium tracking-wide text-cyan-200"
+              className="shrink-0 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-1.5 py-px font-mono text-[9px] font-medium tracking-wide text-cyan-200"
             >
               {tag.label}
             </li>
@@ -143,35 +130,34 @@ export function FirmCard({ firm, rank, netPayout, currency }: FirmCardProps) {
         </ul>
       ) : null}
 
-      <div className="relative mt-auto pt-4">
+      <div className="relative mt-auto pt-2">
         {firm.status === "suspended" ? (
           <Link
             href={`/firm/${firm.slug}`}
-            className="inline-flex w-full items-center justify-center rounded-xl border border-red-400/20 bg-red-400/10 px-3 py-2.5 text-sm font-medium text-red-200 transition-colors hover:border-red-400/40 hover:bg-red-400/15"
+            className="inline-flex w-full items-center justify-center rounded-md border border-red-400/20 bg-red-400/10 px-2 py-1 text-[11px] font-medium text-red-200 transition-colors hover:border-red-400/40 hover:bg-red-400/15"
           >
             {t("readReview")}
           </Link>
         ) : (
-          <>
-            <PromoCodeCopy code={offer.code} href={offer.href} />
-
-            <div className="mt-3 grid grid-cols-[1.15fr_0.85fr] gap-2">
-              <a
-                href={offer.href}
-                target="_blank"
-                rel="sponsored noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-emerald-400 via-emerald-300 to-cyan-400 px-3 py-2.5 text-sm font-semibold text-zinc-950 shadow-[0_0_22px_-4px_rgba(52,211,153,0.95)] ring-1 ring-emerald-200/50 transition-all hover:brightness-110 hover:shadow-[0_0_32px_-2px_rgba(34,211,238,0.85)]"
-              >
-                {t("claimCta")}
-              </a>
-              <Link
-                href={`/firm/${firm.slug}`}
-                className="inline-flex items-center justify-center rounded-xl border border-white/[0.08] bg-zinc-950/70 px-3 py-2.5 text-sm font-medium text-zinc-400 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04)] transition-colors hover:border-white/15 hover:bg-zinc-900 hover:text-zinc-200"
-              >
-                {t("readReview")}
-              </Link>
+          <div className="flex items-center gap-1">
+            <div className="min-w-0 flex-1">
+              <PromoCodeCopy compact code={offer.code} href={offer.href} />
             </div>
-          </>
+            <a
+              href={offer.href}
+              target="_blank"
+              rel="sponsored noopener noreferrer"
+              className="inline-flex shrink-0 items-center justify-center rounded-md bg-gradient-to-r from-emerald-400 via-emerald-300 to-cyan-400 px-2 py-1 text-[11px] font-semibold whitespace-nowrap text-zinc-950 shadow-[0_0_14px_-4px_rgba(52,211,153,0.95)] transition-all hover:brightness-110"
+            >
+              {t("claimCta")}
+            </a>
+            <Link
+              href={`/firm/${firm.slug}`}
+              className="inline-flex shrink-0 items-center justify-center rounded-md border border-white/[0.08] bg-zinc-950/70 px-2 py-1 text-[11px] font-medium whitespace-nowrap text-zinc-400 transition-colors hover:border-white/15 hover:text-zinc-200"
+            >
+              {t("readReview")}
+            </Link>
+          </div>
         )}
       </div>
     </article>

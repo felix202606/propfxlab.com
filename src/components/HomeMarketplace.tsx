@@ -253,7 +253,7 @@ export function HomeMarketplace({
         onViewModeChange={setViewMode}
       />
 
-      <section id="rankings" className="mx-auto w-full max-w-6xl scroll-mt-24 px-4 py-16">
+      <section id="rankings" className="mx-auto w-full max-w-6xl scroll-mt-24 px-4 py-8">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
@@ -282,14 +282,14 @@ export function HomeMarketplace({
         </div>
 
         {firms.length === 0 ? (
-          <div className="mt-8 grid gap-4 md:grid-cols-2">
-            {[0, 1, 2, 3].map((slot) => (
+          <div className="mt-8 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+            {[0, 1, 2, 3, 4, 5].map((slot) => (
               <div
                 key={slot}
-                className="h-64 animate-pulse rounded-2xl border border-white/10 bg-white/[0.03]"
+                className="h-28 animate-pulse rounded-lg border border-white/10 bg-white/[0.03]"
               />
             ))}
-            <p className="md:col-span-2 text-sm text-zinc-500">
+            <p className="sm:col-span-2 lg:col-span-3 text-sm text-zinc-500">
               {t("emptyRankings")}
             </p>
           </div>
@@ -311,7 +311,7 @@ export function HomeMarketplace({
                 <FirmTable rows={visibleList} />
               </div>
             ) : (
-              <ol className="mt-4 grid gap-4 md:grid-cols-2">
+              <ol className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
                 {visibleList.map(({ firm, breakdown }, index) => (
                   <li key={firm.slug}>
                     <FirmCard
