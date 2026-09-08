@@ -2,8 +2,8 @@ name: Daily news scrape
 
 on:
   schedule:
-    # Every 2 hours. GitHub cron is often late; this keeps /news fresher than
-    # twice-daily 02:00/14:00 UTC jobs that can slip 4+ hours.
+    # Every 2 hours (GitHub cron is often late). Cap 3 articles/run so
+    # seven-locale URLs stay crawlable and don't flood sitemap.
     - cron: "20 */2 * * *"
   workflow_dispatch:
 
@@ -40,12 +40,12 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: gemini-3.5-flash-lite
-          NEWS_MAX_ITEMS: "5"
+          NEWS_MAX_ITEMS: "3"
           SKIP_INDEXNOW: "1"
           SKIP_SOCIAL: "1"
         run: |
           set -euo pipefail
-          python -u scripts/news_scraper.py --max-items 5
+          python -u scripts/news_scraper.py --max-items 3
           mapfile -t new_slugs < <(
             git ls-files --others --exclude-standard -- data/news/ \
               | sed -n 's|^data/news/\(.*\)\.json$|\1|p'

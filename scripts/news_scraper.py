@@ -9,11 +9,11 @@ from __future__ import annotations
   export GEMINI_API_KEY=your_key
   python3 scripts/news_scraper.py
   python3 scripts/news_scraper.py --dry-run
-  python3 scripts/news_scraper.py --max-items 5 --model gemini-3.5-flash-lite
+  python3 scripts/news_scraper.py --max-items 3 --model gemini-3.5-flash-lite
 
 说明：
   每条候选新闻只调用 Gemini 一次，单次响应包含英文总结 + 6 语种翻译（共 7 个 locale）。
-  默认模型 gemini-3.5-flash-lite（免费档约 500 RPD）；每天最多处理 5 条 → 约 5 次请求。
+  默认模型 gemini-3.5-flash-lite（免费档约 500 RPD）；每轮最多 3 条（约 2 小时一次）→ 控制新 URL 量。
 """
 
 import argparse
@@ -68,7 +68,7 @@ MAX_AGE_HOURS = 96
 MAX_SUMMARY_CHARS = 800
 # 条目之间的短暂停顿（限流友好；每条仍只 1 次请求）
 BATCH_PAUSE_S = 2.0
-MAX_ITEMS_DEFAULT = 5
+MAX_ITEMS_DEFAULT = 3
 REQUEST_TIMEOUT_S = 20
 TITLE_SIMILARITY_THRESHOLD = 0.72
 TITLE_JACCARD_THRESHOLD = 0.55
