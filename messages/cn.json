@@ -209,6 +209,7 @@
     "promoLabel": "优惠码",
     "copy": "复制",
     "copied": "已复制",
+    "copyCodeHint": "复制 {code}",
     "claimCta": "领取优惠",
     "calculateCta": "🧮 收益计算",
     "visitOfficial": "直达官网 ➔",
@@ -219,8 +220,11 @@
     "statusActive": "正常运营",
     "statusWarning": "延迟预警",
     "statusSuspended": "暂停出金",
-    "ratingBadge": "★ {rating}（{count} 条评价）"
+    "ratingBadge": "★ {rating}（{count} 条评价）",
+    "ratingUnavailable": "暂无",
+    "ratingBadgeUnavailable": "Trustpilot 评分暂不可用（{count} 条评价）"
   },
+
   "PayoutCalculator": {
     "heading": "出金计算器",
     "subtitle": "选择公司与分成方案，输入挑战金额和预计利润，查看预估到手金额。",

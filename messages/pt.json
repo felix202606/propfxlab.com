@@ -209,6 +209,7 @@
     "promoLabel": "Cupom",
     "copy": "Copiar",
     "copied": "Copiado",
+    "copyCodeHint": "Copiar {code}",
     "claimCta": "Resgatar desconto",
     "calculateCta": "🧮 Calcular",
     "visitOfficial": "Ir ao site ➔",
@@ -219,8 +220,11 @@
     "statusActive": "Ativa",
     "statusWarning": "Alerta",
     "statusSuspended": "Suspensa",
-    "ratingBadge": "★ {rating} ({count} avaliações)"
+    "ratingBadge": "★ {rating} ({count} avaliações)",
+    "ratingUnavailable": "N/D",
+    "ratingBadgeUnavailable": "Pontuação Trustpilot indisponível ({count} avaliações)"
   },
+
   "PayoutCalculator": {
     "heading": "Calculadora de saque",
     "subtitle": "Escolha a firma e o nível de divisão, informe o valor do challenge e o lucro esperado para simular o valor líquido a receber.",

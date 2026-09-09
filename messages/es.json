@@ -209,6 +209,7 @@
     "promoLabel": "Código",
     "copy": "Copiar",
     "copied": "Copiado",
+    "copyCodeHint": "Copiar {code}",
     "claimCta": "Reclamar descuento",
     "calculateCta": "🧮 Calcular",
     "visitOfficial": "Ir al sitio ➔",
@@ -219,8 +220,11 @@
     "statusActive": "Activa",
     "statusWarning": "Alerta",
     "statusSuspended": "Suspendida",
-    "ratingBadge": "★ {rating} ({count} reseñas)"
+    "ratingBadge": "★ {rating} ({count} reseñas)",
+    "ratingUnavailable": "N/D",
+    "ratingBadgeUnavailable": "Puntuación de Trustpilot no disponible ({count} reseñas)"
   },
+
   "PayoutCalculator": {
     "heading": "Calculadora de pagos",
     "subtitle": "Elige la firma y el nivel de reparto, introduce el importe del challenge y el beneficio esperado para previsualizar tu pago neto.",

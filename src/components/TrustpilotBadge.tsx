@@ -15,23 +15,27 @@ export function TrustpilotBadge({
   const t = useTranslations("FirmCard");
   const format = useFormatter();
 
-  if (firm.rating == null) return null;
+  // Trustpilot sometimes withdraws the TrustScore but keeps review volume.
+  if (firm.rating == null && firm.reviewCount <= 0) return null;
 
-  const rating = firm.rating.toFixed(1);
+  const rating =
+    firm.rating == null ? t("ratingUnavailable") : firm.rating.toFixed(1);
   const count = format.number(firm.reviewCount);
+  const title =
+    firm.rating == null
+      ? t("ratingBadgeUnavailable", { count })
+      : t("ratingBadge", { rating, count });
 
   return (
     <span
-      className={`inline-flex max-w-full items-center gap-1 rounded-full border border-yellow-400/35 bg-yellow-400/10 px-1.5 py-0.5 text-[10px] font-semibold tracking-wide text-yellow-300 ${className}`}
-      title={t("ratingBadge", { rating, count })}
+      className={`inline-flex max-w-full items-center gap-1 rounded-full border border-yellow-400/35 bg-yellow-400/10 px-2 py-0.5 text-[11px] font-semibold tracking-wide text-yellow-300 ${className}`}
+      title={title}
     >
-      <span aria-hidden className="text-[11px] leading-none">
+      <span aria-hidden className="text-[12px] leading-none">
         ★
       </span>
       <span className="font-mono tabular-nums">{rating}</span>
-      <span className="font-normal text-yellow-200/70">
-        ({count})
-      </span>
+      <span className="font-normal text-yellow-200/70">({count})</span>
     </span>
   );
 }

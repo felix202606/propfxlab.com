@@ -23,11 +23,11 @@ export function PlatformChips({
   const extra = ordered.length - visible.length;
 
   return (
-    <ul className="flex flex-wrap gap-1">
+    <ul className="flex flex-wrap gap-1.5">
       {visible.map((platform) => (
         <li
           key={platform}
-          className={`rounded-md border px-1 py-px font-mono text-[9px] font-semibold tracking-wide ${
+          className={`rounded-md border px-1.5 py-0.5 font-mono text-[11px] font-semibold tracking-wide ${
             ACCENT[platform] ?? "border-slate-700 bg-slate-800/80 text-slate-300"
           }`}
         >
@@ -35,7 +35,7 @@ export function PlatformChips({
         </li>
       ))}
       {extra > 0 ? (
-        <li className="rounded-md border border-slate-700 bg-slate-800/80 px-1 py-px font-mono text-[9px] text-slate-500">
+        <li className="rounded-md border border-slate-700 bg-slate-800/80 px-1.5 py-0.5 font-mono text-[11px] text-slate-500">
           +{extra}
         </li>
       ) : null}
