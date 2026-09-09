@@ -1,6 +1,11 @@
 {
   "slug": "apex-trader-funding",
   "status": "active",
+  "category": ["futures"],
+  "tier": 1,
+  "platforms": ["tradovate", "ninjatrader", "tradingview"],
+  "assets": ["futures"],
+  "highlights": [],
   "payoutSpeed": "24–48 Hours (US ACH)",
   "rating": 4.4,
   "reviewCount": 18690,

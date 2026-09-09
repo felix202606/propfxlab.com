@@ -1,6 +1,11 @@
 {
   "slug": "dna-funded",
   "status": "active",
+  "category": ["forex"],
+  "tier": 2,
+  "platforms": ["mt5", "matchtrader", "tradelocker"],
+  "assets": ["fx", "indices", "metals", "crypto"],
+  "highlights": [],
   "payoutSpeed": "Within 24 Hours",
   "rating": 3.7,
   "reviewCount": 84,

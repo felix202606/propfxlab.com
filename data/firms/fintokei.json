@@ -1,6 +1,11 @@
 {
   "slug": "fintokei",
   "status": "active",
+  "category": ["forex"],
+  "tier": 1,
+  "platforms": ["mt4", "mt5", "ctrader"],
+  "assets": ["fx", "indices", "metals", "crypto"],
+  "highlights": ["licensed_broker"],
   "payoutSpeed": "Within 24 Hours",
   "rating": 4.3,
   "reviewCount": 1308,

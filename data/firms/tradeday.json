@@ -1,6 +1,11 @@
 {
   "slug": "tradeday",
   "status": "active",
+  "category": ["futures"],
+  "tier": 1,
+  "platforms": ["tradovate", "ninjatrader"],
+  "assets": ["futures"],
+  "highlights": ["instant_payout"],
   "payoutSpeed": "Within 24 Hours",
   "rating": 4.6,
   "reviewCount": 1300,

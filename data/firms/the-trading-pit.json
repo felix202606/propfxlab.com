@@ -1,6 +1,11 @@
 {
   "slug": "the-trading-pit",
   "status": "active",
+  "category": ["forex"],
+  "tier": 1,
+  "platforms": ["mt5", "ctrader"],
+  "assets": ["fx", "indices", "metals", "crypto"],
+  "highlights": [],
   "payoutSpeed": "Within 24 Hours",
   "rating": null,
   "reviewCount": 0,

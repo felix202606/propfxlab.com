@@ -1,6 +1,11 @@
 {
   "slug": "for-traders",
   "status": "active",
+  "category": ["forex"],
+  "tier": 2,
+  "platforms": ["mt5", "ctrader"],
+  "assets": ["fx", "indices", "metals", "crypto"],
+  "highlights": [],
   "payoutSpeed": "Within 24 Hours",
   "rating": 4.5,
   "reviewCount": 882,

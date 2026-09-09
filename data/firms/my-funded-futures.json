@@ -1,6 +1,11 @@
 {
   "slug": "my-funded-futures",
   "status": "active",
+  "category": ["futures"],
+  "tier": 1,
+  "platforms": ["tradovate", "ninjatrader", "tradingview"],
+  "assets": ["futures"],
+  "highlights": ["instant_payout"],
   "payoutSpeed": "Same Day",
   "rating": 4.9,
   "reviewCount": 17493,

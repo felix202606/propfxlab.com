@@ -1,6 +1,11 @@
 {
   "slug": "take-profit-trader",
   "status": "active",
+  "category": ["futures"],
+  "tier": 1,
+  "platforms": ["tradovate", "ninjatrader", "tradingview"],
+  "assets": ["futures"],
+  "highlights": ["instant_payout"],
   "payoutSpeed": "Within 24 Hours",
   "rating": 4.4,
   "reviewCount": 8790,

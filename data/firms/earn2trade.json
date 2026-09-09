@@ -1,6 +1,11 @@
 {
   "slug": "earn2trade",
   "status": "active",
+  "category": ["futures"],
+  "tier": 1,
+  "platforms": ["ninjatrader", "tradovate"],
+  "assets": ["futures"],
+  "highlights": [],
   "payoutSpeed": "Within 24-48 Hours",
   "rating": 4.7,
   "reviewCount": 4757,

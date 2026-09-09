@@ -1,6 +1,11 @@
 {
   "slug": "fundingpips",
   "status": "active",
+  "category": ["forex"],
+  "tier": 1,
+  "platforms": ["matchtrader", "ctrader", "tradelocker"],
+  "assets": ["fx", "indices", "metals", "crypto"],
+  "highlights": ["low_entry"],
   "payoutSpeed": "Within 24–72 Hours",
   "rating": 4.5,
   "reviewCount": 67813,

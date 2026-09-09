@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { firmInitials } from "@/lib/logo";
 
 const SIZE_PX = {
+  xs: 28,
   sm: 32,
   md: 40,
   lg: 44,
@@ -25,7 +26,7 @@ function InitialsBadge({
   px: number;
 }) {
   const typeClass =
-    px <= 32 ? "text-[10px]" : px <= 40 ? "text-xs" : "text-[13px]";
+    px <= 28 ? "text-[9px]" : px <= 32 ? "text-[10px]" : px <= 40 ? "text-xs" : "text-[13px]";
 
   return (
     <span

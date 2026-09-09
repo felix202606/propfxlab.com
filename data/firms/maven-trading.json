@@ -1,6 +1,11 @@
 {
   "slug": "maven-trading",
   "status": "active",
+  "category": ["forex"],
+  "tier": 2,
+  "platforms": ["mt5", "ctrader", "matchtrader"],
+  "assets": ["fx", "indices", "metals", "crypto"],
+  "highlights": [],
   "payoutSpeed": "Within 24 Hours",
   "rating": 4.3,
   "reviewCount": 5101,

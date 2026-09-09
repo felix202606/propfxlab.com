@@ -1,6 +1,11 @@
 {
   "slug": "brightfunded",
   "status": "active",
+  "category": ["forex"],
+  "tier": 1,
+  "platforms": ["mt5", "ctrader", "matchtrader"],
+  "assets": ["fx", "indices", "metals", "crypto"],
+  "highlights": [],
   "payoutSpeed": "Within 24 Hours",
   "rating": 4.2,
   "reviewCount": 530,

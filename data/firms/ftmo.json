@@ -1,6 +1,11 @@
 {
   "slug": "ftmo",
   "status": "active",
+  "category": ["forex"],
+  "tier": 1,
+  "platforms": ["mt4", "mt5", "ctrader", "dxtrade"],
+  "assets": ["fx", "indices", "metals", "crypto"],
+  "highlights": [],
   "payoutSpeed": "Within 8 Hours",
   "rating": 4.8,
   "reviewCount": 51486,

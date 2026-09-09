@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "validate:firms": "tsx scripts/validate-firms.ts",
+    "sync:firm-specs": "python3 scripts/sync_firm_specs.py",
     "update:trustpilot": "tsx scripts/update-trustpilot.ts"
   },
   "dependencies": {

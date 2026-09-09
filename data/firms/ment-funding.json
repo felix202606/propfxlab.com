@@ -1,6 +1,11 @@
 {
   "slug": "ment-funding",
   "status": "active",
+  "category": ["forex"],
+  "tier": 2,
+  "platforms": ["mt4", "mt5", "ctrader"],
+  "assets": ["fx", "indices", "metals", "crypto"],
+  "highlights": [],
   "payoutSpeed": "Within 24 Hours",
   "rating": 4.8,
   "reviewCount": 231,

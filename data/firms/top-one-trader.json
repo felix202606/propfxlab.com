@@ -1,6 +1,11 @@
 {
   "slug": "top-one-trader",
   "status": "active",
+  "category": ["forex"],
+  "tier": 2,
+  "platforms": ["mt4", "mt5", "ctrader", "matchtrader"],
+  "assets": ["fx", "indices", "metals", "crypto"],
+  "highlights": [],
   "payoutSpeed": "Within 24 Hours",
   "rating": null,
   "reviewCount": 0,
