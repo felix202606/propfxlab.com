@@ -33,8 +33,6 @@ jobs:
         run: npm ci
 
       - name: Fetch Trustpilot ratings
-        env:
-          TRUSTPILOT_API_KEY: ${{ secrets.TRUSTPILOT_API_KEY }}
         run: npx tsx scripts/update-trustpilot.ts
 
       - name: Validate firm JSON
