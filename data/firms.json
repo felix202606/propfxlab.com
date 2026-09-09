@@ -1,0 +1,908 @@
+[
+  {
+    "slug": "alpha-capital",
+    "name": "Alpha Capital Group",
+    "status": "active",
+    "category": [
+      "forex"
+    ],
+    "tier": 1,
+    "country": "United Kingdom",
+    "countryCode": "GB",
+    "foundedAt": "2021-11-01",
+    "platforms": [
+      "ctrader",
+      "mt5",
+      "dxtrade",
+      "tradelocker"
+    ],
+    "assets": [
+      "fx",
+      "metals",
+      "indices",
+      "energy"
+    ],
+    "maxAllocation": 2000000,
+    "rating": 4.7,
+    "reviewCount": 18792,
+    "highlights": [],
+    "website": "https://alphacapitalgroup.uk"
+  },
+  {
+    "slug": "apex-trader-funding",
+    "name": "Apex Trader Funding",
+    "status": "active",
+    "category": [
+      "futures"
+    ],
+    "tier": 1,
+    "country": "United States",
+    "countryCode": "US",
+    "foundedAt": "2021-01-01",
+    "platforms": [
+      "tradovate",
+      "ninjatrader"
+    ],
+    "assets": [
+      "futures"
+    ],
+    "maxAllocation": 300000,
+    "rating": 4.4,
+    "reviewCount": 18690,
+    "highlights": [],
+    "website": "https://apextraderfunding.com"
+  },
+  {
+    "slug": "aquafunded",
+    "name": "AquaFunded",
+    "status": "active",
+    "category": [
+      "forex"
+    ],
+    "tier": 2,
+    "country": "United Arab Emirates",
+    "countryCode": "AE",
+    "foundedAt": "2023-12-01",
+    "platforms": [
+      "matchtrader",
+      "ctrader",
+      "mt5",
+      "tradelocker"
+    ],
+    "assets": [
+      "fx",
+      "metals",
+      "indices",
+      "crypto"
+    ],
+    "maxAllocation": 2000000,
+    "rating": null,
+    "reviewCount": 0,
+    "highlights": [],
+    "website": "https://www.aquafunded.com"
+  },
+  {
+    "slug": "blue-guardian",
+    "name": "Blue Guardian",
+    "status": "active",
+    "category": [
+      "forex"
+    ],
+    "tier": 2,
+    "country": "United Arab Emirates",
+    "countryCode": "AE",
+    "foundedAt": "2021-06-01",
+    "platforms": [
+      "matchtrader",
+      "mt5",
+      "tradelocker"
+    ],
+    "assets": [
+      "fx",
+      "indices",
+      "crypto"
+    ],
+    "maxAllocation": 2000000,
+    "rating": 3.7,
+    "reviewCount": 2100,
+    "highlights": [],
+    "website": "https://blueguardian.com"
+  },
+  {
+    "slug": "brightfunded",
+    "name": "BrightFunded",
+    "status": "active",
+    "category": [
+      "forex"
+    ],
+    "tier": 1,
+    "country": "United Arab Emirates",
+    "countryCode": "AE",
+    "foundedAt": "2023-09-01",
+    "platforms": [
+      "ctrader",
+      "mt5",
+      "dxtrade"
+    ],
+    "assets": [
+      "fx",
+      "metals",
+      "indices",
+      "energy",
+      "crypto"
+    ],
+    "maxAllocation": 400000,
+    "rating": 4.2,
+    "reviewCount": 530,
+    "highlights": [],
+    "website": "https://www.brightfunded.com"
+  },
+  {
+    "slug": "city-traders-imperium",
+    "name": "City Traders Imperium",
+    "status": "active",
+    "category": [
+      "forex"
+    ],
+    "tier": 2,
+    "country": "United Arab Emirates",
+    "countryCode": "AE",
+    "foundedAt": "2018-07-01",
+    "platforms": [
+      "matchtrader",
+      "mt5"
+    ],
+    "assets": [
+      "fx",
+      "metals",
+      "indices",
+      "energy",
+      "crypto"
+    ],
+    "maxAllocation": 4000000,
+    "rating": 4.2,
+    "reviewCount": 1624,
+    "highlights": [],
+    "website": "https://citytradersimperium.com"
+  },
+  {
+    "slug": "dna-funded",
+    "name": "DNA Funded",
+    "status": "active",
+    "category": [
+      "forex"
+    ],
+    "tier": 2,
+    "country": "Saint Lucia",
+    "countryCode": "LC",
+    "foundedAt": "2023-10-15",
+    "platforms": [
+      "mt5",
+      "tradelocker"
+    ],
+    "assets": [
+      "fx",
+      "indices",
+      "metals",
+      "crypto"
+    ],
+    "maxAllocation": 1000000,
+    "rating": 3.7,
+    "reviewCount": 84,
+    "highlights": [],
+    "website": "https://www.dnafunded.com"
+  },
+  {
+    "slug": "e8-markets",
+    "name": "E8 Markets",
+    "status": "active",
+    "category": [
+      "forex"
+    ],
+    "tier": 1,
+    "country": "United States",
+    "countryCode": "US",
+    "foundedAt": "2021-11-01",
+    "platforms": [
+      "ctrader",
+      "matchtrader",
+      "tradelocker",
+      "mt5"
+    ],
+    "assets": [
+      "fx",
+      "metals",
+      "indices",
+      "energy",
+      "crypto"
+    ],
+    "maxAllocation": 1000000,
+    "rating": 4.3,
+    "reviewCount": 3276,
+    "highlights": [],
+    "website": "https://e8markets.com"
+  },
+  {
+    "slug": "earn2trade",
+    "name": "Earn2Trade",
+    "status": "active",
+    "category": [
+      "futures"
+    ],
+    "tier": 1,
+    "country": "United States",
+    "countryCode": "US",
+    "foundedAt": "2016-09-01",
+    "platforms": [
+      "ninjatrader",
+      "tradovate",
+      "tradingview"
+    ],
+    "assets": [
+      "futures"
+    ],
+    "maxAllocation": 200000,
+    "rating": 4.7,
+    "reviewCount": 4757,
+    "highlights": [],
+    "website": "https://www.earn2trade.com"
+  },
+  {
+    "slug": "fintokei",
+    "name": "Fintokei",
+    "status": "active",
+    "category": [
+      "forex"
+    ],
+    "tier": 1,
+    "country": "Czech Republic",
+    "countryCode": "CZ",
+    "foundedAt": "2023-04-01",
+    "platforms": [
+      "mt4",
+      "mt5",
+      "ctrader",
+      "tradingview"
+    ],
+    "assets": [
+      "fx",
+      "metals",
+      "indices",
+      "energy",
+      "crypto"
+    ],
+    "maxAllocation": 4000000,
+    "rating": 4.3,
+    "reviewCount": 1308,
+    "highlights": [
+      "licensed_broker"
+    ],
+    "website": "https://fintokei.com"
+  },
+  {
+    "slug": "for-traders",
+    "name": "For Traders",
+    "status": "active",
+    "category": [
+      "forex"
+    ],
+    "tier": 2,
+    "country": "United Arab Emirates",
+    "countryCode": "AE",
+    "foundedAt": "2023-06-01",
+    "platforms": [
+      "ctrader",
+      "mt5",
+      "mt4",
+      "tradelocker"
+    ],
+    "assets": [
+      "fx",
+      "metals",
+      "indices",
+      "energy",
+      "crypto"
+    ],
+    "maxAllocation": 1000000,
+    "rating": 4.5,
+    "reviewCount": 882,
+    "highlights": [],
+    "website": "https://www.fortraders.com"
+  },
+  {
+    "slug": "ftmo",
+    "name": "FTMO",
+    "status": "active",
+    "category": [
+      "forex"
+    ],
+    "tier": 1,
+    "country": "Czech Republic",
+    "countryCode": "CZ",
+    "foundedAt": "2015-01-01",
+    "platforms": [
+      "ctrader",
+      "dxtrade",
+      "mt4",
+      "mt5"
+    ],
+    "assets": [
+      "fx",
+      "metals",
+      "indices",
+      "energy",
+      "crypto"
+    ],
+    "maxAllocation": 2000000,
+    "rating": 4.8,
+    "reviewCount": 51486,
+    "highlights": [],
+    "website": "https://ftmo.com"
+  },
+  {
+    "slug": "funded-trading-plus",
+    "name": "Funded Trading Plus",
+    "status": "active",
+    "category": [
+      "forex"
+    ],
+    "tier": 1,
+    "country": "United Kingdom",
+    "countryCode": "GB",
+    "foundedAt": "2021-11-01",
+    "platforms": [
+      "matchtrader",
+      "mt5"
+    ],
+    "assets": [
+      "fx",
+      "metals",
+      "indices",
+      "energy",
+      "crypto"
+    ],
+    "maxAllocation": 2500000,
+    "rating": 4.4,
+    "reviewCount": 2645,
+    "highlights": [
+      "instant_payout"
+    ],
+    "website": "https://www.fundedtradingplus.com"
+  },
+  {
+    "slug": "fundednext",
+    "name": "FundedNext",
+    "status": "active",
+    "category": [
+      "forex"
+    ],
+    "tier": 1,
+    "country": "United Arab Emirates",
+    "countryCode": "AE",
+    "foundedAt": "2022-03-01",
+    "platforms": [
+      "matchtrader",
+      "ctrader",
+      "mt5"
+    ],
+    "assets": [
+      "fx",
+      "metals",
+      "indices",
+      "crypto"
+    ],
+    "maxAllocation": 4000000,
+    "rating": 4.5,
+    "reviewCount": 78108,
+    "highlights": [],
+    "website": "https://fundednext.com"
+  },
+  {
+    "slug": "funderpro",
+    "name": "FunderPro",
+    "status": "active",
+    "category": [
+      "forex"
+    ],
+    "tier": 2,
+    "country": "Malta",
+    "countryCode": "MT",
+    "foundedAt": "2023-02-01",
+    "platforms": [
+      "ctrader",
+      "mt5",
+      "tradelocker"
+    ],
+    "assets": [
+      "fx",
+      "indices",
+      "metals",
+      "crypto"
+    ],
+    "maxAllocation": 5000000,
+    "rating": null,
+    "reviewCount": 1592,
+    "highlights": [],
+    "website": "https://funderpro.com"
+  },
+  {
+    "slug": "funding-traders",
+    "name": "Funding Traders",
+    "status": "active",
+    "category": [
+      "forex"
+    ],
+    "tier": 1,
+    "country": "United Arab Emirates",
+    "countryCode": "AE",
+    "foundedAt": "2023-04-01",
+    "platforms": [
+      "mt5",
+      "dxtrade",
+      "tradelocker"
+    ],
+    "assets": [
+      "fx",
+      "metals",
+      "indices",
+      "crypto"
+    ],
+    "maxAllocation": 2000000,
+    "rating": null,
+    "reviewCount": 0,
+    "highlights": [],
+    "website": "https://fundingtraders.com"
+  },
+  {
+    "slug": "fundingpips",
+    "name": "FundingPips",
+    "status": "active",
+    "category": [
+      "forex"
+    ],
+    "tier": 1,
+    "country": "United Arab Emirates",
+    "countryCode": "AE",
+    "foundedAt": "2022-11-01",
+    "platforms": [
+      "matchtrader",
+      "ctrader",
+      "mt5"
+    ],
+    "assets": [
+      "fx",
+      "metals",
+      "indices",
+      "energy",
+      "crypto"
+    ],
+    "maxAllocation": 2000000,
+    "rating": 4.5,
+    "reviewCount": 67813,
+    "highlights": [
+      "low_entry"
+    ],
+    "website": "https://fundingpips.com"
+  },
+  {
+    "slug": "fxify",
+    "name": "FXIFY",
+    "status": "active",
+    "category": [
+      "forex"
+    ],
+    "tier": 1,
+    "country": "United Kingdom",
+    "countryCode": "GB",
+    "foundedAt": "2023-04-01",
+    "platforms": [
+      "dxtrade",
+      "mt4",
+      "mt5",
+      "tradingview"
+    ],
+    "assets": [
+      "fx",
+      "metals",
+      "indices"
+    ],
+    "maxAllocation": 4000000,
+    "rating": 4.4,
+    "reviewCount": 5447,
+    "highlights": [],
+    "website": "https://fxify.com"
+  },
+  {
+    "slug": "goatfunded",
+    "name": "Goat Funded Trader",
+    "status": "active",
+    "category": [
+      "forex"
+    ],
+    "tier": 1,
+    "country": "Hong Kong",
+    "countryCode": "HK",
+    "foundedAt": "2023-06-01",
+    "platforms": [
+      "matchtrader",
+      "ctrader",
+      "mt5",
+      "tradelocker"
+    ],
+    "assets": [
+      "fx",
+      "metals",
+      "indices",
+      "energy",
+      "crypto"
+    ],
+    "maxAllocation": 2000000,
+    "rating": null,
+    "reviewCount": 3788,
+    "highlights": [
+      "low_entry"
+    ],
+    "website": "https://www.goatfundedtrader.com"
+  },
+  {
+    "slug": "instant-funding",
+    "name": "Instant Funding",
+    "status": "active",
+    "category": [
+      "forex"
+    ],
+    "tier": 1,
+    "country": "United Kingdom",
+    "countryCode": "GB",
+    "foundedAt": "2022-06-01",
+    "platforms": [
+      "matchtrader",
+      "ctrader",
+      "mt5"
+    ],
+    "assets": [
+      "fx",
+      "metals",
+      "indices",
+      "energy",
+      "crypto"
+    ],
+    "maxAllocation": 1250000,
+    "rating": null,
+    "reviewCount": 0,
+    "highlights": [
+      "instant_payout",
+      "low_entry"
+    ],
+    "website": "https://instantfunding.com"
+  },
+  {
+    "slug": "lux-trading-firm",
+    "name": "Lux Trading Firm",
+    "status": "active",
+    "category": [
+      "forex"
+    ],
+    "tier": 2,
+    "country": "United Kingdom",
+    "countryCode": "GB",
+    "foundedAt": "2021-01-01",
+    "platforms": [
+      "tradingview",
+      "matchtrader",
+      "mt5",
+      "mt4"
+    ],
+    "assets": [
+      "fx",
+      "indices",
+      "metals",
+      "crypto"
+    ],
+    "maxAllocation": 10000000,
+    "rating": 3.9,
+    "reviewCount": 622,
+    "highlights": [],
+    "website": "https://luxtradingfirm.com"
+  },
+  {
+    "slug": "maven-trading",
+    "name": "Maven Trading",
+    "status": "active",
+    "category": [
+      "forex"
+    ],
+    "tier": 2,
+    "country": "Saint Lucia",
+    "countryCode": "LC",
+    "foundedAt": "2022-11-01",
+    "platforms": [
+      "mt5",
+      "matchtrader",
+      "ctrader"
+    ],
+    "assets": [
+      "fx",
+      "metals",
+      "indices",
+      "energy",
+      "crypto"
+    ],
+    "maxAllocation": 1000000,
+    "rating": 4.3,
+    "reviewCount": 5101,
+    "highlights": [],
+    "website": "https://www.maventrading.com"
+  },
+  {
+    "slug": "ment-funding",
+    "name": "Ment Funding",
+    "status": "active",
+    "category": [
+      "forex"
+    ],
+    "tier": 2,
+    "country": "United States",
+    "countryCode": "US",
+    "foundedAt": "2021-10-01",
+    "platforms": [
+      "ctrader",
+      "dxtrade",
+      "matchtrader"
+    ],
+    "assets": [
+      "fx",
+      "metals",
+      "indices",
+      "energy"
+    ],
+    "maxAllocation": 2000000,
+    "rating": 4.8,
+    "reviewCount": 231,
+    "highlights": [],
+    "website": "https://mentfunding.com"
+  },
+  {
+    "slug": "my-funded-futures",
+    "name": "My Funded Futures",
+    "status": "active",
+    "category": [
+      "futures"
+    ],
+    "tier": 1,
+    "country": "United States",
+    "countryCode": "US",
+    "foundedAt": "2023-11-01",
+    "platforms": [
+      "ninjatrader",
+      "tradovate",
+      "tradingview"
+    ],
+    "assets": [
+      "futures"
+    ],
+    "maxAllocation": 150000,
+    "rating": 4.9,
+    "reviewCount": 17493,
+    "highlights": [
+      "instant_payout"
+    ],
+    "website": "https://myfundedfutures.com"
+  },
+  {
+    "slug": "take-profit-trader",
+    "name": "Take Profit Trader",
+    "status": "active",
+    "category": [
+      "futures"
+    ],
+    "tier": 1,
+    "country": "United States",
+    "countryCode": "US",
+    "foundedAt": "2021-03-01",
+    "platforms": [
+      "ninjatrader",
+      "tradingview",
+      "tradovate"
+    ],
+    "assets": [
+      "futures"
+    ],
+    "maxAllocation": 300000,
+    "rating": 4.4,
+    "reviewCount": 8790,
+    "highlights": [
+      "instant_payout"
+    ],
+    "website": "https://www.takeprofittrader.com"
+  },
+  {
+    "slug": "the-trading-pit",
+    "name": "The Trading Pit",
+    "status": "active",
+    "category": [
+      "forex"
+    ],
+    "tier": 1,
+    "country": "Liechtenstein",
+    "countryCode": "LI",
+    "foundedAt": "2022-10-01",
+    "platforms": [
+      "mt4",
+      "mt5",
+      "ctrader"
+    ],
+    "assets": [
+      "fx",
+      "metals",
+      "indices",
+      "crypto"
+    ],
+    "maxAllocation": 5000000,
+    "rating": null,
+    "reviewCount": 0,
+    "highlights": [],
+    "website": "https://www.thetradingpit.com"
+  },
+  {
+    "slug": "the5ers",
+    "name": "The5ers",
+    "status": "active",
+    "category": [
+      "forex"
+    ],
+    "tier": 1,
+    "country": "Israel",
+    "countryCode": "IL",
+    "foundedAt": "2016-01-01",
+    "platforms": [
+      "mt5"
+    ],
+    "assets": [
+      "fx",
+      "metals",
+      "indices",
+      "energy",
+      "crypto"
+    ],
+    "maxAllocation": 4000000,
+    "rating": 4.8,
+    "reviewCount": 37071,
+    "highlights": [],
+    "website": "https://the5ers.com"
+  },
+  {
+    "slug": "thinkcapital",
+    "name": "ThinkCapital",
+    "status": "active",
+    "category": [
+      "forex"
+    ],
+    "tier": 1,
+    "country": "United Kingdom",
+    "countryCode": "GB",
+    "foundedAt": "2024-06-01",
+    "platforms": [
+      "thinktrader",
+      "tradingview"
+    ],
+    "assets": [
+      "fx",
+      "metals",
+      "indices",
+      "energy",
+      "crypto"
+    ],
+    "maxAllocation": 1500000,
+    "rating": 4.0,
+    "reviewCount": 606,
+    "highlights": [
+      "licensed_broker"
+    ],
+    "website": "https://www.thinkcapital.com"
+  },
+  {
+    "slug": "top-one-trader",
+    "name": "Top One Trader",
+    "status": "active",
+    "category": [
+      "forex"
+    ],
+    "tier": 2,
+    "country": "United States",
+    "countryCode": "US",
+    "foundedAt": "2023-09-01",
+    "platforms": [
+      "tradelocker",
+      "mt5"
+    ],
+    "assets": [
+      "fx",
+      "metals",
+      "indices",
+      "crypto"
+    ],
+    "maxAllocation": 500000,
+    "rating": null,
+    "reviewCount": 0,
+    "highlights": [],
+    "website": "https://www.toponetrader.com"
+  },
+  {
+    "slug": "topstep",
+    "name": "Topstep",
+    "status": "active",
+    "category": [
+      "futures"
+    ],
+    "tier": 1,
+    "country": "United States",
+    "countryCode": "US",
+    "foundedAt": "2012-01-01",
+    "platforms": [
+      "ninjatrader"
+    ],
+    "assets": [
+      "futures"
+    ],
+    "maxAllocation": 300000,
+    "rating": 3.6,
+    "reviewCount": 14657,
+    "highlights": [],
+    "website": "https://www.topstep.com"
+  },
+  {
+    "slug": "tradeday",
+    "name": "TradeDay",
+    "status": "active",
+    "category": [
+      "futures"
+    ],
+    "tier": 1,
+    "country": "United States",
+    "countryCode": "US",
+    "foundedAt": "2020-01-01",
+    "platforms": [
+      "tradingview",
+      "ninjatrader",
+      "tradovate"
+    ],
+    "assets": [
+      "futures"
+    ],
+    "maxAllocation": 150000,
+    "rating": 4.6,
+    "reviewCount": 1300,
+    "highlights": [
+      "instant_payout"
+    ],
+    "website": "https://www.tradeday.com"
+  },
+  {
+    "slug": "tradeify",
+    "name": "Tradeify",
+    "status": "active",
+    "category": [
+      "futures"
+    ],
+    "tier": 1,
+    "country": "United States",
+    "countryCode": "US",
+    "foundedAt": "2024-06-01",
+    "platforms": [
+      "tradovate",
+      "ninjatrader",
+      "tradingview"
+    ],
+    "assets": [
+      "futures"
+    ],
+    "maxAllocation": 500000,
+    "rating": 4.6,
+    "reviewCount": 2544,
+    "highlights": [
+      "instant_payout"
+    ],
+    "website": "https://tradeify.co"
+  }
+]

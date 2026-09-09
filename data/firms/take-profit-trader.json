@@ -1,6 +1,21 @@
 {
   "slug": "take-profit-trader",
   "status": "active",
+  "category": [
+    "futures"
+  ],
+  "tier": 1,
+  "platforms": [
+    "ninjatrader",
+    "tradingview",
+    "tradovate"
+  ],
+  "assets": [
+    "futures"
+  ],
+  "highlights": [
+    "instant_payout"
+  ],
   "payoutSpeed": "Within 24 Hours",
   "rating": 4.4,
   "reviewCount": 8790,
@@ -12,7 +27,7 @@
       "width": 128,
       "height": 128
     },
-    "foundedAt": "2021-01-01",
+    "foundedAt": "2021-03-01",
     "headquarters": {
       "city": "Orlando",
       "country": "United States",

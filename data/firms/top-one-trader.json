@@ -1,6 +1,21 @@
 {
   "slug": "top-one-trader",
   "status": "active",
+  "category": [
+    "forex"
+  ],
+  "tier": 2,
+  "platforms": [
+    "tradelocker",
+    "mt5"
+  ],
+  "assets": [
+    "fx",
+    "metals",
+    "indices",
+    "crypto"
+  ],
+  "highlights": [],
   "payoutSpeed": "Within 24 Hours",
   "rating": null,
   "reviewCount": 0,
@@ -13,7 +28,7 @@
       "width": 128,
       "height": 128
     },
-    "foundedAt": "2021-01-01",
+    "foundedAt": "2023-09-01",
     "headquarters": {
       "city": "Miami",
       "country": "United States",

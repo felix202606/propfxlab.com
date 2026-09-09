@@ -1,6 +1,22 @@
 {
   "slug": "ment-funding",
   "status": "active",
+  "category": [
+    "forex"
+  ],
+  "tier": 2,
+  "platforms": [
+    "ctrader",
+    "dxtrade",
+    "matchtrader"
+  ],
+  "assets": [
+    "fx",
+    "metals",
+    "indices",
+    "energy"
+  ],
+  "highlights": [],
   "payoutSpeed": "Within 24 Hours",
   "rating": 4.8,
   "reviewCount": 231,
@@ -13,7 +29,7 @@
       "width": 128,
       "height": 128
     },
-    "foundedAt": "2021-01-01",
+    "foundedAt": "2021-10-01",
     "headquarters": {
       "city": "Wilmington",
       "country": "United States",

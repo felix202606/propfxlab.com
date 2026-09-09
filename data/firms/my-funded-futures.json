@@ -1,6 +1,21 @@
 {
   "slug": "my-funded-futures",
   "status": "active",
+  "category": [
+    "futures"
+  ],
+  "tier": 1,
+  "platforms": [
+    "ninjatrader",
+    "tradovate",
+    "tradingview"
+  ],
+  "assets": [
+    "futures"
+  ],
+  "highlights": [
+    "instant_payout"
+  ],
   "payoutSpeed": "Same Day",
   "rating": 4.9,
   "reviewCount": 17493,
@@ -13,7 +28,7 @@
       "width": 128,
       "height": 128
     },
-    "foundedAt": "2023-06-01",
+    "foundedAt": "2023-11-01",
     "headquarters": {
       "city": "Dover",
       "country": "United States",

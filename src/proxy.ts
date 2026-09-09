@@ -8,6 +8,6 @@ import { routing } from "./i18n/routing";
 export default createMiddleware(routing);
 
 export const config = {
-  // 匹配除 /api、/trpc、/_next、/_vercel 以及带文件后缀（如 favicon.ico）之外的所有路径
-  matcher: "/((?!api|trpc|_next|_vercel|.*\\..*).*)",
+  // 匹配除 /api、/out、/trpc、/_next、/_vercel 以及带文件后缀（如 favicon.ico）之外的所有路径
+  matcher: "/((?!api|out|trpc|_next|_vercel|.*\\..*).*)",
 };

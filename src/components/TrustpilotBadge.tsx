@@ -8,7 +8,10 @@ type TrustpilotBadgeProps = {
   className?: string;
 };
 
-export function TrustpilotBadge({ firm, className = "" }: TrustpilotBadgeProps) {
+export function TrustpilotBadge({
+  firm,
+  className = "",
+}: TrustpilotBadgeProps) {
   const t = useTranslations("FirmCard");
   const format = useFormatter();
 
@@ -19,10 +22,16 @@ export function TrustpilotBadge({ firm, className = "" }: TrustpilotBadgeProps) 
 
   return (
     <span
-      className={`inline-flex max-w-full items-center rounded-full border border-yellow-400/30 bg-yellow-400/10 px-1.5 py-px text-[10px] font-medium tracking-wide text-yellow-300 ${className}`}
+      className={`inline-flex max-w-full items-center gap-1 rounded-full border border-yellow-400/35 bg-yellow-400/10 px-1.5 py-0.5 text-[10px] font-semibold tracking-wide text-yellow-300 ${className}`}
       title={t("ratingBadge", { rating, count })}
     >
-      <span className="truncate">{t("ratingBadge", { rating, count })}</span>
+      <span aria-hidden className="text-[11px] leading-none">
+        ★
+      </span>
+      <span className="font-mono tabular-nums">{rating}</span>
+      <span className="font-normal text-yellow-200/70">
+        ({count})
+      </span>
     </span>
   );
 }

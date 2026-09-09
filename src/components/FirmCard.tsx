@@ -1,10 +1,12 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { AssetChips } from "@/components/AssetChips";
 import { FirmLogo } from "@/components/FirmLogo";
+import { PlatformChips } from "@/components/PlatformChips";
 import { PromoCodeCopy } from "@/components/PromoCodeCopy";
 import { TrustpilotBadge } from "@/components/TrustpilotBadge";
 import { getCardChannelTags } from "@/lib/channel-tags";
-import { getFirmOffer } from "@/lib/offers";
+import { getFirmOffer, getOutHref } from "@/lib/offers";
 import { formatMoney } from "@/lib/payout";
 import type { PlatformStatus, PropFirm } from "@/lib/schema";
 
@@ -121,6 +123,13 @@ export function FirmCard({ firm, rank, netPayout, currency }: FirmCardProps) {
         </div>
       </dl>
 
+      <div className="relative mt-1.5">
+        <AssetChips assets={firm.assets} limit={3} />
+      </div>
+      <div className="relative mt-1">
+        <PlatformChips platforms={firm.platforms} limit={3} />
+      </div>
+
       {channelTags.length > 0 ? (
         <ul className="relative mt-1.5 flex gap-1 overflow-hidden">
           {channelTags.map((tag) => (
@@ -145,12 +154,12 @@ export function FirmCard({ firm, rank, netPayout, currency }: FirmCardProps) {
         ) : (
           <div className="flex items-center gap-1">
             <div className="min-w-0 flex-1">
-              <PromoCodeCopy compact code={offer.code} href={offer.href} />
+              <PromoCodeCopy compact code={offer.code} href={getOutHref(firm.slug)} />
             </div>
             <a
-              href={offer.href}
+              href={getOutHref(firm.slug)}
               target="_blank"
-              rel="sponsored noopener noreferrer"
+              rel="nofollow sponsored noopener noreferrer"
               className="inline-flex shrink-0 items-center justify-center rounded-md bg-gradient-to-r from-emerald-400 via-emerald-300 to-cyan-400 px-2 py-1 text-[11px] font-semibold whitespace-nowrap text-zinc-950 shadow-[0_0_14px_-4px_rgba(52,211,153,0.95)] transition-all hover:brightness-110"
             >
               {t("claimCta")}

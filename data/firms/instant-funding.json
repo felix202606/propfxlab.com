@@ -1,6 +1,26 @@
 {
   "slug": "instant-funding",
   "status": "active",
+  "category": [
+    "forex"
+  ],
+  "tier": 1,
+  "platforms": [
+    "matchtrader",
+    "ctrader",
+    "mt5"
+  ],
+  "assets": [
+    "fx",
+    "metals",
+    "indices",
+    "energy",
+    "crypto"
+  ],
+  "highlights": [
+    "instant_payout",
+    "low_entry"
+  ],
   "payoutSpeed": "Within 24 Hours",
   "rating": null,
   "reviewCount": 0,
@@ -13,7 +33,7 @@
       "width": 128,
       "height": 128
     },
-    "foundedAt": "2022-01-01",
+    "foundedAt": "2022-06-01",
     "headquarters": {
       "city": "London",
       "country": "United Kingdom",

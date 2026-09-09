@@ -1,6 +1,18 @@
 {
   "slug": "apex-trader-funding",
   "status": "active",
+  "category": [
+    "futures"
+  ],
+  "tier": 1,
+  "platforms": [
+    "tradovate",
+    "ninjatrader"
+  ],
+  "assets": [
+    "futures"
+  ],
+  "highlights": [],
   "payoutSpeed": "24–48 Hours (US ACH)",
   "rating": 4.4,
   "reviewCount": 18690,
@@ -45,9 +57,16 @@
         "method": "bank_wire",
         "minAmount": 500,
         "maxAmount": null,
-        "processingBusinessDays": { "min": 1, "max": 2 },
-        "fee": { "type": "none" },
-        "currencies": ["USD"],
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 2
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ],
         "notes": "Fastest option; typically settles within 24–48 hours for US-based traders."
       },
       {
@@ -56,9 +75,18 @@
         "method": "other",
         "minAmount": 500,
         "maxAmount": null,
-        "processingBusinessDays": { "min": 5, "max": 11 },
-        "fee": { "type": "flat", "flatAmount": 25, "currency": "USD" },
-        "currencies": ["USD"],
+        "processingBusinessDays": {
+          "min": 5,
+          "max": 11
+        },
+        "fee": {
+          "type": "flat",
+          "flatAmount": 25,
+          "currency": "USD"
+        },
+        "currencies": [
+          "USD"
+        ],
         "notes": "Used for traders outside the US; slower settlement and a processing fee may apply."
       }
     ],
@@ -113,7 +141,12 @@
       "answer": "Apex Trader Funding is a futures-focused proprietary trading firm founded in 2021 by Darrell Martin and headquartered in Austin, Texas. Traders pass an End-of-Day or Intraday evaluation to receive a simulated Performance Account (PA) from $25,000 to $300,000 and can hold up to 20 PAs at once, trading futures markets only (no forex or CFDs).",
       "slug": "what-is-apex-trader-funding",
       "locale": "en",
-      "keywords": ["Apex Trader Funding", "futures prop firm", "Performance Account", "Austin Texas"],
+      "keywords": [
+        "Apex Trader Funding",
+        "futures prop firm",
+        "Performance Account",
+        "Austin Texas"
+      ],
       "seo": {
         "title": "What is Apex Trader Funding? | Prop Firm FAQ",
         "metaDescription": "Apex Trader Funding is a Texas-based futures prop firm founded in 2021, offering Performance Accounts from $25K to $300K.",
@@ -128,7 +161,12 @@
       "answer": "Apex pays 100% of the first $25,000 in cumulative approved payouts per Performance Account, then 90% to the trader / 10% to Apex after that threshold. This tiered split has stayed unchanged through the March 2026 rules overhaul, even though the payout cycle and consistency requirements around it were revised.",
       "slug": "profit-split",
       "locale": "en",
-      "keywords": ["Apex profit split", "100% first 25k", "90/10 split", "futures payout"],
+      "keywords": [
+        "Apex profit split",
+        "100% first 25k",
+        "90/10 split",
+        "futures payout"
+      ],
       "seo": {
         "title": "Apex Trader Funding Profit Split: 100% then 90% | FAQ",
         "metaDescription": "Apex Trader Funding pays 100% of the first $25,000 in payouts per account, then a 90/10 split for everything after that.",
@@ -143,7 +181,12 @@
       "answer": "As of the March 2026 rules update, current Performance Accounts can request a payout as often as weekly once 5 qualifying trading days have passed. Legacy PAs purchased before 1 March 2026 keep the original 8-trading-day cycle. Every PA is limited to 6 total payouts on a rising cap ladder, after which the account closes and a new evaluation is required.",
       "slug": "payout-cycle",
       "locale": "en",
-      "keywords": ["Apex payout cycle", "5 qualifying days", "6 payout ladder", "weekly payout"],
+      "keywords": [
+        "Apex payout cycle",
+        "5 qualifying days",
+        "6 payout ladder",
+        "weekly payout"
+      ],
       "seo": {
         "title": "Apex Trader Funding Payout Cycle and 6-Payout Ladder | FAQ",
         "metaDescription": "Apex allows weekly payouts after 5 qualifying trading days, capped at 6 payouts per Performance Account on a rising ladder.",
@@ -158,7 +201,12 @@
       "answer": "US-based traders are paid via ACH, typically settling within 24–48 hours with no Apex-side fee. International traders are paid through Plane, which takes roughly 5–11 business days and may carry a processing fee. Every payout requires a $500 minimum and must keep the Safety Net (drawdown limit plus $100) intact in the account.",
       "slug": "withdrawal-methods-and-fees",
       "locale": "en",
-      "keywords": ["Apex withdrawal methods", "ACH", "Plane international", "Safety Net"],
+      "keywords": [
+        "Apex withdrawal methods",
+        "ACH",
+        "Plane international",
+        "Safety Net"
+      ],
       "seo": {
         "title": "Apex Trader Funding Withdrawal Methods and Fees | FAQ",
         "metaDescription": "Apex pays US traders via free ACH transfer and international traders via Plane, with a $500 minimum payout either way.",
@@ -173,7 +221,12 @@
       "answer": "No. Instead of growing a single account's balance over time, Apex lets traders hold up to 20 active Performance Accounts simultaneously across EOD, Intraday and Legacy types. Each PA runs a fixed 6-payout ladder with caps that rise per request, then closes once the 6th payout is processed, at which point a new evaluation is needed to open another PA. There is also no refundable one-time challenge fee — PAs run on a recurring activation/subscription model instead.",
       "slug": "no-scaling-plan",
       "locale": "en",
-      "keywords": ["Apex scaling plan", "20 accounts", "6 payout ladder", "no challenge refund"],
+      "keywords": [
+        "Apex scaling plan",
+        "20 accounts",
+        "6 payout ladder",
+        "no challenge refund"
+      ],
       "seo": {
         "title": "Does Apex Trader Funding Scale Accounts? | FAQ",
         "metaDescription": "Apex has no traditional scaling plan; traders instead run up to 20 Performance Accounts, each limited to 6 payouts.",

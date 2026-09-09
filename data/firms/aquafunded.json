@@ -1,6 +1,23 @@
 {
   "slug": "aquafunded",
   "status": "active",
+  "category": [
+    "forex"
+  ],
+  "tier": 2,
+  "platforms": [
+    "matchtrader",
+    "ctrader",
+    "mt5",
+    "tradelocker"
+  ],
+  "assets": [
+    "fx",
+    "metals",
+    "indices",
+    "crypto"
+  ],
+  "highlights": [],
   "payoutSpeed": "Within 24 Hours",
   "rating": null,
   "reviewCount": 0,
@@ -13,7 +30,7 @@
       "width": 128,
       "height": 128
     },
-    "foundedAt": "2023-01-01",
+    "foundedAt": "2023-12-01",
     "headquarters": {
       "city": "Dubai",
       "country": "United Arab Emirates",

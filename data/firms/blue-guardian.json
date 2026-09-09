@@ -1,6 +1,21 @@
 {
   "slug": "blue-guardian",
   "status": "active",
+  "category": [
+    "forex"
+  ],
+  "tier": 2,
+  "platforms": [
+    "matchtrader",
+    "mt5",
+    "tradelocker"
+  ],
+  "assets": [
+    "fx",
+    "indices",
+    "crypto"
+  ],
+  "highlights": [],
   "payoutSpeed": "Within 24-48 Hours",
   "rating": 3.7,
   "reviewCount": 2100,
@@ -15,9 +30,9 @@
     },
     "foundedAt": "2021-06-01",
     "headquarters": {
-      "city": "London",
-      "country": "United Kingdom",
-      "countryCode": "GB"
+      "city": "Dubai",
+      "country": "United Arab Emirates",
+      "countryCode": "AE"
     },
     "website": "https://blueguardian.com",
     "funding": {

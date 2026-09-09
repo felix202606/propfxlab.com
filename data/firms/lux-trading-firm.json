@@ -1,6 +1,23 @@
 {
   "slug": "lux-trading-firm",
   "status": "active",
+  "category": [
+    "forex"
+  ],
+  "tier": 2,
+  "platforms": [
+    "tradingview",
+    "matchtrader",
+    "mt5",
+    "mt4"
+  ],
+  "assets": [
+    "fx",
+    "indices",
+    "metals",
+    "crypto"
+  ],
+  "highlights": [],
   "payoutSpeed": "Within 24-48 Hours",
   "rating": 3.9,
   "reviewCount": 622,

@@ -1,6 +1,24 @@
 {
   "slug": "for-traders",
   "status": "active",
+  "category": [
+    "forex"
+  ],
+  "tier": 2,
+  "platforms": [
+    "ctrader",
+    "mt5",
+    "mt4",
+    "tradelocker"
+  ],
+  "assets": [
+    "fx",
+    "metals",
+    "indices",
+    "energy",
+    "crypto"
+  ],
+  "highlights": [],
   "payoutSpeed": "Within 24 Hours",
   "rating": 4.5,
   "reviewCount": 882,
@@ -13,11 +31,11 @@
       "width": 128,
       "height": 128
     },
-    "foundedAt": "2023-01-01",
+    "foundedAt": "2023-06-01",
     "headquarters": {
-      "city": "Prague",
-      "country": "Czech Republic",
-      "countryCode": "CZ"
+      "city": "Dubai",
+      "country": "United Arab Emirates",
+      "countryCode": "AE"
     },
     "website": "https://www.fortraders.com",
     "funding": {

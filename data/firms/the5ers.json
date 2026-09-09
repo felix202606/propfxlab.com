@@ -1,6 +1,21 @@
 {
   "slug": "the5ers",
   "status": "active",
+  "category": [
+    "forex"
+  ],
+  "tier": 1,
+  "platforms": [
+    "mt5"
+  ],
+  "assets": [
+    "fx",
+    "metals",
+    "indices",
+    "energy",
+    "crypto"
+  ],
+  "highlights": [],
   "payoutSpeed": "Within 24 Hours",
   "rating": 4.8,
   "reviewCount": 37071,
@@ -13,7 +28,7 @@
       "width": 128,
       "height": 128
     },
-    "foundedAt": "2016-04-01",
+    "foundedAt": "2016-01-01",
     "headquarters": {
       "city": "Raanana",
       "country": "Israel",

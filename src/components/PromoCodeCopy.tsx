@@ -7,17 +7,23 @@ export function PromoCodeCopy({
   code,
   href,
   compact = false,
+  copyOnly = false,
+  discountLabel,
 }: {
   code: string;
   href: string;
   compact?: boolean;
+  copyOnly?: boolean;
+  discountLabel?: string;
 }) {
   const t = useTranslations("FirmCard");
   const [copied, setCopied] = useState(false);
 
   async function copyCode() {
-    // Open synchronously so the click still counts as a user gesture for popups.
-    window.open(href, "_blank", "noopener,noreferrer");
+    if (!copyOnly) {
+      // Open synchronously so the click still counts as a user gesture for popups.
+      window.open(href, "_blank", "noopener,noreferrer");
+    }
     try {
       await navigator.clipboard.writeText(code);
       setCopied(true);
@@ -25,6 +31,25 @@ export function PromoCodeCopy({
     } catch {
       setCopied(false);
     }
+  }
+
+  if (copyOnly && discountLabel) {
+    return (
+      <button
+        type="button"
+        onClick={copyCode}
+        aria-live="polite"
+        title={code}
+        className="inline-flex max-w-full items-center gap-1 rounded-md border border-fuchsia-500/40 bg-gradient-to-r from-violet-600/30 via-fuchsia-600/20 to-rose-600/30 px-1.5 py-0.5 text-left transition-all hover:border-fuchsia-400/70 hover:brightness-110"
+      >
+        <span className="shrink-0 text-[10px] font-bold tracking-wide text-rose-200">
+          {discountLabel}
+        </span>
+        <code className="min-w-0 truncate font-mono text-[10px] font-semibold text-fuchsia-200">
+          {copied ? t("copied") : code}
+        </code>
+      </button>
+    );
   }
 
   return (

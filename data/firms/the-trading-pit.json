@@ -1,6 +1,22 @@
 {
   "slug": "the-trading-pit",
   "status": "active",
+  "category": [
+    "forex"
+  ],
+  "tier": 1,
+  "platforms": [
+    "mt4",
+    "mt5",
+    "ctrader"
+  ],
+  "assets": [
+    "fx",
+    "metals",
+    "indices",
+    "crypto"
+  ],
+  "highlights": [],
   "payoutSpeed": "Within 24 Hours",
   "rating": null,
   "reviewCount": 0,
@@ -13,7 +29,7 @@
       "width": 128,
       "height": 128
     },
-    "foundedAt": "2022-01-01",
+    "foundedAt": "2022-10-01",
     "headquarters": {
       "city": "Vaduz",
       "country": "Liechtenstein",

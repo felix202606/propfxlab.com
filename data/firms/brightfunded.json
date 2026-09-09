@@ -1,6 +1,23 @@
 {
   "slug": "brightfunded",
   "status": "active",
+  "category": [
+    "forex"
+  ],
+  "tier": 1,
+  "platforms": [
+    "ctrader",
+    "mt5",
+    "dxtrade"
+  ],
+  "assets": [
+    "fx",
+    "metals",
+    "indices",
+    "energy",
+    "crypto"
+  ],
+  "highlights": [],
   "payoutSpeed": "Within 24 Hours",
   "rating": 4.2,
   "reviewCount": 530,
@@ -13,11 +30,11 @@
       "width": 128,
       "height": 128
     },
-    "foundedAt": "2023-04-01",
+    "foundedAt": "2023-09-01",
     "headquarters": {
-      "city": "Amsterdam",
-      "country": "Netherlands",
-      "countryCode": "NL"
+      "city": "Dubai",
+      "country": "United Arab Emirates",
+      "countryCode": "AE"
     },
     "website": "https://www.brightfunded.com",
     "funding": {

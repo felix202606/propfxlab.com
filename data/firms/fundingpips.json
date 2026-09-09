@@ -1,6 +1,25 @@
 {
   "slug": "fundingpips",
   "status": "active",
+  "category": [
+    "forex"
+  ],
+  "tier": 1,
+  "platforms": [
+    "matchtrader",
+    "ctrader",
+    "mt5"
+  ],
+  "assets": [
+    "fx",
+    "metals",
+    "indices",
+    "energy",
+    "crypto"
+  ],
+  "highlights": [
+    "low_entry"
+  ],
   "payoutSpeed": "Within 24–72 Hours",
   "rating": 4.5,
   "reviewCount": 67813,
@@ -48,9 +67,18 @@
         "method": "crypto",
         "minAmount": 10,
         "maxAmount": null,
-        "processingBusinessDays": { "min": 0, "max": 1 },
-        "fee": { "type": "flat", "flatAmount": 10, "currency": "USD" },
-        "currencies": ["USD"],
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "flat",
+          "flatAmount": 10,
+          "currency": "USD"
+        },
+        "currencies": [
+          "USD"
+        ],
         "notes": "Fastest method; network gas fees are separate from FundingPips' own processing fee."
       },
       {
@@ -59,9 +87,18 @@
         "method": "ewallet",
         "minAmount": 500,
         "maxAmount": null,
-        "processingBusinessDays": { "min": 1, "max": 3 },
-        "fee": { "type": "flat", "flatAmount": 10, "currency": "USD" },
-        "currencies": ["USD"],
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 3
+        },
+        "fee": {
+          "type": "flat",
+          "flatAmount": 10,
+          "currency": "USD"
+        },
+        "currencies": [
+          "USD"
+        ],
         "notes": "Best for traders who cash out regularly; requires one-time identity verification."
       },
       {
@@ -70,9 +107,19 @@
         "method": "bank_wire",
         "minAmount": 500,
         "maxAmount": null,
-        "processingBusinessDays": { "min": 2, "max": 5 },
-        "fee": { "type": "flat", "flatAmount": 10, "currency": "USD" },
-        "currencies": ["USD", "EUR"],
+        "processingBusinessDays": {
+          "min": 2,
+          "max": 5
+        },
+        "fee": {
+          "type": "flat",
+          "flatAmount": 10,
+          "currency": "USD"
+        },
+        "currencies": [
+          "USD",
+          "EUR"
+        ],
         "notes": "Recommended for larger payouts; intermediary bank fees may apply."
       }
     ],
@@ -154,7 +201,13 @@
       "answer": "FundingPips is a proprietary trading firm founded in November 2022 and headquartered in Dubai, UAE. It offers 1-Step, 2-Step, Zero and PRIME evaluation models on accounts from $5,000 to $300,000, with scaling up to $2,000,000, and has paid out more than $267 million to funded traders as of 2026.",
       "slug": "what-is-fundingpips",
       "locale": "en",
-      "keywords": ["FundingPips", "prop firm", "Dubai", "evaluation", "Zero account"],
+      "keywords": [
+        "FundingPips",
+        "prop firm",
+        "Dubai",
+        "evaluation",
+        "Zero account"
+      ],
       "seo": {
         "title": "What is FundingPips? | Prop Firm FAQ",
         "metaDescription": "FundingPips is a Dubai-based prop firm founded in 2022, offering 1-Step, 2-Step, Zero and PRIME funded accounts.",
@@ -169,7 +222,13 @@
       "answer": "Unlike firms with one fixed split, FundingPips ties your profit share to the reward cycle you choose before your first trade: 60% for weekly payouts, 80% for bi-weekly (the most common default), 90% for on-demand withdrawals, and 100% for a monthly cycle. This choice is locked in once selected, so pick the cycle that matches how often you want to cash out.",
       "slug": "profit-split",
       "locale": "en",
-      "keywords": ["FundingPips profit split", "60%", "80%", "100% monthly", "on-demand"],
+      "keywords": [
+        "FundingPips profit split",
+        "60%",
+        "80%",
+        "100% monthly",
+        "on-demand"
+      ],
       "seo": {
         "title": "FundingPips Profit Split by Payout Cycle | FAQ",
         "metaDescription": "FundingPips pays 60% weekly, 80% bi-weekly, 90% on-demand, or 100% monthly, depending on the cycle you select at signup.",
@@ -184,7 +243,12 @@
       "answer": "Weekly-cycle accounts pay out every Tuesday, with withdrawals opening after 5 trading days. Bi-weekly, monthly and on-demand cycles follow their own respective schedules. Every request needs at least 1% net profit on the initial balance, and Master accounts are set to view-only while a payout is being processed.",
       "slug": "payout-cycle",
       "locale": "en",
-      "keywords": ["FundingPips payout cycle", "Tuesday Payday", "1% profit target", "first withdrawal"],
+      "keywords": [
+        "FundingPips payout cycle",
+        "Tuesday Payday",
+        "1% profit target",
+        "first withdrawal"
+      ],
       "seo": {
         "title": "FundingPips Payout Cycle and First Withdrawal | FAQ",
         "metaDescription": "FundingPips' Tuesday Payday opens after 5 trading days; every cycle requires at least 1% net profit to request a payout.",
@@ -199,7 +263,12 @@
       "answer": "Payouts are available via cryptocurrency (USDT/USDC, fastest and no fixed minimum), the Rise platform (bank or crypto, $500 minimum, requires KYC), or a direct bank wire ($500 minimum). FundingPips applies a flat $10 processing fee per withdrawal; crypto network fees and bank intermediary charges are separate and outside the firm's control.",
       "slug": "withdrawal-methods-and-fees",
       "locale": "en",
-      "keywords": ["FundingPips withdrawal fee", "$10 fee", "Rise", "crypto payout"],
+      "keywords": [
+        "FundingPips withdrawal fee",
+        "$10 fee",
+        "Rise",
+        "crypto payout"
+      ],
       "seo": {
         "title": "FundingPips Withdrawal Methods and $10 Fee | FAQ",
         "metaDescription": "FundingPips charges a flat $10 processing fee across crypto, Rise and bank wire payouts, each with its own minimum.",
@@ -214,7 +283,12 @@
       "answer": "PRIME is unlocked after your 3rd reward cycle (or by invitation) and scales your account by 10% every time you hit a profit milestone: +5% cumulative profit for Levels 1–4, then +10% per level after that. Scaling never resets when you withdraw. Reaching Hot Seat (Elite) status after 16 rewards and 40% cumulative profit doubles your original balance and raises your split to 100%, up to a $2,000,000 ceiling.",
       "slug": "scaling-plan",
       "locale": "en",
-      "keywords": ["FundingPips PRIME", "scaling plan", "Hot Seat", "$2 million"],
+      "keywords": [
+        "FundingPips PRIME",
+        "scaling plan",
+        "Hot Seat",
+        "$2 million"
+      ],
       "seo": {
         "title": "FundingPips PRIME Scaling Plan | FAQ",
         "metaDescription": "FundingPips PRIME grows accounts 10% per profit milestone toward a $2M cap, topping out at a 100% split at Hot Seat.",

@@ -1,23 +1,28 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { FirmCard } from "@/components/FirmCard";
-import { FirmFilterBar, type SortMode, type ViewMode } from "@/components/FirmFilterBar";
+import { FirmFilterBar, type SortMode } from "@/components/FirmFilterBar";
 import { FirmTable } from "@/components/FirmTable";
 import { FirmTabs, type FirmTab } from "@/components/FirmTabs";
+import { COMPARE_EXAMPLE_PROFIT } from "@/lib/compare";
+import {
+  NET_PROFIT_ACCOUNT,
+  firmHasHighlights,
+  firmMatchesQuery,
+  maxAllocation,
+  yearsInOperation,
+} from "@/lib/firm-directory";
 import { HERO_ACCOUNT_SIZES } from "@/lib/offers";
 import {
   calculatePayout,
   formatMoney,
   type PayoutBreakdown,
 } from "@/lib/payout";
-import type { PropFirm } from "@/lib/schema";
+import type { FirmHighlight, PropFirm } from "@/lib/schema";
 
 const DEFAULT_ACCOUNT = 100_000;
-const DEFAULT_PROFIT = 8000;
-const PAGE_SIZE = 10;
 
 const STATUS_WEIGHT: Record<PropFirm["status"], number> = {
   active: 0,
@@ -47,6 +52,13 @@ function payoutForFirm(
   return result;
 }
 
+function matchesTab(firm: PropFirm, tab: FirmTab): boolean {
+  if (tab === "top") return firm.tier === 1;
+  if (tab === "forex") return firm.tier === 1 && firm.category.includes("forex");
+  if (tab === "futures") return firm.category.includes("futures");
+  return true;
+}
+
 export function HomeMarketplace({
   firms,
   defunctCount,
@@ -57,22 +69,33 @@ export function HomeMarketplace({
   const t = useTranslations("HomePage");
   const calc = useTranslations("PayoutCalculator");
   const [accountSize, setAccountSize] = useState(DEFAULT_ACCOUNT);
-  const [profit, setProfit] = useState(String(DEFAULT_PROFIT));
+  const [profit, setProfit] = useState(String(COMPARE_EXAMPLE_PROFIT));
   const [searchQuery, setSearchQuery] = useState("");
-  const [viewMode, setViewMode] = useState<ViewMode>("card");
   const [sortMode, setSortMode] = useState<SortMode>("takeHome");
-  const [activeTab, setActiveTab] = useState<FirmTab>("top10");
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const [activeTab, setActiveTab] = useState<FirmTab>("top");
+  const [highlights, setHighlights] = useState<FirmHighlight[]>([]);
 
   const profitValue = Number(profit);
   const hasValidProfit = Number.isFinite(profitValue) && profitValue >= 0;
+
+  const tabCounts = useMemo(
+    () => ({
+      top: firms.filter((firm) => firm.tier === 1).length,
+      forex: firms.filter(
+        (firm) => firm.tier === 1 && firm.category.includes("forex"),
+      ).length,
+      futures: firms.filter((firm) => firm.category.includes("futures")).length,
+      all: firms.length,
+    }),
+    [firms],
+  );
 
   const ranked = useMemo(() => {
     if (!hasValidProfit) return [];
     return firms
       .map((firm) => ({
         firm,
-        breakdown: payoutForFirm(firm, accountSize, profitValue),
+        breakdown: payoutForFirm(firm, NET_PROFIT_ACCOUNT, profitValue),
       }))
       .sort((a, b) => {
         const aWeight = STATUS_WEIGHT[a.firm.status];
@@ -84,34 +107,43 @@ export function HomeMarketplace({
           if (bRating !== aRating) return bRating - aRating;
           return b.firm.reviewCount - a.firm.reviewCount;
         }
+        if (sortMode === "years") {
+          const aYears = yearsInOperation(a.firm.basic.foundedAt);
+          const bYears = yearsInOperation(b.firm.basic.foundedAt);
+          if (bYears !== aYears) return bYears - aYears;
+        }
         const aPay = a.breakdown?.netPayout ?? -1;
         const bPay = b.breakdown?.netPayout ?? -1;
         return bPay - aPay;
       });
-  }, [firms, accountSize, profitValue, hasValidProfit, sortMode]);
+  }, [firms, profitValue, hasValidProfit, sortMode]);
 
   const leader =
     ranked.find((entry) => entry.firm.status !== "suspended") ?? ranked[0];
-  const preview = leader?.breakdown ?? null;
+  const preview =
+    leader && hasValidProfit
+      ? payoutForFirm(leader.firm, accountSize, profitValue)
+      : null;
 
   const filteredRanked = useMemo(() => {
-    const query = searchQuery.trim().toLowerCase();
-    if (!query) return ranked;
-    return ranked.filter(({ firm }) =>
-      firm.basic.name.toLowerCase().includes(query),
+    return ranked.filter(
+      ({ firm }) =>
+        firmMatchesQuery(firm, searchQuery) && firmHasHighlights(firm, highlights),
     );
-  }, [ranked, searchQuery]);
+  }, [ranked, searchQuery, highlights]);
 
-  useEffect(() => {
-    setVisibleCount(PAGE_SIZE);
-  }, [searchQuery, activeTab, sortMode]);
+  const visibleList = useMemo(
+    () =>
+      filteredRanked
+        .filter(({ firm }) => matchesTab(firm, activeTab))
+        .map((row, index) => ({ ...row, rank: index + 1 })),
+    [filteredRanked, activeTab],
+  );
 
-  const top10List = filteredRanked.slice(0, 10);
-  const allList = filteredRanked.slice(0, visibleCount);
-
-  const canLoadMore = activeTab === "all" && visibleCount < filteredRanked.length;
-
-  const visibleList = activeTab === "top10" ? top10List : allList;
+  const maxAllocationCap = useMemo(
+    () => Math.max(...firms.map((firm) => maxAllocation(firm)), 1),
+    [firms],
+  );
 
   return (
     <>
@@ -251,28 +283,21 @@ export function HomeMarketplace({
         </div>
       </section>
 
-      <FirmFilterBar
-        searchQuery={searchQuery}
-        onSearchChange={setSearchQuery}
-        accountSize={accountSize}
-        onAccountSizeChange={setAccountSize}
-        viewMode={viewMode}
-        onViewModeChange={setViewMode}
-        sortMode={sortMode}
-        onSortModeChange={setSortMode}
-      />
-
-      <section id="rankings" className="mx-auto w-full max-w-6xl scroll-mt-24 px-4 py-8">
+      <section
+        id="rankings"
+        className="scroll-mt-24 border-y border-slate-800 bg-[#0B0F19]"
+      >
+        <div className="mx-auto w-full max-w-6xl px-4 py-8">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-              <span className="bg-gradient-to-r from-white to-emerald-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-white via-slate-100 to-indigo-300 bg-clip-text text-transparent">
                 {t("rankingsTitle")}
               </span>
             </h2>
-            <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-400">
+            <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-400">
               {t("rankingsSubtitle", {
-                account: formatAccountChip(accountSize),
+                account: formatAccountChip(NET_PROFIT_ACCOUNT),
                 profit: hasValidProfit
                   ? formatMoney(profitValue, "USD")
                   : "—",
@@ -281,12 +306,20 @@ export function HomeMarketplace({
           </div>
         </div>
 
-        <div className="mt-6">
+        <div className="sticky top-[92px] z-40 -mx-4 mt-6 space-y-3 border-b border-slate-800 bg-[#0B0F19]/95 px-4 py-3 backdrop-blur-xl sm:top-16">
           <FirmTabs
             active={activeTab}
             onChange={setActiveTab}
-            allCount={filteredRanked.length}
+            counts={tabCounts}
             defunctCount={defunctCount}
+          />
+          <FirmFilterBar
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+            sortMode={sortMode}
+            onSortModeChange={setSortMode}
+            highlights={highlights}
+            onHighlightsChange={setHighlights}
           />
         </div>
 
@@ -295,58 +328,24 @@ export function HomeMarketplace({
             {[0, 1, 2, 3, 4, 5].map((slot) => (
               <div
                 key={slot}
-                className="h-28 animate-pulse rounded-lg border border-white/10 bg-white/[0.03]"
+                className="h-28 animate-pulse rounded-lg border border-slate-800 bg-slate-900/40"
               />
             ))}
-            <p className="sm:col-span-2 lg:col-span-3 text-sm text-zinc-500">
+            <p className="sm:col-span-2 lg:col-span-3 text-sm text-slate-500">
               {t("emptyRankings")}
             </p>
           </div>
         ) : visibleList.length === 0 ? (
-          <p className="mt-8 text-sm text-zinc-500">{t("noResults")}</p>
+          <p className="mt-8 text-sm text-slate-500">{t("noResults")}</p>
         ) : (
-          <>
-            {activeTab === "all" ? (
-              <p className="mt-6 text-xs tracking-wide text-zinc-500">
-                {t("showingCount", {
-                  shown: visibleList.length,
-                  total: filteredRanked.length,
-                })}
-              </p>
-            ) : null}
-
-            {viewMode === "table" ? (
-              <div className="mt-4">
-                <FirmTable rows={visibleList} />
-              </div>
-            ) : (
-              <ol className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-                {visibleList.map(({ firm, breakdown }, index) => (
-                  <li key={firm.slug}>
-                    <FirmCard
-                      firm={firm}
-                      rank={index + 1}
-                      netPayout={breakdown?.netPayout ?? null}
-                      currency={firm.calculator.currency}
-                    />
-                  </li>
-                ))}
-              </ol>
-            )}
-
-            {canLoadMore ? (
-              <div className="mt-6 flex justify-center">
-                <button
-                  type="button"
-                  onClick={() => setVisibleCount((count) => count + PAGE_SIZE)}
-                  className="inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/5 px-5 py-2.5 text-sm font-medium text-zinc-200 transition-colors hover:border-emerald-400/30 hover:bg-emerald-400/10 hover:text-emerald-200"
-                >
-                  {t("loadMoreCta")}
-                </button>
-              </div>
-            ) : null}
-          </>
+          <div className="mt-4">
+            <FirmTable
+              rows={visibleList}
+              maxAllocationCap={maxAllocationCap}
+            />
+          </div>
         )}
+        </div>
       </section>
     </>
   );

@@ -1,6 +1,26 @@
 {
   "slug": "fintokei",
   "status": "active",
+  "category": [
+    "forex"
+  ],
+  "tier": 1,
+  "platforms": [
+    "mt4",
+    "mt5",
+    "ctrader",
+    "tradingview"
+  ],
+  "assets": [
+    "fx",
+    "metals",
+    "indices",
+    "energy",
+    "crypto"
+  ],
+  "highlights": [
+    "licensed_broker"
+  ],
   "payoutSpeed": "Within 24 Hours",
   "rating": 4.3,
   "reviewCount": 1308,
@@ -13,7 +33,7 @@
       "width": 128,
       "height": 128
     },
-    "foundedAt": "2021-09-01",
+    "foundedAt": "2023-04-01",
     "headquarters": {
       "city": "Brno",
       "country": "Czech Republic",

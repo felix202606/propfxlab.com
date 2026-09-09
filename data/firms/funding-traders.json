@@ -1,6 +1,22 @@
 {
   "slug": "funding-traders",
   "status": "active",
+  "category": [
+    "forex"
+  ],
+  "tier": 1,
+  "platforms": [
+    "mt5",
+    "dxtrade",
+    "tradelocker"
+  ],
+  "assets": [
+    "fx",
+    "metals",
+    "indices",
+    "crypto"
+  ],
+  "highlights": [],
   "payoutSpeed": "Within 48 Hours",
   "rating": null,
   "reviewCount": 0,
@@ -13,7 +29,7 @@
       "width": 128,
       "height": 128
     },
-    "foundedAt": "2023-01-01",
+    "foundedAt": "2023-04-01",
     "headquarters": {
       "city": "Dubai",
       "country": "United Arab Emirates",
@@ -46,9 +62,16 @@
         "method": "crypto",
         "minAmount": 50,
         "maxAmount": null,
-        "processingBusinessDays": { "min": 0, "max": 2 },
-        "fee": { "type": "none" },
-        "currencies": ["USD"],
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 2
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ],
         "notes": "Fastest route; network fees are outside Funding Traders' control."
       },
       {
@@ -57,9 +80,16 @@
         "method": "bank_wire",
         "minAmount": 200,
         "maxAmount": null,
-        "processingBusinessDays": { "min": 2, "max": 5 },
-        "fee": { "type": "none" },
-        "currencies": ["USD"]
+        "processingBusinessDays": {
+          "min": 2,
+          "max": 5
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ]
       }
     ],
     "minPayoutAmount": 50,
@@ -125,7 +155,13 @@
       "answer": "Funding Traders is a proprietary trading firm founded in 2023, operated by MCF Group FZCO in Dubai, UAE, with a US entity (FT US Inc) based in Miami Beach, Florida. It offers Instant Funded, 2-Step PRO6, 2-Step PRO10 and 1-Step account types on forex, indices, commodities and crypto, and has funded over 53,000 trading accounts.",
       "slug": "what-is-funding-traders",
       "locale": "en",
-      "keywords": ["Funding Traders", "prop firm", "Dubai", "Instant Funded", "evaluation"],
+      "keywords": [
+        "Funding Traders",
+        "prop firm",
+        "Dubai",
+        "Instant Funded",
+        "evaluation"
+      ],
       "seo": {
         "title": "What is Funding Traders? | Prop Firm FAQ",
         "metaDescription": "Funding Traders is a Dubai-based prop firm founded in 2023, offering Instant Funded, 1-Step and 2-Step evaluation accounts.",
@@ -140,7 +176,12 @@
       "answer": "2-Step PRO and 1-Step PRO accounts default to an 80% trader / 20% firm split, while Instant Funded accounts default higher at 90% / 10%. Any account type can reach a full 100% split by using a paid add-on or promo code at checkout.",
       "slug": "profit-split",
       "locale": "en",
-      "keywords": ["Funding Traders profit split", "80%", "90% Instant", "100% add-on"],
+      "keywords": [
+        "Funding Traders profit split",
+        "80%",
+        "90% Instant",
+        "100% add-on"
+      ],
       "seo": {
         "title": "Funding Traders Profit Split: 80% to 100% | FAQ",
         "metaDescription": "Funding Traders pays 80% by default on evaluation accounts, 90% on Instant Funded, with a 100% add-on available.",
@@ -155,7 +196,12 @@
       "answer": "2-Step PRO6, 2-Step PRO10 and 1-Step PRO accounts default to a 21-day payout schedule, with a 14-day cycle available as a paid upgrade. Instant Funded accounts pay every 14 days by default. Funding Traders publicly guarantees processing within 48 hours of a valid request, backed by a $1,000 compensation policy if that deadline is missed.",
       "slug": "payout-cycle",
       "locale": "en",
-      "keywords": ["Funding Traders payout cycle", "21 days", "14 days", "48 hour guarantee"],
+      "keywords": [
+        "Funding Traders payout cycle",
+        "21 days",
+        "14 days",
+        "48 hour guarantee"
+      ],
       "seo": {
         "title": "Funding Traders Payout Cycle and 48-Hour Guarantee | FAQ",
         "metaDescription": "Funding Traders pays every 21 days by default (14-day upgrade available) with a 48-hour processing guarantee.",
@@ -170,7 +216,12 @@
       "answer": "Withdrawals are available via cryptocurrency through Coinbase Commerce (minimum $50, fastest option) or bank transfer via Rise (minimum $200, 2–5 business days). Funding Traders does not add its own processing fee on top of these minimums, though your total profit must exceed 1% of the starting balance before a payout can be requested.",
       "slug": "withdrawal-methods-and-fees",
       "locale": "en",
-      "keywords": ["Funding Traders withdrawal methods", "crypto", "Rise", "1% profit target"],
+      "keywords": [
+        "Funding Traders withdrawal methods",
+        "crypto",
+        "Rise",
+        "1% profit target"
+      ],
       "seo": {
         "title": "Funding Traders Withdrawal Methods and Fees | FAQ",
         "metaDescription": "Funding Traders offers crypto (min $50) and Rise bank transfer (min $200) payouts with no added internal fee.",
@@ -185,7 +236,12 @@
       "answer": "Funded accounts are reviewed automatically every 2 months. Traders who achieve at least 8% net profit over that cycle receive a 25% account size increase applied directly to their existing account (no new evaluation purchase required), scaling up toward a $2,000,000 total allocation cap. The profit split itself stays at its current tier through scaling unless separately upgraded.",
       "slug": "scaling-plan",
       "locale": "en",
-      "keywords": ["Funding Traders scaling plan", "25% increase", "8% profit", "$2 million"],
+      "keywords": [
+        "Funding Traders scaling plan",
+        "25% increase",
+        "8% profit",
+        "$2 million"
+      ],
       "seo": {
         "title": "Funding Traders Scaling Plan Explained | FAQ",
         "metaDescription": "Funding Traders reviews accounts every 2 months and grants a 25% size increase after 8% net profit, up to $2M total.",

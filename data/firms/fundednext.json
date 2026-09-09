@@ -1,6 +1,22 @@
 {
   "slug": "fundednext",
   "status": "active",
+  "category": [
+    "forex"
+  ],
+  "tier": 1,
+  "platforms": [
+    "matchtrader",
+    "ctrader",
+    "mt5"
+  ],
+  "assets": [
+    "fx",
+    "metals",
+    "indices",
+    "crypto"
+  ],
+  "highlights": [],
   "payoutSpeed": "Within 24 Hours",
   "rating": 4.5,
   "reviewCount": 78108,
@@ -47,9 +63,18 @@
         "method": "bank_wire",
         "minAmount": 250,
         "maxAmount": null,
-        "processingBusinessDays": { "min": 2, "max": 5 },
-        "fee": { "type": "percent", "percent": 3.5 },
-        "currencies": ["USD", "EUR"],
+        "processingBusinessDays": {
+          "min": 2,
+          "max": 5
+        },
+        "fee": {
+          "type": "percent",
+          "percent": 3.5
+        },
+        "currencies": [
+          "USD",
+          "EUR"
+        ],
         "notes": "Standard route for larger rewards; intermediary bank charges may apply on top of FundedNext's processing fee."
       },
       {
@@ -58,9 +83,17 @@
         "method": "crypto",
         "minAmount": 250,
         "maxAmount": null,
-        "processingBusinessDays": { "min": 0, "max": 1 },
-        "fee": { "type": "percent", "percent": 3.5 },
-        "currencies": ["USD"],
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "percent",
+          "percent": 3.5
+        },
+        "currencies": [
+          "USD"
+        ],
         "notes": "Fastest option; blockchain network/gas fees are separate from FundedNext's processing fee."
       },
       {
@@ -69,9 +102,18 @@
         "method": "ewallet",
         "minAmount": 250,
         "maxAmount": null,
-        "processingBusinessDays": { "min": 1, "max": 2 },
-        "fee": { "type": "percent", "percent": 3.5 },
-        "currencies": ["USD", "EUR"]
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 2
+        },
+        "fee": {
+          "type": "percent",
+          "percent": 3.5
+        },
+        "currencies": [
+          "USD",
+          "EUR"
+        ]
       },
       {
         "id": "card-payout",
@@ -79,9 +121,17 @@
         "method": "card",
         "minAmount": 250,
         "maxAmount": null,
-        "processingBusinessDays": { "min": 1, "max": 3 },
-        "fee": { "type": "percent", "percent": 3.5 },
-        "currencies": ["USD"]
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 3
+        },
+        "fee": {
+          "type": "percent",
+          "percent": 3.5
+        },
+        "currencies": [
+          "USD"
+        ]
       }
     ],
     "minPayoutAmount": 250,
@@ -155,7 +205,13 @@
       "answer": "FundedNext is a proprietary trading firm founded in March 2022 and headquartered in Ajman, United Arab Emirates. It offers 1-Step, 2-Step, Stellar Lite and Instant Funding evaluation models on CFD accounts from $6,000 to $200,000, plus a separate futures division, and has paid out more than $300M to over 95,000 traders as of 2026.",
       "slug": "what-is-fundednext",
       "locale": "en",
-      "keywords": ["FundedNext", "prop firm", "UAE", "Stellar", "evaluation"],
+      "keywords": [
+        "FundedNext",
+        "prop firm",
+        "UAE",
+        "Stellar",
+        "evaluation"
+      ],
       "seo": {
         "title": "What is FundedNext? | Prop Firm FAQ",
         "metaDescription": "FundedNext is a UAE-based prop firm founded in 2022. Learn how its Stellar, Evaluation and Instant Funding models work.",
@@ -170,7 +226,13 @@
       "answer": "The default reward share is 80% for the trader and 20% for FundedNext. Paying for the 90% or 95% split add-on at checkout raises your share immediately, while reaching FundedNext Pro status (4 qualifying reward cycles with at least 4% growth each, over 2+ months) permanently lifts CFD accounts to a 90% split. Futures Rapid and Legacy accounts pay a full 100% split with no upgrade needed.",
       "slug": "profit-split",
       "locale": "en",
-      "keywords": ["FundedNext profit split", "80%", "95%", "FundedNext Pro", "futures 100%"],
+      "keywords": [
+        "FundedNext profit split",
+        "80%",
+        "95%",
+        "FundedNext Pro",
+        "futures 100%"
+      ],
       "seo": {
         "title": "FundedNext Profit Split: 80% to 95% | FAQ",
         "metaDescription": "FundedNext starts at 80%, with paid add-ons to 90–95% for CFDs and a full 100% split on futures accounts.",
@@ -185,7 +247,12 @@
       "answer": "Timing depends on the account model: Stellar 1-Step and Instant accounts unlock a first reward after 5 trading days, while Stellar 2-Step and Evaluation accounts wait 14–21 calendar days for the first cycle. Later cycles run weekly or bi-weekly depending on the plan. FundedNext commits to processing every approved payout within 24 hours, and pays a $1,000 compensation bonus if it misses that window.",
       "slug": "payout-cycle",
       "locale": "en",
-      "keywords": ["FundedNext payout cycle", "24 hour guarantee", "bi-weekly", "Stellar payout"],
+      "keywords": [
+        "FundedNext payout cycle",
+        "24 hour guarantee",
+        "bi-weekly",
+        "Stellar payout"
+      ],
       "seo": {
         "title": "FundedNext Payout Cycle and 24-Hour Guarantee | FAQ",
         "metaDescription": "FundedNext pays weekly or bi-weekly depending on plan, with a 24-hour processing guarantee or a $1,000 penalty payout.",
@@ -200,7 +267,12 @@
       "answer": "FundedNext supports bank wire, cryptocurrency (USDT), Skrill and card payouts, all starting from a $250 minimum. A processing fee of up to 3.5% is deducted from every withdrawal regardless of method; crypto withdrawals may also incur separate network/gas fees. There is no fee to request a payout beyond this processing charge.",
       "slug": "withdrawal-methods-and-fees",
       "locale": "en",
-      "keywords": ["FundedNext withdrawal fee", "3.5%", "crypto payout", "bank wire"],
+      "keywords": [
+        "FundedNext withdrawal fee",
+        "3.5%",
+        "crypto payout",
+        "bank wire"
+      ],
       "seo": {
         "title": "FundedNext Withdrawal Methods and Fees | FAQ",
         "metaDescription": "FundedNext charges up to a 3.5% processing fee on bank, card, Skrill and crypto payouts starting at a $250 minimum.",
@@ -215,7 +287,12 @@
       "answer": "After receiving 4 Performance Rewards with at least 4% account growth in each qualifying cycle, and staying active for a minimum of 2 months, your account is automatically scaled up 25% and your reward share rises to 90%. Each further qualifying cycle adds another 25%, up to a $4,000,000 ceiling. Cycles under 4% growth simply don't count toward the total rather than resetting your progress.",
       "slug": "scaling-plan",
       "locale": "en",
-      "keywords": ["FundedNext Pro", "scaling plan", "25% increase", "$4 million"],
+      "keywords": [
+        "FundedNext Pro",
+        "scaling plan",
+        "25% increase",
+        "$4 million"
+      ],
       "seo": {
         "title": "FundedNext Pro Scaling Plan Explained | FAQ",
         "metaDescription": "FundedNext Pro scales accounts 25% per qualifying cycle toward a $4M ceiling after 4 reward cycles with 4%+ growth each.",

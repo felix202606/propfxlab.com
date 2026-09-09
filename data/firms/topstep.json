@@ -1,6 +1,17 @@
 {
   "slug": "topstep",
   "status": "active",
+  "category": [
+    "futures"
+  ],
+  "tier": 1,
+  "platforms": [
+    "ninjatrader"
+  ],
+  "assets": [
+    "futures"
+  ],
+  "highlights": [],
   "payoutSpeed": "Within 24 Hours",
   "rating": 3.6,
   "reviewCount": 14657,

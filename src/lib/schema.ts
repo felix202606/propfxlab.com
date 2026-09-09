@@ -217,11 +217,58 @@ export const platformStatusSchema = z
   .enum(["active", "warning", "suspended"])
   .default("active");
 
+/** 交易赛道：外汇/CFD 或期货。数组便于日后双赛道平台扩展。 */
+export const firmCategorySchema = z.enum(["forex", "futures"]);
+
+/** 1 = 首页主列表顶级大厂，2 = 长尾/延伸评测归档 */
+export const firmTierSchema = z.union([z.literal(1), z.literal(2)]);
+
+/** 首页表格/搜索用的交易软件标识 */
+export const tradingPlatformSchema = z.enum([
+  "mt4",
+  "mt5",
+  "ctrader",
+  "tradovate",
+  "ninjatrader",
+  "thinktrader",
+  "matchtrader",
+  "tradelocker",
+  "tradingview",
+  "dxtrade",
+]);
+
+/** 首页快捷筛选徽章 */
+export const firmHighlightSchema = z.enum([
+  "licensed_broker",
+  "instant_payout",
+  "low_entry",
+]);
+
+/** 可交易品种：首页 Assets 徽章 */
+export const firmAssetSchema = z.enum([
+  "fx",
+  "futures",
+  "crypto",
+  "indices",
+  "metals",
+  "energy",
+]);
+
 export const propFirmSchema = z
   .object({
     slug: kebabSlug,
     /** 安全状态：active 正常运营 / warning 延迟预警 / suspended 暂停出金 */
     status: platformStatusSchema,
+    /** 赛道：forex = 外汇/CFD，futures = 期货 */
+    category: z.array(firmCategorySchema).min(1),
+    /** 1 顶级主列表 / 2 长尾归档 */
+    tier: firmTierSchema,
+    /** 支持的交易软件，供表格图标与搜索过滤 */
+    platforms: z.array(tradingPlatformSchema).min(1),
+    /** 可交易品种徽章 */
+    assets: z.array(firmAssetSchema).min(1),
+    /** 快捷筛选标签；没有则空数组 */
+    highlights: z.array(firmHighlightSchema).default([]),
     /** 卡片展示用的出金速度短文案，例如 "Instant"、"Within 24 Hours" */
     payoutSpeed: z.string().min(1),
     /**
@@ -261,6 +308,11 @@ export const propFirmSchema = z
   });
 
 export type PlatformStatus = z.infer<typeof platformStatusSchema>;
+export type FirmCategory = z.infer<typeof firmCategorySchema>;
+export type FirmTier = z.infer<typeof firmTierSchema>;
+export type TradingPlatform = z.infer<typeof tradingPlatformSchema>;
+export type FirmHighlight = z.infer<typeof firmHighlightSchema>;
+export type FirmAsset = z.infer<typeof firmAssetSchema>;
 export type Logo = z.infer<typeof logoSchema>;
 export type BasicInfo = z.infer<typeof basicInfoSchema>;
 export type WithdrawalFee = z.infer<typeof withdrawalFeeSchema>;
