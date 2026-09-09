@@ -24,7 +24,8 @@ const STATUS_DOT: Record<PlatformStatus, string> = {
 };
 
 const ROW_GRID =
-  "grid-cols-[minmax(220px,250px)_minmax(104px,0.65fr)_minmax(128px,0.9fr)_minmax(120px,0.85fr)_minmax(92px,0.55fr)_minmax(140px,0.9fr)_minmax(120px,0.75fr)_minmax(116px,0.55fr)]";
+  "grid w-full grid-cols-[minmax(220px,1.35fr)_72px_minmax(108px,0.9fr)_minmax(128px,1fr)_100px_108px_88px_minmax(128px,0.95fr)]";
+
 
 /** Sticky firm column: extends into row padding so scroll content never peeks underneath. */
 const STICKY_FIRM =
@@ -48,10 +49,10 @@ export function FirmTable({
   const cap = Math.max(maxAllocationCap, 1);
 
   return (
-    <div className="-mx-1 overflow-x-auto overscroll-x-contain px-1 [scrollbar-gutter:stable]">
-      <div className="min-w-[1260px] space-y-2.5">
+    <div className="w-full overflow-x-auto overscroll-x-contain [scrollbar-gutter:stable]">
+      <div className="min-w-[1080px] space-y-2.5">
         <div
-          className={`grid ${ROW_GRID} gap-3 px-3 py-2 text-[11px] font-medium tracking-wide text-slate-500 uppercase`}
+          className={`${ROW_GRID} items-end gap-x-3 px-3 py-2 text-[11px] font-medium tracking-wide text-slate-500 uppercase`}
         >
           <div className={`${STICKY_FIRM} z-30 py-2`}>
             {tHome("tableFirmColumn")}
@@ -59,10 +60,10 @@ export function FirmTable({
           <div>{tHome("tableOriginColumn")}</div>
           <div>{tHome("tableAssetsColumn")}</div>
           <div>{tHome("tablePlatformsColumn")}</div>
+          <div>{tHome("tablePromoColumn")}</div>
+          <div>{tHome("tableActionsColumn")}</div>
           <div>{tHome("tableMaxAllocationColumn")}</div>
           <div>{tHome("tableNetProfitColumn")}</div>
-          <div>{tHome("tablePromoColumn")}</div>
-          <div className="text-right">{tHome("tableActionsColumn")}</div>
         </div>
 
         <ul className="space-y-2.5">
@@ -83,7 +84,7 @@ export function FirmTable({
             return (
               <li key={firm.slug}>
                 <div
-                  className={`group grid ${ROW_GRID} items-center gap-3 rounded-xl border border-slate-800 bg-[#0B0F19] px-3 py-3.5 transition-all hover:border-indigo-500/50 hover:bg-indigo-500/[0.04] hover:shadow-[0_0_24px_-12px_rgba(99,102,241,0.55)]`}
+                  className={`group ${ROW_GRID} items-center gap-x-3 rounded-xl border border-slate-800 bg-[#0B0F19] px-3 py-3.5 transition-all hover:border-indigo-500/50 hover:bg-indigo-500/[0.04] hover:shadow-[0_0_24px_-12px_rgba(99,102,241,0.55)]`}
                 >
                   <div
                     className={`${STICKY_FIRM} -my-3.5 flex min-w-0 items-center gap-2.5 self-stretch rounded-l-[11px] py-3.5 transition-colors group-hover:bg-[#0d1224]`}
@@ -117,6 +118,21 @@ export function FirmTable({
                         </Link>
                       </div>
                       <TrustpilotBadge firm={firm} className="mt-1" />
+                      {firm.highlights.includes("exchange_depth") ||
+                      firm.highlights.includes("always_on") ? (
+                        <div className="mt-1 flex flex-wrap gap-1">
+                          {firm.highlights.includes("exchange_depth") ? (
+                            <span className="rounded-full border border-violet-400/30 bg-violet-500/10 px-1.5 py-px text-[10px] font-medium text-violet-200">
+                              {tHome("filterExchangeDepth")}
+                            </span>
+                          ) : null}
+                          {firm.highlights.includes("always_on") ? (
+                            <span className="rounded-full border border-fuchsia-400/30 bg-fuchsia-500/10 px-1.5 py-px text-[10px] font-medium text-fuchsia-200">
+                              {tHome("filterAlwaysOn")}
+                            </span>
+                          ) : null}
+                        </div>
+                      ) : null}
                     </div>
                   </div>
 
@@ -132,12 +148,45 @@ export function FirmTable({
                     </div>
                   </div>
 
-                  <div className="min-w-0">
-                    <AssetChips assets={firm.assets} limit={4} />
+                  <div className="min-w-0 self-center">
+                    <AssetChips assets={firm.assets} limit={6} />
+                  </div>
+
+                  <div className="min-w-0 self-center">
+                    <PlatformChips platforms={firm.platforms} limit={6} />
                   </div>
 
                   <div className="min-w-0">
-                    <PlatformChips platforms={firm.platforms} limit={4} />
+                    {isSuspended ? (
+                      <span className="text-slate-500">—</span>
+                    ) : (
+                      <PromoCodeCopy
+                        copyOnly
+                        code={offer.code}
+                        href={getOutHref(firm.slug)}
+                        discountLabel={offer.discountLabel}
+                      />
+                    )}
+                  </div>
+
+                  <div className="flex min-w-0 items-center justify-start">
+                    {isSuspended ? (
+                      <Link
+                        href={`/firm/${firm.slug}`}
+                        className="inline-flex w-full items-center justify-center rounded-lg border border-red-400/20 bg-red-400/10 px-2 py-2 text-xs font-medium whitespace-nowrap text-red-200 transition-colors hover:border-red-400/40"
+                      >
+                        {t("readReview")}
+                      </Link>
+                    ) : (
+                      <a
+                        href={getOutHref(firm.slug)}
+                        target="_blank"
+                        rel="nofollow sponsored noopener noreferrer"
+                        className="inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 px-2 py-2 text-xs font-semibold whitespace-nowrap text-white shadow-[0_0_18px_-6px_rgba(139,92,246,0.9)] transition-all hover:brightness-110"
+                      >
+                        {t("visitOfficial")}
+                      </a>
+                    )}
                   </div>
 
                   <div className="min-w-0">
@@ -161,39 +210,6 @@ export function FirmTable({
                     <p className="mt-0.5 text-[11px] font-medium text-emerald-400/70">
                       {tHome("tableSplitHint", { percent: splitPercent })}
                     </p>
-                  </div>
-
-                  <div className="min-w-0">
-                    {isSuspended ? (
-                      <span className="text-slate-500">—</span>
-                    ) : (
-                      <PromoCodeCopy
-                        copyOnly
-                        code={offer.code}
-                        href={getOutHref(firm.slug)}
-                        discountLabel={offer.discountLabel}
-                      />
-                    )}
-                  </div>
-
-                  <div className="flex items-center justify-end gap-1.5">
-                    {isSuspended ? (
-                      <Link
-                        href={`/firm/${firm.slug}`}
-                        className="inline-flex items-center justify-center rounded-lg border border-red-400/20 bg-red-400/10 px-3 py-2 text-xs font-medium whitespace-nowrap text-red-200 transition-colors hover:border-red-400/40"
-                      >
-                        {t("readReview")}
-                      </Link>
-                    ) : (
-                      <a
-                        href={getOutHref(firm.slug)}
-                        target="_blank"
-                        rel="nofollow sponsored noopener noreferrer"
-                        className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 px-3 py-2 text-xs font-semibold whitespace-nowrap text-white shadow-[0_0_18px_-6px_rgba(139,92,246,0.9)] transition-all hover:brightness-110"
-                      >
-                        {t("visitOfficial")}
-                      </a>
-                    )}
                   </div>
                 </div>
               </li>

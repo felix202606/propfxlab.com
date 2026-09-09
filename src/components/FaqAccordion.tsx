@@ -41,12 +41,12 @@ export function FaqAccordion({
           id="faq-heading"
           className="text-2xl font-semibold tracking-tight sm:text-3xl"
         >
-          <span className="bg-gradient-to-r from-white to-emerald-300 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-white via-slate-100 to-indigo-300 bg-clip-text text-transparent">
             {title}
           </span>
         </h2>
       )}
-      <div className={`${hideHeading ? "" : "mt-6 "}divide-y divide-white/10 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-zinc-900 to-black shadow-[0_0_0_1px_rgba(255,255,255,0.04)]`}>
+      <div className={`${hideHeading ? "" : "mt-6 "}divide-y divide-slate-800 overflow-hidden rounded-2xl border border-slate-800 bg-gradient-to-b from-[#12182a] to-[#0B0F19]`}>
         {faqs.map((item, index) => (
           <details
             key={item.id}
@@ -57,17 +57,17 @@ export function FaqAccordion({
             itemProp="mainEntity"
             itemType="https://schema.org/Question"
           >
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-medium text-zinc-100 marker:content-none">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-medium text-slate-100 marker:content-none">
               <span itemProp="name">{item.question}</span>
               <span
                 aria-hidden
-                className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/5 text-base text-zinc-400 transition-transform duration-200 group-open:rotate-45"
+                className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-indigo-500/10 text-base text-indigo-300 transition-transform duration-200 group-open:rotate-45"
               >
                 +
               </span>
             </summary>
             <div
-              className="mt-3 pr-8 text-sm leading-7 text-zinc-400"
+              className="mt-3 pr-8 text-sm leading-7 text-slate-400"
               itemScope
               itemProp="acceptedAnswer"
               itemType="https://schema.org/Answer"

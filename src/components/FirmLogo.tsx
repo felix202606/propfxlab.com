@@ -33,7 +33,7 @@ function InitialsBadge({
       role="img"
       aria-label={name}
       style={{ width: px, height: px }}
-      className={`inline-flex shrink-0 items-center justify-center rounded-full border border-emerald-400/45 bg-gradient-to-br from-zinc-900 via-zinc-950 to-black font-mono font-semibold tracking-wide text-emerald-300 shadow-[0_0_18px_-6px_rgba(52,211,153,0.95)] ${typeClass}`}
+      className={`inline-flex shrink-0 items-center justify-center rounded-full border border-indigo-400/45 bg-gradient-to-br from-[#12182a] via-[#0B0F19] to-black font-mono font-semibold tracking-wide text-indigo-200 shadow-[0_0_18px_-6px_rgba(99,102,241,0.85)] ${typeClass}`}
     >
       {firmInitials(name)}
     </span>
@@ -60,7 +60,7 @@ export function FirmLogo({ name, src, alt, size = "lg" }: FirmLogoProps) {
       height={px}
       unoptimized
       onError={() => setFailed(true)}
-      className="shrink-0 rounded-xl border border-white/10 bg-white object-contain p-0.5"
+      className="shrink-0 rounded-xl border border-slate-800 bg-white object-contain p-0.5"
       style={{ width: px, height: px }}
     />
   );

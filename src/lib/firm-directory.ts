@@ -16,6 +16,7 @@ export const SHORT_COUNTRY: Record<string, string> = {
   CA: "CA",
   LC: "LC",
   KM: "KM",
+  SK: "SK",
 };
 
 export function flagEmoji(countryCode: string): string {

@@ -40,17 +40,18 @@ export function ComparisonsGrid({
       className={
         embedded
           ? "scroll-mt-24"
-          : "mx-auto w-full max-w-6xl scroll-mt-24 px-4 py-16"
+          : "scroll-mt-24 border-b border-slate-800 bg-[#0B0F19]"
       }
     >
+      <div className={embedded ? undefined : "mx-auto w-full max-w-6xl px-4 py-16"}>
       {showHeader ? (
         <>
           <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-            <span className="bg-gradient-to-r from-white to-cyan-300 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-white via-slate-100 to-indigo-300 bg-clip-text text-transparent">
               {t("comparisonsTitle")}
             </span>
           </h2>
-          <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-400">
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-400">
             {t("comparisonsSubtitle")}
           </p>
         </>
@@ -59,7 +60,7 @@ export function ComparisonsGrid({
         <p className="mt-3">
           <Link
             href="/compare"
-            className="text-sm font-medium text-cyan-300 transition-colors hover:text-white"
+            className="text-sm font-medium text-indigo-300 transition-colors hover:text-white"
           >
             {t("viewAllComparisons", {
               count: listCanonicalCompareSlugs(pickerFirms.map((firm) => firm.slug))
@@ -72,7 +73,7 @@ export function ComparisonsGrid({
       {pickerFirms.length >= 2 ? <ComparePicker firms={pickerFirms} /> : null}
 
       {popularHeading ? (
-        <h2 className="mt-10 text-lg font-semibold text-zinc-100">
+        <h2 className="mt-10 text-lg font-semibold text-slate-100">
           {popularHeading}
         </h2>
       ) : null}
@@ -82,7 +83,7 @@ export function ComparisonsGrid({
           {[0, 1, 2].map((slot) => (
             <div
               key={slot}
-              className="h-36 animate-pulse rounded-2xl border border-white/10 bg-white/[0.03]"
+              className="h-36 animate-pulse rounded-2xl border border-slate-800 bg-slate-900/40"
             />
           ))}
         </div>
@@ -95,10 +96,10 @@ export function ComparisonsGrid({
 
             return (
               <li key={`${left.slug}-vs-${right.slug}`}>
-                <div className="flex h-full flex-col rounded-2xl border border-white/10 bg-gradient-to-b from-zinc-900 to-black p-5 shadow-[0_0_0_1px_rgba(255,255,255,0.04)] transition-all duration-300 hover:border-cyan-400/25 hover:shadow-[0_0_28px_-10px_rgba(34,211,238,0.35)]">
+                <div className="flex h-full flex-col rounded-2xl border border-slate-800 bg-gradient-to-b from-[#12182a] to-[#0B0F19] p-5 transition-all duration-300 hover:border-indigo-500/40 hover:shadow-[0_0_28px_-10px_rgba(99,102,241,0.45)]">
                   <div className="flex items-center justify-between gap-3">
                     <FirmMini firm={left} />
-                    <span className="shrink-0 rounded-full border border-white/10 bg-white/5 px-2 py-0.5 font-mono text-[10px] tracking-widest text-zinc-500">
+                    <span className="shrink-0 rounded-full border border-slate-800 bg-slate-950 px-2 py-0.5 font-mono text-[10px] tracking-widest text-slate-500">
                       {t("vs")}
                     </span>
                     <FirmMini firm={right} align="right" />
@@ -106,14 +107,14 @@ export function ComparisonsGrid({
 
                   <Link
                     href={compareHref}
-                    className="mt-4 text-sm font-medium text-zinc-200 transition-colors hover:text-white"
+                    className="mt-4 text-sm font-medium text-slate-200 transition-colors hover:text-white"
                   >
                     {left.basic.name} {t("vs")} {right.basic.name}
                   </Link>
 
                   <Link
                     href={compareHref}
-                    className="mt-4 inline-flex items-center justify-center rounded-xl border border-cyan-400/25 bg-cyan-400/10 px-3 py-2 text-center text-xs font-semibold text-cyan-200 transition-colors hover:border-cyan-300/50 hover:bg-cyan-400/15 hover:text-white"
+                    className="mt-4 inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 px-3 py-2 text-center text-xs font-semibold text-white shadow-[0_0_18px_-6px_rgba(139,92,246,0.9)] transition-all hover:brightness-110"
                   >
                     {t("viewComparison")}
                   </Link>
@@ -123,7 +124,7 @@ export function ComparisonsGrid({
                       href={leftOffer.href}
                       target="_blank"
                       rel="sponsored noopener noreferrer"
-                      className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-center text-xs font-medium text-zinc-300 transition-colors hover:border-emerald-400/30 hover:text-white"
+                      className="rounded-xl border border-slate-800 bg-slate-950/70 px-3 py-2 text-center text-xs font-medium text-slate-300 transition-colors hover:border-indigo-400/40 hover:text-white"
                     >
                       {left.basic.name}
                     </a>
@@ -131,7 +132,7 @@ export function ComparisonsGrid({
                       href={rightOffer.href}
                       target="_blank"
                       rel="sponsored noopener noreferrer"
-                      className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-center text-xs font-medium text-zinc-300 transition-colors hover:border-emerald-400/30 hover:text-white"
+                      className="rounded-xl border border-slate-800 bg-slate-950/70 px-3 py-2 text-center text-xs font-medium text-slate-300 transition-colors hover:border-indigo-400/40 hover:text-white"
                     >
                       {right.basic.name}
                     </a>
@@ -142,6 +143,7 @@ export function ComparisonsGrid({
           })}
         </ul>
       )}
+      </div>
     </section>
   );
 }
@@ -163,7 +165,7 @@ function FirmMini({
         alt={firm.basic.logo.alt}
         size="sm"
       />
-      <span className="truncate text-xs font-medium text-zinc-300">
+      <span className="truncate text-xs font-medium text-slate-300">
         {firm.basic.name}
       </span>
     </div>

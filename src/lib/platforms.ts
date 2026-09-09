@@ -11,6 +11,9 @@ export const PLATFORM_LABELS: Record<TradingPlatform, string> = {
   tradelocker: "TradeLocker",
   tradingview: "TradingView",
   dxtrade: "DXtrade",
+  bybit: "Bybit",
+  kraken: "Kraken",
+  cleo: "CLEO",
 };
 
 export const PLATFORM_ORDER: TradingPlatform[] = [
@@ -24,4 +27,7 @@ export const PLATFORM_ORDER: TradingPlatform[] = [
   "tradelocker",
   "tradingview",
   "dxtrade",
+  "bybit",
+  "kraken",
+  "cleo",
 ];

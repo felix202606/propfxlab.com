@@ -23,7 +23,7 @@ const geistMono = Geist_Mono({
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#09090b" },
+    { media: "(prefers-color-scheme: dark)", color: "#0B0F19" },
     { media: "(prefers-color-scheme: light)", color: "#fafafa" },
   ],
 };
@@ -125,7 +125,7 @@ export default async function LocaleLayout({
       lang={localeMeta[locale].bcp47}
       className={`dark ${geistSans.variable} ${geistMono.variable} h-full scroll-smooth antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-[#09090b] font-sans text-zinc-50">
+      <body className="flex min-h-full flex-col bg-[#0B0F19] font-sans text-slate-50">
         <NextIntlClientProvider>
           <SiteHeader />
           <div className="flex flex-1 flex-col">{children}</div>

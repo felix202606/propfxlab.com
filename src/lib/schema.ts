@@ -217,8 +217,8 @@ export const platformStatusSchema = z
   .enum(["active", "warning", "suspended"])
   .default("active");
 
-/** 交易赛道：外汇/CFD 或期货。数组便于日后双赛道平台扩展。 */
-export const firmCategorySchema = z.enum(["forex", "futures"]);
+/** 交易赛道：外汇/CFD、期货、虚拟币。数组便于双赛道（如外汇+Crypto）平台。 */
+export const firmCategorySchema = z.enum(["forex", "futures", "crypto"]);
 
 /** 1 = 首页主列表顶级大厂，2 = 长尾/延伸评测归档 */
 export const firmTierSchema = z.union([z.literal(1), z.literal(2)]);
@@ -235,6 +235,9 @@ export const tradingPlatformSchema = z.enum([
   "tradelocker",
   "tradingview",
   "dxtrade",
+  "bybit",
+  "kraken",
+  "cleo",
 ]);
 
 /** 首页快捷筛选徽章 */
@@ -242,6 +245,8 @@ export const firmHighlightSchema = z.enum([
   "licensed_broker",
   "instant_payout",
   "low_entry",
+  "exchange_depth",
+  "always_on",
 ]);
 
 /** 可交易品种：首页 Assets 徽章 */

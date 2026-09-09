@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 
-export type FirmTab = "top" | "forex" | "futures" | "all";
+export type FirmTab = "top" | "forex" | "futures" | "crypto" | "all";
 
 type FirmTabsProps = {
   active: FirmTab;
@@ -24,6 +24,7 @@ export function FirmTabs({
     { id: "top", label: t("tabTop", { count: counts.top }) },
     { id: "forex", label: t("tabForex", { count: counts.forex }) },
     { id: "futures", label: t("tabFutures", { count: counts.futures }) },
+    { id: "crypto", label: t("tabCrypto", { count: counts.crypto }) },
     { id: "all", label: t("tabAll", { count: counts.all }) },
   ];
 
@@ -31,7 +32,7 @@ export function FirmTabs({
     <div className="flex flex-col gap-2">
       <div
         role="tablist"
-        className="grid grid-cols-2 gap-1 rounded-2xl border border-slate-800 bg-slate-950/70 p-1 lg:grid-cols-4"
+        className="grid grid-cols-2 gap-1 rounded-2xl border border-slate-800 bg-slate-950/70 p-1 sm:grid-cols-3 lg:grid-cols-5"
       >
         {tabs.map((tab) => {
           const selected = tab.id === active;

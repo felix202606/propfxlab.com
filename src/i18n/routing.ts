@@ -5,13 +5,13 @@ import { defineRouting } from "next-intl/routing";
  * value 是给 <html lang> 用的标准 BCP-47 标签和导航栏切换器显示的本地化名称。
  */
 export const localeMeta = {
-  en: { bcp47: "en", label: "English" },
-  es: { bcp47: "es", label: "Español" },
-  cn: { bcp47: "zh-CN", label: "简体中文" },
-  tw: { bcp47: "zh-TW", label: "繁體中文" },
-  th: { bcp47: "th", label: "ไทย" },
-  vi: { bcp47: "vi", label: "Tiếng Việt" },
-  pt: { bcp47: "pt", label: "Português" },
+  en: { bcp47: "en", label: "English", flag: "🇺🇸" },
+  es: { bcp47: "es", label: "Español", flag: "🇪🇸" },
+  cn: { bcp47: "zh-CN", label: "简体中文", flag: "🇨🇳" },
+  tw: { bcp47: "zh-TW", label: "繁體中文", flag: "🇹🇼" },
+  th: { bcp47: "th", label: "ไทย", flag: "🇹🇭" },
+  vi: { bcp47: "vi", label: "Tiếng Việt", flag: "🇻🇳" },
+  pt: { bcp47: "pt", label: "Português", flag: "🇧🇷" },
 } as const;
 
 export const routing = defineRouting({

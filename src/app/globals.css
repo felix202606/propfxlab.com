@@ -3,10 +3,10 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --background: #09090b;
-  --foreground: #fafafa;
-  --surface: #0c0c10;
-  --accent: #34d399;
+  --background: #0B0F19;
+  --foreground: #f8fafc;
+  --surface: #12182a;
+  --accent: #818cf8;
 }
 
 @theme inline {
@@ -29,5 +29,5 @@ body {
 
 ::selection {
   background: color-mix(in oklab, var(--accent) 35%, transparent);
-  color: #ecfdf5;
+  color: #eef2ff;
 }

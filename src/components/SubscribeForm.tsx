@@ -75,12 +75,12 @@ export function SubscribeForm({ locale = "en", t }: SubscribeFormProps) {
             }}
             placeholder={t.placeholder}
             disabled={status === "loading"}
-            className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-zinc-500 focus:border-emerald-500/60 focus:outline-none focus:ring-1 focus:ring-emerald-500/40 disabled:opacity-50"
+            className="w-full rounded-lg border border-slate-800 bg-[#0B0F19] px-4 py-2.5 text-sm text-white placeholder:text-slate-500 focus:border-indigo-400/60 focus:outline-none focus:ring-1 focus:ring-indigo-400/40 disabled:opacity-50"
           />
           <button
             type="submit"
             disabled={status === "loading" || !email.trim()}
-            className="flex w-full items-center justify-center gap-2 rounded-lg bg-emerald-500 px-5 py-2.5 text-sm font-semibold text-black transition-colors hover:bg-emerald-400 disabled:cursor-not-allowed disabled:opacity-60"
+            className="flex w-full items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 px-5 py-2.5 text-sm font-semibold text-white transition-all hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
           >
             {status === "loading" ? (
               <>
@@ -117,7 +117,7 @@ export function SubscribeForm({ locale = "en", t }: SubscribeFormProps) {
         )}
       </form>
 
-      <p className="mt-2 text-xs text-zinc-500">{t.noSpam}</p>
+      <p className="mt-2 text-xs text-slate-500">{t.noSpam}</p>
     </div>
   );
 }
