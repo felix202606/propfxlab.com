@@ -32,6 +32,9 @@
     "viewModeLabel": "Chế độ xem",
     "viewModeCard": "Thẻ",
     "viewModeTable": "Bảng",
+    "sortLabel": "Sắp xếp theo",
+    "sortTakeHome": "Thực nhận",
+    "sortHighestRated": "Đánh giá cao nhất",
     "tabTop10": "Top 10 đề xuất",
     "tabAllFirms": "Tất cả công ty",
     "tabClosedWarning": "Đóng / Cảnh báo",
@@ -201,7 +204,8 @@
     "firstPayoutImmediate": "Ngay lập tức",
     "statusActive": "Hoạt động",
     "statusWarning": "Cảnh báo",
-    "statusSuspended": "Tạm ngừng rút tiền"
+    "statusSuspended": "Tạm ngừng rút tiền",
+    "ratingBadge": "★ {rating} ({count} đánh giá)"
   },
   "PayoutCalculator": {
     "heading": "Máy tính rút tiền",

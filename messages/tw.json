@@ -32,6 +32,9 @@
     "viewModeLabel": "檢視",
     "viewModeCard": "卡片",
     "viewModeTable": "表格",
+    "sortLabel": "排序",
+    "sortTakeHome": "到手金額",
+    "sortHighestRated": "評分最高",
     "tabTop10": "Top 10 精選",
     "tabAllFirms": "全部平台",
     "tabClosedWarning": "已關閉 / 預警",
@@ -201,7 +204,8 @@
     "firstPayoutImmediate": "即時",
     "statusActive": "正常運營",
     "statusWarning": "延遲預警",
-    "statusSuspended": "暫停出金"
+    "statusSuspended": "暫停出金",
+    "ratingBadge": "★ {rating}（{count} 則評價）"
   },
   "PayoutCalculator": {
     "heading": "出金計算器",

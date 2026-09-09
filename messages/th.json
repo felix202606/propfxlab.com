@@ -32,6 +32,9 @@
     "viewModeLabel": "มุมมอง",
     "viewModeCard": "การ์ด",
     "viewModeTable": "ตาราง",
+    "sortLabel": "เรียงตาม",
+    "sortTakeHome": "ยอดเงินสุทธิ",
+    "sortHighestRated": "คะแนนสูงสุด",
     "tabTop10": "10 อันดับแนะนำ",
     "tabAllFirms": "บริษัททั้งหมด",
     "tabClosedWarning": "ปิด / เตือน",
@@ -201,7 +204,8 @@
     "firstPayoutImmediate": "ทันที",
     "statusActive": "เปิดดำเนินการ",
     "statusWarning": "แจ้งเตือนความล่าช้า",
-    "statusSuspended": "ระงับการถอนเงิน"
+    "statusSuspended": "ระงับการถอนเงิน",
+    "ratingBadge": "★ {rating} ({count} รีวิว)"
   },
   "PayoutCalculator": {
     "heading": "เครื่องคำนวณการถอนเงิน",

@@ -2,6 +2,8 @@
   "slug": "aquafunded",
   "status": "active",
   "payoutSpeed": "Within 24 Hours",
+  "rating": null,
+  "reviewCount": 0,
   "basic": {
     "name": "AquaFunded",
     "legalName": "AquaFunded FZE",

@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { FirmLogo } from "@/components/FirmLogo";
 import { PromoCodeCopy } from "@/components/PromoCodeCopy";
+import { TrustpilotBadge } from "@/components/TrustpilotBadge";
 import { getCardChannelTags } from "@/lib/channel-tags";
 import { getFirmOffer } from "@/lib/offers";
 import { formatMoney } from "@/lib/payout";
@@ -68,7 +69,7 @@ export function FirmCard({ firm, rank, netPayout, currency }: FirmCardProps) {
 
   return (
     <article className="group relative flex h-full flex-col overflow-hidden rounded-lg border border-white/10 bg-gradient-to-b from-zinc-900 to-black p-2.5 shadow-[0_0_0_1px_rgba(255,255,255,0.04)] transition-colors hover:border-emerald-400/30">
-      <div className="relative flex items-center gap-2">
+      <div className="relative flex items-start gap-2">
         <FirmLogo
           name={firm.basic.name}
           src={firm.basic.logo.src}
@@ -81,9 +82,12 @@ export function FirmCard({ firm, rank, netPayout, currency }: FirmCardProps) {
               #{rank}
             </span>
           ) : null}
-          <h3 className="truncate text-xs font-semibold tracking-tight text-zinc-50">
-            {firm.basic.name}
-          </h3>
+          <div className="min-w-0">
+            <h3 className="truncate text-xs font-semibold tracking-tight text-zinc-50">
+              {firm.basic.name}
+            </h3>
+            <TrustpilotBadge firm={firm} className="mt-0.5" />
+          </div>
         </div>
         <StatusBadge status={firm.status} />
       </div>

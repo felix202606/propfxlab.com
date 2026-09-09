@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { FirmCard } from "@/components/FirmCard";
-import { FirmFilterBar, type ViewMode } from "@/components/FirmFilterBar";
+import { FirmFilterBar, type SortMode, type ViewMode } from "@/components/FirmFilterBar";
 import { FirmTable } from "@/components/FirmTable";
 import { FirmTabs, type FirmTab } from "@/components/FirmTabs";
 import { HERO_ACCOUNT_SIZES } from "@/lib/offers";
@@ -60,6 +60,7 @@ export function HomeMarketplace({
   const [profit, setProfit] = useState(String(DEFAULT_PROFIT));
   const [searchQuery, setSearchQuery] = useState("");
   const [viewMode, setViewMode] = useState<ViewMode>("card");
+  const [sortMode, setSortMode] = useState<SortMode>("takeHome");
   const [activeTab, setActiveTab] = useState<FirmTab>("top10");
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
 
@@ -77,11 +78,17 @@ export function HomeMarketplace({
         const aWeight = STATUS_WEIGHT[a.firm.status];
         const bWeight = STATUS_WEIGHT[b.firm.status];
         if (aWeight !== bWeight) return aWeight - bWeight;
+        if (sortMode === "highestRated") {
+          const aRating = a.firm.rating ?? -1;
+          const bRating = b.firm.rating ?? -1;
+          if (bRating !== aRating) return bRating - aRating;
+          return b.firm.reviewCount - a.firm.reviewCount;
+        }
         const aPay = a.breakdown?.netPayout ?? -1;
         const bPay = b.breakdown?.netPayout ?? -1;
         return bPay - aPay;
       });
-  }, [firms, accountSize, profitValue, hasValidProfit]);
+  }, [firms, accountSize, profitValue, hasValidProfit, sortMode]);
 
   const leader =
     ranked.find((entry) => entry.firm.status !== "suspended") ?? ranked[0];
@@ -97,7 +104,7 @@ export function HomeMarketplace({
 
   useEffect(() => {
     setVisibleCount(PAGE_SIZE);
-  }, [searchQuery, activeTab]);
+  }, [searchQuery, activeTab, sortMode]);
 
   const top10List = filteredRanked.slice(0, 10);
   const allList = filteredRanked.slice(0, visibleCount);
@@ -251,6 +258,8 @@ export function HomeMarketplace({
         onAccountSizeChange={setAccountSize}
         viewMode={viewMode}
         onViewModeChange={setViewMode}
+        sortMode={sortMode}
+        onSortModeChange={setSortMode}
       />
 
       <section id="rankings" className="mx-auto w-full max-w-6xl scroll-mt-24 px-4 py-8">

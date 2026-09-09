@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { HERO_ACCOUNT_SIZES } from "@/lib/offers";
 
 export type ViewMode = "card" | "table";
+export type SortMode = "takeHome" | "highestRated";
 
 function formatAccountOption(amount: number): string {
   if (amount >= 1000) return `$${amount / 1000}k`;
@@ -17,6 +18,8 @@ type FirmFilterBarProps = {
   onAccountSizeChange: (value: number) => void;
   viewMode: ViewMode;
   onViewModeChange: (mode: ViewMode) => void;
+  sortMode: SortMode;
+  onSortModeChange: (mode: SortMode) => void;
 };
 
 export function FirmFilterBar({
@@ -26,6 +29,8 @@ export function FirmFilterBar({
   onAccountSizeChange,
   viewMode,
   onViewModeChange,
+  sortMode,
+  onSortModeChange,
 }: FirmFilterBarProps) {
   const t = useTranslations("HomePage");
 
@@ -71,6 +76,27 @@ export function FirmFilterBar({
                   {formatAccountOption(size)}
                 </option>
               ))}
+            </select>
+          </label>
+
+          <label className="flex items-center gap-2 text-sm">
+            <span className="hidden text-xs font-medium uppercase tracking-wider text-zinc-500 sm:inline">
+              {t("sortLabel")}
+            </span>
+            <select
+              value={sortMode}
+              onChange={(event) =>
+                onSortModeChange(event.target.value as SortMode)
+              }
+              aria-label={t("sortLabel")}
+              className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-zinc-100 outline-none transition-colors focus:border-emerald-400/40"
+            >
+              <option value="takeHome" className="bg-zinc-900">
+                {t("sortTakeHome")}
+              </option>
+              <option value="highestRated" className="bg-zinc-900">
+                {t("sortHighestRated")}
+              </option>
             </select>
           </label>
 

@@ -224,6 +224,13 @@ export const propFirmSchema = z
     status: platformStatusSchema,
     /** 卡片展示用的出金速度短文案，例如 "Instant"、"Within 24 Hours" */
     payoutSpeed: z.string().min(1),
+    /**
+     * Trustpilot TrustScore（0–5）。评分被 Trustpilot 下架时为 null，
+     * 卡片/表格不展示星级，按评分排序时排到末尾。
+     */
+    rating: z.number().min(0).max(5).nullable(),
+    /** Trustpilot 公开评论数；评分下架时仍可保留历史计数 */
+    reviewCount: z.number().int().nonnegative(),
     basic: basicInfoSchema,
     withdrawal: withdrawalRulesSchema,
     calculator: calculatorParamsSchema,

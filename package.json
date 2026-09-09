@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "validate:firms": "tsx scripts/validate-firms.ts"
+    "validate:firms": "tsx scripts/validate-firms.ts",
+    "update:trustpilot": "tsx scripts/update-trustpilot.ts"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",

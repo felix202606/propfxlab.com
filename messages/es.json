@@ -32,6 +32,9 @@
     "viewModeLabel": "Vista",
     "viewModeCard": "Tarjetas",
     "viewModeTable": "Tabla",
+    "sortLabel": "Ordenar por",
+    "sortTakeHome": "Pago neto",
+    "sortHighestRated": "Mejor valoradas",
     "tabTop10": "Top 10",
     "tabAllFirms": "Todas las firmas",
     "tabClosedWarning": "Cerradas / Alerta",
@@ -201,7 +204,8 @@
     "firstPayoutImmediate": "Inmediato",
     "statusActive": "Activa",
     "statusWarning": "Alerta",
-    "statusSuspended": "Suspendida"
+    "statusSuspended": "Suspendida",
+    "ratingBadge": "★ {rating} ({count} reseñas)"
   },
   "PayoutCalculator": {
     "heading": "Calculadora de pagos",

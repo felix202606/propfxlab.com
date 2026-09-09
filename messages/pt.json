@@ -32,6 +32,9 @@
     "viewModeLabel": "Visualização",
     "viewModeCard": "Cartões",
     "viewModeTable": "Tabela",
+    "sortLabel": "Ordenar por",
+    "sortTakeHome": "Valor líquido",
+    "sortHighestRated": "Melhor avaliação",
     "tabTop10": "Top 10 escolhas",
     "tabAllFirms": "Todas as firmas",
     "tabClosedWarning": "Fechadas / Alerta",
@@ -201,7 +204,8 @@
     "firstPayoutImmediate": "Imediato",
     "statusActive": "Ativa",
     "statusWarning": "Alerta",
-    "statusSuspended": "Suspensa"
+    "statusSuspended": "Suspensa",
+    "ratingBadge": "★ {rating} ({count} avaliações)"
   },
   "PayoutCalculator": {
     "heading": "Calculadora de saque",

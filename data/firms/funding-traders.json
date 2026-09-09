@@ -2,6 +2,8 @@
   "slug": "funding-traders",
   "status": "active",
   "payoutSpeed": "Within 48 Hours",
+  "rating": null,
+  "reviewCount": 0,
   "basic": {
     "name": "Funding Traders",
     "legalName": "MCF Group FZCO",
