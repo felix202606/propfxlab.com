@@ -32,6 +32,9 @@
     "viewModeLabel": "View",
     "viewModeCard": "Card",
     "viewModeTable": "Table",
+    "sortLabel": "Sort by",
+    "sortTakeHome": "Take-home",
+    "sortHighestRated": "Highest Rated",
     "tabTop10": "Top 10 Picks",
     "tabAllFirms": "All Firms",
     "tabClosedWarning": "Closed / Warning",
@@ -201,7 +204,8 @@
     "firstPayoutImmediate": "Immediate",
     "statusActive": "Active",
     "statusWarning": "Warning",
-    "statusSuspended": "Suspended"
+    "statusSuspended": "Suspended",
+    "ratingBadge": "★ {rating} ({count} reviews)"
   },
   "PayoutCalculator": {
     "heading": "Payout Calculator",

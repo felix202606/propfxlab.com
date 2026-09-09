@@ -1,0 +1,236 @@
+{
+  "slug": "my-funded-futures",
+  "status": "active",
+  "payoutSpeed": "Same Day",
+  "rating": 4.9,
+  "reviewCount": 17493,
+  "basic": {
+    "name": "My Funded Futures",
+    "legalName": "MyFunded Futures, LLC",
+    "logo": {
+      "src": "/logos/my-funded-futures.png",
+      "alt": "My Funded Futures logo",
+      "width": 128,
+      "height": 128
+    },
+    "foundedAt": "2023-06-01",
+    "headquarters": {
+      "city": "Dover",
+      "country": "United States",
+      "countryCode": "US"
+    },
+    "website": "https://myfundedfutures.com",
+    "funding": {
+      "currency": "USD",
+      "minAccountSize": 25000,
+      "maxAccountSize": 150000
+    }
+  },
+  "withdrawal": {
+    "defaultTraderSharePercent": 90,
+    "defaultFirmSharePercent": 10,
+    "payoutCycle": {
+      "type": "on_demand",
+      "firstPayoutMinDays": 1,
+      "subsequentIntervalDays": 1,
+      "description": "Rapid and Rapid EOD accounts can request a payout every 24 hours once the plan's profit buffer is cleared. Flex pays after 5 winning days, Pro every 14 calendar days, and Builder on a capped 5-payout ladder before a live-account invitation."
+    },
+    "platformFee": {
+      "type": "none"
+    },
+    "channels": [
+      {
+        "id": "rise-ach",
+        "name": "Rise (ACH / bank transfer)",
+        "method": "ewallet",
+        "minAmount": 500,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ],
+        "notes": "All MFFU payouts land in Riseworks first. Most requests are approved instantly; a manual review can take 6–12 business hours on weekdays before funds reach Rise."
+      },
+      {
+        "id": "rise-crypto",
+        "name": "Rise (crypto)",
+        "method": "crypto",
+        "minAmount": 500,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ],
+        "notes": "Withdraw from Riseworks to a crypto wallet after the payout is approved. Network fees are charged by the wallet rail, not by MFFU."
+      }
+    ],
+    "minPayoutAmount": 500,
+    "minPayoutCurrency": "USD",
+    "challengeFeeRefundedOnFirstPayout": false,
+    "warnings": [
+      "Rapid and Pro accounts must keep a profit buffer in the account (for example $1,100 on 25K Rapid EOD and $2,100 on 50K) before the first payout",
+      "A 30% consistency rule applies during evaluation on Rapid EOD; Rapid funded accounts have no consistency rule",
+      "MFFU is futures-only — forex, stocks and crypto CFDs are not supported",
+      "Evaluation fees are non-refundable; accounts run in a simulated environment until a live invitation is issued"
+    ]
+  },
+  "calculator": {
+    "currency": "USD",
+    "profitSplitTiers": [
+      {
+        "id": "rapid-90",
+        "label": "Rapid / Rapid EOD (90/10)",
+        "program": "rapid",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 90
+      },
+      {
+        "id": "pro-flex-80",
+        "label": "Pro / Flex / Builder (80/20)",
+        "program": "pro-flex-builder",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 80
+      }
+    ],
+    "platformWithholdingTaxPercent": 0,
+    "platformDeductionPercent": 0,
+    "paymentProcessorFeePercent": 0,
+    "minPayoutAmount": 500,
+    "scaling": {
+      "enabled": false,
+      "requirements": [
+        "There is no traditional balance-scaling plan; account size is chosen at purchase from $25,000 to $150,000 depending on the plan",
+        "Builder uses a 5-payout sim ladder, then an invitation to a live brokerage seat",
+        "Pro advertises a path to live capital with a high per-user payout cap (up to $100,000 per request on current terms)"
+      ]
+    }
+  },
+  "faqs": [
+    {
+      "id": "what-is-my-funded-futures",
+      "question": "What is My Funded Futures?",
+      "answer": "My Funded Futures (MFFU) is a US futures proprietary trading firm founded in 2023 and operated by MyFunded Futures, LLC. Traders buy a one-time evaluation (Rapid, Rapid EOD, Flex, Pro or Builder), pass a profit target without hitting the max loss, then trade a simulated funded account from $25,000 to $150,000. The firm pays a share of simulated profits in real cash via Riseworks; live capital is invitation-only after meeting extra performance criteria.",
+      "slug": "what-is-my-funded-futures",
+      "locale": "en",
+      "keywords": [
+        "My Funded Futures",
+        "MFFU",
+        "futures prop firm",
+        "Rapid EOD"
+      ],
+      "seo": {
+        "title": "What is My Funded Futures? | Prop Firm FAQ",
+        "metaDescription": "My Funded Futures is a 2023 US futures prop firm offering Rapid, Pro, Flex and Builder plans from $25K to $150K with up to a 90/10 split.",
+        "datePublished": "2026-09-09",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/my-funded-futures/faq/what-is-my-funded-futures"
+      }
+    },
+    {
+      "id": "profit-split",
+      "question": "What is the My Funded Futures profit split?",
+      "answer": "Splits are flat by plan, not a 'first $10K at 100%' ladder. Rapid and Rapid EOD pay 90% to the trader / 10% to MFFU. Pro, Flex and Builder sim-funded accounts pay 80/20. There is no add-on to raise the split further; pick the plan that matches the split you want before buying.",
+      "slug": "profit-split",
+      "locale": "en",
+      "keywords": [
+        "MFFU profit split",
+        "90/10 Rapid",
+        "80/20 Pro"
+      ],
+      "seo": {
+        "title": "My Funded Futures Profit Split: 90% Rapid, 80% Pro | FAQ",
+        "metaDescription": "MFFU Rapid plans pay a flat 90/10 split; Pro, Flex and Builder sim accounts pay 80/20. There is no 100% first-tranche tier.",
+        "datePublished": "2026-09-09",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/my-funded-futures/faq/profit-split"
+      }
+    },
+    {
+      "id": "payout-cycle",
+      "question": "How often can I request a payout from My Funded Futures?",
+      "answer": "On Rapid and Rapid EOD you can request a payout every 24 hours once the required profit buffer is in the account and you have net profit since the last payout. Flex requires 5 winning days. Pro pays every 14 calendar days from the first funded trade, with a $1,000 minimum. Builder uses a capped cycle (typically 5 sim payouts) before a live-account review. Most approvals are instant; a manual review can take 6–12 business hours on weekdays.",
+      "slug": "payout-cycle",
+      "locale": "en",
+      "keywords": [
+        "MFFU payout cycle",
+        "daily Rapid payout",
+        "Pro 14 days"
+      ],
+      "seo": {
+        "title": "My Funded Futures Payout Cycle by Plan | FAQ",
+        "metaDescription": "Rapid pays daily after a 24-hour window, Flex after 5 winning days, and Pro every 14 calendar days, all via Riseworks.",
+        "datePublished": "2026-09-09",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/my-funded-futures/faq/payout-cycle"
+      }
+    },
+    {
+      "id": "withdrawal-methods-and-fees",
+      "question": "Which withdrawal methods does My Funded Futures support, and are there fees?",
+      "answer": "Every payout is sent to Riseworks after KYC. From Rise you withdraw by US ACH / bank transfer or cryptocurrency. MFFU does not add its own payout fee. Minimums depend on the plan: $500 on Rapid, $250 on Flex, and $1,000 on Pro. First-time payees must sign Riseworks contractor agreements before funds can leave Rise.",
+      "slug": "withdrawal-methods-and-fees",
+      "locale": "en",
+      "keywords": [
+        "MFFU withdrawal",
+        "Riseworks",
+        "ACH",
+        "crypto payout"
+      ],
+      "seo": {
+        "title": "My Funded Futures Withdrawal Methods and Fees | FAQ",
+        "metaDescription": "MFFU pays through Riseworks via ACH or crypto. Rapid's minimum is $500; Flex is $250 and Pro is $1,000.",
+        "datePublished": "2026-09-09",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/my-funded-futures/faq/withdrawal-methods-and-fees"
+      }
+    },
+    {
+      "id": "drawdown-and-buffer",
+      "question": "How do My Funded Futures drawdown and payout buffers work?",
+      "answer": "Rapid EOD uses an end-of-day max loss in both evaluation and funded (for example $1,000 on 25K and $2,000 on 50K) with no daily loss limit. The payout buffer is the max-loss floor plus $100, so a 50K Rapid EOD account typically needs $2,100 of open profit left in the account. After the first approved payout the maximum loss limit usually locks to a static $100. Hitting the max loss at any stage closes the account.",
+      "slug": "drawdown-and-buffer",
+      "locale": "en",
+      "keywords": [
+        "MFFU drawdown",
+        "EOD max loss",
+        "payout buffer",
+        "Safety Net"
+      ],
+      "seo": {
+        "title": "My Funded Futures Drawdown and Payout Buffer | FAQ",
+        "metaDescription": "Rapid EOD uses EOD trailing max loss with no daily loss limit. Keep the buffer (max loss + $100) in the account to stay payout-eligible.",
+        "datePublished": "2026-09-09",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/my-funded-futures/faq/drawdown-and-buffer"
+      }
+    }
+  ],
+  "prosAndCons": {
+    "pros": [
+      "Rapid / Rapid EOD keep a flat 90/10 split with daily payout eligibility after 24 hours",
+      "No daily loss limit on Rapid and Pro funded accounts, and no funded consistency rule on Rapid",
+      "One-time purchase with $0 activation fee on current Rapid EOD terms",
+      "Most payouts approve instantly; manual reviews still clear in 6–12 business hours"
+    ],
+    "cons": [
+      "Futures only — no forex, stocks or crypto CFDs",
+      "Profit buffer must stay in the account, so you cannot withdraw down to the starting balance",
+      "Evaluation fees are not refunded on the first payout",
+      "Pro, Flex and Builder pay 80/20 rather than the Rapid 90/10 split"
+    ]
+  }
+}

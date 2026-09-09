@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { FirmLogo } from "@/components/FirmLogo";
+import { TrustpilotBadge } from "@/components/TrustpilotBadge";
 import { getFirmOffer } from "@/lib/offers";
 import { formatMoney, type PayoutBreakdown } from "@/lib/payout";
 import type { PlatformStatus, PropFirm } from "@/lib/schema";
@@ -52,14 +53,17 @@ export function FirmTable({ rows }: { rows: FirmTableRow[] }) {
                       alt={firm.basic.logo.alt}
                       size="sm"
                     />
-                    <div className="flex min-w-0 items-center gap-1.5">
-                      <span
-                        className={`h-1.5 w-1.5 shrink-0 rounded-full ${STATUS_DOT[firm.status]}`}
-                        aria-hidden
-                      />
-                      <span className="truncate font-medium text-zinc-100">
-                        {firm.basic.name}
-                      </span>
+                    <div className="min-w-0">
+                      <div className="flex min-w-0 items-center gap-1.5">
+                        <span
+                          className={`h-1.5 w-1.5 shrink-0 rounded-full ${STATUS_DOT[firm.status]}`}
+                          aria-hidden
+                        />
+                        <span className="truncate font-medium text-zinc-100">
+                          {firm.basic.name}
+                        </span>
+                      </div>
+                      <TrustpilotBadge firm={firm} className="mt-1" />
                     </div>
                   </div>
                 </td>

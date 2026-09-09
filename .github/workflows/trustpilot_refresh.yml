@@ -1,0 +1,62 @@
+name: Trustpilot rating refresh
+
+on:
+  schedule:
+    # 1st and 16th of each month ≈ every 15 days.
+    - cron: "0 8 1,16 * *"
+  workflow_dispatch:
+
+concurrency:
+  group: trustpilot-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh-ratings:
+    name: Refresh Trustpilot scores
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          ref: main
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Fetch Trustpilot ratings
+        env:
+          TRUSTPILOT_API_KEY: ${{ secrets.TRUSTPILOT_API_KEY }}
+        run: npx tsx scripts/update-trustpilot.ts
+
+      - name: Validate firm JSON
+        run: npm run validate:firms
+
+      - name: Create pull request
+        id: cpr
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore(firms): refresh Trustpilot ratings"
+          branch: chore/trustpilot-ratings
+          delete-branch: true
+          title: "chore(firms): refresh Trustpilot ratings"
+          body: |
+            Automated Trustpilot TrustScore + review-count refresh (every ~15 days).
+          add-paths: |
+            data/firms/
+
+      - name: Enable auto-merge
+        if: steps.cpr.outputs.pull-request-number != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
+        run: gh pr merge "$PR_NUMBER" --merge --auto || true

@@ -1,0 +1,259 @@
+{
+  "slug": "thinkcapital",
+  "status": "active",
+  "payoutSpeed": "1–3 Business Days",
+  "rating": 4.0,
+  "reviewCount": 606,
+  "basic": {
+    "name": "ThinkCapital",
+    "legalName": "TFG (Payments) Limited",
+    "logo": {
+      "src": "/logos/thinkcapital.png",
+      "alt": "ThinkCapital logo",
+      "width": 128,
+      "height": 128
+    },
+    "foundedAt": "2024-01-01",
+    "headquarters": {
+      "city": "London",
+      "country": "United Kingdom",
+      "countryCode": "GB"
+    },
+    "website": "https://www.thinkcapital.com",
+    "funding": {
+      "currency": "USD",
+      "minAccountSize": 5000,
+      "maxAccountSize": 100000,
+      "maxScaledSize": 1500000
+    }
+  },
+  "withdrawal": {
+    "defaultTraderSharePercent": 80,
+    "defaultFirmSharePercent": 20,
+    "payoutCycle": {
+      "type": "hybrid",
+      "firstPayoutMinDays": 14,
+      "subsequentIntervalDays": 14,
+      "description": "Standard funded accounts are eligible 14 days after the first funded trade, then on a bi-weekly cycle. A checkout add-on shortens the cycle to 7 days. Each cycle needs at least three profitable days of 0.5% or more and a payout of at least $100. All positions must be closed before a request is submitted."
+    },
+    "platformFee": {
+      "type": "none"
+    },
+    "channels": [
+      {
+        "id": "crypto-usdt-usdc",
+        "name": "Crypto (USDT / USDC)",
+        "method": "crypto",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 3
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ],
+        "notes": "Fastest official rail. USDT is accepted on TRC-20 and ERC-20. ThinkCapital processes the request within 3 business days; crypto usually settles shortly after approval."
+      },
+      {
+        "id": "rise",
+        "name": "Rise",
+        "method": "ewallet",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 3
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ],
+        "notes": "Rise deducts a flat $50 USD once per month on months when you request a Rise payout. Use crypto instead if that fee would eat a small withdrawal."
+      },
+      {
+        "id": "thinkmarkets-live",
+        "name": "ThinkMarkets live account",
+        "method": "other",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 5
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ],
+        "notes": "Transfer profits into a personal ThinkMarkets live account. Not available to residents of countries ThinkMarkets does not onboard, including the United States and Canada."
+      }
+    ],
+    "minPayoutAmount": 100,
+    "minPayoutCurrency": "USD",
+    "challengeFeeRefundedOnFirstPayout": false,
+    "warnings": [
+      "The default split is 80/20; 90/10 is a paid checkout add-on, not the base plan",
+      "A 4-minute news blackout applies around listed high-impact events unless a news-trading add-on is purchased",
+      "Open positions at the time of a payout request void eligibility if the account breaches before they are closed",
+      "ThinkMarkets live-account payouts are unavailable to US and other restricted-country residents — use crypto or Rise instead"
+    ]
+  },
+  "calculator": {
+    "currency": "USD",
+    "profitSplitTiers": [
+      {
+        "id": "standard-80",
+        "label": "Standard profit split",
+        "program": "lightning-dual-nexus",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 80
+      },
+      {
+        "id": "addon-90",
+        "label": "90% split add-on",
+        "program": "profit-split-addon",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 90
+      }
+    ],
+    "platformWithholdingTaxPercent": 0,
+    "platformDeductionPercent": 0,
+    "paymentProcessorFeePercent": 0,
+    "minPayoutAmount": 100,
+    "scaling": {
+      "enabled": true,
+      "intervalMonths": 3,
+      "balanceIncreasePercent": 20,
+      "maxCapital": 1500000,
+      "traderShareAfterScalePercent": 80,
+      "requirements": [
+        "Make at least 10% profit over a three-month window (about 3.33% per month)",
+        "Process at least three withdrawals during that review cycle",
+        "Email support to start the scale — it is not automatic",
+        "Each event adds 20% of the original starting balance. ThinkTrader allocations can scale to $1.5M; MT5 / Platform 5 allocations cap at $1M"
+      ]
+    }
+  },
+  "faqs": [
+    {
+      "id": "what-is-thinkcapital",
+      "question": "What is ThinkCapital?",
+      "answer": "ThinkCapital is a broker-backed forex and CFD proprietary trading firm launched in 2024 and operated by TFG (Payments) Limited from London. It sits on ThinkMarkets infrastructure, so traders evaluate on ThinkTrader, TradingView or Platform 5 rather than a generic white-label simulator. Programs include Lightning (1-step), Dual Step Intraday/Swing, Nexus (3-step) and Instant Funding, with starting balances from $5,000 to $100,000 and a scaling path up to $1.5 million on ThinkTrader.",
+      "slug": "what-is-thinkcapital",
+      "locale": "en",
+      "keywords": [
+        "ThinkCapital",
+        "ThinkMarkets",
+        "broker-backed prop firm",
+        "Lightning challenge"
+      ],
+      "seo": {
+        "title": "What is ThinkCapital? | Prop Firm FAQ",
+        "metaDescription": "ThinkCapital is a 2024 London prop firm backed by ThinkMarkets, with $5K–$100K challenges and scaling up to $1.5M on ThinkTrader.",
+        "datePublished": "2026-09-09",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/thinkcapital/faq/what-is-thinkcapital"
+      }
+    },
+    {
+      "id": "profit-split",
+      "question": "What is the ThinkCapital profit split?",
+      "answer": "The default split on Lightning, Dual Step, Nexus and Instant Funding is 80% to the trader / 20% to ThinkCapital. A 90/10 split is sold as a checkout add-on rather than unlocked by scaling. Scaling grows the virtual balance by 20% of the original size every three months; it does not automatically raise the split.",
+      "slug": "profit-split",
+      "locale": "en",
+      "keywords": [
+        "ThinkCapital profit split",
+        "80/20",
+        "90% add-on"
+      ],
+      "seo": {
+        "title": "ThinkCapital Profit Split: 80% Standard, 90% Add-On | FAQ",
+        "metaDescription": "ThinkCapital's base split is 80/20. A 90% add-on is available at checkout; scaling increases balance, not the split.",
+        "datePublished": "2026-09-09",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/thinkcapital/faq/profit-split"
+      }
+    },
+    {
+      "id": "payout-cycle",
+      "question": "How often can I request a payout from ThinkCapital?",
+      "answer": "The first payout is due 14 days after your first trade on the funded account, then every 14 days. A weekly add-on cuts that cycle to 7 days. You also need three profitable days of at least 0.5% in the cycle and a request of $100 or more. ThinkCapital processes approved requests within 3 business days; crypto is usually the fastest rail after that.",
+      "slug": "payout-cycle",
+      "locale": "en",
+      "keywords": [
+        "ThinkCapital payout cycle",
+        "bi-weekly",
+        "7-day add-on"
+      ],
+      "seo": {
+        "title": "ThinkCapital Payout Cycle: 14 Days or 7-Day Add-On | FAQ",
+        "metaDescription": "ThinkCapital pays bi-weekly by default, or weekly with an add-on, after three 0.5% profitable days and a $100 minimum.",
+        "datePublished": "2026-09-09",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/thinkcapital/faq/payout-cycle"
+      }
+    },
+    {
+      "id": "withdrawal-methods-and-fees",
+      "question": "Which withdrawal methods does ThinkCapital support, and are there fees?",
+      "answer": "Three rails: USDT/USDC crypto (fastest, no ThinkCapital fee), Rise (email-based, with a $50 monthly Rise processing fee in months you withdraw that way), and a transfer into a personal ThinkMarkets live account where that broker accepts clients. US and Canadian residents cannot use the ThinkMarkets live-account option. There is no advertised minimum beyond covering about $100 of transactional costs. The challenge fee is refunded automatically after the third successful payout, not the first.",
+      "slug": "withdrawal-methods-and-fees",
+      "locale": "en",
+      "keywords": [
+        "ThinkCapital withdrawal",
+        "USDT",
+        "Rise $50 fee",
+        "ThinkMarkets payout"
+      ],
+      "seo": {
+        "title": "ThinkCapital Withdrawal Methods, Rise Fee and Fee Refund | FAQ",
+        "metaDescription": "ThinkCapital pays via USDT/USDC, Rise ($50 monthly fee) or ThinkMarkets live accounts. The challenge fee refunds on the third payout.",
+        "datePublished": "2026-09-09",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/thinkcapital/faq/withdrawal-methods-and-fees"
+      }
+    },
+    {
+      "id": "scaling-plan",
+      "question": "How does the ThinkCapital scaling plan work?",
+      "answer": "If you make at least 10% over three months and take three withdrawals in that window, you can email support to add 20% of the original starting balance. Repeat that cycle to grow ThinkTrader allocations from a $600,000 funded cap toward $1.5 million (MT5 / Platform 5 caps at $1 million). Scaling is not automatic, accounts cannot be merged or split, and the profit split stays at whatever you bought (80% or the 90% add-on).",
+      "slug": "scaling-plan",
+      "locale": "en",
+      "keywords": [
+        "ThinkCapital scaling",
+        "20% increase",
+        "$1.5 million"
+      ],
+      "seo": {
+        "title": "ThinkCapital Scaling Plan: 20% Every 3 Months | FAQ",
+        "metaDescription": "ThinkCapital scales 20% of the original balance every 3 months after 10% profit and three withdrawals, up to $1.5M on ThinkTrader.",
+        "datePublished": "2026-09-09",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/thinkcapital/faq/scaling-plan"
+      }
+    }
+  ],
+  "prosAndCons": {
+    "pros": [
+      "Broker-backed by ThinkMarkets rather than a standalone marketing shop",
+      "Account sizes from $5,000 with a documented scale to $1.5 million on ThinkTrader",
+      "Crypto, Rise and (where eligible) ThinkMarkets live-account payouts",
+      "Challenge fee is refunded automatically after the third successful payout"
+    ],
+    "cons": [
+      "Default split is 80%; 90% and weekly payouts are paid add-ons",
+      "Bi-weekly cycle and a three-day 0.5% profitable-day rule before each request",
+      "Rise withdrawals carry a $50 monthly processing fee",
+      "News blackout and other add-on gates make the sticker price incomplete"
+    ]
+  }
+}

@@ -2,6 +2,8 @@
   "slug": "instant-funding",
   "status": "active",
   "payoutSpeed": "Within 24 Hours",
+  "rating": null,
+  "reviewCount": 0,
   "basic": {
     "name": "Instant Funding",
     "legalName": "Instant Funding Ltd",
