@@ -2,10 +2,9 @@ import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 
 const FIRMS_DIR = path.join(process.cwd(), "data", "firms");
-const API_KEY = process.env.TRUSTPILOT_API_KEY?.trim() ?? "";
 const DELAY_MS = 600;
 const USER_AGENT =
-  "PropFXLab/1.0 (+https://www.propfxlab.com; trustpilot rating refresh)";
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36";
 
 type Snapshot = {
   rating: number | null;
@@ -23,29 +22,6 @@ function domainFromWebsite(website: string): string {
 
 function roundRating(value: number): number {
   return Math.round(value * 10) / 10;
-}
-
-function parseFindPayload(payload: unknown): Snapshot | null {
-  if (!payload || typeof payload !== "object") return null;
-  const record = payload as Record<string, unknown>;
-  const score = record.score;
-  let rating: number | null = null;
-  if (score && typeof score === "object") {
-    const trustScore = (score as { trustScore?: unknown }).trustScore;
-    if (typeof trustScore === "number" && Number.isFinite(trustScore)) {
-      rating = roundRating(trustScore);
-    }
-  }
-  const reviews = record.numberOfReviews;
-  let reviewCount: number | null = null;
-  if (typeof reviews === "number") {
-    reviewCount = reviews;
-  } else if (reviews && typeof reviews === "object") {
-    const total = (reviews as { total?: unknown }).total;
-    if (typeof total === "number") reviewCount = total;
-  }
-  if (reviewCount == null || reviewCount < 0) return null;
-  return { rating, reviewCount };
 }
 
 function parseReviewPage(html: string): Snapshot | null {
@@ -79,40 +55,19 @@ function parseReviewPage(html: string): Snapshot | null {
   return { rating, reviewCount };
 }
 
-async function fetchJson(url: string, headers: Record<string, string>) {
+async function fetchFromProfile(domain: string): Promise<Snapshot | null> {
+  const url = `https://www.trustpilot.com/review/${encodeURIComponent(domain)}`;
   const response = await fetch(url, {
-    headers,
+    headers: {
+      Accept: "text/html,application/xhtml+xml",
+      "Accept-Language": "en-US,en;q=0.9",
+      "User-Agent": USER_AGENT,
+    },
     redirect: "follow",
     signal: AbortSignal.timeout(20_000),
   });
   const text = await response.text();
-  return { ok: response.ok, status: response.status, text };
-}
-
-async function fetchFromApi(domain: string): Promise<Snapshot | null> {
-  if (!API_KEY) return null;
-  const url = `https://api.trustpilot.com/v1/business-units/find?name=${encodeURIComponent(domain)}`;
-  const { ok, text } = await fetchJson(url, {
-    Accept: "application/json",
-    apikey: API_KEY,
-    "User-Agent": USER_AGENT,
-  });
-  if (!ok) return null;
-  try {
-    return parseFindPayload(JSON.parse(text));
-  } catch {
-    return null;
-  }
-}
-
-async function fetchFromProfile(domain: string): Promise<Snapshot | null> {
-  const url = `https://www.trustpilot.com/review/${encodeURIComponent(domain)}`;
-  const { text, status } = await fetchJson(url, {
-    Accept: "text/html,application/xhtml+xml",
-    "Accept-Language": "en-US,en;q=0.9",
-    "User-Agent": USER_AGENT,
-  });
-  if (status >= 400) return null;
+  if (response.status >= 400) return null;
   return parseReviewPage(text);
 }
 
@@ -154,8 +109,7 @@ async function main() {
     }
 
     const domain = domainFromWebsite(website);
-    let snapshot = await fetchFromApi(domain);
-    if (!snapshot) snapshot = await fetchFromProfile(domain);
+    const snapshot = await fetchFromProfile(domain);
 
     if (!snapshot) {
       console.log(`keep ${slug} (${domain}): fetch failed, left previous values`);
@@ -185,11 +139,6 @@ async function main() {
   console.log(
     `\nTrustpilot refresh: ${updated} updated, ${unchanged} unchanged, ${failed} failed`,
   );
-  if (!API_KEY) {
-    console.log(
-      "No TRUSTPILOT_API_KEY; used public profile pages. Set the secret for the official find API.",
-    );
-  }
 }
 
 main().catch((error) => {
