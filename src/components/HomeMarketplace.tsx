@@ -3,8 +3,6 @@
 import { useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { FirmArchive } from "@/components/FirmArchive";
-import { FirmCard } from "@/components/FirmCard";
 import { FirmFilterBar, type SortMode } from "@/components/FirmFilterBar";
 import { FirmTable } from "@/components/FirmTable";
 import { FirmTabs, type FirmTab } from "@/components/FirmTabs";
@@ -141,16 +139,6 @@ export function HomeMarketplace({
         .map((row, index) => ({ ...row, rank: index + 1 })),
     [filteredRanked, activeTab],
   );
-
-  const archiveFirms = useMemo(() => {
-    if (activeTab === "all" || activeTab === "futures") return [];
-    return filteredRanked
-      .filter(({ firm }) => firm.tier === 2)
-      .filter(({ firm }) =>
-        activeTab === "forex" ? firm.category.includes("forex") : true,
-      )
-      .map(({ firm }) => firm);
-  }, [filteredRanked, activeTab]);
 
   const maxAllocationCap = useMemo(
     () => Math.max(...firms.map((firm) => maxAllocation(firm)), 1),
@@ -347,34 +335,15 @@ export function HomeMarketplace({
               {t("emptyRankings")}
             </p>
           </div>
-        ) : visibleList.length === 0 && archiveFirms.length === 0 ? (
+        ) : visibleList.length === 0 ? (
           <p className="mt-8 text-sm text-slate-500">{t("noResults")}</p>
         ) : (
-          <>
-            {visibleList.length > 0 ? (
-              <>
-                <div className="mt-4 hidden lg:block">
-                  <FirmTable
-                    rows={visibleList}
-                    maxAllocationCap={maxAllocationCap}
-                  />
-                </div>
-                <ol className="mt-4 grid gap-2 sm:grid-cols-2 lg:hidden">
-                  {visibleList.map(({ firm, breakdown, rank }) => (
-                    <li key={firm.slug}>
-                      <FirmCard
-                        firm={firm}
-                        rank={rank}
-                        netPayout={breakdown?.netPayout ?? null}
-                        currency={firm.calculator.currency}
-                      />
-                    </li>
-                  ))}
-                </ol>
-              </>
-            ) : null}
-            <FirmArchive firms={archiveFirms} />
-          </>
+          <div className="mt-4">
+            <FirmTable
+              rows={visibleList}
+              maxAllocationCap={maxAllocationCap}
+            />
+          </div>
         )}
         </div>
       </section>

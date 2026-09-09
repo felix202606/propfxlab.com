@@ -1,10 +1,18 @@
 {
   "slug": "earn2trade",
   "status": "active",
-  "category": ["futures"],
+  "category": [
+    "futures"
+  ],
   "tier": 1,
-  "platforms": ["ninjatrader", "tradovate"],
-  "assets": ["futures"],
+  "platforms": [
+    "ninjatrader",
+    "tradovate",
+    "tradingview"
+  ],
+  "assets": [
+    "futures"
+  ],
   "highlights": [],
   "payoutSpeed": "Within 24-48 Hours",
   "rating": 4.7,
@@ -16,7 +24,7 @@
       "src": "/logos/earn2trade.png",
       "alt": "Earn2Trade Logo"
     },
-    "foundedAt": "2017-01-01",
+    "foundedAt": "2016-09-01",
     "headquarters": {
       "city": "Orlando",
       "country": "United States",

@@ -9,17 +9,18 @@
     "tier": 1,
     "country": "United Kingdom",
     "countryCode": "GB",
-    "foundedAt": "2021-11-02",
+    "foundedAt": "2021-11-01",
     "platforms": [
-      "mt5",
       "ctrader",
-      "dxtrade"
+      "mt5",
+      "dxtrade",
+      "tradelocker"
     ],
     "assets": [
       "fx",
-      "indices",
       "metals",
-      "crypto"
+      "indices",
+      "energy"
     ],
     "maxAllocation": 2000000,
     "rating": 4.7,
@@ -40,8 +41,7 @@
     "foundedAt": "2021-01-01",
     "platforms": [
       "tradovate",
-      "ninjatrader",
-      "tradingview"
+      "ninjatrader"
     ],
     "assets": [
       "futures"
@@ -62,16 +62,17 @@
     "tier": 2,
     "country": "United Arab Emirates",
     "countryCode": "AE",
-    "foundedAt": "2023-01-01",
+    "foundedAt": "2023-12-01",
     "platforms": [
-      "mt5",
+      "matchtrader",
       "ctrader",
-      "matchtrader"
+      "mt5",
+      "tradelocker"
     ],
     "assets": [
       "fx",
-      "indices",
       "metals",
+      "indices",
       "crypto"
     ],
     "maxAllocation": 2000000,
@@ -88,19 +89,17 @@
       "forex"
     ],
     "tier": 2,
-    "country": "United Kingdom",
-    "countryCode": "GB",
+    "country": "United Arab Emirates",
+    "countryCode": "AE",
     "foundedAt": "2021-06-01",
     "platforms": [
-      "mt4",
+      "matchtrader",
       "mt5",
-      "ctrader",
-      "matchtrader"
+      "tradelocker"
     ],
     "assets": [
       "fx",
       "indices",
-      "metals",
       "crypto"
     ],
     "maxAllocation": 2000000,
@@ -117,18 +116,19 @@
       "forex"
     ],
     "tier": 1,
-    "country": "Netherlands",
-    "countryCode": "NL",
-    "foundedAt": "2023-04-01",
+    "country": "United Arab Emirates",
+    "countryCode": "AE",
+    "foundedAt": "2023-09-01",
     "platforms": [
-      "mt5",
       "ctrader",
-      "matchtrader"
+      "mt5",
+      "dxtrade"
     ],
     "assets": [
       "fx",
-      "indices",
       "metals",
+      "indices",
+      "energy",
       "crypto"
     ],
     "maxAllocation": 400000,
@@ -145,18 +145,18 @@
       "forex"
     ],
     "tier": 2,
-    "country": "United Kingdom",
-    "countryCode": "GB",
-    "foundedAt": "2018-01-01",
+    "country": "United Arab Emirates",
+    "countryCode": "AE",
+    "foundedAt": "2018-07-01",
     "platforms": [
-      "mt4",
-      "mt5",
-      "ctrader"
+      "matchtrader",
+      "mt5"
     ],
     "assets": [
       "fx",
-      "indices",
       "metals",
+      "indices",
+      "energy",
       "crypto"
     ],
     "maxAllocation": 4000000,
@@ -173,12 +173,11 @@
       "forex"
     ],
     "tier": 2,
-    "country": "United States",
-    "countryCode": "US",
+    "country": "Saint Lucia",
+    "countryCode": "LC",
     "foundedAt": "2023-10-15",
     "platforms": [
       "mt5",
-      "matchtrader",
       "tradelocker"
     ],
     "assets": [
@@ -205,15 +204,16 @@
     "countryCode": "US",
     "foundedAt": "2021-11-01",
     "platforms": [
-      "mt4",
-      "mt5",
       "ctrader",
-      "matchtrader"
+      "matchtrader",
+      "tradelocker",
+      "mt5"
     ],
     "assets": [
       "fx",
-      "indices",
       "metals",
+      "indices",
+      "energy",
       "crypto"
     ],
     "maxAllocation": 1000000,
@@ -232,10 +232,11 @@
     "tier": 1,
     "country": "United States",
     "countryCode": "US",
-    "foundedAt": "2017-01-01",
+    "foundedAt": "2016-09-01",
     "platforms": [
       "ninjatrader",
-      "tradovate"
+      "tradovate",
+      "tradingview"
     ],
     "assets": [
       "futures"
@@ -256,16 +257,18 @@
     "tier": 1,
     "country": "Czech Republic",
     "countryCode": "CZ",
-    "foundedAt": "2021-09-01",
+    "foundedAt": "2023-04-01",
     "platforms": [
       "mt4",
       "mt5",
-      "ctrader"
+      "ctrader",
+      "tradingview"
     ],
     "assets": [
       "fx",
-      "indices",
       "metals",
+      "indices",
+      "energy",
       "crypto"
     ],
     "maxAllocation": 4000000,
@@ -284,17 +287,20 @@
       "forex"
     ],
     "tier": 2,
-    "country": "Czech Republic",
-    "countryCode": "CZ",
-    "foundedAt": "2023-01-01",
+    "country": "United Arab Emirates",
+    "countryCode": "AE",
+    "foundedAt": "2023-06-01",
     "platforms": [
+      "ctrader",
       "mt5",
-      "ctrader"
+      "mt4",
+      "tradelocker"
     ],
     "assets": [
       "fx",
-      "indices",
       "metals",
+      "indices",
+      "energy",
       "crypto"
     ],
     "maxAllocation": 1000000,
@@ -315,15 +321,16 @@
     "countryCode": "CZ",
     "foundedAt": "2015-01-01",
     "platforms": [
-      "mt4",
-      "mt5",
       "ctrader",
-      "dxtrade"
+      "dxtrade",
+      "mt4",
+      "mt5"
     ],
     "assets": [
       "fx",
-      "indices",
       "metals",
+      "indices",
+      "energy",
       "crypto"
     ],
     "maxAllocation": 2000000,
@@ -344,14 +351,14 @@
     "countryCode": "GB",
     "foundedAt": "2021-11-01",
     "platforms": [
-      "mt4",
-      "mt5",
-      "ctrader"
+      "matchtrader",
+      "mt5"
     ],
     "assets": [
       "fx",
-      "indices",
       "metals",
+      "indices",
+      "energy",
       "crypto"
     ],
     "maxAllocation": 2500000,
@@ -374,14 +381,14 @@
     "countryCode": "AE",
     "foundedAt": "2022-03-01",
     "platforms": [
-      "mt4",
-      "mt5",
-      "ctrader"
+      "matchtrader",
+      "ctrader",
+      "mt5"
     ],
     "assets": [
       "fx",
-      "indices",
       "metals",
+      "indices",
       "crypto"
     ],
     "maxAllocation": 4000000,
@@ -402,8 +409,9 @@
     "countryCode": "MT",
     "foundedAt": "2023-02-01",
     "platforms": [
-      "tradelocker",
-      "mt5"
+      "ctrader",
+      "mt5",
+      "tradelocker"
     ],
     "assets": [
       "fx",
@@ -427,16 +435,16 @@
     "tier": 1,
     "country": "United Arab Emirates",
     "countryCode": "AE",
-    "foundedAt": "2023-01-01",
+    "foundedAt": "2023-04-01",
     "platforms": [
       "mt5",
-      "ctrader",
-      "matchtrader"
+      "dxtrade",
+      "tradelocker"
     ],
     "assets": [
       "fx",
-      "indices",
       "metals",
+      "indices",
       "crypto"
     ],
     "maxAllocation": 2000000,
@@ -459,12 +467,13 @@
     "platforms": [
       "matchtrader",
       "ctrader",
-      "tradelocker"
+      "mt5"
     ],
     "assets": [
       "fx",
-      "indices",
       "metals",
+      "indices",
+      "energy",
       "crypto"
     ],
     "maxAllocation": 2000000,
@@ -487,16 +496,15 @@
     "countryCode": "GB",
     "foundedAt": "2023-04-01",
     "platforms": [
+      "dxtrade",
       "mt4",
       "mt5",
-      "ctrader",
-      "dxtrade"
+      "tradingview"
     ],
     "assets": [
       "fx",
-      "indices",
       "metals",
-      "crypto"
+      "indices"
     ],
     "maxAllocation": 4000000,
     "rating": 4.4,
@@ -514,16 +522,18 @@
     "tier": 1,
     "country": "Hong Kong",
     "countryCode": "HK",
-    "foundedAt": "2022-01-01",
+    "foundedAt": "2023-06-01",
     "platforms": [
-      "mt5",
+      "matchtrader",
       "ctrader",
-      "matchtrader"
+      "mt5",
+      "tradelocker"
     ],
     "assets": [
       "fx",
-      "indices",
       "metals",
+      "indices",
+      "energy",
       "crypto"
     ],
     "maxAllocation": 2000000,
@@ -544,17 +554,17 @@
     "tier": 1,
     "country": "United Kingdom",
     "countryCode": "GB",
-    "foundedAt": "2022-01-01",
+    "foundedAt": "2022-06-01",
     "platforms": [
-      "mt5",
-      "ctrader",
       "matchtrader",
-      "tradelocker"
+      "ctrader",
+      "mt5"
     ],
     "assets": [
       "fx",
-      "indices",
       "metals",
+      "indices",
+      "energy",
       "crypto"
     ],
     "maxAllocation": 1250000,
@@ -578,8 +588,10 @@
     "countryCode": "GB",
     "foundedAt": "2021-01-01",
     "platforms": [
-      "mt4",
-      "mt5"
+      "tradingview",
+      "matchtrader",
+      "mt5",
+      "mt4"
     ],
     "assets": [
       "fx",
@@ -601,18 +613,19 @@
       "forex"
     ],
     "tier": 2,
-    "country": "Canada",
-    "countryCode": "CA",
-    "foundedAt": "2022-08-01",
+    "country": "Saint Lucia",
+    "countryCode": "LC",
+    "foundedAt": "2022-11-01",
     "platforms": [
       "mt5",
-      "ctrader",
-      "matchtrader"
+      "matchtrader",
+      "ctrader"
     ],
     "assets": [
       "fx",
-      "indices",
       "metals",
+      "indices",
+      "energy",
       "crypto"
     ],
     "maxAllocation": 1000000,
@@ -631,17 +644,17 @@
     "tier": 2,
     "country": "United States",
     "countryCode": "US",
-    "foundedAt": "2021-01-01",
+    "foundedAt": "2021-10-01",
     "platforms": [
-      "mt4",
-      "mt5",
-      "ctrader"
+      "ctrader",
+      "dxtrade",
+      "matchtrader"
     ],
     "assets": [
       "fx",
-      "indices",
       "metals",
-      "crypto"
+      "indices",
+      "energy"
     ],
     "maxAllocation": 2000000,
     "rating": 4.8,
@@ -659,10 +672,10 @@
     "tier": 1,
     "country": "United States",
     "countryCode": "US",
-    "foundedAt": "2023-06-01",
+    "foundedAt": "2023-11-01",
     "platforms": [
-      "tradovate",
       "ninjatrader",
+      "tradovate",
       "tradingview"
     ],
     "assets": [
@@ -686,11 +699,11 @@
     "tier": 1,
     "country": "United States",
     "countryCode": "US",
-    "foundedAt": "2021-01-01",
+    "foundedAt": "2021-03-01",
     "platforms": [
-      "tradovate",
       "ninjatrader",
-      "tradingview"
+      "tradingview",
+      "tradovate"
     ],
     "assets": [
       "futures"
@@ -713,15 +726,16 @@
     "tier": 1,
     "country": "Liechtenstein",
     "countryCode": "LI",
-    "foundedAt": "2022-01-01",
+    "foundedAt": "2022-10-01",
     "platforms": [
+      "mt4",
       "mt5",
       "ctrader"
     ],
     "assets": [
       "fx",
-      "indices",
       "metals",
+      "indices",
       "crypto"
     ],
     "maxAllocation": 5000000,
@@ -740,14 +754,15 @@
     "tier": 1,
     "country": "Israel",
     "countryCode": "IL",
-    "foundedAt": "2016-04-01",
+    "foundedAt": "2016-01-01",
     "platforms": [
       "mt5"
     ],
     "assets": [
       "fx",
-      "indices",
       "metals",
+      "indices",
+      "energy",
       "crypto"
     ],
     "maxAllocation": 4000000,
@@ -766,16 +781,16 @@
     "tier": 1,
     "country": "United Kingdom",
     "countryCode": "GB",
-    "foundedAt": "2024-01-01",
+    "foundedAt": "2024-06-01",
     "platforms": [
       "thinktrader",
-      "mt5",
       "tradingview"
     ],
     "assets": [
       "fx",
-      "indices",
       "metals",
+      "indices",
+      "energy",
       "crypto"
     ],
     "maxAllocation": 1500000,
@@ -796,17 +811,15 @@
     "tier": 2,
     "country": "United States",
     "countryCode": "US",
-    "foundedAt": "2021-01-01",
+    "foundedAt": "2023-09-01",
     "platforms": [
-      "mt4",
-      "mt5",
-      "ctrader",
-      "matchtrader"
+      "tradelocker",
+      "mt5"
     ],
     "assets": [
       "fx",
-      "indices",
       "metals",
+      "indices",
       "crypto"
     ],
     "maxAllocation": 500000,
@@ -827,7 +840,6 @@
     "countryCode": "US",
     "foundedAt": "2012-01-01",
     "platforms": [
-      "tradovate",
       "ninjatrader"
     ],
     "assets": [
@@ -851,8 +863,9 @@
     "countryCode": "US",
     "foundedAt": "2020-01-01",
     "platforms": [
-      "tradovate",
-      "ninjatrader"
+      "tradingview",
+      "ninjatrader",
+      "tradovate"
     ],
     "assets": [
       "futures"
@@ -875,7 +888,7 @@
     "tier": 1,
     "country": "United States",
     "countryCode": "US",
-    "foundedAt": "2023-01-01",
+    "foundedAt": "2024-06-01",
     "platforms": [
       "tradovate",
       "ninjatrader",

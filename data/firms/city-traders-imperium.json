@@ -1,10 +1,21 @@
 {
   "slug": "city-traders-imperium",
   "status": "active",
-  "category": ["forex"],
+  "category": [
+    "forex"
+  ],
   "tier": 2,
-  "platforms": ["mt4", "mt5", "ctrader"],
-  "assets": ["fx", "indices", "metals", "crypto"],
+  "platforms": [
+    "matchtrader",
+    "mt5"
+  ],
+  "assets": [
+    "fx",
+    "metals",
+    "indices",
+    "energy",
+    "crypto"
+  ],
   "highlights": [],
   "payoutSpeed": "Within 24 Hours",
   "rating": 4.2,
@@ -18,11 +29,11 @@
       "width": 128,
       "height": 128
     },
-    "foundedAt": "2018-01-01",
+    "foundedAt": "2018-07-01",
     "headquarters": {
-      "city": "London",
-      "country": "United Kingdom",
-      "countryCode": "GB"
+      "city": "Dubai",
+      "country": "United Arab Emirates",
+      "countryCode": "AE"
     },
     "website": "https://citytradersimperium.com",
     "funding": {

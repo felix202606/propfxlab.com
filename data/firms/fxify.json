@@ -1,10 +1,21 @@
 {
   "slug": "fxify",
   "status": "active",
-  "category": ["forex"],
+  "category": [
+    "forex"
+  ],
   "tier": 1,
-  "platforms": ["mt4", "mt5", "ctrader", "dxtrade"],
-  "assets": ["fx", "indices", "metals", "crypto"],
+  "platforms": [
+    "dxtrade",
+    "mt4",
+    "mt5",
+    "tradingview"
+  ],
+  "assets": [
+    "fx",
+    "metals",
+    "indices"
+  ],
   "highlights": [],
   "payoutSpeed": "Within 24 Hours",
   "rating": 4.4,

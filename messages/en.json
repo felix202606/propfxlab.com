@@ -39,8 +39,8 @@
     "tabAll": "📁 Full archive ({count})",
     "tabClosedWarning": "Closed / Warning",
     "tableFirmColumn": "Firm",
-    "tableOriginColumn": "Origin & safety",
-    "tableAssetsColumn": "Assets & tech",
+    "tableOriginColumn": "Origin",
+    "tableAssetsColumn": "Assets",
     "tablePlatformsColumn": "Platforms",
     "tableFundingColumn": "Max funding & split",
     "tableMaxAllocationColumn": "Max allocation",
@@ -53,9 +53,6 @@
     "filterLowEntry": "💰 From $29",
     "yearsShort": "{years, plural, one {# Yr} other {# Yrs}}",
     "yearsPlus": "10+ Yrs",
-    "archiveTitle": "📁 Extended reviews & long-tail directory ({count} extra firms)",
-    "archiveHint": "Show more",
-    "archiveRisk": "Stricter rules / risk note",
     "noResults": "No firms match your search.",
     "trustTitle": "How PropFXLab Works: A Transparent Win-Win Model",
     "trustSubtitle": "We don't charge traders a single penny. Here is how we save you money while keeping our site 100% free.",
@@ -222,8 +219,7 @@
     "statusActive": "Active",
     "statusWarning": "Warning",
     "statusSuspended": "Suspended",
-    "ratingBadge": "★ {rating} ({count} reviews)",
-    "ratingCompact": "★ {rating}"
+    "ratingBadge": "★ {rating} ({count} reviews)"
   },
   "PayoutCalculator": {
     "heading": "Payout Calculator",

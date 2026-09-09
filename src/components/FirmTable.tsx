@@ -23,6 +23,13 @@ const STATUS_DOT: Record<PlatformStatus, string> = {
   suspended: "bg-red-400",
 };
 
+const ROW_GRID =
+  "grid-cols-[minmax(200px,220px)_minmax(100px,0.65fr)_minmax(120px,0.85fr)_minmax(110px,0.8fr)_minmax(84px,0.55fr)_minmax(130px,0.85fr)_minmax(108px,0.7fr)_minmax(110px,0.55fr)]";
+
+/** Sticky firm column: extends into row padding so scroll content never peeks underneath. */
+const STICKY_FIRM =
+  "sticky left-0 z-20 -ml-3 border-r border-slate-800/80 bg-[#0B0F19] pr-2 pl-3 shadow-[10px_0_14px_-10px_rgba(0,0,0,0.75)]";
+
 export type FirmTableRow = {
   firm: PropFirm;
   breakdown: PayoutBreakdown | null;
@@ -41,19 +48,24 @@ export function FirmTable({
   const cap = Math.max(maxAllocationCap, 1);
 
   return (
-    <div className="overflow-x-auto rounded-2xl border border-slate-800 bg-[#0B0F19]">
-      <div className="min-w-[1080px]">
-        <div className="grid grid-cols-[minmax(200px,1.35fr)_minmax(110px,0.7fr)_minmax(150px,1fr)_minmax(88px,0.55fr)_minmax(130px,0.85fr)_minmax(108px,0.7fr)_minmax(168px,0.85fr)] gap-2 border-b border-slate-800 px-3 py-2 text-[10px] font-medium tracking-wide text-slate-500 uppercase">
-          <div>{tHome("tableFirmColumn")}</div>
+    <div className="-mx-1 overflow-x-auto overscroll-x-contain px-1 [scrollbar-gutter:stable]">
+      <div className="min-w-[1180px] space-y-1.5">
+        <div
+          className={`grid ${ROW_GRID} gap-2 px-3 py-1.5 text-[10px] font-medium tracking-wide text-slate-500 uppercase`}
+        >
+          <div className={`${STICKY_FIRM} z-30 py-1.5`}>
+            {tHome("tableFirmColumn")}
+          </div>
           <div>{tHome("tableOriginColumn")}</div>
           <div>{tHome("tableAssetsColumn")}</div>
+          <div>{tHome("tablePlatformsColumn")}</div>
           <div>{tHome("tableMaxAllocationColumn")}</div>
           <div>{tHome("tableNetProfitColumn")}</div>
           <div>{tHome("tablePromoColumn")}</div>
           <div className="text-right">{tHome("tableActionsColumn")}</div>
         </div>
 
-        <ul className="divide-y divide-slate-800/80">
+        <ul className="space-y-1.5">
           {rows.map(({ firm, breakdown, rank }) => {
             const offer = getFirmOffer(firm.slug, firm.basic.website);
             const isSuspended = firm.status === "suspended";
@@ -70,11 +82,17 @@ export function FirmTable({
 
             return (
               <li key={firm.slug}>
-                <div className="grid grid-cols-[minmax(200px,1.35fr)_minmax(110px,0.7fr)_minmax(150px,1fr)_minmax(88px,0.55fr)_minmax(130px,0.85fr)_minmax(108px,0.7fr)_minmax(168px,0.85fr)] items-center gap-2 border border-transparent px-3 py-2.5 transition-all hover:border-indigo-500/50 hover:bg-indigo-500/[0.04] hover:shadow-[0_0_24px_-12px_rgba(99,102,241,0.55)]">
-                  <div className="flex min-w-0 items-center gap-2.5">
+                <div
+                  className={`group grid ${ROW_GRID} items-center gap-2 rounded-xl border border-slate-800 bg-[#0B0F19] px-3 py-2 transition-all hover:border-indigo-500/50 hover:bg-indigo-500/[0.04] hover:shadow-[0_0_24px_-12px_rgba(99,102,241,0.55)]`}
+                >
+                  <div
+                    className={`${STICKY_FIRM} -my-2 flex min-w-0 items-center gap-2.5 self-stretch rounded-l-[11px] py-2 transition-colors group-hover:bg-[#0d1224]`}
+                  >
                     <span className="w-5 shrink-0 text-center font-mono text-[11px] text-slate-500">
                       {rank <= 3 ? (
-                        <span aria-hidden>{rank === 1 ? "🏆" : rank === 2 ? "🥈" : "🥉"}</span>
+                        <span aria-hidden>
+                          {rank === 1 ? "🏆" : rank === 2 ? "🥈" : "🥉"}
+                        </span>
                       ) : (
                         rank
                       )}
@@ -98,7 +116,7 @@ export function FirmTable({
                           {firm.basic.name}
                         </Link>
                       </div>
-                      <TrustpilotBadge firm={firm} compact className="mt-0.5" />
+                      <TrustpilotBadge firm={firm} className="mt-0.5" />
                     </div>
                   </div>
 
@@ -112,9 +130,12 @@ export function FirmTable({
                     <div className="text-[11px] text-slate-500">{yearsLabel}</div>
                   </div>
 
-                  <div className="min-w-0 space-y-1">
+                  <div className="min-w-0">
                     <AssetChips assets={firm.assets} limit={4} />
-                    <PlatformChips platforms={firm.platforms} limit={3} />
+                  </div>
+
+                  <div className="min-w-0">
+                    <PlatformChips platforms={firm.platforms} limit={4} />
                   </div>
 
                   <div className="min-w-0">
@@ -162,22 +183,14 @@ export function FirmTable({
                         {t("readReview")}
                       </Link>
                     ) : (
-                      <>
-                        <Link
-                          href={`/firm/${firm.slug}`}
-                          className="inline-flex items-center justify-center rounded-lg border border-slate-700 bg-slate-900/80 px-2.5 py-1.5 text-[11px] font-medium whitespace-nowrap text-slate-300 transition-colors hover:border-indigo-400/40 hover:text-indigo-100"
-                        >
-                          {t("calculateCta")}
-                        </Link>
-                        <a
-                          href={getOutHref(firm.slug)}
-                          target="_blank"
-                          rel="nofollow sponsored noopener noreferrer"
-                          className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 px-2.5 py-1.5 text-[11px] font-semibold whitespace-nowrap text-white shadow-[0_0_18px_-6px_rgba(139,92,246,0.9)] transition-all hover:brightness-110"
-                        >
-                          {t("visitOfficial")}
-                        </a>
-                      </>
+                      <a
+                        href={getOutHref(firm.slug)}
+                        target="_blank"
+                        rel="nofollow sponsored noopener noreferrer"
+                        className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 px-2.5 py-1.5 text-[11px] font-semibold whitespace-nowrap text-white shadow-[0_0_18px_-6px_rgba(139,92,246,0.9)] transition-all hover:brightness-110"
+                      >
+                        {t("visitOfficial")}
+                      </a>
                     )}
                   </div>
                 </div>

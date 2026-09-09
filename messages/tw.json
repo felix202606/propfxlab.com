@@ -39,8 +39,8 @@
     "tabAll": "📁 完整檔案 ({count})",
     "tabClosedWarning": "已關閉 / 預警",
     "tableFirmColumn": "平台",
-    "tableOriginColumn": "註冊地 & 安全",
-    "tableAssetsColumn": "品種 & 軟體",
+    "tableOriginColumn": "註冊地",
+    "tableAssetsColumn": "交易品種",
     "tablePlatformsColumn": "交易軟體",
     "tableFundingColumn": "最大資金 & 分成",
     "tableMaxAllocationColumn": "最大資金",
@@ -53,9 +53,6 @@
     "filterLowEntry": "💰 $29 起極低門檻",
     "yearsShort": "{years} 年",
     "yearsPlus": "10+ 年",
-    "archiveTitle": "📁 延伸評測與長尾目錄（{count} 家額外平台）",
-    "archiveHint": "展開查看",
-    "archiveRisk": "規則較嚴 / 風險提示",
     "noResults": "沒有符合的平台。",
     "trustTitle": "PropFXLab 如何運作：透明共贏模式",
     "trustSubtitle": "我們不向交易員收取一分錢。以下是我們如何幫你省錢，同時保持網站 100% 免費。",
@@ -222,8 +219,7 @@
     "statusActive": "正常運營",
     "statusWarning": "延遲預警",
     "statusSuspended": "暫停出金",
-    "ratingBadge": "★ {rating}（{count} 則評價）",
-    "ratingCompact": "★ {rating}"
+    "ratingBadge": "★ {rating}（{count} 則評價）"
   },
   "PayoutCalculator": {
     "heading": "出金計算器",

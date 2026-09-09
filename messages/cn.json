@@ -39,8 +39,8 @@
     "tabAll": "📁 完整档案 ({count})",
     "tabClosedWarning": "已关闭 / 预警",
     "tableFirmColumn": "平台",
-    "tableOriginColumn": "注册地 & 安全",
-    "tableAssetsColumn": "品种 & 软件",
+    "tableOriginColumn": "注册地",
+    "tableAssetsColumn": "交易品种",
     "tablePlatformsColumn": "交易软件",
     "tableFundingColumn": "最大资金 & 分成",
     "tableMaxAllocationColumn": "最大资金",
@@ -53,9 +53,6 @@
     "filterLowEntry": "💰 $29 起极低门槛",
     "yearsShort": "{years} 年",
     "yearsPlus": "10+ 年",
-    "archiveTitle": "📁 延伸评测与长尾目录（{count} 家额外平台）",
-    "archiveHint": "展开查看",
-    "archiveRisk": "规则较严 / 风险提示",
     "noResults": "没有匹配的平台。",
     "trustTitle": "PropFXLab 如何运作：透明共赢模式",
     "trustSubtitle": "我们不向交易员收取一分钱。以下是我们如何帮你省钱，同时保持网站 100% 免费。",
@@ -222,8 +219,7 @@
     "statusActive": "正常运营",
     "statusWarning": "延迟预警",
     "statusSuspended": "暂停出金",
-    "ratingBadge": "★ {rating}（{count} 条评价）",
-    "ratingCompact": "★ {rating}"
+    "ratingBadge": "★ {rating}（{count} 条评价）"
   },
   "PayoutCalculator": {
     "heading": "出金计算器",

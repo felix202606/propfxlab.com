@@ -1,10 +1,23 @@
 {
   "slug": "e8-markets",
   "status": "active",
-  "category": ["forex"],
+  "category": [
+    "forex"
+  ],
   "tier": 1,
-  "platforms": ["mt4", "mt5", "ctrader", "matchtrader"],
-  "assets": ["fx", "indices", "metals", "crypto"],
+  "platforms": [
+    "ctrader",
+    "matchtrader",
+    "tradelocker",
+    "mt5"
+  ],
+  "assets": [
+    "fx",
+    "metals",
+    "indices",
+    "energy",
+    "crypto"
+  ],
   "highlights": [],
   "payoutSpeed": "Within 24 Hours",
   "rating": 4.3,

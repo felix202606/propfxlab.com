@@ -1,11 +1,24 @@
 {
   "slug": "funded-trading-plus",
   "status": "active",
-  "category": ["forex"],
+  "category": [
+    "forex"
+  ],
   "tier": 1,
-  "platforms": ["mt4", "mt5", "ctrader"],
-  "assets": ["fx", "indices", "metals", "crypto"],
-  "highlights": ["instant_payout"],
+  "platforms": [
+    "matchtrader",
+    "mt5"
+  ],
+  "assets": [
+    "fx",
+    "metals",
+    "indices",
+    "energy",
+    "crypto"
+  ],
+  "highlights": [
+    "instant_payout"
+  ],
   "payoutSpeed": "Within 24 Hours",
   "rating": 4.4,
   "reviewCount": 2645,

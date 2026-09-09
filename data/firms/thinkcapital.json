@@ -1,11 +1,24 @@
 {
   "slug": "thinkcapital",
   "status": "active",
-  "category": ["forex"],
+  "category": [
+    "forex"
+  ],
   "tier": 1,
-  "platforms": ["thinktrader", "mt5", "tradingview"],
-  "assets": ["fx", "indices", "metals", "crypto"],
-  "highlights": ["licensed_broker"],
+  "platforms": [
+    "thinktrader",
+    "tradingview"
+  ],
+  "assets": [
+    "fx",
+    "metals",
+    "indices",
+    "energy",
+    "crypto"
+  ],
+  "highlights": [
+    "licensed_broker"
+  ],
   "payoutSpeed": "1–3 Business Days",
   "rating": 4.0,
   "reviewCount": 606,
@@ -18,7 +31,7 @@
       "width": 128,
       "height": 128
     },
-    "foundedAt": "2024-01-01",
+    "foundedAt": "2024-06-01",
     "headquarters": {
       "city": "London",
       "country": "United Kingdom",

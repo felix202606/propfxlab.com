@@ -43,3 +43,7 @@ next-env.d.ts
 
 # local tooling (e.g. downloaded gh CLI binary)
 /.tools
+
+# scrape caches (PropFirmMatch / PropFirmMap working files)
+/data/_propfirmmatch_*.json
+/data/_propfirmmap_*.json

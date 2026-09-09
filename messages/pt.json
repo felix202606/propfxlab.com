@@ -39,8 +39,8 @@
     "tabAll": "📁 Arquivo completo ({count})",
     "tabClosedWarning": "Fechadas / Alerta",
     "tableFirmColumn": "Firma",
-    "tableOriginColumn": "Origem e segurança",
-    "tableAssetsColumn": "Ativos e tech",
+    "tableOriginColumn": "Origem",
+    "tableAssetsColumn": "Ativos",
     "tablePlatformsColumn": "Plataformas",
     "tableFundingColumn": "Capital máx. e split",
     "tableMaxAllocationColumn": "Alocação máx.",
@@ -53,9 +53,6 @@
     "filterLowEntry": "💰 A partir de $29",
     "yearsShort": "{years, plural, one {# ano} other {# anos}}",
     "yearsPlus": "10+ anos",
-    "archiveTitle": "📁 Avaliações extras e diretório long-tail ({count} firmas)",
-    "archiveHint": "Mostrar mais",
-    "archiveRisk": "Regras mais rígidas / aviso de risco",
     "noResults": "Nenhuma firma corresponde à sua busca.",
     "trustTitle": "Como o PropFXLab funciona: um modelo transparente de ganha-ganha",
     "trustSubtitle": "Não cobramos um centavo dos traders. Veja como economizamos o seu dinheiro e mantemos o site 100% gratuito.",
@@ -222,8 +219,7 @@
     "statusActive": "Ativa",
     "statusWarning": "Alerta",
     "statusSuspended": "Suspensa",
-    "ratingBadge": "★ {rating} ({count} avaliações)",
-    "ratingCompact": "★ {rating}"
+    "ratingBadge": "★ {rating} ({count} avaliações)"
   },
   "PayoutCalculator": {
     "heading": "Calculadora de saque",

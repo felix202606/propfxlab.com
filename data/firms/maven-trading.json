@@ -1,10 +1,22 @@
 {
   "slug": "maven-trading",
   "status": "active",
-  "category": ["forex"],
+  "category": [
+    "forex"
+  ],
   "tier": 2,
-  "platforms": ["mt5", "ctrader", "matchtrader"],
-  "assets": ["fx", "indices", "metals", "crypto"],
+  "platforms": [
+    "mt5",
+    "matchtrader",
+    "ctrader"
+  ],
+  "assets": [
+    "fx",
+    "metals",
+    "indices",
+    "energy",
+    "crypto"
+  ],
   "highlights": [],
   "payoutSpeed": "Within 24 Hours",
   "rating": 4.3,
@@ -18,11 +30,11 @@
       "width": 128,
       "height": 128
     },
-    "foundedAt": "2022-08-01",
+    "foundedAt": "2022-11-01",
     "headquarters": {
-      "city": "Toronto",
-      "country": "Canada",
-      "countryCode": "CA"
+      "city": "Castries",
+      "country": "Saint Lucia",
+      "countryCode": "LC"
     },
     "website": "https://www.maventrading.com",
     "funding": {

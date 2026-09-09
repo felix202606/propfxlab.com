@@ -1,11 +1,21 @@
 {
   "slug": "tradeify",
   "status": "active",
-  "category": ["futures"],
+  "category": [
+    "futures"
+  ],
   "tier": 1,
-  "platforms": ["tradovate", "ninjatrader", "tradingview"],
-  "assets": ["futures"],
-  "highlights": ["instant_payout"],
+  "platforms": [
+    "tradovate",
+    "ninjatrader",
+    "tradingview"
+  ],
+  "assets": [
+    "futures"
+  ],
+  "highlights": [
+    "instant_payout"
+  ],
   "payoutSpeed": "Within 24 Hours",
   "rating": 4.6,
   "reviewCount": 2544,
@@ -18,7 +28,7 @@
       "width": 128,
       "height": 128
     },
-    "foundedAt": "2023-01-01",
+    "foundedAt": "2024-06-01",
     "headquarters": {
       "city": "Miami",
       "country": "United States",

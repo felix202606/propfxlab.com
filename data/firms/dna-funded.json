@@ -1,10 +1,20 @@
 {
   "slug": "dna-funded",
   "status": "active",
-  "category": ["forex"],
+  "category": [
+    "forex"
+  ],
   "tier": 2,
-  "platforms": ["mt5", "matchtrader", "tradelocker"],
-  "assets": ["fx", "indices", "metals", "crypto"],
+  "platforms": [
+    "mt5",
+    "tradelocker"
+  ],
+  "assets": [
+    "fx",
+    "indices",
+    "metals",
+    "crypto"
+  ],
   "highlights": [],
   "payoutSpeed": "Within 24 Hours",
   "rating": 3.7,
@@ -20,9 +30,9 @@
     },
     "foundedAt": "2023-10-15",
     "headquarters": {
-      "city": "Wilmington",
-      "country": "United States",
-      "countryCode": "US"
+      "city": "Castries",
+      "country": "Saint Lucia",
+      "countryCode": "LC"
     },
     "website": "https://www.dnafunded.com",
     "funding": {

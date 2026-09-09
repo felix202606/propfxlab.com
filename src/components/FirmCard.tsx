@@ -123,8 +123,10 @@ export function FirmCard({ firm, rank, netPayout, currency }: FirmCardProps) {
         </div>
       </dl>
 
-      <div className="relative mt-1.5 space-y-1">
+      <div className="relative mt-1.5">
         <AssetChips assets={firm.assets} limit={3} />
+      </div>
+      <div className="relative mt-1">
         <PlatformChips platforms={firm.platforms} limit={3} />
       </div>
 
@@ -166,7 +168,7 @@ export function FirmCard({ firm, rank, netPayout, currency }: FirmCardProps) {
               href={`/firm/${firm.slug}`}
               className="inline-flex shrink-0 items-center justify-center rounded-md border border-white/[0.08] bg-zinc-950/70 px-2 py-1 text-[11px] font-medium whitespace-nowrap text-zinc-400 transition-colors hover:border-white/15 hover:text-zinc-200"
             >
-              {t("calculateCta")}
+              {t("readReview")}
             </Link>
           </div>
         )}

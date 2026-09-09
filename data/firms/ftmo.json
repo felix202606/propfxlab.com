@@ -1,10 +1,23 @@
 {
   "slug": "ftmo",
   "status": "active",
-  "category": ["forex"],
+  "category": [
+    "forex"
+  ],
   "tier": 1,
-  "platforms": ["mt4", "mt5", "ctrader", "dxtrade"],
-  "assets": ["fx", "indices", "metals", "crypto"],
+  "platforms": [
+    "ctrader",
+    "dxtrade",
+    "mt4",
+    "mt5"
+  ],
+  "assets": [
+    "fx",
+    "metals",
+    "indices",
+    "energy",
+    "crypto"
+  ],
   "highlights": [],
   "payoutSpeed": "Within 8 Hours",
   "rating": 4.8,
@@ -51,9 +64,19 @@
         "method": "bank_wire",
         "minAmount": 20,
         "maxAmount": null,
-        "processingBusinessDays": { "min": 2, "max": 4 },
-        "fee": { "type": "none" },
-        "currencies": ["USD", "EUR", "GBP", "CZK"],
+        "processingBusinessDays": {
+          "min": 2,
+          "max": 4
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD",
+          "EUR",
+          "GBP",
+          "CZK"
+        ],
         "notes": "FTMO does not charge a commission; intermediary banks may still apply their own fees."
       },
       {
@@ -62,9 +85,17 @@
         "method": "card",
         "minAmount": 20,
         "maxAmount": null,
-        "processingBusinessDays": { "min": 1, "max": 3 },
-        "fee": { "type": "none" },
-        "currencies": ["USD", "EUR"]
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 3
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD",
+          "EUR"
+        ]
       },
       {
         "id": "skrill",
@@ -72,9 +103,17 @@
         "method": "ewallet",
         "minAmount": 20,
         "maxAmount": null,
-        "processingBusinessDays": { "min": 1, "max": 2 },
-        "fee": { "type": "none" },
-        "currencies": ["USD", "EUR"]
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 2
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD",
+          "EUR"
+        ]
       },
       {
         "id": "crypto",
@@ -82,9 +121,16 @@
         "method": "crypto",
         "minAmount": 50,
         "maxAmount": null,
-        "processingBusinessDays": { "min": 1, "max": 2 },
-        "fee": { "type": "none" },
-        "currencies": ["USD"],
+        "processingBusinessDays": {
+          "min": 1,
+          "max": 2
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ],
         "notes": "Higher minimum than bank/card. Network fees depend on the chosen asset."
       }
     ],
@@ -151,7 +197,12 @@
       "answer": "FTMO is a Prague-based proprietary trading firm founded in 2015. Traders pass an evaluation (1-Step or 2-Step Challenge) to access a simulated FTMO Account with initial balances from $10,000 to $200,000, and keep most of the simulated profits as a reward.",
       "slug": "what-is-ftmo",
       "locale": "en",
-      "keywords": ["FTMO", "prop firm", "proprietary trading", "evaluation"],
+      "keywords": [
+        "FTMO",
+        "prop firm",
+        "proprietary trading",
+        "evaluation"
+      ],
       "seo": {
         "title": "What is FTMO? | Prop Firm FAQ",
         "metaDescription": "FTMO is a Czech prop firm founded in 2015. Learn how the Challenge, funded accounts, and profit rewards work.",
@@ -167,7 +218,12 @@
       "answer": "Standard Challenge balances are $10,000, $25,000, $50,000, $100,000 and $200,000. Consistently profitable 2-Step traders can grow allocation by 25% every 4 months under the Scaling Plan, up to $2,000,000 across FTMO Accounts.",
       "slug": "account-sizes",
       "locale": "en",
-      "keywords": ["FTMO account size", "200k", "scaling plan", "2 million"],
+      "keywords": [
+        "FTMO account size",
+        "200k",
+        "scaling plan",
+        "2 million"
+      ],
       "seo": {
         "title": "FTMO Account Sizes and Scaling Cap | FAQ",
         "metaDescription": "FTMO initial accounts run from $10k to $200k. The Scaling Plan can raise simulated capital toward a $2M cap.",
@@ -183,7 +239,13 @@
       "answer": "2-Step FTMO Accounts start at an 80% trader / 20% firm split. After qualifying for the Scaling Plan, that trader share rises to 90%. 1-Step accounts pay 90% from the first reward without waiting for scale-up.",
       "slug": "profit-split",
       "locale": "en",
-      "keywords": ["FTMO profit split", "80%", "90%", "1-step", "2-step"],
+      "keywords": [
+        "FTMO profit split",
+        "80%",
+        "90%",
+        "1-step",
+        "2-step"
+      ],
       "seo": {
         "title": "FTMO Profit Split: 80% vs 90% | FAQ",
         "metaDescription": "See how FTMO’s 80% 2-Step split, 90% Scaling Plan, and 90% 1-Step rewards compare.",
@@ -198,7 +260,11 @@
       "answer": "The first payout can be requested 14 calendar days after your first trade on the funded account. After that, rewards are on demand: you choose the date rather than waiting for a fixed monthly cycle. Review typically takes 1–2 business days, then transfer another 1–2 business days depending on the method.",
       "slug": "payout-cycle",
       "locale": "en",
-      "keywords": ["FTMO payout", "14 days", "on demand withdrawal"],
+      "keywords": [
+        "FTMO payout",
+        "14 days",
+        "on demand withdrawal"
+      ],
       "seo": {
         "title": "FTMO Payout Cycle and First Withdrawal | FAQ",
         "metaDescription": "FTMO’s first reward unlocks after 14 days; later payouts are on demand. See typical processing times.",
@@ -214,7 +280,12 @@
       "answer": "FTMO processes rewards by bank wire, Visa Direct / Mastercard Send, Skrill, and cryptocurrency. The firm does not add its own commission. Bank and card routes usually have a $20 minimum; crypto typically requires at least $50.",
       "slug": "withdrawal-methods",
       "locale": "en",
-      "keywords": ["FTMO withdrawal methods", "Skrill", "crypto", "bank wire"],
+      "keywords": [
+        "FTMO withdrawal methods",
+        "Skrill",
+        "crypto",
+        "bank wire"
+      ],
       "seo": {
         "title": "FTMO Withdrawal Methods and Minimums | FAQ",
         "metaDescription": "Withdraw FTMO rewards via wire, card, Skrill, or crypto. Compare minimums and that FTMO charges no payout commission.",
@@ -229,7 +300,12 @@
       "answer": "FTMO does not charge a payout commission and does not withhold personal income tax on rewards. You remain responsible for taxes in your country of residence. Intermediary banks or crypto networks may still deduct their own fees. The Challenge fee is typically refunded with the first successful payout.",
       "slug": "fees-and-tax",
       "locale": "en",
-      "keywords": ["FTMO fees", "tax", "challenge refund", "no commission"],
+      "keywords": [
+        "FTMO fees",
+        "tax",
+        "challenge refund",
+        "no commission"
+      ],
       "seo": {
         "title": "FTMO Withdrawal Fees and Tax | FAQ",
         "metaDescription": "FTMO does not add payout commission or withhold income tax. Challenge fees are usually refunded on the first payout.",
@@ -244,7 +320,12 @@
       "answer": "Every 4 months, 2-Step accounts that make at least 10% net profit, take at least two payouts, and stay in profit can receive a 25% balance increase and a 90% reward ratio. Repeating the cycle can grow simulated capital toward $2,000,000. 1-Step traders already start at 90% split; scale-up rules differ by product.",
       "slug": "scaling-plan",
       "locale": "en",
-      "keywords": ["FTMO scaling plan", "25%", "4 months", "90% split"],
+      "keywords": [
+        "FTMO scaling plan",
+        "25%",
+        "4 months",
+        "90% split"
+      ],
       "seo": {
         "title": "FTMO Scaling Plan Rules | FAQ",
         "metaDescription": "FTMO can raise account size 25% every 4 months and lift the 2-Step split to 90%, up to a $2M cap.",

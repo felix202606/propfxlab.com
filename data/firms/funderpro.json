@@ -1,10 +1,21 @@
 {
   "slug": "funderpro",
   "status": "active",
-  "category": ["forex"],
+  "category": [
+    "forex"
+  ],
   "tier": 2,
-  "platforms": ["tradelocker", "mt5"],
-  "assets": ["fx", "indices", "metals", "crypto"],
+  "platforms": [
+    "ctrader",
+    "mt5",
+    "tradelocker"
+  ],
+  "assets": [
+    "fx",
+    "indices",
+    "metals",
+    "crypto"
+  ],
   "highlights": [],
   "payoutSpeed": "Within 24 Hours",
   "rating": null,

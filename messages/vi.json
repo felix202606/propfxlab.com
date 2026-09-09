@@ -39,9 +39,9 @@
     "tabAll": "📁 Kho lưu trữ ({count})",
     "tabClosedWarning": "Đóng / Cảnh báo",
     "tableFirmColumn": "Công ty",
-    "tableOriginColumn": "Xuất xứ & an toàn",
-    "tableAssetsColumn": "Tài sản & tech",
-    "tablePlatformsColumn": "Nền tảng",
+    "tableOriginColumn": "Xuất xứ",
+    "tableAssetsColumn": "Tài sản",
+    "tablePlatformsColumn": "Phần mềm",
     "tableFundingColumn": "Vốn tối đa & chia",
     "tableMaxAllocationColumn": "Vốn tối đa",
     "tableNetProfitColumn": "Thực nhận PropFXLab ⚡",
@@ -53,9 +53,6 @@
     "filterLowEntry": "💰 Từ $29",
     "yearsShort": "{years} năm",
     "yearsPlus": "10+ năm",
-    "archiveTitle": "📁 Đánh giá mở rộng & danh mục long-tail ({count} công ty thêm)",
-    "archiveHint": "Xem thêm",
-    "archiveRisk": "Luật chặt hơn / cảnh báo rủi ro",
     "noResults": "Không có công ty phù hợp với tìm kiếm.",
     "trustTitle": "PropFXLab hoạt động thế nào: mô hình Win-Win minh bạch",
     "trustSubtitle": "Chúng tôi không thu một xu nào từ trader. Đây là cách chúng tôi giúp bạn tiết kiệm tiền và giữ trang web miễn phí 100%.",
@@ -222,8 +219,7 @@
     "statusActive": "Hoạt động",
     "statusWarning": "Cảnh báo",
     "statusSuspended": "Tạm ngừng rút tiền",
-    "ratingBadge": "★ {rating} ({count} đánh giá)",
-    "ratingCompact": "★ {rating}"
+    "ratingBadge": "★ {rating} ({count} đánh giá)"
   },
   "PayoutCalculator": {
     "heading": "Máy tính rút tiền",
