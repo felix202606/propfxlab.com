@@ -1,0 +1,223 @@
+{
+  "slug": "breakout",
+  "status": "active",
+  "category": [
+    "crypto"
+  ],
+  "tier": 1,
+  "platforms": [
+    "kraken"
+  ],
+  "assets": [
+    "crypto"
+  ],
+  "highlights": [
+    "exchange_depth",
+    "always_on",
+    "instant_payout"
+  ],
+  "payoutSpeed": "On demand",
+  "rating": 4.8,
+  "reviewCount": 860,
+  "basic": {
+    "name": "Breakout",
+    "legalName": "Breakout Trading Group",
+    "logo": {
+      "src": "/logos/breakout.png",
+      "alt": "Breakout logo",
+      "width": 128,
+      "height": 128
+    },
+    "foundedAt": "2023-11-01",
+    "headquarters": {
+      "city": "Dubai",
+      "country": "United Arab Emirates",
+      "countryCode": "AE"
+    },
+    "website": "https://breakoutprop.com",
+    "funding": {
+      "currency": "USD",
+      "minAccountSize": 5000,
+      "maxAccountSize": 200000,
+      "maxScaledSize": 200000
+    }
+  },
+  "withdrawal": {
+    "defaultTraderSharePercent": 80,
+    "defaultFirmSharePercent": 20,
+    "payoutCycle": {
+      "type": "on_demand",
+      "firstPayoutMinDays": 0,
+      "subsequentIntervalDays": null,
+      "description": "Funded traders can request on-demand USDC payouts 24/7 with a $50 minimum. After Kraken's September 2025 acquisition, withdrawals run on Kraken rails rather than a queued approval desk."
+    },
+    "platformFee": {
+      "type": "none"
+    },
+    "channels": [
+      {
+        "id": "usdc",
+        "name": "USDC",
+        "method": "crypto",
+        "minAmount": 50,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ],
+        "notes": "Stablecoin payouts; network fees are separate."
+      }
+    ],
+    "minPayoutAmount": 50,
+    "minPayoutCurrency": "USD",
+    "challengeFeeRefundedOnFirstPayout": false,
+    "warnings": [
+      "Crypto markets trade 24/7 — daily loss and max-drawdown limits still apply overnight and on weekends.",
+      "The Breakout Terminal is the primary interface; there is no MT5 or TradingView integration.",
+      "Profit split starts at 80% and can be upgraded to 90% at checkout; confirm the live checkout rate before buying."
+    ]
+  },
+  "calculator": {
+    "currency": "USD",
+    "profitSplitTiers": [
+      {
+        "id": "breakout-80",
+        "label": "Standard 80% split",
+        "program": "1-step",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 80
+      },
+      {
+        "id": "breakout-90",
+        "label": "90% checkout upgrade",
+        "program": "1-step",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 90
+      }
+    ],
+    "platformWithholdingTaxPercent": 0,
+    "platformDeductionPercent": 0,
+    "paymentProcessorFeePercent": 0,
+    "minPayoutAmount": 50,
+    "scaling": {
+      "enabled": false
+    }
+  },
+  "faqs": [
+    {
+      "id": "what-is-breakout",
+      "question": "What is Breakout?",
+      "answer": "Breakout is a crypto-native proprietary trading firm launched in November 2023. It was acquired by Kraken in September 2025. Traders evaluate on the Breakout Terminal with simulated capital from $5,000 to $200,000, then request on-demand USDC payouts if they stay inside the daily-loss and max-drawdown limits.",
+      "slug": "what-is-breakout",
+      "locale": "en",
+      "keywords": [
+        "Breakout",
+        "crypto prop firm",
+        "Kraken"
+      ],
+      "seo": {
+        "title": "What is Breakout? | Crypto Prop Firm FAQ",
+        "metaDescription": "Breakout is a Kraken-owned crypto prop firm with on-demand USDC payouts and a dedicated trading terminal.",
+        "datePublished": "2026-09-10",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/breakout/faq/what-is-breakout"
+      }
+    },
+    {
+      "id": "breakout-payouts",
+      "question": "How do Breakout payouts work?",
+      "answer": "Funded traders can withdraw any amount from $50 upward on demand, 24/7, in USDC. There is no minimum trading-day wait after the first funded trade. Processing typically completes the same day on Kraken's infrastructure.",
+      "slug": "breakout-payouts",
+      "locale": "en",
+      "keywords": [
+        "Breakout payout",
+        "USDC",
+        "on demand"
+      ],
+      "seo": {
+        "title": "Breakout Payout Speed and Methods",
+        "metaDescription": "Breakout pays on-demand USDC from a $50 minimum with no trading-day wait after you are funded.",
+        "datePublished": "2026-09-10",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/breakout/faq/breakout-payouts"
+      }
+    },
+    {
+      "id": "breakout-rules",
+      "question": "What evaluation rules does Breakout use?",
+      "answer": "Breakout offers 1-Step Turbo, Pro and Classic plus a 2-Step Classic. Headline targets are around 9–12% profit with 3–8% drawdown depending on the plan. The firm markets no consistency rule, no time limit and no minimum trading days — you still cannot breach the published daily loss or max drawdown.",
+      "slug": "breakout-rules",
+      "locale": "en",
+      "keywords": [
+        "Breakout rules",
+        "drawdown",
+        "1-step"
+      ],
+      "seo": {
+        "title": "Breakout Evaluation Rules Explained",
+        "metaDescription": "See Breakout's 1-step and 2-step profit targets, drawdown limits, and what is not restricted.",
+        "datePublished": "2026-09-10",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/breakout/faq/breakout-rules"
+      }
+    },
+    {
+      "id": "breakout-platforms",
+      "question": "Which platforms and markets does Breakout support?",
+      "answer": "Trading runs on the Breakout Terminal with Kraken exchange liquidity (historically marketed with Bybit depth before the acquisition). The product is crypto-first — dozens of perpetual pairs rather than MT4/MT5 FX books. Markets are open 24/7.",
+      "slug": "breakout-platforms",
+      "locale": "en",
+      "keywords": [
+        "Breakout Terminal",
+        "Kraken",
+        "crypto pairs"
+      ],
+      "seo": {
+        "title": "Breakout Trading Platforms and Markets",
+        "metaDescription": "Breakout uses its own terminal on Kraken liquidity for 24/7 crypto perpetuals, not MT5.",
+        "datePublished": "2026-09-10",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/breakout/faq/breakout-platforms"
+      }
+    },
+    {
+      "id": "breakout-profit-split",
+      "question": "What profit split does Breakout pay?",
+      "answer": "The default funded split is 80% to the trader. A 90% split is sold as a checkout add-on. Confirm the live checkout price and whether the upgrade is refundable before you buy.",
+      "slug": "breakout-profit-split",
+      "locale": "en",
+      "keywords": [
+        "Breakout profit split",
+        "80%",
+        "90%"
+      ],
+      "seo": {
+        "title": "Breakout Profit Split",
+        "metaDescription": "Breakout starts at an 80% trader split with an optional 90% checkout upgrade.",
+        "datePublished": "2026-09-10",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/breakout/faq/breakout-profit-split"
+      }
+    }
+  ],
+  "prosAndCons": {
+    "pros": [
+      "Kraken-owned crypto infrastructure and on-demand USDC payouts",
+      "No consistency rule or minimum trading days on the advertised evaluations",
+      "24/7 crypto markets with exchange-grade depth"
+    ],
+    "cons": [
+      "Crypto-only — no classic FX or futures book",
+      "Proprietary terminal only; no MT5 or TradingView",
+      "90% split is an add-on, not the default"
+    ]
+  }
+}

@@ -56,6 +56,7 @@ function matchesTab(firm: PropFirm, tab: FirmTab): boolean {
   if (tab === "top") return firm.tier === 1;
   if (tab === "forex") return firm.tier === 1 && firm.category.includes("forex");
   if (tab === "futures") return firm.category.includes("futures");
+  if (tab === "crypto") return firm.category.includes("crypto");
   return true;
 }
 
@@ -85,6 +86,7 @@ export function HomeMarketplace({
         (firm) => firm.tier === 1 && firm.category.includes("forex"),
       ).length,
       futures: firms.filter((firm) => firm.category.includes("futures")).length,
+      crypto: firms.filter((firm) => firm.category.includes("crypto")).length,
       all: firms.length,
     }),
     [firms],
@@ -149,23 +151,23 @@ export function HomeMarketplace({
     <>
       <section
         id="calculator"
-        className="relative overflow-hidden border-b border-white/5"
+        className="relative overflow-hidden border-b border-slate-800"
       >
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(16,185,129,0.16),transparent_55%),radial-gradient(ellipse_at_bottom_right,rgba(34,211,238,0.08),transparent_40%)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(99,102,241,0.18),transparent_55%),radial-gradient(ellipse_at_bottom_right,rgba(139,92,246,0.1),transparent_40%)]" />
         <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[length:72px_72px] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
 
         <div className="relative mx-auto w-full max-w-6xl px-4 pt-16 pb-10 lg:pt-24 lg:pb-12">
           <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div>
-            <p className="inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-emerald-300">
+            <p className="inline-flex items-center gap-2 rounded-full border border-indigo-400/25 bg-indigo-500/10 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.18em] text-indigo-200">
               {t("eyebrow")}
             </p>
             <h1 className="mt-5 text-4xl font-semibold tracking-tight text-balance sm:text-5xl">
-              <span className="bg-gradient-to-r from-white via-zinc-100 to-emerald-300 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-white via-slate-100 to-indigo-300 bg-clip-text text-transparent">
                 {t("title")}
               </span>
             </h1>
-            <p className="mt-4 max-w-xl text-sm leading-7 text-zinc-400 sm:text-base">
+            <p className="mt-4 max-w-xl text-sm leading-7 text-slate-400 sm:text-base">
               {t("subtitle")}
             </p>
 
@@ -174,7 +176,7 @@ export function HomeMarketplace({
               onSubmit={(event) => event.preventDefault()}
             >
               <fieldset>
-                <legend className="text-xs font-medium uppercase tracking-wider text-zinc-500">
+                <legend className="text-xs font-medium uppercase tracking-wider text-slate-500">
                   {t("accountSizeLabel")}
                 </legend>
                 <div className="mt-2 flex flex-wrap gap-2">
@@ -187,8 +189,8 @@ export function HomeMarketplace({
                         onClick={() => setAccountSize(size)}
                         className={`rounded-full border px-3.5 py-1.5 text-sm font-medium transition-all ${
                           selected
-                            ? "border-emerald-400/40 bg-emerald-400/15 text-emerald-200 shadow-[0_0_20px_-8px_rgba(52,211,153,0.9)]"
-                            : "border-white/10 bg-white/5 text-zinc-400 hover:border-white/20 hover:text-zinc-200"
+                            ? "border-indigo-400/40 bg-indigo-500/15 text-indigo-100 shadow-[0_0_20px_-8px_rgba(99,102,241,0.9)]"
+                            : "border-slate-800 bg-slate-950/70 text-slate-400 hover:border-slate-700 hover:text-slate-200"
                         }`}
                       >
                         {formatAccountChip(size)}
@@ -199,11 +201,11 @@ export function HomeMarketplace({
               </fieldset>
 
               <label className="block max-w-sm text-sm">
-                <span className="text-xs font-medium uppercase tracking-wider text-zinc-500">
+                <span className="text-xs font-medium uppercase tracking-wider text-slate-500">
                   {t("profitLabel")}
                 </span>
                 <span className="relative mt-2 flex">
-                  <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center font-mono text-zinc-500">
+                  <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center font-mono text-slate-500">
                     $
                   </span>
                   <input
@@ -213,58 +215,58 @@ export function HomeMarketplace({
                     inputMode="decimal"
                     value={profit}
                     onChange={(event) => setProfit(event.target.value)}
-                    className="w-full rounded-xl border border-white/10 bg-white/5 py-3 pr-3 pl-7 font-mono text-lg text-zinc-50 outline-none transition-colors placeholder:text-zinc-600 focus:border-emerald-400/40"
+                    className="w-full rounded-xl border border-slate-800 bg-[#0B0F19] py-3 pr-3 pl-7 font-mono text-lg text-slate-50 outline-none transition-colors placeholder:text-slate-600 focus:border-indigo-400/50"
                   />
                 </span>
               </label>
             </form>
           </div>
 
-          <div className="rounded-3xl border border-white/10 bg-gradient-to-b from-zinc-900/90 to-black p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.04),0_24px_80px_-32px_rgba(16,185,129,0.45)]">
-            <p className="text-xs font-medium uppercase tracking-[0.18em] text-zinc-500">
+          <div className="rounded-3xl border border-slate-800 bg-gradient-to-b from-[#12182a] to-[#0B0F19] p-6 shadow-[0_0_0_1px_rgba(99,102,241,0.08),0_24px_80px_-32px_rgba(99,102,241,0.45)]">
+            <p className="text-xs font-medium uppercase tracking-[0.18em] text-slate-500">
               {t("previewLabel")}
             </p>
             {firms.length === 0 ? (
               <div className="mt-6 space-y-4">
-                <div className="h-12 w-48 animate-pulse rounded-lg bg-white/10" />
-                <p className="text-sm text-zinc-500">{t("emptyPreview")}</p>
+                <div className="h-12 w-48 animate-pulse rounded-lg bg-slate-800" />
+                <p className="text-sm text-slate-500">{t("emptyPreview")}</p>
               </div>
             ) : preview && leader ? (
               <>
-                <p className="mt-1 text-sm text-zinc-400">
+                <p className="mt-1 text-sm text-slate-400">
                   {t("previewFirm", { firm: leader.firm.basic.name })}
                 </p>
-                <p className="mt-4 bg-gradient-to-r from-emerald-300 via-cyan-300 to-white bg-clip-text font-mono text-4xl font-semibold tracking-tight text-transparent sm:text-5xl">
+                <p className="mt-4 font-mono text-4xl font-semibold tracking-tight text-[#10B981] sm:text-5xl">
                   {formatMoney(preview.netPayout, preview.currency)}
                 </p>
-                <p className="mt-2 text-sm text-zinc-500">
+                <p className="mt-2 text-sm text-slate-500">
                   {t("previewSplit", {
                     percent: preview.tier.traderSharePercent,
                   })}
                 </p>
                 <dl className="mt-6 grid grid-cols-2 gap-3 text-sm">
-                  <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3">
-                    <dt className="text-[11px] uppercase tracking-wide text-zinc-500">
+                  <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-3">
+                    <dt className="text-[11px] uppercase tracking-wide text-slate-500">
                       {calc("traderShare", {
                         percent: preview.tier.traderSharePercent,
                       })}
                     </dt>
-                    <dd className="mt-1 font-mono text-zinc-200">
+                    <dd className="mt-1 font-mono text-slate-200">
                       {formatMoney(preview.traderShare, preview.currency)}
                     </dd>
                   </div>
-                  <div className="rounded-xl border border-white/10 bg-white/[0.03] p-3">
-                    <dt className="text-[11px] uppercase tracking-wide text-zinc-500">
+                  <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-3">
+                    <dt className="text-[11px] uppercase tracking-wide text-slate-500">
                       {calc("withdrawalFee")}
                     </dt>
-                    <dd className="mt-1 font-mono text-zinc-200">
+                    <dd className="mt-1 font-mono text-slate-200">
                       {formatMoney(preview.withdrawalFee, preview.currency)}
                     </dd>
                   </div>
                 </dl>
                 <Link
                   href="/calculator"
-                  className="mt-6 inline-flex w-full items-center justify-center rounded-xl border border-emerald-400/30 bg-emerald-400/10 py-2.5 text-sm font-medium text-emerald-200 transition-colors hover:bg-emerald-400/20"
+                  className="mt-6 inline-flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 py-2.5 text-sm font-medium text-white shadow-[0_0_18px_-6px_rgba(139,92,246,0.9)] transition-all hover:brightness-110"
                 >
                   {t("openCalculator")}
                 </Link>
@@ -277,7 +279,7 @@ export function HomeMarketplace({
           </div>
         </div>
 
-        <p className="mt-8 text-center text-[11px] tracking-wide text-zinc-500">
+        <p className="mt-8 text-center text-[11px] tracking-wide text-slate-500">
           {t("dataAudited")}
         </p>
         </div>

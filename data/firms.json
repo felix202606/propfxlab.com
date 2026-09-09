@@ -109,11 +109,39 @@
     "website": "https://blueguardian.com"
   },
   {
+    "slug": "breakout",
+    "name": "Breakout",
+    "status": "active",
+    "category": [
+      "crypto"
+    ],
+    "tier": 1,
+    "country": "United Arab Emirates",
+    "countryCode": "AE",
+    "foundedAt": "2023-11-01",
+    "platforms": [
+      "kraken"
+    ],
+    "assets": [
+      "crypto"
+    ],
+    "maxAllocation": 200000,
+    "rating": 4.8,
+    "reviewCount": 860,
+    "highlights": [
+      "exchange_depth",
+      "always_on",
+      "instant_payout"
+    ],
+    "website": "https://breakoutprop.com"
+  },
+  {
     "slug": "brightfunded",
     "name": "BrightFunded",
     "status": "active",
     "category": [
-      "forex"
+      "forex",
+      "crypto"
     ],
     "tier": 1,
     "country": "United Arab Emirates",
@@ -197,7 +225,8 @@
     "name": "E8 Markets",
     "status": "active",
     "category": [
-      "forex"
+      "forex",
+      "crypto"
     ],
     "tier": 1,
     "country": "United States",
@@ -374,7 +403,8 @@
     "name": "FundedNext",
     "status": "active",
     "category": [
-      "forex"
+      "forex",
+      "crypto"
     ],
     "tier": 1,
     "country": "United Arab Emirates",
@@ -458,7 +488,8 @@
     "name": "FundingPips",
     "status": "active",
     "category": [
-      "forex"
+      "forex",
+      "crypto"
     ],
     "tier": 1,
     "country": "United Arab Emirates",
@@ -517,7 +548,8 @@
     "name": "Goat Funded Trader",
     "status": "active",
     "category": [
-      "forex"
+      "forex",
+      "crypto"
     ],
     "tier": 1,
     "country": "Hong Kong",
@@ -543,6 +575,34 @@
       "low_entry"
     ],
     "website": "https://www.goatfundedtrader.com"
+  },
+  {
+    "slug": "hyrotrader",
+    "name": "HyroTrader",
+    "status": "active",
+    "category": [
+      "crypto"
+    ],
+    "tier": 1,
+    "country": "Slovakia",
+    "countryCode": "SK",
+    "foundedAt": "2022-01-01",
+    "platforms": [
+      "bybit",
+      "cleo"
+    ],
+    "assets": [
+      "crypto"
+    ],
+    "maxAllocation": 1000000,
+    "rating": 4.3,
+    "reviewCount": 191,
+    "highlights": [
+      "exchange_depth",
+      "always_on",
+      "instant_payout"
+    ],
+    "website": "https://www.hyrotrader.com"
   },
   {
     "slug": "instant-funding",
@@ -749,7 +809,8 @@
     "name": "The5ers",
     "status": "active",
     "category": [
-      "forex"
+      "forex",
+      "crypto"
     ],
     "tier": 1,
     "country": "Israel",

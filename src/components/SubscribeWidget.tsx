@@ -60,35 +60,35 @@ export function SubscribeWidget({ locale, t }: SubscribeWidgetProps) {
         className={[
           // Shape: very rounded "squircle-ish" card with glowing border
           "w-[min(260px,calc(100vw-2.5rem))] overflow-hidden",
-          "rounded-[22px] border border-emerald-500/20",
-          "bg-gradient-to-b from-zinc-800/95 to-zinc-900/95 backdrop-blur-sm",
-          "shadow-[0_8px_40px_-8px_rgba(16,185,129,0.18),0_4px_24px_rgba(0,0,0,0.6)]",
+          "rounded-[22px] border border-indigo-500/25",
+          "bg-gradient-to-b from-[#12182a]/95 to-[#0B0F19]/95 backdrop-blur-sm",
+          "shadow-[0_8px_40px_-8px_rgba(99,102,241,0.25),0_4px_24px_rgba(0,0,0,0.6)]",
           "transition-all duration-300 ease-out",
           open
             ? "pointer-events-auto translate-y-0 scale-100 opacity-100"
             : "pointer-events-none translate-y-3 scale-95 opacity-0",
         ].join(" ")}
       >
-        {/* Emerald accent bar at top */}
-        <div className="h-[3px] w-full bg-gradient-to-r from-emerald-600 via-emerald-400 to-teal-400" />
+        {/* Indigo accent bar at top */}
+        <div className="h-[3px] w-full bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500" />
 
         {/* Header */}
         <div className="relative px-4 pt-4 pb-3">
           <button
             onClick={dismiss}
             aria-label="Close"
-            className="absolute right-3 top-3 flex h-5 w-5 items-center justify-center rounded-full text-zinc-500 transition-colors hover:bg-white/10 hover:text-white"
+            className="absolute right-3 top-3 flex h-5 w-5 items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-indigo-500/15 hover:text-white"
           >
             <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
               <path d="M1 1l8 8M9 1L1 9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
             </svg>
           </button>
 
-          <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/25 bg-emerald-950/70 px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-emerald-400">
+          <span className="inline-flex items-center gap-1 rounded-full border border-indigo-400/30 bg-indigo-500/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest text-indigo-200">
             {t.badge}
           </span>
           <h3 className="mt-2 text-[13px] font-bold leading-snug text-white pr-4">{t.heading}</h3>
-          <p className="mt-1 text-[11px] leading-relaxed text-zinc-400">{t.subheading}</p>
+          <p className="mt-1 text-[11px] leading-relaxed text-slate-400">{t.subheading}</p>
         </div>
 
         {/* Form */}
@@ -104,15 +104,15 @@ export function SubscribeWidget({ locale, t }: SubscribeWidgetProps) {
         title={t.button}
         className={[
           "group relative flex h-12 w-12 items-center justify-center rounded-full",
-          "bg-gradient-to-br from-emerald-500 to-teal-600",
-          "shadow-[0_4px_20px_rgba(16,185,129,0.45)]",
-          "transition-all duration-200 hover:scale-110 hover:shadow-[0_4px_28px_rgba(16,185,129,0.65)]",
+          "bg-gradient-to-br from-indigo-500 to-violet-600",
+          "shadow-[0_4px_20px_rgba(99,102,241,0.45)]",
+          "transition-all duration-200 hover:scale-110 hover:shadow-[0_4px_28px_rgba(139,92,246,0.65)]",
           "active:scale-95",
         ].join(" ")}
       >
         {/* Pulse ring — only when card is closed */}
         {!open && (
-          <span className="absolute inset-0 rounded-full animate-ping bg-emerald-400/30" />
+          <span className="absolute inset-0 rounded-full animate-ping bg-indigo-400/30" />
         )}
 
         {/* Bell icon */}

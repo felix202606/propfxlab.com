@@ -88,9 +88,7 @@ PROP_FIRMS: list[PropFirmSeed] = [
         "url": "https://www.maventrading.com",
     },
     {"name": "DNA Funded", "slug": "dna-funded", "url": "https://www.dnafunded.com"},
-    {
-        "name": "Lux Trading Firm",
-        "slug": "lux-trading-firm",
-        "url": "https://luxtradingfirm.com",
-    },
+    {"name": "Lux Trading Firm", "slug": "lux-trading-firm", "url": "https://luxtradingfirm.com"},
+    {"name": "Breakout", "slug": "breakout", "url": "https://breakoutprop.com"},
+    {"name": "HyroTrader", "slug": "hyrotrader", "url": "https://www.hyrotrader.com"},
 ]

@@ -44,9 +44,11 @@ export default async function Home({
       <TrustGrid />
       <ComparisonsGrid firms={firms} />
       {faqs.length > 0 ? (
-        <div className="mx-auto w-full max-w-6xl px-4 pb-20">
-          <SiteFaqExplorer faqs={faqs} heading={faqTitle} />
-        </div>
+        <section className="border-b border-slate-800 bg-[#0B0F19]">
+          <div className="mx-auto w-full max-w-6xl px-4 py-16">
+            <SiteFaqExplorer faqs={faqs} heading={faqTitle} />
+          </div>
+        </section>
       ) : null}
     </main>
   );

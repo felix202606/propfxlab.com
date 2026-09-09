@@ -3,10 +3,18 @@ import type { TradingPlatform } from "@/lib/schema";
 
 const ACCENT: Partial<Record<TradingPlatform, string>> = {
   mt4: "border-sky-500/30 bg-sky-500/10 text-sky-200",
-  mt5: "border-blue-500/30 bg-blue-500/10 text-blue-200",
-  ctrader: "border-emerald-500/30 bg-emerald-500/10 text-emerald-200",
-  tradovate: "border-amber-500/30 bg-amber-500/10 text-amber-200",
-  ninjatrader: "border-orange-500/30 bg-orange-500/10 text-orange-200",
+  mt5: "border-indigo-500/30 bg-indigo-500/10 text-indigo-200",
+  ctrader: "border-violet-500/30 bg-violet-500/10 text-violet-200",
+  matchtrader: "border-violet-500/30 bg-violet-500/10 text-violet-200",
+  tradelocker: "border-violet-500/30 bg-violet-500/10 text-violet-200",
+  dxtrade: "border-indigo-400/25 bg-indigo-500/10 text-indigo-200",
+  thinktrader: "border-indigo-400/25 bg-indigo-500/10 text-indigo-200",
+  tradingview: "border-indigo-400/25 bg-indigo-500/10 text-indigo-200",
+  tradovate: "border-fuchsia-500/25 bg-fuchsia-500/10 text-fuchsia-200",
+  ninjatrader: "border-fuchsia-500/25 bg-fuchsia-500/10 text-fuchsia-200",
+  bybit: "border-fuchsia-400/35 bg-fuchsia-500/10 text-fuchsia-100",
+  kraken: "border-violet-400/40 bg-violet-500/10 text-violet-100",
+  cleo: "border-fuchsia-400/35 bg-fuchsia-500/10 text-fuchsia-100",
 };
 
 export function PlatformChips({
@@ -23,7 +31,7 @@ export function PlatformChips({
   const extra = ordered.length - visible.length;
 
   return (
-    <ul className="flex flex-wrap gap-1.5">
+    <ul className="flex flex-wrap gap-1">
       {visible.map((platform) => (
         <li
           key={platform}

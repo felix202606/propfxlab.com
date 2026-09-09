@@ -1,0 +1,231 @@
+{
+  "slug": "hyrotrader",
+  "status": "active",
+  "category": [
+    "crypto"
+  ],
+  "tier": 1,
+  "platforms": [
+    "bybit",
+    "cleo"
+  ],
+  "assets": [
+    "crypto"
+  ],
+  "highlights": [
+    "exchange_depth",
+    "always_on",
+    "instant_payout"
+  ],
+  "payoutSpeed": "Within 12–24 Hours",
+  "rating": 4.3,
+  "reviewCount": 191,
+  "basic": {
+    "name": "HyroTrader",
+    "legalName": "HyroTrader",
+    "logo": {
+      "src": "/logos/hyrotrader.png",
+      "alt": "HyroTrader logo",
+      "width": 128,
+      "height": 128
+    },
+    "foundedAt": "2022-01-01",
+    "headquarters": {
+      "city": "Bratislava",
+      "country": "Slovakia",
+      "countryCode": "SK"
+    },
+    "website": "https://www.hyrotrader.com",
+    "funding": {
+      "currency": "USD",
+      "minAccountSize": 5000,
+      "maxAccountSize": 200000,
+      "maxScaledSize": 1000000
+    }
+  },
+  "withdrawal": {
+    "defaultTraderSharePercent": 80,
+    "defaultFirmSharePercent": 20,
+    "payoutCycle": {
+      "type": "on_demand",
+      "firstPayoutMinDays": 1,
+      "subsequentIntervalDays": null,
+      "description": "After the first funded trade, traders can request a payout from $100 of profit. Settlements are USDT or USDC, typically within 12–24 hours. A per-payout cap around 5% of the account applies."
+    },
+    "platformFee": {
+      "type": "none"
+    },
+    "channels": [
+      {
+        "id": "usdt-usdc",
+        "name": "USDT / USDC",
+        "method": "crypto",
+        "minAmount": 100,
+        "maxAmount": null,
+        "processingBusinessDays": {
+          "min": 0,
+          "max": 1
+        },
+        "fee": {
+          "type": "none"
+        },
+        "currencies": [
+          "USD"
+        ],
+        "notes": "Stablecoin only; no fiat bank wire. Network fees are separate."
+      }
+    ],
+    "minPayoutAmount": 100,
+    "minPayoutCurrency": "USD",
+    "challengeFeeRefundedOnFirstPayout": true,
+    "warnings": [
+      "Bybit API execution is unavailable in some restricted countries; CLEO (Binance liquidity) is the fallback with its own country list.",
+      "A stop-loss must be set shortly after each trade — missing it is treated as a hard breach.",
+      "Single payouts are capped (about 5% of the account). Crypto books trade 24/7 so drawdown clocks never pause."
+    ]
+  },
+  "calculator": {
+    "currency": "USD",
+    "profitSplitTiers": [
+      {
+        "id": "hyro-80",
+        "label": "Funded 80% split",
+        "program": "1-step",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 80
+      },
+      {
+        "id": "hyro-90",
+        "label": "Scaled 90% split",
+        "program": "1-step",
+        "minProfit": 0,
+        "maxProfit": null,
+        "traderSharePercent": 90
+      }
+    ],
+    "platformWithholdingTaxPercent": 0,
+    "platformDeductionPercent": 0,
+    "paymentProcessorFeePercent": 0,
+    "minPayoutAmount": 100,
+    "scaling": {
+      "enabled": true,
+      "maxCapital": 1000000,
+      "traderShareAfterScalePercent": 90,
+      "requirements": [
+        "Meet HyroTrader's published scaling milestones on the funded account",
+        "Stay inside daily trailing loss and max-drawdown limits",
+        "Complete KYC before the first payout"
+      ]
+    }
+  },
+  "faqs": [
+    {
+      "id": "what-is-hyrotrader",
+      "question": "What is HyroTrader?",
+      "answer": "HyroTrader is a crypto-only proprietary trading firm based in Bratislava, Slovakia. It was among the first evaluation firms to route live fills through a real exchange API (Bybit) rather than a legacy FX CFD book. Account sizes run from $5,000 to $200,000 with scaling advertised up to $1,000,000 USDT.",
+      "slug": "what-is-hyrotrader",
+      "locale": "en",
+      "keywords": [
+        "HyroTrader",
+        "crypto prop firm",
+        "Bybit"
+      ],
+      "seo": {
+        "title": "What is HyroTrader? | Crypto Prop Firm FAQ",
+        "metaDescription": "HyroTrader is a Slovakia-based crypto prop firm with real Bybit API execution and USDT/USDC payouts.",
+        "datePublished": "2026-09-10",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/hyrotrader/faq/what-is-hyrotrader"
+      }
+    },
+    {
+      "id": "hyrotrader-payouts",
+      "question": "How fast are HyroTrader payouts?",
+      "answer": "The first payout can be requested one day after the first funded trade once you have at least $100 of profit. HyroTrader pays USDT or USDC only, typically within 12–24 hours. The evaluation fee is refunded on the first funded payout. Watch the per-payout percentage cap.",
+      "slug": "hyrotrader-payouts",
+      "locale": "en",
+      "keywords": [
+        "HyroTrader payout",
+        "USDT",
+        "USDC"
+      ],
+      "seo": {
+        "title": "HyroTrader Payout Speed and Methods",
+        "metaDescription": "HyroTrader pays USDT/USDC on demand from $100, usually within 12–24 hours, with a fee refund on first payout.",
+        "datePublished": "2026-09-10",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/hyrotrader/faq/hyrotrader-payouts"
+      }
+    },
+    {
+      "id": "hyrotrader-execution",
+      "question": "Does HyroTrader use real exchange execution?",
+      "answer": "Yes. The primary route is Bybit's live order book via API, so spreads and depth match a personal Bybit account. Traders who cannot use Bybit can trade on CLEO, which uses Binance liquidity. Both books run 24/7.",
+      "slug": "hyrotrader-execution",
+      "locale": "en",
+      "keywords": [
+        "HyroTrader Bybit",
+        "CLEO",
+        "exchange execution"
+      ],
+      "seo": {
+        "title": "HyroTrader Bybit and CLEO Execution",
+        "metaDescription": "HyroTrader fills on Bybit's real order book or on CLEO with Binance liquidity, not a CFD crypto feed.",
+        "datePublished": "2026-09-10",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/hyrotrader/faq/hyrotrader-execution"
+      }
+    },
+    {
+      "id": "hyrotrader-rules",
+      "question": "What rules can breach a HyroTrader account?",
+      "answer": "1-Step evaluations use a 10% profit target with a trailing daily loss around 4% and 6% max drawdown. 2-Step is 10% then 5% with a 5% trailing daily and 10% static max. A stop-loss must be placed shortly after every trade. A 40% profit-distribution / consistency rule applies during evaluation only.",
+      "slug": "hyrotrader-rules",
+      "locale": "en",
+      "keywords": [
+        "HyroTrader rules",
+        "stop-loss",
+        "drawdown"
+      ],
+      "seo": {
+        "title": "HyroTrader Evaluation Rules",
+        "metaDescription": "HyroTrader enforces trailing daily loss, max drawdown, and a mandatory stop-loss on every trade.",
+        "datePublished": "2026-09-10",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/hyrotrader/faq/hyrotrader-rules"
+      }
+    },
+    {
+      "id": "hyrotrader-profit-split",
+      "question": "What profit split does HyroTrader pay?",
+      "answer": "Funded traders start at 80% and can scale to 90% under the published scaling plan. Payouts are crypto-only — there is no bank-wire option.",
+      "slug": "hyrotrader-profit-split",
+      "locale": "en",
+      "keywords": [
+        "HyroTrader profit split",
+        "80%",
+        "90%"
+      ],
+      "seo": {
+        "title": "HyroTrader Profit Split",
+        "metaDescription": "HyroTrader pays 80% on funded accounts, scaling to 90%, in USDT or USDC only.",
+        "datePublished": "2026-09-10",
+        "schemaType": "FAQPage",
+        "canonicalPath": "/firms/hyrotrader/faq/hyrotrader-profit-split"
+      }
+    }
+  ],
+  "prosAndCons": {
+    "pros": [
+      "Real Bybit order-book execution instead of a CFD crypto feed",
+      "On-demand USDT/USDC payouts, often inside 24 hours",
+      "Evaluation fee refunded on the first funded payout"
+    ],
+    "cons": [
+      "Mandatory stop-loss on every trade",
+      "Per-payout withdrawal cap around 5% of the account",
+      "Bybit access is blocked in some countries; US traders may be restricted"
+    ]
+  }
+}

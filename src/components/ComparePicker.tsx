@@ -27,47 +27,47 @@ export function ComparePicker({ firms }: { firms: CompareFirmOption[] }) {
   return (
     <form
       onSubmit={onSubmit}
-      className="mt-8 rounded-2xl border border-white/10 bg-white/[0.03] p-4 shadow-[0_0_0_1px_rgba(255,255,255,0.03)] sm:p-5"
+      className="mt-8 rounded-2xl border border-slate-800 bg-gradient-to-b from-[#12182a] to-[#0B0F19] p-4 sm:p-5"
     >
       <div className="grid gap-3 sm:grid-cols-[1fr_auto_1fr_auto] sm:items-end">
         <label className="flex min-w-0 flex-col gap-1.5 text-sm">
-          <span className="text-[11px] font-medium uppercase tracking-wide text-zinc-500">
+          <span className="text-[11px] font-medium uppercase tracking-wide text-slate-500">
             {t("selectFirmA")}
           </span>
           <select
             value={leftSlug}
             onChange={(event) => setLeftSlug(event.target.value)}
-            className="w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-zinc-100 outline-none transition-colors focus:border-cyan-400/40"
+            className="w-full rounded-xl border border-slate-800 bg-[#0B0F19] px-3 py-2.5 text-sm text-slate-100 outline-none transition-colors focus:border-indigo-400/50"
           >
-            <option value="" className="bg-zinc-900">
+            <option value="" className="bg-[#0B0F19]">
               {t("selectFirmA")}
             </option>
             {firms.map((firm) => (
-              <option key={firm.slug} value={firm.slug} className="bg-zinc-900">
+                <option key={firm.slug} value={firm.slug} className="bg-[#0B0F19]">
                 {firm.name}
               </option>
             ))}
           </select>
         </label>
 
-        <p className="hidden pb-2.5 text-center font-mono text-[11px] tracking-widest text-zinc-500 sm:block">
+        <p className="hidden pb-2.5 text-center font-mono text-[11px] tracking-widest text-slate-500 sm:block">
           {t("vs")}
         </p>
 
         <label className="flex min-w-0 flex-col gap-1.5 text-sm">
-          <span className="text-[11px] font-medium uppercase tracking-wide text-zinc-500">
+          <span className="text-[11px] font-medium uppercase tracking-wide text-slate-500">
             {t("selectFirmB")}
           </span>
           <select
             value={rightSlug}
             onChange={(event) => setRightSlug(event.target.value)}
-            className="w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-sm text-zinc-100 outline-none transition-colors focus:border-cyan-400/40"
+            className="w-full rounded-xl border border-slate-800 bg-[#0B0F19] px-3 py-2.5 text-sm text-slate-100 outline-none transition-colors focus:border-indigo-400/50"
           >
-            <option value="" className="bg-zinc-900">
+            <option value="" className="bg-[#0B0F19]">
               {t("selectFirmB")}
             </option>
             {firms.map((firm) => (
-              <option key={firm.slug} value={firm.slug} className="bg-zinc-900">
+                <option key={firm.slug} value={firm.slug} className="bg-[#0B0F19]">
                 {firm.name}
               </option>
             ))}
@@ -77,7 +77,7 @@ export function ComparePicker({ firms }: { firms: CompareFirmOption[] }) {
         <button
           type="submit"
           disabled={!canCompare}
-          className="rounded-xl bg-gradient-to-r from-cyan-400 via-emerald-300 to-emerald-400 px-4 py-2.5 text-sm font-semibold text-zinc-950 shadow-[0_0_22px_-4px_rgba(34,211,238,0.85)] transition-all hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none"
+          className="rounded-xl bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 px-4 py-2.5 text-sm font-semibold text-white shadow-[0_0_22px_-4px_rgba(139,92,246,0.85)] transition-all hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none"
         >
           {t("compareNow")}
         </button>

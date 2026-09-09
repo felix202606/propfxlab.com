@@ -16,11 +16,18 @@ type FirmFilterBarProps = {
 
 const QUICK_FILTERS: Array<{
   id: FirmHighlight;
-  labelKey: "filterLicensed" | "filterInstantPayout" | "filterLowEntry";
+  labelKey:
+    | "filterLicensed"
+    | "filterInstantPayout"
+    | "filterLowEntry"
+    | "filterExchangeDepth"
+    | "filterAlwaysOn";
 }> = [
   { id: "licensed_broker", labelKey: "filterLicensed" },
   { id: "instant_payout", labelKey: "filterInstantPayout" },
   { id: "low_entry", labelKey: "filterLowEntry" },
+  { id: "exchange_depth", labelKey: "filterExchangeDepth" },
+  { id: "always_on", labelKey: "filterAlwaysOn" },
 ];
 
 export function FirmFilterBar({
@@ -44,7 +51,7 @@ export function FirmFilterBar({
   return (
     <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
       <label className="relative block min-w-0 flex-1 lg:max-w-sm">
-        <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-zinc-500">
+        <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-slate-500">
           <svg
             width="15"
             height="15"
@@ -63,7 +70,7 @@ export function FirmFilterBar({
           value={searchQuery}
           onChange={(event) => onSearchChange(event.target.value)}
           placeholder={t("searchPlaceholder")}
-          className="w-full rounded-xl border border-white/10 bg-white/5 py-2 pr-3 pl-9 text-sm text-zinc-100 outline-none transition-colors placeholder:text-zinc-500 focus:border-emerald-400/40"
+          className="w-full rounded-xl border border-slate-800 bg-[#0B0F19] py-2 pr-3 pl-9 text-sm text-slate-100 outline-none transition-colors placeholder:text-slate-500 focus:border-indigo-400/50"
         />
       </label>
 
@@ -78,8 +85,8 @@ export function FirmFilterBar({
               onClick={() => toggleHighlight(filter.id)}
               className={`rounded-full border px-2.5 py-1 text-[11px] font-medium whitespace-nowrap transition-all ${
                 selected
-                  ? "border-emerald-400/40 bg-emerald-400/15 text-emerald-200"
-                  : "border-white/10 bg-white/5 text-zinc-400 hover:border-white/20 hover:text-zinc-200"
+                  ? "border-indigo-400/40 bg-indigo-500/15 text-indigo-100"
+                  : "border-slate-800 bg-slate-950/70 text-slate-400 hover:border-slate-700 hover:text-slate-200"
               }`}
             >
               {t(filter.labelKey)}
@@ -88,7 +95,7 @@ export function FirmFilterBar({
         })}
 
         <label className="ml-auto flex items-center gap-2 text-sm">
-          <span className="hidden text-[11px] font-medium uppercase tracking-wider text-zinc-500 sm:inline">
+          <span className="hidden text-[11px] font-medium uppercase tracking-wider text-slate-500 sm:inline">
             {t("sortLabel")}
           </span>
           <select
@@ -97,15 +104,15 @@ export function FirmFilterBar({
               onSortModeChange(event.target.value as SortMode)
             }
             aria-label={t("sortLabel")}
-            className="rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-sm text-zinc-100 outline-none transition-colors focus:border-emerald-400/40"
+            className="rounded-xl border border-slate-800 bg-[#0B0F19] px-3 py-2 text-sm text-slate-100 outline-none transition-colors focus:border-indigo-400/50"
           >
-            <option value="highestRated" className="bg-zinc-900">
+            <option value="highestRated" className="bg-[#0B0F19]">
               {t("sortHighestRated")}
             </option>
-            <option value="takeHome" className="bg-zinc-900">
+            <option value="takeHome" className="bg-[#0B0F19]">
               {t("sortTakeHome")}
             </option>
-            <option value="years" className="bg-zinc-900">
+            <option value="years" className="bg-[#0B0F19]">
               {t("sortYears")}
             </option>
           </select>

@@ -2,7 +2,8 @@
   "slug": "e8-markets",
   "status": "active",
   "category": [
-    "forex"
+    "forex",
+    "crypto"
   ],
   "tier": 1,
   "platforms": [

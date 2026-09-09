@@ -3,10 +3,10 @@ import { useTranslations } from "next-intl";
 const TRUST_ITEMS = [
   {
     key: "discount" as const,
-    glow: "from-emerald-500/25",
+    glow: "from-indigo-500/30",
     hover:
-      "hover:border-emerald-400/40 hover:shadow-[0_16px_40px_-12px_rgba(16,185,129,0.55)]",
-    iconClass: "border-emerald-400/25 bg-emerald-400/10 text-emerald-300",
+      "hover:border-indigo-500/50 hover:shadow-[0_16px_40px_-12px_rgba(99,102,241,0.55)]",
+    iconClass: "border-indigo-400/30 bg-indigo-500/10 text-indigo-200",
     icon: (
       <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden>
         <path
@@ -27,10 +27,10 @@ const TRUST_ITEMS = [
   },
   {
     key: "free" as const,
-    glow: "from-cyan-500/25",
+    glow: "from-violet-500/30",
     hover:
-      "hover:border-cyan-400/40 hover:shadow-[0_16px_40px_-12px_rgba(34,211,238,0.5)]",
-    iconClass: "border-cyan-400/25 bg-cyan-400/10 text-cyan-300",
+      "hover:border-violet-400/50 hover:shadow-[0_16px_40px_-12px_rgba(139,92,246,0.5)]",
+    iconClass: "border-violet-400/30 bg-violet-500/10 text-violet-200",
     icon: (
       <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden>
         <path
@@ -58,10 +58,10 @@ const TRUST_ITEMS = [
   },
   {
     key: "audit" as const,
-    glow: "from-sky-500/25",
+    glow: "from-fuchsia-500/25",
     hover:
-      "hover:border-sky-400/40 hover:shadow-[0_16px_40px_-12px_rgba(56,189,248,0.5)]",
-    iconClass: "border-sky-400/25 bg-sky-400/10 text-sky-300",
+      "hover:border-fuchsia-400/40 hover:shadow-[0_16px_40px_-12px_rgba(217,70,239,0.45)]",
+    iconClass: "border-fuchsia-400/30 bg-fuchsia-500/10 text-fuchsia-200",
     icon: (
       <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden>
         <path
@@ -86,39 +86,43 @@ export function TrustGrid() {
   const t = useTranslations("HomePage");
 
   return (
-    <section className="mx-auto w-full max-w-6xl px-4 py-8" id="how-it-works">
-      <h2 className="text-center text-2xl font-semibold tracking-tight sm:text-3xl">
-        <span className="bg-gradient-to-r from-white via-emerald-100 to-cyan-300 bg-clip-text text-transparent">
-          {t("trustTitle")}
-        </span>
-      </h2>
-      <p className="mx-auto mt-3 max-w-3xl text-center text-sm leading-6 text-zinc-400">
-        {t("trustSubtitle")}
-      </p>
-      <ul className="mt-8 grid gap-4 md:grid-cols-3">
-        {TRUST_ITEMS.map((item) => (
-          <li
-            key={item.key}
-            className={`group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-zinc-900 to-black p-6 shadow-[0_0_0_1px_rgba(255,255,255,0.04)] transition-all duration-300 hover:-translate-y-1 ${item.hover}`}
-          >
-            <div
-              className={`pointer-events-none absolute -top-16 right-0 h-32 w-32 bg-gradient-to-b ${item.glow} to-transparent blur-2xl transition-opacity duration-300 group-hover:opacity-100`}
-            />
-            <div className="pointer-events-none absolute inset-x-0 -top-24 h-40 bg-[radial-gradient(closest-side,rgba(16,185,129,0.14),transparent)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-            <span
-              className={`relative inline-flex h-10 w-10 items-center justify-center rounded-xl border ${item.iconClass}`}
+    <section
+      className="border-b border-slate-800 bg-[#0B0F19]"
+      id="how-it-works"
+    >
+      <div className="mx-auto w-full max-w-6xl px-4 py-12">
+        <h2 className="text-center text-2xl font-semibold tracking-tight sm:text-3xl">
+          <span className="bg-gradient-to-r from-white via-slate-100 to-indigo-300 bg-clip-text text-transparent">
+            {t("trustTitle")}
+          </span>
+        </h2>
+        <p className="mx-auto mt-3 max-w-3xl text-center text-sm leading-6 text-slate-400">
+          {t("trustSubtitle")}
+        </p>
+        <ul className="mt-8 grid gap-4 md:grid-cols-3">
+          {TRUST_ITEMS.map((item) => (
+            <li
+              key={item.key}
+              className={`group relative overflow-hidden rounded-2xl border border-slate-800 bg-gradient-to-b from-[#12182a] to-[#0B0F19] p-6 transition-all duration-300 hover:-translate-y-1 ${item.hover}`}
             >
-              {item.icon}
-            </span>
-            <h3 className="relative mt-4 text-base font-semibold tracking-tight text-zinc-50">
-              {t(`trust.${item.key}.title`)}
-            </h3>
-            <p className="relative mt-2 text-sm leading-6 text-zinc-400">
-              {t(`trust.${item.key}.body`)}
-            </p>
-          </li>
-        ))}
-      </ul>
+              <div
+                className={`pointer-events-none absolute -top-16 right-0 h-32 w-32 bg-gradient-to-b ${item.glow} to-transparent blur-2xl transition-opacity duration-300 group-hover:opacity-100`}
+              />
+              <span
+                className={`relative inline-flex h-10 w-10 items-center justify-center rounded-xl border ${item.iconClass}`}
+              >
+                {item.icon}
+              </span>
+              <h3 className="relative mt-4 text-base font-semibold tracking-tight text-slate-50">
+                {t(`trust.${item.key}.title`)}
+              </h3>
+              <p className="relative mt-2 text-sm leading-6 text-slate-400">
+                {t(`trust.${item.key}.body`)}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   );
 }
