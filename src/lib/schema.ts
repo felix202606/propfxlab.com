@@ -272,11 +272,11 @@ export const propFirmSchema = z
     /** 卡片展示用的出金速度短文案，例如 "Instant"、"Within 24 Hours" */
     payoutSpeed: z.string().min(1),
     /**
-     * Trustpilot TrustScore（0–5）。评分被 Trustpilot 下架时为 null，
-     * 卡片/表格不展示星级，按评分排序时排到末尾。
+     * 公开星级（0–5）。优先 Trustpilot TrustScore；
+     * Trustpilot 下架时回退 PropFirmMatch 社区分（FunderPro 等未上架则用 Map 分）。
      */
     rating: z.number().min(0).max(5).nullable(),
-    /** Trustpilot 公开评论数；评分下架时仍可保留历史计数 */
+    /** 评论数；优先保留 Trustpilot 公开评论量 */
     reviewCount: z.number().int().nonnegative(),
     basic: basicInfoSchema,
     withdrawal: withdrawalRulesSchema,

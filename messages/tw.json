@@ -209,6 +209,7 @@
     "promoLabel": "優惠碼",
     "copy": "複製",
     "copied": "已複製",
+    "copyCodeHint": "複製 {code}",
     "claimCta": "領取優惠",
     "calculateCta": "🧮 收益計算",
     "visitOfficial": "直達官網 ➔",
@@ -219,8 +220,11 @@
     "statusActive": "正常運營",
     "statusWarning": "延遲預警",
     "statusSuspended": "暫停出金",
-    "ratingBadge": "★ {rating}（{count} 則評價）"
+    "ratingBadge": "★ {rating}（{count} 則評價）",
+    "ratingUnavailable": "暫無",
+    "ratingBadgeUnavailable": "Trustpilot 評分暫不可用（{count} 則評價）"
   },
+
   "PayoutCalculator": {
     "heading": "出金計算器",
     "subtitle": "選擇公司與分成方案，輸入挑戰金額和預計利潤，查看預估到手金額。",

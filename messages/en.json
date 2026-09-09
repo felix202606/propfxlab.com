@@ -209,6 +209,7 @@
     "promoLabel": "Code",
     "copy": "Copy",
     "copied": "Copied",
+    "copyCodeHint": "Copy {code}",
     "claimCta": "Claim Discount",
     "calculateCta": "🧮 Calculate",
     "visitOfficial": "Visit site ➔",
@@ -219,8 +220,11 @@
     "statusActive": "Active",
     "statusWarning": "Warning",
     "statusSuspended": "Suspended",
-    "ratingBadge": "★ {rating} ({count} reviews)"
+    "ratingBadge": "★ {rating} ({count} reviews)",
+    "ratingUnavailable": "N/A",
+    "ratingBadgeUnavailable": "Trustpilot score unavailable ({count} reviews)"
   },
+
   "PayoutCalculator": {
     "heading": "Payout Calculator",
     "subtitle": "Choose the firm and split tier, enter your challenge amount and expected profit to preview your take-home payout.",

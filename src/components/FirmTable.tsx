@@ -24,7 +24,7 @@ const STATUS_DOT: Record<PlatformStatus, string> = {
 };
 
 const ROW_GRID =
-  "grid-cols-[minmax(200px,220px)_minmax(100px,0.65fr)_minmax(120px,0.85fr)_minmax(110px,0.8fr)_minmax(84px,0.55fr)_minmax(130px,0.85fr)_minmax(108px,0.7fr)_minmax(110px,0.55fr)]";
+  "grid-cols-[minmax(220px,250px)_minmax(104px,0.65fr)_minmax(128px,0.9fr)_minmax(120px,0.85fr)_minmax(92px,0.55fr)_minmax(140px,0.9fr)_minmax(120px,0.75fr)_minmax(116px,0.55fr)]";
 
 /** Sticky firm column: extends into row padding so scroll content never peeks underneath. */
 const STICKY_FIRM =
@@ -49,11 +49,11 @@ export function FirmTable({
 
   return (
     <div className="-mx-1 overflow-x-auto overscroll-x-contain px-1 [scrollbar-gutter:stable]">
-      <div className="min-w-[1180px] space-y-1.5">
+      <div className="min-w-[1260px] space-y-2.5">
         <div
-          className={`grid ${ROW_GRID} gap-2 px-3 py-1.5 text-[10px] font-medium tracking-wide text-slate-500 uppercase`}
+          className={`grid ${ROW_GRID} gap-3 px-3 py-2 text-[11px] font-medium tracking-wide text-slate-500 uppercase`}
         >
-          <div className={`${STICKY_FIRM} z-30 py-1.5`}>
+          <div className={`${STICKY_FIRM} z-30 py-2`}>
             {tHome("tableFirmColumn")}
           </div>
           <div>{tHome("tableOriginColumn")}</div>
@@ -65,7 +65,7 @@ export function FirmTable({
           <div className="text-right">{tHome("tableActionsColumn")}</div>
         </div>
 
-        <ul className="space-y-1.5">
+        <ul className="space-y-2.5">
           {rows.map(({ firm, breakdown, rank }) => {
             const offer = getFirmOffer(firm.slug, firm.basic.website);
             const isSuspended = firm.status === "suspended";
@@ -83,12 +83,12 @@ export function FirmTable({
             return (
               <li key={firm.slug}>
                 <div
-                  className={`group grid ${ROW_GRID} items-center gap-2 rounded-xl border border-slate-800 bg-[#0B0F19] px-3 py-2 transition-all hover:border-indigo-500/50 hover:bg-indigo-500/[0.04] hover:shadow-[0_0_24px_-12px_rgba(99,102,241,0.55)]`}
+                  className={`group grid ${ROW_GRID} items-center gap-3 rounded-xl border border-slate-800 bg-[#0B0F19] px-3 py-3.5 transition-all hover:border-indigo-500/50 hover:bg-indigo-500/[0.04] hover:shadow-[0_0_24px_-12px_rgba(99,102,241,0.55)]`}
                 >
                   <div
-                    className={`${STICKY_FIRM} -my-2 flex min-w-0 items-center gap-2.5 self-stretch rounded-l-[11px] py-2 transition-colors group-hover:bg-[#0d1224]`}
+                    className={`${STICKY_FIRM} -my-3.5 flex min-w-0 items-center gap-2.5 self-stretch rounded-l-[11px] py-3.5 transition-colors group-hover:bg-[#0d1224]`}
                   >
-                    <span className="w-5 shrink-0 text-center font-mono text-[11px] text-slate-500">
+                    <span className="w-6 shrink-0 text-center font-mono text-[12px] text-slate-500">
                       {rank <= 3 ? (
                         <span aria-hidden>
                           {rank === 1 ? "🏆" : rank === 2 ? "🥈" : "🥉"}
@@ -111,23 +111,25 @@ export function FirmTable({
                         />
                         <Link
                           href={`/firm/${firm.slug}`}
-                          className="truncate text-sm font-semibold text-slate-50 hover:text-indigo-200"
+                          className="truncate text-[15px] font-semibold leading-snug text-slate-50 hover:text-indigo-200"
                         >
                           {firm.basic.name}
                         </Link>
                       </div>
-                      <TrustpilotBadge firm={firm} className="mt-0.5" />
+                      <TrustpilotBadge firm={firm} className="mt-1" />
                     </div>
                   </div>
 
-                  <div className="min-w-0 text-[12px] leading-5 text-slate-300">
+                  <div className="min-w-0 text-[13px] leading-5 text-slate-300">
                     <div className="truncate">
                       <span className="mr-1" aria-hidden>
                         {flagEmoji(hq.countryCode)}
                       </span>
                       {shortCountry(hq.countryCode)}
                     </div>
-                    <div className="text-[11px] text-slate-500">{yearsLabel}</div>
+                    <div className="mt-0.5 text-[12px] text-slate-500">
+                      {yearsLabel}
+                    </div>
                   </div>
 
                   <div className="min-w-0">
@@ -139,10 +141,10 @@ export function FirmTable({
                   </div>
 
                   <div className="min-w-0">
-                    <p className="font-mono text-sm font-semibold text-slate-100">
+                    <p className="font-mono text-[15px] font-semibold text-slate-100">
                       {formatCompactUsd(allocation)}
                     </p>
-                    <div className="mt-1 h-1 overflow-hidden rounded-full bg-slate-800">
+                    <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-slate-800">
                       <div
                         className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-violet-400"
                         style={{ width: `${barPct}%` }}
@@ -151,12 +153,12 @@ export function FirmTable({
                   </div>
 
                   <div className="min-w-0">
-                    <p className="font-mono text-[15px] font-bold tracking-tight text-[#10B981]">
+                    <p className="font-mono text-base font-bold tracking-tight text-[#10B981]">
                       {breakdown
                         ? formatMoney(breakdown.netPayout, payoutCurrency)
                         : "—"}
                     </p>
-                    <p className="mt-0.5 text-[10px] font-medium text-emerald-400/70">
+                    <p className="mt-0.5 text-[11px] font-medium text-emerald-400/70">
                       {tHome("tableSplitHint", { percent: splitPercent })}
                     </p>
                   </div>
@@ -178,7 +180,7 @@ export function FirmTable({
                     {isSuspended ? (
                       <Link
                         href={`/firm/${firm.slug}`}
-                        className="inline-flex items-center justify-center rounded-lg border border-red-400/20 bg-red-400/10 px-2.5 py-1.5 text-[11px] font-medium whitespace-nowrap text-red-200 transition-colors hover:border-red-400/40"
+                        className="inline-flex items-center justify-center rounded-lg border border-red-400/20 bg-red-400/10 px-3 py-2 text-xs font-medium whitespace-nowrap text-red-200 transition-colors hover:border-red-400/40"
                       >
                         {t("readReview")}
                       </Link>
@@ -187,7 +189,7 @@ export function FirmTable({
                         href={getOutHref(firm.slug)}
                         target="_blank"
                         rel="nofollow sponsored noopener noreferrer"
-                        className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 px-2.5 py-1.5 text-[11px] font-semibold whitespace-nowrap text-white shadow-[0_0_18px_-6px_rgba(139,92,246,0.9)] transition-all hover:brightness-110"
+                        className="inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 px-3 py-2 text-xs font-semibold whitespace-nowrap text-white shadow-[0_0_18px_-6px_rgba(139,92,246,0.9)] transition-all hover:brightness-110"
                       >
                         {t("visitOfficial")}
                       </a>

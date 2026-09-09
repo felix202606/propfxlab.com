@@ -33,19 +33,25 @@ export function PromoCodeCopy({
     }
   }
 
-  if (copyOnly && discountLabel) {
+  if (copyOnly) {
     return (
       <button
         type="button"
         onClick={copyCode}
         aria-live="polite"
-        title={code}
-        className="inline-flex max-w-full items-center gap-1 rounded-md border border-fuchsia-500/40 bg-gradient-to-r from-violet-600/30 via-fuchsia-600/20 to-rose-600/30 px-1.5 py-0.5 text-left transition-all hover:border-fuchsia-400/70 hover:brightness-110"
+        title={copied ? t("copied") : t("copyCodeHint", { code })}
+        className="inline-flex max-w-full items-center gap-1.5 rounded-lg border border-fuchsia-500/35 bg-gradient-to-r from-violet-600/25 via-fuchsia-600/15 to-rose-600/25 px-2.5 py-2 text-left transition-all hover:border-fuchsia-400/65 hover:brightness-110"
       >
-        <span className="shrink-0 text-[10px] font-bold tracking-wide text-rose-200">
-          {discountLabel}
-        </span>
-        <code className="min-w-0 truncate font-mono text-[10px] font-semibold text-fuchsia-200">
+        {discountLabel ? (
+          <span className="shrink-0 text-[11px] font-bold tracking-wide text-rose-200">
+            {discountLabel}
+          </span>
+        ) : (
+          <span className="shrink-0 text-[10px] font-semibold tracking-[0.14em] text-fuchsia-300/70 uppercase">
+            {t("promoLabel")}
+          </span>
+        )}
+        <code className="min-w-0 truncate font-mono text-[13px] font-semibold text-fuchsia-100">
           {copied ? t("copied") : code}
         </code>
       </button>

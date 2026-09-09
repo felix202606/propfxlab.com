@@ -15,17 +15,17 @@ export function AssetChips({
   const extra = ordered.length - visible.length;
 
   return (
-    <ul className="flex flex-wrap gap-1">
+    <ul className="flex flex-wrap gap-1.5">
       {visible.map((asset) => (
         <li
           key={asset}
-          className="rounded-md border border-slate-700 bg-slate-800/80 px-1.5 py-px text-[9px] font-medium tracking-wide text-slate-300"
+          className="rounded-md border border-slate-700 bg-slate-800/80 px-2 py-0.5 text-[11px] font-medium tracking-wide text-slate-300"
         >
           {ASSET_LABELS[asset]}
         </li>
       ))}
       {extra > 0 ? (
-        <li className="rounded-md border border-slate-700 bg-slate-800/80 px-1.5 py-px text-[9px] text-slate-500">
+        <li className="rounded-md border border-slate-700 bg-slate-800/80 px-2 py-0.5 text-[11px] text-slate-500">
           +{extra}
         </li>
       ) : null}

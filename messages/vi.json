@@ -209,6 +209,7 @@
     "promoLabel": "Mã",
     "copy": "Sao chép",
     "copied": "Đã sao chép",
+    "copyCodeHint": "Sao chép {code}",
     "claimCta": "Nhận giảm giá",
     "calculateCta": "🧮 Tính toán",
     "visitOfficial": "Tới trang chủ ➔",
@@ -219,8 +220,11 @@
     "statusActive": "Hoạt động",
     "statusWarning": "Cảnh báo",
     "statusSuspended": "Tạm ngừng rút tiền",
-    "ratingBadge": "★ {rating} ({count} đánh giá)"
+    "ratingBadge": "★ {rating} ({count} đánh giá)",
+    "ratingUnavailable": "N/A",
+    "ratingBadgeUnavailable": "Điểm Trustpilot tạm không khả dụng ({count} đánh giá)"
   },
+
   "PayoutCalculator": {
     "heading": "Máy tính rút tiền",
     "subtitle": "Chọn công ty và bậc chia lợi nhuận, nhập số tiền Challenge và lợi nhuận dự kiến để xem trước số tiền thực nhận.",

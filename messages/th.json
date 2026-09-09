@@ -209,6 +209,7 @@
     "promoLabel": "รหัส",
     "copy": "คัดลอก",
     "copied": "คัดลอกแล้ว",
+    "copyCodeHint": "คัดลอก {code}",
     "claimCta": "รับส่วนลด",
     "calculateCta": "🧮 คำนวณ",
     "visitOfficial": "ไปที่เว็บไซต์ ➔",
@@ -219,8 +220,11 @@
     "statusActive": "เปิดดำเนินการ",
     "statusWarning": "แจ้งเตือนความล่าช้า",
     "statusSuspended": "ระงับการถอนเงิน",
-    "ratingBadge": "★ {rating} ({count} รีวิว)"
+    "ratingBadge": "★ {rating} ({count} รีวิว)",
+    "ratingUnavailable": "N/A",
+    "ratingBadgeUnavailable": "คะแนน Trustpilot ไม่พร้อมใช้งาน ({count} รีวิว)"
   },
+
   "PayoutCalculator": {
     "heading": "เครื่องคำนวณการถอนเงิน",
     "subtitle": "เลือกบริษัทและระดับสัดส่วนแบ่งกำไร กรอกจำนวนเงิน Challenge และกำไรที่คาดหวัง เพื่อดูยอดเงินสุทธิที่คาดว่าจะได้รับ",

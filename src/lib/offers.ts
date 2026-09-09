@@ -1,12 +1,14 @@
 export type FirmOffer = {
   code: string;
   href: string;
-  /** Compact table badge, e.g. "10% OFF" */
+  /**
+   * Optional compact badge when we know the real partner deal, e.g. "15% OFF".
+   * Do not invent a site-wide percent — rates differ by firm.
+   */
   discountLabel?: string;
 };
 
 export const DEFAULT_PROMO_CODE = "PROPFXLAB";
-export const DEFAULT_DISCOUNT_LABEL = "10% OFF";
 
 /** Affiliate hop so outbound clicks stay on /out/[slug] (nofollow sponsored). */
 export function getOutHref(slug: string): string {
@@ -35,14 +37,12 @@ export const FIRM_OFFERS: Record<string, FirmOffer> = {
 };
 
 export function getFirmOffer(slug: string, fallbackHref: string): FirmOffer {
-  const offer = FIRM_OFFERS[slug] ?? {
-    code: DEFAULT_PROMO_CODE,
-    href: fallbackHref,
-  };
-  return {
-    ...offer,
-    discountLabel: offer.discountLabel ?? DEFAULT_DISCOUNT_LABEL,
-  };
+  return (
+    FIRM_OFFERS[slug] ?? {
+      code: DEFAULT_PROMO_CODE,
+      href: fallbackHref,
+    }
+  );
 }
 
 export const HERO_ACCOUNT_SIZES = [10_000, 25_000, 50_000, 100_000, 200_000] as const;
