@@ -810,7 +810,11 @@ def notify_indexnow(slug: str) -> None:
         "key": INDEXNOW_KEY,
         "keyLocation": INDEXNOW_KEY_LOCATION,
         "urlList": [
-            f"https://{INDEXNOW_HOST}/{locale}/news/{slug}"
+            (
+                f"https://{INDEXNOW_HOST}/news/{slug}"
+                if locale == "en"
+                else f"https://{INDEXNOW_HOST}/{locale}/news/{slug}"
+            )
             for locale in INDEXNOW_LOCALES
         ],
     }

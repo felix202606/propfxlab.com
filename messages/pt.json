@@ -9,6 +9,7 @@
     "rankings": "Ranking",
     "compare": "Comparar",
     "faq": "FAQ",
+    "about": "Sobre",
     "news": "Notícias",
     "defunct": "Cemitério",
     "languageLabel": "Idioma"
@@ -230,7 +231,6 @@
     "ratingUnavailable": "N/D",
     "ratingBadgeUnavailable": "Pontuação Trustpilot indisponível ({count} avaliações)"
   },
-
   "PayoutCalculator": {
     "heading": "Calculadora de saque",
     "subtitle": "Escolha a firma e o nível de divisão, informe o valor do challenge e o lucro esperado para simular o valor líquido a receber.",
@@ -338,5 +338,28 @@
     "noSpam": "0 Spam. Cancele quando quiser.",
     "networkError": "Erro de rede. Verifique sua conexão.",
     "genericError": "Algo deu errado. Tente novamente."
+  },
+  "AboutPage": {
+    "metaTitle": "Sobre a PropFXLab — Inteligência de payouts e metodologia",
+    "metaDescription": "Quem somos, como calculamos o take-home estimado, com que frequência auditamos dados e como falar conosco.",
+    "title": "Sobre a PropFXLab",
+    "subtitle": "Inteligência independente sobre payouts de prop firms: calculadoras, comparações e contexto de segurança.",
+    "orgDescription": "Site independente de comparação e calculadora de payout líquido. Não somos prop firm nem corretora.",
+    "whoTitle": "Quem somos",
+    "whoBody": "A PropFXLab é um site independente de comparação e cálculo. Modelamos o payout líquido estimado após splits, taxas de plataforma e custos de saque, e ranqueamos firms com a mesma matemática reproduzível.\n\nEscrevemos para traders funded que querem ver a economia do payout antes de comprar um challenge.",
+    "notTitle": "O que não somos",
+    "notBody": "Não somos prop firm, corretora, processador de pagamentos nem banco. Não custodiamos fundos e não operamos challenges ou contas funded.\n\nA PropFXLab também não é afiliada a marcas ou corretoras históricas de nome parecido. Verifique sempre razão social, domínio e registro antes de enviar dinheiro.",
+    "methodTitle": "Como funcionam ranking e take-home",
+    "methodBody": "Com um tamanho de conta e lucro de exemplo, aplicamos o split padrão do trader e subtraímos taxas de plataforma/saque quando as regras públicas as detalham. O ranking da home usa os mesmos inputs em todas as firms.\n\nCódigos promo podem descontar o challenge; não mudam o split no nosso modelo salvo se as regras públicas disserem o contrário.",
+    "dataTitle": "Fontes e ritmo de dados",
+    "dataBody": "Regras, canais de payout e códigos são coletados de páginas públicas e divulgações de parceiros, depois revisados por edição humana. Nosso alvo é atualizar cerca de duas vezes por semana.\n\nRegras mudam. Confirme sempre os termos atuais no site da firm antes de comprar ou sacar.",
+    "safetyTitle": "Status de segurança",
+    "safetyBody": "Rótulos de segurança resumem histórico operacional, postura regulatória, registros públicos de payout e relatos de atraso da comunidade. São sinais editoriais, não garantias. Firms fechadas ou de alto risco ficam no Boneyard e fora do ranking ativo.",
+    "affiliateTitle": "Aviso de afiliados",
+    "affiliateBody": "Alguns links de saída são de afiliação. Podemos receber comissão se você se cadastrar por eles, sem custo extra. A compensação não altera o cálculo — cada firm é avaliada com as mesmas regras públicas.",
+    "contactTitle": "Contato",
+    "contactBody": "Imprensa e correções: contact@propfxlab.com\n\nSe notar regras desatualizadas ou um payout incorreto, escreva com o nome da firm, URL e o que mudou.",
+    "ctaFaq": "Ler o FAQ",
+    "ctaCalculator": "Abrir calculadora"
   }
 }
