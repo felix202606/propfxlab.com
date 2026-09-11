@@ -23,9 +23,9 @@ const STATUS_DOT: Record<PlatformStatus, string> = {
   suspended: "bg-red-400",
 };
 
-/** Conversion L→R: identity → context → money → promo → visit CTA. */
+/** PFM-style conversion L→R: identity → context → money → promo tile → visit. */
 const ROW_GRID =
-  "grid w-full grid-cols-[minmax(176px,1.3fr)_60px_minmax(88px,0.75fr)_minmax(100px,0.85fr)_72px_minmax(124px,0.95fr)_108px_96px]";
+  "grid w-full grid-cols-[minmax(168px,1.25fr)_56px_minmax(76px,0.7fr)_minmax(84px,0.75fr)_68px_minmax(120px,0.95fr)_112px_96px]";
 
 export type FirmTableRow = {
   firm: PropFirm;
@@ -46,7 +46,7 @@ export function FirmTable({
 
   return (
     <div className="w-full overflow-x-auto">
-      <div className="min-w-[940px] space-y-2.5">
+      <div className="min-w-[900px] space-y-2.5">
         <div
           className={`${ROW_GRID} items-end gap-x-2.5 px-3 py-2 text-[11px] font-medium tracking-wide text-slate-500 uppercase`}
         >
@@ -143,11 +143,11 @@ export function FirmTable({
                   </div>
 
                   <div className="min-w-0 self-center">
-                    <AssetChips assets={firm.assets} limit={6} />
+                    <AssetChips assets={firm.assets} limit={3} />
                   </div>
 
                   <div className="min-w-0 self-center">
-                    <PlatformChips platforms={firm.platforms} limit={6} />
+                    <PlatformChips platforms={firm.platforms} limit={3} />
                   </div>
 
                   <div className="min-w-0">
