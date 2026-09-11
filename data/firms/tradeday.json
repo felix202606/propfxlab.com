@@ -180,7 +180,7 @@
         "metaDescription": "TradeDay is a Chicago futures prop firm founded in 2020, with $50K–$150K Quick Pay evaluations and a path from Funded Sim to Funded Live.",
         "datePublished": "2026-09-09",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/tradeday/faq/what-is-tradeday"
+        "canonicalPath": "/firm/tradeday/faq/what-is-tradeday"
       }
     },
     {
@@ -200,7 +200,7 @@
         "metaDescription": "Quick Pay Funded Sim pays 80% above $4,000 current profit and 50/50 below it. Funded Live pays 90/10.",
         "datePublished": "2026-09-09",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/tradeday/faq/profit-split"
+        "canonicalPath": "/firm/tradeday/faq/profit-split"
       }
     },
     {
@@ -220,7 +220,7 @@
         "metaDescription": "Quick Pay allows a payout after one funded day with a $250 minimum. Requests before 5:30pm CT process the next business day.",
         "datePublished": "2026-09-09",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/tradeday/faq/payout-cycle"
+        "canonicalPath": "/firm/tradeday/faq/payout-cycle"
       }
     },
     {
@@ -240,7 +240,7 @@
         "metaDescription": "TradeDay pays via Riseworks: free US wires, $15 international wires, free L2 crypto, and $2.50 plus gas on L1.",
         "datePublished": "2026-09-09",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/tradeday/faq/withdrawal-methods-and-fees"
+        "canonicalPath": "/firm/tradeday/faq/withdrawal-methods-and-fees"
       }
     },
     {
@@ -260,7 +260,7 @@
         "metaDescription": "Quick Pay uses a trailing max drawdown, then reviews sim accounts at $10,000 gross profit for a 90/10 Funded Live seat.",
         "datePublished": "2026-09-09",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/tradeday/faq/drawdown-and-live-path"
+        "canonicalPath": "/firm/tradeday/faq/drawdown-and-live-path"
       }
     }
   ],

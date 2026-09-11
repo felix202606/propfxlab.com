@@ -1,4 +1,9 @@
 import type { Metadata } from "next";
+import {
+  pageAlternates,
+  pageOpenGraph,
+  pageTwitter,
+} from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
 import { SiteFaqExplorer, type SiteFaqListItem } from "@/components/SiteFaqExplorer";
 import { getAllSiteFaqs } from "@/lib/data";
@@ -9,9 +14,19 @@ export async function generateMetadata({
 }: PageProps<"/[locale]/faq">): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "FaqPage" });
+  const title = t("metaTitle");
+  const description = t("metaDescription");
   return {
-    title: t("metaTitle"),
-    description: t("metaDescription"),
+    title,
+    description,
+    alternates: pageAlternates(locale, "/faq"),
+    openGraph: pageOpenGraph({
+      locale,
+      pathname: "/faq",
+      title,
+      description,
+    }),
+    twitter: pageTwitter({ title, description }),
   };
 }
 

@@ -1,4 +1,9 @@
 import type { Metadata } from "next";
+import {
+  pageAlternates,
+  pageOpenGraph,
+  pageTwitter,
+} from "@/lib/seo";
 import { Suspense } from "react";
 import { getTranslations } from "next-intl/server";
 import { NewsIndex, type NewsListItem } from "@/components/NewsIndex";
@@ -11,9 +16,19 @@ export async function generateMetadata({
 }: PageProps<"/[locale]/news">): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "NewsPage" });
+  const title = t("metaTitle");
+  const description = t("metaDescription");
   return {
-    title: t("metaTitle"),
-    description: t("metaDescription"),
+    title,
+    description,
+    alternates: pageAlternates(locale, "/news"),
+    openGraph: pageOpenGraph({
+      locale,
+      pathname: "/news",
+      title,
+      description,
+    }),
+    twitter: pageTwitter({ title, description }),
   };
 }
 

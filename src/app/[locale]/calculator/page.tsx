@@ -1,4 +1,9 @@
 import type { Metadata } from "next";
+import {
+  pageAlternates,
+  pageOpenGraph,
+  pageTwitter,
+} from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
 import { PayoutCalculator } from "@/components/PayoutCalculator";
 import { getAllFirms } from "@/lib/data";
@@ -8,9 +13,19 @@ export async function generateMetadata({
 }: PageProps<"/[locale]/calculator">): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "CalculatorPage" });
+  const title = t("metaTitle");
+  const description = t("metaDescription");
   return {
-    title: t("metaTitle"),
-    description: t("metaDescription"),
+    title,
+    description,
+    alternates: pageAlternates(locale, "/calculator"),
+    openGraph: pageOpenGraph({
+      locale,
+      pathname: "/calculator",
+      title,
+      description,
+    }),
+    twitter: pageTwitter({ title, description }),
   };
 }
 

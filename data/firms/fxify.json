@@ -176,7 +176,7 @@
         "metaDescription": "Learn about FXIFY's flexible payout rules, including on-demand payouts from day one and standard 24-hour processing times.",
         "datePublished": "2026-09-04",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/fxify/faq/payout-rules-schedule"
+        "canonicalPath": "/firm/fxify/faq/payout-rules-schedule"
       }
     },
     {
@@ -196,7 +196,7 @@
         "metaDescription": "Understand FXIFY's 5% daily drawdown and 10% maximum static drawdown rules to keep your funded account safe.",
         "datePublished": "2026-09-04",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/fxify/faq/drawdown-limits-calculation"
+        "canonicalPath": "/firm/fxify/faq/drawdown-limits-calculation"
       }
     },
     {
@@ -215,7 +215,7 @@
         "metaDescription": "Find out how and when you can get your FXIFY challenge registration fee refunded back to you.",
         "datePublished": "2026-09-04",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/fxify/faq/refundable-challenge-fee"
+        "canonicalPath": "/firm/fxify/faq/refundable-challenge-fee"
       }
     },
     {
@@ -235,7 +235,7 @@
         "metaDescription": "Review the list of banned trading practices at FXIFY, including latency arbitrage and high-frequency trading.",
         "datePublished": "2026-09-04",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/fxify/faq/prohibited-trading-strategies"
+        "canonicalPath": "/firm/fxify/faq/prohibited-trading-strategies"
       }
     }
   ],

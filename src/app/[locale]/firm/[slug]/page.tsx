@@ -1,4 +1,9 @@
 import type { Metadata } from "next";
+import {
+  pageAlternates,
+  pageOpenGraph,
+  pageTwitter,
+} from "@/lib/seo";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
@@ -28,9 +33,19 @@ export async function generateMetadata({
   if (!firm) {
     return { title: t("notFoundMetaTitle") };
   }
+  const title = t("metaTitle", { name: firm.basic.name });
+  const description = t("metaDescription", { name: firm.basic.name });
   return {
-    title: t("metaTitle", { name: firm.basic.name }),
-    description: t("metaDescription", { name: firm.basic.name }),
+    title,
+    description,
+    alternates: pageAlternates(locale, `/firm/${slug}`),
+    openGraph: pageOpenGraph({
+      locale,
+      pathname: `/firm/${slug}`,
+      title,
+      description,
+    }),
+    twitter: pageTwitter({ title, description }),
   };
 }
 

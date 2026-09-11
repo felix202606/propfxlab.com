@@ -175,7 +175,7 @@
         "metaDescription": "Learn how the relative drawdown limit is calculated and enforced at Lux Trading Firm to avoid account breaches.",
         "datePublished": "2026-09-04",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/lux-trading-firm/faq/drawdown-limit-rules"
+        "canonicalPath": "/firm/lux-trading-firm/faq/drawdown-limit-rules"
       }
     },
     {
@@ -194,7 +194,7 @@
         "metaDescription": "Find out how quickly Lux Trading Firm processes profit splits and the schedule for requesting withdrawals.",
         "datePublished": "2026-09-04",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/lux-trading-firm/faq/payout-schedule-speed"
+        "canonicalPath": "/firm/lux-trading-firm/faq/payout-schedule-speed"
       }
     },
     {
@@ -214,7 +214,7 @@
         "metaDescription": "Discover the available withdrawal methods at Lux Trading Firm, including Bank Wire, Rise, and Crypto.",
         "datePublished": "2026-09-04",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/lux-trading-firm/faq/supported-payout-methods"
+        "canonicalPath": "/firm/lux-trading-firm/faq/supported-payout-methods"
       }
     },
     {
@@ -233,7 +233,7 @@
         "metaDescription": "Learn about the refund policy for evaluation fees at Lux Trading Firm upon your first successful payout.",
         "datePublished": "2026-09-04",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/lux-trading-firm/faq/evaluation-fee-refund"
+        "canonicalPath": "/firm/lux-trading-firm/faq/evaluation-fee-refund"
       }
     }
   ],

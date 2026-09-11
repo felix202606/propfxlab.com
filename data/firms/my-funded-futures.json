@@ -152,7 +152,7 @@
         "metaDescription": "My Funded Futures is a 2023 US futures prop firm offering Rapid, Pro, Flex and Builder plans from $25K to $150K with up to a 90/10 split.",
         "datePublished": "2026-09-09",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/my-funded-futures/faq/what-is-my-funded-futures"
+        "canonicalPath": "/firm/my-funded-futures/faq/what-is-my-funded-futures"
       }
     },
     {
@@ -171,7 +171,7 @@
         "metaDescription": "MFFU Rapid plans pay a flat 90/10 split; Pro, Flex and Builder sim accounts pay 80/20. There is no 100% first-tranche tier.",
         "datePublished": "2026-09-09",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/my-funded-futures/faq/profit-split"
+        "canonicalPath": "/firm/my-funded-futures/faq/profit-split"
       }
     },
     {
@@ -190,7 +190,7 @@
         "metaDescription": "Rapid pays daily after a 24-hour window, Flex after 5 winning days, and Pro every 14 calendar days, all via Riseworks.",
         "datePublished": "2026-09-09",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/my-funded-futures/faq/payout-cycle"
+        "canonicalPath": "/firm/my-funded-futures/faq/payout-cycle"
       }
     },
     {
@@ -210,7 +210,7 @@
         "metaDescription": "MFFU pays through Riseworks via ACH or crypto. Rapid's minimum is $500; Flex is $250 and Pro is $1,000.",
         "datePublished": "2026-09-09",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/my-funded-futures/faq/withdrawal-methods-and-fees"
+        "canonicalPath": "/firm/my-funded-futures/faq/withdrawal-methods-and-fees"
       }
     },
     {
@@ -230,7 +230,7 @@
         "metaDescription": "Rapid EOD uses EOD trailing max loss with no daily loss limit. Keep the buffer (max loss + $100) in the account to stay payout-eligible.",
         "datePublished": "2026-09-09",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/my-funded-futures/faq/drawdown-and-buffer"
+        "canonicalPath": "/firm/my-funded-futures/faq/drawdown-and-buffer"
       }
     }
   ],

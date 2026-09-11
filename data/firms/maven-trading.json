@@ -178,7 +178,7 @@
         "metaDescription": "Learn about Maven Trading's bi-weekly payout schedule, including the 14-day waiting period for your first withdrawal on a funded account.",
         "datePublished": "2026-09-04",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/maven-trading/faq/payout-frequency"
+        "canonicalPath": "/firm/maven-trading/faq/payout-frequency"
       }
     },
     {
@@ -198,7 +198,7 @@
         "metaDescription": "Understand the daily and overall maximum drawdown limits on Maven Trading accounts to avoid account breaches.",
         "datePublished": "2026-09-04",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/maven-trading/faq/drawdown-rules"
+        "canonicalPath": "/firm/maven-trading/faq/drawdown-rules"
       }
     },
     {
@@ -217,7 +217,7 @@
         "metaDescription": "Find out how and when you can get your registration fee refunded after passing the Maven Trading challenge.",
         "datePublished": "2026-09-04",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/maven-trading/faq/fee-refund"
+        "canonicalPath": "/firm/maven-trading/faq/fee-refund"
       }
     },
     {
@@ -237,7 +237,7 @@
         "metaDescription": "Review the list of forbidden trading practices at Maven Trading, including HFT and latency arbitrage, to keep your account safe.",
         "datePublished": "2026-09-04",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/maven-trading/faq/prohibited-strategies"
+        "canonicalPath": "/firm/maven-trading/faq/prohibited-strategies"
       }
     }
   ],

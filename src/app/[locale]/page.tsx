@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { ComparisonsGrid } from "@/components/ComparisonsGrid";
 import { HomeMarketplace } from "@/components/HomeMarketplace";
@@ -5,6 +6,29 @@ import { SiteFaqExplorer, type SiteFaqListItem } from "@/components/SiteFaqExplo
 import { TrustGrid } from "@/components/TrustGrid";
 import { getAllDefunctFirms, getAllFirms, getAllSiteFaqs } from "@/lib/data";
 import { getSiteFaqLocaleCopy } from "@/lib/schema";
+import {
+  pageAlternates,
+  pageOpenGraph,
+  pageTwitter,
+  siteJsonLd,
+} from "@/lib/seo";
+
+
+export async function generateMetadata({
+  params,
+}: PageProps<"/[locale]">): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "Metadata" });
+  const title = t("titleDefault");
+  const description = t("description");
+  return {
+    title: { absolute: title },
+    description,
+    alternates: pageAlternates(locale, ""),
+    openGraph: pageOpenGraph({ locale, pathname: "", title, description }),
+    twitter: pageTwitter({ title, description }),
+  };
+}
 
 export default async function Home({
   params,
@@ -38,8 +62,14 @@ export default async function Home({
     console.error("[home] translations failed, rendering page without FAQ copy:", err);
   }
 
+  const jsonLd = siteJsonLd();
+
   return (
     <main className="relative flex-1">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <HomeMarketplace firms={firms} defunctCount={defunctCount} />
       <TrustGrid />
       <ComparisonsGrid firms={firms} />

@@ -9,6 +9,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { SubscribeWidget } from "@/components/SubscribeWidget";
 import { getAllFirms } from "@/lib/data";
 import { localeMeta, routing } from "@/i18n/routing";
+import { SITE_NAME, SITE_URL } from "@/lib/seo";
 import "../globals.css";
 
 const geistSans = Geist({
@@ -40,16 +41,30 @@ export async function generateMetadata({
     if (!hasLocale(routing.locales, locale)) return {};
 
     const t = await getTranslations({ locale, namespace: "Metadata" });
+    const titleDefault = t("titleDefault");
+    const description = t("description");
     return {
+      metadataBase: new URL(SITE_URL),
       title: {
-        default: t("titleDefault"),
-        template: "%s · PropFXLab",
+        default: titleDefault,
+        template: `%s · ${SITE_NAME}`,
       },
-      description: t("description"),
+      description,
+      openGraph: {
+        type: "website",
+        siteName: SITE_NAME,
+        title: titleDefault,
+        description,
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: titleDefault,
+        description,
+      },
       appleWebApp: {
         capable: true,
         statusBarStyle: "black-translucent",
-        title: "Prop Calc",
+        title: SITE_NAME,
       },
       icons: {
         icon: [

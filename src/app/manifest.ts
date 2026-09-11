@@ -2,8 +2,8 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Prop Firm Payout Calculator",
-    short_name: "Prop Calc",
+    name: "PropFXLab — Prop Firm Payout Intelligence",
+    short_name: "PropFXLab",
     description:
       "Compare prop firm payout rules, profit split, and calculate net profits.",
     start_url: "/",

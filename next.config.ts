@@ -33,6 +33,17 @@ const nextConfig: NextConfig = {
         destination: "/:locale",
         permanent: true,
       },
+      // Legacy FAQ schema paths used /firms/...; live routes are /firm/...
+      {
+        source: "/firms/:path*",
+        destination: "/firm/:path*",
+        permanent: true,
+      },
+      {
+        source: "/:locale(en|es|cn|tw|th|vi|pt)/firms/:path*",
+        destination: "/:locale/firm/:path*",
+        permanent: true,
+      },
     ];
   },
   // Logo 来自各平台官网（多为 favicon.ico）；unoptimized 跳过优化器，
