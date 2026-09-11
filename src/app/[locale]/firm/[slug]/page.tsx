@@ -8,9 +8,10 @@ import { ProsConsBox } from "@/components/ProsConsBox";
 import { WarningBox } from "@/components/WarningBox";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { FirmLogo } from "@/components/FirmLogo";
+import { PromoCodeCopy } from "@/components/PromoCodeCopy";
 import { canonicalCompareSlug, COMPARE_EXCLUDED_SLUGS } from "@/lib/compare";
 import { getAllFirms, getFirmBySlug, getFirmSlugs } from "@/lib/data";
-import { getOutboundLink } from "@/lib/offers";
+import { getFirmOffer, getOutboundLink } from "@/lib/offers";
 import { formatMoney } from "@/lib/payout";
 import { toFaqJsonLd } from "@/lib/schema";
 
@@ -52,9 +53,11 @@ export default async function FirmPage({
   if (!firm) notFound();
 
   const t = await getTranslations("FirmPage");
+  const tCard = await getTranslations("FirmCard");
   const firms = getAllFirms();
   const jsonLd = toFaqJsonLd(firm);
   const { funding } = firm.basic;
+  const offer = getFirmOffer(firm.slug);
   const outbound = getOutboundLink(firm.slug, firm.basic.website);
   const cycle = firm.withdrawal.payoutCycle;
 
@@ -89,14 +92,25 @@ export default async function FirmPage({
             {firm.basic.headquarters.city}, {firm.basic.headquarters.country}
           </p>
         </div>
-        <a
-          href={outbound.href}
-          className="ml-auto text-sm font-medium text-zinc-700 underline-offset-4 hover:underline dark:text-zinc-300"
-          rel={outbound.rel}
-          target="_blank"
-        >
-          {t("website")}
-        </a>
+        <div className="ml-auto flex min-w-0 flex-wrap items-center justify-end gap-2">
+          {offer?.code ? (
+            <div className="min-w-0 max-w-xs">
+              <PromoCodeCopy copyOnly code={offer.code} href={outbound.href} />
+            </div>
+          ) : null}
+          <a
+            href={outbound.href}
+            className={
+              outbound.partner
+                ? "inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 px-4 py-2.5 text-sm font-semibold text-white shadow-[0_0_22px_-6px_rgba(139,92,246,0.9)] transition-all hover:brightness-110"
+                : "text-sm font-medium text-zinc-700 underline-offset-4 hover:underline dark:text-zinc-300"
+            }
+            rel={outbound.rel}
+            target="_blank"
+          >
+            {outbound.partner ? tCard("claimCta") : t("website")}
+          </a>
+        </div>
       </header>
 
       <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
