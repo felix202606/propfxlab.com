@@ -308,7 +308,7 @@ export function HomeMarketplace({
           </div>
         </div>
 
-        <div className="sticky top-[92px] z-40 -mx-4 mt-6 space-y-3 border-b border-slate-800 bg-[#0B0F19]/95 px-4 py-3 backdrop-blur-xl sm:top-16">
+        <div className="mt-6 space-y-3 border-b border-slate-800 pb-3">
           <FirmTabs
             active={activeTab}
             onChange={setActiveTab}
