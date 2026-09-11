@@ -52,6 +52,16 @@ function payoutForFirm(
   return result;
 }
 
+const TAB_PAGE_SIZE: Record<FirmTab, number> = {
+  top: 10,
+  forex: 8,
+  futures: 5,
+  crypto: 5,
+  all: 10,
+};
+
+const SHOW_MORE_CHUNK = 10;
+
 function matchesTab(firm: PropFirm, tab: FirmTab): boolean {
   if (tab === "top") return firm.tier === 1;
   if (tab === "forex") return firm.tier === 1 && firm.category.includes("forex");
@@ -75,6 +85,11 @@ export function HomeMarketplace({
   const [sortMode, setSortMode] = useState<SortMode>("takeHome");
   const [activeTab, setActiveTab] = useState<FirmTab>("top");
   const [highlights, setHighlights] = useState<FirmHighlight[]>([]);
+  const [visibleCount, setVisibleCount] = useState(TAB_PAGE_SIZE.top);
+
+  function resetVisibleCount(tab: FirmTab = activeTab) {
+    setVisibleCount(TAB_PAGE_SIZE[tab]);
+  }
 
   const profitValue = Number(profit);
   const hasValidProfit = Number.isFinite(profitValue) && profitValue >= 0;
@@ -134,13 +149,15 @@ export function HomeMarketplace({
     );
   }, [ranked, searchQuery, highlights]);
 
-  const visibleList = useMemo(
+  const tabList = useMemo(
     () =>
       filteredRanked
         .filter(({ firm }) => matchesTab(firm, activeTab))
         .map((row, index) => ({ ...row, rank: index + 1 })),
     [filteredRanked, activeTab],
   );
+  const visibleList = tabList.slice(0, visibleCount);
+  const remainingCount = Math.max(0, tabList.length - visibleList.length);
 
   const maxAllocationCap = useMemo(
     () => Math.max(...firms.map((firm) => maxAllocation(firm)), 1),
@@ -308,20 +325,32 @@ export function HomeMarketplace({
           </div>
         </div>
 
-        <div className="sticky top-[92px] z-40 -mx-4 mt-6 space-y-3 border-b border-slate-800 bg-[#0B0F19]/95 px-4 py-3 backdrop-blur-xl sm:top-16">
+        <div className="mt-6 space-y-3 border-b border-slate-800 pb-3">
           <FirmTabs
             active={activeTab}
-            onChange={setActiveTab}
+            onChange={(tab) => {
+              setActiveTab(tab);
+              resetVisibleCount(tab);
+            }}
             counts={tabCounts}
             defunctCount={defunctCount}
           />
           <FirmFilterBar
             searchQuery={searchQuery}
-            onSearchChange={setSearchQuery}
+            onSearchChange={(value) => {
+              setSearchQuery(value);
+              resetVisibleCount();
+            }}
             sortMode={sortMode}
-            onSortModeChange={setSortMode}
+            onSortModeChange={(mode) => {
+              setSortMode(mode);
+              resetVisibleCount();
+            }}
             highlights={highlights}
-            onHighlightsChange={setHighlights}
+            onHighlightsChange={(value) => {
+              setHighlights(value);
+              resetVisibleCount();
+            }}
           />
         </div>
 
@@ -337,7 +366,7 @@ export function HomeMarketplace({
               {t("emptyRankings")}
             </p>
           </div>
-        ) : visibleList.length === 0 ? (
+        ) : tabList.length === 0 ? (
           <p className="mt-8 text-sm text-slate-500">{t("noResults")}</p>
         ) : (
           <div className="mt-4">
@@ -345,6 +374,19 @@ export function HomeMarketplace({
               rows={visibleList}
               maxAllocationCap={maxAllocationCap}
             />
+            {remainingCount > 0 ? (
+              <div className="mt-6 flex justify-center">
+                <button
+                  type="button"
+                  onClick={() =>
+                    setVisibleCount((count) => count + SHOW_MORE_CHUNK)
+                  }
+                  className="rounded-xl border border-slate-800 bg-slate-950/80 px-4 py-2.5 text-sm font-medium text-slate-200 transition-all hover:border-indigo-400/40 hover:bg-indigo-500/10 hover:text-indigo-100"
+                >
+                  {t("showMore", { remaining: remainingCount })}
+                </button>
+              </div>
+            ) : null}
           </div>
         )}
         </div>

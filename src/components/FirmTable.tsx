@@ -23,13 +23,9 @@ const STATUS_DOT: Record<PlatformStatus, string> = {
   suspended: "bg-red-400",
 };
 
+/** PFM-style conversion L→R: identity → context → money → promo tile → visit. */
 const ROW_GRID =
-  "grid w-full grid-cols-[minmax(220px,1.35fr)_72px_minmax(108px,0.9fr)_minmax(128px,1fr)_100px_108px_88px_minmax(128px,0.95fr)]";
-
-
-/** Sticky firm column: extends into row padding so scroll content never peeks underneath. */
-const STICKY_FIRM =
-  "sticky left-0 z-20 -ml-3 border-r border-slate-800/80 bg-[#0B0F19] pr-2 pl-3 shadow-[10px_0_14px_-10px_rgba(0,0,0,0.75)]";
+  "grid w-full grid-cols-[minmax(168px,1.25fr)_56px_minmax(76px,0.7fr)_minmax(84px,0.75fr)_68px_minmax(120px,0.95fr)_112px_96px]";
 
 export type FirmTableRow = {
   firm: PropFirm;
@@ -49,21 +45,21 @@ export function FirmTable({
   const cap = Math.max(maxAllocationCap, 1);
 
   return (
-    <div className="w-full overflow-x-auto overscroll-x-contain [scrollbar-gutter:stable]">
-      <div className="min-w-[1080px] space-y-2.5">
+    <div className="w-full overflow-x-auto">
+      <div className="min-w-[900px] space-y-2.5">
         <div
-          className={`${ROW_GRID} items-end gap-x-3 px-3 py-2 text-[11px] font-medium tracking-wide text-slate-500 uppercase`}
+          className={`${ROW_GRID} items-end gap-x-2.5 px-3 py-2 text-[11px] font-medium tracking-wide text-slate-500 uppercase`}
         >
-          <div className={`${STICKY_FIRM} z-30 py-2`}>
-            {tHome("tableFirmColumn")}
-          </div>
+          <div>{tHome("tableFirmColumn")}</div>
           <div>{tHome("tableOriginColumn")}</div>
           <div>{tHome("tableAssetsColumn")}</div>
           <div>{tHome("tablePlatformsColumn")}</div>
-          <div>{tHome("tablePromoColumn")}</div>
-          <div>{tHome("tableActionsColumn")}</div>
           <div>{tHome("tableMaxAllocationColumn")}</div>
-          <div>{tHome("tableNetProfitColumn")}</div>
+          <div className="text-emerald-400/80">
+            {tHome("tableNetProfitColumn")}
+          </div>
+          <div>{tHome("tablePromoColumn")}</div>
+          <div className="text-right">{tHome("tableActionsColumn")}</div>
         </div>
 
         <ul className="space-y-2.5">
@@ -84,11 +80,9 @@ export function FirmTable({
             return (
               <li key={firm.slug}>
                 <div
-                  className={`group ${ROW_GRID} items-center gap-x-3 rounded-xl border border-slate-800 bg-[#0B0F19] px-3 py-3.5 transition-all hover:border-indigo-500/50 hover:bg-indigo-500/[0.04] hover:shadow-[0_0_24px_-12px_rgba(99,102,241,0.55)]`}
+                  className={`group ${ROW_GRID} items-center gap-x-2.5 rounded-xl border border-slate-800 bg-[#0B0F19] px-3 py-3.5 transition-all hover:border-indigo-500/50 hover:bg-indigo-500/[0.04] hover:shadow-[0_0_24px_-12px_rgba(99,102,241,0.55)]`}
                 >
-                  <div
-                    className={`${STICKY_FIRM} -my-3.5 flex min-w-0 items-center gap-2.5 self-stretch rounded-l-[11px] py-3.5 transition-colors group-hover:bg-[#0d1224]`}
-                  >
+                  <div className="flex min-w-0 items-center gap-2.5">
                     <span className="w-6 shrink-0 text-center font-mono text-[12px] text-slate-500">
                       {rank <= 3 ? (
                         <span aria-hidden>
@@ -105,14 +99,14 @@ export function FirmTable({
                       size="sm"
                     />
                     <div className="min-w-0">
-                      <div className="flex min-w-0 items-center gap-1.5">
+                      <div className="flex min-w-0 items-start gap-1.5">
                         <span
-                          className={`h-1.5 w-1.5 shrink-0 rounded-full ${STATUS_DOT[firm.status]}`}
+                          className={`mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full ${STATUS_DOT[firm.status]}`}
                           aria-hidden
                         />
                         <Link
                           href={`/firm/${firm.slug}`}
-                          className="truncate text-[15px] font-semibold leading-snug text-slate-50 hover:text-indigo-200"
+                          className="text-[15px] font-semibold leading-snug text-pretty text-slate-50 hover:text-indigo-200"
                         >
                           {firm.basic.name}
                         </Link>
@@ -137,7 +131,7 @@ export function FirmTable({
                   </div>
 
                   <div className="min-w-0 text-[13px] leading-5 text-slate-300">
-                    <div className="truncate">
+                    <div>
                       <span className="mr-1" aria-hidden>
                         {flagEmoji(hq.countryCode)}
                       </span>
@@ -149,11 +143,34 @@ export function FirmTable({
                   </div>
 
                   <div className="min-w-0 self-center">
-                    <AssetChips assets={firm.assets} limit={6} />
+                    <AssetChips assets={firm.assets} limit={3} />
                   </div>
 
                   <div className="min-w-0 self-center">
-                    <PlatformChips platforms={firm.platforms} limit={6} />
+                    <PlatformChips platforms={firm.platforms} limit={3} />
+                  </div>
+
+                  <div className="min-w-0">
+                    <p className="font-mono text-[15px] font-semibold text-slate-100">
+                      {formatCompactUsd(allocation)}
+                    </p>
+                    <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-slate-800">
+                      <div
+                        className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-violet-400"
+                        style={{ width: `${barPct}%` }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="min-w-0 rounded-lg bg-emerald-500/[0.07] px-2 py-1.5">
+                    <p className="font-mono text-lg font-bold tracking-tight text-[#10B981]">
+                      {breakdown
+                        ? formatMoney(breakdown.netPayout, payoutCurrency)
+                        : "—"}
+                    </p>
+                    <p className="mt-0.5 text-[11px] font-medium text-emerald-400/70">
+                      {tHome("tableSplitHint", { percent: splitPercent })}
+                    </p>
                   </div>
 
                   <div className="min-w-0">
@@ -169,7 +186,7 @@ export function FirmTable({
                     )}
                   </div>
 
-                  <div className="flex min-w-0 items-center justify-start">
+                  <div className="flex min-w-0 items-center justify-end">
                     {isSuspended ? (
                       <Link
                         href={`/firm/${firm.slug}`}
@@ -187,29 +204,6 @@ export function FirmTable({
                         {t("visitOfficial")}
                       </a>
                     )}
-                  </div>
-
-                  <div className="min-w-0">
-                    <p className="font-mono text-[15px] font-semibold text-slate-100">
-                      {formatCompactUsd(allocation)}
-                    </p>
-                    <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-slate-800">
-                      <div
-                        className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-violet-400"
-                        style={{ width: `${barPct}%` }}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="min-w-0">
-                    <p className="font-mono text-base font-bold tracking-tight text-[#10B981]">
-                      {breakdown
-                        ? formatMoney(breakdown.netPayout, payoutCurrency)
-                        : "—"}
-                    </p>
-                    <p className="mt-0.5 text-[11px] font-medium text-emerald-400/70">
-                      {tHome("tableSplitHint", { percent: splitPercent })}
-                    </p>
                   </div>
                 </div>
               </li>

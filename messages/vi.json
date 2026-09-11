@@ -47,7 +47,7 @@
     "tableMaxAllocationColumn": "Vốn tối đa",
     "tableNetProfitColumn": "Thực nhận PropFXLab ⚡",
     "tablePromoColumn": "Promo",
-    "tableActionsColumn": "Thao tác",
+    "tableActionsColumn": "Truy cập",
     "tableSplitHint": "Chia {percent}%",
     "filterLicensed": "🏦 Broker có giấy phép",
     "filterInstantPayout": "⚡ Rút hàng ngày / tức thì",
@@ -57,6 +57,7 @@
     "yearsShort": "{years} năm",
     "yearsPlus": "10+ năm",
     "noResults": "Không có công ty phù hợp với tìm kiếm.",
+    "showMore": "Xem thêm (còn {remaining})",
     "trustTitle": "PropFXLab hoạt động thế nào: mô hình Win-Win minh bạch",
     "trustSubtitle": "Chúng tôi không thu một xu nào từ trader. Đây là cách chúng tôi giúp bạn tiết kiệm tiền và giữ trang web miễn phí 100%.",
     "trust": {

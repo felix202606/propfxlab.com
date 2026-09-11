@@ -47,7 +47,7 @@
     "tableMaxAllocationColumn": "Max allocation",
     "tableNetProfitColumn": "PropFXLab net profit ⚡",
     "tablePromoColumn": "Promo",
-    "tableActionsColumn": "Actions",
+    "tableActionsColumn": "Visit",
     "tableSplitHint": "{percent}% split",
     "filterLicensed": "🏦 Licensed broker",
     "filterInstantPayout": "⚡ Daily / instant payouts",
@@ -57,6 +57,7 @@
     "yearsShort": "{years, plural, one {# Yr} other {# Yrs}}",
     "yearsPlus": "10+ Yrs",
     "noResults": "No firms match your search.",
+    "showMore": "Show more ({remaining} remaining)",
     "trustTitle": "How PropFXLab Works: A Transparent Win-Win Model",
     "trustSubtitle": "We don't charge traders a single penny. Here is how we save you money while keeping our site 100% free.",
     "trust": {

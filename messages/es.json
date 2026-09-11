@@ -47,7 +47,7 @@
     "tableMaxAllocationColumn": "Asignación máx.",
     "tableNetProfitColumn": "Pago neto PropFXLab ⚡",
     "tablePromoColumn": "Promo",
-    "tableActionsColumn": "Acciones",
+    "tableActionsColumn": "Visitar",
     "tableSplitHint": "{percent}% split",
     "filterLicensed": "🏦 Bróker con licencia",
     "filterInstantPayout": "⚡ Pagos diarios / instantáneos",
@@ -57,6 +57,7 @@
     "yearsShort": "{years, plural, one {# año} other {# años}}",
     "yearsPlus": "10+ años",
     "noResults": "Ninguna firma coincide con tu búsqueda.",
+    "showMore": "Mostrar más ({remaining} restantes)",
     "trustTitle": "Cómo funciona PropFXLab: un modelo transparente de ganar-ganar",
     "trustSubtitle": "No cobramos ni un céntimo a los traders. Así es como te ahorramos dinero y mantenemos el sitio 100% gratis.",
     "trust": {
