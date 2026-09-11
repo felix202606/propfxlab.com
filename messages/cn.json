@@ -57,6 +57,7 @@
     "yearsShort": "{years} 年",
     "yearsPlus": "10+ 年",
     "noResults": "没有匹配的平台。",
+    "showMore": "显示更多（还剩 {remaining} 家）",
     "trustTitle": "PropFXLab 如何运作：透明共赢模式",
     "trustSubtitle": "我们不向交易员收取一分钱。以下是我们如何帮你省钱，同时保持网站 100% 免费。",
     "trust": {

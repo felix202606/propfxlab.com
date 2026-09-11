@@ -57,6 +57,7 @@
     "yearsShort": "{years, plural, one {# ano} other {# anos}}",
     "yearsPlus": "10+ anos",
     "noResults": "Nenhuma firma corresponde à sua busca.",
+    "showMore": "Mostrar mais ({remaining} restantes)",
     "trustTitle": "Como o PropFXLab funciona: um modelo transparente de ganha-ganha",
     "trustSubtitle": "Não cobramos um centavo dos traders. Veja como economizamos o seu dinheiro e mantemos o site 100% gratuito.",
     "trust": {
