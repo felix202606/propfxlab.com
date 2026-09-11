@@ -21,7 +21,15 @@ const nextConfig: NextConfig = {
       "./scripts/**/*",
     ],
   },
-  async redirects() {
+  async rewrites() {
+    return [
+      {
+        source: "/sitemap.xml",
+        destination: "/api/sitemap-index",
+      },
+    ];
+  },
+    async redirects() {
     return [
       {
         source: "/firm/myfundedfx",
