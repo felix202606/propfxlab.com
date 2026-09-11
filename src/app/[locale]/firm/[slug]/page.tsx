@@ -10,6 +10,7 @@ import { FaqAccordion } from "@/components/FaqAccordion";
 import { FirmLogo } from "@/components/FirmLogo";
 import { canonicalCompareSlug, COMPARE_EXCLUDED_SLUGS } from "@/lib/compare";
 import { getAllFirms, getFirmBySlug, getFirmSlugs } from "@/lib/data";
+import { getOutboundLink } from "@/lib/offers";
 import { formatMoney } from "@/lib/payout";
 import { toFaqJsonLd } from "@/lib/schema";
 
@@ -54,6 +55,7 @@ export default async function FirmPage({
   const firms = getAllFirms();
   const jsonLd = toFaqJsonLd(firm);
   const { funding } = firm.basic;
+  const outbound = getOutboundLink(firm.slug, firm.basic.website);
   const cycle = firm.withdrawal.payoutCycle;
 
   const cycleText =
@@ -88,9 +90,9 @@ export default async function FirmPage({
           </p>
         </div>
         <a
-          href={firm.basic.website}
+          href={outbound.href}
           className="ml-auto text-sm font-medium text-zinc-700 underline-offset-4 hover:underline dark:text-zinc-300"
-          rel="noreferrer"
+          rel={outbound.rel}
           target="_blank"
         >
           {t("website")}

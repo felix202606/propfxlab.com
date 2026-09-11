@@ -88,7 +88,7 @@
     "category": [
       "forex"
     ],
-    "tier": 2,
+    "tier": 1,
     "country": "United Arab Emirates",
     "countryCode": "AE",
     "foundedAt": "2021-06-01",
@@ -172,7 +172,7 @@
     "category": [
       "forex"
     ],
-    "tier": 2,
+    "tier": 1,
     "country": "United Arab Emirates",
     "countryCode": "AE",
     "foundedAt": "2018-07-01",
@@ -315,7 +315,7 @@
     "category": [
       "forex"
     ],
-    "tier": 2,
+    "tier": 1,
     "country": "United Arab Emirates",
     "countryCode": "AE",
     "foundedAt": "2023-06-01",
@@ -672,7 +672,7 @@
     "category": [
       "forex"
     ],
-    "tier": 2,
+    "tier": 1,
     "country": "Saint Lucia",
     "countryCode": "LC",
     "foundedAt": "2022-11-01",
@@ -869,7 +869,7 @@
     "category": [
       "forex"
     ],
-    "tier": 2,
+    "tier": 1,
     "country": "United States",
     "countryCode": "US",
     "foundedAt": "2023-09-01",

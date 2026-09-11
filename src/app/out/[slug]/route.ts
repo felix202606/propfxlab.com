@@ -16,8 +16,8 @@ export async function GET(
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
 
-  const offer = getFirmOffer(firm.slug, firm.basic.website);
-  return NextResponse.redirect(offer.href, {
+  const offer = getFirmOffer(firm.slug);
+  return NextResponse.redirect(offer?.href ?? firm.basic.website, {
     status: 302,
     headers: { "X-Robots-Tag": "noindex, nofollow" },
   });

@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { getFirmOffer } from "@/lib/offers";
+import { getFirmOffer, getOutHref, OUT_LINK_REL } from "@/lib/offers";
 
 const ALTERNATIVES = [
   { slug: "ftmo", displayName: "FTMO" },
@@ -23,20 +23,33 @@ export function SaferAlternatives({ variant = "banner" }: SaferAlternativesProps
         </p>
         <div className="mt-2 flex flex-wrap gap-2">
           {ALTERNATIVES.map(({ slug, displayName }) => {
-            const offer = getFirmOffer(slug, `https://${slug}.com`);
-            return (
+            const offer = getFirmOffer(slug);
+            const className =
+              "inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-emerald-400 via-emerald-300 to-cyan-400 px-3 py-1.5 text-xs font-semibold text-zinc-950 shadow-[0_0_16px_-4px_rgba(52,211,153,0.9)] transition-all hover:brightness-110";
+            const label = (
+              <>
+                {displayName}
+                {offer?.code ? (
+                  <code className="rounded bg-black/20 px-1.5 py-0.5 font-mono text-[10px] tracking-wide">
+                    {offer.code}
+                  </code>
+                ) : null}
+              </>
+            );
+            return offer ? (
               <a
                 key={slug}
-                href={offer.href}
+                href={getOutHref(slug)}
                 target="_blank"
-                rel="sponsored noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-emerald-400 via-emerald-300 to-cyan-400 px-3 py-1.5 text-xs font-semibold text-zinc-950 shadow-[0_0_16px_-4px_rgba(52,211,153,0.9)] transition-all hover:brightness-110"
+                rel={OUT_LINK_REL}
+                className={className}
               >
-                {displayName}
-                <code className="rounded bg-black/20 px-1.5 py-0.5 font-mono text-[10px] tracking-wide">
-                  {offer.code}
-                </code>
+                {label}
               </a>
+            ) : (
+              <Link key={slug} href={`/firm/${slug}`} className={className}>
+                {label}
+              </Link>
             );
           })}
         </div>
@@ -58,7 +71,7 @@ export function SaferAlternatives({ variant = "banner" }: SaferAlternativesProps
 
         <div className="flex flex-wrap gap-2">
           {ALTERNATIVES.map(({ slug, displayName }) => {
-            const offer = getFirmOffer(slug, `https://${slug}.com`);
+            const offer = getFirmOffer(slug);
             return (
               <div
                 key={slug}
@@ -70,17 +83,28 @@ export function SaferAlternatives({ variant = "banner" }: SaferAlternativesProps
                 >
                   {displayName}
                 </Link>
-                <a
-                  href={offer.href}
-                  target="_blank"
-                  rel="sponsored noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-gradient-to-r from-emerald-400 via-emerald-300 to-cyan-400 px-3 py-1.5 text-xs font-semibold text-zinc-950 shadow-[0_0_16px_-4px_rgba(52,211,153,0.9)] transition-all hover:brightness-110"
-                >
-                  {tCard("claimCta")}
-                  <code className="rounded bg-black/20 px-1.5 py-0.5 font-mono text-[10px] tracking-wide">
-                    {offer.code}
-                  </code>
-                </a>
+                {offer ? (
+                  <a
+                    href={getOutHref(slug)}
+                    target="_blank"
+                    rel={OUT_LINK_REL}
+                    className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-gradient-to-r from-emerald-400 via-emerald-300 to-cyan-400 px-3 py-1.5 text-xs font-semibold text-zinc-950 shadow-[0_0_16px_-4px_rgba(52,211,153,0.9)] transition-all hover:brightness-110"
+                  >
+                    {tCard("claimCta")}
+                    {offer.code ? (
+                      <code className="rounded bg-black/20 px-1.5 py-0.5 font-mono text-[10px] tracking-wide">
+                        {offer.code}
+                      </code>
+                    ) : null}
+                  </a>
+                ) : (
+                  <Link
+                    href={`/firm/${slug}`}
+                    className="inline-flex items-center justify-center rounded-lg border border-white/10 px-3 py-1.5 text-xs font-medium text-zinc-200 transition-colors hover:border-emerald-400/30 hover:text-white"
+                  >
+                    {tCard("readReview")}
+                  </Link>
+                )}
               </div>
             );
           })}

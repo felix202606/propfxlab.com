@@ -6,7 +6,7 @@ import { PlatformChips } from "@/components/PlatformChips";
 import { PromoCodeCopy } from "@/components/PromoCodeCopy";
 import { TrustpilotBadge } from "@/components/TrustpilotBadge";
 import { getCardChannelTags } from "@/lib/channel-tags";
-import { getFirmOffer, getOutHref } from "@/lib/offers";
+import { getFirmOffer, getOutboundLink } from "@/lib/offers";
 import { formatMoney } from "@/lib/payout";
 import type { PlatformStatus, PropFirm } from "@/lib/schema";
 
@@ -64,7 +64,8 @@ type FirmCardProps = {
 
 export function FirmCard({ firm, rank, netPayout, currency }: FirmCardProps) {
   const t = useTranslations("FirmCard");
-  const offer = getFirmOffer(firm.slug, firm.basic.website);
+  const offer = getFirmOffer(firm.slug);
+  const outbound = getOutboundLink(firm.slug, firm.basic.website);
   const payoutCurrency = currency ?? firm.calculator.currency;
   const channelTags = getCardChannelTags(firm.withdrawal.channels).slice(0, 2);
   const firstPayoutDays = firm.withdrawal.payoutCycle.firstPayoutMinDays;
@@ -153,16 +154,22 @@ export function FirmCard({ firm, rank, netPayout, currency }: FirmCardProps) {
           </Link>
         ) : (
           <div className="flex items-center gap-1">
-            <div className="min-w-0 flex-1">
-              <PromoCodeCopy compact code={offer.code} href={getOutHref(firm.slug)} />
-            </div>
+            {offer?.code ? (
+              <div className="min-w-0 flex-1">
+                <PromoCodeCopy compact code={offer.code} href={outbound.href} />
+              </div>
+            ) : null}
             <a
-              href={getOutHref(firm.slug)}
+              href={outbound.href}
               target="_blank"
-              rel="nofollow sponsored noopener noreferrer"
-              className="inline-flex shrink-0 items-center justify-center rounded-md bg-gradient-to-r from-emerald-400 via-emerald-300 to-cyan-400 px-2 py-1 text-[11px] font-semibold whitespace-nowrap text-zinc-950 shadow-[0_0_14px_-4px_rgba(52,211,153,0.95)] transition-all hover:brightness-110"
+              rel={outbound.rel}
+              className={
+                outbound.partner
+                  ? "inline-flex shrink-0 items-center justify-center rounded-md bg-gradient-to-r from-emerald-400 via-emerald-300 to-cyan-400 px-2 py-1 text-[11px] font-semibold whitespace-nowrap text-zinc-950 shadow-[0_0_14px_-4px_rgba(52,211,153,0.95)] transition-all hover:brightness-110"
+                  : "inline-flex min-w-0 flex-1 items-center justify-center rounded-md border border-white/[0.08] bg-zinc-950/70 px-2 py-1 text-[11px] font-medium whitespace-nowrap text-zinc-200 transition-colors hover:border-white/15 hover:text-white"
+              }
             >
-              {t("claimCta")}
+              {outbound.partner ? t("claimCta") : t("visitOfficial")}
             </a>
             <Link
               href={`/firm/${firm.slug}`}

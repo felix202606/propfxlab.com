@@ -3,7 +3,7 @@ import { Link } from "@/i18n/navigation";
 import { ComparePicker } from "@/components/ComparePicker";
 import { FirmLogo } from "@/components/FirmLogo";
 import { canonicalCompareSlug, listCanonicalCompareSlugs } from "@/lib/compare";
-import { getFirmOffer, POPULAR_COMPARISONS } from "@/lib/offers";
+import { getOutboundLink, POPULAR_COMPARISONS } from "@/lib/offers";
 import type { PropFirm } from "@/lib/schema";
 
 export function ComparisonsGrid({
@@ -91,8 +91,8 @@ export function ComparisonsGrid({
         <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {pairs.map(({ left, right }) => {
             const compareHref = `/compare/${canonicalCompareSlug(left.slug, right.slug)}`;
-            const leftOffer = getFirmOffer(left.slug, left.basic.website);
-            const rightOffer = getFirmOffer(right.slug, right.basic.website);
+            const leftOut = getOutboundLink(left.slug, left.basic.website);
+            const rightOut = getOutboundLink(right.slug, right.basic.website);
 
             return (
               <li key={`${left.slug}-vs-${right.slug}`}>
@@ -121,17 +121,17 @@ export function ComparisonsGrid({
 
                   <div className="mt-3 grid grid-cols-2 gap-2">
                     <a
-                      href={leftOffer.href}
+                      href={leftOut.href}
                       target="_blank"
-                      rel="sponsored noopener noreferrer"
+                      rel={leftOut.rel}
                       className="rounded-xl border border-slate-800 bg-slate-950/70 px-3 py-2 text-center text-xs font-medium text-slate-300 transition-colors hover:border-indigo-400/40 hover:text-white"
                     >
                       {left.basic.name}
                     </a>
                     <a
-                      href={rightOffer.href}
+                      href={rightOut.href}
                       target="_blank"
-                      rel="sponsored noopener noreferrer"
+                      rel={rightOut.rel}
                       className="rounded-xl border border-slate-800 bg-slate-950/70 px-3 py-2 text-center text-xs font-medium text-slate-300 transition-colors hover:border-indigo-400/40 hover:text-white"
                     >
                       {right.basic.name}
