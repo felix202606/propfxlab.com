@@ -9,6 +9,7 @@
     "rankings": "Rankings",
     "compare": "Compare",
     "faq": "FAQ",
+    "about": "About",
     "news": "News",
     "defunct": "Boneyard",
     "languageLabel": "Language"
@@ -230,7 +231,6 @@
     "ratingUnavailable": "N/A",
     "ratingBadgeUnavailable": "Trustpilot score unavailable ({count} reviews)"
   },
-
   "PayoutCalculator": {
     "heading": "Payout Calculator",
     "subtitle": "Choose the firm and split tier, enter your challenge amount and expected profit to preview your take-home payout.",
@@ -338,5 +338,28 @@
     "noSpam": "0 Spam. Unsubscribe at any time.",
     "networkError": "Network error. Please check your connection.",
     "genericError": "Something went wrong. Please try again."
+  },
+  "AboutPage": {
+    "metaTitle": "About PropFXLab — Payout Intelligence & Methodology",
+    "metaDescription": "Who PropFXLab is, how take-home payout rankings are calculated, how often firm data is audited, and how to contact us.",
+    "title": "About PropFXLab",
+    "subtitle": "Independent prop firm payout intelligence — calculators, comparisons and safety context for funded traders.",
+    "orgDescription": "Independent prop firm payout intelligence and take-home calculator. Not a prop firm or broker.",
+    "whoTitle": "Who we are",
+    "whoBody": "PropFXLab is an independent comparison and calculator site. We model estimated take-home payouts after profit splits, platform fees and withdrawal costs, then rank firms on transparent, reproducible math.\n\nWe write for funded traders who want clearer payout economics before buying a challenge.",
+    "notTitle": "What we are not",
+    "notBody": "We are not a proprietary trading firm, broker, payment processor or bank. We never hold trader funds and we do not operate challenges or funded accounts.\n\nPropFXLab is also not affiliated with any similarly named historical brands or brokers. Always verify entities by legal name, domain and registration before sending money.",
+    "methodTitle": "How rankings and take-home estimates work",
+    "methodBody": "For a chosen account size and example profit, we apply each firm’s default trader share, then subtract modelled platform / withdrawal fees where the public rules specify them. Rankings on the homepage use the same inputs across firms so results stay comparable.\n\nPromo codes may discount challenge fees; they do not change profit splits in our model unless a firm’s public rules say otherwise.",
+    "dataTitle": "Data sources and update cadence",
+    "dataBody": "Firm rules, payout channels and promo codes are collected from public pages and partner disclosures, then reviewed by a human editor. We aim to refresh this data about twice a week.\n\nRules change. Always confirm the latest terms on the firm’s own site before you buy or withdraw.",
+    "safetyTitle": "Safety status",
+    "safetyBody": "Safety labels summarise operating history, regulatory posture, public payout records and community reports of delays. Labels are editorial signals, not guarantees. Closed or high-risk firms appear in the Boneyard so they stay out of active rankings.",
+    "affiliateTitle": "Affiliate disclosure",
+    "affiliateBody": "Some outbound links are affiliate / referral links. We may earn a commission if you sign up through them, at no extra cost to you. Compensation does not change calculator math — every firm is scored with the same public-rule inputs.",
+    "contactTitle": "Contact",
+    "contactBody": "Media and corrections: contact@propfxlab.com\n\nIf you spot outdated rules or a broken payout figure, email us with the firm name, URL and what changed.",
+    "ctaFaq": "Read the FAQ",
+    "ctaCalculator": "Open calculator"
   }
 }

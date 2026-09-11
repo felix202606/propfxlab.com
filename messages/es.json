@@ -9,6 +9,7 @@
     "rankings": "Ranking",
     "compare": "Comparar",
     "faq": "FAQ",
+    "about": "Acerca de",
     "news": "Noticias",
     "defunct": "Cementerio",
     "languageLabel": "Idioma"
@@ -230,7 +231,6 @@
     "ratingUnavailable": "N/D",
     "ratingBadgeUnavailable": "Puntuación de Trustpilot no disponible ({count} reseñas)"
   },
-
   "PayoutCalculator": {
     "heading": "Calculadora de pagos",
     "subtitle": "Elige la firma y el nivel de reparto, introduce el importe del challenge y el beneficio esperado para previsualizar tu pago neto.",
@@ -338,5 +338,28 @@
     "noSpam": "0 Spam. Cancela cuando quieras.",
     "networkError": "Error de red. Verifica tu conexión.",
     "genericError": "Algo salió mal. Inténtalo de nuevo."
+  },
+  "AboutPage": {
+    "metaTitle": "Acerca de PropFXLab — Inteligencia de pagos y metodología",
+    "metaDescription": "Quiénes somos, cómo calculamos el dinero neto estimado, con qué frecuencia auditamos los datos y cómo contactarnos.",
+    "title": "Acerca de PropFXLab",
+    "subtitle": "Inteligencia independiente sobre pagos de prop firms: calculadoras, comparativas y contexto de seguridad.",
+    "orgDescription": "Sitio independiente de comparación y calculadora de pagos netos. No somos una prop firm ni un bróker.",
+    "whoTitle": "Quiénes somos",
+    "whoBody": "PropFXLab es un sitio independiente de comparación y cálculo. Modelamos el pago neto estimado tras splits, comisiones de plataforma y costes de retirada, y ordenamos firmas con la misma matemática reproducible.\n\nEscribimos para traders fondeados que quieren ver la economía del payout antes de comprar un challenge.",
+    "notTitle": "Qué no somos",
+    "notBody": "No somos una prop firm, bróker, procesador de pagos ni banco. No custodiamos fondos ni operamos challenges o cuentas fondeadas.\n\nPropFXLab tampoco está afiliado a marcas o brókers históricos de nombre similar. Verifica siempre la entidad por razón social, dominio y registro antes de enviar dinero.",
+    "methodTitle": "Cómo funcionan el ranking y el take-home",
+    "methodBody": "Con un tamaño de cuenta y un beneficio de ejemplo, aplicamos el split por defecto del trader y restamos comisiones de plataforma/retirada cuando las reglas públicas las detallan. El ranking de inicio usa los mismos inputs en todas las firmas.\n\nLos códigos promo pueden descontar el challenge; no cambian el split en nuestro modelo salvo que las reglas públicas digan lo contrario.",
+    "dataTitle": "Fuentes y cadencia de datos",
+    "dataBody": "Reglas, canales de pago y códigos se recopilan de páginas públicas y divulgaciones de partners, y se revisan con edición humana. Nuestro objetivo es actualizarlos unas dos veces por semana.\n\nLas reglas cambian. Confirma siempre los términos actuales en el sitio de la firma.",
+    "safetyTitle": "Estado de seguridad",
+    "safetyBody": "Las etiquetas de seguridad resumen historial operativo, postura regulatoria, registros públicos de pagos e informes de retrasos. Son señales editoriales, no garantías. Las firmas cerradas o de alto riesgo van al Boneyard y salen del ranking activo.",
+    "affiliateTitle": "Aviso de afiliados",
+    "affiliateBody": "Algunos enlaces de salida son de afiliación. Podemos recibir comisión si te registras con ellos, sin coste extra. La compensación no altera el cálculo: cada firma se evalúa con las mismas reglas públicas.",
+    "contactTitle": "Contacto",
+    "contactBody": "Prensa y correcciones: contact@propfxlab.com\n\nSi ves reglas desactualizadas o un payout incorrecto, escríbenos con el nombre de la firma, la URL y el cambio.",
+    "ctaFaq": "Ver FAQ",
+    "ctaCalculator": "Abrir calculadora"
   }
 }

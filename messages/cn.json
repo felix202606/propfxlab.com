@@ -9,6 +9,7 @@
     "rankings": "排行榜",
     "compare": "对比",
     "faq": "FAQ",
+    "about": "关于",
     "news": "新闻",
     "defunct": "已关闭平台",
     "languageLabel": "语言"
@@ -230,7 +231,6 @@
     "ratingUnavailable": "暂无",
     "ratingBadgeUnavailable": "Trustpilot 评分暂不可用（{count} 条评价）"
   },
-
   "PayoutCalculator": {
     "heading": "出金计算器",
     "subtitle": "选择公司与分成方案，输入挑战金额和预计利润，查看预估到手金额。",
@@ -338,5 +338,28 @@
     "noSpam": "0 垃圾邮件，随时可退订。",
     "networkError": "网络错误，请检查连接。",
     "genericError": "出错了，请重试。"
+  },
+  "AboutPage": {
+    "metaTitle": "关于 PropFXLab — 出金情报与计算方法",
+    "metaDescription": "我们是谁、如何估算到手出金与排名、数据多久复核一次，以及如何联系我们。",
+    "title": "关于 PropFXLab",
+    "subtitle": "独立的 Prop Firm 出金情报站：计算器、对比，以及安全背景信息。",
+    "orgDescription": "独立的 Prop Firm 到手出金对比与计算器网站。我们不是 Prop Firm，也不是券商。",
+    "whoTitle": "我们是谁",
+    "whoBody": "PropFXLab 是独立的对比与计算网站。我们按利润分成、平台费与出金成本估算到手金额，并用同一套可复核的算法给公司排序。\n\n内容面向希望在购买挑战前看清出金经济账的 funded trader。",
+    "notTitle": "我们不是什么",
+    "notBody": "我们不是自营交易公司、券商、支付机构或银行。我们不托管交易员资金，也不运营挑战或出资账户。\n\nPropFXLab 与任何名称相近的历史品牌或券商无关。汇款前请务必核对法定名称、域名与注册信息。",
+    "methodTitle": "排名与到手金额如何计算",
+    "methodBody": "在给定账户规模与示例利润下，我们套用各公司默认交易员分成，并在公开规则写明时扣除平台/出金费用。首页排名对所有公司使用相同输入，保证可比。\n\n优惠码通常只折扣挑战费；除非公开规则另有说明，否则不改变分成模型。",
+    "dataTitle": "数据来源与更新频率",
+    "dataBody": "规则、出金渠道与优惠码来自公开页面与合作披露，并由人工复核。我们目标约每周更新两次。\n\n规则会变。购买或出金前请以公司官网最新条款为准。",
+    "safetyTitle": "安全状态",
+    "safetyBody": "安全标签综合运营年限、监管姿态、公开出金记录与社区延迟报告，属于编辑信号而非保证。已关闭或高风险公司放入 Boneyard，不进入活跃排名。",
+    "affiliateTitle": "联盟声明",
+    "affiliateBody": "部分外链为联盟/推荐链接。你通过它们注册时我们可能获得佣金，费用不会因此增加。佣金不改变计算器：每家公司都按同一套公开规则计分。",
+    "contactTitle": "联系",
+    "contactBody": "媒体与勘误：contact@propfxlab.com\n\n若发现规则过时或出金数字有误，请来信并附上公司名、链接与变更内容。",
+    "ctaFaq": "查看常见问题",
+    "ctaCalculator": "打开计算器"
   }
 }

@@ -9,6 +9,7 @@ const EXPLORE_LINKS = [
   { href: { pathname: "/", hash: "rankings" } as const, label: "rankings" as const },
   { href: "/compare", label: "compare" as const },
   { href: "/faq", label: "faq" as const },
+  { href: "/about", label: "about" as const },
   { href: "/news", label: "news" as const },
   { href: "/calculator", label: "calculator" as const },
 ] as const;

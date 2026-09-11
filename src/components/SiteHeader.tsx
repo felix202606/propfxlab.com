@@ -6,7 +6,7 @@ import { LocaleSwitcher } from "@/components/LocaleSwitcher";
 import { SiteLogo } from "@/components/SiteLogo";
 
 type NavItem = {
-  key: "rankings" | "compare" | "faq" | "news" | "calculator" | "defunct";
+  key: "rankings" | "compare" | "faq" | "about" | "news" | "calculator" | "defunct";
   href: string | { pathname: "/"; hash: string };
   match: (pathname: string) => boolean;
   tone?: "default" | "warning";
@@ -27,6 +27,11 @@ const NAV_ITEMS: NavItem[] = [
     key: "faq",
     href: "/faq",
     match: (pathname) => pathname === "/faq" || pathname.startsWith("/faq/"),
+  },
+  {
+    key: "about",
+    href: "/about",
+    match: (pathname) => pathname === "/about",
   },
   {
     key: "news",

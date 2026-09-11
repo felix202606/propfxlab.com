@@ -9,6 +9,7 @@
     "rankings": "Xếp hạng",
     "compare": "So sánh",
     "faq": "FAQ",
+    "about": "Giới thiệu",
     "news": "Tin tức",
     "defunct": "Công ty đã đóng",
     "languageLabel": "Ngôn ngữ"
@@ -230,7 +231,6 @@
     "ratingUnavailable": "N/A",
     "ratingBadgeUnavailable": "Điểm Trustpilot tạm không khả dụng ({count} đánh giá)"
   },
-
   "PayoutCalculator": {
     "heading": "Máy tính rút tiền",
     "subtitle": "Chọn công ty và bậc chia lợi nhuận, nhập số tiền Challenge và lợi nhuận dự kiến để xem trước số tiền thực nhận.",
@@ -338,5 +338,28 @@
     "noSpam": "0 Spam. Hủy đăng ký bất cứ lúc nào.",
     "networkError": "Lỗi mạng. Vui lòng kiểm tra kết nối.",
     "genericError": "Đã có lỗi xảy ra. Vui lòng thử lại."
+  },
+  "AboutPage": {
+    "metaTitle": "Giới thiệu PropFXLab — Thông tin payout và phương pháp",
+    "metaDescription": "Chúng tôi là ai, cách tính tiền về túi ước tính, tần suất kiểm tra dữ liệu và cách liên hệ.",
+    "title": "Giới thiệu PropFXLab",
+    "subtitle": "Nguồn độc lập về payout prop firm: máy tính, so sánh và bối cảnh an toàn.",
+    "orgDescription": "Trang so sánh và máy tính payout độc lập. Không phải prop firm hay broker.",
+    "whoTitle": "Chúng tôi là ai",
+    "whoBody": "PropFXLab là trang so sánh và tính toán độc lập. Chúng tôi ước tính tiền về túi sau split, phí nền tảng và phí rút, rồi xếp hạng công ty bằng cùng một công thức có thể kiểm chứng.\n\nNội dung dành cho funded trader muốn hiểu kinh tế payout trước khi mua challenge.",
+    "notTitle": "Chúng tôi không phải",
+    "notBody": "Chúng tôi không phải prop firm, broker, cổng thanh toán hay ngân hàng. Chúng tôi không giữ tiền trader và không vận hành challenge hay tài khoản funded.\n\nPropFXLab cũng không liên kết với thương hiệu/broker lịch sử tên tương tự. Hãy xác minh tên pháp lý, domain và đăng ký trước khi chuyển tiền.",
+    "methodTitle": "Cách xếp hạng và take-home hoạt động",
+    "methodBody": "Với quy mô tài khoản và lợi nhuận mẫu, chúng tôi áp dụng tỷ lệ trader mặc định rồi trừ phí nền tảng/rút khi quy tắc công khai nêu rõ. Bảng xếp hạng trang chủ dùng cùng input cho mọi công ty.\n\nMã khuyến mãi thường chỉ giảm phí challenge; không đổi split trong mô hình trừ khi quy tắc công khai nói khác.",
+    "dataTitle": "Nguồn dữ liệu và nhịp cập nhật",
+    "dataBody": "Quy tắc, kênh payout và mã được thu thập từ trang công khai và tiết lộ đối tác, rồi biên tập viên rà soát. Mục tiêu là cập nhật khoảng hai lần mỗi tuần.\n\nQuy tắc thay đổi. Luôn xác nhận điều khoản mới nhất trên site của công ty trước khi mua hoặc rút.",
+    "safetyTitle": "Trạng thái an toàn",
+    "safetyBody": "Nhãn an toàn tóm tắt lịch sử vận hành, tư thế quản lý, hồ sơ payout công khai và báo cáo chậm trả từ cộng đồng. Đây là tín hiệu biên tập, không phải bảo đảm. Công ty đóng cửa hoặc rủi ro cao nằm trong Boneyard, không vào xếp hạng đang hoạt động.",
+    "affiliateTitle": "Công bố liên kết",
+    "affiliateBody": "Một số liên kết ngoài là affiliate. Chúng tôi có thể nhận hoa hồng nếu bạn đăng ký qua chúng, không phát sinh thêm phí. Hoa hồng không đổi công thức — mỗi công ty được chấm bằng cùng bộ quy tắc công khai.",
+    "contactTitle": "Liên hệ",
+    "contactBody": "Truyền thông và sửa lỗi: contact@propfxlab.com\n\nNếu thấy quy tắc cũ hoặc số payout sai, hãy email kèm tên công ty, URL và thay đổi.",
+    "ctaFaq": "Xem FAQ",
+    "ctaCalculator": "Mở máy tính"
   }
 }
