@@ -1,4 +1,9 @@
 import type { Metadata } from "next";
+import {
+  pageAlternates,
+  pageOpenGraph,
+  pageTwitter,
+} from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { ComparisonsGrid } from "@/components/ComparisonsGrid";
@@ -15,9 +20,19 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "CompareIndex" });
   const pairCount = compareableFirms().length;
   const comparisons = (pairCount * (pairCount - 1)) / 2;
+  const title = t("metaTitle");
+  const description = t("metaDescription", { count: comparisons });
   return {
-    title: t("metaTitle"),
-    description: t("metaDescription", { count: comparisons }),
+    title,
+    description,
+    alternates: pageAlternates(locale, "/compare"),
+    openGraph: pageOpenGraph({
+      locale,
+      pathname: "/compare",
+      title,
+      description,
+    }),
+    twitter: pageTwitter({ title, description }),
   };
 }
 

@@ -1,0 +1,30 @@
+# PropFXLab
+
+> Independent prop firm payout intelligence: model take-home after splits, platform fees and withdrawal costs, then compare who pays faster and safer.
+
+PropFXLab is a comparison and calculator site. We do not hold trader funds and are not a prop firm or broker.
+
+## Core pages
+- [Home](https://www.propfxlab.com/): Live firm ranking and take-home estimates
+- [Calculator](https://www.propfxlab.com/calculator): Take-home payout calculator
+- [Compare](https://www.propfxlab.com/compare): Head-to-head firm matchups
+- [FAQ](https://www.propfxlab.com/faq): How rankings, safety status and promo codes work
+- [News](https://www.propfxlab.com/news): Firm and payout updates
+- [Boneyard / Defunct](https://www.propfxlab.com/defunct): Closed or high-risk firms
+
+## Example firm pages
+- [FTMO](https://www.propfxlab.com/firm/ftmo)
+- [Apex Trader Funding](https://www.propfxlab.com/firm/apex-trader-funding)
+- [Topstep](https://www.propfxlab.com/firm/topstep)
+- [My Funded Futures](https://www.propfxlab.com/firm/my-funded-futures)
+- [FundedNext](https://www.propfxlab.com/firm/fundednext)
+- [Alpha Capital Group](https://www.propfxlab.com/firm/alpha-capital)
+
+## Data & trust
+- Rules, promo codes and payout channels are scraped then human-reviewed about twice a week (stated on-site as of Sep 2026).
+- Safety status uses operating history, regulatory posture, public payout records and community delay reports.
+- Contact: contact@propfxlab.com
+
+## Optional
+- [Sitemap](https://www.propfxlab.com/sitemap.xml)
+- [Robots](https://www.propfxlab.com/robots.txt)

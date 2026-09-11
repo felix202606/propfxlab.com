@@ -1,4 +1,9 @@
 import type { Metadata } from "next";
+import {
+  pageAlternates,
+  pageOpenGraph,
+  pageTwitter,
+} from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
 import { DefunctFirmCard } from "@/components/DefunctFirmCard";
 import { SaferAlternatives } from "@/components/SaferAlternatives";
@@ -9,9 +14,19 @@ export async function generateMetadata({
 }: PageProps<"/[locale]/defunct">): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "DefunctPage" });
+  const title = t("metaTitle");
+  const description = t("metaDescription");
   return {
-    title: t("metaTitle"),
-    description: t("metaDescription"),
+    title,
+    description,
+    alternates: pageAlternates(locale, "/defunct"),
+    openGraph: pageOpenGraph({
+      locale,
+      pathname: "/defunct",
+      title,
+      description,
+    }),
+    twitter: pageTwitter({ title, description }),
   };
 }
 

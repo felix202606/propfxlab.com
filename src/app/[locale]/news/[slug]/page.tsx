@@ -1,4 +1,9 @@
 import type { Metadata } from "next";
+import {
+  pageAlternates,
+  pageOpenGraph,
+  pageTwitter,
+} from "@/lib/seo";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
@@ -22,9 +27,19 @@ export async function generateMetadata({
     return { title: t("notFoundMetaTitle") };
   }
   const copy = getNewsLocaleCopy(article, locale);
+  const title = copy.title;
+  const description = copy.summary;
   return {
-    title: copy.title,
-    description: copy.summary,
+    title,
+    description,
+    alternates: pageAlternates(locale, `/news/${slug}`),
+    openGraph: pageOpenGraph({
+      locale,
+      pathname: `/news/${slug}`,
+      title,
+      description,
+    }),
+    twitter: pageTwitter({ title, description }),
   };
 }
 

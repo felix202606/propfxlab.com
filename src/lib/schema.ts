@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { absoluteFirmFaqUrl } from "@/lib/seo";
 
 /** ISO-8601 日历日期，例如 2015-01-01 */
 const isoDate = z
@@ -199,7 +200,7 @@ export const faqItemSchema = z.object({
   id: kebabSlug,
   question: z.string().min(1),
   answer: z.string().min(1),
-  /** 程序化 SEO 落地页路径片段，例如 /firms/ftmo/faq/payout-cycle */
+  /** 程序化 SEO 落地页路径片段，例如 /firm/ftmo/faq/payout-cycle */
   slug: kebabSlug,
   locale: z.string().min(2).default("en"),
   keywords: z.array(z.string().min(1)).default([]),
@@ -572,7 +573,7 @@ export function toFaqJsonLd(firm: PropFirm) {
     mainEntity: firm.faqs.map((item) => ({
       "@type": "Question",
       name: item.question,
-      url: item.seo.canonicalPath,
+      url: absoluteFirmFaqUrl(item.seo.canonicalPath),
       acceptedAnswer: {
         "@type": "Answer",
         text: item.answer,

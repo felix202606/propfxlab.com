@@ -170,7 +170,7 @@
         "metaDescription": "Learn how to request and receive payouts at AquaFunded using Crypto, Rise Pay, or Bank Wire.",
         "datePublished": "2026-09-04",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/aquafunded/faq/how-do-payouts-work"
+        "canonicalPath": "/firm/aquafunded/faq/how-do-payouts-work"
       }
     },
     {
@@ -190,7 +190,7 @@
         "metaDescription": "Understand AquaFunded daily and overall drawdown limit rules to keep your funded account active.",
         "datePublished": "2026-09-04",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/aquafunded/faq/what-are-the-drawdown-limits"
+        "canonicalPath": "/firm/aquafunded/faq/what-are-the-drawdown-limits"
       }
     },
     {
@@ -209,7 +209,7 @@
         "metaDescription": "Find out when you are eligible to request your first withdrawal after passing your AquaFunded challenge.",
         "datePublished": "2026-09-04",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/aquafunded/faq/when-can-i-request-first-payout"
+        "canonicalPath": "/firm/aquafunded/faq/when-can-i-request-first-payout"
       }
     },
     {
@@ -228,7 +228,7 @@
         "metaDescription": "Learn about AquaFunded challenge fee refund policy on your first successful payout request.",
         "datePublished": "2026-09-04",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/aquafunded/faq/is-the-challenge-fee-refundable"
+        "canonicalPath": "/firm/aquafunded/faq/is-the-challenge-fee-refundable"
       }
     }
   ],

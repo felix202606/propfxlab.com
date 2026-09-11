@@ -136,7 +136,7 @@
         "metaDescription": "HyroTrader is a Slovakia-based crypto prop firm with real Bybit API execution and USDT/USDC payouts.",
         "datePublished": "2026-09-10",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/hyrotrader/faq/what-is-hyrotrader"
+        "canonicalPath": "/firm/hyrotrader/faq/what-is-hyrotrader"
       }
     },
     {
@@ -155,7 +155,7 @@
         "metaDescription": "HyroTrader pays USDT/USDC on demand from $100, usually within 12–24 hours, with a fee refund on first payout.",
         "datePublished": "2026-09-10",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/hyrotrader/faq/hyrotrader-payouts"
+        "canonicalPath": "/firm/hyrotrader/faq/hyrotrader-payouts"
       }
     },
     {
@@ -174,7 +174,7 @@
         "metaDescription": "HyroTrader fills on Bybit's real order book or on CLEO with Binance liquidity, not a CFD crypto feed.",
         "datePublished": "2026-09-10",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/hyrotrader/faq/hyrotrader-execution"
+        "canonicalPath": "/firm/hyrotrader/faq/hyrotrader-execution"
       }
     },
     {
@@ -193,7 +193,7 @@
         "metaDescription": "HyroTrader enforces trailing daily loss, max drawdown, and a mandatory stop-loss on every trade.",
         "datePublished": "2026-09-10",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/hyrotrader/faq/hyrotrader-rules"
+        "canonicalPath": "/firm/hyrotrader/faq/hyrotrader-rules"
       }
     },
     {
@@ -212,7 +212,7 @@
         "metaDescription": "HyroTrader pays 80% on funded accounts, scaling to 90%, in USDT or USDC only.",
         "datePublished": "2026-09-10",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/hyrotrader/faq/hyrotrader-profit-split"
+        "canonicalPath": "/firm/hyrotrader/faq/hyrotrader-profit-split"
       }
     }
   ],

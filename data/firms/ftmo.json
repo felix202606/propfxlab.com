@@ -209,7 +209,7 @@
         "datePublished": "2026-01-15",
         "dateModified": "2026-08-01",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/ftmo/faq/what-is-ftmo"
+        "canonicalPath": "/firm/ftmo/faq/what-is-ftmo"
       }
     },
     {
@@ -230,7 +230,7 @@
         "datePublished": "2026-01-15",
         "dateModified": "2026-08-01",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/ftmo/faq/account-sizes"
+        "canonicalPath": "/firm/ftmo/faq/account-sizes"
       }
     },
     {
@@ -251,7 +251,7 @@
         "metaDescription": "See how FTMO’s 80% 2-Step split, 90% Scaling Plan, and 90% 1-Step rewards compare.",
         "datePublished": "2026-01-15",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/ftmo/faq/profit-split"
+        "canonicalPath": "/firm/ftmo/faq/profit-split"
       }
     },
     {
@@ -271,7 +271,7 @@
         "datePublished": "2026-01-15",
         "dateModified": "2026-07-08",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/ftmo/faq/payout-cycle"
+        "canonicalPath": "/firm/ftmo/faq/payout-cycle"
       }
     },
     {
@@ -291,7 +291,7 @@
         "metaDescription": "Withdraw FTMO rewards via wire, card, Skrill, or crypto. Compare minimums and that FTMO charges no payout commission.",
         "datePublished": "2026-01-15",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/ftmo/faq/withdrawal-methods"
+        "canonicalPath": "/firm/ftmo/faq/withdrawal-methods"
       }
     },
     {
@@ -311,7 +311,7 @@
         "metaDescription": "FTMO does not add payout commission or withhold income tax. Challenge fees are usually refunded on the first payout.",
         "datePublished": "2026-01-15",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/ftmo/faq/fees-and-tax"
+        "canonicalPath": "/firm/ftmo/faq/fees-and-tax"
       }
     },
     {
@@ -332,7 +332,7 @@
         "datePublished": "2026-01-15",
         "dateModified": "2026-06-18",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/ftmo/faq/scaling-plan"
+        "canonicalPath": "/firm/ftmo/faq/scaling-plan"
       }
     }
   ],

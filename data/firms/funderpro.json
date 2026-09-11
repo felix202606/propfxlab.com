@@ -177,7 +177,7 @@
         "metaDescription": "Learn about FunderPro's 5% daily drawdown and 10% overall drawdown limits, calculated based on equity and balance.",
         "datePublished": "2026-09-04",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/funderpro/faq/drawdown-limit-rules"
+        "canonicalPath": "/firm/funderpro/faq/drawdown-limit-rules"
       }
     },
     {
@@ -196,7 +196,7 @@
         "metaDescription": "Discover FunderPro's payout cycle. Learn how you can request payouts on demand and receive them within 24 hours.",
         "datePublished": "2026-09-04",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/funderpro/faq/payout-cycle-speed"
+        "canonicalPath": "/firm/funderpro/faq/payout-cycle-speed"
       }
     },
     {
@@ -215,7 +215,7 @@
         "metaDescription": "Find out if FunderPro refunds your initial evaluation fee. Yes, the challenge fee is fully refunded with your first successful payout.",
         "datePublished": "2026-09-04",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/funderpro/faq/challenge-fee-refund"
+        "canonicalPath": "/firm/funderpro/faq/challenge-fee-refund"
       }
     },
     {
@@ -235,7 +235,7 @@
         "metaDescription": "Explore the payout methods available at FunderPro, including Rise, Bank Wire, and Crypto options like USDT.",
         "datePublished": "2026-09-04",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/funderpro/faq/supported-payout-methods"
+        "canonicalPath": "/firm/funderpro/faq/supported-payout-methods"
       }
     }
   ],

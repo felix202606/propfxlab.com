@@ -12,7 +12,20 @@ const BASE_URL = "https://www.propfxlab.com";
 const FIRMS_DIR = path.join(process.cwd(), "data", "firms");
 const NEWS_DIR = path.join(process.cwd(), "data", "news");
 
-/** 与语言无关的固定路径，会在每种语言前缀下各生成一条 URL。 */
+/**
+ * Shard ids for generateSitemaps. Splitting keeps each XML response smaller
+ * so cold starts / crawlers are less likely to hit timeouts (single-file 5MB+).
+ * All seven locales remain covered — HARD LOCK.
+ */
+const SITEMAP_SHARDS = [
+  { id: "static" },
+  { id: "firms" },
+  { id: "compare" },
+  { id: "news" },
+] as const;
+
+type FirmEntry = { slug: string; lastModified: Date };
+
 const STATIC_PATHS = [
   "",
   "/calculator",
@@ -22,13 +35,6 @@ const STATIC_PATHS = [
   "/faq",
 ] as const;
 
-type FirmEntry = { slug: string; lastModified: Date };
-
-/**
- * 直接读原始 JSON 而不复用 lib/data.ts 的 getAllFirms()：
- * 那边会跑 Zod 校验，任何一个字段不合法都会抛错并让整个 /sitemap.xml 变成 500。
- * sitemap 只需要 slug，所以这里逐文件容错——坏文件跳过，好文件照常收录。
- */
 function readFirmEntries(): FirmEntry[] {
   let fileNames: string[];
   try {
@@ -47,7 +53,6 @@ function readFirmEntries(): FirmEntry[] {
         typeof parsed === "object" && parsed !== null
           ? (parsed as { slug?: unknown }).slug
           : undefined;
-      // slug 缺失时退回文件名：文件名和路由 slug 在本仓库里始终一致
       const slug =
         typeof raw === "string" && raw.trim()
           ? raw.trim()
@@ -94,10 +99,6 @@ function readNewsEntries(): FirmEntry[] {
   return entries.sort((a, b) => a.slug.localeCompare(b.slug, "en"));
 }
 
-/**
- * 所有真实页面都在 /[locale] 之下，裸路径（如 /firm/ftmo）会被 proxy.ts 307 跳转，
- * 因此这里输出带语言前缀的 URL，并让同一页面的各语言版本互相声明 hreflang。
- */
 function localeUrl(locale: string, pathname: string): string {
   const suffix = pathname === "" ? "" : pathname;
   if (locale === routing.defaultLocale) {
@@ -128,18 +129,18 @@ function localizedEntries(
   }));
 }
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const firms = readFirmEntries().filter(
-    (firm) => !COMPARE_EXCLUDED_SLUGS.has(firm.slug),
-  );
-  const news = readNewsEntries();
-  const now = new Date();
-  const compareSlugs = listCanonicalCompareSlugs(
-    compareableSlugs(firms.map((firm) => firm.slug)),
-  );
+export async function generateSitemaps() {
+  return SITEMAP_SHARDS.map((shard) => ({ id: shard.id }));
+}
 
-  return [
-    ...STATIC_PATHS.flatMap((pathname) =>
+export default async function sitemap(props: {
+  id: Promise<string>;
+}): Promise<MetadataRoute.Sitemap> {
+  const id = await props.id;
+  const now = new Date();
+
+  if (id === "static") {
+    return STATIC_PATHS.flatMap((pathname) =>
       localizedEntries(
         pathname,
         now,
@@ -154,15 +155,37 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
               : 0.8,
         pathname === "/news" ? "daily" : "weekly",
       ),
-    ),
-    ...firms.flatMap((firm) =>
+    );
+  }
+
+  if (id === "firms") {
+    const firms = readFirmEntries().filter(
+      (firm) => !COMPARE_EXCLUDED_SLUGS.has(firm.slug),
+    );
+    return firms.flatMap((firm) =>
       localizedEntries(`/firm/${firm.slug}`, firm.lastModified, 0.7),
-    ),
-    ...compareSlugs.flatMap((slug) =>
+    );
+  }
+
+  if (id === "compare") {
+    const firms = readFirmEntries().filter(
+      (firm) => !COMPARE_EXCLUDED_SLUGS.has(firm.slug),
+    );
+    const compareSlugs = listCanonicalCompareSlugs(
+      compareableSlugs(firms.map((firm) => firm.slug)),
+    );
+    return compareSlugs.flatMap((slug) =>
       localizedEntries(`/compare/${slug}`, now, 0.65),
-    ),
-    ...news.flatMap((article) =>
+    );
+  }
+
+  if (id === "news") {
+    const news = readNewsEntries();
+    return news.flatMap((article) =>
       localizedEntries(`/news/${article.slug}`, article.lastModified, 0.6, "daily"),
-    ),
-  ];
+    );
+  }
+
+  console.error(`[sitemap] unknown shard id: ${id}`);
+  return [];
 }

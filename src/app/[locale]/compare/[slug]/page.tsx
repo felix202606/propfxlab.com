@@ -1,4 +1,9 @@
 import type { Metadata } from "next";
+import {
+  pageAlternates,
+  pageOpenGraph,
+  pageTwitter,
+} from "@/lib/seo";
 import type { ReactNode } from "react";
 import { notFound, permanentRedirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
@@ -41,12 +46,22 @@ export async function generateMetadata({
     return { title: t("notFoundMetaTitle") };
   }
   const { left, right } = pair;
+  const title = t("metaTitle", { left: left.basic.name, right: right.basic.name });
+  const description = t("metaDescription", {
+    left: left.basic.name,
+    right: right.basic.name,
+  });
   return {
-    title: t("metaTitle", { left: left.basic.name, right: right.basic.name }),
-    description: t("metaDescription", {
-      left: left.basic.name,
-      right: right.basic.name,
+    title,
+    description,
+    alternates: pageAlternates(locale, `/compare/${slug}`),
+    openGraph: pageOpenGraph({
+      locale,
+      pathname: `/compare/${slug}`,
+      title,
+      description,
     }),
+    twitter: pageTwitter({ title, description }),
   };
 }
 

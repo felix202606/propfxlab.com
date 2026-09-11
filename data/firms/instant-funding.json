@@ -183,7 +183,7 @@
         "metaDescription": "Learn how the daily and maximum drawdown limits are calculated on Instant Funding accounts to avoid account breaches.",
         "datePublished": "2026-09-04",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/instant-funding/faq/drawdown-limit-rules"
+        "canonicalPath": "/firm/instant-funding/faq/drawdown-limit-rules"
       }
     },
     {
@@ -202,7 +202,7 @@
         "metaDescription": "Find out when you can request your payouts and how long it takes for Instant Funding to process your withdrawals.",
         "datePublished": "2026-09-04",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/instant-funding/faq/payout-schedule-processing"
+        "canonicalPath": "/firm/instant-funding/faq/payout-schedule-processing"
       }
     },
     {
@@ -222,7 +222,7 @@
         "metaDescription": "Understand the restricted trading strategies on Instant Funding, including HFT, martingale, and arbitrage rules.",
         "datePublished": "2026-09-04",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/instant-funding/faq/prohibited-trading-strategies"
+        "canonicalPath": "/firm/instant-funding/faq/prohibited-trading-strategies"
       }
     },
     {
@@ -241,7 +241,7 @@
         "metaDescription": "Learn about the refund policy for the initial challenge fee on Instant Funding and how to claim it with your first payout.",
         "datePublished": "2026-09-04",
         "schemaType": "FAQPage",
-        "canonicalPath": "/firms/instant-funding/faq/challenge-fee-refund"
+        "canonicalPath": "/firm/instant-funding/faq/challenge-fee-refund"
       }
     }
   ],
