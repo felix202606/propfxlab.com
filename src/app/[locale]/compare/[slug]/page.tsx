@@ -19,7 +19,7 @@ import {
   pickCompareInsight,
 } from "@/lib/compare";
 import { getAllFirms, getFirmBySlug, getFirmSlugs } from "@/lib/data";
-import { getFirmOffer } from "@/lib/offers";
+import { getFirmOffer, getOutboundLink } from "@/lib/offers";
 import { formatMoney } from "@/lib/payout";
 import type { PropFirm } from "@/lib/schema";
 
@@ -347,15 +347,24 @@ function OfferCell({
   firm: PropFirm;
   t: Awaited<ReturnType<typeof getTranslations>>;
 }) {
-  const offer = getFirmOffer(firm.slug, firm.basic.website);
+  const offer = getFirmOffer(firm.slug);
+  const outbound = getOutboundLink(firm.slug, firm.basic.website);
   return (
     <div className="flex flex-col gap-3 px-3 py-4 sm:px-5">
-      <PromoCodeCopy code={offer.code} href={offer.href} />
+      {offer?.code ? (
+        <PromoCodeCopy code={offer.code} href={outbound.href} />
+      ) : offer ? null : (
+        <p className="text-xs text-zinc-500">{t("noPartnerPromo")}</p>
+      )}
       <a
-        href={offer.href}
+        href={outbound.href}
         target="_blank"
-        rel="sponsored noopener noreferrer"
-        className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-emerald-400 via-emerald-300 to-cyan-400 px-3 py-2.5 text-sm font-semibold text-zinc-950 shadow-[0_0_22px_-4px_rgba(52,211,153,0.95)] transition-all hover:brightness-110"
+        rel={outbound.rel}
+        className={
+          outbound.partner
+            ? "inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-emerald-400 via-emerald-300 to-cyan-400 px-3 py-2.5 text-sm font-semibold text-zinc-950 shadow-[0_0_22px_-4px_rgba(52,211,153,0.95)] transition-all hover:brightness-110"
+            : "inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5 text-sm font-medium text-zinc-200 transition-colors hover:border-cyan-400/30 hover:text-white"
+        }
       >
         {t("visitWebsite", { name: firm.basic.name })}
       </a>

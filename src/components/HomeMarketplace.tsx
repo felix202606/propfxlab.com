@@ -14,7 +14,7 @@ import {
   maxAllocation,
   yearsInOperation,
 } from "@/lib/firm-directory";
-import { HERO_ACCOUNT_SIZES } from "@/lib/offers";
+import { HERO_ACCOUNT_SIZES, isPartnerFirm } from "@/lib/offers";
 import {
   calculatePayout,
   formatMoney,
@@ -118,6 +118,9 @@ export function HomeMarketplace({
         const aWeight = STATUS_WEIGHT[a.firm.status];
         const bWeight = STATUS_WEIGHT[b.firm.status];
         if (aWeight !== bWeight) return aWeight - bWeight;
+        const aPartner = isPartnerFirm(a.firm.slug) ? 0 : 1;
+        const bPartner = isPartnerFirm(b.firm.slug) ? 0 : 1;
+        if (aPartner !== bPartner) return aPartner - bPartner;
         if (sortMode === "highestRated") {
           const aRating = a.firm.rating ?? -1;
           const bRating = b.firm.rating ?? -1;

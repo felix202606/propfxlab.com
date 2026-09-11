@@ -13,7 +13,7 @@ import {
   shortCountry,
   yearsInOperation,
 } from "@/lib/firm-directory";
-import { getFirmOffer, getOutHref } from "@/lib/offers";
+import { getFirmOffer, getOutboundLink } from "@/lib/offers";
 import { formatMoney, type PayoutBreakdown } from "@/lib/payout";
 import type { PlatformStatus, PropFirm } from "@/lib/schema";
 
@@ -64,7 +64,8 @@ export function FirmTable({
 
         <ul className="space-y-2.5">
           {rows.map(({ firm, breakdown, rank }) => {
-            const offer = getFirmOffer(firm.slug, firm.basic.website);
+            const offer = getFirmOffer(firm.slug);
+            const outbound = getOutboundLink(firm.slug, firm.basic.website);
             const isSuspended = firm.status === "suspended";
             const payoutCurrency =
               breakdown?.currency ?? firm.calculator.currency;
@@ -176,13 +177,19 @@ export function FirmTable({
                   <div className="min-w-0">
                     {isSuspended ? (
                       <span className="text-slate-500">—</span>
-                    ) : (
+                    ) : offer?.code ? (
                       <PromoCodeCopy
                         copyOnly
                         code={offer.code}
-                        href={getOutHref(firm.slug)}
+                        href={outbound.href}
                         discountLabel={offer.discountLabel}
                       />
+                    ) : offer ? (
+                      <span className="text-slate-500">—</span>
+                    ) : (
+                      <span className="text-[11px] text-slate-500">
+                        {t("noPartnerPromo")}
+                      </span>
                     )}
                   </div>
 
@@ -196,10 +203,14 @@ export function FirmTable({
                       </Link>
                     ) : (
                       <a
-                        href={getOutHref(firm.slug)}
+                        href={outbound.href}
                         target="_blank"
-                        rel="nofollow sponsored noopener noreferrer"
-                        className="inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 px-2 py-2 text-xs font-semibold whitespace-nowrap text-white shadow-[0_0_18px_-6px_rgba(139,92,246,0.9)] transition-all hover:brightness-110"
+                        rel={outbound.rel}
+                        className={
+                          outbound.partner
+                            ? "inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 px-2 py-2 text-xs font-semibold whitespace-nowrap text-white shadow-[0_0_18px_-6px_rgba(139,92,246,0.9)] transition-all hover:brightness-110"
+                            : "inline-flex w-full items-center justify-center rounded-lg border border-slate-700 bg-slate-950/80 px-2 py-2 text-xs font-medium whitespace-nowrap text-slate-200 transition-colors hover:border-indigo-400/40 hover:text-white"
+                        }
                       >
                         {t("visitOfficial")}
                       </a>
