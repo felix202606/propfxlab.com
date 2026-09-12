@@ -4,13 +4,35 @@ import { localeMeta, routing } from "@/i18n/routing";
 export const SITE_URL = "https://www.propfxlab.com";
 export const SITE_NAME = "PropFXLab";
 
-/** Build absolute URL for a locale + pathname ("" or "/foo"). Default locale is unprefixed. */
+/**
+ * Build absolute URL for a locale + pathname ("" or "/foo"). Default locale is unprefixed.
+ * Default-locale homepage is always `${SITE_URL}/` (trailing slash) to match the sitemap.
+ *
+ * IMPORTANT: Next.js Metadata `resolveAbsoluteUrlWithPathname` replaces root URLs with
+ * `URL.origin` (no trailing slash) when `trailingSlash` is false. Do not rely on
+ * `pageAlternates` / `pageOpenGraph` alone for the homepage — render those URL tags
+ * manually via {@link homepageSeoHeadTags} so canonical / hreflang / og:url keep `/`.
+ */
 export function absoluteLocaleUrl(locale: string, pathname = ""): string {
   const suffix = pathname === "/" ? "" : pathname;
   if (locale === routing.defaultLocale) {
     return `${SITE_URL}${suffix || "/"}`;
   }
   return `${SITE_URL}/${locale}${suffix}`;
+}
+
+/** Data for homepage <link>/<meta> tags that bypass Next.js Metadata URL normalization. */
+export function homepageSeoHeadTags(locale: string): {
+  canonical: string;
+  languages: Record<string, string>;
+  ogUrl: string;
+} {
+  const canonical = absoluteLocaleUrl(locale, "");
+  return {
+    canonical,
+    languages: languageAlternates(""),
+    ogUrl: canonical,
+  };
 }
 
 /** hreflang map for Metadata.alternates.languages (BCP-47 keys + x-default). */
