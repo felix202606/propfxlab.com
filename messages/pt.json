@@ -10,6 +10,7 @@
     "compare": "Comparar",
     "faq": "FAQ",
     "about": "Sobre",
+    "dataAuditLog": "Auditoria de dados",
     "news": "Notícias",
     "defunct": "Cemitério",
     "languageLabel": "Idioma"
@@ -361,5 +362,24 @@
     "contactBody": "Imprensa e correções: contact@propfxlab.com\n\nSe notar regras desatualizadas ou um payout incorreto, escreva com o nome da firm, URL e o que mudou.",
     "ctaFaq": "Ler o FAQ",
     "ctaCalculator": "Abrir calculadora"
+  },
+  "DataAuditLogPage": {
+    "metaTitle": "Registro de auditoria de dados — Fontes, cadência e verificação | PropFXLab",
+    "metaDescription": "Como a PropFXLab obtém as regras das firms, com que frequência os dados são auditados, o formato do change-log e como você pode verificar payouts e taxas.",
+    "title": "Registro de auditoria de dados",
+    "subtitle": "Notas transparentes sobre a origem dos dados das firms, a frequência de atualização e como conferir os números que publicamos.",
+    "orgDescription": "Inteligência independente de payouts de prop firms e calculadora de lucro líquido. Não somos uma prop firm nem uma corretora.",
+    "sourcesTitle": "Fontes de dados",
+    "sourcesBody": "Regras de cada firm, tamanhos de conta, splits de lucro, taxas de plataforma, canais de payout e códigos promo são coletados do site público, central de ajuda e termos de uso publicados.\n\nQuando a firm é parceira de afiliados, também cruzamos as condições divulgadas com o checkout ou o painel de parceiros. Relatos da comunidade (fóruns, redes, prints de payout) informam o contexto de segurança, mas nunca substituem silenciosamente as regras oficiais sem revisão humana.\n\nNão fazemos scraping de painéis de conta privados nem de dados pessoais de traders.",
+    "frequencyTitle": "Frequência de atualização",
+    "frequencyBody": "Especificações centrais (splits, taxas, métodos de saque e regras de challenge) são revisadas cerca de duas vezes por semana. Mudanças de alto impacto — congelamento de payouts, aumento de taxas, novos tamanhos de conta ou programas encerrados — são priorizadas assim que confirmadas publicamente.\n\nSinais de reputação como Trustpilot atualizam em cadência mais longa (cerca de a cada duas semanas). Notícias seguem um pipeline diário separado e não substituem a auditoria do perfil da firm.",
+    "changelogTitle": "Formato do registro de mudanças",
+    "changelogBody": "Quando um campo material muda, registramos:\n• Data (UTC) da revisão\n• Slug / nome da firm\n• Campo(s) alterados (ex.: profitSplit, platformFee, payoutMethods, challengeRules)\n• Nota breve do que mudou e a fonte pública usada\n\nCorreções menores de texto ou tipografia podem não gerar uma entrada pública separada. Mudanças materiais de payout ou taxas aparecem na página da firm e, quando relevante, no News.",
+    "verifyTitle": "Como verificar os dados de uma firm",
+    "verifyBody": "1. Abra a página oficial de preços, FAQ ou termos da firm e compare split %, taxas e janelas de payout com o perfil da PropFXLab.\n2. Use o mesmo tamanho de conta e lucro de exemplo na nossa Calculadora e confira se o take-home modelado bate com a fórmula publicada (split → taxa de plataforma → custo de saque).\n3. Para códigos promo, confirme que o código ainda aparece no checkout ou landing de parceiros da firm.\n4. Se um número parecer desatualizado, envie e-mail para contact@propfxlab.com com o nome da firm, o campo e um link da fonte oficial — tratamos correções como revisões prioritárias.",
+    "contactTitle": "Correções e contato",
+    "contactBody": "Correções de dados e perguntas de metodologia: contact@propfxlab.com\n\nInclua o nome da firm, o campo que você acredita estar errado e um link da página oficial com o valor atual. Respondemos conforme a capacidade e atualizamos o perfil após a verificação.",
+    "ctaAbout": "Sobre nós e metodologia",
+    "ctaFaq": "Ler o FAQ"
   }
 }

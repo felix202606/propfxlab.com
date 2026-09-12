@@ -10,6 +10,7 @@ PropFXLab is a comparison and calculator site. We do not hold trader funds and a
 - [Compare](https://www.propfxlab.com/compare): Head-to-head firm matchups
 - [FAQ](https://www.propfxlab.com/faq): How rankings, safety status and promo codes work
 - [About & methodology](https://www.propfxlab.com/about): Who we are, how take-home math works, data cadence
+- [Data audit log](https://www.propfxlab.com/data-audit-log): Sources, update frequency, change-log format, how to verify firm data
 - [News](https://www.propfxlab.com/news): Firm and payout updates
 - [Boneyard / Defunct](https://www.propfxlab.com/defunct): Closed or high-risk firms
 
@@ -22,7 +23,7 @@ PropFXLab is a comparison and calculator site. We do not hold trader funds and a
 - [Alpha Capital Group](https://www.propfxlab.com/firm/alpha-capital)
 
 ## Data & trust
-- Details: [About](https://www.propfxlab.com/about)
+- Details: [About](https://www.propfxlab.com/about) · [Data audit log](https://www.propfxlab.com/data-audit-log)
 - Rules, promo codes and payout channels are scraped then human-reviewed about twice a week (stated on-site as of Sep 2026).
 - Safety status uses operating history, regulatory posture, public payout records and community delay reports.
 - Contact: contact@propfxlab.com

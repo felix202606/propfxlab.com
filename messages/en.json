@@ -10,6 +10,7 @@
     "compare": "Compare",
     "faq": "FAQ",
     "about": "About",
+    "dataAuditLog": "Data audit",
     "news": "News",
     "defunct": "Boneyard",
     "languageLabel": "Language"
@@ -361,5 +362,24 @@
     "contactBody": "Media and corrections: contact@propfxlab.com\n\nIf you spot outdated rules or a broken payout figure, email us with the firm name, URL and what changed.",
     "ctaFaq": "Read the FAQ",
     "ctaCalculator": "Open calculator"
+  },
+  "DataAuditLogPage": {
+    "metaTitle": "Data Audit Log — Sources, Cadence & Verification | PropFXLab",
+    "metaDescription": "How PropFXLab sources firm rules, how often data is audited, what our change-log looks like, and how you can verify payout and fee figures yourself.",
+    "title": "Data audit log",
+    "subtitle": "Transparent notes on where firm data comes from, how often we refresh it, and how to double-check the numbers we publish.",
+    "orgDescription": "Independent prop firm payout intelligence and take-home calculator. Not a prop firm or broker.",
+    "sourcesTitle": "Data sources",
+    "sourcesBody": "Firm rules, account sizes, profit splits, platform fees, payout channels and promo codes are collected from each firm’s public website, help centre and published terms of use.\n\nWhere a firm is an affiliate partner, we may also cross-check disclosed offer terms against the live checkout or partner dashboard. Community reports (forums, social posts, payout screenshots) inform safety context but never silently overwrite official rules without a human review.\n\nWe do not scrape private account dashboards or personal trader data.",
+    "frequencyTitle": "Update frequency",
+    "frequencyBody": "Core firm specs (splits, fees, withdrawal methods and challenge rules) are reviewed about twice a week. High-impact changes — payout freezes, fee hikes, new account sizes or closed programmes — are prioritised as soon as they are publicly confirmed.\n\nTrustpilot and similar reputation signals refresh on a longer cadence (roughly every two weeks). News articles are published on a separate daily pipeline and are not a substitute for the firm profile audit.",
+    "changelogTitle": "Change-log format",
+    "changelogBody": "When a material field changes, we record:\n• Date (UTC) of the review\n• Firm slug / display name\n• Field(s) touched (e.g. profitSplit, platformFee, payoutMethods, challengeRules)\n• Brief note of what changed and the public source used\n\nMinor copy fixes and typo corrections may not produce a separate public entry. Material payout or fee changes are reflected on the firm page and, when relevant, called out in News.",
+    "verifyTitle": "How to verify firm data",
+    "verifyBody": "1. Open the firm’s official pricing, FAQ or terms page and compare split %, fees and payout windows against the PropFXLab firm profile.\n2. Run the same account size and example profit through our Calculator and check that the modelled take-home matches the published formula (split → platform fee → withdrawal cost).\n3. For promo codes, confirm the code still appears on the firm’s own checkout or partner landing page.\n4. If a number looks stale, email contact@propfxlab.com with the firm name, field and a link to the official source — we treat corrections as priority reviews.",
+    "contactTitle": "Corrections and contact",
+    "contactBody": "Data corrections and methodology questions: contact@propfxlab.com\n\nPlease include the firm name, the field you believe is wrong, and a link to the official page that shows the current value. We reply as capacity allows and update the profile once the change is verified.",
+    "ctaAbout": "About & methodology",
+    "ctaFaq": "Read the FAQ"
   }
 }

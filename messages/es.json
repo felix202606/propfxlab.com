@@ -10,6 +10,7 @@
     "compare": "Comparar",
     "faq": "FAQ",
     "about": "Acerca de",
+    "dataAuditLog": "Auditoría de datos",
     "news": "Noticias",
     "defunct": "Cementerio",
     "languageLabel": "Idioma"
@@ -361,5 +362,24 @@
     "contactBody": "Prensa y correcciones: contact@propfxlab.com\n\nSi ves reglas desactualizadas o un payout incorrecto, escríbenos con el nombre de la firma, la URL y el cambio.",
     "ctaFaq": "Ver FAQ",
     "ctaCalculator": "Abrir calculadora"
+  },
+  "DataAuditLogPage": {
+    "metaTitle": "Registro de auditoría de datos — Fuentes, cadencia y verificación | PropFXLab",
+    "metaDescription": "Cómo PropFXLab obtiene las reglas de las firmas, con qué frecuencia se auditan los datos, el formato del registro de cambios y cómo puedes verificar cifras de payout y comisiones.",
+    "title": "Registro de auditoría de datos",
+    "subtitle": "Notas transparentes sobre el origen de los datos de firmas, la frecuencia de actualización y cómo contrastar las cifras que publicamos.",
+    "orgDescription": "Inteligencia independiente de payouts de prop firms y calculadora de beneficio neto. No somos una prop firm ni un bróker.",
+    "sourcesTitle": "Fuentes de datos",
+    "sourcesBody": "Las reglas de cada firma, tamaños de cuenta, splits de beneficio, comisiones de plataforma, canales de payout y códigos promo se recopilan del sitio público, centro de ayuda y términos de uso publicados.\n\nCuando una firma es partner de afiliados, también contrastamos las condiciones divulgadas con el checkout o el panel de partners. Los reportes de la comunidad (foros, redes, capturas de payout) informan el contexto de seguridad, pero nunca sustituyen en silencio las reglas oficiales sin revisión humana.\n\nNo raspamos paneles de cuenta privados ni datos personales de traders.",
+    "frequencyTitle": "Frecuencia de actualización",
+    "frequencyBody": "Las especificaciones centrales (splits, comisiones, métodos de retiro y reglas de challenge) se revisan unas dos veces por semana. Los cambios de alto impacto — congelación de payouts, subidas de fees, nuevos tamaños de cuenta o programas cerrados — se priorizan en cuanto se confirman públicamente.\n\nSeñales de reputación como Trustpilot se refrescan con una cadencia más larga (aprox. cada dos semanas). Las noticias siguen un pipeline diario aparte y no sustituyen la auditoría del perfil de la firma.",
+    "changelogTitle": "Formato del registro de cambios",
+    "changelogBody": "Cuando cambia un campo material, registramos:\n• Fecha (UTC) de la revisión\n• Slug / nombre de la firma\n• Campo(s) tocados (p. ej. profitSplit, platformFee, payoutMethods, challengeRules)\n• Nota breve de qué cambió y la fuente pública usada\n\nCorrecciones menores de copy o tipografía pueden no generar una entrada pública aparte. Los cambios materiales de payout o fees se reflejan en la página de la firma y, cuando corresponde, en News.",
+    "verifyTitle": "Cómo verificar los datos de una firma",
+    "verifyBody": "1. Abre la página oficial de precios, FAQ o términos de la firma y compara split %, fees y ventanas de payout con el perfil de PropFXLab.\n2. Usa el mismo tamaño de cuenta y beneficio de ejemplo en nuestra Calculadora y comprueba que el take-home modelado coincida con la fórmula publicada (split → fee de plataforma → coste de retiro).\n3. Para códigos promo, confirma que el código sigue apareciendo en el checkout o landing de partners de la firma.\n4. Si un dato parece desactualizado, escribe a contact@propfxlab.com con el nombre de la firma, el campo y un enlace a la fuente oficial — tratamos las correcciones como revisiones prioritarias.",
+    "contactTitle": "Correcciones y contacto",
+    "contactBody": "Correcciones de datos y preguntas de metodología: contact@propfxlab.com\n\nIncluye el nombre de la firma, el campo que crees incorrecto y un enlace a la página oficial con el valor actual. Respondemos según capacidad y actualizamos el perfil una vez verificado el cambio.",
+    "ctaAbout": "Sobre nosotros y metodología",
+    "ctaFaq": "Leer el FAQ"
   }
 }
