@@ -41,6 +41,17 @@ const nextConfig: NextConfig = {
         destination: "/:locale",
         permanent: true,
       },
+      // Bare /firm has no index page; homepage marketplace is the live list.
+      {
+        source: "/firm",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/:locale(en|es|cn|tw|th|vi|pt)/firm",
+        destination: "/:locale",
+        permanent: true,
+      },
       // Legacy FAQ schema paths used /firms/...; live routes are /firm/...
       {
         source: "/firms/:path*",
