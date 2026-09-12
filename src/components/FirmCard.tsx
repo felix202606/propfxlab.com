@@ -3,6 +3,7 @@ import { Link } from "@/i18n/navigation";
 import { AssetChips } from "@/components/AssetChips";
 import { FirmLogo } from "@/components/FirmLogo";
 import { PlatformChips } from "@/components/PlatformChips";
+import { AffiliateLink } from "@/components/AffiliateLink";
 import { PromoCodeCopy } from "@/components/PromoCodeCopy";
 import { TrustpilotBadge } from "@/components/TrustpilotBadge";
 import { getCardChannelTags } from "@/lib/channel-tags";
@@ -159,18 +160,24 @@ export function FirmCard({ firm, rank, netPayout, currency }: FirmCardProps) {
                 <PromoCodeCopy compact code={offer.code} href={outbound.href} />
               </div>
             ) : null}
-            <a
-              href={outbound.href}
-              target="_blank"
-              rel={outbound.rel}
-              className={
-                outbound.partner
-                  ? "inline-flex shrink-0 items-center justify-center rounded-md bg-gradient-to-r from-emerald-400 via-emerald-300 to-cyan-400 px-2 py-1 text-[11px] font-semibold whitespace-nowrap text-zinc-950 shadow-[0_0_14px_-4px_rgba(52,211,153,0.95)] transition-all hover:brightness-110"
-                  : "inline-flex min-w-0 flex-1 items-center justify-center rounded-md border border-white/[0.08] bg-zinc-950/70 px-2 py-1 text-[11px] font-medium whitespace-nowrap text-zinc-200 transition-colors hover:border-white/15 hover:text-white"
-              }
-            >
-              {outbound.partner ? t("claimCta") : t("visitOfficial")}
-            </a>
+            {outbound.partner ? (
+              <AffiliateLink
+                slug={firm.slug}
+                source="card"
+                className="inline-flex shrink-0 items-center justify-center rounded-md bg-gradient-to-r from-emerald-400 via-emerald-300 to-cyan-400 px-2 py-1 text-[11px] font-semibold whitespace-nowrap text-zinc-950 shadow-[0_0_14px_-4px_rgba(52,211,153,0.95)] transition-all hover:brightness-110"
+              >
+                {t("claimCta")}
+              </AffiliateLink>
+            ) : (
+              <a
+                href={outbound.href}
+                target="_blank"
+                rel={outbound.rel}
+                className="inline-flex min-w-0 flex-1 items-center justify-center rounded-md border border-white/[0.08] bg-zinc-950/70 px-2 py-1 text-[11px] font-medium whitespace-nowrap text-zinc-200 transition-colors hover:border-white/15 hover:text-white"
+              >
+                {t("visitOfficial")}
+              </a>
+            )}
             <Link
               href={`/firm/${firm.slug}`}
               className="inline-flex shrink-0 items-center justify-center rounded-md border border-white/[0.08] bg-zinc-950/70 px-2 py-1 text-[11px] font-medium whitespace-nowrap text-zinc-400 transition-colors hover:border-white/15 hover:text-zinc-200"

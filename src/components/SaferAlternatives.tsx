@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { getFirmOffer, getOutHref, OUT_LINK_REL } from "@/lib/offers";
+import { AffiliateLink } from "@/components/AffiliateLink";
+import { getFirmOffer } from "@/lib/offers";
 
 const ALTERNATIVES = [
   { slug: "ftmo", displayName: "FTMO" },
@@ -37,15 +38,14 @@ export function SaferAlternatives({ variant = "banner" }: SaferAlternativesProps
               </>
             );
             return offer ? (
-              <a
+              <AffiliateLink
                 key={slug}
-                href={getOutHref(slug)}
-                target="_blank"
-                rel={OUT_LINK_REL}
+                slug={slug}
+                source="defunct_compact"
                 className={className}
               >
                 {label}
-              </a>
+              </AffiliateLink>
             ) : (
               <Link key={slug} href={`/firm/${slug}`} className={className}>
                 {label}
@@ -84,10 +84,9 @@ export function SaferAlternatives({ variant = "banner" }: SaferAlternativesProps
                   {displayName}
                 </Link>
                 {offer ? (
-                  <a
-                    href={getOutHref(slug)}
-                    target="_blank"
-                    rel={OUT_LINK_REL}
+                  <AffiliateLink
+                    slug={slug}
+                    source="defunct"
                     className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-gradient-to-r from-emerald-400 via-emerald-300 to-cyan-400 px-3 py-1.5 text-xs font-semibold text-zinc-950 shadow-[0_0_16px_-4px_rgba(52,211,153,0.9)] transition-all hover:brightness-110"
                   >
                     {tCard("claimCta")}
@@ -96,7 +95,7 @@ export function SaferAlternatives({ variant = "banner" }: SaferAlternativesProps
                         {offer.code}
                       </code>
                     ) : null}
-                  </a>
+                  </AffiliateLink>
                 ) : (
                   <Link
                     href={`/firm/${slug}`}

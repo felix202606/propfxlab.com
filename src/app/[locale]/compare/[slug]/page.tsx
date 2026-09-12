@@ -9,6 +9,7 @@ import { notFound, permanentRedirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { getPathname, Link } from "@/i18n/navigation";
 import { FirmLogo } from "@/components/FirmLogo";
+import { AffiliateLink } from "@/components/AffiliateLink";
 import { PromoCodeCopy } from "@/components/PromoCodeCopy";
 import { getCardChannelTags } from "@/lib/channel-tags";
 import {
@@ -371,18 +372,24 @@ function OfferCell({
       ) : offer ? null : (
         <p className="text-xs text-zinc-500">{t("noPartnerPromo")}</p>
       )}
-      <a
-        href={outbound.href}
-        target="_blank"
-        rel={outbound.rel}
-        className={
-          outbound.partner
-            ? "inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-emerald-400 via-emerald-300 to-cyan-400 px-3 py-2.5 text-sm font-semibold text-zinc-950 shadow-[0_0_22px_-4px_rgba(52,211,153,0.95)] transition-all hover:brightness-110"
-            : "inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5 text-sm font-medium text-zinc-200 transition-colors hover:border-cyan-400/30 hover:text-white"
-        }
-      >
-        {t("visitWebsite", { name: firm.basic.name })}
-      </a>
+      {outbound.partner ? (
+        <AffiliateLink
+          slug={firm.slug}
+          source="compare"
+          className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-emerald-400 via-emerald-300 to-cyan-400 px-3 py-2.5 text-sm font-semibold text-zinc-950 shadow-[0_0_22px_-4px_rgba(52,211,153,0.95)] transition-all hover:brightness-110"
+        >
+          {t("visitWebsite", { name: firm.basic.name })}
+        </AffiliateLink>
+      ) : (
+        <a
+          href={outbound.href}
+          target="_blank"
+          rel={outbound.rel}
+          className="inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/[0.03] px-3 py-2.5 text-sm font-medium text-zinc-200 transition-colors hover:border-cyan-400/30 hover:text-white"
+        >
+          {t("visitWebsite", { name: firm.basic.name })}
+        </a>
+      )}
     </div>
   );
 }
