@@ -3,6 +3,7 @@ import { Link } from "@/i18n/navigation";
 import { AssetChips } from "@/components/AssetChips";
 import { FirmLogo } from "@/components/FirmLogo";
 import { PlatformChips } from "@/components/PlatformChips";
+import { AffiliateLink } from "@/components/AffiliateLink";
 import { PromoCodeCopy } from "@/components/PromoCodeCopy";
 import { TrustpilotBadge } from "@/components/TrustpilotBadge";
 import { maxTraderSharePercent } from "@/lib/compare";
@@ -25,7 +26,7 @@ const STATUS_DOT: Record<PlatformStatus, string> = {
 
 /** PFM-style conversion L→R: identity → context → money → promo tile → visit. */
 const ROW_GRID =
-  "grid w-full grid-cols-[minmax(168px,1.25fr)_56px_minmax(76px,0.7fr)_minmax(84px,0.75fr)_68px_minmax(120px,0.95fr)_112px_96px]";
+  "grid w-full grid-cols-[minmax(168px,1.25fr)_56px_minmax(76px,0.7fr)_minmax(84px,0.75fr)_68px_minmax(120px,0.95fr)_minmax(100px,112px)_minmax(108px,120px)]";
 
 export type FirmTableRow = {
   firm: PropFirm;
@@ -81,9 +82,9 @@ export function FirmTable({
             return (
               <li key={firm.slug}>
                 <div
-                  className={`group ${ROW_GRID} items-center gap-x-2.5 rounded-xl border border-slate-800 bg-[#0B0F19] px-3 py-3.5 transition-all hover:border-indigo-500/50 hover:bg-indigo-500/[0.04] hover:shadow-[0_0_24px_-12px_rgba(99,102,241,0.55)]`}
+                  className={`group ${ROW_GRID} items-stretch gap-x-2.5 overflow-hidden rounded-xl border border-slate-800 bg-[#0B0F19] px-3 py-3.5 transition-all hover:border-indigo-500/50 hover:bg-indigo-500/[0.04] hover:shadow-[0_0_24px_-12px_rgba(99,102,241,0.55)]`}
                 >
-                  <div className="flex min-w-0 items-center gap-2.5">
+                  <div className="flex min-w-0 items-center gap-2.5 overflow-hidden">
                     <span className="w-6 shrink-0 text-center font-mono text-[12px] text-slate-500">
                       {rank <= 3 ? (
                         <span aria-hidden>
@@ -131,7 +132,7 @@ export function FirmTable({
                     </div>
                   </div>
 
-                  <div className="min-w-0 text-[13px] leading-5 text-slate-300">
+                  <div className="min-w-0 overflow-hidden text-[13px] leading-5 text-slate-300">
                     <div>
                       <span className="mr-1" aria-hidden>
                         {flagEmoji(hq.countryCode)}
@@ -143,15 +144,15 @@ export function FirmTable({
                     </div>
                   </div>
 
-                  <div className="min-w-0 self-center">
+                  <div className="min-w-0 self-center overflow-hidden">
                     <AssetChips assets={firm.assets} limit={3} />
                   </div>
 
-                  <div className="min-w-0 self-center">
+                  <div className="min-w-0 self-center overflow-hidden">
                     <PlatformChips platforms={firm.platforms} limit={3} />
                   </div>
 
-                  <div className="min-w-0">
+                  <div className="min-w-0 overflow-hidden">
                     <p className="font-mono text-[15px] font-semibold text-slate-100">
                       {formatCompactUsd(allocation)}
                     </p>
@@ -163,7 +164,7 @@ export function FirmTable({
                     </div>
                   </div>
 
-                  <div className="min-w-0 rounded-lg bg-emerald-500/[0.07] px-2 py-1.5">
+                  <div className="min-w-0 overflow-hidden rounded-lg bg-emerald-500/[0.07] px-2 py-1.5">
                     <p className="font-mono text-lg font-bold tracking-tight text-[#10B981]">
                       {breakdown
                         ? formatMoney(breakdown.netPayout, payoutCurrency)
@@ -174,7 +175,7 @@ export function FirmTable({
                     </p>
                   </div>
 
-                  <div className="min-w-0">
+                  <div className="relative z-[1] min-w-0 overflow-hidden">
                     {isSuspended ? (
                       <span className="text-slate-500">—</span>
                     ) : offer?.code ? (
@@ -193,24 +194,28 @@ export function FirmTable({
                     )}
                   </div>
 
-                  <div className="flex min-w-0 items-center justify-end">
+                  <div className="relative z-10 flex min-w-0 items-stretch">
                     {isSuspended ? (
                       <Link
                         href={`/firm/${firm.slug}`}
-                        className="inline-flex w-full items-center justify-center rounded-lg border border-red-400/20 bg-red-400/10 px-2 py-2 text-xs font-medium whitespace-nowrap text-red-200 transition-colors hover:border-red-400/40"
+                        className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border border-red-400/20 bg-red-400/10 px-2 py-2 text-xs font-medium whitespace-nowrap text-red-200 transition-colors hover:border-red-400/40"
                       >
                         {t("readReview")}
                       </Link>
+                    ) : outbound.partner ? (
+                      <AffiliateLink
+                        slug={firm.slug}
+                        source="rankings"
+                        className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 px-2 py-2 text-xs font-semibold whitespace-nowrap text-white shadow-[0_0_18px_-6px_rgba(139,92,246,0.9)] transition-all hover:brightness-110"
+                      >
+                        {t("visitOfficial")}
+                      </AffiliateLink>
                     ) : (
                       <a
                         href={outbound.href}
                         target="_blank"
                         rel={outbound.rel}
-                        className={
-                          outbound.partner
-                            ? "inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-r from-indigo-500 via-violet-500 to-fuchsia-500 px-2 py-2 text-xs font-semibold whitespace-nowrap text-white shadow-[0_0_18px_-6px_rgba(139,92,246,0.9)] transition-all hover:brightness-110"
-                            : "inline-flex w-full items-center justify-center rounded-lg border border-slate-700 bg-slate-950/80 px-2 py-2 text-xs font-medium whitespace-nowrap text-slate-200 transition-colors hover:border-indigo-400/40 hover:text-white"
-                        }
+                        className="inline-flex w-full cursor-pointer items-center justify-center rounded-lg border border-slate-700 bg-slate-950/80 px-2 py-2 text-xs font-medium whitespace-nowrap text-slate-200 transition-colors hover:border-indigo-400/40 hover:text-white"
                       >
                         {t("visitOfficial")}
                       </a>

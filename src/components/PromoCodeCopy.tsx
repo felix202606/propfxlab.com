@@ -2,6 +2,13 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import { trackAffiliateClick } from "@/components/AffiliateLink";
+import { OUT_LINK_REL } from "@/lib/offers";
+
+function slugFromOutHref(href: string): string | null {
+  const match = href.match(/^\/out\/([^/?#]+)/);
+  return match?.[1] ?? null;
+}
 
 export function PromoCodeCopy({
   code,
@@ -19,28 +26,30 @@ export function PromoCodeCopy({
   const t = useTranslations("FirmCard");
   const [copied, setCopied] = useState(false);
 
-  async function copyCode() {
-    if (!copyOnly) {
-      // Open synchronously so the click still counts as a user gesture for popups.
-      window.open(href, "_blank", "noopener,noreferrer");
-    }
-    try {
-      await navigator.clipboard.writeText(code);
-      setCopied(true);
-      window.setTimeout(() => setCopied(false), 1600);
-    } catch {
-      setCopied(false);
-    }
+  function onActivate() {
+    const slug = slugFromOutHref(href);
+    if (slug) trackAffiliateClick(slug, "promo_copy");
+    void navigator.clipboard.writeText(code).then(
+      () => {
+        setCopied(true);
+        window.setTimeout(() => setCopied(false), 1600);
+      },
+      () => {
+        setCopied(false);
+      },
+    );
   }
 
   if (copyOnly) {
     return (
-      <button
-        type="button"
-        onClick={copyCode}
+      <a
+        href={href}
+        target="_blank"
+        rel={OUT_LINK_REL}
+        onClick={onActivate}
         aria-live="polite"
         title={copied ? t("copied") : t("copyCodeHint", { code })}
-        className="inline-flex w-full flex-col overflow-hidden rounded-lg text-center shadow-[0_0_18px_-8px_rgba(217,70,239,0.95)] ring-1 ring-fuchsia-400/50 transition-all hover:brightness-110"
+        className="inline-flex w-full cursor-pointer flex-col overflow-hidden rounded-lg text-center shadow-[0_0_18px_-8px_rgba(217,70,239,0.95)] ring-1 ring-fuchsia-400/50 transition-all hover:brightness-110"
       >
         <span className="bg-gradient-to-r from-fuchsia-500 via-rose-500 to-orange-400 px-1.5 py-0.5 text-[10px] font-black tracking-[0.12em] text-white uppercase">
           {discountLabel ?? t("promoLabel")}
@@ -48,7 +57,7 @@ export function PromoCodeCopy({
         <code className="bg-[#2a0b33] px-1.5 py-1.5 font-mono text-[12px] font-bold leading-tight tracking-wide text-fuchsia-50">
           {copied ? t("copied") : code}
         </code>
-      </button>
+      </a>
     );
   }
 
@@ -68,11 +77,13 @@ export function PromoCodeCopy({
           compact ? "text-[11px]" : "flex-1 text-sm"
         }`}
       >
-        {code}
+        {copied ? t("copied") : code}
       </code>
-      <button
-        type="button"
-        onClick={copyCode}
+      <a
+        href={href}
+        target="_blank"
+        rel={OUT_LINK_REL}
+        onClick={onActivate}
         aria-live="polite"
         className={`shrink-0 rounded-md text-[10px] font-semibold tracking-wide transition-all ${
           compact ? "px-1.5 py-px" : "px-2 py-0.5"
@@ -83,7 +94,7 @@ export function PromoCodeCopy({
         }`}
       >
         {copied ? t("copied") : t("copy")}
-      </button>
+      </a>
     </div>
   );
 }

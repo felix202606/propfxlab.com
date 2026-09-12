@@ -31,16 +31,17 @@ export function SubscribeWidget({ locale, t }: SubscribeWidgetProps) {
     return () => clearTimeout(timer);
   }, []);
 
-  // Close on outside click
+  // Close on outside click after the target's own click has already fired,
+  // so Visit / promo links are not eaten by the first tap.
   useEffect(() => {
     if (!open) return;
-    function onDown(e: MouseEvent) {
+    function onClick(e: MouseEvent) {
       if (cardRef.current && !cardRef.current.contains(e.target as Node)) {
         setOpen(false);
       }
     }
-    document.addEventListener("mousedown", onDown);
-    return () => document.removeEventListener("mousedown", onDown);
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
   }, [open]);
 
   function dismiss() {
@@ -52,7 +53,7 @@ export function SubscribeWidget({ locale, t }: SubscribeWidgetProps) {
   if (!mounted) return null;
 
   return (
-    <div className="fixed bottom-5 right-4 z-50 flex flex-col items-end gap-3 sm:right-5">
+    <div className="fixed bottom-5 left-4 z-40 flex flex-col items-start gap-3 sm:left-5">
       {/* ── Floating card ── */}
       <div
         ref={cardRef}
@@ -112,7 +113,7 @@ export function SubscribeWidget({ locale, t }: SubscribeWidgetProps) {
       >
         {/* Pulse ring — only when card is closed */}
         {!open && (
-          <span className="absolute inset-0 rounded-full animate-ping bg-indigo-400/30" />
+          <span className="pointer-events-none absolute inset-0 rounded-full animate-ping bg-indigo-400/30" />
         )}
 
         {/* Bell icon */}

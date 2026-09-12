@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
+import { AffiliateLink } from "@/components/AffiliateLink";
 import { ComparePicker } from "@/components/ComparePicker";
 import { FirmLogo } from "@/components/FirmLogo";
 import { canonicalCompareSlug, listCanonicalCompareSlugs } from "@/lib/compare";
@@ -120,22 +121,42 @@ export function ComparisonsGrid({
                   </Link>
 
                   <div className="mt-3 grid grid-cols-2 gap-2">
-                    <a
-                      href={leftOut.href}
-                      target="_blank"
-                      rel={leftOut.rel}
-                      className="rounded-xl border border-slate-800 bg-slate-950/70 px-3 py-2 text-center text-xs font-medium text-slate-300 transition-colors hover:border-indigo-400/40 hover:text-white"
-                    >
-                      {left.basic.name}
-                    </a>
-                    <a
-                      href={rightOut.href}
-                      target="_blank"
-                      rel={rightOut.rel}
-                      className="rounded-xl border border-slate-800 bg-slate-950/70 px-3 py-2 text-center text-xs font-medium text-slate-300 transition-colors hover:border-indigo-400/40 hover:text-white"
-                    >
-                      {right.basic.name}
-                    </a>
+                    {leftOut.partner ? (
+                      <AffiliateLink
+                        slug={left.slug}
+                        source="compare_grid"
+                        className="rounded-xl border border-slate-800 bg-slate-950/70 px-3 py-2 text-center text-xs font-medium text-slate-300 transition-colors hover:border-indigo-400/40 hover:text-white"
+                      >
+                        {left.basic.name}
+                      </AffiliateLink>
+                    ) : (
+                      <a
+                        href={leftOut.href}
+                        target="_blank"
+                        rel={leftOut.rel}
+                        className="rounded-xl border border-slate-800 bg-slate-950/70 px-3 py-2 text-center text-xs font-medium text-slate-300 transition-colors hover:border-indigo-400/40 hover:text-white"
+                      >
+                        {left.basic.name}
+                      </a>
+                    )}
+                    {rightOut.partner ? (
+                      <AffiliateLink
+                        slug={right.slug}
+                        source="compare_grid"
+                        className="rounded-xl border border-slate-800 bg-slate-950/70 px-3 py-2 text-center text-xs font-medium text-slate-300 transition-colors hover:border-indigo-400/40 hover:text-white"
+                      >
+                        {right.basic.name}
+                      </AffiliateLink>
+                    ) : (
+                      <a
+                        href={rightOut.href}
+                        target="_blank"
+                        rel={rightOut.rel}
+                        className="rounded-xl border border-slate-800 bg-slate-950/70 px-3 py-2 text-center text-xs font-medium text-slate-300 transition-colors hover:border-indigo-400/40 hover:text-white"
+                      >
+                        {right.basic.name}
+                      </a>
+                    )}
                   </div>
                 </div>
               </li>

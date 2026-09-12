@@ -23,7 +23,7 @@ export type OutboundLink = {
 
 export const DEFAULT_PROMO_CODE = "PROPFXLAB";
 
-export const OUT_LINK_REL = "nofollow sponsored noopener noreferrer";
+export const OUT_LINK_REL = "sponsored noopener noreferrer";
 
 /** Unpaid editorial citation to the official site — not an affiliate hop. */
 export const EDITORIAL_LINK_REL = "noopener noreferrer";

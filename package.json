@@ -12,6 +12,7 @@
     "update:trustpilot": "tsx scripts/update-trustpilot.ts"
   },
   "dependencies": {
+    "@next/third-parties": "^16.3.5",
     "@vercel/analytics": "^2.0.1",
     "next": "16.3.3",
     "next-intl": "^4.14.2",

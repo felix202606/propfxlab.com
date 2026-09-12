@@ -4,6 +4,7 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SubscribeWidget } from "@/components/SubscribeWidget";
@@ -148,6 +149,7 @@ export default async function LocaleLayout({
           <SubscribeWidget locale={locale} t={subT} />
         </NextIntlClientProvider>
         <Analytics />
+        <GoogleAnalytics gaId="G-LN4L3NDEBS" />
       </body>
     </html>
   );
