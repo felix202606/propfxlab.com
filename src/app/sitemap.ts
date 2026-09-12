@@ -34,6 +34,7 @@ const STATIC_PATHS = [
   "/defunct",
   "/faq",
   "/about",
+  "/data-audit-log",
 ] as const;
 
 function readFirmEntries(): FirmEntry[] {

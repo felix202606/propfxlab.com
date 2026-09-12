@@ -10,6 +10,7 @@ const EXPLORE_LINKS = [
   { href: "/compare", label: "compare" as const },
   { href: "/faq", label: "faq" as const },
   { href: "/about", label: "about" as const },
+  { href: "/data-audit-log", label: "dataAuditLog" as const },
   { href: "/news", label: "news" as const },
   { href: "/calculator", label: "calculator" as const },
 ] as const;

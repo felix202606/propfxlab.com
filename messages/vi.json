@@ -10,6 +10,7 @@
     "compare": "So sánh",
     "faq": "FAQ",
     "about": "Giới thiệu",
+    "dataAuditLog": "Kiểm toán dữ liệu",
     "news": "Tin tức",
     "defunct": "Công ty đã đóng",
     "languageLabel": "Ngôn ngữ"
@@ -361,5 +362,24 @@
     "contactBody": "Truyền thông và sửa lỗi: contact@propfxlab.com\n\nNếu thấy quy tắc cũ hoặc số payout sai, hãy email kèm tên công ty, URL và thay đổi.",
     "ctaFaq": "Xem FAQ",
     "ctaCalculator": "Mở máy tính"
+  },
+  "DataAuditLogPage": {
+    "metaTitle": "Nhật ký kiểm toán dữ liệu — Nguồn, nhịp cập nhật & xác minh | PropFXLab",
+    "metaDescription": "PropFXLab lấy quy tắc công ty từ đâu, tần suất kiểm toán dữ liệu, định dạng nhật ký thay đổi, và cách bạn tự xác minh số liệu payout cùng phí.",
+    "title": "Nhật ký kiểm toán dữ liệu",
+    "subtitle": "Ghi chú minh bạch về nguồn dữ liệu công ty, tần suất làm mới và cách đối chiếu các con số chúng tôi công bố.",
+    "orgDescription": "Thông tin payout prop firm độc lập và máy tính lợi nhuận thực nhận. Không phải prop firm hay broker.",
+    "sourcesTitle": "Nguồn dữ liệu",
+    "sourcesBody": "Quy tắc từng công ty, quy mô tài khoản, tỷ lệ chia lợi nhuận, phí nền tảng, kênh payout và mã khuyến mại được thu thập từ website công khai, trung tâm trợ giúp và điều khoản sử dụng đã đăng.\n\nKhi công ty là đối tác affiliate, chúng tôi cũng đối chiếu điều kiện đã công bố với trang thanh toán hoặc bảng điều khiển đối tác. Báo cáo cộng đồng (diễn đàn, mạng xã hội, ảnh chụp payout) chỉ bổ sung bối cảnh an toàn và không bao giờ ghi đè thầm quy tắc chính thức nếu chưa có người duyệt.\n\nChúng tôi không thu thập bảng điều khiển tài khoản riêng tư hay dữ liệu cá nhân của trader.",
+    "frequencyTitle": "Tần suất cập nhật",
+    "frequencyBody": "Thông số cốt lõi (chia sẻ, phí, phương thức rút tiền và quy tắc challenge) được rà soát khoảng hai lần mỗi tuần. Thay đổi tác động lớn — đóng băng payout, tăng phí, kích thước tài khoản mới hoặc chương trình đóng — được ưu tiên ngay khi được xác nhận công khai.\n\nTín hiệu uy tín như Trustpilot làm mới chậm hơn (khoảng hai tuần một lần). Bài tin tức chạy pipeline hàng ngày riêng và không thay thế kiểm toán hồ sơ công ty.",
+    "changelogTitle": "Định dạng nhật ký thay đổi",
+    "changelogBody": "Khi một trường quan trọng thay đổi, chúng tôi ghi:\n• Ngày rà soát (UTC)\n• Slug / tên hiển thị công ty\n• Trường bị đụng (ví dụ profitSplit, platformFee, payoutMethods, challengeRules)\n• Ghi chú ngắn về thay đổi và nguồn công khai đã dùng\n\nSửa lỗi chữ nhỏ có thể không tạo mục công khai riêng. Thay đổi payout hoặc phí trọng yếu được phản ánh trên trang công ty và, khi phù hợp, được nêu trong News.",
+    "verifyTitle": "Cách xác minh dữ liệu công ty",
+    "verifyBody": "1. Mở trang giá, FAQ hoặc điều khoản chính thức của công ty và so sánh % chia sẻ, phí và cửa sổ payout với hồ sơ PropFXLab.\n2. Chạy cùng quy mô tài khoản và lợi nhuận mẫu trên Máy tính của chúng tôi, kiểm tra take-home mô hình khớp công thức (chia sẻ → phí nền tảng → chi phí rút).\n3. Với mã khuyến mại, xác nhận mã vẫn xuất hiện trên checkout hoặc landing đối tác của công ty.\n4. Nếu số liệu có vẻ cũ, gửi email contact@propfxlab.com kèm tên công ty, trường và liên kết nguồn chính thức — chúng tôi ưu tiên xử lý chỉnh sửa.",
+    "contactTitle": "Chỉnh sửa và liên hệ",
+    "contactBody": "Chỉnh sửa dữ liệu và câu hỏi phương pháp: contact@propfxlab.com\n\nVui lòng ghi tên công ty, trường bạn cho là sai và liên kết trang chính thức hiển thị giá trị hiện tại. Chúng tôi phản hồi theo khả năng và cập nhật hồ sơ sau khi xác minh.",
+    "ctaAbout": "Giới thiệu & phương pháp",
+    "ctaFaq": "Đọc FAQ"
   }
 }
