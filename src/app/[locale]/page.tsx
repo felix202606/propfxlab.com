@@ -7,7 +7,7 @@ import { TrustGrid } from "@/components/TrustGrid";
 import { getAllDefunctFirms, getAllFirms, getAllSiteFaqs } from "@/lib/data";
 import { getSiteFaqLocaleCopy } from "@/lib/schema";
 import {
-  pageAlternates,
+  homepageSeoHeadTags,
   pageOpenGraph,
   pageTwitter,
   siteJsonLd,
@@ -21,11 +21,15 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "Metadata" });
   const title = t("titleDefault");
   const description = t("description");
+  // Omit alternates + openGraph.url: Next.js Metadata strips the trailing slash on
+  // root URLs (uses URL.origin). Tags are rendered manually below so canonical /
+  // hreflang en+x-default / og:url stay `https://www.propfxlab.com/`.
+  const openGraph = { ...pageOpenGraph({ locale, pathname: "", title, description }) };
+  delete (openGraph as { url?: string }).url;
   return {
     title: { absolute: title },
     description,
-    alternates: pageAlternates(locale, ""),
-    openGraph: pageOpenGraph({ locale, pathname: "", title, description }),
+    openGraph,
     twitter: pageTwitter({ title, description }),
   };
 }
@@ -34,6 +38,7 @@ export default async function Home({
   params,
 }: PageProps<"/[locale]">) {
   const { locale } = await params;
+  const seoHead = homepageSeoHeadTags(locale);
   let firms: ReturnType<typeof getAllFirms> = [];
   let defunctCount = 0;
   try {
@@ -65,7 +70,13 @@ export default async function Home({
   const jsonLd = siteJsonLd();
 
   return (
-    <main className="relative flex-1">
+    <>
+      <link rel="canonical" href={seoHead.canonical} />
+      {Object.entries(seoHead.languages).map(([hreflang, href]) => (
+        <link key={hreflang} rel="alternate" hrefLang={hreflang} href={href} />
+      ))}
+      <meta property="og:url" content={seoHead.ogUrl} />
+      <main className="relative flex-1">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -81,5 +92,6 @@ export default async function Home({
         </section>
       ) : null}
     </main>
+    </>
   );
 }
