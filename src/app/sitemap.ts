@@ -2,9 +2,9 @@ import { readdirSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import type { MetadataRoute } from "next";
 import {
+  buildCompareSlug,
   COMPARE_EXCLUDED_SLUGS,
   compareableSlugs,
-  listCanonicalCompareSlugs,
 } from "@/lib/compare";
 import { localeMeta, routing } from "@/i18n/routing";
 
@@ -101,6 +101,18 @@ function readNewsEntries(): FirmEntry[] {
   return entries.sort((a, b) => a.slug.localeCompare(b.slug, "en"));
 }
 
+function laterDate(left: Date, right: Date): Date {
+  return left > right ? left : right;
+}
+
+function latestMtime(entries: readonly FirmEntry[], fallback: Date): Date {
+  if (entries.length === 0) return fallback;
+  return entries.reduce(
+    (max, entry) => laterDate(max, entry.lastModified),
+    entries[0].lastModified,
+  );
+}
+
 function localeUrl(locale: string, pathname: string): string {
   const suffix = pathname === "" ? "" : pathname;
   if (locale === routing.defaultLocale) {
@@ -135,17 +147,34 @@ export async function generateSitemaps() {
   return SITEMAP_SHARDS.map((shard) => ({ id: shard.id }));
 }
 
+/**
+ * lastmod comes from firm/news file mtimes, not Date.now(). Stamping every
+ * compare URL as "today" after each news deploy makes crawlers refill the
+ * ISR cache (new Vercel deployment = empty ISR).
+ */
+export const revalidate = false;
+
 export default async function sitemap(props: {
   id: Promise<string>;
 }): Promise<MetadataRoute.Sitemap> {
   const id = await props.id;
-  const now = new Date();
+  const firms = readFirmEntries().filter(
+    (firm) => !COMPARE_EXCLUDED_SLUGS.has(firm.slug),
+  );
+  const news = readNewsEntries();
+  const latestFirm = latestMtime(firms, latestMtime(news, new Date(0)));
+  const latestNews = latestMtime(news, latestFirm);
 
   if (id === "static") {
+    const homeModified = laterDate(latestFirm, latestNews);
     return STATIC_PATHS.flatMap((pathname) =>
       localizedEntries(
         pathname,
-        now,
+        pathname === "/news"
+          ? latestNews
+          : pathname === ""
+            ? homeModified
+            : latestFirm,
         pathname === ""
           ? 1
           : pathname === "/compare" ||
@@ -161,28 +190,34 @@ export default async function sitemap(props: {
   }
 
   if (id === "firms") {
-    const firms = readFirmEntries().filter(
-      (firm) => !COMPARE_EXCLUDED_SLUGS.has(firm.slug),
-    );
     return firms.flatMap((firm) =>
       localizedEntries(`/firm/${firm.slug}`, firm.lastModified, 0.7),
     );
   }
 
   if (id === "compare") {
-    const firms = readFirmEntries().filter(
-      (firm) => !COMPARE_EXCLUDED_SLUGS.has(firm.slug),
-    );
-    const compareSlugs = listCanonicalCompareSlugs(
-      compareableSlugs(firms.map((firm) => firm.slug)),
-    );
-    return compareSlugs.flatMap((slug) =>
-      localizedEntries(`/compare/${slug}`, now, 0.65),
-    );
+    const mtimeBySlug = new Map(firms.map((firm) => [firm.slug, firm.lastModified]));
+    const slugs = compareableSlugs(firms.map((firm) => firm.slug));
+    const entries: MetadataRoute.Sitemap = [];
+    for (let i = 0; i < slugs.length; i += 1) {
+      for (let j = i + 1; j < slugs.length; j += 1) {
+        const lastModified = laterDate(
+          mtimeBySlug.get(slugs[i]) ?? latestFirm,
+          mtimeBySlug.get(slugs[j]) ?? latestFirm,
+        );
+        entries.push(
+          ...localizedEntries(
+            `/compare/${buildCompareSlug(slugs[i], slugs[j])}`,
+            lastModified,
+            0.65,
+          ),
+        );
+      }
+    }
+    return entries;
   }
 
   if (id === "news") {
-    const news = readNewsEntries();
     return news.flatMap((article) =>
       localizedEntries(`/news/${article.slug}`, article.lastModified, 0.6, "daily"),
     );

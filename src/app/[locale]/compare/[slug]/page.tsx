@@ -29,9 +29,15 @@ import { getFirmOffer, getOutboundLink } from "@/lib/offers";
 import { formatMoney } from "@/lib/payout";
 import type { PropFirm } from "@/lib/schema";
 
-/** Cache on-demand compare URLs as static HTML after the first hit. */
+/**
+ * On-demand compare URLs are ISR-cached after the first hit.
+ * Do not set a 7-day `revalidate`: Vercel ISR is per-deployment, so every
+ * production deploy already starts empty. A time window would regenerate
+ * again on the same deploy and burn more ISR Writes.
+ */
 export const dynamic = "force-static";
 export const dynamicParams = true;
+export const revalidate = false;
 
 export function generateStaticParams() {
   return getPrerenderCompareSlugs().map((slug) => ({ slug }));
