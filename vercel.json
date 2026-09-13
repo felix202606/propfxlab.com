@@ -3,8 +3,8 @@
   "ignoreCommand": "git rev-parse --verify HEAD^ >/dev/null 2>&1 && git diff --quiet HEAD^ HEAD -- . ':!data/telegram_queue.json' || exit 1",
   "git": {
     "deploymentEnabled": {
-      "main": true,
-      "chore/*": false
+      "*": false,
+      "main": true
     }
   }
 }
