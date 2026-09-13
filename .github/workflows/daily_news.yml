@@ -2,9 +2,10 @@ name: Daily news scrape
 
 on:
   schedule:
-    # Every 2 hours (GitHub cron is often late). Cap 3 articles/run so
-    # seven-locale URLs stay crawlable and don't flood sitemap.
-    - cron: "20 */2 * * *"
+    # Once daily (07:20 UTC ≈ 19:20 NZ). Each production deploy starts an
+    # empty ISR cache; a 2-hour cadence refills ~3,900 compare URLs and
+    # exhausts Hobby's 200k ISR Writes. News stays daily for SEO.
+    - cron: "20 7 * * *"
   workflow_dispatch:
 
 concurrency:
@@ -40,12 +41,12 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: gemini-3.5-flash-lite
-          NEWS_MAX_ITEMS: "3"
+          NEWS_MAX_ITEMS: "6"
           SKIP_INDEXNOW: "1"
           SKIP_SOCIAL: "1"
         run: |
           set -euo pipefail
-          python -u scripts/news_scraper.py --max-items 3
+          python -u scripts/news_scraper.py --max-items 6
           mapfile -t new_slugs < <(
             git ls-files --others --exclude-standard -- data/news/ \
               | sed -n 's|^data/news/\(.*\)\.json$|\1|p'

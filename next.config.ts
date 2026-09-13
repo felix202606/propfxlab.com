@@ -29,6 +29,18 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async headers() {
+    const sitemapCache = [
+      {
+        key: "Cache-Control",
+        value: "public, s-maxage=3600, stale-while-revalidate=86400",
+      },
+    ];
+    return [
+      { source: "/sitemap.xml", headers: sitemapCache },
+      { source: "/sitemap/:id.xml", headers: sitemapCache },
+    ];
+  },
     async redirects() {
     return [
       {
