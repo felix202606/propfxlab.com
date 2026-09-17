@@ -69,6 +69,8 @@ export async function generateMetadata({
       },
       icons: {
         icon: [
+          { url: "/favicon.ico", sizes: "any" },
+          { url: "/icon.png", type: "image/png", sizes: "192x192" },
           {
             url: "/logo-on-dark.png",
             type: "image/png",
@@ -80,7 +82,11 @@ export async function generateMetadata({
             media: "(prefers-color-scheme: light)",
           },
         ],
-        apple: "/icon-192.png",
+        apple: [
+          { url: "/apple-touch-icon.png", sizes: "192x192", type: "image/png" },
+          { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
+        ],
+        shortcut: "/favicon.ico",
       },
     };
   } catch (err) {

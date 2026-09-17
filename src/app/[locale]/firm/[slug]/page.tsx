@@ -64,14 +64,14 @@ function Stat({ label, value }: { label: string; value: string }) {
 export default async function FirmPage({
   params,
 }: PageProps<"/[locale]/firm/[slug]">) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
   const firm = getFirmBySlug(slug);
   if (!firm) notFound();
 
   const t = await getTranslations("FirmPage");
   const tCard = await getTranslations("FirmCard");
   const firms = getAllFirms();
-  const jsonLd = toFaqJsonLd(firm);
+  const jsonLd = toFaqJsonLd(firm, locale);
   const { funding } = firm.basic;
   const offer = getFirmOffer(firm.slug);
   const outbound = getOutboundLink(firm.slug, firm.basic.website);

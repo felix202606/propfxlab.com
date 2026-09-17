@@ -50,7 +50,7 @@ export function FaqAccordion({
         {faqs.map((item, index) => (
           <details
             key={item.id}
-            id={item.slug ?? item.id}
+            id={`faq-${item.slug ?? item.id}`}
             open={openFirst && index === 0}
             className="group px-5 py-4 [&_summary::-webkit-details-marker]:hidden"
             itemScope
