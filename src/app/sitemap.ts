@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync, statSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import type { MetadataRoute } from "next";
 import {
@@ -24,7 +24,7 @@ const SITEMAP_SHARDS = [
   { id: "news" },
 ] as const;
 
-type FirmEntry = { slug: string; lastModified: Date };
+type SitemapEntry = { slug: string; lastModified?: Date };
 
 const STATIC_PATHS = [
   "",
@@ -37,7 +37,25 @@ const STATIC_PATHS = [
   "/data-audit-log",
 ] as const;
 
-function readFirmEntries(): FirmEntry[] {
+function parseIsoDate(value: unknown): Date | undefined {
+  if (typeof value !== "string" || !value.trim()) return undefined;
+  const parsed = new Date(value);
+  return Number.isNaN(parsed.getTime()) ? undefined : parsed;
+}
+
+function readJsonObject(filePath: string): Record<string, unknown> | null {
+  try {
+    const parsed: unknown = JSON.parse(readFileSync(filePath, "utf8"));
+    if (typeof parsed === "object" && parsed !== null) {
+      return parsed as Record<string, unknown>;
+    }
+  } catch (error) {
+    console.error(`[sitemap] 跳过无法解析的 ${filePath}：`, error);
+  }
+  return null;
+}
+
+function readFirmEntries(): SitemapEntry[] {
   let fileNames: string[];
   try {
     fileNames = readdirSync(FIRMS_DIR).filter((name) => name.endsWith(".json"));
@@ -46,30 +64,25 @@ function readFirmEntries(): FirmEntry[] {
     return [];
   }
 
-  const entries: FirmEntry[] = [];
+  const entries: SitemapEntry[] = [];
   for (const fileName of fileNames) {
     const filePath = path.join(FIRMS_DIR, fileName);
-    try {
-      const parsed: unknown = JSON.parse(readFileSync(filePath, "utf8"));
-      const raw =
-        typeof parsed === "object" && parsed !== null
-          ? (parsed as { slug?: unknown }).slug
-          : undefined;
-      const slug =
-        typeof raw === "string" && raw.trim()
-          ? raw.trim()
-          : path.basename(fileName, ".json");
-
-      entries.push({ slug, lastModified: statSync(filePath).mtime });
-    } catch (error) {
-      console.error(`[sitemap] 跳过无法解析的 ${filePath}：`, error);
-    }
+    const parsed = readJsonObject(filePath);
+    if (!parsed) continue;
+    const raw = parsed.slug;
+    const slug =
+      typeof raw === "string" && raw.trim()
+        ? raw.trim()
+        : path.basename(fileName, ".json");
+    // Do not use fs mtime: on Vercel every deploy retouches files, so lastmod
+    // becomes "today" and crawlers refill the whole compare ISR cache.
+    entries.push({ slug });
   }
 
   return entries.sort((a, b) => a.slug.localeCompare(b.slug, "en"));
 }
 
-function readNewsEntries(): FirmEntry[] {
+function readNewsEntries(): SitemapEntry[] {
   let fileNames: string[];
   try {
     fileNames = readdirSync(NEWS_DIR).filter((name) => name.endsWith(".json"));
@@ -78,39 +91,24 @@ function readNewsEntries(): FirmEntry[] {
     return [];
   }
 
-  const entries: FirmEntry[] = [];
+  const entries: SitemapEntry[] = [];
   for (const fileName of fileNames) {
     const filePath = path.join(NEWS_DIR, fileName);
-    try {
-      const parsed: unknown = JSON.parse(readFileSync(filePath, "utf8"));
-      const raw =
-        typeof parsed === "object" && parsed !== null
-          ? (parsed as { slug?: unknown }).slug
-          : undefined;
-      const slug =
-        typeof raw === "string" && raw.trim()
-          ? raw.trim()
-          : path.basename(fileName, ".json");
-
-      entries.push({ slug, lastModified: statSync(filePath).mtime });
-    } catch (error) {
-      console.error(`[sitemap] 跳过无法解析的 ${filePath}：`, error);
-    }
+    const parsed = readJsonObject(filePath);
+    if (!parsed) continue;
+    const raw = parsed.slug;
+    const slug =
+      typeof raw === "string" && raw.trim()
+        ? raw.trim()
+        : path.basename(fileName, ".json");
+    entries.push({
+      slug,
+      lastModified:
+        parseIsoDate(parsed.publishedAt) ?? parseIsoDate(parsed.scrapedAt),
+    });
   }
 
   return entries.sort((a, b) => a.slug.localeCompare(b.slug, "en"));
-}
-
-function laterDate(left: Date, right: Date): Date {
-  return left > right ? left : right;
-}
-
-function latestMtime(entries: readonly FirmEntry[], fallback: Date): Date {
-  if (entries.length === 0) return fallback;
-  return entries.reduce(
-    (max, entry) => laterDate(max, entry.lastModified),
-    entries[0].lastModified,
-  );
 }
 
 function localeUrl(locale: string, pathname: string): string {
@@ -123,7 +121,7 @@ function localeUrl(locale: string, pathname: string): string {
 
 function localizedEntries(
   pathname: string,
-  lastModified: Date,
+  lastModified: Date | undefined,
   priority: number,
   changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] = "weekly",
 ): MetadataRoute.Sitemap {
@@ -136,7 +134,7 @@ function localizedEntries(
 
   return routing.locales.map((locale) => ({
     url: localeUrl(locale, pathname),
-    lastModified,
+    ...(lastModified ? { lastModified } : {}),
     changeFrequency,
     priority,
     alternates: { languages },
@@ -148,9 +146,10 @@ export async function generateSitemaps() {
 }
 
 /**
- * lastmod comes from firm/news file mtimes, not Date.now(). Stamping every
- * compare URL as "today" after each news deploy makes crawlers refill the
- * ISR cache (new Vercel deployment = empty ISR).
+ * lastmod must be a content date, never fs.stat mtime or Date.now().
+ * Vercel unpacks the deployment at build time, so file mtimes all become
+ * "today" and crawlers recrawl the full C(n,2)×7 compare matrix after
+ * every news ship — each recrawl refills a cold ISR cache.
  */
 export const revalidate = false;
 
@@ -162,19 +161,12 @@ export default async function sitemap(props: {
     (firm) => !COMPARE_EXCLUDED_SLUGS.has(firm.slug),
   );
   const news = readNewsEntries();
-  const latestFirm = latestMtime(firms, latestMtime(news, new Date(0)));
-  const latestNews = latestMtime(news, latestFirm);
 
   if (id === "static") {
-    const homeModified = laterDate(latestFirm, latestNews);
     return STATIC_PATHS.flatMap((pathname) =>
       localizedEntries(
         pathname,
-        pathname === "/news"
-          ? latestNews
-          : pathname === ""
-            ? homeModified
-            : latestFirm,
+        undefined,
         pathname === ""
           ? 1
           : pathname === "/compare" ||
@@ -191,24 +183,19 @@ export default async function sitemap(props: {
 
   if (id === "firms") {
     return firms.flatMap((firm) =>
-      localizedEntries(`/firm/${firm.slug}`, firm.lastModified, 0.7),
+      localizedEntries(`/firm/${firm.slug}`, undefined, 0.7),
     );
   }
 
   if (id === "compare") {
-    const mtimeBySlug = new Map(firms.map((firm) => [firm.slug, firm.lastModified]));
     const slugs = compareableSlugs(firms.map((firm) => firm.slug));
     const entries: MetadataRoute.Sitemap = [];
     for (let i = 0; i < slugs.length; i += 1) {
       for (let j = i + 1; j < slugs.length; j += 1) {
-        const lastModified = laterDate(
-          mtimeBySlug.get(slugs[i]) ?? latestFirm,
-          mtimeBySlug.get(slugs[j]) ?? latestFirm,
-        );
         entries.push(
           ...localizedEntries(
             `/compare/${buildCompareSlug(slugs[i], slugs[j])}`,
-            lastModified,
+            undefined,
             0.65,
           ),
         );
@@ -219,7 +206,12 @@ export default async function sitemap(props: {
 
   if (id === "news") {
     return news.flatMap((article) =>
-      localizedEntries(`/news/${article.slug}`, article.lastModified, 0.6, "daily"),
+      localizedEntries(
+        `/news/${article.slug}`,
+        article.lastModified,
+        0.6,
+        "daily",
+      ),
     );
   }
 
