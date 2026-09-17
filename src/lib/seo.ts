@@ -111,12 +111,17 @@ export function siteJsonLd() {
   ];
 }
 
-/** Normalize legacy /firms/... FAQ paths to live /firm/... routes and absolutize. */
-export function absoluteFirmFaqUrl(canonicalPath: string): string {
-  const path = canonicalPath.startsWith("/firms/")
-    ? `/firm/${canonicalPath.slice("/firms/".length)}`
-    : canonicalPath.startsWith("/")
-      ? canonicalPath
-      : `/${canonicalPath}`;
-  return `${SITE_URL}${path}`;
+/**
+ * Absolute URL for a firm FAQ Question in JSON-LD.
+ * There is no /firm/:slug/faq/:faqSlug route — always point at the firm page
+ * (optionally with an in-page hash matching FaqAccordion item ids).
+ */
+export function absoluteFirmFaqUrl(
+  firmSlug: string,
+  faqSlug?: string,
+  locale: string = routing.defaultLocale,
+): string {
+  const base = absoluteLocaleUrl(locale, `/firm/${firmSlug}`);
+  if (!faqSlug) return base;
+  return `${base}#faq-${faqSlug}`;
 }

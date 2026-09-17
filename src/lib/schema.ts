@@ -566,14 +566,15 @@ export function toSiteFaqJsonLd(faqs: Array<SiteFaqLocaleCopy & { id: string }>)
 }
 
 /** 生成 schema.org FAQPage，可直接放入 <script type="application/ld+json"> */
-export function toFaqJsonLd(firm: PropFirm) {
+export function toFaqJsonLd(firm: PropFirm, locale: string = "en") {
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity: firm.faqs.map((item) => ({
       "@type": "Question",
       name: item.question,
-      url: absoluteFirmFaqUrl(item.seo.canonicalPath),
+      // Never emit /firm/:slug/faq/:faqSlug — those routes do not exist.
+      url: absoluteFirmFaqUrl(firm.slug, item.slug, locale),
       acceptedAnswer: {
         "@type": "Answer",
         text: item.answer,

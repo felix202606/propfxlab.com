@@ -64,6 +64,28 @@ const nextConfig: NextConfig = {
         destination: "/:locale",
         permanent: true,
       },
+      // Bare /out has no index; affiliate hops live at /out/[slug] only.
+      {
+        source: "/out",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/:locale(en|es|cn|tw|th|vi|pt)/out",
+        destination: "/:locale",
+        permanent: true,
+      },
+      // FAQ JSON-LD historically pointed at /firm/:slug/faq/:faqSlug but no route exists.
+      {
+        source: "/firm/:slug/faq/:faqSlug",
+        destination: "/firm/:slug",
+        permanent: true,
+      },
+      {
+        source: "/:locale(en|es|cn|tw|th|vi|pt)/firm/:slug/faq/:faqSlug",
+        destination: "/:locale/firm/:slug",
+        permanent: true,
+      },
       // Legacy FAQ schema paths used /firms/...; live routes are /firm/...
       {
         source: "/firms/:path*",
