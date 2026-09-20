@@ -106,6 +106,22 @@ export function getNewsSlugs(): string[] {
   return getAllNews().map((article) => article.slug);
 }
 
+/** Newest-first list: previous = newer, next = older (same order as the index). */
+export function getAdjacentNews(slug: string): {
+  previous: NewsArticle | undefined;
+  next: NewsArticle | undefined;
+} {
+  const articles = getAllNews();
+  const index = articles.findIndex((article) => article.slug === slug);
+  if (index < 0) {
+    return { previous: undefined, next: undefined };
+  }
+  return {
+    previous: index > 0 ? articles[index - 1] : undefined,
+    next: articles[index + 1],
+  };
+}
+
 /**
  * 读取 data/closed_firms.json（Boneyard 黑名单，单文件、非逐平台目录）。
  * 同样逐条容错：坏条目跳过，不让整页 500。

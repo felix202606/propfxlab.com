@@ -281,7 +281,10 @@
     "next": "ถัดไป",
     "paginationNav": "การแบ่งหน้าข่าว",
     "showingCount": "แสดง {shown} จาก {total} · หน้า {page}/{totalPages}",
-    "noResults": "ไม่พบข่าวที่ตรงกับการค้นหา"
+    "noResults": "ไม่พบข่าวที่ตรงกับการค้นหา",
+    "previousArticle": "บทความก่อนหน้า",
+    "nextArticle": "บทความถัดไป",
+    "adjacentNav": "บทความก่อนหน้าและถัดไป"
   },
   "FaqPage": {
     "metaTitle": "FAQ Prop Firm — การถอน ความปลอดภัย และกฎการเทรด",

@@ -281,7 +281,10 @@
     "next": "Sau",
     "paginationNav": "Phân trang tin tức",
     "showingCount": "Hiển thị {shown}/{total} · trang {page}/{totalPages}",
-    "noResults": "Không có bài viết phù hợp với tìm kiếm."
+    "noResults": "Không có bài viết phù hợp với tìm kiếm.",
+    "previousArticle": "Bài trước",
+    "nextArticle": "Bài tiếp",
+    "adjacentNav": "Bài trước và bài tiếp"
   },
   "FaqPage": {
     "metaTitle": "FAQ Prop Firm — Rút tiền, an toàn và luật giao dịch",

@@ -281,7 +281,10 @@
     "next": "Next",
     "paginationNav": "News pagination",
     "showingCount": "Showing {shown} of {total} · page {page}/{totalPages}",
-    "noResults": "No articles match your search."
+    "noResults": "No articles match your search.",
+    "previousArticle": "Previous article",
+    "nextArticle": "Next article",
+    "adjacentNav": "Previous and next articles"
   },
   "FaqPage": {
     "metaTitle": "Prop Firm FAQ — Payouts, Safety and Trading Rules",

@@ -8,7 +8,8 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { NewsShareButtons } from "@/components/NewsShareButtons";
-import { getAllFirms, getNewsBySlug, getNewsSlugs } from "@/lib/data";
+import { NewsAdjacentArticles } from "@/components/NewsAdjacentArticles";
+import { getAdjacentNews, getAllFirms, getNewsBySlug, getNewsSlugs } from "@/lib/data";
 import { formatNewsPublished, newsArticleAbsoluteUrl } from "@/lib/news-format";
 import { getNewsLocaleCopy } from "@/lib/schema";
 import { localeMeta } from "@/i18n/routing";
@@ -64,6 +65,7 @@ export default async function NewsArticlePage({
   const related = article.relatedFirmSlugs
     .map((firmSlug) => firms.find((firm) => firm.slug === firmSlug))
     .filter((firm): firm is NonNullable<typeof firm> => firm != null);
+  const { previous, next } = getAdjacentNews(article.slug);
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -136,6 +138,8 @@ export default async function NewsArticlePage({
           </ul>
         </section>
       ) : null}
+
+      <NewsAdjacentArticles locale={locale} previous={previous} next={next} />
 
       <p className="mt-10 text-xs leading-5 text-zinc-600">{t("disclaimer")}</p>
     </article>
