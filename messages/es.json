@@ -281,7 +281,10 @@
     "next": "Siguiente",
     "paginationNav": "Paginación de noticias",
     "showingCount": "Mostrando {shown} de {total} · página {page}/{totalPages}",
-    "noResults": "Ningún artículo coincide con tu búsqueda."
+    "noResults": "Ningún artículo coincide con tu búsqueda.",
+    "previousArticle": "Artículo anterior",
+    "nextArticle": "Artículo siguiente",
+    "adjacentNav": "Artículos anterior y siguiente"
   },
   "FaqPage": {
     "metaTitle": "FAQ de Prop Firms — Pagos, seguridad y reglas",

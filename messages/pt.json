@@ -281,7 +281,10 @@
     "next": "Próxima",
     "paginationNav": "Paginação de notícias",
     "showingCount": "Mostrando {shown} de {total} · página {page}/{totalPages}",
-    "noResults": "Nenhum artigo corresponde à sua busca."
+    "noResults": "Nenhum artigo corresponde à sua busca.",
+    "previousArticle": "Artigo anterior",
+    "nextArticle": "Próximo artigo",
+    "adjacentNav": "Artigos anterior e seguinte"
   },
   "FaqPage": {
     "metaTitle": "FAQ de Prop Firms — Saques, segurança e regras",

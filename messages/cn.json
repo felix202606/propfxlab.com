@@ -281,7 +281,10 @@
     "next": "下一页",
     "paginationNav": "新闻分页",
     "showingCount": "显示 {shown} / {total} · 第 {page}/{totalPages} 页",
-    "noResults": "没有匹配的新闻。"
+    "noResults": "没有匹配的新闻。",
+    "previousArticle": "上一篇",
+    "nextArticle": "下一篇",
+    "adjacentNav": "上一篇和下一篇"
   },
   "FaqPage": {
     "metaTitle": "Prop Firm FAQ — 出金、安全与交易规则",
