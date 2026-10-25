@@ -40,7 +40,7 @@ export default async function NewsIndexPage({
 }: PageProps<"/[locale]/news">) {
   const { locale } = await params;
   const t = await getTranslations("NewsPage");
-  const articles: NewsListItem[] = (await getPublishedNews()).map((article) => {
+  const articles: NewsListItem[] = (await getPublishedNews(locale)).map((article) => {
     const copy = getNewsLocaleCopy(article, locale);
     return {
       slug: article.slug,
