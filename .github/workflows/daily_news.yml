@@ -2,9 +2,10 @@ name: Daily news scrape
 
 on:
   schedule:
-    # Once daily (07:20 UTC ≈ 19:20 NZ). Each production deploy starts an
-    # empty ISR cache; a 2-hour cadence refills ~3,900 compare URLs and
-    # exhausts Hobby's 200k ISR Writes. News stays daily for SEO.
+    # Once daily (07:20 UTC ≈ 19:20 NZ). The JSON still merges to main as
+    # a backup, but vercel.json skips the build for news-only diffs: a new
+    # deployment would cold-start ISR and refill ~3,900 compare URLs. The
+    # live site reads Sanity; its webhook revalidates only the news pages.
     - cron: "20 7 * * *"
   workflow_dispatch:
 
@@ -87,6 +88,7 @@ jobs:
         if: steps.cpr.outputs.pull-request-number != ''
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SANITY_WRITE_TOKEN: ${{ secrets.SANITY_WRITE_TOKEN }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
@@ -137,6 +139,7 @@ jobs:
 
           git fetch origin main
           git checkout -B main origin/main
+          python -u scripts/sync_news_to_sanity.py
           sleep 45
 
           python -u scripts/news_scraper.py --notify-indexnow "${cleaned[@]}"

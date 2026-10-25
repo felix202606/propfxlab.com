@@ -6,11 +6,11 @@ import {
   COMPARE_EXCLUDED_SLUGS,
   compareableSlugs,
 } from "@/lib/compare";
+import { getPublishedNews } from "@/lib/news-cms";
 import { localeMeta, routing } from "@/i18n/routing";
 
 const BASE_URL = "https://www.propfxlab.com";
 const FIRMS_DIR = path.join(process.cwd(), "data", "firms");
-const NEWS_DIR = path.join(process.cwd(), "data", "news");
 
 /**
  * Shard ids for generateSitemaps. Splitting keeps each XML response smaller
@@ -82,35 +82,6 @@ function readFirmEntries(): SitemapEntry[] {
   return entries.sort((a, b) => a.slug.localeCompare(b.slug, "en"));
 }
 
-function readNewsEntries(): SitemapEntry[] {
-  let fileNames: string[];
-  try {
-    fileNames = readdirSync(NEWS_DIR).filter((name) => name.endsWith(".json"));
-  } catch (error) {
-    console.error(`[sitemap] 读取 ${NEWS_DIR} 失败，本次跳过新闻页：`, error);
-    return [];
-  }
-
-  const entries: SitemapEntry[] = [];
-  for (const fileName of fileNames) {
-    const filePath = path.join(NEWS_DIR, fileName);
-    const parsed = readJsonObject(filePath);
-    if (!parsed) continue;
-    const raw = parsed.slug;
-    const slug =
-      typeof raw === "string" && raw.trim()
-        ? raw.trim()
-        : path.basename(fileName, ".json");
-    entries.push({
-      slug,
-      lastModified:
-        parseIsoDate(parsed.publishedAt) ?? parseIsoDate(parsed.scrapedAt),
-    });
-  }
-
-  return entries.sort((a, b) => a.slug.localeCompare(b.slug, "en"));
-}
-
 function localeUrl(locale: string, pathname: string): string {
   const suffix = pathname === "" ? "" : pathname;
   if (locale === routing.defaultLocale) {
@@ -147,11 +118,12 @@ export async function generateSitemaps() {
 
 /**
  * lastmod must be a content date, never fs.stat mtime or Date.now().
- * Vercel unpacks the deployment at build time, so file mtimes all become
- * "today" and crawlers recrawl the full C(n,2)×7 compare matrix after
- * every news ship — each recrawl refills a cold ISR cache.
+ * Compare and firm URLs omit lastModified so a sitemap refresh does not
+ * mark the whole matrix as updated. News comes from Sanity: a publish
+ * revalidates the `news` tag, and 21600 is the fallback if a webhook is
+ * missed. Unchanged shard output is not an ISR write.
  */
-export const revalidate = false;
+export const revalidate = 21600;
 
 export default async function sitemap(props: {
   id: Promise<string>;
@@ -160,7 +132,6 @@ export default async function sitemap(props: {
   const firms = readFirmEntries().filter(
     (firm) => !COMPARE_EXCLUDED_SLUGS.has(firm.slug),
   );
-  const news = readNewsEntries();
 
   if (id === "static") {
     return STATIC_PATHS.flatMap((pathname) =>
@@ -205,10 +176,11 @@ export default async function sitemap(props: {
   }
 
   if (id === "news") {
+    const news = await getPublishedNews();
     return news.flatMap((article) =>
       localizedEntries(
         `/news/${article.slug}`,
-        article.lastModified,
+        parseIsoDate(article.publishedAt) ?? parseIsoDate(article.scrapedAt),
         0.6,
         "daily",
       ),
