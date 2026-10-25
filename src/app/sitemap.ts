@@ -6,7 +6,7 @@ import {
   COMPARE_EXCLUDED_SLUGS,
   compareableSlugs,
 } from "@/lib/compare";
-import { getPublishedNews } from "@/lib/news-cms";
+import { getPublishedNewsIndex } from "@/lib/news-cms";
 import { localeMeta, routing } from "@/i18n/routing";
 
 const BASE_URL = "https://www.propfxlab.com";
@@ -176,7 +176,7 @@ export default async function sitemap(props: {
   }
 
   if (id === "news") {
-    const news = await getPublishedNews();
+    const news = await getPublishedNewsIndex();
     return news.flatMap((article) =>
       localizedEntries(
         `/news/${article.slug}`,
