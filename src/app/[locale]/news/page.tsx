@@ -7,9 +7,12 @@ import {
 import { Suspense } from "react";
 import { getTranslations } from "next-intl/server";
 import { NewsIndex, type NewsListItem } from "@/components/NewsIndex";
-import { getAllNews } from "@/lib/data";
 import { getNewsCategories } from "@/lib/news-categories";
+import { getPublishedNews } from "@/lib/news-cms";
 import { getNewsLocaleCopy } from "@/lib/schema";
+
+/** Webhook revalidates the `news` tag on publish; this is the fallback if it misses. */
+export const revalidate = 3600;
 
 export async function generateMetadata({
   params,
@@ -37,7 +40,7 @@ export default async function NewsIndexPage({
 }: PageProps<"/[locale]/news">) {
   const { locale } = await params;
   const t = await getTranslations("NewsPage");
-  const articles: NewsListItem[] = getAllNews().map((article) => {
+  const articles: NewsListItem[] = (await getPublishedNews()).map((article) => {
     const copy = getNewsLocaleCopy(article, locale);
     return {
       slug: article.slug,

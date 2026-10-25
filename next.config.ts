@@ -33,7 +33,7 @@ const nextConfig: NextConfig = {
     const sitemapCache = [
       {
         key: "Cache-Control",
-        value: "public, s-maxage=3600, stale-while-revalidate=86400",
+        value: "public, s-maxage=21600, stale-while-revalidate=86400",
       },
     ];
     return [

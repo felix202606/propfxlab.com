@@ -9,10 +9,20 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { NewsShareButtons } from "@/components/NewsShareButtons";
 import { NewsAdjacentArticles } from "@/components/NewsAdjacentArticles";
-import { getAdjacentNews, getAllFirms, getNewsBySlug, getNewsSlugs } from "@/lib/data";
+import { getAllFirms, getNewsSlugs } from "@/lib/data";
 import { formatNewsPublished, newsArticleAbsoluteUrl } from "@/lib/news-format";
+import { getAdjacentPublished, resolveNewsArticle } from "@/lib/news-cms";
 import { getNewsLocaleCopy } from "@/lib/schema";
 import { localeMeta } from "@/i18n/routing";
+
+/**
+ * Articles in data/news at build time are prerendered; later CMS articles
+ * render on first request. No timer: a Sanity publish revalidates the
+ * `news:{slug}` tag, so each page is rewritten only when it changes.
+ */
+export const dynamic = "force-static";
+export const dynamicParams = true;
+export const revalidate = false;
 
 export function generateStaticParams() {
   return getNewsSlugs().map((slug) => ({ slug }));
@@ -22,7 +32,7 @@ export async function generateMetadata({
   params,
 }: PageProps<"/[locale]/news/[slug]">): Promise<Metadata> {
   const { locale, slug } = await params;
-  const article = getNewsBySlug(slug);
+  const article = await resolveNewsArticle(slug);
   const t = await getTranslations({ locale, namespace: "NewsPage" });
   if (!article) {
     return { title: t("notFoundMetaTitle") };
@@ -55,7 +65,7 @@ export default async function NewsArticlePage({
   params,
 }: PageProps<"/[locale]/news/[slug]">) {
   const { locale, slug } = await params;
-  const article = getNewsBySlug(slug);
+  const article = await resolveNewsArticle(slug);
   if (!article) notFound();
 
   const t = await getTranslations("NewsPage");
@@ -65,7 +75,7 @@ export default async function NewsArticlePage({
   const related = article.relatedFirmSlugs
     .map((firmSlug) => firms.find((firm) => firm.slug === firmSlug))
     .filter((firm): firm is NonNullable<typeof firm> => firm != null);
-  const { previous, next } = getAdjacentNews(article.slug);
+  const { previous, next } = await getAdjacentPublished(article.slug);
 
   const jsonLd = {
     "@context": "https://schema.org",
