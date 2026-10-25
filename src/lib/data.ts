@@ -72,6 +72,8 @@ function readNewsFile(fileName: string): NewsArticle {
   return parseNewsArticle(JSON.parse(raw));
 }
 
+const reportedNewsFiles = new Set<string>();
+
 export const getAllNews = cache((): NewsArticle[] => {
   try {
     let fileNames: string[];
@@ -87,7 +89,11 @@ export const getAllNews = cache((): NewsArticle[] => {
       try {
         results.push(readNewsFile(fileName));
       } catch (err) {
-        console.error("[data] Skipping invalid news file:", fileName, err);
+        // Runs once per prerendered page; log each file once per worker to stay under Vercel's 4 MB build log cap.
+        if (!reportedNewsFiles.has(fileName)) {
+          reportedNewsFiles.add(fileName);
+          console.error("[data] Skipping invalid news file:", fileName, err);
+        }
       }
     }
 

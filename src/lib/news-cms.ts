@@ -1,5 +1,6 @@
 import "server-only";
 
+import { cache } from "react";
 import { getAllNews, getNewsBySlug } from "@/lib/data";
 import { newsFromCms } from "@/lib/sanity-mapping";
 import { sanityQuery } from "@/lib/sanity-fetch";
@@ -44,17 +45,23 @@ function listRowToArticle(row: ListRow): NewsArticle | null {
   }
   try {
     return newsFromCms({ ...row, body: row.summary, translations });
-  } catch (error) {
-    console.error("[news] skip CMS row", row.slug, error);
+  } catch {
+    // Every article page reads the list; one line per slug per worker keeps build logs under Vercel's 4 MB cap.
+    if (!skippedRows.has(row.slug)) {
+      skippedRows.add(row.slug);
+      console.warn("[news] skip invalid CMS row", row.slug);
+    }
     return null;
   }
 }
+
+const skippedRows = new Set<string>();
 
 /**
  * CMS first. Articles that only exist in data/news stay listed, so no
  * indexed URL disappears if the dataset is missing something.
  */
-export async function getPublishedNews(): Promise<NewsArticle[]> {
+export const getPublishedNews = cache(async (): Promise<NewsArticle[]> => {
   const local = getAllNews();
   const rows = await sanityQuery<ListRow[]>(LIST_QUERY, {}, [NEWS_LIST_TAG]);
   if (!rows) return local;
@@ -66,15 +73,15 @@ export async function getPublishedNews(): Promise<NewsArticle[]> {
     if (article) bySlug.set(article.slug, article);
   }
   return [...bySlug.values()].sort((a, b) => b.publishedAt.localeCompare(a.publishedAt));
-}
+});
 
 export async function resolveNewsArticle(slug: string): Promise<NewsArticle | undefined> {
   const doc = await sanityQuery<unknown>(ARTICLE_QUERY, { slug }, [newsArticleTag(slug)]);
   if (doc) {
     try {
       return newsFromCms(doc);
-    } catch (error) {
-      console.error("[news] invalid CMS article", slug, error);
+    } catch {
+      console.warn("[news] invalid CMS article", slug);
     }
   }
   return getNewsBySlug(slug);

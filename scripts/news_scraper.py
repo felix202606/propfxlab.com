@@ -25,6 +25,7 @@ import re
 import socket
 import sys
 import time
+import unicodedata
 from datetime import datetime, timedelta, timezone
 from difflib import SequenceMatcher
 from pathlib import Path
@@ -290,7 +291,9 @@ def load_dotenv() -> None:
 def kebab(value: str) -> str:
     cleaned: list[str] = []
     prev_dash = False
-    for char in value.strip().lower():
+    # Slugs must match [a-z0-9-] (schema.ts); "dušek" -> "dusek".
+    ascii_value = unicodedata.normalize("NFKD", value).encode("ascii", "ignore").decode("ascii")
+    for char in ascii_value.strip().lower():
         if char.isalnum():
             cleaned.append(char)
             prev_dash = False
