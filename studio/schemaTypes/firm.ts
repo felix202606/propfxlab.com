@@ -1,4 +1,5 @@
 import {defineArrayMember, defineField, defineType} from 'sanity'
+import {studioText} from '../i18n/bundles'
 
 const kebab = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
 const currency = /^[A-Z]{3}$/
@@ -23,10 +24,10 @@ export const firm = defineType({
   title: 'Prop firm',
   type: 'document',
   groups: [
-    {name: 'listing', title: 'Listing & partner', default: true},
-    {name: 'rules', title: 'Rules & payouts'},
-    {name: 'profile', title: 'Profile'},
-    {name: 'content', title: 'FAQ & pros/cons'},
+    {name: 'listing', title: 'Listing & partner', i18n: {title: studioText('group.listing')}, default: true},
+    {name: 'rules', title: 'Rules & payouts', i18n: {title: studioText('group.rules')}},
+    {name: 'profile', title: 'Profile', i18n: {title: studioText('group.profile')}},
+    {name: 'content', title: 'FAQ & pros/cons', i18n: {title: studioText('group.content')}},
   ],
   fields: [
     defineField({
