@@ -2,9 +2,16 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { ComparisonsGrid } from "@/components/ComparisonsGrid";
 import { HomeMarketplace } from "@/components/HomeMarketplace";
+import {
+  SponsoredBanner,
+  SponsoredTop3,
+  type SponsoredFirm,
+} from "@/components/SponsoredPlacements";
 import { SiteFaqExplorer, type SiteFaqListItem } from "@/components/SiteFaqExplorer";
 import { TrustGrid } from "@/components/TrustGrid";
-import { getAllDefunctFirms, getAllFirms, getAllSiteFaqs } from "@/lib/data";
+import { getAllDefunctFirms, getAllSiteFaqs } from "@/lib/data";
+import { getHomepagePlacements, getListedFirms, type SponsoredSlot } from "@/lib/firms";
+import type { ListedFirm } from "@/lib/outbound";
 import { getSiteFaqLocaleCopy } from "@/lib/schema";
 import {
   homepageSeoHeadTags,
@@ -39,10 +46,10 @@ export default async function Home({
 }: PageProps<"/[locale]">) {
   const { locale } = await params;
   const seoHead = homepageSeoHeadTags(locale);
-  let firms: ReturnType<typeof getAllFirms> = [];
+  let firms: ListedFirm[] = [];
   let defunctCount = 0;
   try {
-    firms = getAllFirms().filter((firm) => firm.status === "active");
+    firms = (await getListedFirms()).filter((firm) => firm.status === "active");
     defunctCount = getAllDefunctFirms().length;
   } catch (err) {
     console.error("[home] getAllFirms failed, rendering empty marketplace:", err);
@@ -67,6 +74,24 @@ export default async function Home({
     console.error("[home] translations failed, rendering page without FAQ copy:", err);
   }
 
+  const placements = await getHomepagePlacements();
+  const bySlug = new Map(firms.map((firm) => [firm.slug, firm]));
+  const toSponsored = (slot: SponsoredSlot): SponsoredFirm[] => {
+    const firm = bySlug.get(slot.slug);
+    if (!firm) return [];
+    return [
+      {
+        slug: firm.slug,
+        name: firm.basic.name,
+        logo: firm.basic.logo,
+        ...(firm.offer ? { offer: firm.offer } : {}),
+        ...(slot.startsAt ? { startsAt: slot.startsAt } : {}),
+        ...(slot.endsAt ? { endsAt: slot.endsAt } : {}),
+      },
+    ];
+  };
+  const top3 = placements.top3.flatMap(toSponsored);
+  const [banner] = placements.banner ? toSponsored(placements.banner) : [];
   const jsonLd = siteJsonLd();
 
   return (
@@ -81,9 +106,14 @@ export default async function Home({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <HomeMarketplace firms={firms} defunctCount={defunctCount} />
+      {banner ? <SponsoredBanner slot={banner} /> : null}
+      <HomeMarketplace
+        firms={firms}
+        defunctCount={defunctCount}
+        beforeRankings={top3.length > 0 ? <SponsoredTop3 slots={top3} /> : null}
+      />
       <TrustGrid />
-      <ComparisonsGrid firms={firms} />
+      <ComparisonsGrid firms={firms} popularPairs={placements.popularComparisons} />
       {faqs.length > 0 ? (
         <section className="border-b border-slate-800 bg-[#0B0F19]">
           <div className="mx-auto w-full max-w-6xl px-4 py-16">

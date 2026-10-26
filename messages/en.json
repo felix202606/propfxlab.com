@@ -107,7 +107,10 @@
         "question": "Why do two firms show different take-home on the same profit?",
         "answer": "Default split, platform deductions and payout-channel fees differ. A higher advertised split can still net less after processor or crypto fees — that gap is exactly what the ranking is designed to show."
       }
-    ]
+    ],
+    "sponsoredBadge": "Sponsored",
+    "sponsoredTitle": "Featured partners",
+    "sponsoredBannerText": "{firm} partner offer"
   },
   "CalculatorPage": {
     "metaTitle": "Payout Calculator",

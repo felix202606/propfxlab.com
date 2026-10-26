@@ -142,7 +142,6 @@ export const ZH_FIELD_TEXT: Record<string, string> = {
   'Drag to reorder. Labelled "Sponsored" on the site.': '拖动排序。网站上会标注“赞助”。',
   Firm: '平台',
   'Recommended banner': '推荐横幅',
-  Headline: '横幅标题',
   'Popular comparisons on /compare': '/compare 热门对比',
   Left: '左侧平台',
   Right: '右侧平台',

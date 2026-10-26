@@ -8,7 +8,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { ComparisonsGrid } from "@/components/ComparisonsGrid";
 import { canonicalCompareSlug, COMPARE_EXCLUDED_SLUGS } from "@/lib/compare";
-import { getAllFirms } from "@/lib/data";
+import { getHomepagePlacements, getListedFirms } from "@/lib/firms";
 import type { PropFirm } from "@/lib/schema";
 
 type CompareIndexParams = { params: Promise<{ locale: string }> };
@@ -18,7 +18,7 @@ export async function generateMetadata({
 }: CompareIndexParams): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "CompareIndex" });
-  const pairCount = compareableFirms().length;
+  const pairCount = (await compareableFirms()).length;
   const comparisons = (pairCount * (pairCount - 1)) / 2;
   const title = t("metaTitle");
   const description = t("metaDescription", { count: comparisons });
@@ -41,7 +41,8 @@ export default async function CompareIndexPage({
 }: CompareIndexParams) {
   const { locale } = await params;
   const t = await getTranslations("CompareIndex");
-  const firms = compareableFirms();
+  const firms = await compareableFirms();
+  const placements = await getHomepagePlacements();
   const comparisons = (firms.length * (firms.length - 1)) / 2;
   const localePrefix = locale === "en" ? "" : `/${locale}`;
 
@@ -83,6 +84,7 @@ export default async function CompareIndexPage({
 
       <ComparisonsGrid
         firms={firms}
+        popularPairs={placements.popularComparisons}
         showHeader={false}
         showViewAll={false}
         embedded
@@ -143,8 +145,8 @@ export default async function CompareIndexPage({
   );
 }
 
-function compareableFirms() {
-  return getAllFirms().filter((firm) => !COMPARE_EXCLUDED_SLUGS.has(firm.slug));
+async function compareableFirms() {
+  return (await getListedFirms()).filter((firm) => !COMPARE_EXCLUDED_SLUGS.has(firm.slug));
 }
 
 function groupFirmsByLetter(firms: PropFirm[]): [string, PropFirm[]][] {

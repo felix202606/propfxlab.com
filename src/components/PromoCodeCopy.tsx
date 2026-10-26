@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { trackAffiliateClick } from "@/components/AffiliateLink";
-import { OUT_LINK_REL } from "@/lib/offers";
+import { OUT_LINK_REL, type OfferPromotion } from "@/lib/outbound";
+import { useActiveOffer } from "@/lib/use-active-offer";
 
 function slugFromOutHref(href: string): string | null {
   const match = href.match(/^\/out\/([^/?#]+)/);
@@ -11,20 +12,23 @@ function slugFromOutHref(href: string): string | null {
 }
 
 export function PromoCodeCopy({
-  code,
+  code: regularCode,
   href,
   compact = false,
   copyOnly = false,
-  discountLabel,
+  discountLabel: regularLabel,
+  promotion,
 }: {
   code: string;
   href: string;
   compact?: boolean;
   copyOnly?: boolean;
   discountLabel?: string;
+  promotion?: OfferPromotion;
 }) {
   const t = useTranslations("FirmCard");
   const [copied, setCopied] = useState(false);
+  const { code, discountLabel } = useActiveOffer(regularCode, regularLabel, promotion);
 
   function onActivate() {
     const slug = slugFromOutHref(href);

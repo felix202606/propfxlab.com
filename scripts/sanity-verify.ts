@@ -2,7 +2,7 @@
  * Checks that what Sanity returns parses to exactly the repo JSON.
  *
  *   (cd studio && npx sanity documents query '*[_type in ["firm","newsArticle"]]' > /tmp/cms.json)
- *   npx tsx scripts/sanity-verify.ts /tmp/cms.json
+ *   npx tsx --conditions=react-server scripts/sanity-verify.ts /tmp/cms.json
  */
 import { isDeepStrictEqual } from "node:util";
 import { readdirSync, readFileSync } from "node:fs";

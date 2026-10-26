@@ -14,9 +14,9 @@ import {
   shortCountry,
   yearsInOperation,
 } from "@/lib/firm-directory";
-import { getFirmOffer, getOutboundLink } from "@/lib/offers";
+import { getOutboundLink, type ListedFirm } from "@/lib/outbound";
 import { formatMoney, type PayoutBreakdown } from "@/lib/payout";
-import type { PlatformStatus, PropFirm } from "@/lib/schema";
+import type { PlatformStatus } from "@/lib/schema";
 
 const STATUS_DOT: Record<PlatformStatus, string> = {
   active: "bg-emerald-400",
@@ -29,7 +29,7 @@ const ROW_GRID =
   "grid w-full grid-cols-[minmax(168px,1.25fr)_56px_minmax(76px,0.7fr)_minmax(84px,0.75fr)_68px_minmax(120px,0.95fr)_minmax(100px,112px)_minmax(108px,120px)]";
 
 export type FirmTableRow = {
-  firm: PropFirm;
+  firm: ListedFirm;
   breakdown: PayoutBreakdown | null;
   rank: number;
 };
@@ -65,8 +65,8 @@ export function FirmTable({
 
         <ul className="space-y-2.5">
           {rows.map(({ firm, breakdown, rank }) => {
-            const offer = getFirmOffer(firm.slug);
-            const outbound = getOutboundLink(firm.slug, firm.basic.website);
+            const offer = firm.offer;
+            const outbound = getOutboundLink(firm);
             const isSuspended = firm.status === "suspended";
             const payoutCurrency =
               breakdown?.currency ?? firm.calculator.currency;
@@ -184,6 +184,7 @@ export function FirmTable({
                         code={offer.code}
                         href={outbound.href}
                         discountLabel={offer.discountLabel}
+                        promotion={offer.promotion}
                       />
                     ) : offer ? (
                       <span className="text-slate-500">—</span>

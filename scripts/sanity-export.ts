@@ -3,13 +3,14 @@
  * Document ids are stable (firm.{slug}, news.{slug}), so re-importing with
  * --replace overwrites instead of duplicating.
  *
- *   npx tsx scripts/sanity-export.ts /tmp/propfxlab.ndjson
+ *   npx tsx --conditions=react-server scripts/sanity-export.ts /tmp/propfxlab.ndjson
  *   (cd studio && npx sanity dataset import /tmp/propfxlab.ndjson production --replace)
  */
 import { createHash } from "node:crypto";
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
-import { FIRM_OFFERS, POPULAR_COMPARISONS } from "../src/lib/offers";
+import { FIRM_OFFERS } from "../src/lib/offers";
+import { POPULAR_COMPARISONS } from "../src/lib/popular-comparisons";
 
 const ROOT = path.resolve(__dirname, "..");
 const FIRMS_DIR = path.join(ROOT, "data", "firms");

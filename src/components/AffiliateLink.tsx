@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 import { sendGAEvent } from "@next/third-parties/google";
-import { getOutHref, OUT_LINK_REL } from "@/lib/offers";
+import { getOutHref, OUT_LINK_REL } from "@/lib/outbound";
 
 export function trackAffiliateClick(slug: string, source = "cta") {
   try {

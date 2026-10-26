@@ -1,7 +1,7 @@
-import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { AffiliateLink } from "@/components/AffiliateLink";
-import { getFirmOffer } from "@/lib/offers";
+import { getListedFirm } from "@/lib/firms";
 
 const ALTERNATIVES = [
   { slug: "ftmo", displayName: "FTMO" },
@@ -12,9 +12,11 @@ type SaferAlternativesProps = {
   variant?: "banner" | "compact";
 };
 
-export function SaferAlternatives({ variant = "banner" }: SaferAlternativesProps) {
-  const t = useTranslations("DefunctPage");
-  const tCard = useTranslations("FirmCard");
+export async function SaferAlternatives({ variant = "banner" }: SaferAlternativesProps) {
+  const t = await getTranslations("DefunctPage");
+  const tCard = await getTranslations("FirmCard");
+  const firms = await Promise.all(ALTERNATIVES.map(({ slug }) => getListedFirm(slug)));
+  const offers = new Map(ALTERNATIVES.map(({ slug }, index) => [slug, firms[index]?.offer]));
 
   if (variant === "compact") {
     return (
@@ -24,7 +26,7 @@ export function SaferAlternatives({ variant = "banner" }: SaferAlternativesProps
         </p>
         <div className="mt-2 flex flex-wrap gap-2">
           {ALTERNATIVES.map(({ slug, displayName }) => {
-            const offer = getFirmOffer(slug);
+            const offer = offers.get(slug);
             const className =
               "inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-emerald-400 via-emerald-300 to-cyan-400 px-3 py-1.5 text-xs font-semibold text-zinc-950 shadow-[0_0_16px_-4px_rgba(52,211,153,0.9)] transition-all hover:brightness-110";
             const label = (
@@ -71,7 +73,7 @@ export function SaferAlternatives({ variant = "banner" }: SaferAlternativesProps
 
         <div className="flex flex-wrap gap-2">
           {ALTERNATIVES.map(({ slug, displayName }) => {
-            const offer = getFirmOffer(slug);
+            const offer = offers.get(slug);
             return (
               <div
                 key={slug}

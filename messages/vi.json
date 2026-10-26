@@ -107,7 +107,10 @@
         "question": "Vì sao cùng lợi nhuận mà hai công ty thực nhận khác nhau?",
         "answer": "Tỷ lệ chia mặc định, khoản khấu trừ và phí kênh khác nhau. Tỷ lệ chia quảng cáo cao hơn vẫn có thể thực nhận thấp hơn sau phí crypto hoặc phí xử lý — đó chính là khoảng cách mà bảng xếp hạng muốn cho thấy."
       }
-    ]
+    ],
+    "sponsoredBadge": "Được tài trợ",
+    "sponsoredTitle": "Đối tác nổi bật",
+    "sponsoredBannerText": "Ưu đãi đối tác {firm}"
   },
   "CalculatorPage": {
     "metaTitle": "Máy tính rút tiền",

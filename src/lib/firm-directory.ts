@@ -3,6 +3,8 @@ import type { FirmHighlight, PropFirm, TradingPlatform } from "@/lib/schema";
 
 export const NET_PROFIT_ACCOUNT = 100_000;
 
+export const HERO_ACCOUNT_SIZES = [10_000, 25_000, 50_000, 100_000, 200_000] as const;
+
 export const SHORT_COUNTRY: Record<string, string> = {
   AE: "UAE",
   US: "US",

@@ -35,7 +35,6 @@ export const homepagePlacements = defineType({
       fields: [
         defineField({name: 'enabled', type: 'boolean', initialValue: false}),
         defineField({name: 'firm', ...firmRef}),
-        defineField({name: 'headline', type: 'string'}),
         ...scheduleFields,
       ],
     }),

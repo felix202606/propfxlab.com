@@ -1,3 +1,9 @@
+import "server-only";
+
+/**
+ * Fallback partner deals when Sanity is unreachable. Sanity's `firm.offer` is
+ * the source of truth; keep this in step via scripts/sanity-verify.ts.
+ */
 export type FirmOffer = {
   /**
    * Copyable checkout code. Omit when the partner only issued a tracking URL.
@@ -15,23 +21,7 @@ export type FirmOffer = {
   discountLabel?: string;
 };
 
-export type OutboundLink = {
-  href: string;
-  rel: string;
-  partner: boolean;
-};
-
-export const DEFAULT_PROMO_CODE = "PROPFXLAB";
-
-export const OUT_LINK_REL = "sponsored noopener noreferrer";
-
-/** Unpaid editorial citation to the official site — not an affiliate hop. */
-export const EDITORIAL_LINK_REL = "noopener noreferrer";
-
-/** Affiliate hop so outbound clicks stay on /out/[slug] (nofollow sponsored). */
-export function getOutHref(slug: string): string {
-  return `/out/${slug}`;
-}
+const DEFAULT_PROMO_CODE = "PROPFXLAB";
 
 /**
  * Approved partner hops only. Pending / rejected firms stay editorial:
@@ -96,35 +86,3 @@ export const FIRM_OFFERS: Record<string, FirmOffer> = {
     href: "https://maventrading.com/?ref=propfxlab",
   },
 };
-
-export function getFirmOffer(slug: string): FirmOffer | undefined {
-  return FIRM_OFFERS[slug];
-}
-
-export function isPartnerFirm(slug: string): boolean {
-  return Object.hasOwn(FIRM_OFFERS, slug);
-}
-
-export function getOutboundLink(
-  slug: string,
-  officialWebsite: string,
-): OutboundLink {
-  if (isPartnerFirm(slug)) {
-    return { href: getOutHref(slug), rel: OUT_LINK_REL, partner: true };
-  }
-  return { href: officialWebsite, rel: EDITORIAL_LINK_REL, partner: false };
-}
-
-export const HERO_ACCOUNT_SIZES = [10_000, 25_000, 50_000, 100_000, 200_000] as const;
-
-export const POPULAR_COMPARISONS = [
-  ["ftmo", "fundednext"],
-  ["e8-markets", "the5ers"],
-  ["funding-traders", "instant-funding"],
-  ["fxify", "thinkcapital"],
-  ["blue-guardian", "for-traders"],
-  ["fintokei", "hyrotrader"],
-  ["city-traders-imperium", "maven-trading"],
-  ["top-one-trader", "ftmo"],
-  ["fundednext", "e8-markets"],
-] as const;

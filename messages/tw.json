@@ -107,7 +107,10 @@
         "question": "為什麼同樣利潤，兩家到手不一樣？",
         "answer": "預設分成、平台扣減和通道費不同。更高的宣傳分成在扣完通道費後仍可能更少——這正是排行榜要揭示的差距。"
       }
-    ]
+    ],
+    "sponsoredBadge": "贊助",
+    "sponsoredTitle": "精選合作平台",
+    "sponsoredBannerText": "{firm} 合作優惠"
   },
   "CalculatorPage": {
     "metaTitle": "出金計算器",

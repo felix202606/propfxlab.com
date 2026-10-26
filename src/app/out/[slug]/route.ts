@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { getFirmBySlug, getFirmSlugs } from "@/lib/data";
-import { getFirmOffer } from "@/lib/offers";
+import { getFirmSlugs } from "@/lib/data";
+import { getOutboundTarget } from "@/lib/firms";
 
 export function generateStaticParams() {
   return getFirmSlugs().map((slug) => ({ slug }));
@@ -11,13 +11,12 @@ export async function GET(
   context: { params: Promise<{ slug: string }> },
 ) {
   const { slug } = await context.params;
-  const firm = getFirmBySlug(slug);
-  if (!firm) {
+  const target = await getOutboundTarget(slug);
+  if (!target) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
 
-  const offer = getFirmOffer(firm.slug);
-  return NextResponse.redirect(offer?.href ?? firm.basic.website, {
+  return NextResponse.redirect(target, {
     status: 302,
     headers: { "X-Robots-Tag": "noindex, nofollow" },
   });

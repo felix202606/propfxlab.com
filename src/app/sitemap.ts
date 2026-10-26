@@ -1,16 +1,14 @@
-import { readdirSync, readFileSync } from "node:fs";
-import path from "node:path";
 import type { MetadataRoute } from "next";
 import {
   buildCompareSlug,
   COMPARE_EXCLUDED_SLUGS,
   compareableSlugs,
 } from "@/lib/compare";
+import { getFirmRoster } from "@/lib/firms";
 import { getPublishedNewsIndex } from "@/lib/news-cms";
 import { localeMeta, routing } from "@/i18n/routing";
 
 const BASE_URL = "https://www.propfxlab.com";
-const FIRMS_DIR = path.join(process.cwd(), "data", "firms");
 
 /**
  * Shard ids for generateSitemaps. Splitting keeps each XML response smaller
@@ -23,8 +21,6 @@ const SITEMAP_SHARDS = [
   { id: "compare" },
   { id: "news" },
 ] as const;
-
-type SitemapEntry = { slug: string; lastModified?: Date };
 
 const STATIC_PATHS = [
   "",
@@ -41,45 +37,6 @@ function parseIsoDate(value: unknown): Date | undefined {
   if (typeof value !== "string" || !value.trim()) return undefined;
   const parsed = new Date(value);
   return Number.isNaN(parsed.getTime()) ? undefined : parsed;
-}
-
-function readJsonObject(filePath: string): Record<string, unknown> | null {
-  try {
-    const parsed: unknown = JSON.parse(readFileSync(filePath, "utf8"));
-    if (typeof parsed === "object" && parsed !== null) {
-      return parsed as Record<string, unknown>;
-    }
-  } catch (error) {
-    console.error(`[sitemap] 跳过无法解析的 ${filePath}：`, error);
-  }
-  return null;
-}
-
-function readFirmEntries(): SitemapEntry[] {
-  let fileNames: string[];
-  try {
-    fileNames = readdirSync(FIRMS_DIR).filter((name) => name.endsWith(".json"));
-  } catch (error) {
-    console.error(`[sitemap] 读取 ${FIRMS_DIR} 失败，本次只输出静态页面：`, error);
-    return [];
-  }
-
-  const entries: SitemapEntry[] = [];
-  for (const fileName of fileNames) {
-    const filePath = path.join(FIRMS_DIR, fileName);
-    const parsed = readJsonObject(filePath);
-    if (!parsed) continue;
-    const raw = parsed.slug;
-    const slug =
-      typeof raw === "string" && raw.trim()
-        ? raw.trim()
-        : path.basename(fileName, ".json");
-    // Do not use fs mtime: on Vercel every deploy retouches files, so lastmod
-    // becomes "today" and crawlers refill the whole compare ISR cache.
-    entries.push({ slug });
-  }
-
-  return entries.sort((a, b) => a.slug.localeCompare(b.slug, "en"));
 }
 
 function localeUrl(locale: string, pathname: string): string {
@@ -129,9 +86,11 @@ export default async function sitemap(props: {
   id: Promise<string>;
 }): Promise<MetadataRoute.Sitemap> {
   const id = await props.id;
-  const firms = readFirmEntries().filter(
-    (firm) => !COMPARE_EXCLUDED_SLUGS.has(firm.slug),
-  );
+  // Do not add lastmod from fs mtime: every deploy retouches files and crawlers
+  // would refill the whole compare ISR cache.
+  const firms = (await getFirmRoster())
+    .filter((firm) => !COMPARE_EXCLUDED_SLUGS.has(firm.slug))
+    .sort((a, b) => a.slug.localeCompare(b.slug, "en"));
 
   if (id === "static") {
     return STATIC_PATHS.flatMap((pathname) =>

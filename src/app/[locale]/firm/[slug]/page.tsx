@@ -16,8 +16,9 @@ import { FirmLogo } from "@/components/FirmLogo";
 import { AffiliateLink } from "@/components/AffiliateLink";
 import { PromoCodeCopy } from "@/components/PromoCodeCopy";
 import { canonicalCompareSlug, COMPARE_EXCLUDED_SLUGS } from "@/lib/compare";
-import { getAllFirms, getFirmBySlug, getFirmSlugs } from "@/lib/data";
-import { getFirmOffer, getOutboundLink } from "@/lib/offers";
+import { getFirmSlugs } from "@/lib/data";
+import { getFirmRoster, getListedFirm } from "@/lib/firms";
+import { getOutboundLink } from "@/lib/outbound";
 import { formatMoney } from "@/lib/payout";
 import { toFaqJsonLd } from "@/lib/schema";
 
@@ -29,7 +30,7 @@ export async function generateMetadata({
   params,
 }: PageProps<"/[locale]/firm/[slug]">): Promise<Metadata> {
   const { locale, slug } = await params;
-  const firm = getFirmBySlug(slug);
+  const firm = await getListedFirm(slug);
   const t = await getTranslations({ locale, namespace: "FirmPage" });
   if (!firm) {
     return { title: t("notFoundMetaTitle") };
@@ -65,16 +66,16 @@ export default async function FirmPage({
   params,
 }: PageProps<"/[locale]/firm/[slug]">) {
   const { locale, slug } = await params;
-  const firm = getFirmBySlug(slug);
+  const firm = await getListedFirm(slug);
   if (!firm) notFound();
 
   const t = await getTranslations("FirmPage");
   const tCard = await getTranslations("FirmCard");
-  const firms = getAllFirms();
+  const roster = await getFirmRoster();
   const jsonLd = toFaqJsonLd(firm, locale);
   const { funding } = firm.basic;
-  const offer = getFirmOffer(firm.slug);
-  const outbound = getOutboundLink(firm.slug, firm.basic.website);
+  const offer = firm.offer;
+  const outbound = getOutboundLink(firm);
   const cycle = firm.withdrawal.payoutCycle;
 
   const cycleText =
@@ -111,7 +112,12 @@ export default async function FirmPage({
         <div className="ml-auto flex min-w-0 flex-wrap items-center justify-end gap-2">
           {offer?.code ? (
             <div className="min-w-0 max-w-xs">
-              <PromoCodeCopy copyOnly code={offer.code} href={outbound.href} />
+              <PromoCodeCopy
+                copyOnly
+                code={offer.code}
+                href={outbound.href}
+                promotion={offer.promotion}
+              />
             </div>
           ) : null}
           {outbound.partner ? (
@@ -190,7 +196,7 @@ export default async function FirmPage({
       ) : null}
 
       <div className="mt-10">
-        <PayoutCalculator firms={firms} defaultSlug={firm.slug} lockFirm />
+        <PayoutCalculator firms={[firm]} defaultSlug={firm.slug} lockFirm />
       </div>
 
       {/* 禁忌规则提醒 Warning Box */}
@@ -208,7 +214,7 @@ export default async function FirmPage({
           {t("compareHeading", { name: firm.basic.name })}
         </h2>
         <ul className="mt-3 flex flex-wrap gap-2">
-          {firms
+          {roster
             .filter(
               (other) =>
                 other.slug !== firm.slug &&
@@ -220,7 +226,7 @@ export default async function FirmPage({
                   href={`/compare/${canonicalCompareSlug(firm.slug, other.slug)}`}
                   className="inline-flex rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs text-zinc-300 transition-colors hover:border-cyan-400/40 hover:text-white"
                 >
-                  {t("compareWith", { name: other.basic.name })}
+                  {t("compareWith", { name: other.name })}
                 </Link>
               </li>
             ))}
