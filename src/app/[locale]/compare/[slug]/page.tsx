@@ -24,8 +24,8 @@ import {
   parseCompareSlug,
   pickCompareInsight,
 } from "@/lib/compare";
-import { getAllFirms, getFirmBySlug, getFirmSlugs } from "@/lib/data";
-import { getFirmOffer, getOutboundLink } from "@/lib/offers";
+import { getFirmRoster, getListedFirm } from "@/lib/firms";
+import { getOutboundLink, type ListedFirm } from "@/lib/outbound";
 import { formatMoney } from "@/lib/payout";
 import type { PropFirm } from "@/lib/schema";
 
@@ -48,7 +48,7 @@ export async function generateMetadata({
 }: PageProps<"/[locale]/compare/[slug]">): Promise<Metadata> {
   const { locale, slug } = await params;
   const t = await getTranslations({ locale, namespace: "ComparePage" });
-  const pair = resolveComparePair(slug);
+  const pair = await resolveComparePair(slug);
   if (!pair) {
     return { title: t("notFoundMetaTitle") };
   }
@@ -76,7 +76,7 @@ export default async function ComparePage({
   params,
 }: PageProps<"/[locale]/compare/[slug]">) {
   const { locale, slug } = await params;
-  const pair = resolveComparePair(slug);
+  const pair = await resolveComparePair(slug);
   if (!pair) notFound();
 
   const canonical = canonicalCompareSlug(pair.left.slug, pair.right.slug);
@@ -235,13 +235,18 @@ export default async function ComparePage({
   );
 }
 
-function resolveComparePair(slug: string): { left: PropFirm; right: PropFirm } | null {
-  const parsed = parseCompareSlug(slug, getFirmSlugs());
+async function resolveComparePair(
+  slug: string,
+): Promise<{ left: ListedFirm; right: ListedFirm } | null> {
+  const roster = await getFirmRoster();
+  const parsed = parseCompareSlug(
+    slug,
+    roster.map((firm) => firm.slug),
+  );
   if (!parsed) return null;
   const [leftSlug, rightSlug] = parsed;
   if (leftSlug === rightSlug) return null;
-  const left = getFirmBySlug(leftSlug);
-  const right = getFirmBySlug(rightSlug);
+  const [left, right] = await Promise.all([getListedFirm(leftSlug), getListedFirm(rightSlug)]);
   if (!left || !right) return null;
   return { left, right };
 }
@@ -366,15 +371,15 @@ function OfferCell({
   firm,
   t,
 }: {
-  firm: PropFirm;
+  firm: ListedFirm;
   t: Awaited<ReturnType<typeof getTranslations>>;
 }) {
-  const offer = getFirmOffer(firm.slug);
-  const outbound = getOutboundLink(firm.slug, firm.basic.website);
+  const offer = firm.offer;
+  const outbound = getOutboundLink(firm);
   return (
     <div className="flex flex-col gap-3 px-3 py-4 sm:px-5">
       {offer?.code ? (
-        <PromoCodeCopy code={offer.code} href={outbound.href} />
+        <PromoCodeCopy code={offer.code} href={outbound.href} promotion={offer.promotion} />
       ) : offer ? null : (
         <p className="text-xs text-zinc-500">{t("noPartnerPromo")}</p>
       )}
@@ -411,7 +416,7 @@ function ProfileLink({ firm, label }: { firm: PropFirm; label: string }) {
   );
 }
 
-function RelatedCompares({
+async function RelatedCompares({
   firm,
   excludeSlug,
   heading,
@@ -422,7 +427,7 @@ function RelatedCompares({
   heading: string;
   vs: string;
 }) {
-  const others = getAllFirms().filter(
+  const others = (await getFirmRoster()).filter(
     (item) =>
       item.slug !== firm.slug &&
       item.slug !== excludeSlug &&
@@ -440,7 +445,7 @@ function RelatedCompares({
               href={`/compare/${canonicalCompareSlug(firm.slug, other.slug)}`}
               className="inline-flex rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs text-zinc-300 transition-colors hover:border-cyan-400/40 hover:text-white"
             >
-              {firm.basic.name} {vs} {other.basic.name}
+              {firm.basic.name} {vs} {other.name}
             </Link>
           </li>
         ))}

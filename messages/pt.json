@@ -107,7 +107,10 @@
         "question": "Por que duas firmas pagam diferente com o mesmo lucro?",
         "answer": "O split padrão, as deduções e as taxas de canal diferem. Um split mais alto no marketing ainda pode render menos após taxas de cripto ou da processadora — essa diferença é o que o ranking mostra."
       }
-    ]
+    ],
+    "sponsoredBadge": "Patrocinado",
+    "sponsoredTitle": "Parceiros em destaque",
+    "sponsoredBannerText": "Oferta parceira {firm}"
   },
   "CalculatorPage": {
     "metaTitle": "Calculadora de saque",

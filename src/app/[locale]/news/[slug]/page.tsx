@@ -9,7 +9,8 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { NewsShareButtons } from "@/components/NewsShareButtons";
 import { NewsAdjacentArticles } from "@/components/NewsAdjacentArticles";
-import { getAllFirms, getNewsSlugs } from "@/lib/data";
+import { getNewsSlugs } from "@/lib/data";
+import { getFirmRoster } from "@/lib/firms";
 import { formatNewsPublished, newsArticleAbsoluteUrl } from "@/lib/news-format";
 import { getAdjacentPublished, resolveNewsArticle } from "@/lib/news-cms";
 import { getNewsLocaleCopy } from "@/lib/schema";
@@ -71,7 +72,7 @@ export default async function NewsArticlePage({
   const t = await getTranslations("NewsPage");
   const copy = getNewsLocaleCopy(article, locale);
   const shareUrl = newsArticleAbsoluteUrl(locale, article.slug);
-  const firms = getAllFirms();
+  const firms = await getFirmRoster();
   const related = article.relatedFirmSlugs
     .map((firmSlug) => firms.find((firm) => firm.slug === firmSlug))
     .filter((firm): firm is NonNullable<typeof firm> => firm != null);
@@ -141,7 +142,7 @@ export default async function NewsArticlePage({
                   href={`/firm/${firm.slug}`}
                   className="rounded-full border border-white/10 px-3 py-1 text-sm text-zinc-300 transition-colors hover:border-emerald-400/40 hover:text-emerald-300"
                 >
-                  {firm.basic.name}
+                  {firm.name}
                 </Link>
               </li>
             ))}

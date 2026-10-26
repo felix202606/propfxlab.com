@@ -6,7 +6,7 @@ import {
 } from "@/lib/seo";
 import { getTranslations } from "next-intl/server";
 import { PayoutCalculator } from "@/components/PayoutCalculator";
-import { getAllFirms } from "@/lib/data";
+import { getListedFirms } from "@/lib/firms";
 
 export async function generateMetadata({
   params,
@@ -31,7 +31,7 @@ export async function generateMetadata({
 
 export default async function CalculatorPage() {
   const t = await getTranslations("CalculatorPage");
-  const firms = getAllFirms();
+  const firms = await getListedFirms();
 
   return (
     <main className="mx-auto w-full max-w-6xl px-4 py-10">

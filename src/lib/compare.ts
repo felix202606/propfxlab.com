@@ -1,4 +1,4 @@
-import { POPULAR_COMPARISONS } from "@/lib/offers";
+import { POPULAR_COMPARISONS } from "@/lib/popular-comparisons";
 import { calculatePayout, type PayoutBreakdown } from "@/lib/payout";
 import type { PropFirm } from "@/lib/schema";
 

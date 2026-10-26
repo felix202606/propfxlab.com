@@ -7,9 +7,9 @@ import { AffiliateLink } from "@/components/AffiliateLink";
 import { PromoCodeCopy } from "@/components/PromoCodeCopy";
 import { TrustpilotBadge } from "@/components/TrustpilotBadge";
 import { getCardChannelTags } from "@/lib/channel-tags";
-import { getFirmOffer, getOutboundLink } from "@/lib/offers";
+import { getOutboundLink, type ListedFirm } from "@/lib/outbound";
 import { formatMoney } from "@/lib/payout";
-import type { PlatformStatus, PropFirm } from "@/lib/schema";
+import type { PlatformStatus } from "@/lib/schema";
 
 const STATUS_STYLES: Record<
   PlatformStatus,
@@ -57,7 +57,7 @@ function StatusBadge({ status }: { status: PlatformStatus }) {
 }
 
 type FirmCardProps = {
-  firm: PropFirm;
+  firm: ListedFirm;
   rank?: number;
   netPayout?: number | null;
   currency?: string;
@@ -65,8 +65,8 @@ type FirmCardProps = {
 
 export function FirmCard({ firm, rank, netPayout, currency }: FirmCardProps) {
   const t = useTranslations("FirmCard");
-  const offer = getFirmOffer(firm.slug);
-  const outbound = getOutboundLink(firm.slug, firm.basic.website);
+  const offer = firm.offer;
+  const outbound = getOutboundLink(firm);
   const payoutCurrency = currency ?? firm.calculator.currency;
   const channelTags = getCardChannelTags(firm.withdrawal.channels).slice(0, 2);
   const firstPayoutDays = firm.withdrawal.payoutCycle.firstPayoutMinDays;
@@ -157,7 +157,12 @@ export function FirmCard({ firm, rank, netPayout, currency }: FirmCardProps) {
           <div className="flex items-center gap-1">
             {offer?.code ? (
               <div className="min-w-0 flex-1">
-                <PromoCodeCopy compact code={offer.code} href={outbound.href} />
+                <PromoCodeCopy
+                  compact
+                  code={offer.code}
+                  href={outbound.href}
+                  promotion={offer.promotion}
+                />
               </div>
             ) : null}
             {outbound.partner ? (

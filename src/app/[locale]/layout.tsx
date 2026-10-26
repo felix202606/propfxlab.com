@@ -8,7 +8,7 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SubscribeWidget } from "@/components/SubscribeWidget";
-import { getAllFirms } from "@/lib/data";
+import { getFirmRoster } from "@/lib/firms";
 import { localeMeta, routing } from "@/i18n/routing";
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
 import "../globals.css";
@@ -104,12 +104,9 @@ export default async function LocaleLayout({
 
   let firms: { slug: string; name: string }[] = [];
   try {
-    firms = getAllFirms().map((firm) => ({
-      slug: firm.slug,
-      name: firm.basic.name,
-    }));
+    firms = (await getFirmRoster()).map((firm) => ({ slug: firm.slug, name: firm.name }));
   } catch (err) {
-    console.error("[layout] getAllFirms failed, rendering footer without firm links:", err);
+    console.error("[layout] getFirmRoster failed, rendering footer without firm links:", err);
   }
 
   let subT = {

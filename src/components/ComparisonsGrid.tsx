@@ -4,17 +4,18 @@ import { AffiliateLink } from "@/components/AffiliateLink";
 import { ComparePicker } from "@/components/ComparePicker";
 import { FirmLogo } from "@/components/FirmLogo";
 import { canonicalCompareSlug, listCanonicalCompareSlugs } from "@/lib/compare";
-import { getOutboundLink, POPULAR_COMPARISONS } from "@/lib/offers";
-import type { PropFirm } from "@/lib/schema";
+import { getOutboundLink, type ListedFirm } from "@/lib/outbound";
 
 export function ComparisonsGrid({
   firms,
+  popularPairs,
   showHeader = true,
   showViewAll = true,
   embedded = false,
   popularHeading,
 }: {
-  firms: PropFirm[];
+  firms: ListedFirm[];
+  popularPairs: readonly (readonly [string, string])[];
   showHeader?: boolean;
   showViewAll?: boolean;
   embedded?: boolean;
@@ -23,7 +24,7 @@ export function ComparisonsGrid({
   const t = useTranslations("HomePage");
   const bySlug = new Map(firms.map((firm) => [firm.slug, firm]));
 
-  const pairs = POPULAR_COMPARISONS.flatMap(([leftSlug, rightSlug]) => {
+  const pairs = popularPairs.flatMap(([leftSlug, rightSlug]) => {
     const left = bySlug.get(leftSlug);
     const right = bySlug.get(rightSlug);
     if (!left || !right) return [];
@@ -92,8 +93,8 @@ export function ComparisonsGrid({
         <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {pairs.map(({ left, right }) => {
             const compareHref = `/compare/${canonicalCompareSlug(left.slug, right.slug)}`;
-            const leftOut = getOutboundLink(left.slug, left.basic.website);
-            const rightOut = getOutboundLink(right.slug, right.basic.website);
+            const leftOut = getOutboundLink(left);
+            const rightOut = getOutboundLink(right);
 
             return (
               <li key={`${left.slug}-vs-${right.slug}`}>
@@ -173,7 +174,7 @@ function FirmMini({
   firm,
   align = "left",
 }: {
-  firm: PropFirm;
+  firm: ListedFirm;
   align?: "left" | "right";
 }) {
   return (

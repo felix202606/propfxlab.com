@@ -107,7 +107,10 @@
         "question": "为什么同样利润，两家到手不一样？",
         "answer": "默认分成、平台扣减和通道费不同。更高的宣传分成在扣完通道费后仍可能更少——这正是排行榜要揭示的差距。"
       }
-    ]
+    ],
+    "sponsoredBadge": "赞助",
+    "sponsoredTitle": "精选合作平台",
+    "sponsoredBannerText": "{firm} 合作优惠"
   },
   "CalculatorPage": {
     "metaTitle": "出金计算器",

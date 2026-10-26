@@ -107,7 +107,10 @@
         "question": "¿Por qué dos firmas pagan distinto con el mismo beneficio?",
         "answer": "El split por defecto, las deducciones y las comisiones de canal difieren. Un split más alto en el marketing puede quedar por debajo tras las comisiones de cripto o del procesador: esa brecha es lo que muestra el ranking."
       }
-    ]
+    ],
+    "sponsoredBadge": "Patrocinado",
+    "sponsoredTitle": "Socios destacados",
+    "sponsoredBannerText": "Oferta de socio de {firm}"
   },
   "CalculatorPage": {
     "metaTitle": "Calculadora de pagos",

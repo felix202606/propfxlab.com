@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { FirmFilterBar, type SortMode } from "@/components/FirmFilterBar";
@@ -8,13 +8,14 @@ import { FirmTable } from "@/components/FirmTable";
 import { FirmTabs, type FirmTab } from "@/components/FirmTabs";
 import { COMPARE_EXAMPLE_PROFIT } from "@/lib/compare";
 import {
+  HERO_ACCOUNT_SIZES,
   NET_PROFIT_ACCOUNT,
   firmHasHighlights,
   firmMatchesQuery,
   maxAllocation,
   yearsInOperation,
 } from "@/lib/firm-directory";
-import { HERO_ACCOUNT_SIZES, isPartnerFirm } from "@/lib/offers";
+import { isPartnerFirm, type ListedFirm } from "@/lib/outbound";
 import {
   calculatePayout,
   formatMoney,
@@ -73,9 +74,12 @@ function matchesTab(firm: PropFirm, tab: FirmTab): boolean {
 export function HomeMarketplace({
   firms,
   defunctCount,
+  beforeRankings,
 }: {
-  firms: PropFirm[];
+  firms: ListedFirm[];
   defunctCount: number;
+  /** Sponsored placements, kept above and apart from the calculated ranking. */
+  beforeRankings?: ReactNode;
 }) {
   const t = useTranslations("HomePage");
   const calc = useTranslations("PayoutCalculator");
@@ -118,8 +122,13 @@ export function HomeMarketplace({
         const aWeight = STATUS_WEIGHT[a.firm.status];
         const bWeight = STATUS_WEIGHT[b.firm.status];
         if (aWeight !== bWeight) return aWeight - bWeight;
-        const aPartner = isPartnerFirm(a.firm.slug) ? 0 : 1;
-        const bPartner = isPartnerFirm(b.firm.slug) ? 0 : 1;
+        if (sortMode === "takeHome") {
+          const aOrder = a.firm.sortOrder ?? Number.POSITIVE_INFINITY;
+          const bOrder = b.firm.sortOrder ?? Number.POSITIVE_INFINITY;
+          if (aOrder !== bOrder) return aOrder < bOrder ? -1 : 1;
+        }
+        const aPartner = isPartnerFirm(a.firm) ? 0 : 1;
+        const bPartner = isPartnerFirm(b.firm) ? 0 : 1;
         if (aPartner !== bPartner) return aPartner - bPartner;
         if (sortMode === "highestRated") {
           const aRating = a.firm.rating ?? -1;
@@ -310,6 +319,7 @@ export function HomeMarketplace({
         className="scroll-mt-24 border-y border-slate-800 bg-[#0B0F19]"
       >
         <div className="mx-auto w-full max-w-6xl px-4 py-8">
+        {beforeRankings}
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
