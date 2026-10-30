@@ -28,6 +28,72 @@ import { getFirmRoster, getListedFirm } from "@/lib/firms";
 import { getOutboundLink, type ListedFirm } from "@/lib/outbound";
 import { formatMoney } from "@/lib/payout";
 import type { PropFirm } from "@/lib/schema";
+import {
+  compactMoney,
+  fitDescription,
+  fitTitle,
+  seoYear,
+  titleText,
+} from "@/lib/seo-copy";
+
+type CompareTranslator = Awaited<ReturnType<typeof getTranslations<"ComparePage">>>;
+
+function firstPayoutShort(t: CompareTranslator, firm: PropFirm): string {
+  const days = firm.withdrawal.payoutCycle.firstPayoutMinDays;
+  return days === 0
+    ? t("firstPayoutShortDayOne")
+    : t("firstPayoutShortDays", { days });
+}
+
+/** Data-driven numbers shared by the compare title, meta and verdict. */
+function compareFacts(t: CompareTranslator, left: PropFirm, right: PropFirm) {
+  const leftNet = examplePayoutForFirm(left)?.netPayout;
+  const rightNet = examplePayoutForFirm(right)?.netPayout;
+  const hasTakeHome = leftNet != null && rightNet != null;
+  return {
+    left: left.basic.name,
+    right: right.basic.name,
+    year: seoYear(),
+    leftSplit: maxTraderSharePercent(left),
+    rightSplit: maxTraderSharePercent(right),
+    leftFirst: firstPayoutShort(t, left),
+    rightFirst: firstPayoutShort(t, right),
+    hasTakeHome: hasTakeHome ? "yes" : "no",
+    account: formatMoney(COMPARE_ACCOUNT_SIZE, "USD").replace(/\.00$/, ""),
+    profit: formatMoney(COMPARE_EXAMPLE_PROFIT, "USD").replace(/\.00$/, ""),
+    leftTakeHome: hasTakeHome
+      ? formatMoney(Math.round(leftNet), left.calculator.currency).replace(/\.00$/, "")
+      : "",
+    rightTakeHome: hasTakeHome
+      ? formatMoney(Math.round(rightNet), right.calculator.currency).replace(/\.00$/, "")
+      : "",
+  };
+}
+
+function compareDescription(
+  t: CompareTranslator,
+  left: PropFirm,
+  right: PropFirm,
+): string {
+  const facts = {
+    ...compareFacts(t, left, right),
+    account: compactMoney(COMPARE_ACCOUNT_SIZE, "USD"),
+    profit: compactMoney(COMPARE_EXAMPLE_PROFIT, "USD"),
+  };
+  return fitDescription([
+    t("metaDescription", facts),
+    t("metaDescriptionShort", facts),
+  ]);
+}
+
+function compareTitle(t: CompareTranslator, left: PropFirm, right: PropFirm) {
+  const names = { left: left.basic.name, right: right.basic.name, year: seoYear() };
+  return fitTitle([
+    t("metaTitle", names),
+    t("metaTitleShort", names),
+    t("metaTitleMin", names),
+  ]);
+}
 
 /**
  * On-demand compare URLs are ISR-cached after the first hit.
@@ -53,11 +119,9 @@ export async function generateMetadata({
     return { title: t("notFoundMetaTitle") };
   }
   const { left, right } = pair;
-  const title = t("metaTitle", { left: left.basic.name, right: right.basic.name });
-  const description = t("metaDescription", {
-    left: left.basic.name,
-    right: right.basic.name,
-  });
+  const title = compareTitle(t, left, right);
+  const socialTitle = titleText(title);
+  const description = compareDescription(t, left, right);
   return {
     title,
     description,
@@ -65,10 +129,10 @@ export async function generateMetadata({
     openGraph: pageOpenGraph({
       locale,
       pathname: `/compare/${slug}`,
-      title,
+      title: socialTitle,
       description,
     }),
-    twitter: pageTwitter({ title, description }),
+    twitter: pageTwitter({ title: socialTitle, description }),
   };
 }
 
@@ -95,14 +159,12 @@ export default async function ComparePage({
   const rightWinsTakeHome =
     (rightPayout?.netPayout ?? 0) > (leftPayout?.netPayout ?? 0);
 
+  const facts = compareFacts(t, left, right);
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: t("metaTitle", { left: left.basic.name, right: right.basic.name }),
-    description: t("metaDescription", {
-      left: left.basic.name,
-      right: right.basic.name,
-    }),
+    name: titleText(compareTitle(t, left, right)),
+    description: compareDescription(t, left, right),
   };
 
   return (
@@ -139,6 +201,24 @@ export default async function ComparePage({
           })}
         </p>
       </header>
+
+      <aside className="mt-6 rounded-2xl border border-cyan-400/20 bg-gradient-to-br from-cyan-400/10 via-zinc-950 to-emerald-400/10 p-5 shadow-[0_0_40px_-18px_rgba(34,211,238,0.55)] sm:p-6">
+        <p className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-cyan-200">
+          <span aria-hidden>✦</span>
+          {t("insightTitle")}
+        </p>
+        <p className="mt-3 text-base leading-7 text-zinc-100 sm:text-lg">
+          {t("verdictFacts", facts)}
+        </p>
+        <p className="mt-2 text-sm leading-6 text-zinc-300">
+          {t("insightTemplate", {
+            nameA: left.basic.name,
+            reasonA: t(insight.leftReason),
+            nameB: right.basic.name,
+            reasonB: t(insight.rightReason),
+          })}
+        </p>
+      </aside>
 
       <div className="mt-8 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-b from-zinc-900 to-black shadow-[0_0_0_1px_rgba(255,255,255,0.04)]">
         <div className="grid grid-cols-[minmax(7rem,0.9fr)_1fr_1fr] border-b border-white/10 bg-white/[0.03]">
@@ -202,20 +282,6 @@ export default async function ComparePage({
         </CompareRow>
       </div>
 
-      <aside className="mt-8 rounded-2xl border border-cyan-400/20 bg-gradient-to-br from-cyan-400/10 via-zinc-950 to-emerald-400/10 p-5 shadow-[0_0_40px_-18px_rgba(34,211,238,0.55)] sm:p-6">
-        <p className="inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-cyan-200">
-          <span aria-hidden>✦</span>
-          {t("insightTitle")}
-        </p>
-        <p className="mt-3 text-base leading-7 text-zinc-100 sm:text-lg">
-          {t("insightTemplate", {
-            nameA: left.basic.name,
-            reasonA: t(insight.leftReason),
-            nameB: right.basic.name,
-            reasonB: t(insight.rightReason),
-          })}
-        </p>
-      </aside>
 
       <div className="mt-8 grid gap-3 sm:grid-cols-2">
         <ProfileLink firm={left} label={t("readProfile", { name: left.basic.name })} />

@@ -21,6 +21,33 @@ import { getFirmRoster, getListedFirm } from "@/lib/firms";
 import { getOutboundLink } from "@/lib/outbound";
 import { formatMoney } from "@/lib/payout";
 import { toFaqJsonLd } from "@/lib/schema";
+import {
+  featuredComparesForFirm,
+  firmSeoFacts,
+  fitDescription,
+  fitTitle,
+  listFormat,
+  seoYear,
+  titleText,
+  type FirmSeoFacts,
+} from "@/lib/seo-copy";
+
+type FirmTranslator = Awaited<ReturnType<typeof getTranslations<"FirmPage">>>;
+
+function splitLabel(t: FirmTranslator, facts: FirmSeoFacts, range: boolean): string {
+  if (facts.maxSplit > facts.defaultSplit) {
+    return range
+      ? t("splitRange", { percent: facts.defaultSplit, max: facts.maxSplit })
+      : t("splitUpTo", { max: facts.maxSplit });
+  }
+  return t("splitFlat", { percent: facts.defaultSplit });
+}
+
+function firstPayoutLabel(t: FirmTranslator, facts: FirmSeoFacts): string {
+  return facts.firstPayoutDays === 0
+    ? t("firstPayoutDayOne")
+    : t("firstPayoutAfter", { days: facts.firstPayoutDays });
+}
 
 export function generateStaticParams() {
   return getFirmSlugs().map((slug) => ({ slug }));
@@ -35,8 +62,29 @@ export async function generateMetadata({
   if (!firm) {
     return { title: t("notFoundMetaTitle") };
   }
-  const title = t("metaTitle", { name: firm.basic.name });
-  const description = t("metaDescription", { name: firm.basic.name });
+  const facts = firmSeoFacts(firm);
+  const year = seoYear();
+  const split = splitLabel(t, facts, false);
+  const title = fitTitle([
+    t("metaTitle", { name: facts.name, year, split }),
+    t("metaTitleShort", { name: facts.name, year, split }),
+    t("metaTitleMin", { name: facts.name, year }),
+  ]);
+  const descriptionValues = {
+    name: facts.name,
+    year,
+    split: splitLabel(t, facts, true),
+    firstPayout: firstPayoutLabel(t, facts),
+    hasMin: facts.minPayout ? "yes" : "no",
+    minPayout: facts.minPayout ?? "",
+    maxFunding: facts.maxFunding,
+    channels: facts.channelNames.length,
+  };
+  const description = fitDescription([
+    t("metaDescription", descriptionValues),
+    t("metaDescriptionShort", descriptionValues),
+  ]);
+  const socialTitle = titleText(title);
   return {
     title,
     description,
@@ -44,10 +92,10 @@ export async function generateMetadata({
     openGraph: pageOpenGraph({
       locale,
       pathname: `/firm/${slug}`,
-      title,
+      title: socialTitle,
       description,
     }),
-    twitter: pageTwitter({ title, description }),
+    twitter: pageTwitter({ title: socialTitle, description }),
   };
 }
 
@@ -72,6 +120,28 @@ export default async function FirmPage({
   const t = await getTranslations("FirmPage");
   const tCard = await getTranslations("FirmCard");
   const roster = await getFirmRoster();
+  const rosterNames = new Map(roster.map((item) => [item.slug, item.name]));
+  const facts = firmSeoFacts(firm);
+  const introFacts = t("introFacts", {
+    name: facts.name,
+    split: splitLabel(t, facts, true),
+    firstPayout: firstPayoutLabel(t, facts),
+    cadence:
+      facts.intervalDays != null
+        ? t("cadenceEvery", { days: facts.intervalDays })
+        : facts.firstPayoutDays > 0
+          ? t("cadenceOnDemand")
+          : "",
+    hasMin: facts.minPayout ? "yes" : "no",
+    minPayout: facts.minPayout ?? "",
+    minFunding: facts.minFunding,
+    maxFunding: facts.maxFunding,
+    channels: listFormat(locale, facts.channelNames),
+  });
+  const popularCompares = featuredComparesForFirm(
+    firm.slug,
+    roster.map((item) => item.slug),
+  ).filter(([a, b]) => rosterNames.has(a) && rosterNames.has(b));
   const jsonLd = toFaqJsonLd(firm, locale);
   const { funding } = firm.basic;
   const offer = firm.offer;
@@ -140,6 +210,36 @@ export default async function FirmPage({
           )}
         </div>
       </header>
+
+      <p className="mt-6 max-w-3xl text-base leading-7 text-zinc-300">
+        {introFacts}
+      </p>
+
+      {popularCompares.length > 0 ? (
+        <nav
+          aria-label={t("popularComparesHeading", { name: firm.basic.name })}
+          className="mt-5"
+        >
+          <h2 className="text-xs font-medium uppercase tracking-wide text-zinc-500">
+            {t("popularComparesHeading", { name: firm.basic.name })}
+          </h2>
+          <ul className="mt-2 flex flex-wrap gap-2">
+            {popularCompares.map(([a, b]) => (
+              <li key={`${a}-${b}`}>
+                <Link
+                  href={`/compare/${canonicalCompareSlug(a, b)}`}
+                  className="inline-flex rounded-full border border-cyan-400/20 bg-cyan-400/[0.06] px-3 py-1.5 text-xs text-cyan-100 transition-colors hover:border-cyan-400/50 hover:text-white"
+                >
+                  {t("popularCompareLink", {
+                    left: rosterNames.get(a) ?? a,
+                    right: rosterNames.get(b) ?? b,
+                  })}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ) : null}
 
       <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         <Stat

@@ -43,14 +43,22 @@ const nextConfig: NextConfig = {
   },
     async redirects() {
     return [
+      // MyFundedFX (→ SeacrestFunded → Seacrest Markets) is closed: no firm
+      // profile, but it is listed on /defunct (data/closed_firms.json). Send the
+      // old profile URL to its Boneyard card instead of the homepage (soft 404).
       {
         source: "/firm/myfundedfx",
-        destination: "/",
+        destination: "/defunct#myfundedfx",
         permanent: true,
       },
       {
-        source: "/:locale(en|es|cn|tw|th|vi|pt)/firm/myfundedfx",
-        destination: "/:locale",
+        source: "/en/firm/myfundedfx",
+        destination: "/defunct#myfundedfx",
+        permanent: true,
+      },
+      {
+        source: "/:locale(es|cn|tw|th|vi|pt)/firm/myfundedfx",
+        destination: "/:locale/defunct#myfundedfx",
         permanent: true,
       },
       // Bare /firm has no index page; homepage marketplace is the live list.
