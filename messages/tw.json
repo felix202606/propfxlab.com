@@ -119,8 +119,9 @@
     "subtitle": "選擇 Prop Firm，輸入挑戰金額與預計利潤。結果會依該公司的階梯分成、平台扣稅、通道費與最低出金規則即時計算。"
   },
   "FirmPage": {
-    "metaTitle": "{name} 詳情與出金規則",
-    "metaDescription": "{name} 資金規模、提現規則、分成計算器與常見問題。",
+    "metaTitle": "{name} 評測 {year}：{split} 分成與出金規則",
+    "metaDescription": "{name} {year}：利潤分成 {split}，{firstPayout}{hasMin, select, yes {，最低出金 {minPayout}} other {}}，帳戶最高 {maxFunding}，支援 {channels} 種出金方式。附出金規則、收益計算器與常見問題。",
+    "metaDescriptionShort": "{name} {year}：利潤分成 {split}，{firstPayout}{hasMin, select, yes {，最低出金 {minPayout}} other {}}，帳戶最高 {maxFunding}。",
     "notFoundMetaTitle": "找不到公司",
     "website": "官網",
     "foundedOn": "成立於 {date}",
@@ -160,11 +161,24 @@
     "warningHeading": "禁忌規則與風險提醒",
     "warningIntro": "所有帳戶均為模擬資金交易，規則可能隨時調整。購買或申請出金前，請務必以公司官網當前條款為準。",
     "compareHeading": "對比 {name}",
-    "compareWith": "對 {name}"
+    "compareWith": "對 {name}",
+    "metaTitleShort": "{name} 評測 {year}：{split} 分成",
+    "metaTitleMin": "{name} 評測 {year}",
+    "splitUpTo": "最高 {max}%",
+    "splitFlat": "{percent}%",
+    "splitRange": "{percent}%（最高 {max}%）",
+    "firstPayoutDayOne": "首日即可首次出金",
+    "firstPayoutAfter": "{days} 天後可首次出金",
+    "cadenceEvery": "，之後每 {days} 天一次",
+    "cadenceOnDemand": "，之後按需出金",
+    "introFacts": "{name} 給資助交易員的利潤分成為 {split}，{firstPayout}{cadence}。{hasMin, select, yes {最低出金 {minPayout}。} other {}}帳戶規模 {minFunding} 至 {maxFunding}，出金方式包括 {channels}。",
+    "popularComparesHeading": "{name} 熱門對比",
+    "popularCompareLink": "{left} vs {right}：出金、分成與回撤"
   },
   "ComparePage": {
-    "metaTitle": "{left} vs {right} — Prop Firm 對比",
-    "metaDescription": "對比 {left} 與 {right} 在 10 萬美元帳戶上的到手利潤、分成、首次出金等待期、出金通道與回撤規則。",
+    "metaTitle": "{left} vs {right}（{year}）：出金、分成與回撤對比",
+    "metaDescription": "{left} vs {right}（{year}）：最高分成 {leftSplit}% 對 {rightSplit}%，首次出金 {leftFirst} 對 {rightFirst}{hasTakeHome, select, yes {；{account} 帳戶獲利 {profit} 到手 {leftTakeHome} 對 {rightTakeHome}} other {}}。附回撤規則與結論。",
+    "metaDescriptionShort": "{left} vs {right}：最高分成 {leftSplit}% 對 {rightSplit}%，首次出金 {leftFirst} 對 {rightFirst}，附到手收益與回撤規則。",
     "notFoundMetaTitle": "找不到此次對比",
     "eyebrow": "Prop Firm 兩兩對比",
     "vs": "VS",
@@ -180,7 +194,7 @@
     "drawdownFallback": "請以該平台官網的日虧與總虧損上限為準。",
     "visitWebsite": "前往 {name} 官網",
     "noPartnerPromo": "獨立評測，暫無合作優惠碼",
-    "insightTitle": "AI 對比總結",
+    "insightTitle": "快速結論",
     "insightTemplate": "更看重 {reasonA} 選 {nameA}；想要 {reasonB} 則選 {nameB}。",
     "reasonReputation": "穩健口碑",
     "reasonHigherSplit": "更高分成",
@@ -189,7 +203,12 @@
     "reasonHigherTakeHome": "更高預估到手",
     "readProfile": "查看 {name} 評測",
     "relatedHeading": "更多 {name} 對比",
-    "backToCompare": "全部對比"
+    "backToCompare": "全部對比",
+    "metaTitleShort": "{left} vs {right}（{year}）：出金與分成",
+    "metaTitleMin": "{left} vs {right}（{year}）",
+    "firstPayoutShortDayOne": "首日",
+    "firstPayoutShortDays": "{days} 天後",
+    "verdictFacts": "{left} 最高分成 {leftSplit}%，首次出金：{leftFirst}；{right} 最高分成 {rightSplit}%，首次出金：{rightFirst}。{hasTakeHome, select, yes {{account} 帳戶獲利 {profit} 時，預計到手 {leftTakeHome} 對 {rightTakeHome}。} other {}}"
   },
   "CompareIndex": {
     "metaTitle": "全部 Prop Firm 對比",
@@ -290,8 +309,8 @@
     "adjacentNav": "上一篇和下一篇"
   },
   "FaqPage": {
-    "metaTitle": "Prop Firm FAQ — 出金、安全與交易規則",
-    "metaDescription": "解答到手金額、隱藏出金費、首次出金等待期、安全徽章、一致性規則和優惠碼等 funded 交易員常見問題。",
+    "metaTitle": "Prop Firm 常見問題 {year}：出金、費用與交易規則",
+    "metaDescription": "給資助交易員的直白解答：到手收益怎麼算、出金隱藏費用、首次與後續出金差異、一致性規則、新聞交易與優惠碼是否影響分成。",
     "title": "常見問題",
     "subtitle": "出金計算、平台安全與交易規則，寫給正在對比 Challenge 的 funded 交易員。",
     "listHeading": "問答",

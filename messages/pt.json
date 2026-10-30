@@ -119,8 +119,9 @@
     "subtitle": "Escolha uma prop firm, informe o valor do challenge e o lucro esperado. O resultado é calculado instantaneamente com base na divisão por níveis, no imposto retido pela plataforma, na taxa da processadora de pagamentos e no saque mínimo dessa firma."
   },
   "FirmPage": {
-    "metaTitle": "{name}: detalhes e regras de pagamento",
-    "metaDescription": "{name}: capital disponível, regras de saque, calculadora de pagamento e perguntas frequentes.",
+    "metaTitle": "{name} review {year}: divisão {split} e saques",
+    "metaDescription": "{name} {year}: divisão {split}, {firstPayout}{hasMin, select, yes {, saque mínimo {minPayout}} other {}}, contas até {maxFunding}, {channels, plural, one {# método de saque} other {# métodos de saque}}. Regras e FAQ.",
+    "metaDescriptionShort": "{name} {year}: divisão {split}, {firstPayout}{hasMin, select, yes {, saque mínimo {minPayout}} other {}}, contas até {maxFunding}.",
     "notFoundMetaTitle": "Firma não encontrada",
     "website": "Site",
     "foundedOn": "Fundada em {date}",
@@ -160,11 +161,24 @@
     "warningHeading": "Regras e restrições a observar",
     "warningIntro": "Todas as contas operam com capital simulado e as regras podem mudar sem aviso prévio. Sempre confirme os termos vigentes diretamente no site oficial da firma antes de comprar ou solicitar um saque.",
     "compareHeading": "Comparar {name}",
-    "compareWith": "vs {name}"
+    "compareWith": "vs {name}",
+    "metaTitleShort": "{name} review {year}: divisão {split}",
+    "metaTitleMin": "{name} review {year}",
+    "splitUpTo": "até {max}%",
+    "splitFlat": "{percent}%",
+    "splitRange": "{percent}% (até {max}%)",
+    "firstPayoutDayOne": "primeiro saque desde o primeiro dia",
+    "firstPayoutAfter": "primeiro saque após {days, plural, one {# dia} other {# dias}}",
+    "cadenceEvery": " e depois a cada {days, plural, one {dia} other {# dias}}",
+    "cadenceOnDemand": " e depois sob demanda",
+    "introFacts": "A {name} paga aos traders financiados uma divisão de lucros de {split}, com {firstPayout}{cadence}.{hasMin, select, yes { O saque mínimo é de {minPayout}.} other {}} As contas vão de {minFunding} a {maxFunding} e os saques são enviados via {channels}.",
+    "popularComparesHeading": "Comparações populares da {name}",
+    "popularCompareLink": "{left} vs {right}: saques, divisão e drawdown"
   },
   "ComparePage": {
-    "metaTitle": "{left} vs {right} — Comparação de prop firms",
-    "metaDescription": "Compare o valor líquido de {left} e {right} numa conta de 100 mil dólares, o split, a espera do primeiro saque, os canais de pagamento e as regras de drawdown.",
+    "metaTitle": "{left} vs {right} ({year}): saques, divisão e drawdown",
+    "metaDescription": "{left} vs {right}: divisão até {leftSplit}% vs {rightSplit}%, primeiro saque {leftFirst} vs {rightFirst}{hasTakeHome, select, yes {; {profit} em {account} rendem {leftTakeHome} vs {rightTakeHome}} other {}}. Drawdown e veredito.",
+    "metaDescriptionShort": "{left} vs {right}: divisão até {leftSplit}% vs {rightSplit}%, primeiro saque {leftFirst} vs {rightFirst}, líquido estimado e regras de drawdown.",
     "notFoundMetaTitle": "Comparação não encontrada",
     "eyebrow": "Comparação de prop firms",
     "vs": "VS",
@@ -180,7 +194,7 @@
     "drawdownFallback": "Confirme os limites de perda diária e total no site oficial da firma.",
     "visitWebsite": "Visitar {name}",
     "noPartnerPromo": "Listagem independente — sem cupom parceiro",
-    "insightTitle": "Conclusão da comparação",
+    "insightTitle": "Veredito rápido",
     "insightTemplate": "Escolha {nameA} se prioriza {reasonA}; escolha {nameB} se quiser {reasonB}.",
     "reasonReputation": "reputação sólida",
     "reasonHigherSplit": "um split de lucro mais alto",
@@ -189,7 +203,12 @@
     "reasonHigherTakeHome": "um líquido estimado mais alto",
     "readProfile": "Ler a análise de {name}",
     "relatedHeading": "Mais comparações de {name}",
-    "backToCompare": "Todas as comparações"
+    "backToCompare": "Todas as comparações",
+    "metaTitleShort": "{left} vs {right} ({year}): saques e divisão",
+    "metaTitleMin": "{left} vs {right} ({year})",
+    "firstPayoutShortDayOne": "no dia 1",
+    "firstPayoutShortDays": "após {days, plural, one {# dia} other {# dias}}",
+    "verdictFacts": "A {left} paga até {leftSplit}% com o primeiro saque {leftFirst}; a {right} paga até {rightSplit}% com o primeiro saque {rightFirst}.{hasTakeHome, select, yes { Com {profit} de lucro numa conta de {account}, o líquido estimado é {leftTakeHome} vs {rightTakeHome}.} other {}}"
   },
   "CompareIndex": {
     "metaTitle": "Todas as comparações de prop firms",
@@ -290,8 +309,8 @@
     "adjacentNav": "Artigos anterior e seguinte"
   },
   "FaqPage": {
-    "metaTitle": "FAQ de Prop Firms — Saques, segurança e regras",
-    "metaDescription": "Respostas sobre valor líquido, taxas ocultas, primeiro saque, selos de segurança, consistency rule e cupons para traders funded.",
+    "metaTitle": "FAQ de prop firms {year}: saques, taxas e regras",
+    "metaDescription": "Respostas diretas para traders financiados: como o lucro líquido é calculado, taxas ocultas de saque, primeiro saque vs seguintes e regras de consistência.",
     "title": "Perguntas frequentes",
     "subtitle": "Cálculo de saque, segurança das firmas e regras de trading para quem compara challenges.",
     "listHeading": "Respostas",

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { fitTitle, seoYear, titleText } from "@/lib/seo-copy";
 import {
   pageAlternates,
   pageOpenGraph,
@@ -14,7 +15,8 @@ export async function generateMetadata({
 }: PageProps<"/[locale]/faq">): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "FaqPage" });
-  const title = t("metaTitle");
+  const title = fitTitle([t("metaTitle", { year: seoYear() })]);
+  const socialTitle = titleText(title);
   const description = t("metaDescription");
   return {
     title,
@@ -23,10 +25,10 @@ export async function generateMetadata({
     openGraph: pageOpenGraph({
       locale,
       pathname: "/faq",
-      title,
+      title: socialTitle,
       description,
     }),
-    twitter: pageTwitter({ title, description }),
+    twitter: pageTwitter({ title: socialTitle, description }),
   };
 }
 
