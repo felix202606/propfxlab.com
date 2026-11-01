@@ -8,6 +8,7 @@ import { getTranslations } from "next-intl/server";
 import { DefunctFirmCard } from "@/components/DefunctFirmCard";
 import { SaferAlternatives } from "@/components/SaferAlternatives";
 import { getAllDefunctFirms } from "@/lib/data";
+import { getFirmRoster } from "@/lib/firms";
 
 export async function generateMetadata({
   params,
@@ -36,6 +37,7 @@ export default async function DefunctPage({
   const { locale } = await params;
   const t = await getTranslations("DefunctPage");
   const firms = getAllDefunctFirms();
+  const listedSlugs = new Set((await getFirmRoster()).map((firm) => firm.slug));
 
   return (
     <main className="mx-auto w-full max-w-6xl px-4 py-10">
@@ -67,7 +69,15 @@ export default async function DefunctPage({
           <ul className="mt-4 grid gap-4 sm:grid-cols-2">
             {firms.map((firm) => (
               <li key={firm.slug}>
-                <DefunctFirmCard firm={firm} locale={locale} />
+                <DefunctFirmCard
+                  firm={firm}
+                  locale={locale}
+                  hasProfile={
+                    firm.relatedFirmSlug
+                      ? listedSlugs.has(firm.relatedFirmSlug)
+                      : false
+                  }
+                />
               </li>
             ))}
           </ul>

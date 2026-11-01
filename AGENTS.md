@@ -15,6 +15,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 1. `messages/{en,es,cn,tw,th,vi,pt}.json` 七语 key 对齐，禁止只写一种语言。
 2. 可索引 URL 稳定 200，不因 cookie / `Accept-Language` 互跳。保持 `localeDetection: false`、`localeCookie: false`。
 3. 新路由写入 `sitemap.ts` 七语 hreflang，并有站内链接。对比页必须是 C(n,2) 全量矩阵，不是 6 张热门卡。
+   - **例外（sitemap 精简 Option A）**：经 SEO 审查提出、待 felix 在 PR review 中批准。对比页仍是 C(n,2) 全量矩阵、七语全部 200 可索引、内链与 canonical/hreflang 不变；只是 XML sitemap 里 **非 en（es cn tw th vi pt）** 的 `/compare/*` 与 `/news/*` 只输出 `data/sitemap-keep-slugs.json` 里的 slug（新闻另加 publishedAt 30 天内）。en 全部 URL、七语静态页、七语 `/firm/*` 不受影响。keep list 每月按 GSC 数据重生成（见该 JSON 的 `_comment`）。
 
 详见 `.cursor/rules/traffic-i18n-seo.mdc`。流量是核心，收录失败则改动不算完成。
 

@@ -18,15 +18,21 @@ const SEVERITY_BADGE: Record<DefunctFirm["severity"], string> = {
 export function DefunctFirmCard({
   firm,
   locale,
+  hasProfile = false,
 }: {
   firm: DefunctFirm;
   locale: string;
+  /** Only link to /firm/[slug] when that profile is actually listed (not redirected). */
+  hasProfile?: boolean;
 }) {
   const t = useTranslations("DefunctPage");
   const { reason } = getDefunctLocaleCopy(firm, locale);
 
   return (
-    <article className="flex h-full flex-col rounded-2xl border border-red-400/20 bg-gradient-to-b from-red-950/25 via-zinc-950 to-black p-5 shadow-[0_0_0_1px_rgba(248,113,113,0.08)]">
+    <article
+      id={firm.slug}
+      className="flex h-full scroll-mt-24 flex-col rounded-2xl border border-red-400/20 bg-gradient-to-b from-red-950/25 via-zinc-950 to-black p-5 shadow-[0_0_0_1px_rgba(248,113,113,0.08)]"
+    >
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0">
           <div className="flex items-center gap-2">
@@ -60,7 +66,7 @@ export function DefunctFirmCard({
       <p className="mt-3 flex-1 text-sm leading-6 text-zinc-300">{reason}</p>
 
       <div className="mt-4 flex flex-wrap gap-2">
-        {firm.relatedFirmSlug ? (
+        {firm.relatedFirmSlug && hasProfile ? (
           <Link
             href={`/firm/${firm.relatedFirmSlug}`}
             className="inline-flex items-center justify-center rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-zinc-300 transition-colors hover:border-amber-400/30 hover:text-amber-200"
