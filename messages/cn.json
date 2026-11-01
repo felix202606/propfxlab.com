@@ -119,8 +119,9 @@
     "subtitle": "选择 Prop Firm，输入挑战金额与预计利润。结果会按该公司的阶梯分成、平台扣税、通道费和最低出金规则即时计算。"
   },
   "FirmPage": {
-    "metaTitle": "{name} 详情与出金规则",
-    "metaDescription": "{name} 资金规模、提现规则、分成计算器与常见问题。",
+    "metaTitle": "{name} 测评 {year}：{split} 分成与出金规则",
+    "metaDescription": "{name} {year}：利润分成 {split}，{firstPayout}{hasMin, select, yes {，最低出金 {minPayout}} other {}}，账户最高 {maxFunding}，支持 {channels} 种出金方式。附出金规则、收益计算器与常见问题。",
+    "metaDescriptionShort": "{name} {year}：利润分成 {split}，{firstPayout}{hasMin, select, yes {，最低出金 {minPayout}} other {}}，账户最高 {maxFunding}。",
     "notFoundMetaTitle": "公司未找到",
     "website": "官网",
     "foundedOn": "成立于 {date}",
@@ -160,11 +161,24 @@
     "warningHeading": "禁忌规则与风险提醒",
     "warningIntro": "所有账户均为模拟资金交易，规则可能随时调整。购买或申请出金前，请务必以公司官网当前条款为准。",
     "compareHeading": "对比 {name}",
-    "compareWith": "对 {name}"
+    "compareWith": "对 {name}",
+    "metaTitleShort": "{name} 测评 {year}：{split} 分成",
+    "metaTitleMin": "{name} 测评 {year}",
+    "splitUpTo": "最高 {max}%",
+    "splitFlat": "{percent}%",
+    "splitRange": "{percent}%（最高 {max}%）",
+    "firstPayoutDayOne": "首日即可首次出金",
+    "firstPayoutAfter": "{days} 天后可首次出金",
+    "cadenceEvery": "，之后每 {days} 天一次",
+    "cadenceOnDemand": "，之后按需出金",
+    "introFacts": "{name} 给资助交易员的利润分成为 {split}，{firstPayout}{cadence}。{hasMin, select, yes {最低出金 {minPayout}。} other {}}账户规模 {minFunding} 至 {maxFunding}，出金方式包括 {channels}。",
+    "popularComparesHeading": "{name} 热门对比",
+    "popularCompareLink": "{left} vs {right}：出金、分成与回撤"
   },
   "ComparePage": {
-    "metaTitle": "{left} vs {right} — Prop Firm 对比",
-    "metaDescription": "对比 {left} 与 {right} 在 10 万美元账户上的到手利润、分成、首次出金等待期、出金通道与回撤规则。",
+    "metaTitle": "{left} vs {right}（{year}）：出金、分成与回撤对比",
+    "metaDescription": "{left} vs {right}（{year}）：最高分成 {leftSplit}% 对 {rightSplit}%，首次出金 {leftFirst} 对 {rightFirst}{hasTakeHome, select, yes {；{account} 账户盈利 {profit} 到手 {leftTakeHome} 对 {rightTakeHome}} other {}}。附回撤规则与结论。",
+    "metaDescriptionShort": "{left} vs {right}：最高分成 {leftSplit}% 对 {rightSplit}%，首次出金 {leftFirst} 对 {rightFirst}，附到手收益与回撤规则。",
     "notFoundMetaTitle": "未找到该对比",
     "eyebrow": "Prop Firm 两两对比",
     "vs": "VS",
@@ -180,7 +194,7 @@
     "drawdownFallback": "请以该平台官网的日亏与总亏损上限为准。",
     "visitWebsite": "前往 {name} 官网",
     "noPartnerPromo": "独立评测，暂无合作优惠码",
-    "insightTitle": "AI 对比总结",
+    "insightTitle": "快速结论",
     "insightTemplate": "更看重 {reasonA} 选 {nameA}；想要 {reasonB} 则选 {nameB}。",
     "reasonReputation": "稳健口碑",
     "reasonHigherSplit": "更高分成",
@@ -189,7 +203,12 @@
     "reasonHigherTakeHome": "更高预估到手",
     "readProfile": "查看 {name} 评测",
     "relatedHeading": "更多 {name} 对比",
-    "backToCompare": "全部对比"
+    "backToCompare": "全部对比",
+    "metaTitleShort": "{left} vs {right}（{year}）：出金与分成",
+    "metaTitleMin": "{left} vs {right}（{year}）",
+    "firstPayoutShortDayOne": "首日",
+    "firstPayoutShortDays": "{days} 天后",
+    "verdictFacts": "{left} 最高分成 {leftSplit}%，首次出金：{leftFirst}；{right} 最高分成 {rightSplit}%，首次出金：{rightFirst}。{hasTakeHome, select, yes {{account} 账户盈利 {profit} 时，预计到手 {leftTakeHome} 对 {rightTakeHome}。} other {}}"
   },
   "CompareIndex": {
     "metaTitle": "全部 Prop Firm 对比",
@@ -290,8 +309,8 @@
     "adjacentNav": "上一篇和下一篇"
   },
   "FaqPage": {
-    "metaTitle": "Prop Firm FAQ — 出金、安全与交易规则",
-    "metaDescription": "解答到手金额、隐藏出金费、首次出金等待期、安全徽章、一致性规则和优惠码等 funded 交易员常见问题。",
+    "metaTitle": "Prop Firm 常见问题 {year}：出金、费用与交易规则",
+    "metaDescription": "给资助交易员的直白解答：到手收益怎么算、出金隐藏费用、首次与后续出金区别、一致性规则、新闻交易与优惠码是否影响分成。",
     "title": "常见问题",
     "subtitle": "出金计算、平台安全与交易规则，写给正在对比 Challenge 的 funded 交易员。",
     "listHeading": "问答",

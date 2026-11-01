@@ -119,8 +119,9 @@
     "subtitle": "เลือก Prop Firm กรอกจำนวนเงิน Challenge และกำไรที่คาดหวัง ระบบจะคำนวณทันทีตามสัดส่วนแบ่งกำไรแบบขั้นบันได ภาษีของแพลตฟอร์ม ค่าธรรมเนียมช่องทางชำระเงิน และยอดถอนขั้นต่ำของบริษัทนั้น"
   },
   "FirmPage": {
-    "metaTitle": "{name} รายละเอียดและกฎการถอนเงิน",
-    "metaDescription": "{name} ขนาดทุน กฎการถอนเงิน เครื่องคำนวณการถอนเงิน และคำถามที่พบบ่อย",
+    "metaTitle": "รีวิว {name} {year}: ส่วนแบ่ง {split} และกฎถอนเงิน",
+    "metaDescription": "{name} {year}: ส่วนแบ่งกำไร {split}, {firstPayout}{hasMin, select, yes {, ถอนขั้นต่ำ {minPayout}} other {}}, บัญชีสูงสุด {maxFunding}, ช่องทางถอน {channels} ช่องทาง พร้อมกฎและ FAQ",
+    "metaDescriptionShort": "{name} {year}: ส่วนแบ่งกำไร {split}, {firstPayout}{hasMin, select, yes {, ถอนขั้นต่ำ {minPayout}} other {}}, บัญชีสูงสุด {maxFunding}",
     "notFoundMetaTitle": "ไม่พบบริษัทนี้",
     "website": "เว็บไซต์",
     "foundedOn": "ก่อตั้งเมื่อ {date}",
@@ -160,11 +161,24 @@
     "warningHeading": "กฎและข้อจำกัดที่ควรระวัง",
     "warningIntro": "ทุกบัญชีเทรดด้วยทุนจำลอง และกฎอาจเปลี่ยนแปลงได้โดยไม่แจ้งล่วงหน้า โปรดตรวจสอบเงื่อนไขล่าสุดจากเว็บไซต์ทางการของบริษัทก่อนซื้อหรือขอถอนเงินเสมอ",
     "compareHeading": "เปรียบเทียบ {name}",
-    "compareWith": "vs {name}"
+    "compareWith": "vs {name}",
+    "metaTitleShort": "รีวิว {name} {year}: ส่วนแบ่ง {split}",
+    "metaTitleMin": "รีวิว {name} {year}",
+    "splitUpTo": "สูงสุด {max}%",
+    "splitFlat": "{percent}%",
+    "splitRange": "{percent}% (สูงสุด {max}%)",
+    "firstPayoutDayOne": "ถอนครั้งแรกได้ตั้งแต่วันแรก",
+    "firstPayoutAfter": "ถอนครั้งแรกได้หลัง {days} วัน",
+    "cadenceEvery": " จากนั้นทุก {days} วัน",
+    "cadenceOnDemand": " จากนั้นถอนได้ตามต้องการ",
+    "introFacts": "{name} ให้ส่วนแบ่งกำไรแก่เทรดเดอร์ที่ได้รับทุน {split} โดย{firstPayout}{cadence}{hasMin, select, yes { ยอดถอนขั้นต่ำคือ {minPayout}} other {}} ขนาดบัญชีตั้งแต่ {minFunding} ถึง {maxFunding} และจ่ายเงินผ่าน {channels}",
+    "popularComparesHeading": "การเปรียบเทียบยอดนิยมของ {name}",
+    "popularCompareLink": "{left} vs {right}: การถอน ส่วนแบ่ง และ drawdown"
   },
   "ComparePage": {
-    "metaTitle": "{left} vs {right} — เปรียบเทียบ Prop Firm",
-    "metaDescription": "เปรียบเทียบยอดรับสุทธิของ {left} และ {right} ในบัญชี 100,000 ดอลลาร์ สัดส่วนแบ่งกำไร เวลารอถอนครั้งแรก ช่องทางถอน และกฎ drawdown",
+    "metaTitle": "{left} vs {right} ({year}): การถอน ส่วนแบ่ง และ Drawdown",
+    "metaDescription": "{left} vs {right}: ส่วนแบ่งสูงสุด {leftSplit}% vs {rightSplit}%, ถอนครั้งแรก{leftFirst} vs {rightFirst}{hasTakeHome, select, yes {, กำไร {profit} บนบัญชี {account} ได้จริง {leftTakeHome} vs {rightTakeHome}} other {}} พร้อมกฎ drawdown",
+    "metaDescriptionShort": "{left} vs {right}: ส่วนแบ่งสูงสุด {leftSplit}% vs {rightSplit}%, ถอนครั้งแรก{leftFirst} vs {rightFirst} พร้อมรายได้สุทธิและกฎ drawdown",
     "notFoundMetaTitle": "ไม่พบการเปรียบเทียบนี้",
     "eyebrow": "เปรียบเทียบ Prop Firm",
     "vs": "VS",
@@ -180,7 +194,7 @@
     "drawdownFallback": "โปรดยืนยันเพดานขาดทุนรายวันและรวมจากเว็บไซต์ทางการของบริษัท",
     "visitWebsite": "ไปที่ {name}",
     "noPartnerPromo": "รายการอิสระ — ไม่มีโค้ดพาร์ทเนอร์",
-    "insightTitle": "สรุปเปรียบเทียบโดย AI",
+    "insightTitle": "สรุปสั้น",
     "insightTemplate": "เลือก {nameA} หากคุณให้ความสำคัญกับ {reasonA} เลือก {nameB} หากคุณต้องการ {reasonB}",
     "reasonReputation": "ชื่อเสียงที่มั่นคง",
     "reasonHigherSplit": "สัดส่วนแบ่งกำไรที่สูงกว่า",
@@ -189,7 +203,12 @@
     "reasonHigherTakeHome": "ยอดรับสุทธิโดยประมาณที่สูงกว่า",
     "readProfile": "อ่านรีวิว {name}",
     "relatedHeading": "การเปรียบเทียบ {name} เพิ่มเติม",
-    "backToCompare": "การเปรียบเทียบทั้งหมด"
+    "backToCompare": "การเปรียบเทียบทั้งหมด",
+    "metaTitleShort": "{left} vs {right} ({year}): การถอนและส่วนแบ่ง",
+    "metaTitleMin": "{left} vs {right} ({year})",
+    "firstPayoutShortDayOne": "วันแรก",
+    "firstPayoutShortDays": "หลัง {days} วัน",
+    "verdictFacts": "{left} ให้ส่วนแบ่งสูงสุด {leftSplit}% ถอนครั้งแรก{leftFirst}; {right} ให้สูงสุด {rightSplit}% ถอนครั้งแรก{rightFirst}{hasTakeHome, select, yes { เมื่อกำไร {profit} บนบัญชี {account} รายได้สุทธิโดยประมาณคือ {leftTakeHome} vs {rightTakeHome}} other {}}"
   },
   "CompareIndex": {
     "metaTitle": "เปรียบเทียบ Prop Firm ทั้งหมด",
@@ -290,8 +309,8 @@
     "adjacentNav": "บทความก่อนหน้าและถัดไป"
   },
   "FaqPage": {
-    "metaTitle": "FAQ Prop Firm — การถอน ความปลอดภัย และกฎการเทรด",
-    "metaDescription": "คำตอบเรื่องยอดสุทธิ ค่าธรรมเนียมแอบแฝง รอรอบแรก สถานะความปลอดภัย กฎ Consistency และโค้ดส่วนลด สำหรับเทรดเดอร์ที่ได้รับทุน",
+    "metaTitle": "FAQ Prop Firm {year}: การถอน ค่าธรรมเนียม และกฎการเทรด",
+    "metaDescription": "คำตอบตรงประเด็นสำหรับเทรดเดอร์ที่ได้รับทุน: คำนวณรายได้สุทธิอย่างไร ค่าธรรมเนียมถอนแฝง การถอนครั้งแรกกับครั้งถัดไป กฎ consistency การเทรดข่าว และโค้ดส่วนลด",
     "title": "คำถามที่พบบ่อย",
     "subtitle": "การคำนวณถอน ความปลอดภัยของแพลตฟอร์ม และกฎการเทรด สำหรับคนที่กำลังเปรียบเทียบ Challenge",
     "listHeading": "คำตอบ",

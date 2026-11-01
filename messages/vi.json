@@ -119,8 +119,9 @@
     "subtitle": "Chọn một prop firm, nhập số tiền Challenge và lợi nhuận dự kiến. Kết quả được tính ngay theo tỷ lệ chia lợi nhuận theo bậc, thuế của nền tảng, phí xử lý thanh toán và quy định rút tối thiểu của công ty đó."
   },
   "FirmPage": {
-    "metaTitle": "{name}: Chi tiết và quy định rút tiền",
-    "metaDescription": "{name}: quy mô vốn, quy định rút tiền, máy tính rút tiền và câu hỏi thường gặp.",
+    "metaTitle": "Đánh giá {name} {year}: chia lợi nhuận {split}",
+    "metaDescription": "{name} {year}: chia lợi nhuận {split}, {firstPayout}{hasMin, select, yes {, rút tối thiểu {minPayout}} other {}}, tài khoản tới {maxFunding}, {channels} phương thức rút. Quy định & FAQ.",
+    "metaDescriptionShort": "{name} {year}: chia lợi nhuận {split}, {firstPayout}{hasMin, select, yes {, rút tối thiểu {minPayout}} other {}}, tài khoản tới {maxFunding}.",
     "notFoundMetaTitle": "Không tìm thấy công ty",
     "website": "Trang web",
     "foundedOn": "Thành lập ngày {date}",
@@ -160,11 +161,24 @@
     "warningHeading": "Quy định và hạn chế cần lưu ý",
     "warningIntro": "Tất cả tài khoản đều giao dịch bằng vốn mô phỏng và quy định có thể thay đổi mà không cần báo trước. Luôn xác nhận điều khoản hiện tại trực tiếp trên trang web chính thức của công ty trước khi mua hoặc yêu cầu rút tiền.",
     "compareHeading": "So sánh {name}",
-    "compareWith": "vs {name}"
+    "compareWith": "vs {name}",
+    "metaTitleShort": "Đánh giá {name} {year}: chia {split}",
+    "metaTitleMin": "Đánh giá {name} {year}",
+    "splitUpTo": "tới {max}%",
+    "splitFlat": "{percent}%",
+    "splitRange": "{percent}% (tối đa {max}%)",
+    "firstPayoutDayOne": "rút lần đầu ngay từ ngày đầu tiên",
+    "firstPayoutAfter": "rút lần đầu sau {days} ngày",
+    "cadenceEvery": ", sau đó mỗi {days} ngày",
+    "cadenceOnDemand": ", sau đó rút theo yêu cầu",
+    "introFacts": "{name} chia cho trader được cấp vốn {split} lợi nhuận, {firstPayout}{cadence}.{hasMin, select, yes { Mức rút tối thiểu là {minPayout}.} other {}} Quy mô tài khoản từ {minFunding} đến {maxFunding}, tiền được chi trả qua {channels}.",
+    "popularComparesHeading": "So sánh phổ biến về {name}",
+    "popularCompareLink": "{left} vs {right}: rút tiền, chia lợi nhuận và drawdown"
   },
   "ComparePage": {
-    "metaTitle": "{left} vs {right} — So sánh Prop Firm",
-    "metaDescription": "So sánh số tiền thực nhận của {left} và {right} trên tài khoản 100.000 USD, tỷ lệ chia, thời gian chờ lần rút đầu, kênh rút tiền và quy tắc drawdown.",
+    "metaTitle": "{left} vs {right} ({year}): rút tiền, chia lãi & drawdown",
+    "metaDescription": "{left} vs {right}: chia tới {leftSplit}% vs {rightSplit}%, rút lần đầu {leftFirst} vs {rightFirst}{hasTakeHome, select, yes {; lãi {profit} trên {account} nhận {leftTakeHome} vs {rightTakeHome}} other {}}. Drawdown và kết luận.",
+    "metaDescriptionShort": "{left} vs {right}: chia lợi nhuận tới {leftSplit}% vs {rightSplit}%, rút lần đầu {leftFirst} vs {rightFirst}, tiền thực nhận và quy định drawdown.",
     "notFoundMetaTitle": "Không tìm thấy bản so sánh",
     "eyebrow": "So sánh Prop Firm",
     "vs": "VS",
@@ -180,7 +194,7 @@
     "drawdownFallback": "Hãy xác nhận hạn mức lỗ ngày và tổng lỗ trên trang chính thức của công ty.",
     "visitWebsite": "Truy cập {name}",
     "noPartnerPromo": "Đánh giá độc lập — không có mã đối tác",
-    "insightTitle": "Tóm tắt so sánh bằng AI",
+    "insightTitle": "Kết luận nhanh",
     "insightTemplate": "Chọn {nameA} nếu bạn ưu tiên {reasonA}; chọn {nameB} nếu bạn muốn {reasonB}.",
     "reasonReputation": "uy tín vững chắc",
     "reasonHigherSplit": "tỷ lệ chia lợi nhuận cao hơn",
@@ -189,7 +203,12 @@
     "reasonHigherTakeHome": "số tiền thực nhận ước tính cao hơn",
     "readProfile": "Đọc đánh giá {name}",
     "relatedHeading": "Thêm so sánh của {name}",
-    "backToCompare": "Tất cả so sánh"
+    "backToCompare": "Tất cả so sánh",
+    "metaTitleShort": "{left} vs {right} ({year}): rút tiền & chia lãi",
+    "metaTitleMin": "{left} vs {right} ({year})",
+    "firstPayoutShortDayOne": "ngày đầu",
+    "firstPayoutShortDays": "sau {days} ngày",
+    "verdictFacts": "{left} chia tới {leftSplit}%, rút lần đầu {leftFirst}; {right} chia tới {rightSplit}%, rút lần đầu {rightFirst}.{hasTakeHome, select, yes { Với lãi {profit} trên tài khoản {account}, số tiền thực nhận ước tính là {leftTakeHome} vs {rightTakeHome}.} other {}}"
   },
   "CompareIndex": {
     "metaTitle": "Tất cả so sánh Prop Firm",
@@ -290,8 +309,8 @@
     "adjacentNav": "Bài trước và bài tiếp"
   },
   "FaqPage": {
-    "metaTitle": "FAQ Prop Firm — Rút tiền, an toàn và luật giao dịch",
-    "metaDescription": "Giải đáp tiền thực nhận, phí ẩn, chờ rút lần đầu, huy hiệu an toàn, consistency rule và mã giảm giá cho trader funded.",
+    "metaTitle": "FAQ Prop Firm {year}: rút tiền, phí và luật giao dịch",
+    "metaDescription": "Giải đáp thẳng cho trader được cấp vốn: cách tính tiền thực nhận, phí rút ẩn, lần rút đầu so với các lần sau, luật consistency và giao dịch tin tức.",
     "title": "Câu hỏi thường gặp",
     "subtitle": "Tính payout, an toàn nền tảng và luật giao dịch — dành cho trader đang so sánh challenge.",
     "listHeading": "Câu trả lời",

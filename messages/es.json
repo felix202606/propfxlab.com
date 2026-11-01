@@ -119,8 +119,9 @@
     "subtitle": "Elige una prop firm, introduce el importe del challenge y el beneficio esperado. El resultado se calcula al instante según el reparto por niveles, el impuesto de la plataforma, la comisión del procesador y el pago mínimo de esa firma."
   },
   "FirmPage": {
-    "metaTitle": "{name}: detalles y reglas de pago",
-    "metaDescription": "{name}: capital disponible, reglas de retiro, calculadora de pagos y preguntas frecuentes.",
+    "metaTitle": "{name} opiniones {year}: reparto {split} y pagos",
+    "metaDescription": "{name} {year}: reparto {split}, {firstPayout}{hasMin, select, yes {, pago mínimo {minPayout}} other {}}, cuentas hasta {maxFunding}, {channels, plural, one {# método de pago} other {# métodos de pago}}. Reglas y FAQ.",
+    "metaDescriptionShort": "{name} {year}: reparto {split}, {firstPayout}{hasMin, select, yes {, pago mínimo {minPayout}} other {}}, cuentas hasta {maxFunding}.",
     "notFoundMetaTitle": "Firma no encontrada",
     "website": "Sitio web",
     "foundedOn": "Fundada el {date}",
@@ -160,11 +161,24 @@
     "warningHeading": "Reglas y restricciones a tener en cuenta",
     "warningIntro": "Todas las cuentas operan con capital simulado y las reglas pueden cambiar sin previo aviso. Verifica siempre los términos vigentes directamente en el sitio oficial de la firma antes de comprar o solicitar un retiro.",
     "compareHeading": "Comparar {name}",
-    "compareWith": "vs {name}"
+    "compareWith": "vs {name}",
+    "metaTitleShort": "{name} opiniones {year}: reparto {split}",
+    "metaTitleMin": "{name} opiniones {year}",
+    "splitUpTo": "hasta {max}%",
+    "splitFlat": "{percent}%",
+    "splitRange": "{percent}% (hasta {max}%)",
+    "firstPayoutDayOne": "primer pago desde el día uno",
+    "firstPayoutAfter": "primer pago tras {days, plural, one {# día} other {# días}}",
+    "cadenceEvery": " y luego cada {days, plural, one {día} other {# días}}",
+    "cadenceOnDemand": " y luego bajo demanda",
+    "introFacts": "{name} paga a los traders financiados un reparto de beneficios del {split}, con el {firstPayout}{cadence}.{hasMin, select, yes { El pago mínimo es de {minPayout}.} other {}} Las cuentas van de {minFunding} a {maxFunding} y los pagos se envían por {channels}.",
+    "popularComparesHeading": "Comparativas populares de {name}",
+    "popularCompareLink": "{left} vs {right}: pagos, reparto y drawdown"
   },
   "ComparePage": {
-    "metaTitle": "{left} vs {right} — Comparativa de prop firms",
-    "metaDescription": "Compara el pago neto de {left} y {right} en una cuenta de 100.000 $, el split, la espera del primer payout, los canales de retiro y las reglas de drawdown.",
+    "metaTitle": "{left} vs {right} ({year}): pagos, reparto y drawdown",
+    "metaDescription": "{left} vs {right}: reparto hasta {leftSplit}% vs {rightSplit}%, primer pago {leftFirst} vs {rightFirst}{hasTakeHome, select, yes {; {profit} en {account} dejan {leftTakeHome} vs {rightTakeHome}} other {}}. Drawdown y veredicto.",
+    "metaDescriptionShort": "{left} vs {right}: reparto hasta {leftSplit}% vs {rightSplit}%, primer pago {leftFirst} vs {rightFirst}, neto estimado y reglas de drawdown.",
     "notFoundMetaTitle": "Comparativa no encontrada",
     "eyebrow": "Comparativa de prop firms",
     "vs": "VS",
@@ -180,7 +194,7 @@
     "drawdownFallback": "Confirma los límites de pérdida diaria y total en el sitio oficial de la firma.",
     "visitWebsite": "Visitar {name}",
     "noPartnerPromo": "Listado independiente — sin código partner",
-    "insightTitle": "Conclusión de la comparativa",
+    "insightTitle": "Veredicto rápido",
     "insightTemplate": "Elige {nameA} si priorizas {reasonA}; elige {nameB} si quieres {reasonB}.",
     "reasonReputation": "una reputación sólida",
     "reasonHigherSplit": "un split de beneficios más alto",
@@ -189,7 +203,12 @@
     "reasonHigherTakeHome": "un neto estimado más alto",
     "readProfile": "Leer la reseña de {name}",
     "relatedHeading": "Más comparativas de {name}",
-    "backToCompare": "Todas las comparativas"
+    "backToCompare": "Todas las comparativas",
+    "metaTitleShort": "{left} vs {right} ({year}): pagos y reparto",
+    "metaTitleMin": "{left} vs {right} ({year})",
+    "firstPayoutShortDayOne": "el día 1",
+    "firstPayoutShortDays": "tras {days, plural, one {# día} other {# días}}",
+    "verdictFacts": "{left} paga hasta el {leftSplit}% con el primer pago {leftFirst}; {right} paga hasta el {rightSplit}% con el primer pago {rightFirst}.{hasTakeHome, select, yes { Con {profit} de beneficio en una cuenta de {account}, el neto estimado es {leftTakeHome} vs {rightTakeHome}.} other {}}"
   },
   "CompareIndex": {
     "metaTitle": "Todas las comparativas de prop firms",
@@ -290,8 +309,8 @@
     "adjacentNav": "Artículos anterior y siguiente"
   },
   "FaqPage": {
-    "metaTitle": "FAQ de Prop Firms — Pagos, seguridad y reglas",
-    "metaDescription": "Respuestas sobre pago neto, comisiones ocultas, primer payout, badges de seguridad, consistency rules y códigos promo para traders fondeados.",
+    "metaTitle": "FAQ de prop firms {year}: pagos, comisiones y reglas",
+    "metaDescription": "Respuestas claras para traders financiados: cómo se calcula el neto, comisiones ocultas de retiro, primer pago vs siguientes y reglas de consistencia.",
     "title": "Preguntas frecuentes",
     "subtitle": "Cálculo de pagos, seguridad de las firmas y reglas de trading para quien compara challenges.",
     "listHeading": "Respuestas",

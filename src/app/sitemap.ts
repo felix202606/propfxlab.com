@@ -7,13 +7,33 @@ import {
 import { getFirmRoster } from "@/lib/firms";
 import { getPublishedNewsIndex } from "@/lib/news-cms";
 import { localeMeta, routing } from "@/i18n/routing";
+import sitemapKeepSlugs from "../../data/sitemap-keep-slugs.json";
 
 const BASE_URL = "https://www.propfxlab.com";
 
 /**
+ * Sitemap prune (Option A, slug-level). Exception to the HARD LOCK "full
+ * C(n,2) compare matrix in the sitemap" rule, requested via SEO review and
+ * pending felix's approval in PR review (see AGENTS.md /
+ * .cursor/rules/traffic-i18n-seo.mdc).
+ *
+ * Only the XML sitemap is filtered. Every page stays live, indexable, keeps
+ * its canonical/hreflang and stays internally linked.
+ *  - en URLs, static pages and /firm/* are always emitted (all 7 locales).
+ *  - Non-en /compare/* and /news/* are emitted only when the slug is in
+ *    data/sitemap-keep-slugs.json; news is also emitted when publishedAt is
+ *    within the last NEWS_GRACE_DAYS.
+ */
+const KEEP_COMPARE_SLUGS = new Set<string>(sitemapKeepSlugs.compare);
+const KEEP_NEWS_SLUGS = new Set<string>(sitemapKeepSlugs.news);
+const NEWS_GRACE_DAYS = 30;
+const DAY_MS = 24 * 60 * 60 * 1000;
+
+/**
  * Shard ids for generateSitemaps. Splitting keeps each XML response smaller
  * so cold starts / crawlers are less likely to hit timeouts (single-file 5MB+).
- * All seven locales remain covered — HARD LOCK.
+ * Static and firm shards cover all seven locales — HARD LOCK. Compare and
+ * news shards filter non-en entries through the keep list above.
  */
 const SITEMAP_SHARDS = [
   { id: "static" },
@@ -47,11 +67,16 @@ function localeUrl(locale: string, pathname: string): string {
   return `${BASE_URL}/${locale}${suffix}`;
 }
 
+function isDefaultLocale(locale: string): boolean {
+  return locale === routing.defaultLocale;
+}
+
 function localizedEntries(
   pathname: string,
   lastModified: Date | undefined,
   priority: number,
   changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"] = "weekly",
+  includeLocale: (locale: string) => boolean = () => true,
 ): MetadataRoute.Sitemap {
   const languages: Record<string, string> = {
     "x-default": localeUrl(routing.defaultLocale, pathname),
@@ -60,7 +85,8 @@ function localizedEntries(
     languages[localeMeta[locale].bcp47] = localeUrl(locale, pathname);
   }
 
-  return routing.locales.map((locale) => ({
+  // hreflang alternates keep listing every locale: they point at live pages.
+  return routing.locales.filter(includeLocale).map((locale) => ({
     url: localeUrl(locale, pathname),
     ...(lastModified ? { lastModified } : {}),
     changeFrequency,
@@ -122,11 +148,15 @@ export default async function sitemap(props: {
     const entries: MetadataRoute.Sitemap = [];
     for (let i = 0; i < slugs.length; i += 1) {
       for (let j = i + 1; j < slugs.length; j += 1) {
+        const compareSlug = buildCompareSlug(slugs[i], slugs[j]);
+        const keepAllLocales = KEEP_COMPARE_SLUGS.has(compareSlug);
         entries.push(
           ...localizedEntries(
-            `/compare/${buildCompareSlug(slugs[i], slugs[j])}`,
+            `/compare/${compareSlug}`,
             undefined,
             0.65,
+            "weekly",
+            keepAllLocales ? undefined : isDefaultLocale,
           ),
         );
       }
@@ -136,14 +166,20 @@ export default async function sitemap(props: {
 
   if (id === "news") {
     const news = await getPublishedNewsIndex();
-    return news.flatMap((article) =>
-      localizedEntries(
+    const graceStart = Date.now() - NEWS_GRACE_DAYS * DAY_MS;
+    return news.flatMap((article) => {
+      const published = parseIsoDate(article.publishedAt);
+      const keepAllLocales =
+        KEEP_NEWS_SLUGS.has(article.slug) ||
+        (published !== undefined && published.getTime() >= graceStart);
+      return localizedEntries(
         `/news/${article.slug}`,
-        parseIsoDate(article.publishedAt) ?? parseIsoDate(article.scrapedAt),
+        published ?? parseIsoDate(article.scrapedAt),
         0.6,
         "daily",
-      ),
-    );
+        keepAllLocales ? undefined : isDefaultLocale,
+      );
+    });
   }
 
   console.error(`[sitemap] unknown shard id: ${id}`);
