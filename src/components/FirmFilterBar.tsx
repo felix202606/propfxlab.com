@@ -74,7 +74,10 @@ export function FirmFilterBar({
         />
       </label>
 
-      <div className="flex min-w-0 flex-wrap items-center gap-2">
+      <div className="flex min-w-0 flex-col gap-2 md:flex-row md:flex-wrap md:items-center">
+        {/* Mobile: one horizontally scrollable chip row; md+: wraps as before. */}
+        <div className="relative min-w-0">
+        <div className="-mx-4 flex min-w-0 flex-nowrap items-center gap-2 overflow-x-auto px-4 [scrollbar-width:none] md:mx-0 md:flex-wrap md:overflow-visible md:px-0 [&::-webkit-scrollbar]:hidden">
         {QUICK_FILTERS.map((filter) => {
           const selected = highlights.includes(filter.id);
           return (
@@ -93,8 +96,14 @@ export function FirmFilterBar({
             </button>
           );
         })}
+        </div>
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 -right-4 w-8 bg-gradient-to-l from-[#0B0F19] to-transparent md:hidden"
+        />
+        </div>
 
-        <label className="ml-auto flex items-center gap-2 text-sm">
+        <label className="flex items-center gap-2 self-start text-sm md:ml-auto md:self-auto">
           <span className="hidden text-[11px] font-medium uppercase tracking-wider text-slate-500 sm:inline">
             {t("sortLabel")}
           </span>
