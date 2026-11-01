@@ -4,6 +4,7 @@ import { useMemo, useState, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { FirmFilterBar, type SortMode } from "@/components/FirmFilterBar";
+import { FirmCardList } from "@/components/FirmCardList";
 import { FirmTable } from "@/components/FirmTable";
 import { FirmTabs, type FirmTab } from "@/components/FirmTabs";
 import { COMPARE_EXAMPLE_PROFIT } from "@/lib/compare";
@@ -383,10 +384,19 @@ export function HomeMarketplace({
           <p className="mt-8 text-sm text-slate-500">{t("noResults")}</p>
         ) : (
           <div className="mt-4">
-            <FirmTable
-              rows={visibleList}
-              maxAllocationCap={maxAllocationCap}
-            />
+            {/* Same rows/state for both; only the rendering switches at md. */}
+            <div className="md:hidden">
+              <FirmCardList
+                rows={visibleList}
+                maxAllocationCap={maxAllocationCap}
+              />
+            </div>
+            <div className="hidden md:block">
+              <FirmTable
+                rows={visibleList}
+                maxAllocationCap={maxAllocationCap}
+              />
+            </div>
             {remainingCount > 0 ? (
               <div className="mt-6 flex justify-center">
                 <button

@@ -75,7 +75,8 @@ export function SiteHeader() {
           </div>
         </div>
 
-        <nav className="-mx-1 overflow-x-auto px-1 [scrollbar-width:none] sm:mx-0 sm:overflow-visible sm:px-0 [&::-webkit-scrollbar]:hidden">
+        <div className="relative min-w-0">
+        <nav className="-mx-1 overflow-x-auto px-1 pr-8 [scrollbar-width:none] sm:mx-0 sm:overflow-visible sm:px-0 [&::-webkit-scrollbar]:hidden">
           <div className="flex w-max items-center gap-0.5 rounded-2xl border border-slate-800 bg-slate-950/70 p-1 sm:w-auto">
             {NAV_ITEMS.map((item) => {
               const active = item.match(pathname);
@@ -101,6 +102,12 @@ export function SiteHeader() {
             })}
           </div>
         </nav>
+        {/* Right-edge fade hints that the mobile nav scrolls sideways. */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-[#0B0F19] to-transparent sm:hidden"
+        />
+        </div>
 
         <div className="hidden sm:block">
           <LocaleSwitcher />
