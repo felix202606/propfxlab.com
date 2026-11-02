@@ -1,7 +1,59 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
+import { readFileSync } from "node:fs";
+import path from "node:path";
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
+
+/**
+ * Firm slugs with a live profile (data/firms.json, the same roster the
+ * sitemap firms shard lists). Used to build redirect regexes so a removed
+ * firm's compare URLs only point at profiles that exist.
+ */
+const LIVE_FIRM_SLUGS: string[] = (
+  JSON.parse(
+    readFileSync(path.join(process.cwd(), "data/firms.json"), "utf8"),
+  ) as Array<{ slug: string }>
+)
+  .map((firm) => firm.slug)
+  .filter((slug) => slug !== "myfundedfx" && /^[a-z0-9-]+$/.test(slug));
+const LIVE_FIRM_PATTERN = LIVE_FIRM_SLUGS.join("|");
+
+/**
+ * Atlas Funded was never a listed firm here (not in data/firms.json or
+ * data/closed_firms.json, and still trading), but old /compare/atlas-funded-*
+ * URLs collect search impressions and 404. Send each to the other firm's
+ * profile when that firm is live, otherwise to the compare hub.
+ */
+function removedFirmCompareRedirects(removed: string) {
+  const prefixes: Array<{ source: string; destination: string }> = [
+    { source: "", destination: "" },
+    { source: "/en", destination: "" },
+    { source: "/:locale(es|cn|tw|th|vi|pt)", destination: "/:locale" },
+  ];
+  return prefixes.flatMap(({ source, destination }) => [
+    {
+      source: `${source}/compare/${removed}-vs-:other(${LIVE_FIRM_PATTERN})`,
+      destination: `${destination}/firm/:other`,
+      permanent: true,
+    },
+    {
+      source: `${source}/compare/:other(${LIVE_FIRM_PATTERN})-vs-${removed}`,
+      destination: `${destination}/firm/:other`,
+      permanent: true,
+    },
+    {
+      source: `${source}/compare/${removed}-vs-:rest`,
+      destination: `${destination}/compare`,
+      permanent: true,
+    },
+    {
+      source: `${source}/compare/:rest(.+)-vs-${removed}`,
+      destination: `${destination}/compare`,
+      permanent: true,
+    },
+  ]);
+}
 
 const nextConfig: NextConfig = {
   // ISR / 按需静态化时 serverless 函数必须带上 JSON，否则 readdir 会失败。
@@ -43,6 +95,7 @@ const nextConfig: NextConfig = {
   },
     async redirects() {
     return [
+      ...removedFirmCompareRedirects("atlas-funded"),
       // MyFundedFX (→ SeacrestFunded → Seacrest Markets) is closed: no firm
       // profile, but it is listed on /defunct (data/closed_firms.json). Send the
       // old profile URL to its Boneyard card instead of the homepage (soft 404).

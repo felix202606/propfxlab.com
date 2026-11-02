@@ -177,13 +177,14 @@
   },
   "ComparePage": {
     "metaTitle": "{left} vs {right} ({year}): Payout, Split & Drawdown",
-    "metaDescription": "{left} vs {right}: up to {leftSplit}% vs {rightSplit}% split, first payout {leftFirst} vs {rightFirst}{hasTakeHome, select, yes {; {profit} profit on {account} nets {leftTakeHome} vs {rightTakeHome}} other {}}. Drawdown rules & verdict.",
+    "metaDescription": "{left} vs {right}: {leftSplitRange} vs {rightSplitRange} split, first payout {leftFirst} vs {rightFirst}{hasTakeHome, select, yes {; {profit} profit on {account} nets {leftTakeHome} vs {rightTakeHome}} other {}}. Drawdown rules & verdict.",
     "metaDescriptionShort": "{left} vs {right}: up to {leftSplit}% vs {rightSplit}% profit split, first payout {leftFirst} vs {rightFirst}, take-home and drawdown rules.",
     "notFoundMetaTitle": "Comparison not found",
     "eyebrow": "Prop Firm Comparison",
     "vs": "VS",
     "subtitle": "Side-by-side payout rules using a {account} account and {profit} profit example.",
     "exampleProfitLabel": "Take-home on $100k",
+    "exampleSplitNote": "at {percent}% split",
     "profitSplit": "Profit Split",
     "firstPayout": "First Payout Wait",
     "channels": "Payout Channels",
@@ -208,7 +209,7 @@
     "metaTitleMin": "{left} vs {right} ({year})",
     "firstPayoutShortDayOne": "on day 1",
     "firstPayoutShortDays": "after {days, plural, one {# day} other {# days}}",
-    "verdictFacts": "{left} pays up to {leftSplit}% with the first payout {leftFirst}; {right} pays up to {rightSplit}% with the first payout {rightFirst}.{hasTakeHome, select, yes { With {profit} profit on a {account} account, estimated take-home is {leftTakeHome} vs {rightTakeHome}.} other {}}"
+    "verdictFacts": "{left} pays up to {leftSplit}% with the first payout {leftFirst}; {right} pays up to {rightSplit}% with the first payout {rightFirst}.{hasTakeHome, select, yes { With {profit} profit on a {account} account at the {leftExampleSplit}% vs {rightExampleSplit}% split used in this example, estimated take-home is {leftTakeHome} vs {rightTakeHome}.} other {}}"
   },
   "CompareIndex": {
     "metaTitle": "All Prop Firm Comparisons",

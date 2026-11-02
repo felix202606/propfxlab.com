@@ -177,13 +177,14 @@
   },
   "ComparePage": {
     "metaTitle": "{left} vs {right} ({year}): saques, divisão e drawdown",
-    "metaDescription": "{left} vs {right}: divisão até {leftSplit}% vs {rightSplit}%, primeiro saque {leftFirst} vs {rightFirst}{hasTakeHome, select, yes {; {profit} em {account} rendem {leftTakeHome} vs {rightTakeHome}} other {}}. Drawdown e veredito.",
+    "metaDescription": "{left} vs {right}: divisão {leftSplitRange} vs {rightSplitRange}, primeiro saque {leftFirst} vs {rightFirst}{hasTakeHome, select, yes {; {profit} em {account} rendem {leftTakeHome} vs {rightTakeHome}} other {}}. Drawdown e veredito.",
     "metaDescriptionShort": "{left} vs {right}: divisão até {leftSplit}% vs {rightSplit}%, primeiro saque {leftFirst} vs {rightFirst}, líquido estimado e regras de drawdown.",
     "notFoundMetaTitle": "Comparação não encontrada",
     "eyebrow": "Comparação de prop firms",
     "vs": "VS",
     "subtitle": "Regras de saque lado a lado com uma conta de {account} e um lucro de exemplo de {profit}.",
     "exampleProfitLabel": "Líquido em $100k",
+    "exampleSplitNote": "com divisão de {percent}%",
     "profitSplit": "Profit Split",
     "firstPayout": "Espera do primeiro saque",
     "channels": "Canais de saque",
@@ -208,7 +209,7 @@
     "metaTitleMin": "{left} vs {right} ({year})",
     "firstPayoutShortDayOne": "no dia 1",
     "firstPayoutShortDays": "após {days, plural, one {# dia} other {# dias}}",
-    "verdictFacts": "A {left} paga até {leftSplit}% com o primeiro saque {leftFirst}; a {right} paga até {rightSplit}% com o primeiro saque {rightFirst}.{hasTakeHome, select, yes { Com {profit} de lucro numa conta de {account}, o líquido estimado é {leftTakeHome} vs {rightTakeHome}.} other {}}"
+    "verdictFacts": "A {left} paga até {leftSplit}% com o primeiro saque {leftFirst}; a {right} paga até {rightSplit}% com o primeiro saque {rightFirst}.{hasTakeHome, select, yes { Com {profit} de lucro numa conta de {account} e a divisão de {leftExampleSplit}% vs {rightExampleSplit}% usada neste exemplo, o líquido estimado é {leftTakeHome} vs {rightTakeHome}.} other {}}"
   },
   "CompareIndex": {
     "metaTitle": "Todas as comparações de prop firms",

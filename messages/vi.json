@@ -177,13 +177,14 @@
   },
   "ComparePage": {
     "metaTitle": "{left} vs {right} ({year}): rút tiền, chia lãi & drawdown",
-    "metaDescription": "{left} vs {right}: chia tới {leftSplit}% vs {rightSplit}%, rút lần đầu {leftFirst} vs {rightFirst}{hasTakeHome, select, yes {; lãi {profit} trên {account} nhận {leftTakeHome} vs {rightTakeHome}} other {}}. Drawdown và kết luận.",
+    "metaDescription": "{left} vs {right}: chia {leftSplitRange} vs {rightSplitRange}, rút lần đầu {leftFirst} vs {rightFirst}{hasTakeHome, select, yes {; lãi {profit} trên {account} nhận {leftTakeHome} vs {rightTakeHome}} other {}}. Drawdown và kết luận.",
     "metaDescriptionShort": "{left} vs {right}: chia lợi nhuận tới {leftSplit}% vs {rightSplit}%, rút lần đầu {leftFirst} vs {rightFirst}, tiền thực nhận và quy định drawdown.",
     "notFoundMetaTitle": "Không tìm thấy bản so sánh",
     "eyebrow": "So sánh Prop Firm",
     "vs": "VS",
     "subtitle": "Đối chiếu quy tắc rút tiền với tài khoản {account} và lợi nhuận ví dụ {profit}.",
     "exampleProfitLabel": "Thực nhận trên $100k",
+    "exampleSplitNote": "tỷ lệ chia {percent}%",
     "profitSplit": "Profit Split",
     "firstPayout": "Chờ lần rút đầu",
     "channels": "Kênh rút tiền",
@@ -208,7 +209,7 @@
     "metaTitleMin": "{left} vs {right} ({year})",
     "firstPayoutShortDayOne": "ngày đầu",
     "firstPayoutShortDays": "sau {days} ngày",
-    "verdictFacts": "{left} chia tới {leftSplit}%, rút lần đầu {leftFirst}; {right} chia tới {rightSplit}%, rút lần đầu {rightFirst}.{hasTakeHome, select, yes { Với lãi {profit} trên tài khoản {account}, số tiền thực nhận ước tính là {leftTakeHome} vs {rightTakeHome}.} other {}}"
+    "verdictFacts": "{left} chia tới {leftSplit}%, rút lần đầu {leftFirst}; {right} chia tới {rightSplit}%, rút lần đầu {rightFirst}.{hasTakeHome, select, yes { Với lãi {profit} trên tài khoản {account} và tỷ lệ chia {leftExampleSplit}% vs {rightExampleSplit}% dùng trong ví dụ này, số tiền thực nhận ước tính là {leftTakeHome} vs {rightTakeHome}.} other {}}"
   },
   "CompareIndex": {
     "metaTitle": "Tất cả so sánh Prop Firm",
