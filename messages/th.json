@@ -177,13 +177,14 @@
   },
   "ComparePage": {
     "metaTitle": "{left} vs {right} ({year}): การถอน ส่วนแบ่ง และ Drawdown",
-    "metaDescription": "{left} vs {right}: ส่วนแบ่งสูงสุด {leftSplit}% vs {rightSplit}%, ถอนครั้งแรก{leftFirst} vs {rightFirst}{hasTakeHome, select, yes {, กำไร {profit} บนบัญชี {account} ได้จริง {leftTakeHome} vs {rightTakeHome}} other {}} พร้อมกฎ drawdown",
+    "metaDescription": "{left} vs {right}: ส่วนแบ่ง {leftSplitRange} vs {rightSplitRange}, ถอนครั้งแรก{leftFirst} vs {rightFirst}{hasTakeHome, select, yes {, กำไร {profit} บนบัญชี {account} ได้จริง {leftTakeHome} vs {rightTakeHome}} other {}} พร้อมกฎ drawdown",
     "metaDescriptionShort": "{left} vs {right}: ส่วนแบ่งสูงสุด {leftSplit}% vs {rightSplit}%, ถอนครั้งแรก{leftFirst} vs {rightFirst} พร้อมรายได้สุทธิและกฎ drawdown",
     "notFoundMetaTitle": "ไม่พบการเปรียบเทียบนี้",
     "eyebrow": "เปรียบเทียบ Prop Firm",
     "vs": "VS",
     "subtitle": "เทียบกฎการถอนแบบคู่ขนาน โดยใช้บัญชี {account} และกำไรตัวอย่าง {profit}",
     "exampleProfitLabel": "ยอดสุทธิบนบัญชี $100k",
+    "exampleSplitNote": "ที่ส่วนแบ่ง {percent}%",
     "profitSplit": "Profit Split",
     "firstPayout": "เวลารอถอนครั้งแรก",
     "channels": "ช่องทางถอนเงิน",
@@ -208,7 +209,7 @@
     "metaTitleMin": "{left} vs {right} ({year})",
     "firstPayoutShortDayOne": "วันแรก",
     "firstPayoutShortDays": "หลัง {days} วัน",
-    "verdictFacts": "{left} ให้ส่วนแบ่งสูงสุด {leftSplit}% ถอนครั้งแรก{leftFirst}; {right} ให้สูงสุด {rightSplit}% ถอนครั้งแรก{rightFirst}{hasTakeHome, select, yes { เมื่อกำไร {profit} บนบัญชี {account} รายได้สุทธิโดยประมาณคือ {leftTakeHome} vs {rightTakeHome}} other {}}"
+    "verdictFacts": "{left} ให้ส่วนแบ่งสูงสุด {leftSplit}% ถอนครั้งแรก{leftFirst}; {right} ให้สูงสุด {rightSplit}% ถอนครั้งแรก{rightFirst}{hasTakeHome, select, yes { เมื่อกำไร {profit} บนบัญชี {account} ที่ส่วนแบ่ง {leftExampleSplit}% vs {rightExampleSplit}% ที่ใช้ในตัวอย่างนี้ รายได้สุทธิโดยประมาณคือ {leftTakeHome} vs {rightTakeHome}} other {}}"
   },
   "CompareIndex": {
     "metaTitle": "เปรียบเทียบ Prop Firm ทั้งหมด",

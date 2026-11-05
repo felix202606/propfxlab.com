@@ -45,10 +45,18 @@ function firstPayoutShort(t: CompareTranslator, firm: PropFirm): string {
     : t("firstPayoutShortDays", { days });
 }
 
+function splitRange(exampleSplit: number | undefined, maxSplit: number): string {
+  return exampleSplit != null && exampleSplit < maxSplit
+    ? `${exampleSplit}–${maxSplit}%`
+    : `${maxSplit}%`;
+}
+
 /** Data-driven numbers shared by the compare title, meta and verdict. */
 function compareFacts(t: CompareTranslator, left: PropFirm, right: PropFirm) {
-  const leftNet = examplePayoutForFirm(left)?.netPayout;
-  const rightNet = examplePayoutForFirm(right)?.netPayout;
+  const leftExample = examplePayoutForFirm(left);
+  const rightExample = examplePayoutForFirm(right);
+  const leftNet = leftExample?.netPayout;
+  const rightNet = rightExample?.netPayout;
   const hasTakeHome = leftNet != null && rightNet != null;
   return {
     left: left.basic.name,
@@ -56,6 +64,14 @@ function compareFacts(t: CompareTranslator, left: PropFirm, right: PropFirm) {
     year: seoYear(),
     leftSplit: maxTraderSharePercent(left),
     rightSplit: maxTraderSharePercent(right),
+    // The take-home example uses one tier (often the starting split, not the
+    // "up to" max), so name that split next to the dollar figures.
+    leftExampleSplit: leftExample?.tier.traderSharePercent ?? "",
+    rightExampleSplit: rightExample?.tier.traderSharePercent ?? "",
+    // "80–90%": the example split up to the max, so a lower take-home next
+    // to a higher "up to" split does not read as a contradiction.
+    leftSplitRange: splitRange(leftExample?.tier.traderSharePercent, maxTraderSharePercent(left)),
+    rightSplitRange: splitRange(rightExample?.tier.traderSharePercent, maxTraderSharePercent(right)),
     leftFirst: firstPayoutShort(t, left),
     rightFirst: firstPayoutShort(t, right),
     hasTakeHome: hasTakeHome ? "yes" : "no",
@@ -232,11 +248,21 @@ export default async function ComparePage({
             amount={leftPayout?.netPayout ?? null}
             currency={left.calculator.currency}
             highlight={leftWinsTakeHome}
+            note={
+              leftPayout
+                ? t("exampleSplitNote", { percent: leftPayout.tier.traderSharePercent })
+                : null
+            }
           />
           <TakeHomeCell
             amount={rightPayout?.netPayout ?? null}
             currency={right.calculator.currency}
             highlight={rightWinsTakeHome}
+            note={
+              rightPayout
+                ? t("exampleSplitNote", { percent: rightPayout.tier.traderSharePercent })
+                : null
+            }
           />
         </CompareRow>
 
@@ -374,10 +400,12 @@ function TakeHomeCell({
   amount,
   currency,
   highlight,
+  note,
 }: {
   amount: number | null;
   currency: string;
   highlight: boolean;
+  note?: string | null;
 }) {
   return (
     <div className="px-3 py-4 sm:px-5">
@@ -388,6 +416,9 @@ function TakeHomeCell({
       >
         {amount != null ? formatMoney(amount, currency) : "—"}
       </p>
+      {amount != null && note ? (
+        <p className="mt-0.5 text-[11px] text-zinc-500">{note}</p>
+      ) : null}
     </div>
   );
 }

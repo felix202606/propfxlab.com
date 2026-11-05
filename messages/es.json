@@ -177,13 +177,14 @@
   },
   "ComparePage": {
     "metaTitle": "{left} vs {right} ({year}): pagos, reparto y drawdown",
-    "metaDescription": "{left} vs {right}: reparto hasta {leftSplit}% vs {rightSplit}%, primer pago {leftFirst} vs {rightFirst}{hasTakeHome, select, yes {; {profit} en {account} dejan {leftTakeHome} vs {rightTakeHome}} other {}}. Drawdown y veredicto.",
+    "metaDescription": "{left} vs {right}: reparto {leftSplitRange} vs {rightSplitRange}, primer pago {leftFirst} vs {rightFirst}{hasTakeHome, select, yes {; {profit} en {account} dejan {leftTakeHome} vs {rightTakeHome}} other {}}. Drawdown y veredicto.",
     "metaDescriptionShort": "{left} vs {right}: reparto hasta {leftSplit}% vs {rightSplit}%, primer pago {leftFirst} vs {rightFirst}, neto estimado y reglas de drawdown.",
     "notFoundMetaTitle": "Comparativa no encontrada",
     "eyebrow": "Comparativa de prop firms",
     "vs": "VS",
     "subtitle": "Reglas de pago lado a lado con una cuenta de {account} y un beneficio de ejemplo de {profit}.",
     "exampleProfitLabel": "Neto en 100k $",
+    "exampleSplitNote": "con reparto del {percent}%",
     "profitSplit": "Profit Split",
     "firstPayout": "Espera del primer payout",
     "channels": "Canales de retiro",
@@ -208,7 +209,7 @@
     "metaTitleMin": "{left} vs {right} ({year})",
     "firstPayoutShortDayOne": "el día 1",
     "firstPayoutShortDays": "tras {days, plural, one {# día} other {# días}}",
-    "verdictFacts": "{left} paga hasta el {leftSplit}% con el primer pago {leftFirst}; {right} paga hasta el {rightSplit}% con el primer pago {rightFirst}.{hasTakeHome, select, yes { Con {profit} de beneficio en una cuenta de {account}, el neto estimado es {leftTakeHome} vs {rightTakeHome}.} other {}}"
+    "verdictFacts": "{left} paga hasta el {leftSplit}% con el primer pago {leftFirst}; {right} paga hasta el {rightSplit}% con el primer pago {rightFirst}.{hasTakeHome, select, yes { Con {profit} de beneficio en una cuenta de {account} y el reparto del {leftExampleSplit}% vs {rightExampleSplit}% usado en este ejemplo, el neto estimado es {leftTakeHome} vs {rightTakeHome}.} other {}}"
   },
   "CompareIndex": {
     "metaTitle": "Todas las comparativas de prop firms",

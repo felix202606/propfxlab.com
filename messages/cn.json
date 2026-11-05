@@ -177,13 +177,14 @@
   },
   "ComparePage": {
     "metaTitle": "{left} vs {right}（{year}）：出金、分成与回撤对比",
-    "metaDescription": "{left} vs {right}（{year}）：最高分成 {leftSplit}% 对 {rightSplit}%，首次出金 {leftFirst} 对 {rightFirst}{hasTakeHome, select, yes {；{account} 账户盈利 {profit} 到手 {leftTakeHome} 对 {rightTakeHome}} other {}}。附回撤规则与结论。",
+    "metaDescription": "{left} vs {right}（{year}）：分成 {leftSplitRange} 对 {rightSplitRange}，首次出金 {leftFirst} 对 {rightFirst}{hasTakeHome, select, yes {；{account} 账户盈利 {profit} 到手 {leftTakeHome} 对 {rightTakeHome}} other {}}。附回撤规则与结论。",
     "metaDescriptionShort": "{left} vs {right}：最高分成 {leftSplit}% 对 {rightSplit}%，首次出金 {leftFirst} 对 {rightFirst}，附到手收益与回撤规则。",
     "notFoundMetaTitle": "未找到该对比",
     "eyebrow": "Prop Firm 两两对比",
     "vs": "VS",
     "subtitle": "以 {account} 账户、{profit} 利润为例，并排对照双方出金规则。",
     "exampleProfitLabel": "$100k 到手利润",
+    "exampleSplitNote": "按 {percent}% 分成",
     "profitSplit": "Profit Split",
     "firstPayout": "首次出金等待期",
     "channels": "出金通道",
@@ -208,7 +209,7 @@
     "metaTitleMin": "{left} vs {right}（{year}）",
     "firstPayoutShortDayOne": "首日",
     "firstPayoutShortDays": "{days} 天后",
-    "verdictFacts": "{left} 最高分成 {leftSplit}%，首次出金：{leftFirst}；{right} 最高分成 {rightSplit}%，首次出金：{rightFirst}。{hasTakeHome, select, yes {{account} 账户盈利 {profit} 时，预计到手 {leftTakeHome} 对 {rightTakeHome}。} other {}}"
+    "verdictFacts": "{left} 最高分成 {leftSplit}%，首次出金：{leftFirst}；{right} 最高分成 {rightSplit}%，首次出金：{rightFirst}。{hasTakeHome, select, yes {{account} 账户盈利 {profit} 时，按本例采用的 {leftExampleSplit}% 对 {rightExampleSplit}% 分成，预计到手 {leftTakeHome} 对 {rightTakeHome}。} other {}}"
   },
   "CompareIndex": {
     "metaTitle": "全部 Prop Firm 对比",
