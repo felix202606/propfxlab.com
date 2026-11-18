@@ -4,9 +4,9 @@ import {
   pageOpenGraph,
   pageTwitter,
 } from "@/lib/seo";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
+import { getPathname, Link } from "@/i18n/navigation";
 import { NewsShareButtons } from "@/components/NewsShareButtons";
 import { NewsAdjacentArticles } from "@/components/NewsAdjacentArticles";
 import { getNewsSlugs } from "@/lib/data";
@@ -15,6 +15,20 @@ import { formatNewsPublished, newsArticleAbsoluteUrl } from "@/lib/news-format";
 import { getAdjacentPublished, resolveNewsArticle } from "@/lib/news-cms";
 import { getNewsLocaleCopy } from "@/lib/schema";
 import { localeMeta } from "@/i18n/routing";
+import { foldAsciiSlug } from "@/lib/slug";
+
+async function loadNewsArticleOrRedirect(locale: string, slug: string) {
+  const article = await resolveNewsArticle(slug);
+  if (article) return article;
+  const folded = foldAsciiSlug(slug);
+  if (folded && folded !== slug) {
+    const target = await resolveNewsArticle(folded);
+    if (target) {
+      permanentRedirect(getPathname({ href: `/news/${target.slug}`, locale }));
+    }
+  }
+  return undefined;
+}
 
 /**
  * Articles in data/news at build time are prerendered; later CMS articles
@@ -33,7 +47,7 @@ export async function generateMetadata({
   params,
 }: PageProps<"/[locale]/news/[slug]">): Promise<Metadata> {
   const { locale, slug } = await params;
-  const article = await resolveNewsArticle(slug);
+  const article = await loadNewsArticleOrRedirect(locale, slug);
   const t = await getTranslations({ locale, namespace: "NewsPage" });
   if (!article) {
     return { title: t("notFoundMetaTitle") };
@@ -66,7 +80,7 @@ export default async function NewsArticlePage({
   params,
 }: PageProps<"/[locale]/news/[slug]">) {
   const { locale, slug } = await params;
-  const article = await resolveNewsArticle(slug);
+  const article = await loadNewsArticleOrRedirect(locale, slug);
   if (!article) notFound();
 
   const t = await getTranslations("NewsPage");

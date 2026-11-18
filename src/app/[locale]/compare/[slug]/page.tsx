@@ -15,6 +15,7 @@ import { getCardChannelTags } from "@/lib/channel-tags";
 import {
   COMPARE_ACCOUNT_SIZE,
   COMPARE_EXAMPLE_PROFIT,
+  cryptoPayoutInfo,
   examplePayoutForFirm,
   extractDrawdownRule,
   canonicalCompareSlug,
@@ -28,10 +29,12 @@ import { getFirmRoster, getListedFirm } from "@/lib/firms";
 import { getOutboundLink, type ListedFirm } from "@/lib/outbound";
 import { formatMoney } from "@/lib/payout";
 import type { PropFirm } from "@/lib/schema";
+import { FaqAccordion } from "@/components/FaqAccordion";
 import {
   compactMoney,
-  fitDescription,
-  fitTitle,
+  compareSeoDescription,
+  compareSeoTitle,
+  formatCompareCryptoLabel,
   seoYear,
   titleText,
 } from "@/lib/seo-copy";
@@ -43,6 +46,10 @@ function firstPayoutShort(t: CompareTranslator, firm: PropFirm): string {
   return days === 0
     ? t("firstPayoutShortDayOne")
     : t("firstPayoutShortDays", { days });
+}
+
+function roundNet(amount: number | undefined | null): number | null {
+  return amount == null ? null : Math.round(amount);
 }
 
 function splitRange(exampleSplit: number | undefined, maxSplit: number): string {
@@ -86,29 +93,48 @@ function compareFacts(t: CompareTranslator, left: PropFirm, right: PropFirm) {
   };
 }
 
+function compareSeoInput(
+  t: CompareTranslator,
+  left: PropFirm,
+  right: PropFirm,
+  locale?: string,
+) {
+  const facts = compareFacts(t, left, right);
+  return {
+    left,
+    right,
+    leftSplitRange: facts.leftSplitRange,
+    rightSplitRange: facts.rightSplitRange,
+    leftFirst: facts.leftFirst,
+    rightFirst: facts.rightFirst,
+    leftFirstDays: left.withdrawal.payoutCycle.firstPayoutMinDays,
+    rightFirstDays: right.withdrawal.payoutCycle.firstPayoutMinDays,
+    leftTakeHome: facts.leftTakeHome,
+    rightTakeHome: facts.rightTakeHome,
+    leftNet: roundNet(examplePayoutForFirm(left)?.netPayout),
+    rightNet: roundNet(examplePayoutForFirm(right)?.netPayout),
+    account: compactMoney(COMPARE_ACCOUNT_SIZE, "USD"),
+    profit: compactMoney(COMPARE_EXAMPLE_PROFIT, "USD"),
+    locale,
+  };
+}
+
 function compareDescription(
   t: CompareTranslator,
   left: PropFirm,
   right: PropFirm,
+  locale?: string,
 ): string {
-  const facts = {
-    ...compareFacts(t, left, right),
-    account: compactMoney(COMPARE_ACCOUNT_SIZE, "USD"),
-    profit: compactMoney(COMPARE_EXAMPLE_PROFIT, "USD"),
-  };
-  return fitDescription([
-    t("metaDescription", facts),
-    t("metaDescriptionShort", facts),
-  ]);
+  return compareSeoDescription(t, compareSeoInput(t, left, right, locale));
 }
 
-function compareTitle(t: CompareTranslator, left: PropFirm, right: PropFirm) {
-  const names = { left: left.basic.name, right: right.basic.name, year: seoYear() };
-  return fitTitle([
-    t("metaTitle", names),
-    t("metaTitleShort", names),
-    t("metaTitleMin", names),
-  ]);
+function compareTitle(
+  t: CompareTranslator,
+  left: PropFirm,
+  right: PropFirm,
+  locale?: string,
+) {
+  return compareSeoTitle(t, compareSeoInput(t, left, right, locale));
 }
 
 /**
@@ -135,9 +161,9 @@ export async function generateMetadata({
     return { title: t("notFoundMetaTitle") };
   }
   const { left, right } = pair;
-  const title = compareTitle(t, left, right);
+  const title = compareTitle(t, left, right, locale);
   const socialTitle = titleText(title);
-  const description = compareDescription(t, left, right);
+  const description = compareDescription(t, left, right, locale);
   return {
     title,
     description,
@@ -176,12 +202,29 @@ export default async function ComparePage({
     (rightPayout?.netPayout ?? 0) > (leftPayout?.netPayout ?? 0);
 
   const facts = compareFacts(t, left, right);
-  const jsonLd = {
-    "@context": "https://schema.org",
+  const cryptoFaqs = compareCryptoFaqs(t, left, right);
+  const webpageLd = {
     "@type": "WebPage",
-    name: titleText(compareTitle(t, left, right)),
-    description: compareDescription(t, left, right),
+    name: titleText(compareTitle(t, left, right, locale)),
+    description: compareDescription(t, left, right, locale),
   };
+  const jsonLd =
+    cryptoFaqs.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@graph": [
+            webpageLd,
+            {
+              "@type": "FAQPage",
+              mainEntity: cryptoFaqs.map((item) => ({
+                "@type": "Question",
+                name: item.question,
+                acceptedAnswer: { "@type": "Answer", text: item.answer },
+              })),
+            },
+          ],
+        }
+      : { "@context": "https://schema.org", ...webpageLd };
 
   return (
     <article className="mx-auto w-full max-w-5xl px-4 py-10">
@@ -289,6 +332,21 @@ export default async function ComparePage({
           <ChannelCell firm={right} />
         </CompareRow>
 
+        {cryptoPayoutInfo(left).supported || cryptoPayoutInfo(right).supported ? (
+          <CompareRow label={t("cryptoPayouts")}>
+            <TextCell>
+              <p className="text-sm leading-6 text-zinc-300">
+                {formatCompareCryptoLabel(t, left)}
+              </p>
+            </TextCell>
+            <TextCell>
+              <p className="text-sm leading-6 text-zinc-300">
+                {formatCompareCryptoLabel(t, right)}
+              </p>
+            </TextCell>
+          </CompareRow>
+        ) : null}
+
         <CompareRow label={t("drawdown")}>
           <TextCell>
             <p className="text-sm leading-6 text-zinc-300">
@@ -308,6 +366,16 @@ export default async function ComparePage({
         </CompareRow>
       </div>
 
+
+      {cryptoFaqs.length > 0 ? (
+        <div className="mt-10">
+          <FaqAccordion
+            faqs={cryptoFaqs}
+            heading={t("faqHeading")}
+            openFirst
+          />
+        </div>
+      ) : null}
 
       <div className="mt-8 grid gap-3 sm:grid-cols-2">
         <ProfileLink firm={left} label={t("readProfile", { name: left.basic.name })} />
@@ -341,6 +409,46 @@ async function resolveComparePair(
   const [left, right] = await Promise.all([getListedFirm(leftSlug), getListedFirm(rightSlug)]);
   if (!left || !right) return null;
   return { left, right };
+}
+
+function compareCryptoFaqs(
+  t: CompareTranslator,
+  left: PropFirm,
+  right: PropFirm,
+) {
+  const leftCrypto = cryptoPayoutInfo(left);
+  const rightCrypto = cryptoPayoutInfo(right);
+  if (!leftCrypto.supported && !rightCrypto.supported) return [];
+
+  const question = t("faqCryptoQuestion", {
+    left: left.basic.name,
+    right: right.basic.name,
+  });
+  let answer: string;
+  if (leftCrypto.supported && rightCrypto.supported) {
+    answer = t("faqCryptoAnswerBoth", {
+      left: left.basic.name,
+      right: right.basic.name,
+      leftMethods: formatCompareCryptoLabel(t, left),
+      rightMethods: formatCompareCryptoLabel(t, right),
+    });
+  } else {
+    const supported = leftCrypto.supported ? left : right;
+    const other = leftCrypto.supported ? right : left;
+    answer = t("faqCryptoAnswerOne", {
+      name: supported.basic.name,
+      other: other.basic.name,
+      methods: formatCompareCryptoLabel(t, supported),
+    });
+  }
+  return [
+    {
+      id: "crypto-payouts",
+      slug: "crypto-payouts",
+      question,
+      answer,
+    },
+  ];
 }
 
 function formatFirstPayout(
