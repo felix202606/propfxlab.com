@@ -9,7 +9,7 @@ function isRiseChannel(channel: WithdrawalChannel): boolean {
   return /\brise\b/i.test(channel.name);
 }
 
-function isCryptoChannel(channel: WithdrawalChannel): boolean {
+export function isCryptoChannel(channel: WithdrawalChannel): boolean {
   return (
     channel.method === "crypto" || /crypto|usdt|usdc|\bbtc\b|bitcoin/i.test(channel.name)
   );

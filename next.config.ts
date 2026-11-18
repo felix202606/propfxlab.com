@@ -136,15 +136,28 @@ const nextConfig: NextConfig = {
         destination: "/:locale",
         permanent: true,
       },
-      // FAQ JSON-LD historically pointed at /firm/:slug/faq/:faqSlug but no route exists.
+      // FAQ JSON-LD historically pointed at /firm/:slug/faq/:faqSlug but no
+      // route exists. Send them to the firm-page accordion (#faq-:slug).
       {
         source: "/firm/:slug/faq/:faqSlug",
-        destination: "/firm/:slug",
+        destination: "/firm/:slug#faq-:faqSlug",
         permanent: true,
       },
       {
         source: "/:locale(en|es|cn|tw|th|vi|pt)/firm/:slug/faq/:faqSlug",
-        destination: "/:locale/firm/:slug",
+        destination: "/:locale/firm/:slug#faq-:faqSlug",
+        permanent: true,
+      },
+      // Legacy /firms/... FAQ paths: one hop to the same hash, so we do not
+      // rely on /firms/:path* then /firm/:slug/faq/:faqSlug.
+      {
+        source: "/firms/:slug/faq/:faqSlug",
+        destination: "/firm/:slug#faq-:faqSlug",
+        permanent: true,
+      },
+      {
+        source: "/:locale(en|es|cn|tw|th|vi|pt)/firms/:slug/faq/:faqSlug",
+        destination: "/:locale/firm/:slug#faq-:faqSlug",
         permanent: true,
       },
       // Legacy FAQ schema paths used /firms/...; live routes are /firm/...
