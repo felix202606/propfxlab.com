@@ -8,11 +8,13 @@ import {
   isTakeHomeTie,
   maxTraderSharePercent,
   parseCompareSlug,
-  pickCompareTitleHook,
   pickConcreteDifferentiator,
   profileFallbackField,
   comparableTakeHome,
   payoutRailLabels,
+  compareHookScores,
+  bothHaveCryptoPayouts,
+  type CompareTitleHook,
   type ConcreteDifferentiator,
   type DrawdownType,
   type PayoutFrequencyToken,
@@ -198,15 +200,112 @@ const DRAWDOWN_TYPE_KEYS: Record<DrawdownType, string> = {
   daily_and_overall: "drawdownTypeDailyOverall",
 };
 
+/**
+ * FundingPips' default split tier is still undecided (PR #162, unmerged),
+ * so its example take-home, its split range, and any amount- or split-based
+ * compare title or verdict are unreliable in SEO copy. Body content is
+ * unchanged. Speed and crypto copy are still allowed.
+ */
+const UNRELIABLE_SEO_STAT_SLUGS = new Set(["fundingpips"]);
+
+export function excludeUnreliableSeoStats(left: PropFirm, right: PropFirm): boolean {
+  return (
+    UNRELIABLE_SEO_STAT_SLUGS.has(left.slug) || UNRELIABLE_SEO_STAT_SLUGS.has(right.slug)
+  );
+}
+
 function hookInput(input: CompareSeoFactsInput) {
+  const excluded = excludeUnreliableSeoStats(input.left, input.right);
   return {
     leftFirstDays: input.leftFirstDays,
     rightFirstDays: input.rightFirstDays,
-    leftTakeHome: input.leftNet,
-    rightTakeHome: input.rightNet,
+    leftTakeHome: excluded ? null : input.leftNet,
+    rightTakeHome: excluded ? null : input.rightNet,
     left: input.left,
     right: input.right,
   };
+}
+
+/**
+ * True when the firm with the higher max split is not the firm that nets
+ * more in the published take-home example. Those pages must not use a
+ * "higher split" title or verdict.
+ */
+export function splitVerdictContradictsTakeHome(input: CompareSeoFactsInput): boolean {
+  if (!comparableTakeHome(input.left, input.right)) return false;
+  if (input.leftNet == null || input.rightNet == null) return false;
+  if (isTakeHomeTie(input.leftNet, input.rightNet)) return false;
+  const leftSplit = maxTraderSharePercent(input.left);
+  const rightSplit = maxTraderSharePercent(input.right);
+  if (leftSplit === rightSplit) return false;
+  const splitWinnerIsLeft = leftSplit > rightSplit;
+  const takeHomeWinnerIsLeft = input.leftNet > input.rightNet;
+  return splitWinnerIsLeft !== takeHomeWinnerIsLeft;
+}
+
+export function pickCompareSeoTitleHook(input: CompareSeoFactsInput): CompareTitleHook {
+  const excluded = excludeUnreliableSeoStats(input.left, input.right);
+  const conflict = splitVerdictContradictsTakeHome(input);
+  const scores = { ...compareHookScores(hookInput(input)) };
+  // A higher max split that does not net more is not a verdict. Prefer
+  // take-home when the example is reliable; otherwise drop the split hook
+  // and use speed or another real differentiator. FundingPips split
+  // figures are also excluded (PR #162).
+  if (excluded) {
+    scores.split = 0;
+  }
+  if (conflict && !excluded && scores.more > 0) {
+    return "more";
+  }
+  if (conflict) {
+    scores.split = 0;
+  }
+  const order = ["more", "split", "faster", "crypto"] as const;
+  let best: CompareTitleHook = "generic";
+  let bestScore = 0;
+  for (const hook of order) {
+    if (scores[hook] > bestScore) {
+      best = hook;
+      bestScore = scores[hook];
+    }
+  }
+  if (best === "generic" && bothHaveCryptoPayouts(input.left, input.right)) {
+    return "cryptoBoth";
+  }
+  return best;
+}
+
+export type CompareLeadSide = "left" | "right";
+
+/** The firm named first in the SEO verdict — later "X vs Y" figures follow this order. */
+export function compareSeoLeadSide(
+  input: CompareSeoFactsInput,
+  hook: CompareTitleHook = pickCompareSeoTitleHook(input),
+): CompareLeadSide {
+  if (
+    hook === "more" &&
+    input.leftNet != null &&
+    input.rightNet != null &&
+    !excludeUnreliableSeoStats(input.left, input.right)
+  ) {
+    return input.leftNet >= input.rightNet ? "left" : "right";
+  }
+  if (hook === "faster") {
+    return input.leftFirstDays <= input.rightFirstDays ? "left" : "right";
+  }
+  if (hook === "split" && !excludeUnreliableSeoStats(input.left, input.right)) {
+    return maxTraderSharePercent(input.left) >= maxTraderSharePercent(input.right)
+      ? "left"
+      : "right";
+  }
+  if (hook === "crypto") {
+    return cryptoPayoutInfo(input.left).supported ? "left" : "right";
+  }
+  return "left";
+}
+
+function orderedPair<T>(lead: CompareLeadSide, left: T, right: T): { first: T; second: T } {
+  return lead === "left" ? { first: left, second: right } : { first: right, second: left };
 }
 
 function formatRails(_t: CompareCopyT, labels: readonly string[], locale?: string): string {
@@ -321,6 +420,14 @@ function railsSentenceCandidates(t: CompareCopyT, input: CompareSeoFactsInput): 
   );
 }
 
+function isRailsFallbackLine(t: CompareCopyT, line: string, input: CompareSeoFactsInput): boolean {
+  return (
+    line === t("railsDifferShort") ||
+    line === t("railsMoreMethods", { name: input.left.basic.name }) ||
+    line === t("railsMoreMethods", { name: input.right.basic.name })
+  );
+}
+
 function frequencyLabel(t: CompareCopyT, token: PayoutFrequencyToken): string {
   if (token === "on_demand") return t("freqOnDemand");
   if (token === "weekly") return t("freqWeekly");
@@ -371,7 +478,7 @@ export function formatDifferentiatorPhrase(
 
 export function compareSeoTitle(t: CompareCopyT, input: CompareSeoFactsInput) {
   const year = seoYear();
-  const hook = pickCompareTitleHook(hookInput(input));
+  const hook = pickCompareSeoTitleHook(input);
   const names = { left: input.left.basic.name, right: input.right.basic.name, year };
   if (hook === "cryptoBoth") {
     const hasStablecoin =
@@ -404,7 +511,7 @@ function joinSentences(...parts: Array<string | null | undefined>): string {
     .join(" ");
 }
 
-function compareVerdict(t: CompareCopyT, input: CompareSeoFactsInput, hook: ReturnType<typeof pickCompareTitleHook>): string {
+function compareVerdict(t: CompareCopyT, input: CompareSeoFactsInput, hook: CompareTitleHook, style: "implicit" | "explicit" | "explicitShort" = "implicit"): string {
   const leftName = input.left.basic.name;
   const rightName = input.right.basic.name;
   if (hook === "faster") {
@@ -420,23 +527,57 @@ function compareVerdict(t: CompareCopyT, input: CompareSeoFactsInput, hook: Retu
     hook === "more" &&
     input.leftNet != null &&
     input.rightNet != null &&
-    comparableTakeHome(input.left, input.right)
+    comparableTakeHome(input.left, input.right) &&
+    !excludeUnreliableSeoStats(input.left, input.right)
   ) {
     const leftWins = input.leftNet > input.rightNet;
+    const winner = leftWins ? leftName : rightName;
+    const loser = leftWins ? rightName : leftName;
+    const winnerTakeHome = leftWins ? input.leftTakeHome : input.rightTakeHome;
+    const loserTakeHome = leftWins ? input.rightTakeHome : input.leftTakeHome;
+    if (style === "explicit") {
+      return t("verdictMoreExplicit", {
+        winner,
+        loser,
+        profit: input.profit,
+        winnerTakeHome,
+        loserTakeHome,
+      });
+    }
+    if (style === "explicitShort") {
+      return t("verdictMoreExplicitShort", {
+        winner,
+        loser,
+        winnerTakeHome,
+        loserTakeHome,
+      });
+    }
     return t("verdictMore", {
-      winner: leftWins ? leftName : rightName,
+      winner,
       profit: input.profit,
-      leftTakeHome: input.leftTakeHome,
-      rightTakeHome: input.rightTakeHome,
+      winnerTakeHome,
+      loserTakeHome,
     });
   }
   if (hook === "split") {
     const leftHigher =
       maxTraderSharePercent(input.left) > maxTraderSharePercent(input.right);
+    const winner = leftHigher ? leftName : rightName;
+    const loser = leftHigher ? rightName : leftName;
+    const winnerSplit = leftHigher ? input.leftSplitRange : input.rightSplitRange;
+    const loserSplit = leftHigher ? input.rightSplitRange : input.leftSplitRange;
+    if (style === "explicit" || style === "explicitShort") {
+      return t("verdictSplitExplicit", {
+        winner,
+        loser,
+        winnerSplit,
+        loserSplit,
+      });
+    }
     return t("verdictSplit", {
-      winner: leftHigher ? leftName : rightName,
-      leftSplitRange: input.leftSplitRange,
-      rightSplitRange: input.rightSplitRange,
+      winner,
+      winnerSplit,
+      loserSplit,
     });
   }
   if (hook === "crypto") {
@@ -473,7 +614,14 @@ function bothCryptoSentence(t: CompareCopyT, input: CompareSeoFactsInput): strin
   return t("bothCryptoShort", { stablecoinNote });
 }
 
-function splitSentence(t: CompareCopyT, input: CompareSeoFactsInput, hook: string): string | null {
+function splitSentence(
+  t: CompareCopyT,
+  input: CompareSeoFactsInput,
+  hook: string,
+  lead: CompareLeadSide,
+  explicit = false,
+): string | null {
+  if (excludeUnreliableSeoStats(input.left, input.right)) return null;
   const equal = input.leftSplitRange === input.rightSplitRange;
   if (equal) {
     const detail = pickConcreteDifferentiator(input.left, input.right);
@@ -497,15 +645,33 @@ function splitSentence(t: CompareCopyT, input: CompareSeoFactsInput, hook: strin
     return t("bothSplit", { split: input.leftSplitRange });
   }
   if (hook === "split") return null;
+  const names = orderedPair(lead, input.left.basic.name, input.right.basic.name);
+  const splits = orderedPair(lead, input.leftSplitRange, input.rightSplitRange);
+  if (explicit) {
+    return t("splitVsExplicit", {
+      left: names.first,
+      right: names.second,
+      leftSplitRange: splits.first,
+      rightSplitRange: splits.second,
+    });
+  }
   return t("splitVs", {
-    leftSplitRange: input.leftSplitRange,
-    rightSplitRange: input.rightSplitRange,
+    leftSplitRange: splits.first,
+    rightSplitRange: splits.second,
   });
 }
 
-function takeHomeSentence(t: CompareCopyT, input: CompareSeoFactsInput, hook: string): string | null {
+function takeHomeSentence(
+  t: CompareCopyT,
+  input: CompareSeoFactsInput,
+  hook: string,
+  lead: CompareLeadSide,
+  explicit = false,
+): string | null {
   // Safer than inventing a 1:1 FX rate: drop the dollar comparison when
-  // the two firms' calculator currencies differ.
+  // the two firms' calculator currencies differ. Also omit amounts when a
+  // firm's example take-home is excluded from SEO copy (see PR #162).
+  if (excludeUnreliableSeoStats(input.left, input.right)) return null;
   if (!comparableTakeHome(input.left, input.right)) return null;
   if (input.leftNet == null || input.rightNet == null) return null;
   if (isTakeHomeTie(input.leftNet, input.rightNet)) {
@@ -516,15 +682,33 @@ function takeHomeSentence(t: CompareCopyT, input: CompareSeoFactsInput, hook: st
     });
   }
   if (hook === "more") return null;
+  const names = orderedPair(lead, input.left.basic.name, input.right.basic.name);
+  const amounts = orderedPair(lead, input.leftTakeHome, input.rightTakeHome);
+  if (explicit) {
+    return t("takeHomeVsExplicit", {
+      profit: input.profit,
+      account: input.account,
+      left: names.first,
+      right: names.second,
+      leftTakeHome: amounts.first,
+      rightTakeHome: amounts.second,
+    });
+  }
   return t("takeHomeVs", {
     profit: input.profit,
     account: input.account,
-    leftTakeHome: input.leftTakeHome,
-    rightTakeHome: input.rightTakeHome,
+    leftTakeHome: amounts.first,
+    rightTakeHome: amounts.second,
   });
 }
 
-function firstPayoutSentence(t: CompareCopyT, input: CompareSeoFactsInput, hook: string): string | null {
+function firstPayoutSentence(
+  t: CompareCopyT,
+  input: CompareSeoFactsInput,
+  hook: string,
+  lead: CompareLeadSide,
+  explicit = false,
+): string | null {
   if (hook === "faster") return null;
   if (isFirstPayoutTie(input.leftFirstDays, input.rightFirstDays)) {
     if (input.leftFirstDays === input.rightFirstDays) {
@@ -533,7 +717,17 @@ function firstPayoutSentence(t: CompareCopyT, input: CompareSeoFactsInput, hook:
     // 0 vs 1 (or 5 vs 6): a near-tie, not worth highlighting.
     return null;
   }
-  return t("firstVs", { leftFirst: input.leftFirst, rightFirst: input.rightFirst });
+  const names = orderedPair(lead, input.left.basic.name, input.right.basic.name);
+  const firsts = orderedPair(lead, input.leftFirst, input.rightFirst);
+  if (explicit) {
+    return t("firstVsExplicit", {
+      left: names.first,
+      right: names.second,
+      leftFirst: firsts.first,
+      rightFirst: firsts.second,
+    });
+  }
+  return t("firstVs", { leftFirst: firsts.first, rightFirst: firsts.second });
 }
 
 function cryptoBothLeadShort(t: CompareCopyT, input: CompareSeoFactsInput): string | null {
@@ -546,71 +740,175 @@ function cryptoBothLeadShort(t: CompareCopyT, input: CompareSeoFactsInput): stri
 }
 
 export function compareSeoDescription(t: CompareCopyT, input: CompareSeoFactsInput): string {
-  const hook = pickCompareTitleHook(hookInput(input));
+  const hook = pickCompareSeoTitleHook(input);
   const hookVerdict = compareVerdict(t, input, hook);
+  const hookVerdictExplicit =
+    hook === "more" || hook === "split" ? compareVerdict(t, input, hook, "explicit") : null;
+  const hookVerdictExplicitShort =
+    hook === "more" ? compareVerdict(t, input, hook, "explicitShort") : null;
   const hookVerdictShort = hook === "cryptoBoth" ? cryptoBothLeadShort(t, input) : null;
   const cryptoBoth = hook === "crypto" || hook === "cryptoBoth" ? null : bothCryptoSentence(t, input);
-  const split = splitSentence(t, input, hook);
-  const takeHome = takeHomeSentence(t, input, hook);
-  const first = firstPayoutSentence(t, input, hook);
+  const lead = compareSeoLeadSide(input, hook);
+  const splitImplicit = splitSentence(t, input, hook, lead, false);
+  const splitExplicit = splitSentence(t, input, hook, lead, true);
+  const takeHomeImplicit = takeHomeSentence(t, input, hook, lead, false);
+  const takeHomeExplicit = takeHomeSentence(t, input, hook, lead, true);
+  const firstImplicit = firstPayoutSentence(t, input, hook, lead, false);
+  const firstExplicit = firstPayoutSentence(t, input, hook, lead, true);
   const rails = railsSentenceCandidates(t, input);
   // For a generic hook, the concrete split sentence is a better lead
   // than "compared on split, payout speed and drawdown". cryptoBoth already
   // opens with a data-backed crypto/stablecoin verdict.
-  const leadVerdict = hook === "generic" ? (split ?? hookVerdict) : hookVerdict;
-  const splitAfter = hook === "generic" && leadVerdict === split ? null : split;
+  const leadVerdict = hook === "generic" ? (splitImplicit ?? hookVerdict) : hookVerdict;
+  const implicitLeadSplit = hook === "generic" && leadVerdict === splitImplicit;
   const verdicts = [
+    ...(hook !== "generic" && hookVerdictExplicit && hookVerdictExplicit !== hookVerdict
+      ? [hookVerdictExplicit]
+      : []),
     leadVerdict,
+    ...(hook !== "generic" && hookVerdictExplicitShort && hookVerdictExplicitShort !== hookVerdict
+      ? [hookVerdictExplicitShort]
+      : []),
     ...(hookVerdictShort && hookVerdictShort !== leadVerdict ? [hookVerdictShort] : []),
   ];
 
-  const candidates: string[] = [];
+  const scored: Array<{ extrasScore: number; styleRank: number; extraStyleRank: number; railsRank: number; text: string }> = [];
   // Prefer payment-method wording and take-home over a tied first-payout line
   // or a same-split filler, so a slightly shorter combo does not drop rails.
-  const extrasFor = (verdict: string, railsLine: string | null) => {
+  // Prefer the explicit "Firm $X vs Firm $Y" form only when it still fits
+  // with the same supporting facts.
+  const extrasFor = (
+    verdict: string,
+    styleRank: number,
+    railsLine: string | null,
+    railsRank: number,
+    takeHome: string | null,
+    splitAfter: string | null,
+    first: string | null,
+    extraStyleRank: number,
+  ) => {
     const extras: Array<{ text: string; weight: number }> = [];
     const preferRails = hook === "cryptoBoth" || hook === "generic";
+    const railsWeight = railsLine
+      ? isRailsFallbackLine(t, railsLine, input)
+        ? 0
+        : preferRails
+          ? 16
+          : 2
+      : 0;
+    const splitIsTie = input.leftSplitRange === input.rightSplitRange;
+    const firstIsTie = isFirstPayoutTie(input.leftFirstDays, input.rightFirstDays);
     if (preferRails) {
-      if (railsLine) extras.push({ text: railsLine, weight: 16 });
+      if (railsLine) extras.push({ text: railsLine, weight: railsWeight });
       if (takeHome) extras.push({ text: takeHome, weight: 8 });
-      if (splitAfter) extras.push({ text: splitAfter, weight: 4 });
+      if (splitAfter) extras.push({ text: splitAfter, weight: splitIsTie ? 0 : 4 });
       if (cryptoBoth) extras.push({ text: cryptoBoth, weight: 3 });
-      if (first) extras.push({ text: first, weight: 2 });
+      if (first) extras.push({ text: first, weight: firstIsTie ? 0 : 2 });
     } else {
-      const splitsDiffer = input.leftSplitRange !== input.rightSplitRange;
+      const splitsDiffer = !splitIsTie;
       if (takeHome) extras.push({ text: takeHome, weight: 16 });
-      if (first) extras.push({ text: first, weight: 12 });
-      if (splitAfter) extras.push({ text: splitAfter, weight: splitsDiffer ? 14 : 8 });
+      if (first) extras.push({ text: first, weight: firstIsTie ? 0 : 12 });
+      if (splitAfter) extras.push({ text: splitAfter, weight: splitsDiffer ? 14 : 0 });
       if (cryptoBoth) extras.push({ text: cryptoBoth, weight: splitsDiffer ? 8 : 12 });
-      if (railsLine) extras.push({ text: railsLine, weight: 2 });
+      if (railsLine) extras.push({ text: railsLine, weight: railsWeight });
     }
     const n = extras.length;
-    const scored: Array<{ score: number; text: string }> = [];
     for (let mask = (1 << n) - 1; mask >= 0; mask--) {
-      let score = 0;
+      let extrasScore = 0;
       const parts: string[] = [verdict];
       for (let i = 0; i < n; i++) {
         if (mask & (1 << (n - 1 - i))) {
-          score += extras[i]!.weight;
+          extrasScore += extras[i]!.weight;
           parts.push(extras[i]!.text);
         }
       }
-      scored.push({ score, text: joinSentences(...parts) });
+      scored.push({ extrasScore, styleRank, extraStyleRank, railsRank, text: joinSentences(...parts) });
     }
-    scored.sort((a, b) => b.score - a.score || b.text.length - a.text.length);
-    return scored.map((item) => item.text);
   };
+  const styleRanks = new Map(verdicts.map((verdict, index) => [verdict, verdicts.length - index]));
+  const extraStyles = [
+    {
+      rank: 1,
+      takeHome: takeHomeExplicit ?? takeHomeImplicit,
+      split: implicitLeadSplit ? null : (splitExplicit ?? splitImplicit),
+      first: firstExplicit ?? firstImplicit,
+    },
+    {
+      rank: 0,
+      takeHome: takeHomeImplicit,
+      split: implicitLeadSplit ? null : splitImplicit,
+      first: firstImplicit,
+    },
+  ];
   for (const verdict of verdicts) {
-    if (rails.length) {
-      for (const railsLine of rails) candidates.push(...extrasFor(verdict, railsLine));
+    const styleRank = styleRanks.get(verdict) ?? 0;
+    for (const extraStyle of extraStyles) {
+      if (rails.length) {
+        rails.forEach((railsLine, index) =>
+          extrasFor(
+            verdict,
+            styleRank,
+            railsLine,
+            rails.length - index,
+            extraStyle.takeHome,
+            extraStyle.split,
+            extraStyle.first,
+            extraStyle.rank,
+          ),
+        );
+      }
+      extrasFor(
+        verdict,
+        styleRank,
+        null,
+        0,
+        extraStyle.takeHome,
+        extraStyle.split,
+        extraStyle.first,
+        extraStyle.rank,
+      );
     }
-    candidates.push(...extrasFor(verdict, null));
   }
-  candidates.push(
+  scored.sort(
+    (a, b) =>
+      b.extrasScore - a.extrasScore ||
+      b.styleRank - a.styleRank ||
+      b.extraStyleRank - a.extraStyleRank ||
+      b.railsRank - a.railsRank ||
+      b.text.length - a.text.length,
+  );
+  const candidates = [
+    ...new Set(scored.map((item) => item.text)),
     hookVerdict,
     t("verdictGeneric", { left: input.left.basic.name, right: input.right.basic.name }),
-  );
-  return fitDescription(candidates, COMPARE_DESCRIPTION_MAX_CHARS);
+  ];
+  const figureFacts: CompareFigureFacts = {
+    leftName: input.left.basic.name,
+    rightName: input.right.basic.name,
+    leftTakeHome: input.leftTakeHome,
+    rightTakeHome: input.rightTakeHome,
+    leftSplitRange: input.leftSplitRange,
+    rightSplitRange: input.rightSplitRange,
+    leftFirst: input.leftFirst,
+    rightFirst: input.rightFirst,
+  };
+  const clean = candidates.filter((text) => {
+    if (figureOrderMismatches(text, figureFacts).length > 0) return false;
+    if (
+      hasExcludedSplitFigure(
+        "",
+        text,
+        input.left,
+        input.right,
+        input.leftSplitRange,
+        input.rightSplitRange,
+      )
+    ) {
+      return false;
+    }
+    return true;
+  });
+  return fitDescription(clean.length > 0 ? clean : candidates, COMPARE_DESCRIPTION_MAX_CHARS);
 }
 
 /**
@@ -704,4 +1002,227 @@ export function formatCompareCryptoLabel(
   if (!info.supported) return t("cryptoNone");
   const methods = formatCryptoPayoutMethods(info);
   return info.hasStablecoin ? t("cryptoStablecoinMethods", { methods }) : methods;
+}
+
+
+const MONEY_OR_AMOUNT_RE = /[\$€£¥]\s*[\d,]+(?:\.\d+)?K?|\b(?:USD|EUR|GBP)\b/;
+
+const AMOUNT_VERDICT_RE =
+  /which pays more|nets more|quién paga más(?!\s+rápido)|deja más neto|谁到手更多|到手更高|誰到手更多|ใครได้เงินมากกว่า|ได้เงินสุทธิมากกว่า|bên nào nhận nhiều hơn|nhận nhiều hơn với ví dụ|quem paga mais(?!\s+(?:rápido|cedo))|rende mais num exemplo/iu;
+
+/** True when compare SEO copy contains a money amount or an amount-based verdict. */
+export function hasSeoAmountOrAmountVerdict(title: string, description: string): boolean {
+  const text = `${title} ${description}`;
+  return MONEY_OR_AMOUNT_RE.test(text) || AMOUNT_VERDICT_RE.test(text);
+}
+
+export type CompareFigureFacts = {
+  leftName: string;
+  rightName: string;
+  leftTakeHome: string;
+  rightTakeHome: string;
+  leftSplitRange: string;
+  rightSplitRange: string;
+  leftFirst: string;
+  rightFirst: string;
+};
+
+function escapeRegExp(value: string): string {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function normalizeFigure(value: string): string {
+  return value.trim().replace(/[–—]/g, "-").replace(/\s+/g, " ").toLowerCase();
+}
+
+function firstNamedSide(
+  text: string,
+  facts: CompareFigureFacts,
+): "left" | "right" | null {
+  const leftPos = text.toLowerCase().indexOf(facts.leftName.toLowerCase());
+  const rightPos = text.toLowerCase().indexOf(facts.rightName.toLowerCase());
+  if (leftPos === -1 && rightPos === -1) return null;
+  if (leftPos === -1) return "right";
+  if (rightPos === -1) return "left";
+  return leftPos <= rightPos ? "left" : "right";
+}
+
+function lastFigureBoundary(text: string, end: number): number {
+  let at = lastBoundary(text, end);
+  const prefix = text.slice(0, end);
+  for (const mark of ["(", "（", "[", "【"]) {
+    const index = prefix.lastIndexOf(mark);
+    if (index >= 0) at = Math.max(at, index + mark.length);
+  }
+  return at;
+}
+
+function stripFigurePunctuation(value: string): string {
+  return value.replace(/^[(\[（【]+/, "").replace(/[)\]）.】.,;:]+$/, "").trim();
+}
+
+function knownCompareFigures(facts: CompareFigureFacts): string[] {
+  return [
+    facts.leftTakeHome,
+    facts.rightTakeHome,
+    facts.leftSplitRange,
+    facts.rightSplitRange,
+    facts.leftFirst,
+    facts.rightFirst,
+  ].filter(Boolean);
+}
+
+function extractComparedFigure(operand: string, facts: CompareFigureFacts): string {
+  const stripped = stripFigurePunctuation(operand);
+  const normalized = normalizeFigure(stripped);
+  let best = "";
+  for (const value of knownCompareFigures(facts)) {
+    const valueNorm = normalizeFigure(value);
+    if (!valueNorm) continue;
+    if (normalized === valueNorm) return value;
+    if (normalized.endsWith(valueNorm) && valueNorm.length > normalizeFigure(best).length) {
+      best = value;
+    }
+  }
+  return best;
+}
+
+function stripLeadingFirm(
+  operand: string,
+  facts: CompareFigureFacts,
+): { side: "left" | "right" | null; figure: string } {
+  const trimmed = stripFigurePunctuation(operand);
+  const names: Array<["left" | "right", string]> = [
+    ["left", facts.leftName],
+    ["right", facts.rightName],
+  ].sort((a, b) => b[1].length - a[1].length) as Array<["left" | "right", string]>;
+  for (const [side, name] of names) {
+    const match = trimmed.match(new RegExp(`^${escapeRegExp(name)}\s+(.+)$`, "i"));
+    if (!match?.[1]) continue;
+    const rest = match[1].trim();
+    const figure = extractComparedFigure(rest, facts);
+    // Only treat it as an explicit "Name value" pair when the rest is the figure.
+    if (figure && normalizeFigure(rest) === normalizeFigure(figure)) {
+      return { side, figure };
+    }
+  }
+  return { side: null, figure: extractComparedFigure(trimmed, facts) };
+}
+
+function sidesOwningFigure(
+  figure: string,
+  facts: CompareFigureFacts,
+): Set<"left" | "right"> {
+  const normalized = normalizeFigure(figure);
+  const sides = new Set<"left" | "right">();
+  if (!normalized) return sides;
+  const leftValues = [facts.leftTakeHome, facts.leftSplitRange, facts.leftFirst].map(normalizeFigure);
+  const rightValues = [facts.rightTakeHome, facts.rightSplitRange, facts.rightFirst].map(normalizeFigure);
+  if (leftValues.includes(normalized)) sides.add("left");
+  if (rightValues.includes(normalized)) sides.add("right");
+  return sides;
+}
+
+/**
+ * "A vs B" figures in a title or description. Every figure pair in the
+ * text must start with the firm named first in that same text (or be an
+ * explicit "Name value vs Name value" pair in that same order).
+ */
+export function figureOrderMismatchesInCopy(
+  title: string,
+  description: string,
+  facts: CompareFigureFacts,
+): string[] {
+  return [
+    ...figureOrderMismatches(title, facts),
+    ...figureOrderMismatches(description, facts),
+  ];
+}
+
+export function figureOrderMismatches(text: string, facts: CompareFigureFacts): string[] {
+  const hits: string[] = [];
+  const lead = firstNamedSide(text, facts);
+  const splitter = /\s+(?:vs\.?|对|對)\s+/giu;
+  let match: RegExpExecArray | null;
+  while ((match = splitter.exec(text)) !== null) {
+    const leftRaw = text.slice(lastFigureBoundary(text, match.index), match.index).trim();
+    const rightRaw = stripFigurePunctuation(cutRight(text.slice(match.index + match[0].length)));
+    const leftPart = stripLeadingFirm(leftRaw, facts);
+    const rightPart = stripLeadingFirm(rightRaw, facts);
+    if (!leftPart.figure || !rightPart.figure) continue;
+    const leftOwners = sidesOwningFigure(leftPart.figure, facts);
+    const rightOwners = sidesOwningFigure(rightPart.figure, facts);
+    if (leftOwners.size === 0 && rightOwners.size === 0) continue;
+
+    if (leftPart.side) {
+      if (leftOwners.size > 0 && !leftOwners.has(leftPart.side)) {
+        hits.push(`${leftPart.figure} vs ${rightPart.figure}`);
+        continue;
+      }
+      if (rightPart.side && rightOwners.size > 0 && !rightOwners.has(rightPart.side)) {
+        hits.push(`${leftPart.figure} vs ${rightPart.figure}`);
+        continue;
+      }
+      if (lead && leftPart.side !== lead) {
+        hits.push(`${leftPart.figure} vs ${rightPart.figure}`);
+      }
+      continue;
+    }
+
+    if (!lead || leftOwners.size === 0) continue;
+    if (!leftOwners.has(lead)) {
+      hits.push(`${leftPart.figure} vs ${rightPart.figure}`);
+    }
+  }
+  return hits;
+}
+
+function splitFigureVariants(range: string): string[] {
+  const trimmed = range.trim();
+  if (!trimmed) return [];
+  const variants = new Set<string>([
+    trimmed,
+    trimmed.replace(/–/g, "-"),
+    trimmed.replace(/-/g, "–"),
+  ]);
+  return [...variants].map((value) => value.toLowerCase());
+}
+
+/**
+ * True when title or description includes the excluded firm's split range
+ * (FundingPips' 60–100% while PR #162 is unmerged).
+ */
+export function hasExcludedSplitFigure(
+  title: string,
+  description: string,
+  left: PropFirm,
+  right: PropFirm,
+  leftSplitRange: string,
+  rightSplitRange: string,
+): boolean {
+  const text = `${title} ${description}`.toLowerCase().replace(/-/g, "–");
+  const ranges: Array<[PropFirm, string]> = [
+    [left, leftSplitRange],
+    [right, rightSplitRange],
+  ];
+  for (const [firm, range] of ranges) {
+    if (!UNRELIABLE_SEO_STAT_SLUGS.has(firm.slug) || !range) continue;
+    for (const variant of splitFigureVariants(range)) {
+      if (text.includes(variant.replace(/-/g, "–"))) return true;
+    }
+  }
+  return false;
+}
+
+const SPLIT_VERDICT_RE =
+  /higher split|reparto más alto|分成更高|ส่วนแบ่งสูงกว่า|tỷ lệ chia cao hơn|divisão mais alta/u;
+
+export function hasContradictorySplitVerdict(
+  title: string,
+  description: string,
+  input: CompareSeoFactsInput,
+): boolean {
+  if (!splitVerdictContradictsTakeHome(input)) return false;
+  if (pickCompareSeoTitleHook(input) === "split") return true;
+  return SPLIT_VERDICT_RE.test(`${title} ${description}`);
 }
